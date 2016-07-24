@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E29911FA1D456EAD0083B484 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29911F91D456EAD0083B484 /* AppDelegate.swift */; };
+		E29911FC1D456EAD0083B484 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29911FB1D456EAD0083B484 /* ViewController.swift */; };
+		E29911FF1D456EAD0083B484 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29911FD1D456EAD0083B484 /* Main.storyboard */; };
+		E29912011D456EAD0083B484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29912001D456EAD0083B484 /* Assets.xcassets */; };
+		E29912041D456EAD0083B484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E29912021D456EAD0083B484 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E29911F61D456EAC0083B484 /* Swifty Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29911F91D456EAD0083B484 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E29911FB1D456EAD0083B484 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E29911FE1D456EAD0083B484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E29912001D456EAD0083B484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E29912031D456EAD0083B484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E29912051D456EAD0083B484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E29911F31D456EAC0083B484 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E29911ED1D456EAC0083B484 = {
+			isa = PBXGroup;
+			children = (
+				E29911F81D456EAD0083B484 /* Swifty Forecast */,
+				E29911F71D456EAC0083B484 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E29911F71D456EAC0083B484 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E29911F61D456EAC0083B484 /* Swifty Forecast.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E29911F81D456EAD0083B484 /* Swifty Forecast */ = {
+			isa = PBXGroup;
+			children = (
+				E29911F91D456EAD0083B484 /* AppDelegate.swift */,
+				E29911FB1D456EAD0083B484 /* ViewController.swift */,
+				E299120B1D456EF10083B484 /* Storyboards */,
+				E299120C1D456F290083B484 /* Resource */,
+			);
+			path = "Swifty Forecast";
+			sourceTree = "<group>";
+		};
+		E299120B1D456EF10083B484 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				E29911FD1D456EAD0083B484 /* Main.storyboard */,
+				E29912021D456EAD0083B484 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		E299120C1D456F290083B484 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E29912001D456EAD0083B484 /* Assets.xcassets */,
+				E29912051D456EAD0083B484 /* Info.plist */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E29911F51D456EAC0083B484 /* Swifty Forecast */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */;
+			buildPhases = (
+				E29911F21D456EAC0083B484 /* Sources */,
+				E29911F31D456EAC0083B484 /* Frameworks */,
+				E29911F41D456EAC0083B484 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swifty Forecast";
+			productName = "Swifty Forecast";
+			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E29911EE1D456EAC0083B484 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Pawel Milek";
+				TargetAttributes = {
+					E29911F51D456EAC0083B484 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = L9L72R78Y3;
+					};
+				};
+			};
+			buildConfigurationList = E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "Swifty Forecast" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E29911ED1D456EAC0083B484;
+			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E29911F51D456EAC0083B484 /* Swifty Forecast */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E29911F41D456EAC0083B484 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E29912041D456EAD0083B484 /* LaunchScreen.storyboard in Resources */,
+				E29912011D456EAD0083B484 /* Assets.xcassets in Resources */,
+				E29911FF1D456EAD0083B484 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E29911F21D456EAC0083B484 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E29911FC1D456EAD0083B484 /* ViewController.swift in Sources */,
+				E29911FA1D456EAD0083B484 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E29911FD1D456EAD0083B484 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E29911FE1D456EAD0083B484 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E29912021D456EAD0083B484 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E29912031D456EAD0083B484 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E29912061D456EAD0083B484 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E29912071D456EAD0083B484 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E29912091D456EAD0083B484 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Swifty Forecast/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E299120A1D456EAD0083B484 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Swifty Forecast/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "Swifty Forecast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E29912061D456EAD0083B484 /* Debug */,
+				E29912071D456EAD0083B484 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E29912091D456EAD0083B484 /* Debug */,
+				E299120A1D456EAD0083B484 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E29911EE1D456EAC0083B484 /* Project object */;
+}
