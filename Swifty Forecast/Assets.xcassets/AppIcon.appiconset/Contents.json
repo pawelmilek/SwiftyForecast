@@ -1,40 +1,76 @@
 {
   "images" : [
     {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "Icon-Small-29x29@2x.png",
+      "idiom" : "ipad",
+      "size" : "20x20",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "20x20",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "Icon-Small-29x29@3x.png",
-      "scale" : "3x"
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_29p.png",
+      "scale" : "1x"
     },
     {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "Icon-Small-40x40@2x.png",
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_58p.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "Icon-Small-40x40@3x.png",
-      "scale" : "3x"
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_40p.png",
+      "scale" : "1x"
     },
     {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "Icon-60x60@2x.png",
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_80p.png",
       "scale" : "2x"
     },
     {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "Icon-60x60@3x.png",
-      "scale" : "3x"
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "50x50",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "72x72",
+      "scale" : "2x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_76p.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_152p.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "83.5x83.5",
+      "idiom" : "ipad",
+      "filename" : "SwiftyWeather_167p.png",
+      "scale" : "2x"
     }
   ],
   "info" : {

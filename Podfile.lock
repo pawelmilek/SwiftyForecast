@@ -1,0 +1,38 @@
+PODS:
+  - Alamofire (3.5.0)
+  - FlickrKit (1.0.8)
+  - FXBlurView (1.6.4)
+  - LatoFont (1.0.1)
+  - WeatherIconsKit (1.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 3.4)
+  - FlickrKit (~> 1.0)
+  - FXBlurView (~> 1.6)
+  - LatoFont (from `https://github.com/gscalzo/LatoFont.git`)
+  - WeatherIconsKit (from `https://github.com/gscalzo/WeatherIconsKit.git`)
+
+EXTERNAL SOURCES:
+  LatoFont:
+    :git: https://github.com/gscalzo/LatoFont.git
+  WeatherIconsKit:
+    :git: https://github.com/gscalzo/WeatherIconsKit.git
+
+CHECKOUT OPTIONS:
+  LatoFont:
+    :commit: 2739e4c28c92c82ca2c7daf289a238d62af01c42
+    :git: https://github.com/gscalzo/LatoFont.git
+  WeatherIconsKit:
+    :commit: effa8476b88010a5ea6d3cfcf5fb81db87ff5bfa
+    :git: https://github.com/gscalzo/WeatherIconsKit.git
+
+SPEC CHECKSUMS:
+  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  FlickrKit: beadf880a10ccaa2f13666d04112324fe08815e2
+  FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
+  LatoFont: 0bfeace154ee2da6080123d0e80560f6e22b187d
+  WeatherIconsKit: 84526a4cdf9da972c2866f24e40360420b1d40bf
+
+PODFILE CHECKSUM: d2e23bb662b3238b8b3d8aea2fbffe6db27eeead
+
+COCOAPODS: 1.0.1
