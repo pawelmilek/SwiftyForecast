@@ -21,12 +21,11 @@
  * THE SOFTWARE.
  */
 
-import UIKit
+import Foundation
 
 
-class HourlyForecastCollectionViewCell: UICollectionViewCell {
-    
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var conditionImage: UIImageView!
-    @IBOutlet weak var hourlyTemperatureLabel: UILabel!
+struct Location {
+    var city: String
+    var country: String
+    var coordinate: Coordinate
 }

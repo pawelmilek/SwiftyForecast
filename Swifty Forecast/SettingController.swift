@@ -23,7 +23,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     private let dataSource = [
                                 [UnitType.Imperial.description, UnitType.Metric.description],
@@ -32,7 +32,7 @@ class SettingsViewController: UIViewController {
     private let UnitDimension = 0
     private let ForecastDimension = 1
     private var settingsWereChanged: Bool = false
-    var delegate: SwiftyWeatherViewControllerDelegate?
+    var delegate: SwiftyForecastControllerDelegate?
     
     
     
@@ -54,7 +54,7 @@ class SettingsViewController: UIViewController {
 
 
 // MARK: Setup
-private extension SettingsViewController {
+private extension SettingController {
     func setup() -> () {
         self.view.backgroundColor = UIColor.spray()
         self.pickerView.dataSource = self
@@ -79,7 +79,7 @@ private extension SettingsViewController {
 
 
 // MARK: UIPickerViewDataSource
-extension SettingsViewController: UIPickerViewDataSource {
+extension SettingController: UIPickerViewDataSource {
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
@@ -160,6 +160,6 @@ extension SettingsViewController: UIPickerViewDataSource {
 }
 
 // MARK: UIPickerViewDelegate
-extension SettingsViewController: UIPickerViewDelegate {
+extension SettingController: UIPickerViewDelegate {
     
 }

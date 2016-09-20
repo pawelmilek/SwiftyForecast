@@ -24,7 +24,7 @@
 import UIKit
 
 
-class SixDaysForecastCollectionViewController: UICollectionViewController {
+class SixDaysCollectionController: UICollectionViewController {
     private let sixDaysForecastCell = "sixDaysCell"
     var dailyConditions: [DailyCondition] = [DailyCondition]()
     
@@ -44,7 +44,7 @@ class SixDaysForecastCollectionViewController: UICollectionViewController {
 
 
 // MARK: UICollectionViewDataSource
-extension SixDaysForecastCollectionViewController {
+extension SixDaysCollectionController {
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dailyConditions.count
@@ -52,7 +52,7 @@ extension SixDaysForecastCollectionViewController {
     
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell: ForecastCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(sixDaysForecastCell, forIndexPath: indexPath) as! ForecastCollectionViewCell
+        let cell: ForecastCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier(sixDaysForecastCell, forIndexPath: indexPath) as! ForecastCollectionCell
         
         guard self.dailyConditions.count > 0 else {
             print("No data in dailyConditions property")
@@ -103,7 +103,7 @@ extension SixDaysForecastCollectionViewController {
 }
 
 // MARK: UICollectionViewDelegate
-extension SixDaysForecastCollectionViewController {
+extension SixDaysCollectionController {
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         cell.backgroundColor = .clearColor()

@@ -25,7 +25,7 @@ import UIKit
 import CoreLocation
 
 
-class SwiftyWeatherViewController: UIViewController {
+class SwiftyForecastController: UIViewController {
     @IBOutlet weak var weatherConditionImage: UIImageView!
     @IBOutlet weak var sunriseImage: UIImageView!
     @IBOutlet weak var sunsetImage: UIImageView!
@@ -48,8 +48,8 @@ class SwiftyWeatherViewController: UIViewController {
     private var locationManager: CLLocationManager!
     private var forecastParser: ForecastParser = ForecastParser()
     private var weather: SwiftyWeather = SwiftyWeather()
-    private var sixDaysContainer: SixDaysForecastCollectionViewController?
-    private var twelveHoursContainer: TwelveHoursForecastCollectionViewController?
+    private var sixDaysContainer: SixDaysCollectionController?
+    private var twelveHoursContainer: TwelveHoursCollectionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,16 +70,16 @@ class SwiftyWeatherViewController: UIViewController {
          * to send messages to the source ViewController).
          * ************************************************************************************************ */
         if segue.identifier == "settings" {
-            let destination = segue.destinationViewController as! SettingsViewController
+            let destination = segue.destinationViewController as! SettingController
             destination.delegate = self
-            print("SettingsViewController")
+            print("SettingController")
         }
     }
     */
 }
 
 // MARK: Setup
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func setup() {
         func assignDataSourceForForecastCollectionView() {
@@ -104,7 +104,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Setup Layout
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func setupLayout() {
         
@@ -134,7 +134,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Location Manager
-extension SwiftyWeatherViewController: CLLocationManagerDelegate {
+extension SwiftyForecastController: CLLocationManagerDelegate {
     
     func initLocationManager() {
         self.locationManager = CLLocationManager()
@@ -198,7 +198,7 @@ extension SwiftyWeatherViewController: CLLocationManagerDelegate {
 
 
 // MARK: Fetching Weather Forecast
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func fetchingForecastData() {
         let completeURL = self.weather.forecastURL
@@ -214,7 +214,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Render and Reload View Layout
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func renderAndReloadLayoutViewContent() {
         dispatch_async(dispatch_get_main_queue(), {() -> Void in
@@ -227,7 +227,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Set Navigation Item Title Attributes
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func setNavigationItemTitleAttributes() {
         func setTitleColorAndFont() {
@@ -247,7 +247,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Render Current Day
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func renderViewLayoutForCurrentDay() {
         self.renderMoonPhase()
@@ -318,7 +318,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Reload CollectionView Data
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func reloadForecastCollectionViewData() {
         self.sixDaysContainer?.dailyConditions = self.weather.dailyConditions
@@ -331,7 +331,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Actions
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     @IBAction func onSegmentedControlSwitchUnit(sender: UISegmentedControl) {
         guard let selectedMeasuringSystem = MeasuringSystem(rawValue: sender.selectedSegmentIndex) else { return }
@@ -348,7 +348,7 @@ private extension SwiftyWeatherViewController {
 
 
 // MARK: Alert Controller
-private extension SwiftyWeatherViewController {
+private extension SwiftyForecastController {
     
     func showAlertWithTitleAndMessage(title title: String, message: String) {
         dispatch_async(dispatch_get_main_queue(), {() -> Void in
@@ -378,15 +378,15 @@ private extension SwiftyWeatherViewController {
 }
 
 // MARK: Prepare For Segue
-extension SwiftyWeatherViewController {
+extension SwiftyForecastController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sixDaysForecast" {
-            let childSixDaysViewController = segue.destinationViewController as! SixDaysForecastCollectionViewController
+            let childSixDaysViewController = segue.destinationViewController as! SixDaysCollectionController
             self.sixDaysContainer = childSixDaysViewController
             
         } else if segue.identifier == "twelveHoursForecast" {
-            let childTwelveHoursViewController = segue.destinationViewController as! TwelveHoursForecastCollectionViewController
+            let childTwelveHoursViewController = segue.destinationViewController as! TwelveHoursCollectionController
             self.twelveHoursContainer = childTwelveHoursViewController
         }
     }

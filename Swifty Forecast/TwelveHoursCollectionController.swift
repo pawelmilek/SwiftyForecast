@@ -25,7 +25,7 @@ import UIKit
 
 
 
-class TwelveHoursForecastCollectionViewController: UICollectionViewController {
+class TwelveHoursCollectionController: UICollectionViewController {
     private let reuseIdentifier = "twelveHoursCell"
     var hourlyConditions: [HourlyCondition] = [HourlyCondition]()
     
@@ -45,14 +45,14 @@ class TwelveHoursForecastCollectionViewController: UICollectionViewController {
 
 
 // MARK: UICollectionViewDataSource
-extension TwelveHoursForecastCollectionViewController {
+extension TwelveHoursCollectionController {
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.hourlyConditions.count
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell: HourlyForecastCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! HourlyForecastCollectionViewCell
+        let cell: HourlyForecastCollectionCell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! HourlyForecastCollectionCell
         
         guard self.hourlyConditions.count > 0 else {
             print("No data in hourlyCondition property")
@@ -74,7 +74,7 @@ extension TwelveHoursForecastCollectionViewController {
 }
 
 // MARK: UICollectionViewDelegate
-extension TwelveHoursForecastCollectionViewController {
+extension TwelveHoursCollectionController {
     
     override func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
     
