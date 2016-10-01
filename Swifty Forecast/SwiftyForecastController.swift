@@ -24,6 +24,17 @@ class SwiftyForecastController: UIViewController, CityListSelectDelegate, Custom
     var isConstraints = true
     
     
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.addObserver()
+    }
+    
+    deinit {
+        self.removeObserver()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -180,18 +191,13 @@ extension SwiftyForecastController {
 extension SwiftyForecastController {
     
     func segmentedControllerTapped(_ sender: UISegmentedControl) {
-        let selectedSegment = sender.selectedSegmentIndex
-        
-        switch selectedSegment {
-        case 0:
-            print("Fahrenheit")
-            
-        case 1:
-            print("Celsius")
-            
-        default:
-            break
+        if sender.selectedSegmentIndex == 0 {
+            MeasuringSystem.isMetric = false    // default, need to store user choose in local dba, UserDefaults.standard
+        } else {
+            MeasuringSystem.isMetric = true
         }
+        
+        self.notifyObserver()
     }
     
     @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
@@ -229,6 +235,34 @@ fileprivate extension SwiftyForecastController {
             }
         }
     }
+}
+
+
+extension SwiftyForecastController {
+    
+    func addObserver() {
+        let defaultCenter = NotificationCenter.default
+        let name = NotificationCenterKey.measuringSystemDidSwitcheNotification
+        
+        defaultCenter.addObserver(self, selector: #selector(SwiftyForecastController.measuringSystemSwitched(_:)), name: NSNotification.Name(rawValue: name), object: nil)
+    }
+    
+    
+    func removeObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func notifyObserver() {
+        let notificationCenterKey = NotificationCenterKey.measuringSystemDidSwitcheNotification
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationCenterKey), object: nil)
+    }
+    
+    func measuringSystemSwitched(_ notification: NSNotification) {
+        print(NotificationCenterKey.measuringSystemDidSwitcheNotification)
+        self.retrieveWeatherData()
+    }
+    
 }
 
 

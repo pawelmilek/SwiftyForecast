@@ -10,7 +10,5 @@ import Foundation
 
 
 struct MeasuringSystem {
-    static var isMetric: Bool {
-            return NSLocale.current.usesMetricSystem
-    }
+    static var isMetric = false
 }
