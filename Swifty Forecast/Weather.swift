@@ -39,17 +39,17 @@ struct Weather {
 extension Weather {
     var currentTemperatureCelsius: Double? {
         guard let currentFahrenheit = self.currentTemperatureFahrenheit else { return nil }
-        return (currentFahrenheit - 32) * Double(5 / 9)
+        return (currentFahrenheit - 32) * Double(5.0 / 9.0)
     }
     
     var minTemperatureCelsius: Double? {
         guard let minFahrenheit = self.minTemperatureFahrenheit else { return nil }
-        return (minFahrenheit - 32) * Double(5 / 9)
+        return (minFahrenheit - 32) * Double(5.0 / 9.0)
     }
     
     var maxTemperatureCelsius: Double? {
-        guard let maxFahrenheit = self.minTemperatureFahrenheit else { return nil }
-        return (maxFahrenheit - 32) * Double(5 / 9)
+        guard let maxFahrenheit = self.maxTemperatureFahrenheit else { return nil }
+        return (maxFahrenheit - 32) * Double(5.0 / 9.0)
     }
 }
 

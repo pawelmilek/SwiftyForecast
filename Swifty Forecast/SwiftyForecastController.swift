@@ -208,6 +208,37 @@ extension SwiftyForecastController {
 }
 
 
+
+// MARK: NotificationCenter
+extension SwiftyForecastController {
+    
+    func addObserver() {
+        let defaultCenter = NotificationCenter.default
+        let name = NotificationCenterKey.measuringSystemDidSwitcheNotification
+        
+        defaultCenter.addObserver(self, selector: #selector(SwiftyForecastController.measuringSystemSwitched(_:)), name: NSNotification.Name(rawValue: name), object: nil)
+    }
+    
+    
+    func removeObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
+    func notifyObserver() {
+        let notificationCenterKey = NotificationCenterKey.measuringSystemDidSwitcheNotification
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationCenterKey), object: nil)
+    }
+    
+    func measuringSystemSwitched(_ notification: NSNotification) {
+        print(NotificationCenterKey.measuringSystemDidSwitcheNotification)
+        self.retrieveWeatherData()
+    }
+    
+}
+
+
+
 // MAKR: Retrieve Weather Data from JSON
 fileprivate extension SwiftyForecastController {
     
@@ -236,33 +267,4 @@ fileprivate extension SwiftyForecastController {
         }
     }
 }
-
-
-extension SwiftyForecastController {
-    
-    func addObserver() {
-        let defaultCenter = NotificationCenter.default
-        let name = NotificationCenterKey.measuringSystemDidSwitcheNotification
-        
-        defaultCenter.addObserver(self, selector: #selector(SwiftyForecastController.measuringSystemSwitched(_:)), name: NSNotification.Name(rawValue: name), object: nil)
-    }
-    
-    
-    func removeObserver() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    func notifyObserver() {
-        let notificationCenterKey = NotificationCenterKey.measuringSystemDidSwitcheNotification
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationCenterKey), object: nil)
-    }
-    
-    func measuringSystemSwitched(_ notification: NSNotification) {
-        print(NotificationCenterKey.measuringSystemDidSwitcheNotification)
-        self.retrieveWeatherData()
-    }
-    
-}
-
 
