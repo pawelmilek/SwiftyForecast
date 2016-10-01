@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Cartography.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FXBlurView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>WeatherIconsKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,7 +52,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0D427514B67718C3994C7B1EC0F54BE9</key>
+		<key>062A637629D8BBE66510B34C95C5E8F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33F2B9C6344360A5AC371EDD0BAFCC78</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80261038F7FE77E8E9CC67103469A8F4</key>
+		<key>925543D9BB575CEEA9DE71529A4392DD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9D1C82117572F0D0E2216005744DFDB0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BA71D51147B8A72A588BFCC03DB91086</key>
 		<dict>
 			<key>primary</key>
 			<true/>

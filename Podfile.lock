@@ -1,15 +1,19 @@
 PODS:
-  - Alamofire (3.5.0)
+  - Alamofire (4.0.1)
+  - Cartography (1.0.0)
   - FlickrKit (1.0.8)
   - FXBlurView (1.6.4)
   - LatoFont (1.0.1)
+  - SwiftyJSON (3.1.0)
   - WeatherIconsKit (1.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
+  - Alamofire (~> 4.0)
+  - Cartography (~> 1.0)
   - FlickrKit (~> 1.0)
   - FXBlurView (~> 1.6)
   - LatoFont (from `https://github.com/gscalzo/LatoFont.git`)
+  - SwiftyJSON (~> 3.1)
   - WeatherIconsKit (from `https://github.com/gscalzo/WeatherIconsKit.git`)
 
 EXTERNAL SOURCES:
@@ -27,12 +31,14 @@ CHECKOUT OPTIONS:
     :git: https://github.com/gscalzo/WeatherIconsKit.git
 
 SPEC CHECKSUMS:
-  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  Cartography: e576cf19c0c1f201686180bcf4537f981574ce8d
   FlickrKit: beadf880a10ccaa2f13666d04112324fe08815e2
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   LatoFont: 0bfeace154ee2da6080123d0e80560f6e22b187d
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
   WeatherIconsKit: 84526a4cdf9da972c2866f24e40360420b1d40bf
 
-PODFILE CHECKSUM: d2e23bb662b3238b8b3d8aea2fbffe6db27eeead
+PODFILE CHECKSUM: 8a64828c527fd5cacc17ee476898f530eb5a316d
 
 COCOAPODS: 1.0.1

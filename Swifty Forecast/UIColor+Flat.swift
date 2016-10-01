@@ -43,9 +43,9 @@ extension UIColor {
 }
 
 
-extension UIColor {
+fileprivate extension UIColor {
     
-    private class func colorRGB(component component: (CGFloat, CGFloat, CGFloat)) -> UIColor {
+    class func colorRGB(component: (CGFloat, CGFloat, CGFloat)) -> UIColor {
         return UIColor(red: component.0/255, green: component.1/255, blue: component.2/255, alpha: 1)
     }
     
