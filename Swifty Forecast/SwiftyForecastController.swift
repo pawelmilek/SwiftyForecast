@@ -249,18 +249,17 @@ fileprivate extension SwiftyForecastController {
             var mutableLocation = cityLocation
             
             if let selectedCity = self.city {
-                mutableLocation.latitude = selectedCity.latitude
-                mutableLocation.longitude = selectedCity.longitude
+                mutableLocation = Coordinate(latitude: selectedCity.latitude, longitude: selectedCity.longitude)
                 //print("selectedCity \(selectedCity.fullName): latitude \(mutableLocation.latitude), longitude \(mutableLocation.longitude)")
             }
             
             
-            weatherDatastore.retrieveCurrentWeatherAt(latitude: mutableLocation.latitude, longitude: mutableLocation.longitude) { currentConditions in
+            weatherDatastore.retrieveCurrentWeatherAt(coordinate: mutableLocation) { currentConditions in
                 weakSelf?.currentWeatherView.renderView(weather: currentConditions)
                 return
             }
             
-            weatherDatastore.retrieveDailyForecastAt(latitude: mutableLocation.latitude, longitude: mutableLocation.longitude, forecast: ConstantValue.numberOfDays) { dailyConditions in
+            weatherDatastore.retrieveDailyForecastAt(coordinate: mutableLocation, forecast: ConstantValue.numberOfDays) { dailyConditions in
                 weakSelf?.dailyForecastView.renderView(weathers: dailyConditions)
                 return
             }

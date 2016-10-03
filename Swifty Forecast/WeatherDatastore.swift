@@ -16,14 +16,14 @@ class WeatherDatastore {
     fileprivate weak var city: City? = nil
     
     
-    func retrieveCurrentWeatherAt(latitude: Double, longitude: Double,
+    func retrieveCurrentWeatherAt(coordinate: Coordinate,
                                   block: @escaping (_ condition: Weather) -> Void) {
         
         //https://api.darksky.net/forecast/6a92402c27dfc4740168ec5c0673a760/42.3601,-71.0589?exclude=minutely,hourly,alerts,flags?units=us
         
         let exclude = DarkSkyAPI.exclude
         let units = DarkSkyAPI.units
-        let url = DarkSkyAPI.requestURL + "\(latitude),\(longitude)" + exclude + units
+        let url = DarkSkyAPI.requestURL + "\(coordinate.latitude),\(coordinate.longitude)" + exclude + units
 
         Alamofire.request(url).responseJSON { response in
                 if(response.result.value == nil) {
@@ -46,12 +46,12 @@ class WeatherDatastore {
     }
     
     
-    func retrieveDailyForecastAt(latitude: Double, longitude: Double, forecast: Int,
+    func retrieveDailyForecastAt(coordinate: Coordinate, forecast: Int,
                                     block: @escaping (_ conditions: [Weather]) -> Void) {
         
         let exclude = DarkSkyAPI.exclude
         let units = DarkSkyAPI.units
-        let url = DarkSkyAPI.requestURL + "\(latitude),\(longitude)" + exclude + units
+        let url = DarkSkyAPI.requestURL + "\(coordinate.latitude),\(coordinate.longitude)" + exclude + units
         
         Alamofire.request(url).responseJSON { response in
             //print(response)
