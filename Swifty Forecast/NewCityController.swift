@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import CoreLocation
+import Foundation
+import Cartography
 
 
 
@@ -16,7 +17,7 @@ class NewCityController: UIViewController, UITextFieldDelegate, CustomViewLayout
     @IBOutlet weak var cityName: UITextField!
     @IBOutlet weak var countryName: UITextField!
     weak var delegate: NewCityControllerDelegate? = nil
-    var isConstraints = false
+    var isConstraints = true
     
     
     override func viewDidLoad() {
@@ -36,8 +37,34 @@ class NewCityController: UIViewController, UITextFieldDelegate, CustomViewLayout
 
 // MARK: CustomViewLayoutSetupable
 extension NewCityController {
+    
     func setupLayout() {
-        // MARK: TODO
+        let horizontalMerge: CGFloat = 8
+        let verticalMerge: CGFloat = 16
+        
+        func setCityNameTextFieldConstrains() {
+            constrain(self.cityName) { view in
+                let statusBarHeight = UIApplication.shared.statusBarFrame.height
+                let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+                let topMerge = statusBarHeight + navigationBarHeight + verticalMerge
+                
+                view.top == view.superview!.top + topMerge
+                view.left == view.superview!.left + horizontalMerge
+                view.right == view.superview!.right - horizontalMerge
+            }
+        }
+        
+        func setCountryNameTextFieldConstrains() {
+            constrain(self.countryName, self.cityName) { view, view2 in
+                view.top == view2.bottom + (verticalMerge - horizontalMerge)
+                view.left == view2.left
+                view.right == view2.right
+            }
+        }
+        
+        
+        setCityNameTextFieldConstrains()
+        setCountryNameTextFieldConstrains()
     }
 }
 
@@ -105,6 +132,7 @@ fileprivate extension NewCityController {
             guard let country = self.countryName.text else { return true }
             return (country.trimmingCharacters(in: .whitespaces) == "") ? true : false
         }
+        
         
         if isCityNameNilOrEmpty() {
             AlertController.presentAlertWith(title: "New City", andMessage: "Check City Name text field.")
