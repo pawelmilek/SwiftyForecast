@@ -10,7 +10,7 @@ import Foundation
 
 
 struct DarkSkyAPI {
-    static let exclude = "?exclude=minutely,hourly,alerts,flags"
+    static let exclude = "?exclude=minutely,alerts,flags"
     static let units = "?units=us"
     
     static var requestURL: String {

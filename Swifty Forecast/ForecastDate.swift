@@ -10,7 +10,8 @@ import Foundation
 
 
 struct ForecastDate {
-    var dayMonth: String
+    var mediumDayMonth: String
+    var longDayMonth: String
     var weekday: String
     var time: String
 
@@ -18,13 +19,16 @@ struct ForecastDate {
     init(timeStamp: Int) {
         let timeStamp = TimeInterval(timeStamp)
         let formatter = DateFormatter()
-        
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        formatter.dateFormat = "dd MMMM"
-        
         let date = Date(timeIntervalSince1970: timeStamp)
-        let shortDate = formatter.string(from: date)
+        
+        
+        formatter.dateFormat = "dd MMMM"
+        let longDate = formatter.string(from: date)
+        
+        
+        formatter.dateFormat = "dd MMM"
+        let mediumDate = formatter.string(from: date)
+    
         
         formatter.dateFormat = "EEEE"
         let weekday = formatter.string(from: date)
@@ -34,7 +38,9 @@ struct ForecastDate {
         let time = formatter.string(from: date)
         
         
-        self.dayMonth = shortDate
+    
+        self.mediumDayMonth = mediumDate
+        self.longDayMonth = longDate
         self.weekday = weekday
         self.time = time
     }
@@ -44,7 +50,7 @@ struct ForecastDate {
 // MARK: CustomStringConvertible
 extension ForecastDate: CustomStringConvertible {
     var description: String {
-        let textualRepresentation = "\(self.dayMonth), \(self.weekday) \(self.time)"
+        let textualRepresentation = "\(self.longDayMonth), \(self.weekday) \(self.time)"
         return textualRepresentation
     }
 }

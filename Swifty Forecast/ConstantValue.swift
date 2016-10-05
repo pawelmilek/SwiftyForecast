@@ -10,5 +10,6 @@ import Foundation
 
 
 struct ConstantValue {
+    static let numberOfHours = 12
     static let numberOfDays = 5
 }

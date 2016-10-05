@@ -52,6 +52,8 @@
 		E27E2FD91DA04E9100B3EABF /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FD81DA04E9100B3EABF /* CurrentWeatherView.swift */; };
 		E27E2FDB1DA057C100B3EABF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E27E2FDA1DA057C100B3EABF /* Info.plist */; };
 		E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */; };
+		E28E5DD51DA2DC8E00092D02 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E5DD41DA2DC8E00092D02 /* HourlyForecastView.swift */; };
+		E28E5DD71DA3197500092D02 /* HourForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E5DD61DA3197500092D02 /* HourForecastView.swift */; };
 		E2EC1CF91D918F4A00FD1F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E2EC1D111D9195FE00FD1F95 /* Shakeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC1D081D9195FE00FD1F95 /* Shakeable.swift */; };
 		E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */; };
@@ -105,6 +107,8 @@
 		E27E2FD81DA04E9100B3EABF /* CurrentWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		E27E2FDA1DA057C100B3EABF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterKey.swift; sourceTree = "<group>"; };
+		E28E5DD41DA2DC8E00092D02 /* HourlyForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyForecastView.swift; sourceTree = "<group>"; };
+		E28E5DD61DA3197500092D02 /* HourForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourForecastView.swift; sourceTree = "<group>"; };
 		E29911F61D456EAC0083B484 /* Swifty Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2EC1D081D9195FE00FD1F95 /* Shakeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shakeable.swift; sourceTree = "<group>"; };
@@ -154,6 +158,8 @@
 				E27E2FD81DA04E9100B3EABF /* CurrentWeatherView.swift */,
 				E27E2F9C1DA04D1D00B3EABF /* DailyForecastView.swift */,
 				E27E2F9F1DA04D1D00B3EABF /* DayForecastView.swift */,
+				E28E5DD41DA2DC8E00092D02 /* HourlyForecastView.swift */,
+				E28E5DD61DA3197500092D02 /* HourForecastView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -414,6 +420,7 @@
 				E27E2FB71DA04D1D00B3EABF /* CityListTableDataSource.swift in Sources */,
 				E27E2FCD1DA04D1D00B3EABF /* ReusableView.swift in Sources */,
 				E27E2FD01DA04D1D00B3EABF /* UITableView+Registrable.swift in Sources */,
+				E28E5DD51DA2DC8E00092D02 /* HourlyForecastView.swift in Sources */,
 				E27E2FC31DA04D1D00B3EABF /* Geocoder.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,
 				E27E2FD21DA04D1D00B3EABF /* UITableViewCell+ReusableView.swift in Sources */,
@@ -450,6 +457,7 @@
 				E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
 				E27E2FD91DA04E9100B3EABF /* CurrentWeatherView.swift in Sources */,
+				E28E5DD71DA3197500092D02 /* HourForecastView.swift in Sources */,
 				E27E2FBA1DA04D1D00B3EABF /* Coordinate.swift in Sources */,
 				E27E2FC41DA04D1D00B3EABF /* IconType.swift in Sources */,
 			);

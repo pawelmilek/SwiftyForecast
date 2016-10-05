@@ -13,7 +13,7 @@ import Cartography
 
 
 class DailyForecastView: UIView, CustomViewLayoutSetupable, CustomViewSetupable {
-    fileprivate var forecastCells = [DayForecastView]()
+    fileprivate var dayCells = [DayForecastView]()
     var isConstraints = false
     
     
@@ -59,7 +59,7 @@ extension DailyForecastView {
             }
         }
         
-        func setForecastCellsConstrain() {
+        func setdayCellsConstrain() {
             /*
              * Disable the translation from the autoresizingMask to AutoLayout constraints for the view itself.
              * Cartography disables it, but in this case, we set constraints only on the subviews,
@@ -67,34 +67,34 @@ extension DailyForecastView {
              */
             self.translatesAutoresizingMaskIntoConstraints = false
             
-            constrain(forecastCells.first!) { view in
+            constrain(dayCells.first!) { view in
                 view.top == view.superview!.top
             }
             
-            for idx in 1..<forecastCells.count {
-                let previousCell = forecastCells[idx-1]
-                let cell = forecastCells[idx]
+            for index in 1..<dayCells.count {
+                let previousCell = dayCells[index - 1]
+                let cell = dayCells[index]
                 
                 constrain(cell, previousCell) { view, view2 in
                     view.top == view2.bottom
                 }
             }
             
-            for cell in forecastCells {
+            for cell in dayCells {
                 constrain(cell) { view in
                     view.left == view.superview!.left
                     view.right == view.superview!.right
                 }
             }
             
-            constrain(forecastCells.last!) { view in
+            constrain(dayCells.last!) { view in
                 view.bottom == view.superview!.bottom
             }
         }
         
         
         setViewConstrain()
-        setForecastCellsConstrain()
+        setdayCellsConstrain()
     }
 }
 
@@ -104,7 +104,7 @@ extension DailyForecastView {
     func setup() {
         for _ in 0..<ConstantValue.numberOfDays {
             let cell = DayForecastView(frame: CGRect.zero)
-            self.forecastCells.append(cell)
+            self.dayCells.append(cell)
             self.addSubview(cell)
         }
     }
@@ -121,7 +121,7 @@ extension DailyForecastView {
     
     
     func renderView(weathers: [Weather]) {
-        for (index, dayView) in self.forecastCells.enumerated() {
+        for (index, dayView) in self.dayCells.enumerated() {
             dayView.renderView(weather: weathers[index])
         }
     }

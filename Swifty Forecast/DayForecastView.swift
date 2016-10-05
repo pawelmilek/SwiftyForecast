@@ -16,7 +16,7 @@ import Cartography
 final class DayForecastView: UIView, CustomViewLayoutSetupable, CustomViewSetupable  {
     fileprivate let iconLabel = UILabel()
     fileprivate let moonPhaseLabel = UILabel()
-    fileprivate let dayLabel = UILabel()
+    fileprivate let dateLabel = UILabel()
     fileprivate let temperaturesLabel = UILabel()
     fileprivate let descriptionLabel = UILabel()
     var isConstraints = false
@@ -85,10 +85,11 @@ extension DayForecastView {
             }
         }
         
-        func setDayLabelConstrain() {
-            constrain(self.dayLabel, self.moonPhaseLabel) { view, view2 in
-                view.centerY == view.superview!.centerY
+        func setDateLabelConstrain() {
+            constrain(self.dateLabel, self.moonPhaseLabel) { view, view2 in
+                view.top == view.superview!.top
                 view.left == view2.right + mergin
+                //view.height == 10
             }
         }
         
@@ -101,12 +102,13 @@ extension DayForecastView {
         
         func setDescriptionLabelConstrain() {
             constrain(self.descriptionLabel, self.moonPhaseLabel) { view, view2 in
+                view.top == view.superview!.centerY
+                view.bottom == view.superview!.bottom
                 view.left == view2.right + mergin
                 view.right == view.superview!.right - mergin
-                view.bottom == view.superview!.bottom
             }
             
-            constrain(self.descriptionLabel, self.dayLabel) { view, view2 in
+            constrain(self.descriptionLabel, self.dateLabel) { view, view2 in
                 view.height == view2.height
             }
         }
@@ -114,7 +116,7 @@ extension DayForecastView {
         setViewConstrain()
         setIconLabelConstrain()
         setMoonPhaseLabelConstrain()
-        setDayLabelConstrain()
+        setDateLabelConstrain()
         setTemperaturesLabelConstrain()
         setDescriptionLabelConstrain()
         
@@ -127,7 +129,7 @@ extension DayForecastView {
     func setup() {
         self.addSubview(self.iconLabel)
         self.addSubview(self.moonPhaseLabel)
-        self.addSubview(self.dayLabel)
+        self.addSubview(self.dateLabel)
         self.addSubview(self.temperaturesLabel)
         self.addSubview(self.descriptionLabel)
     }
@@ -145,8 +147,8 @@ extension DayForecastView {
             self.iconLabel.layer.borderColor = borderColor
             self.moonPhaseLabel.layer.borderWidth = width
             self.moonPhaseLabel.layer.borderColor = borderColor
-            self.dayLabel.layer.borderWidth = width
-            self.dayLabel.layer.borderColor = borderColor
+            self.dateLabel.layer.borderWidth = width
+            self.dateLabel.layer.borderColor = borderColor
             self.temperaturesLabel.layer.borderWidth = width
             self.temperaturesLabel.layer.borderColor = borderColor
             self.descriptionLabel.layer.borderWidth = width
@@ -161,10 +163,10 @@ extension DayForecastView {
             self.iconLabel.textAlignment = .center
             self.moonPhaseLabel.textColor = textColor
             self.moonPhaseLabel.textAlignment = .center
-            self.dayLabel.font = UIFont.latoLightFont(ofSize: 16)
-            self.dayLabel.textColor = textColor
-            self.dayLabel.textAlignment = .left
-            self.temperaturesLabel.font = UIFont.latoLightFont(ofSize: 16)
+            self.dateLabel.font = UIFont.latoLightFont(ofSize: 14)
+            self.dateLabel.textColor = textColor
+            self.dateLabel.textAlignment = .left
+            self.temperaturesLabel.font = UIFont.latoLightFont(ofSize: 15)
             self.temperaturesLabel.textColor = textColor
             self.temperaturesLabel.textAlignment = .right
             self.descriptionLabel.font = UIFont.latoLightFont(ofSize: 11)
@@ -179,7 +181,7 @@ extension DayForecastView {
     }
     
     func renderView(weather: Weather) {
-        self.dayLabel.text = weather.date.dayMonth
+        self.dateLabel.text = "\(weather.date.mediumDayMonth), \(weather.date.weekday)"
         self.iconLabel.attributedText = IconType(rawValue: weather.icon)!.fontIcon
         self.moonPhaseLabel.attributedText = weather.moonPhase?.icon
         self.descriptionLabel.text = weather.description

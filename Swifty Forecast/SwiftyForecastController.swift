@@ -18,6 +18,7 @@ class SwiftyForecastController: UIViewController, CityListSelectDelegate, Custom
     fileprivate var backgroundImageView: UIImageView! = nil
     fileprivate var scrollView: UIScrollView! = nil
     fileprivate var currentWeatherView: CurrentWeatherView! = nil
+    fileprivate var hourlyForecastView: HourlyForecastView! = nil
     fileprivate var dailyForecastView: DailyForecastView! = nil
     fileprivate var locationDatastore: LocationDatastore?
     fileprivate var city: City?
@@ -87,6 +88,7 @@ extension SwiftyForecastController {
         
         func setupScrollViewSubViews() {
             self.currentWeatherView = CurrentWeatherView(frame: CGRect.zero)
+            self.hourlyForecastView = HourlyForecastView(frame: CGRect.zero)
             self.dailyForecastView = DailyForecastView(frame: CGRect.zero)
         }
         
@@ -96,6 +98,7 @@ extension SwiftyForecastController {
             self.scrollView.showsVerticalScrollIndicator = false
             
             self.scrollView.addSubview(self.currentWeatherView)
+            self.scrollView.addSubview(self.hourlyForecastView)
             self.scrollView.addSubview(self.dailyForecastView)
             self.view.addSubview(self.scrollView)
         }
@@ -127,6 +130,10 @@ extension SwiftyForecastController {
     
     
     func setupLayout() {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        
+        
         func setBackgroundConstrains() {
             constrain(self.backgroundImageView) { view in
                 view.top == view.superview!.top
@@ -144,9 +151,6 @@ extension SwiftyForecastController {
              * - when Hotspot is activated
              */
             constrain(self.scrollView) { view in
-                let statusBarHeight = UIApplication.shared.statusBarFrame.height
-                let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
-                
                 view.top == view.superview!.top + (statusBarHeight + navigationBarHeight)
                 view.bottom == view.superview!.bottom
                 view.left == view.superview!.left
@@ -160,12 +164,17 @@ extension SwiftyForecastController {
                 view.centerX == view.superview!.centerX
                 
                 // set view at the bottom of the scrollView to enable scrolling
-                view.top == view.superview!.top + CGFloat(64) //centerY
+                view.top == view.superview!.top + (statusBarHeight + navigationBarHeight)
             }
+        }
+        
+        func setHourlyForecastViewConstrains() {
+            
         }
         
         func setDailyForecastViewConstrains() {
             let bottomMargin: CGFloat = 8
+            
             constrain(self.dailyForecastView, self.currentWeatherView) { view, view2 in
                 view.top == view2.bottom + bottomMargin
                 view.width == view.superview!.width
@@ -177,6 +186,7 @@ extension SwiftyForecastController {
         setBackgroundConstrains()
         setScrollViewConstrains()
         setCurrentWeatherViewConstrains()
+        setHourlyForecastViewConstrains()
         setDailyForecastViewConstrains()
     }
     
@@ -254,12 +264,17 @@ fileprivate extension SwiftyForecastController {
             }
             
             
-            weatherDatastore.retrieveCurrentWeatherAt(coordinate: mutableLocation) { currentConditions in
+            weatherDatastore.retrieveCurrentWeather(at: mutableLocation) { currentConditions in
                 weakSelf?.currentWeatherView.renderView(weather: currentConditions)
                 return
             }
             
-            weatherDatastore.retrieveDailyForecastAt(coordinate: mutableLocation, forecast: ConstantValue.numberOfDays) { dailyConditions in
+            weatherDatastore.retrieveHourlyWeather(at: mutableLocation, forecast: ConstantValue.numberOfHours) { hourlyConditions in
+                weakSelf?.hourlyForecastView.renderView(weathers: hourlyConditions)
+                return
+            }
+            
+            weatherDatastore.retrieveDailyForecast(at: mutableLocation, forecast: ConstantValue.numberOfDays) { dailyConditions in
                 weakSelf?.dailyForecastView.renderView(weathers: dailyConditions)
                 return
             }

@@ -211,7 +211,7 @@ extension CurrentWeatherView {
     }
     
     func renderView(weather: Weather) {
-        self.dateLabel.text = weather.date.dayMonth
+        self.dateLabel.text = weather.date.longDayMonth
         self.cityLabel.text = weather.cityAndCountry
         self.descriptionLabel.text = weather.description
         self.iconLabel.attributedText = IconType(rawValue: weather.icon)!.fontIcon

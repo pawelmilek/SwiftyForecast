@@ -13,6 +13,7 @@ struct JSONResponseFormat {
     static let latitude = "latitude"
     static let longitude = "longitude"
     static let currently = "currently"
+    static let hourly = "hourly"
     static let daily = "daily"
     static let data = "data"
     
