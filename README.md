@@ -1,5 +1,11 @@
 # Swifty-Forecast <br/>
 
+# General Info
++ Version: 1.0
++ Deployment target: iOS 9.0
++ Device: iPhone
++ Orientation: Portrait
+
 ![screen](https://cloud.githubusercontent.com/assets/9807660/19017166/072d69ce-87f6-11e6-9b97-c0a9ccc7106e.png)
 ![screen](https://cloud.githubusercontent.com/assets/9807660/19017228/00c10f4e-87f8-11e6-9935-449172d849c9.png)
 ![screen](https://cloud.githubusercontent.com/assets/9807660/19017164/0728bb2c-87f6-11e6-9dc1-6dedfc6fb2a1.png)
