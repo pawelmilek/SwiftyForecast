@@ -20,10 +20,10 @@
 	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>The app requires location services to get weather in your area.</string>
-	<key>NSLocationUsageDescription</key>
-	<string>Your message!!</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app requires location services to get weather in your area.</string>
 	<key>NSLocationWhenInUsageDescription</key>
 	<string>I need to know where you are.</string>
 	<key>UILaunchStoryboardName</key>

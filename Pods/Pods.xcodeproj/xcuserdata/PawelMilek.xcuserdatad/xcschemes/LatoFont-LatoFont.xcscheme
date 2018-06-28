@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9D1C82117572F0D0E2216005744DFDB0"
+               BlueprintIdentifier = "DE8F2EA6BBEA8FD641321B92F8BA8C2B"
                BuildableName = "LatoFont.bundle"
                BlueprintName = "LatoFont-LatoFont"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9D1C82117572F0D0E2216005744DFDB0"
+            BlueprintIdentifier = "DE8F2EA6BBEA8FD641321B92F8BA8C2B"
             BuildableName = "LatoFont.bundle"
             BlueprintName = "LatoFont-LatoFont"
             ReferencedContainer = "container:Pods.xcodeproj">

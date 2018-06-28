@@ -123,7 +123,7 @@ fileprivate extension WeatherDatastore {
         let summary = json[JSONResponseFormat.currently][JSONResponseFormat.DataPoint.summary].stringValue
         let currentTempFahr = json[JSONResponseFormat.currently][JSONResponseFormat.DataPoint.temperature].doubleValue
         
-        let weather = Weather(city: city, timeStamp: Int(timestamp), icon: icon, description: summary, currentTemp: currentTempFahr)
+      let weather = Weather(city: city, timeStamp: Int(truncating: timestamp), icon: icon, description: summary, currentTemp: currentTempFahr)
 
         return weather
     }
@@ -134,7 +134,7 @@ fileprivate extension WeatherDatastore {
         let summary = json[JSONResponseFormat.DataPoint.summary].stringValue
         let currentTemp = json[JSONResponseFormat.DataPoint.temperature].doubleValue
         
-        let weather = Weather(city: nil, timeStamp: Int(timestamp), icon: icon, description: summary, currentTemp: currentTemp)
+      let weather = Weather(city: nil, timeStamp: Int(truncating: timestamp), icon: icon, description: summary, currentTemp: currentTemp)
         
         return weather
     }
@@ -147,7 +147,7 @@ fileprivate extension WeatherDatastore {
         let maxTempFahr = json[JSONResponseFormat.DataPoint.temperatureMax].doubleValue
         let moonPhase = json[JSONResponseFormat.DataPoint.moonPhase].doubleValue
         
-        let weather = Weather(city: nil, timeStamp: Int(timestamp), icon: icon, description: summary, currentTemp: nil, minTemp: minTempFahr, maxTemp: maxTempFahr, moonPhaseLunation: moonPhase)
+      let weather = Weather(city: nil, timeStamp: Int(truncating: timestamp), icon: icon, description: summary, currentTemp: nil, minTemp: minTempFahr, maxTemp: maxTempFahr, moonPhaseLunation: moonPhase)
         
         return weather
     }

@@ -13,7 +13,7 @@ protocol DequeuableCell: class {}
 
 
 extension DequeuableCell where Self: UITableView {
-    func dequeueCell<T: UITableViewCell>(for indexPath: IndexPath) -> T where T: ReusableView {
+    func dequeueCell<T: UITableViewCell>(for indexPath: IndexPath) -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reuseIdentifier, for: indexPath) as? T else {
             fatalError("Could not dequeue cell with identifier: \(T.reuseIdentifier)")
         }

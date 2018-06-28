@@ -51,7 +51,7 @@ private extension AppDelegate {
         
         func setTitleTextColor() {
             let color = UIColor.white
-            let textAttributes = [NSForegroundColorAttributeName : color]
+            let textAttributes = [NSAttributedStringKey.foregroundColor : color]
             UINavigationBar.appearance().titleTextAttributes = textAttributes
         }
         

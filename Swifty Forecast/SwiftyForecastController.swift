@@ -200,7 +200,7 @@ extension SwiftyForecastController {
 // MARK: Actions
 extension SwiftyForecastController {
     
-    func segmentedControllerTapped(_ sender: UISegmentedControl) {
+    @objc func segmentedControllerTapped(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             MeasuringSystem.isMetric = false    // default, need to store user choose in local dba, UserDefaults.standard
         } else {
@@ -240,7 +240,7 @@ extension SwiftyForecastController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationCenterKey), object: nil)
     }
     
-    func measuringSystemSwitched(_ notification: NSNotification) {
+    @objc func measuringSystemSwitched(_ notification: NSNotification) {
         print(NotificationCenterKey.measuringSystemDidSwitcheNotification)
         self.retrieveWeatherData()
     }
