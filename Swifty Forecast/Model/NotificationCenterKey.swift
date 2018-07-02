@@ -8,6 +8,15 @@
 
 import Foundation
 
-struct NotificationCenterKey {
-    static let measuringSystemDidSwitcheNotification = "MeasuringSystemDidSwitcheNotification"
+enum NotificationCenterKey: String {
+    case measuringSystemDidSwitchNotification = "MeasuringSystemDidSwitch"
+}
+
+
+extension NotificationCenterKey {
+  
+  var name: NSNotification.Name {
+    return NSNotification.Name(rawValue: self.rawValue)
+  }
+  
 }

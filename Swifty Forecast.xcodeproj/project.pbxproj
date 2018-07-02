@@ -33,7 +33,6 @@
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
 		E27E2F8C1DA048B600B3EABF /* CityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8B1DA048B600B3EABF /* CityCell.swift */; };
 		E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */; };
-		E27E2F901DA048EB00B3EABF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8F1DA048EB00B3EABF /* AlertController.swift */; };
 		E27E2F921DA04C8C00B3EABF /* Double+RoundToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */; };
 		E27E2FB41DA04D1D00B3EABF /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F931DA04D1D00B3EABF /* City.swift */; };
 		E27E2FB51DA04D1D00B3EABF /* CityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F941DA04D1D00B3EABF /* CityCell.xib */; };
@@ -105,7 +104,6 @@
 		E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E27E2F8B1DA048B600B3EABF /* CityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCell.swift; sourceTree = "<group>"; };
 		E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E27E2F8F1DA048EB00B3EABF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+RoundToString.swift"; sourceTree = "<group>"; };
 		E27E2F931DA04D1D00B3EABF /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E27E2F941DA04D1D00B3EABF /* CityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityCell.xib; sourceTree = "<group>"; };
@@ -228,10 +226,9 @@
 		E23997D520E84075007D8CE4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E27E2F8F1DA048EB00B3EABF /* AlertController.swift */,
+				E27E2F821DA0482C00B3EABF /* SwiftyForecastController.swift */,
 				E27E2F7F1DA0482C00B3EABF /* CityListTableController.swift */,
 				E27E2F801DA0482C00B3EABF /* NewCityController.swift */,
-				E27E2F821DA0482C00B3EABF /* SwiftyForecastController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -386,8 +383,8 @@
 		E29911F81D456EAD0083B484 /* Swifty Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				E23997DF20E84371007D8CE4 /* NetworkLayer */,
 				E23997DC20E84129007D8CE4 /* Application */,
+				E23997DF20E84371007D8CE4 /* NetworkLayer */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E23997D320E84038007D8CE4 /* Protocols */,
 				E23997DA20E84104007D8CE4 /* Model */,
@@ -542,7 +539,6 @@
 				E27E2F921DA04C8C00B3EABF /* Double+RoundToString.swift in Sources */,
 				E27E2FBE1DA04D1D00B3EABF /* DarkSkyAPI.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
-				E27E2F901DA048EB00B3EABF /* AlertController.swift in Sources */,
 				E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */,
 				E27E2FC91DA04D1D00B3EABF /* MoonPhase.swift in Sources */,
 				E27E2FCA1DA04D1D00B3EABF /* NewCityControllerDelegate.swift in Sources */,

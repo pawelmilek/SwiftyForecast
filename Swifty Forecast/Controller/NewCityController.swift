@@ -135,12 +135,12 @@ private extension NewCityController {
     
     
     if isCityNameNilOrEmpty() {
-      AlertController.presentAlertWith(title: "New City", andMessage: "Check City Name text field.")
+      AlertViewPresenter.shared.presentError(withMessage: "Check City Name text field.")
       return
     }
     
     if isCountryNameNilOrEmpty() {
-      AlertController.presentAlertWith(title: "New City", andMessage: "Check Country Name text field.")
+      AlertViewPresenter.shared.presentError(withMessage: "Check Country Name text field.")
       return
     }
     

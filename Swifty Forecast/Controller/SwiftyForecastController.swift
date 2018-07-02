@@ -11,7 +11,7 @@ import UIKit
 import Cartography
 import CoreLocation
 
-class SwiftyForecastController: UIViewController, CityListSelectDelegate, CustomViewLayoutSetupable, ViewSetupable {
+class SwiftyForecastController: UIViewController, CityListSelectDelegate, ViewSetupable {
   private var measuringSystemSwitch: UISegmentedControl! = nil
   private var backgroundImageView: UIImageView! = nil
   private var scrollView: UIScrollView! = nil
@@ -20,33 +20,25 @@ class SwiftyForecastController: UIViewController, CityListSelectDelegate, Custom
   private var dailyForecastView: DailyForecastView! = nil
   
   private var city: City?
-  var isConstraints = true
   
   var weatherForecast: WeatherForecast?
   
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    addObserver()
-  }
-  
-  deinit {
-    removeObserver()
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setup()
-    setupLayout()
-    setupStyle()
+    retrieveWeatherData()
   }
-  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    retrieveWeatherData()
+    setupLayout()
+    setupStyle()
   }
 }
 
@@ -65,13 +57,14 @@ extension SwiftyForecastController {
 }
 
 
-// MARK: - CityListSelectDelegate
+// MARK: - CityListSelectDelegate protocol
 extension SwiftyForecastController {
   
   func cityListDidSelect(city: City) {
     self.city = city
   }
 }
+
 
 
 // MARK: - CustomViewSetupable
@@ -196,12 +189,12 @@ extension SwiftyForecastController {
   
   @objc func segmentedControllerTapped(_ sender: UISegmentedControl) {
     if sender.selectedSegmentIndex == 0 {
-      MeasuringSystem.isMetric = false    // default, need to store user choose in local dba, UserDefaults.standard
+      MeasuringSystem.isMetric = false // default, need to store user choose in local dba, UserDefaults.standard
     } else {
       MeasuringSystem.isMetric = true
     }
     
-    notifyObserver()
+    measuringSystemSwitched()
   }
   
   @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
@@ -212,29 +205,11 @@ extension SwiftyForecastController {
 
 
 
-// MARK: - NotificationCenter
+// MARK: - Measuring System switched
 extension SwiftyForecastController {
   
-  func addObserver() {
-    let defaultCenter = NotificationCenter.default
-    let name = NotificationCenterKey.measuringSystemDidSwitcheNotification
-    
-    defaultCenter.addObserver(self, selector: #selector(SwiftyForecastController.measuringSystemSwitched(_:)), name: NSNotification.Name(rawValue: name), object: nil)
-  }
-  
-  
-  func removeObserver() {
-    NotificationCenter.default.removeObserver(self)
-  }
-  
-  
-  func notifyObserver() {
-    let notificationCenterKey = NotificationCenterKey.measuringSystemDidSwitcheNotification
-    NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationCenterKey), object: nil)
-  }
-  
-  @objc func measuringSystemSwitched(_ notification: NSNotification) {
-    print(NotificationCenterKey.measuringSystemDidSwitcheNotification)
+  func measuringSystemSwitched() {
+    print(NotificationCenterKey.measuringSystemDidSwitchNotification)
     retrieveWeatherData()
   }
   
@@ -267,7 +242,7 @@ private extension SwiftyForecastController {
       
       
       
-      
+      // TODO: Improve !!!!!!!!
       var mutableLocation = cityLocation
       
       if let selectedCity = strongSelf.city {

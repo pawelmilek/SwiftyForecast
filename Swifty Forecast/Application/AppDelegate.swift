@@ -9,39 +9,35 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, ViewSetupable {
+class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
-    self.setupStyle()
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    setupStyle()
     return true
   }
 }
 
 
-// MARK: - CustomViewSetupable
 extension AppDelegate {
   
-  func setup() {}
   func setupStyle() {
-    func setStatusBarStyle() {
-      UIApplication.shared.statusBarStyle = .lightContent
-    }
-    
-    
     setStatusBarStyle()
-    self.navigationBarStyle()
+    setNavigationBarStyle()
   }
+  
 }
 
 
 // MARK: - Set UINAvigationBar Attributes
 private extension AppDelegate {
   
-  func navigationBarStyle() {
+  func setStatusBarStyle() {
+    UIApplication.shared.statusBarStyle = .lightContent
+  }
+  
+  func setNavigationBarStyle() {
     func setTransparentBackground() {
       UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
       UINavigationBar.appearance().shadowImage = UIImage()
@@ -62,9 +58,6 @@ private extension AppDelegate {
     setTransparentBackground()
     setTitleTextColor()
     setBarButtonItemColor()
-    
   }
+  
 }
-
-
-
