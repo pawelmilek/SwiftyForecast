@@ -143,8 +143,8 @@
 /* Begin PBXFileReference section */
 		0100C40A2180827BF526858F5E960623 /* LayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuide.swift; path = Cartography/LayoutGuide.swift; sourceTree = "<group>"; };
 		036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
-		03A05804A69CD0ADCF69EAF5D121E9C1 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-BoldItalic.ttf"; path = "Source/Fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
-		0416A44E985333B7A7E7DD0A19254B66 /* Lato-Black.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Black.ttf"; path = "Source/Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
+		03A05804A69CD0ADCF69EAF5D121E9C1 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "Source/Fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		0416A44E985333B7A7E7DD0A19254B66 /* Lato-Black.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Source/Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
 		050996B1322189BD423349AF7BFEA7AE /* WIKFontIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WIKFontIcon.m; path = WeatherIconsKit/WIKFontIcon.m; sourceTree = "<group>"; };
 		06CA8F566D03133CB628E9F97F851B7E /* Response.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Response.swift; path = Source/Response.swift; sourceTree = "<group>"; };
 		09A95C592D9D858F72F538C3FFAFBBF6 /* Cartography.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cartography.modulemap; sourceTree = "<group>"; };
@@ -159,17 +159,17 @@
 		2151517DAA6CF24A6A4D14DC080FBD81 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Cartography/View.swift; sourceTree = "<group>"; };
 		259B74877082E61836D617D92CAFF806 /* FAKIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAKIcon.h; path = WeatherIconsKit/FAKIcon.h; sourceTree = "<group>"; };
 		274311206AED9353FD794F6DCA2E05DD /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		27D557D02FFE8918D278A12931AADCD6 /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-HairlineItalic.ttf"; path = "Source/Fonts/Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
+		27D557D02FFE8918D278A12931AADCD6 /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-HairlineItalic.ttf"; path = "Source/Fonts/Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
 		28E24C141B2CCEF6E5705FAC1AD293F5 /* ResourceBundle-LatoFont-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-LatoFont-Info.plist"; sourceTree = "<group>"; };
 		2ECC39187D0CBA504F26579F36A1202C /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		2F7A01B76593E2731539CCB4D713FF5A /* LayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutSupport.swift; path = Cartography/LayoutSupport.swift; sourceTree = "<group>"; };
-		2F896932A6BA8FA6A720357C8EDFBB46 /* LatoFont.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = LatoFont.bundle; path = "LatoFont-LatoFont.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		31B0CDA654EB7CD41C8080E1F6B24879 /* WeatherIconsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = WeatherIconsKit.framework; path = WeatherIconsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F896932A6BA8FA6A720357C8EDFBB46 /* LatoFont.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LatoFont.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		31B0CDA654EB7CD41C8080E1F6B24879 /* WeatherIconsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherIconsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37DACD13AB0FB9E0B06142CB2D98D9DF /* WeatherIconsKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WeatherIconsKit-dummy.m"; sourceTree = "<group>"; };
 		38005C8803225015A200292D2157EC98 /* UIFont+Lato.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Lato.m"; path = "Source/UIFont+Lato.m"; sourceTree = "<group>"; };
 		38E713E5D9B221103DFAD32F1F9593B4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1B1A6ADB0CAE00086DD9B35D7E271D /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
-		3EE4DE0BDD9881E351754C40E5374150 /* WeatherIcons-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; name = "WeatherIcons-Regular.otf"; path = "WeatherIconsKit/WeatherIcons-Regular.otf"; sourceTree = "<group>"; };
+		3EE4DE0BDD9881E351754C40E5374150 /* WeatherIcons-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "WeatherIcons-Regular.otf"; path = "WeatherIconsKit/WeatherIcons-Regular.otf"; sourceTree = "<group>"; };
 		40DF71E4F22A451ED0AA96E15D8FC918 /* WeatherIconsKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-prefix.pch"; sourceTree = "<group>"; };
 		466F5EFC29EDFC9D2A3456C7115C0DDC /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Cartography/Extensions.swift; sourceTree = "<group>"; };
 		48D1F880BA9C7E44157DD26250D0AC38 /* ViewProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewProxy.swift; path = Cartography/ViewProxy.swift; sourceTree = "<group>"; };
@@ -179,31 +179,31 @@
 		532EFB5F8F8968DD597EB9F5FF140DFA /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
 		54A5E667E3CA48D3BCCB51EC5DF4C60D /* Size.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Size.swift; path = Cartography/Size.swift; sourceTree = "<group>"; };
 		55A8C80D28F4185362592D97CF3F534B /* LatoFont-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LatoFont-umbrella.h"; sourceTree = "<group>"; };
-		56D0433BC7094360F0E0D054B3E3C75F /* Lato-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Bold.ttf"; path = "Source/Fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
+		56D0433BC7094360F0E0D054B3E3C75F /* Lato-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "Source/Fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
 		56E5257444ABA6F06CAE00E0AC41EA39 /* Compound.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compound.swift; path = Cartography/Compound.swift; sourceTree = "<group>"; };
 		5B33AB8367156D9CECB163A282B22FA8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
 		5D9FDDD1BF4432577472A2B2AA8B8A90 /* Cartography-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-prefix.pch"; sourceTree = "<group>"; };
 		5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
-		60CDD892B727ED5BD51C2D568EA5B8C1 /* Lato-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Regular.ttf"; path = "Source/Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
+		60CDD892B727ED5BD51C2D568EA5B8C1 /* Lato-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Source/Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
 		61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
 		68F5096D4C0ADA3D18F7B713632BEDC2 /* LatoFont.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LatoFont.modulemap; sourceTree = "<group>"; };
 		69BC00ACC539BEF585B3C667C649E1CB /* LayoutItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutItem.swift; path = Cartography/LayoutItem.swift; sourceTree = "<group>"; };
-		6A5F7F0E8B52897974C7124FBC823DA1 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-LightItalic.ttf"; path = "Source/Fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		6A5F7F0E8B52897974C7124FBC823DA1 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "Source/Fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
 		6AB3EB267C24379C54A68B1B8FEF5028 /* WIKFontIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WIKFontIcon.h; path = WeatherIconsKit/WIKFontIcon.h; sourceTree = "<group>"; };
 		6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
 		6F9A05E4378821883400F499C6EDF76A /* LayoutGuideProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuideProxy.swift; path = Cartography/LayoutGuideProxy.swift; sourceTree = "<group>"; };
-		70A658A8C95B0381DB71CAC51731684F /* LatoFont.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LatoFont.framework; path = LatoFont.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70A658A8C95B0381DB71CAC51731684F /* LatoFont.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LatoFont.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74F8EE633E21E206BC01EEEC7F34062E /* WeatherIconsKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-umbrella.h"; sourceTree = "<group>"; };
-		77F0DA9A7858D133363813988F5AD589 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77F0DA9A7858D133363813988F5AD589 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DC3BD85E4E8026F5D39BCD9423A51D /* LayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutProxy.swift; path = Cartography/LayoutProxy.swift; sourceTree = "<group>"; };
 		7DBD7C922804E10E346D8FB0F939C1CD /* Dimension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = Cartography/Dimension.swift; sourceTree = "<group>"; };
 		808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
 		834B643A90A392C27DAC84AFC43B235D /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
-		8BACAA031DF027CE946EB8C76A2B1EB6 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Alamofire.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BACAA031DF027CE946EB8C76A2B1EB6 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F7C0F9CC3C1D50C58EAE3AE6135774 /* Context.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Context.swift; path = Cartography/Context.swift; sourceTree = "<group>"; };
 		92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9729C2DFC0F9B52C453B7D3673DC836E /* LayoutProxy+TypeErasure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LayoutProxy+TypeErasure.swift"; path = "Cartography/LayoutProxy+TypeErasure.swift"; sourceTree = "<group>"; };
 		984E54675A09B98944EF52CA0143B1D5 /* UIFont+Lato.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIFont+Lato.h"; path = "Source/UIFont+Lato.h"; sourceTree = "<group>"; };
 		9BB4FFA68B3C75DA572EA3547A6BC2B4 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		AEFF86CCFDF34C27B279E7DE4CB98ECE /* TaskDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TaskDelegate.swift; path = Source/TaskDelegate.swift; sourceTree = "<group>"; };
 		AF4E069B0C9A3A991FBD8E25137BFB99 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0E7E6642620C3C5B37A6F7E064A1F3B /* Request.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Request.swift; path = Source/Request.swift; sourceTree = "<group>"; };
-		B1B732731B62A743DADCB34C69D283EB /* Lato-Italic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Italic.ttf"; path = "Source/Fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
+		B1B732731B62A743DADCB34C69D283EB /* Lato-Italic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "Source/Fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
 		B4E03F9DEF961BE0D3251F3095E9B00C /* Cartography.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cartography.xcconfig; sourceTree = "<group>"; };
 		B7617E497DBEB16349E08A6D5C3CA646 /* Coefficients.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coefficients.swift; path = Cartography/Coefficients.swift; sourceTree = "<group>"; };
 		B79A9E52E0C66FBC68478E7EEE32F883 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Cartography/Constraint.swift; sourceTree = "<group>"; };
@@ -231,11 +231,11 @@
 		C5E4FB4661C54672C5B11923555B9046 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		C6A42CAC1FE35C28177696BC3DA9E173 /* SessionManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionManager.swift; path = Source/SessionManager.swift; sourceTree = "<group>"; };
 		C845ABA1FC9090F948E1EEDE4ECDD50E /* SessionDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SessionDelegate.swift; path = Source/SessionDelegate.swift; sourceTree = "<group>"; };
-		C8E67D257E031717156B53581DA23A34 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast.framework; path = "Pods-Swifty Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C8E67D257E031717156B53581DA23A34 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9B89CFB6B85A974A81793B9EEB7D3F6 /* Validation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Validation.swift; path = Source/Validation.swift; sourceTree = "<group>"; };
 		CA4E9AA1502A065FE873834D9B7574EF /* Constrain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constrain.swift; path = Cartography/Constrain.swift; sourceTree = "<group>"; };
 		CB83F5491DAF060E98B8A2975D9328A0 /* LatoFont-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LatoFont-dummy.m"; sourceTree = "<group>"; };
-		CE841B7C022E90E0B0001E61DC2A0E21 /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Cartography.framework; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE841B7C022E90E0B0001E61DC2A0E21 /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEC9EFBEE5231138754365822D402094 /* LatoFont.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LatoFont.xcconfig; sourceTree = "<group>"; };
 		CF5C494E91300E50C54B5C999C4BECD1 /* Edges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edges.swift; path = Cartography/Edges.swift; sourceTree = "<group>"; };
 		D10679B3113C457910574955787E490D /* WeatherIconsKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WeatherIconsKit.xcconfig; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		DC455C3CE1CB10AA9622C93644A1726D /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Source/Result.swift; sourceTree = "<group>"; };
 		DE2E9972E4EADE8079124B2892701799 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		DE5F418FC24A0542FDC7BC427257B9EE /* WeatherIconsKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WeatherIconsKit.modulemap; sourceTree = "<group>"; };
-		E0B7A91D83D39895F10DD86744BEE005 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-BlackItalic.ttf"; path = "Source/Fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		E0B7A91D83D39895F10DD86744BEE005 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BlackItalic.ttf"; path = "Source/Fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
 		E252C3CBC2C9FDA9545FBAE955D0E784 /* ServerTrustPolicy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ServerTrustPolicy.swift; path = Source/ServerTrustPolicy.swift; sourceTree = "<group>"; };
 		F31DEA1B3E7FDCC6DF35563F6510EF4C /* Edge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edge.swift; path = Cartography/Edge.swift; sourceTree = "<group>"; };
 		F408AF490ABCF8D0420B3B0A3E885C78 /* Alamofire-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-umbrella.h"; sourceTree = "<group>"; };
@@ -253,8 +253,8 @@
 		F7771AC3F06426FD8771049019050A95 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
 		F8795EBFCCA5041AE12E13E4DA30CCBF /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		F91E1B2C17AB4D547571F8FAB5A25380 /* ConstraintGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintGroup.swift; path = Cartography/ConstraintGroup.swift; sourceTree = "<group>"; };
-		FBBC125D0F2E79B1492F9522AB4BD6D2 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Hairline.ttf"; path = "Source/Fonts/Lato-Hairline.ttf"; sourceTree = "<group>"; };
-		FE3B88ADDE4F15138D6751F956E4D1E2 /* Lato-Light.ttf */ = {isa = PBXFileReference; includeInIndex = 1; name = "Lato-Light.ttf"; path = "Source/Fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
+		FBBC125D0F2E79B1492F9522AB4BD6D2 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "Source/Fonts/Lato-Hairline.ttf"; sourceTree = "<group>"; };
+		FE3B88ADDE4F15138D6751F956E4D1E2 /* Lato-Light.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "Source/Fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
 		FF602A9AC65C852610771589D89E9E32 /* Align.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Align.swift; path = Cartography/Align.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -371,7 +371,6 @@
 				B25A99D8B0D4C1E3B3CA8869F9A5A6B7 /* Resources */,
 				D13429A489466E3FA3C7A195A2835A94 /* Support Files */,
 			);
-			name = LatoFont;
 			path = LatoFont;
 			sourceTree = "<group>";
 		};
@@ -405,7 +404,6 @@
 				C9B89CFB6B85A974A81793B9EEB7D3F6 /* Validation.swift */,
 				1B5E009AE9F1EB49EF723DA3B8FD638A /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -441,7 +439,6 @@
 				48D1F880BA9C7E44157DD26250D0AC38 /* ViewProxy.swift */,
 				8ECD8B5BD1DD677732F270868B921951 /* Support Files */,
 			);
-			name = Cartography;
 			path = Cartography;
 			sourceTree = "<group>";
 		};
@@ -521,7 +518,6 @@
 				F7771AC3F06426FD8771049019050A95 /* SwiftyJSON.swift */,
 				CAAE7145980D3178524531CF7B486607 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -593,7 +589,6 @@
 				577CBCFB5B67AF7A08F5D4DCFD76C243 /* Resources */,
 				E48437842D89A96272BBED1B8FFF1F55 /* Support Files */,
 			);
-			name = WeatherIconsKit;
 			path = WeatherIconsKit;
 			sourceTree = "<group>";
 		};
