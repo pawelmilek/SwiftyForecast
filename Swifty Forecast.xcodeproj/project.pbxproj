@@ -44,14 +44,12 @@
 		E27E2FBB1DA04D1D00B3EABF /* CustomViewLayoutSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9A1DA04D1D00B3EABF /* CustomViewLayoutSetupable.swift */; };
 		E27E2FBC1DA04D1D00B3EABF /* ViewSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9B1DA04D1D00B3EABF /* ViewSetupable.swift */; };
 		E27E2FBD1DA04D1D00B3EABF /* DailyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9C1DA04D1D00B3EABF /* DailyForecastView.swift */; };
-		E27E2FBE1DA04D1D00B3EABF /* DarkSkyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9D1DA04D1D00B3EABF /* DarkSkyAPI.swift */; };
 		E27E2FBF1DA04D1D00B3EABF /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9E1DA04D1D00B3EABF /* Database.swift */; };
 		E27E2FC01DA04D1D00B3EABF /* DayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9F1DA04D1D00B3EABF /* DayForecastView.swift */; };
 		E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA01DA04D1D00B3EABF /* DequeuableCell.swift */; };
 		E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA11DA04D1D00B3EABF /* ForecastDate.swift */; };
 		E27E2FC31DA04D1D00B3EABF /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA21DA04D1D00B3EABF /* Geocoder.swift */; };
 		E27E2FC41DA04D1D00B3EABF /* IconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA31DA04D1D00B3EABF /* IconType.swift */; };
-		E27E2FC61DA04D1D00B3EABF /* JSONResponseFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA51DA04D1D00B3EABF /* JSONResponseFormat.swift */; };
 		E27E2FC71DA04D1D00B3EABF /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA61DA04D1D00B3EABF /* LocationProvider.swift */; };
 		E27E2FC81DA04D1D00B3EABF /* MeasuringSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA71DA04D1D00B3EABF /* MeasuringSystem.swift */; };
 		E27E2FC91DA04D1D00B3EABF /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA81DA04D1D00B3EABF /* MoonPhase.swift */; };
@@ -64,8 +62,6 @@
 		E27E2FD01DA04D1D00B3EABF /* UITableView+Registrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FAF1DA04D1D00B3EABF /* UITableView+Registrable.swift */; };
 		E27E2FD11DA04D1D00B3EABF /* UITableViewCell+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB01DA04D1D00B3EABF /* UITableViewCell+NibLoadableView.swift */; };
 		E27E2FD21DA04D1D00B3EABF /* UITableViewCell+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB11DA04D1D00B3EABF /* UITableViewCell+ReusableView.swift */; };
-		E27E2FD31DA04D1D00B3EABF /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB21DA04D1D00B3EABF /* Weather.swift */; };
-		E27E2FD41DA04D1D00B3EABF /* WeatherDatastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB31DA04D1D00B3EABF /* WeatherDatastore.swift */; };
 		E27E2FD91DA04E9100B3EABF /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FD81DA04E9100B3EABF /* CurrentWeatherView.swift */; };
 		E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */; };
 		E28E5DD51DA2DC8E00092D02 /* HourlyForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28E5DD41DA2DC8E00092D02 /* HourlyForecastView.swift */; };
@@ -115,14 +111,12 @@
 		E27E2F9A1DA04D1D00B3EABF /* CustomViewLayoutSetupable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewLayoutSetupable.swift; sourceTree = "<group>"; };
 		E27E2F9B1DA04D1D00B3EABF /* ViewSetupable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSetupable.swift; sourceTree = "<group>"; };
 		E27E2F9C1DA04D1D00B3EABF /* DailyForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyForecastView.swift; sourceTree = "<group>"; };
-		E27E2F9D1DA04D1D00B3EABF /* DarkSkyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkSkyAPI.swift; sourceTree = "<group>"; };
 		E27E2F9E1DA04D1D00B3EABF /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		E27E2F9F1DA04D1D00B3EABF /* DayForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayForecastView.swift; sourceTree = "<group>"; };
 		E27E2FA01DA04D1D00B3EABF /* DequeuableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DequeuableCell.swift; sourceTree = "<group>"; };
 		E27E2FA11DA04D1D00B3EABF /* ForecastDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastDate.swift; sourceTree = "<group>"; };
 		E27E2FA21DA04D1D00B3EABF /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		E27E2FA31DA04D1D00B3EABF /* IconType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconType.swift; sourceTree = "<group>"; };
-		E27E2FA51DA04D1D00B3EABF /* JSONResponseFormat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONResponseFormat.swift; sourceTree = "<group>"; };
 		E27E2FA61DA04D1D00B3EABF /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E27E2FA71DA04D1D00B3EABF /* MeasuringSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasuringSystem.swift; sourceTree = "<group>"; };
 		E27E2FA81DA04D1D00B3EABF /* MoonPhase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoonPhase.swift; sourceTree = "<group>"; };
@@ -135,8 +129,6 @@
 		E27E2FAF1DA04D1D00B3EABF /* UITableView+Registrable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Registrable.swift"; sourceTree = "<group>"; };
 		E27E2FB01DA04D1D00B3EABF /* UITableViewCell+NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+NibLoadableView.swift"; sourceTree = "<group>"; };
 		E27E2FB11DA04D1D00B3EABF /* UITableViewCell+ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+ReusableView.swift"; sourceTree = "<group>"; };
-		E27E2FB21DA04D1D00B3EABF /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		E27E2FB31DA04D1D00B3EABF /* WeatherDatastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDatastore.swift; sourceTree = "<group>"; };
 		E27E2FD81DA04E9100B3EABF /* CurrentWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		E27E2FDA1DA057C100B3EABF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterKey.swift; sourceTree = "<group>"; };
@@ -272,13 +264,10 @@
 				E27E2F9E1DA04D1D00B3EABF /* Database.swift */,
 				E27E2FA21DA04D1D00B3EABF /* Geocoder.swift */,
 				E27E2FA31DA04D1D00B3EABF /* IconType.swift */,
-				E27E2FA51DA04D1D00B3EABF /* JSONResponseFormat.swift */,
 				E27E2FA61DA04D1D00B3EABF /* LocationProvider.swift */,
 				E27E2FA71DA04D1D00B3EABF /* MeasuringSystem.swift */,
 				E27E2FA81DA04D1D00B3EABF /* MoonPhase.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
-				E27E2FB21DA04D1D00B3EABF /* Weather.swift */,
-				E27E2FB31DA04D1D00B3EABF /* WeatherDatastore.swift */,
 				E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */,
 			);
 			path = Model;
@@ -313,9 +302,8 @@
 				E23997E120E84371007D8CE4 /* ForecastRequest.swift */,
 				E23997E220E84371007D8CE4 /* WebService.swift */,
 				E23997E320E84371007D8CE4 /* WebServiceRequest.swift */,
-				E23997E420E84371007D8CE4 /* Parser.swift */,
 				E23997E820E84371007D8CE4 /* WebServiceResultType.swift */,
-				E27E2F9D1DA04D1D00B3EABF /* DarkSkyAPI.swift */,
+				E23997E420E84371007D8CE4 /* Parser.swift */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -475,18 +463,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework",
 				"${BUILT_PRODUCTS_DIR}/LatoFont/LatoFont.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/WeatherIconsKit/WeatherIconsKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cartography.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LatoFont.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WeatherIconsKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,7 +521,6 @@
 				E27E2FBB1DA04D1D00B3EABF /* CustomViewLayoutSetupable.swift in Sources */,
 				E27E2FB91DA04D1D00B3EABF /* ConstantValue.swift in Sources */,
 				E27E2F921DA04C8C00B3EABF /* Double+RoundToString.swift in Sources */,
-				E27E2FBE1DA04D1D00B3EABF /* DarkSkyAPI.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */,
 				E27E2FC91DA04D1D00B3EABF /* MoonPhase.swift in Sources */,
@@ -552,9 +535,7 @@
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* Parser.swift in Sources */,
 				E23997F520E84389007D8CE4 /* AlertViewPresenterDelegate.swift in Sources */,
-				E27E2FC61DA04D1D00B3EABF /* JSONResponseFormat.swift in Sources */,
 				E27E2FC81DA04D1D00B3EABF /* MeasuringSystem.swift in Sources */,
-				E27E2FD31DA04D1D00B3EABF /* Weather.swift in Sources */,
 				E27E2FB41DA04D1D00B3EABF /* City.swift in Sources */,
 				E27E2F841DA0482C00B3EABF /* NewCityController.swift in Sources */,
 				E27E2F831DA0482C00B3EABF /* CityListTableController.swift in Sources */,
@@ -562,7 +543,6 @@
 				E27E2FBC1DA04D1D00B3EABF /* ViewSetupable.swift in Sources */,
 				E27E2FCB1DA04D1D00B3EABF /* NibLoadableView.swift in Sources */,
 				E27E2FCC1DA04D1D00B3EABF /* Registrable.swift in Sources */,
-				E27E2FD41DA04D1D00B3EABF /* WeatherDatastore.swift in Sources */,
 				E27E2F861DA0482C00B3EABF /* SwiftyForecastController.swift in Sources */,
 				E27E2FC71DA04D1D00B3EABF /* LocationProvider.swift in Sources */,
 				E27E2FBF1DA04D1D00B3EABF /* Database.swift in Sources */,

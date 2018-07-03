@@ -21,7 +21,13 @@ class SwiftyForecastController: UIViewController, CityListSelectDelegate, ViewSe
   
   private var city: City?
   
-  var weatherForecast: WeatherForecast?
+  var weatherForecast: WeatherForecast? {
+    didSet {
+      guard let weatherForecast = weatherForecast else { return }
+      currentWeatherView.renderView(for: weatherForecast.currently, and: weatherForecast.city)
+      dailyForecastView.renderView(for: weatherForecast.daily)
+    }
+  }
   
   
   required init?(coder aDecoder: NSCoder) {
@@ -209,7 +215,6 @@ extension SwiftyForecastController {
 extension SwiftyForecastController {
   
   func measuringSystemSwitched() {
-    print(NotificationCenterKey.measuringSystemDidSwitchNotification)
     retrieveWeatherData()
   }
   
@@ -222,9 +227,6 @@ private extension SwiftyForecastController {
   
   func retrieveWeatherData() {
     LocationProvider.shared.getCurrentLocation() { [weak self] cityLocation in
-      guard let strongSelf = self else { return }
-      
-      // MARK: TEST !!!
       let request = ForecastRequest.make(by: cityLocation)
       WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
         switch response {
@@ -234,39 +236,13 @@ private extension SwiftyForecastController {
           Geocoder.findCity(at: currentCityCoord) { [weak self] city in
             self?.weatherForecast = WeatherForecast(city: city, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
           }
-
+          
         case .failure(let error):
           error.handle()
         }
       })
-      
-      
-      
-      // TODO: Improve !!!!!!!!
-      var mutableLocation = cityLocation
-      
-      if let selectedCity = strongSelf.city {
-        mutableLocation = selectedCity.coordinate
-        //print("selectedCity \(selectedCity.fullName): latitude \(mutableLocation.latitude), longitude \(mutableLocation.longitude)")
-      }
-      
-      
-      let weatherDatastore = WeatherDatastore()
-      weatherDatastore.retrieveCurrentWeather(at: mutableLocation) { currentConditions in
-        strongSelf.currentWeatherView.renderView(weather: currentConditions)
-        return
-      }
-      
-      weatherDatastore.retrieveHourlyWeather(at: mutableLocation, forecast: ConstantValue.numberOfHours) { hourlyConditions in
-        strongSelf.hourlyForecastView.renderView(weathers: hourlyConditions)
-        return
-      }
-      
-      weatherDatastore.retrieveDailyForecast(at: mutableLocation, forecast: ConstantValue.numberOfDays) { dailyConditions in
-        strongSelf.dailyForecastView.renderView(weathers: dailyConditions)
-        return
-      }
     }
   }
+  
 }
 

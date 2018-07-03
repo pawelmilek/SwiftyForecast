@@ -190,24 +190,21 @@ private extension CurrentWeatherView {
 }
 
 
-
 // MARK: - Render view
 extension CurrentWeatherView {
   
-  func renderView(weather: Weather) {
-    self.dateLabel.text = weather.date.longDayMonth
-    self.cityLabel.text = weather.cityAndCountry
-    self.descriptionLabel.text = weather.description
-    self.iconLabel.attributedText = IconType(rawValue: weather.icon)!.fontIcon
-    self.thermometerLabel.attributedText = weather.thermometerIcon
+  func renderView(for forecast: CurrentForecast, and city: City) {
+    self.dateLabel.text = forecast.time.longDayMonth
+    self.cityLabel.text = city.fullName
+    self.descriptionLabel.text = forecast.summary
+    self.iconLabel.attributedText = IconType(rawValue: forecast.icon)!.fontIcon
+    self.thermometerLabel.attributedText = IconType.thermometer.fontIcon
     
     
     if MeasuringSystem.isMetric {
-      guard let currentTmp = weather.currentTemperatureCelsius else { return }
-      self.currentTemperatureLabel.text = currentTmp.roundAndConvertingToString() + "\u{00B0}"
+      self.currentTemperatureLabel.text = forecast.temperatureInCelsius.roundAndConvertingToString() + "\u{00B0}"
     } else {
-      guard let currentTmp = weather.currentTemperatureFahrenheit else { return }
-      self.currentTemperatureLabel.text = currentTmp.roundAndConvertingToString() + "\u{00B0}"
+      self.currentTemperatureLabel.text = forecast.temperature.roundAndConvertingToString() + "\u{00B0}"
     }
   }
   

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 final class CityListTableDataSource: NSObject, CityListTableDataSourceDelegate {
   private let database = Database.shared
   
@@ -36,10 +35,7 @@ final class CityListTableDataSource: NSObject, CityListTableDataSourceDelegate {
   }
   
   
-  func tableView(_ tableView: UITableView,
-                 commit editingStyle: UITableViewCellEditingStyle,
-                 forRowAt indexPath: IndexPath) {
-    
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       self.database.delete(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)

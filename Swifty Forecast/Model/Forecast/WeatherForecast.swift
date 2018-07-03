@@ -14,3 +14,16 @@ struct WeatherForecast {
   let hourly: HourlyForecast
   let daily: DailyForecast
 }
+
+
+extension WeatherForecast {
+  
+  var cityName: String {
+    return self.city.name
+  }
+  
+  var cityAndCountry: String {
+    return self.city.fullName
+  }
+  
+}

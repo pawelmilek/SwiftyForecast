@@ -142,7 +142,7 @@ extension HourlyForecastView {
         }
     }
     
-    func renderView(weathers: [Weather]) {
+    func renderView(weathers: HourlyForecast) {
         
     }
 }

@@ -89,20 +89,7 @@ extension HourForecastView {
     }
     
     
-    func renderView(weather: Weather) {
-        self.dateLabel.text = "\(weather.date.mediumDayMonth) \(weather.date.weekday)"
-        self.iconLabel.attributedText = IconType(rawValue: weather.icon)!.fontIcon
-        self.descriptionLabel.text = weather.description
-        
-        if MeasuringSystem.isMetric {
-            guard let temperature = weather.currentTemperatureCelsius else { return }
-            let currentTemp = temperature.roundAndConvertingToString() + "℃"
-            self.temperaturesLabel.text = "\(currentTemp)"
-        } else {
-            guard let temperature = weather.currentTemperatureFahrenheit else { return }
-            let currentTmp = temperature.roundAndConvertingToString() + "℉"
-            self.temperaturesLabel.text = "\(currentTmp)"
-        }
+    func renderView(weather: HourlyForecast) {
     }
     
     func render() {
