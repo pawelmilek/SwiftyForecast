@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import LatoFont
-
 
 class CityCell: UITableViewCell {
   @IBOutlet weak var cityNameLabel: UILabel!
@@ -33,7 +31,7 @@ extension CityCell: ViewSetupable {
   func setup() {
     self.backgroundColor = .clear
     
-    self.cityNameLabel.font = UIFont.latoLightFont(ofSize: 18)
+    self.cityNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
     self.cityNameLabel.textColor = .white
     self.cityNameLabel.textAlignment = .left
   }

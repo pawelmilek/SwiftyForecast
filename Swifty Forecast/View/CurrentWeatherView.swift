@@ -8,8 +8,6 @@
 
 import UIKit
 import Foundation
-import LatoFont
-import WeatherIconsKit
 import Cartography
 
 
@@ -165,21 +163,21 @@ private extension CurrentWeatherView {
   
   func labelsStyle() {
     let textColor = UIColor.white
-    self.dateLabel.font = UIFont.latoFont(ofSize: 48)
+    self.dateLabel.font = UIFont.systemFont(ofSize: 48, weight: .regular)
     self.dateLabel.textColor = textColor
     self.dateLabel.textAlignment = .center
     
-    self.cityLabel.font = UIFont.latoFont(ofSize: 20)
+    self.cityLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
     self.cityLabel.textColor = textColor
     self.cityLabel.textAlignment = .left
     
     self.iconLabel.textColor = textColor
     self.iconLabel.textAlignment = .center
-    self.descriptionLabel.font = UIFont.latoFont(ofSize: 20)
+    self.descriptionLabel.font = UIFont.systemFont(ofSize: 20, weight: .regular)
     self.descriptionLabel.textColor = textColor
     self.descriptionLabel.textAlignment = .center
     
-    self.currentTemperatureLabel.font = UIFont.latoFont(ofSize: 120)
+    self.currentTemperatureLabel.font = UIFont.systemFont(ofSize: 120, weight: .regular)
     self.currentTemperatureLabel.textColor = textColor
     self.currentTemperatureLabel.textAlignment = .center
     

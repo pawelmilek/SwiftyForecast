@@ -1,11 +1,9 @@
 PODS:
   - Cartography (3.0.2)
-  - LatoFont (1.0.1)
   - WeatherIconsKit (1.0.0)
 
 DEPENDENCIES:
   - Cartography (~> 3.0)
-  - LatoFont (from `https://github.com/gscalzo/LatoFont.git`)
   - WeatherIconsKit (from `https://github.com/gscalzo/WeatherIconsKit.git`)
 
 SPEC REPOS:
@@ -13,24 +11,18 @@ SPEC REPOS:
     - Cartography
 
 EXTERNAL SOURCES:
-  LatoFont:
-    :git: https://github.com/gscalzo/LatoFont.git
   WeatherIconsKit:
     :git: https://github.com/gscalzo/WeatherIconsKit.git
 
 CHECKOUT OPTIONS:
-  LatoFont:
-    :commit: 2739e4c28c92c82ca2c7daf289a238d62af01c42
-    :git: https://github.com/gscalzo/LatoFont.git
   WeatherIconsKit:
     :commit: effa8476b88010a5ea6d3cfcf5fb81db87ff5bfa
     :git: https://github.com/gscalzo/WeatherIconsKit.git
 
 SPEC CHECKSUMS:
   Cartography: 231190d7d0b3107ce8d67c54189f059a509b3760
-  LatoFont: 0bfeace154ee2da6080123d0e80560f6e22b187d
   WeatherIconsKit: 84526a4cdf9da972c2866f24e40360420b1d40bf
 
-PODFILE CHECKSUM: 6be08f308d44abf9314e47b3be8548e3e50edd11
+PODFILE CHECKSUM: 510a9183b5fde60b3f77fc3744c83aa7c0fa685d
 
 COCOAPODS: 1.5.3

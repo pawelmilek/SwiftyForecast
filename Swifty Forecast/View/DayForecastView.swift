@@ -8,10 +8,7 @@
 
 import Foundation
 import UIKit
-import WeatherIconsKit
 import Cartography
-
-
 
 final class DayForecastView: UIView, CustomViewLayoutSetupable, ViewSetupable  {
   private let iconLabel = UILabel()
@@ -143,13 +140,13 @@ extension DayForecastView {
       self.iconLabel.textAlignment = .center
       self.moonPhaseLabel.textColor = textColor
       self.moonPhaseLabel.textAlignment = .center
-      self.dateLabel.font = UIFont.latoLightFont(ofSize: 14)
+      self.dateLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
       self.dateLabel.textColor = textColor
       self.dateLabel.textAlignment = .left
-      self.temperaturesLabel.font = UIFont.latoLightFont(ofSize: 15)
+      self.temperaturesLabel.font = UIFont.systemFont(ofSize: 15, weight: .regular)
       self.temperaturesLabel.textColor = textColor
       self.temperaturesLabel.textAlignment = .right
-      self.descriptionLabel.font = UIFont.latoLightFont(ofSize: 11)
+      self.descriptionLabel.font = UIFont.systemFont(ofSize: 11, weight: .regular)
       self.descriptionLabel.textColor = textColor
       self.descriptionLabel.textAlignment = .left
     }

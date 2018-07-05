@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+// https://erikflowers.github.io/weather-icons/
 protocol WeatherFontIcon {
   associatedtype T: WeatherFontIcon
   var attributedIcon: NSAttributedString { get }

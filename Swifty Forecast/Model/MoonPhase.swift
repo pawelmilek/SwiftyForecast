@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 struct MoonPhase {
   private let lunation: Float
   
@@ -23,8 +22,7 @@ struct MoonPhase {
 extension MoonPhase {
   
   var icon: NSAttributedString? {
-    guard let icon = IconType(rawValue: self.description) else { return nil }
-    return icon.fontIcon
+    return MoonPhaseFontIcon.make(icon: description, font: 25)?.attributedIcon
   }
   
 }

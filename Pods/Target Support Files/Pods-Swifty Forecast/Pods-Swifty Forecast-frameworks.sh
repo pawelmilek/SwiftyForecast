@@ -144,12 +144,10 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/LatoFont/LatoFont.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WeatherIconsKit/WeatherIconsKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Cartography/Cartography.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/LatoFont/LatoFont.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WeatherIconsKit/WeatherIconsKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

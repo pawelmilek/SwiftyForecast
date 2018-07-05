@@ -7,195 +7,150 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		000CA1E5E29071DFA07494D2AF5A09D7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B33AB8367156D9CECB163A282B22FA8 /* CoreText.framework */; };
-		033E20123508ACA1151479485BEC8D90 /* LayoutProxy+TypeErasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A347E24246CC8CFEB090F2CAE7D588 /* LayoutProxy+TypeErasure.swift */; };
-		0739B8BF39538E41B6C747EDE71114F3 /* Constrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C45790CE6BC4251BE4896C8B7C4167 /* Constrain.swift */; };
-		078D75FC8795FA3EBD22377BC890520B /* Distribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1698A0F2D7CB98C0AD94E24FE09F40 /* Distribute.swift */; };
-		0C98CFEC996DEEB10E39FC50845A3D21 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 711611040685F6A5695DADD963D506D7 /* Lato-Italic.ttf */; };
-		164961A70FDD04B27CE7934AE44D781D /* FAKIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = EBDC645D517427138ABAC7A73614466D /* FAKIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		18E2EC0F5BF9B7F6F55B426714271EE0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
-		1C92A98E34D0E29E787071F0B75401E5 /* Cartography-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C32923F253CE5898AA17EA71FA749E5F /* Cartography-dummy.m */; };
-		22C18133E55CC4E0633B633F3912F097 /* Cartography-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A44ADC158AFEA2CE0C5FE01E3BE25651 /* Cartography-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26D9D26B1D4A7C48E1DFE6C4697A7EB3 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4137DE330EF98A25567A39B566FA66CA /* Size.swift */; };
-		27BEB6D60B638B2F7E7086598B419CB3 /* LayoutGuideProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E5280435BF5C53E8977A7481FD312C /* LayoutGuideProxy.swift */; };
-		27F7E6A11F73A56A3F542C80EE253035 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2E9972E4EADE8079124B2892701799 /* UIKit.framework */; };
-		33E91E78F43301F168B42DB67C04CDC4 /* Coefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA778A73A84A07BBF0C30E33B49B3B7A /* Coefficients.swift */; };
-		370EA4B00C3E1F71C87314271179D06D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24C05338AF77EFDFB1B981B345B65307 /* Property.swift */; };
-		44279488206961A71665C70FD3BD9FCD /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B7BE439CA17BAA4C6A8AAF6E38AE38 /* Point.swift */; };
-		499FF33C0104375324BF5D5B63A22422 /* UIFont+Lato.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C11F7465DC959CBA0BC38E5064BC3A /* UIFont+Lato.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		52C3E8081BB80AA34FEF1659F24533C2 /* ViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F5A2FB321A14DE4AEC02F9DC6BA79A /* ViewProxy.swift */; };
-		551EDA7C2AEF5DBDE54A1E04D3B66DEF /* ConstraintGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D0A62D2A903E53D598233A26ADBE3D /* ConstraintGroup.swift */; };
-		58B00C7BCF27BE64587847CA77E9DD11 /* Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765A9C4B63605F2843863C9D4AB02609 /* Align.swift */; };
-		599DA7AB49F446A05AB7D68FD37813EA /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B33AB8367156D9CECB163A282B22FA8 /* CoreText.framework */; };
-		5D0516B593D14D0C7D829717D60842F1 /* WeatherIconsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BCD6B7E97CE6100E352E291A2FD8085 /* WeatherIconsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6303953B4072C1B9B5BE9038CD1A5858 /* LayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBE7D6EAB9A36869972DEFE6B56B04F7 /* LayoutProxy.swift */; };
-		64C1C1BBD53C2B17073E4473687A853A /* LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3988E4A832F9A75755CE13592451BF1 /* LayoutGuide.swift */; };
-		65419FFB4343F39CB03890D5DAEB39FD /* WeatherIcons-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E135895AFEB320F7004DECF800CDE5F /* WeatherIcons-Regular.otf */; };
-		6F4FE3B61F3F4136F1C403AD21C331D7 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423744E8C93C64025FB6E7098B64C759 /* Context.swift */; };
-		75A09744CB87DB237A3D3FA76FC9AB9A /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3B96CF4FB70DE8872D1C21731EF7E4 /* Edges.swift */; };
-		774B799BDE8BF1AADF00F412885B3F3D /* WeatherIconsKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0F5315206ABEF0D344DB215071112EC /* WeatherIconsKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7AE1D4765B31AC40AF3D774705CD04FC /* Lato-HairlineItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBFD5D04DB4C65FED02592A0EB931844 /* Lato-HairlineItalic.ttf */; };
-		7BBAA7D5001ABB0D1516ACAF7F51F4B5 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD41BF15A80E12687F4B6118B6DEA085 /* View.swift */; };
-		82ED0C7CC376B8FFC2E8A7E81074B17C /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EABA853F810BE5197AD5E892C0C6B564 /* Lato-Light.ttf */; };
-		85140FFC25E45DBF594AC743AFC3D2C2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2E9972E4EADE8079124B2892701799 /* UIKit.framework */; };
-		859C1F735F9DF514A047C65FCE9982B2 /* WIKFontIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5849C6E1A328CA31425F501F43BEC35E /* WIKFontIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		869BF762B9D0699ABF4024F1DED0AD0E /* AutoresizingMaskLayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB35E2D51C1F27AFD2322649606538D /* AutoresizingMaskLayoutProxy.swift */; };
-		87015FBC04C616C1285E60A47D25419A /* UIFont+Lato.m in Sources */ = {isa = PBXBuildFile; fileRef = C96FA8B3CEE8866A42609B6BE3440C37 /* UIFont+Lato.m */; };
-		870BD9B8F123D7C19285D5FDE36D3D47 /* WIKFontIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 882CEEE50ED19520C6D10D6624B24338 /* WIKFontIcon.m */; };
-		8D2747BAC45A6EA8219D64B76837858C /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		90F5892B40BD38B69E8D88C958373A8A /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D1E44A95CF5CAA3C531511CCEB3ACC92 /* Lato-BoldItalic.ttf */; };
-		938FB262A8F31934EA530F1AB86A3F3A /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7879C57E7029B18AAAEC5C1000EF363F /* Lato-BlackItalic.ttf */; };
-		94C7D2A64168F83FDD3F1FDD86309462 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2352D53A5BF6D85BDE955FCE6B690AF9 /* Edge.swift */; };
-		9BCEC4AFD1B01B3597D567FE0AB0BC44 /* LatoFont-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAC39DAFFDF84B0902477A414B7F7AE /* LatoFont-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C6E1370B7332CEA8408E407F24570B5 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE9326049A5942357C3086AC6F6FDEAB /* Expression.swift */; };
-		9DE7AC7E9424287CE00664C9EA68D2D2 /* LayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB00E60E7EB86BECBF6ECB5498E0875 /* LayoutSupport.swift */; };
-		9F14481C6E8A4683734C60FAEBDDF402 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */; };
-		A54A38B0E874515D00B9F6BD60FDAE7C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
-		A641892548994B7BDCBB6BCC9383C524 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B46B9EFB7E9E5C6996C1EE25684D297 /* Lato-LightItalic.ttf */; };
-		B2E4E6A261F20F48A7B7E0F50AFAD415 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EE947D94E417CC6FE89F9EEA0C446162 /* Lato-Regular.ttf */; };
-		B4DBC3F172AFEA9A0F86A1428D235BAB /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DB2A6CD1212EC96DDE68CECEC76AA6 /* Dimension.swift */; };
-		B98CC95209815BD031BE231C8050CCBB /* WeatherIconsKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA473A20B98594DE8063398DA8D1871 /* WeatherIconsKit-dummy.m */; };
-		BAA82517E186455BBE3B74D44E5EDD5D /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82455E1E4697687DC397253DF1EA75B /* LayoutItem.swift */; };
-		BFA6B53A709CB76C3EA03E5CA68A605F /* LatoFont-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 69213C78665854FF766C3A5B5BE824CA /* LatoFont-dummy.m */; };
-		CAC2C9F67E42ECAD602108ACCA8706DD /* Lato-Hairline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 404B3F170FBFB014B332F518F3D976A8 /* Lato-Hairline.ttf */; };
-		CE8E707F4EF416FD78C4906EA698C9EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
-		CFCACE678B70021485804DA8A3C8ACE4 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57F43CB3B3E7197E66DCEE18DB6A4521 /* Lato-Black.ttf */; };
+		033E20123508ACA1151479485BEC8D90 /* LayoutProxy+TypeErasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C478F544FB332678F9C964782F2FA /* LayoutProxy+TypeErasure.swift */; };
+		058B55DDDDC1FCA1F85E8953999FB830 /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0739B8BF39538E41B6C747EDE71114F3 /* Constrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B608341532676D65DCF18CCB956D235 /* Constrain.swift */; };
+		078D75FC8795FA3EBD22377BC890520B /* Distribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AE66D8C3A6DFFE89D587AC3AC8E74A /* Distribute.swift */; };
+		0FB6DAE8E897205247C42BC1D375A4EF /* WeatherIconsKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CBB02FE9FE12AEBDEFCB32E26132762F /* WeatherIconsKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1556972CBDD955A5E2DB329BF723A46C /* WIKFontIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = BAFEDB9DD1745889F035405912A0D69C /* WIKFontIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1C92A98E34D0E29E787071F0B75401E5 /* Cartography-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E837EA27AF194A12C61180DEA50B0D /* Cartography-dummy.m */; };
+		22C18133E55CC4E0633B633F3912F097 /* Cartography-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D524C1AF11B7E64BB15FD2C6075F958 /* Cartography-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		26D9D26B1D4A7C48E1DFE6C4697A7EB3 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B60F8D64ADC813DBE802DFDE0520ED0 /* Size.swift */; };
+		27BEB6D60B638B2F7E7086598B419CB3 /* LayoutGuideProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A461C7C680F7F6BC8960543F31870 /* LayoutGuideProxy.swift */; };
+		33E91E78F43301F168B42DB67C04CDC4 /* Coefficients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E588A5F6640E0928D44D94454B7B28 /* Coefficients.swift */; };
+		370EA4B00C3E1F71C87314271179D06D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2B8FEDC0E0A66BA5A958C67D528178 /* Property.swift */; };
+		3EF6956685830CB5E0558997D2EA8FF8 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */; };
+		44279488206961A71665C70FD3BD9FCD /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A990F83A5FF01023A21E8CEF2EB483F /* Point.swift */; };
+		4D89387B5F7726455C8F68554CCCDCFB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
+		52C3E8081BB80AA34FEF1659F24533C2 /* ViewProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A990C4A0BABB90F60995FF75BAE3453A /* ViewProxy.swift */; };
+		551EDA7C2AEF5DBDE54A1E04D3B66DEF /* ConstraintGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8E5DDD189EE6BFEA60C296C0D09DA6 /* ConstraintGroup.swift */; };
+		58B00C7BCF27BE64587847CA77E9DD11 /* Align.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BFE8010B656615E4C95CE9E40349E3 /* Align.swift */; };
+		5E68552FC16936BFCF587BB327E1D813 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
+		6303953B4072C1B9B5BE9038CD1A5858 /* LayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3074B57081691E36B3C08491D70277F6 /* LayoutProxy.swift */; };
+		64C1C1BBD53C2B17073E4473687A853A /* LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D8C61815161D886BDE40653EAD85A6 /* LayoutGuide.swift */; };
+		66C9F0C5A67B3AEF28DF40377A7962E8 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B33AB8367156D9CECB163A282B22FA8 /* CoreText.framework */; };
+		6C53BD0CC2CFCC453F15F77BA7C66BDE /* WeatherIconsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 00F6110C2E6F6756CC7D87157CF5A5FE /* WeatherIconsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6F4FE3B61F3F4136F1C403AD21C331D7 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BBAB87F5529C51D4E151735AF03924 /* Context.swift */; };
+		75A09744CB87DB237A3D3FA76FC9AB9A /* Edges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 613344607B61B08D3BE136CD55A2E015 /* Edges.swift */; };
+		7AC5EB2BB606589C5BBD88D3DCE2D7A2 /* FAKIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = DFE936EB9178E7B759DCAF95C4C41935 /* FAKIcon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7BBAA7D5001ABB0D1516ACAF7F51F4B5 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068E294AC43F2EA1D259EFCD2E8AE0B1 /* View.swift */; };
+		869BF762B9D0699ABF4024F1DED0AD0E /* AutoresizingMaskLayoutProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36FC7097239423C9595BBB8C333E6BE /* AutoresizingMaskLayoutProxy.swift */; };
+		94BB7E8EF6B3D264E5556D1E6DB1C745 /* WeatherIcons-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6EB844A40050CC9B4E2EA99FC8CD8E6E /* WeatherIcons-Regular.otf */; };
+		94C7D2A64168F83FDD3F1FDD86309462 /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A743B170EBA9AF20B36DE4525211126 /* Edge.swift */; };
+		9C6E1370B7332CEA8408E407F24570B5 /* Expression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AECD158958BD06A33A4559B1D3C5D5 /* Expression.swift */; };
+		9DE7AC7E9424287CE00664C9EA68D2D2 /* LayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0BA8ACDAE3BCD29179D7795BDCD721 /* LayoutSupport.swift */; };
+		B4DBC3F172AFEA9A0F86A1428D235BAB /* Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4465F3657C58CD848DD20A293EC2C5AA /* Dimension.swift */; };
+		BAA82517E186455BBE3B74D44E5EDD5D /* LayoutItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F239373C3148EFD5FBC859E3F938FEC /* LayoutItem.swift */; };
+		BC3347CB9744AB15E284509BD698A5A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE2E9972E4EADE8079124B2892701799 /* UIKit.framework */; };
+		C24B2B4A5478499DC03C2CFC086049D6 /* WeatherIconsKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DDEC1F99E3D365AEBE15341C3D9CD2 /* WeatherIconsKit-dummy.m */; };
 		D2D8F3205D6C61C8C4C9EB0FD8FC6308 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */; };
-		DB9F3857E166A3EAC8EC5646023E7B8E /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D6CB060AC84A4B8C3EB73AD103968C7 /* Compound.swift */; };
-		DE222EEB2FD8853FB48571C6A60AB73A /* FAKIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = A80A99286808BA18C6FC3C98085ACAA6 /* FAKIcon.m */; };
-		E2F636932DC549ECAC060149AE2925A8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCA3510033BD3D3855BD6594C3105B5 /* Extensions.swift */; };
-		E79C8C2851495884D91FEFFFC53FAB45 /* LayoutSupportProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC875FD1B14593BFEBEFC8CE26B772DF /* LayoutSupportProxy.swift */; };
-		EE2DEE42051C135B4A982C05E02A5367 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEAAE1BF4CFB640D4EC50CB98DB1BC8B /* Lato-Bold.ttf */; };
-		F14347E3AC3A254F7A424CCB7FCF512B /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D16774F4648757893A8441A1F92D47F /* Priority.swift */; };
-		F435B4C2D5E6E7B34471B69DAC6D5E51 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE46A83DE9D4BB8858508FC9D224944 /* Constraint.swift */; };
-		FDC53F86779C136EE6E099AEC389796D /* LatoFont.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B889CCD0FBBADBA112FA498B657C41C1 /* LatoFont.bundle */; };
+		D83DA467B3F33B057CB1907394B13512 /* WIKFontIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = B834376175CA1F3D68FC5F496831B140 /* WIKFontIcon.m */; };
+		DB9F3857E166A3EAC8EC5646023E7B8E /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B69990A7088BF7A45D7599780E0607 /* Compound.swift */; };
+		E06C1A12DA50304F5891C18AC2FE8227 /* FAKIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 115B576F50332BF959384D1879D31C26 /* FAKIcon.m */; };
+		E2F636932DC549ECAC060149AE2925A8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C9AEF53D5A8682204CB179C30ECBAD /* Extensions.swift */; };
+		E79C8C2851495884D91FEFFFC53FAB45 /* LayoutSupportProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BD7C328B8D666C3A7270495A51406C /* LayoutSupportProxy.swift */; };
+		F14347E3AC3A254F7A424CCB7FCF512B /* Priority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BD67EEAE59670C14C8220BCA7EDA7 /* Priority.swift */; };
+		F435B4C2D5E6E7B34471B69DAC6D5E51 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C126A7E24E6CB0E83203CD626429EBE /* Constraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		14B910373B5BD91A7413FCEBBD70ACF1 /* PBXContainerItemProxy */ = {
+		3C70A5A7226AC29D9F1BEA9974C1F795 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 05B5E6B6BF53C2C31E616E4C5644E8BB;
 			remoteInfo = Cartography;
 		};
-		50A850BC869F11CB26EBCFE0B5E9D9B4 /* PBXContainerItemProxy */ = {
+		E97117E649735A16987F3CDC005D633E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = DE8F2EA6BBEA8FD641321B92F8BA8C2B;
-			remoteInfo = "LatoFont-LatoFont";
-		};
-		D25BBE6D62524A7A88F5AFF2B872BFAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 942A9D7D01CE9FA0F2A9C8C1CC57951C;
-			remoteInfo = LatoFont;
-		};
-		F05B1DE75123F9C55C915B01CF34DDE7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7DDA7E1E09ADC1C64CCCFF08CB20B78D;
+			remoteGlobalIDString = 63FEC12E6AAA13E7E738945B659EDC3C;
 			remoteInfo = WeatherIconsKit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02C11F7465DC959CBA0BC38E5064BC3A /* UIFont+Lato.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIFont+Lato.h"; path = "Source/UIFont+Lato.h"; sourceTree = "<group>"; };
+		00F6110C2E6F6756CC7D87157CF5A5FE /* WeatherIconsKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WeatherIconsKit.h; path = WeatherIconsKit/WeatherIconsKit.h; sourceTree = "<group>"; };
+		01E588A5F6640E0928D44D94454B7B28 /* Coefficients.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coefficients.swift; path = Cartography/Coefficients.swift; sourceTree = "<group>"; };
 		036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
-		0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LatoFont.xcconfig; sourceTree = "<group>"; };
-		0D6CB060AC84A4B8C3EB73AD103968C7 /* Compound.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compound.swift; path = Cartography/Compound.swift; sourceTree = "<group>"; };
-		197C2829CBC4F78FBA28E939D2956C4B /* LatoFont.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LatoFont.modulemap; sourceTree = "<group>"; };
-		1B3BC98D5254C2CD6E71B0FEAD4E82DA /* WeatherIconsKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WeatherIconsKit.xcconfig; sourceTree = "<group>"; };
-		1CD7CE761593D380CEF4F2ECB8BA0925 /* Cartography.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cartography.modulemap; sourceTree = "<group>"; };
-		1FAC39DAFFDF84B0902477A414B7F7AE /* LatoFont-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LatoFont-umbrella.h"; sourceTree = "<group>"; };
-		21DB2A6CD1212EC96DDE68CECEC76AA6 /* Dimension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = Cartography/Dimension.swift; sourceTree = "<group>"; };
-		2352D53A5BF6D85BDE955FCE6B690AF9 /* Edge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edge.swift; path = Cartography/Edge.swift; sourceTree = "<group>"; };
-		24C05338AF77EFDFB1B981B345B65307 /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Cartography/Property.swift; sourceTree = "<group>"; };
-		2C1E4DB554438FEB36CE86D87725C6DE /* WeatherIconsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherIconsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		2FE46A83DE9D4BB8858508FC9D224944 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Cartography/Constraint.swift; sourceTree = "<group>"; };
-		37E5280435BF5C53E8977A7481FD312C /* LayoutGuideProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuideProxy.swift; path = Cartography/LayoutGuideProxy.swift; sourceTree = "<group>"; };
-		404B3F170FBFB014B332F518F3D976A8 /* Lato-Hairline.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Hairline.ttf"; path = "Source/Fonts/Lato-Hairline.ttf"; sourceTree = "<group>"; };
-		4137DE330EF98A25567A39B566FA66CA /* Size.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Size.swift; path = Cartography/Size.swift; sourceTree = "<group>"; };
-		423744E8C93C64025FB6E7098B64C759 /* Context.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Context.swift; path = Cartography/Context.swift; sourceTree = "<group>"; };
+		068E294AC43F2EA1D259EFCD2E8AE0B1 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Cartography/View.swift; sourceTree = "<group>"; };
+		0A990F83A5FF01023A21E8CEF2EB483F /* Point.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Point.swift; path = Cartography/Point.swift; sourceTree = "<group>"; };
+		0B60F8D64ADC813DBE802DFDE0520ED0 /* Size.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Size.swift; path = Cartography/Size.swift; sourceTree = "<group>"; };
+		115B576F50332BF959384D1879D31C26 /* FAKIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAKIcon.m; path = WeatherIconsKit/FAKIcon.m; sourceTree = "<group>"; };
+		11BBAB87F5529C51D4E151735AF03924 /* Context.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Context.swift; path = Cartography/Context.swift; sourceTree = "<group>"; };
+		212CAF32BB7A2135CA957D35D3CD534D /* Cartography-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-prefix.pch"; sourceTree = "<group>"; };
+		3074B57081691E36B3C08491D70277F6 /* LayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutProxy.swift; path = Cartography/LayoutProxy.swift; sourceTree = "<group>"; };
+		3B608341532676D65DCF18CCB956D235 /* Constrain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constrain.swift; path = Cartography/Constrain.swift; sourceTree = "<group>"; };
+		3E20674BB048762AB7C4B49E6A11C84B /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		41DDEC1F99E3D365AEBE15341C3D9CD2 /* WeatherIconsKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WeatherIconsKit-dummy.m"; sourceTree = "<group>"; };
+		4465F3657C58CD848DD20A293EC2C5AA /* Dimension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Dimension.swift; path = Cartography/Dimension.swift; sourceTree = "<group>"; };
+		47B69990A7088BF7A45D7599780E0607 /* Compound.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compound.swift; path = Cartography/Compound.swift; sourceTree = "<group>"; };
+		4A0BD67EEAE59670C14C8220BCA7EDA7 /* Priority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Priority.swift; path = Cartography/Priority.swift; sourceTree = "<group>"; };
 		4ADA7437A85AB977917EE6D10175FCDE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D16774F4648757893A8441A1F92D47F /* Priority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Priority.swift; path = Cartography/Priority.swift; sourceTree = "<group>"; };
+		4C5A461C7C680F7F6BC8960543F31870 /* LayoutGuideProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuideProxy.swift; path = Cartography/LayoutGuideProxy.swift; sourceTree = "<group>"; };
 		4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
-		57F43CB3B3E7197E66DCEE18DB6A4521 /* Lato-Black.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Black.ttf"; path = "Source/Fonts/Lato-Black.ttf"; sourceTree = "<group>"; };
-		5849C6E1A328CA31425F501F43BEC35E /* WIKFontIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WIKFontIcon.h; path = WeatherIconsKit/WIKFontIcon.h; sourceTree = "<group>"; };
+		55AE66D8C3A6DFFE89D587AC3AC8E74A /* Distribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Distribute.swift; path = Cartography/Distribute.swift; sourceTree = "<group>"; };
+		5A743B170EBA9AF20B36DE4525211126 /* Edge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edge.swift; path = Cartography/Edge.swift; sourceTree = "<group>"; };
 		5B33AB8367156D9CECB163A282B22FA8 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		5C126A7E24E6CB0E83203CD626429EBE /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Cartography/Constraint.swift; sourceTree = "<group>"; };
 		5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5D77D293BA9EF31BDCC00043FD9EE8D6 /* ResourceBundle-LatoFont-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-LatoFont-Info.plist"; sourceTree = "<group>"; };
 		5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
-		60B7BE439CA17BAA4C6A8AAF6E38AE38 /* Point.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Point.swift; path = Cartography/Point.swift; sourceTree = "<group>"; };
 		61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
-		69213C78665854FF766C3A5B5BE824CA /* LatoFont-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LatoFont-dummy.m"; sourceTree = "<group>"; };
+		613344607B61B08D3BE136CD55A2E015 /* Edges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edges.swift; path = Cartography/Edges.swift; sourceTree = "<group>"; };
+		622ACB95F4037C7CCA8FE65F0ECF841B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		68AECD158958BD06A33A4559B1D3C5D5 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Cartography/Expression.swift; sourceTree = "<group>"; };
 		6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
-		711611040685F6A5695DADD963D506D7 /* Lato-Italic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Italic.ttf"; path = "Source/Fonts/Lato-Italic.ttf"; sourceTree = "<group>"; };
-		753F5A84D790E1877B671D86A7F6831B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		765A9C4B63605F2843863C9D4AB02609 /* Align.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Align.swift; path = Cartography/Align.swift; sourceTree = "<group>"; };
-		77A9F3477C5902D82C6573FBE2DB4874 /* WeatherIconsKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-prefix.pch"; sourceTree = "<group>"; };
-		7879C57E7029B18AAAEC5C1000EF363F /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BlackItalic.ttf"; path = "Source/Fonts/Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
-		7B46B9EFB7E9E5C6996C1EE25684D297 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-LightItalic.ttf"; path = "Source/Fonts/Lato-LightItalic.ttf"; sourceTree = "<group>"; };
-		7BB35E2D51C1F27AFD2322649606538D /* AutoresizingMaskLayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoresizingMaskLayoutProxy.swift; path = Cartography/AutoresizingMaskLayoutProxy.swift; sourceTree = "<group>"; };
-		7E1B33BE7B07DE41366909C52A437AB3 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EA3F65AF342F93DDFF7F61D2C772FA4 /* Cartography.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cartography.xcconfig; sourceTree = "<group>"; };
+		6C00D9B4C3887E84AE35A41C472BE9DA /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EB844A40050CC9B4E2EA99FC8CD8E6E /* WeatherIcons-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "WeatherIcons-Regular.otf"; path = "WeatherIconsKit/WeatherIcons-Regular.otf"; sourceTree = "<group>"; };
+		6F239373C3148EFD5FBC859E3F938FEC /* LayoutItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutItem.swift; path = Cartography/LayoutItem.swift; sourceTree = "<group>"; };
+		71BE3D65495A0DEEAD4EC8C6174A46B8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		741379F2E8A9DB99F1BAB0456D0DEC27 /* WeatherIconsKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-prefix.pch"; sourceTree = "<group>"; };
+		76C9AEF53D5A8682204CB179C30ECBAD /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Cartography/Extensions.swift; sourceTree = "<group>"; };
+		77E837EA27AF194A12C61180DEA50B0D /* Cartography-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Cartography-dummy.m"; sourceTree = "<group>"; };
+		79F8C45F52F2DD06D6102EA507885165 /* WeatherIconsKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = WeatherIconsKit.xcconfig; sourceTree = "<group>"; };
+		7D524C1AF11B7E64BB15FD2C6075F958 /* Cartography-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-umbrella.h"; sourceTree = "<group>"; };
 		808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
-		882CEEE50ED19520C6D10D6624B24338 /* WIKFontIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WIKFontIcon.m; path = WeatherIconsKit/WIKFontIcon.m; sourceTree = "<group>"; };
-		8AA473A20B98594DE8063398DA8D1871 /* WeatherIconsKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "WeatherIconsKit-dummy.m"; sourceTree = "<group>"; };
-		8C3B96CF4FB70DE8872D1C21731EF7E4 /* Edges.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Edges.swift; path = Cartography/Edges.swift; sourceTree = "<group>"; };
-		8D1698A0F2D7CB98C0AD94E24FE09F40 /* Distribute.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Distribute.swift; path = Cartography/Distribute.swift; sourceTree = "<group>"; };
-		8DB00E60E7EB86BECBF6ECB5498E0875 /* LayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutSupport.swift; path = Cartography/LayoutSupport.swift; sourceTree = "<group>"; };
-		8E135895AFEB320F7004DECF800CDE5F /* WeatherIcons-Regular.otf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "WeatherIcons-Regular.otf"; path = "WeatherIconsKit/WeatherIcons-Regular.otf"; sourceTree = "<group>"; };
+		85BFE8010B656615E4C95CE9E40349E3 /* Align.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Align.swift; path = Cartography/Align.swift; sourceTree = "<group>"; };
+		86BD7C328B8D666C3A7270495A51406C /* LayoutSupportProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutSupportProxy.swift; path = Cartography/LayoutSupportProxy.swift; sourceTree = "<group>"; };
+		8950720604EA0EE22A30A4CCB9C2FF34 /* Cartography.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Cartography.modulemap; sourceTree = "<group>"; };
+		8B2B8FEDC0E0A66BA5A958C67D528178 /* Property.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Property.swift; path = Cartography/Property.swift; sourceTree = "<group>"; };
+		8B8E5DDD189EE6BFEA60C296C0D09DA6 /* ConstraintGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintGroup.swift; path = Cartography/ConstraintGroup.swift; sourceTree = "<group>"; };
 		92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
-		92CF7033860764D84D010998C9B78123 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9BCD6B7E97CE6100E352E291A2FD8085 /* WeatherIconsKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WeatherIconsKit.h; path = WeatherIconsKit/WeatherIconsKit.h; sourceTree = "<group>"; };
 		9E12950B9CE60F60E04016668A8A8842 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		A44ADC158AFEA2CE0C5FE01E3BE25651 /* Cartography-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-umbrella.h"; sourceTree = "<group>"; };
-		A80A99286808BA18C6FC3C98085ACAA6 /* FAKIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAKIcon.m; path = WeatherIconsKit/FAKIcon.m; sourceTree = "<group>"; };
-		AE7485AE93A49399AC711CDB7B3EB3F8 /* LatoFont-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LatoFont-prefix.pch"; sourceTree = "<group>"; };
-		B3D0A62D2A903E53D598233A26ADBE3D /* ConstraintGroup.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintGroup.swift; path = Cartography/ConstraintGroup.swift; sourceTree = "<group>"; };
-		B7956B1411C9F7026C8D4C51F600D919 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B889CCD0FBBADBA112FA498B657C41C1 /* LatoFont.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LatoFont.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2D1ACF312649BF0BD153540A18E03AA /* WeatherIconsKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WeatherIconsKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A990C4A0BABB90F60995FF75BAE3453A /* ViewProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewProxy.swift; path = Cartography/ViewProxy.swift; sourceTree = "<group>"; };
+		B0D8C61815161D886BDE40653EAD85A6 /* LayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuide.swift; path = Cartography/LayoutGuide.swift; sourceTree = "<group>"; };
+		B2D8883473DF48BB570529381D1A796F /* Cartography.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Cartography.xcconfig; sourceTree = "<group>"; };
+		B36FC7097239423C9595BBB8C333E6BE /* AutoresizingMaskLayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoresizingMaskLayoutProxy.swift; path = Cartography/AutoresizingMaskLayoutProxy.swift; sourceTree = "<group>"; };
+		B57C478F544FB332678F9C964782F2FA /* LayoutProxy+TypeErasure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LayoutProxy+TypeErasure.swift"; path = "Cartography/LayoutProxy+TypeErasure.swift"; sourceTree = "<group>"; };
+		B834376175CA1F3D68FC5F496831B140 /* WIKFontIcon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WIKFontIcon.m; path = WeatherIconsKit/WIKFontIcon.m; sourceTree = "<group>"; };
 		B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
-		BB7CE2940E22F7EFC2CF8F7555B63936 /* LatoFont.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LatoFont.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BBE7D6EAB9A36869972DEFE6B56B04F7 /* LayoutProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutProxy.swift; path = Cartography/LayoutProxy.swift; sourceTree = "<group>"; };
-		BFCA3510033BD3D3855BD6594C3105B5 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Cartography/Extensions.swift; sourceTree = "<group>"; };
-		C0F5A2FB321A14DE4AEC02F9DC6BA79A /* ViewProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ViewProxy.swift; path = Cartography/ViewProxy.swift; sourceTree = "<group>"; };
-		C32923F253CE5898AA17EA71FA749E5F /* Cartography-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Cartography-dummy.m"; sourceTree = "<group>"; };
-		C3988E4A832F9A75755CE13592451BF1 /* LayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutGuide.swift; path = Cartography/LayoutGuide.swift; sourceTree = "<group>"; };
-		C96FA8B3CEE8866A42609B6BE3440C37 /* UIFont+Lato.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIFont+Lato.m"; path = "Source/UIFont+Lato.m"; sourceTree = "<group>"; };
-		CC875FD1B14593BFEBEFC8CE26B772DF /* LayoutSupportProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutSupportProxy.swift; path = Cartography/LayoutSupportProxy.swift; sourceTree = "<group>"; };
-		CCCEC896396F26C1EEF30840FDB7D687 /* WeatherIconsKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WeatherIconsKit.modulemap; sourceTree = "<group>"; };
-		CD41BF15A80E12687F4B6118B6DEA085 /* View.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = View.swift; path = Cartography/View.swift; sourceTree = "<group>"; };
-		D1E44A95CF5CAA3C531511CCEB3ACC92 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-BoldItalic.ttf"; path = "Source/Fonts/Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
-		D719063554618726A2BA14080A450AC7 /* Cartography-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Cartography-prefix.pch"; sourceTree = "<group>"; };
-		DBFD5D04DB4C65FED02592A0EB931844 /* Lato-HairlineItalic.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-HairlineItalic.ttf"; path = "Source/Fonts/Lato-HairlineItalic.ttf"; sourceTree = "<group>"; };
-		DC18167D084AB600EBB7743551FD7D45 /* Cartography.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA0BA8ACDAE3BCD29179D7795BDCD721 /* LayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutSupport.swift; path = Cartography/LayoutSupport.swift; sourceTree = "<group>"; };
+		BAFEDB9DD1745889F035405912A0D69C /* WIKFontIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WIKFontIcon.h; path = WeatherIconsKit/WIKFontIcon.h; sourceTree = "<group>"; };
+		CBB02FE9FE12AEBDEFCB32E26132762F /* WeatherIconsKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-umbrella.h"; sourceTree = "<group>"; };
+		DC01C0C6A381D6213942DAAB5CCF4176 /* WeatherIconsKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = WeatherIconsKit.modulemap; sourceTree = "<group>"; };
 		DE2E9972E4EADE8079124B2892701799 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		DEAAE1BF4CFB640D4EC50CB98DB1BC8B /* Lato-Bold.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Bold.ttf"; path = "Source/Fonts/Lato-Bold.ttf"; sourceTree = "<group>"; };
-		E0F5315206ABEF0D344DB215071112EC /* WeatherIconsKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "WeatherIconsKit-umbrella.h"; sourceTree = "<group>"; };
-		E2C45790CE6BC4251BE4896C8B7C4167 /* Constrain.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constrain.swift; path = Cartography/Constrain.swift; sourceTree = "<group>"; };
-		EA778A73A84A07BBF0C30E33B49B3B7A /* Coefficients.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Coefficients.swift; path = Cartography/Coefficients.swift; sourceTree = "<group>"; };
-		EABA853F810BE5197AD5E892C0C6B564 /* Lato-Light.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Light.ttf"; path = "Source/Fonts/Lato-Light.ttf"; sourceTree = "<group>"; };
-		EBDC645D517427138ABAC7A73614466D /* FAKIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAKIcon.h; path = WeatherIconsKit/FAKIcon.h; sourceTree = "<group>"; };
-		EE9326049A5942357C3086AC6F6FDEAB /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Cartography/Expression.swift; sourceTree = "<group>"; };
-		EE947D94E417CC6FE89F9EEA0C446162 /* Lato-Regular.ttf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = "Lato-Regular.ttf"; path = "Source/Fonts/Lato-Regular.ttf"; sourceTree = "<group>"; };
-		F1A347E24246CC8CFEB090F2CAE7D588 /* LayoutProxy+TypeErasure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LayoutProxy+TypeErasure.swift"; path = "Cartography/LayoutProxy+TypeErasure.swift"; sourceTree = "<group>"; };
-		F82455E1E4697687DC397253DF1EA75B /* LayoutItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutItem.swift; path = Cartography/LayoutItem.swift; sourceTree = "<group>"; };
+		DFE936EB9178E7B759DCAF95C4C41935 /* FAKIcon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAKIcon.h; path = WeatherIconsKit/FAKIcon.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		44FA040AD0C67FB8AB75409D60DFC515 /* Frameworks */ = {
+		14EF2BA988715BD3B008C1716CF6BD1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				000CA1E5E29071DFA07494D2AF5A09D7 /* CoreText.framework in Frameworks */,
-				A54A38B0E874515D00B9F6BD60FDAE7C /* Foundation.framework in Frameworks */,
-				85140FFC25E45DBF594AC743AFC3D2C2 /* UIKit.framework in Frameworks */,
+				4D89387B5F7726455C8F68554CCCDCFB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		21A172473F5D382E521547D3F6F0D2DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C9F0C5A67B3AEF28DF40377A7962E8 /* CoreText.framework in Frameworks */,
+				5E68552FC16936BFCF587BB327E1D813 /* Foundation.framework in Frameworks */,
+				BC3347CB9744AB15E284509BD698A5A6 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,31 +159,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2D8F3205D6C61C8C4C9EB0FD8FC6308 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ADD195DF913852BA147CFB7452E27A73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				599DA7AB49F446A05AB7D68FD37813EA /* CoreText.framework in Frameworks */,
-				18E2EC0F5BF9B7F6F55B426714271EE0 /* Foundation.framework in Frameworks */,
-				27F7E6A11F73A56A3F542C80EE253035 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B6990691653206C24C7B2C9DE26CC39B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C7D90F76EF5CC0E20DA80C9BEF530260 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CE8E707F4EF416FD78C4906EA698C9EF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,17 +173,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		0F3F0FD1B306DC06A3131AF6E3846EC0 /* LatoFont */ = {
-			isa = PBXGroup;
-			children = (
-				02C11F7465DC959CBA0BC38E5064BC3A /* UIFont+Lato.h */,
-				C96FA8B3CEE8866A42609B6BE3440C37 /* UIFont+Lato.m */,
-				B338FF821EA9BD85C671E54B182E429E /* Resources */,
-				C305742CA14F5A2F0574025970C1C681 /* Support Files */,
-			);
-			path = LatoFont;
-			sourceTree = "<group>";
-		};
 		122DA2E5084A4393C29BE363C764795C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,26 +181,65 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3E84679DE91027FEF991478D79A51995 /* Pods */ = {
+		292CA9DAE7C39F9292EC4CACC6EBEB0F /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C17E9D3EBF203CC589A54347B2E753C3 /* Cartography */,
-				0F3F0FD1B306DC06A3131AF6E3846EC0 /* LatoFont */,
-				5A2D75864C82AE1818A6FF7DEE2F4FDD /* WeatherIconsKit */,
+				71BE3D65495A0DEEAD4EC8C6174A46B8 /* Info.plist */,
+				DC01C0C6A381D6213942DAAB5CCF4176 /* WeatherIconsKit.modulemap */,
+				79F8C45F52F2DD06D6102EA507885165 /* WeatherIconsKit.xcconfig */,
+				41DDEC1F99E3D365AEBE15341C3D9CD2 /* WeatherIconsKit-dummy.m */,
+				741379F2E8A9DB99F1BAB0456D0DEC27 /* WeatherIconsKit-prefix.pch */,
+				CBB02FE9FE12AEBDEFCB32E26132762F /* WeatherIconsKit-umbrella.h */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/WeatherIconsKit";
 			sourceTree = "<group>";
 		};
-		5A2D75864C82AE1818A6FF7DEE2F4FDD /* WeatherIconsKit */ = {
+		3C561E4CD38C2D5F018D072202FEF3BC /* Cartography */ = {
 			isa = PBXGroup;
 			children = (
-				EBDC645D517427138ABAC7A73614466D /* FAKIcon.h */,
-				A80A99286808BA18C6FC3C98085ACAA6 /* FAKIcon.m */,
-				9BCD6B7E97CE6100E352E291A2FD8085 /* WeatherIconsKit.h */,
-				5849C6E1A328CA31425F501F43BEC35E /* WIKFontIcon.h */,
-				882CEEE50ED19520C6D10D6624B24338 /* WIKFontIcon.m */,
-				D95ED08C2C974DF3C8A31C1BA32C6053 /* Resources */,
-				8AB9F30A43FD52719BCF60983BCE8B2A /* Support Files */,
+				85BFE8010B656615E4C95CE9E40349E3 /* Align.swift */,
+				B36FC7097239423C9595BBB8C333E6BE /* AutoresizingMaskLayoutProxy.swift */,
+				01E588A5F6640E0928D44D94454B7B28 /* Coefficients.swift */,
+				47B69990A7088BF7A45D7599780E0607 /* Compound.swift */,
+				3B608341532676D65DCF18CCB956D235 /* Constrain.swift */,
+				5C126A7E24E6CB0E83203CD626429EBE /* Constraint.swift */,
+				8B8E5DDD189EE6BFEA60C296C0D09DA6 /* ConstraintGroup.swift */,
+				11BBAB87F5529C51D4E151735AF03924 /* Context.swift */,
+				4465F3657C58CD848DD20A293EC2C5AA /* Dimension.swift */,
+				55AE66D8C3A6DFFE89D587AC3AC8E74A /* Distribute.swift */,
+				5A743B170EBA9AF20B36DE4525211126 /* Edge.swift */,
+				613344607B61B08D3BE136CD55A2E015 /* Edges.swift */,
+				68AECD158958BD06A33A4559B1D3C5D5 /* Expression.swift */,
+				76C9AEF53D5A8682204CB179C30ECBAD /* Extensions.swift */,
+				B0D8C61815161D886BDE40653EAD85A6 /* LayoutGuide.swift */,
+				4C5A461C7C680F7F6BC8960543F31870 /* LayoutGuideProxy.swift */,
+				6F239373C3148EFD5FBC859E3F938FEC /* LayoutItem.swift */,
+				3074B57081691E36B3C08491D70277F6 /* LayoutProxy.swift */,
+				B57C478F544FB332678F9C964782F2FA /* LayoutProxy+TypeErasure.swift */,
+				BA0BA8ACDAE3BCD29179D7795BDCD721 /* LayoutSupport.swift */,
+				86BD7C328B8D666C3A7270495A51406C /* LayoutSupportProxy.swift */,
+				0A990F83A5FF01023A21E8CEF2EB483F /* Point.swift */,
+				4A0BD67EEAE59670C14C8220BCA7EDA7 /* Priority.swift */,
+				8B2B8FEDC0E0A66BA5A958C67D528178 /* Property.swift */,
+				0B60F8D64ADC813DBE802DFDE0520ED0 /* Size.swift */,
+				068E294AC43F2EA1D259EFCD2E8AE0B1 /* View.swift */,
+				A990C4A0BABB90F60995FF75BAE3453A /* ViewProxy.swift */,
+				C3E6804D2018F281102714291E19B479 /* Support Files */,
+			);
+			path = Cartography;
+			sourceTree = "<group>";
+		};
+		707739425C1E76B818F1C65DB6F92F7B /* WeatherIconsKit */ = {
+			isa = PBXGroup;
+			children = (
+				DFE936EB9178E7B759DCAF95C4C41935 /* FAKIcon.h */,
+				115B576F50332BF959384D1879D31C26 /* FAKIcon.m */,
+				00F6110C2E6F6756CC7D87157CF5A5FE /* WeatherIconsKit.h */,
+				BAFEDB9DD1745889F035405912A0D69C /* WIKFontIcon.h */,
+				B834376175CA1F3D68FC5F496831B140 /* WIKFontIcon.m */,
+				D37C7E124F08DE1B1E122FC56FEC9530 /* Resources */,
+				292CA9DAE7C39F9292EC4CACC6EBEB0F /* Support Files */,
 			);
 			path = WeatherIconsKit;
 			sourceTree = "<group>";
@@ -304,43 +262,25 @@
 			path = "Target Support Files/Pods-Swifty Forecast";
 			sourceTree = "<group>";
 		};
-		72C969ABA33F43F8A461CE1212D73494 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1CD7CE761593D380CEF4F2ECB8BA0925 /* Cartography.modulemap */,
-				7EA3F65AF342F93DDFF7F61D2C772FA4 /* Cartography.xcconfig */,
-				C32923F253CE5898AA17EA71FA749E5F /* Cartography-dummy.m */,
-				D719063554618726A2BA14080A450AC7 /* Cartography-prefix.pch */,
-				A44ADC158AFEA2CE0C5FE01E3BE25651 /* Cartography-umbrella.h */,
-				753F5A84D790E1877B671D86A7F6831B /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Cartography";
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				122DA2E5084A4393C29BE363C764795C /* Frameworks */,
-				3E84679DE91027FEF991478D79A51995 /* Pods */,
-				CCF3D3C4623BEC827C6C8A6847DADDAD /* Products */,
+				B936EB213CF1B94E055ED5EF92848FD2 /* Pods */,
+				97ACC266D74A697FC2ED9AB37C92E7CD /* Products */,
 				0E89FCEEF42F82A8E48C380ECD207CDC /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		8AB9F30A43FD52719BCF60983BCE8B2A /* Support Files */ = {
+		97ACC266D74A697FC2ED9AB37C92E7CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92CF7033860764D84D010998C9B78123 /* Info.plist */,
-				CCCEC896396F26C1EEF30840FDB7D687 /* WeatherIconsKit.modulemap */,
-				1B3BC98D5254C2CD6E71B0FEAD4E82DA /* WeatherIconsKit.xcconfig */,
-				8AA473A20B98594DE8063398DA8D1871 /* WeatherIconsKit-dummy.m */,
-				77A9F3477C5902D82C6573FBE2DB4874 /* WeatherIconsKit-prefix.pch */,
-				E0F5315206ABEF0D344DB215071112EC /* WeatherIconsKit-umbrella.h */,
+				3E20674BB048762AB7C4B49E6A11C84B /* Cartography.framework */,
+				6C00D9B4C3887E84AE35A41C472BE9DA /* Pods_Swifty_Forecast.framework */,
+				A2D1ACF312649BF0BD153540A18E03AA /* WeatherIconsKit.framework */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/WeatherIconsKit";
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A6E8F77E6A3B76377DD6425D7F87AFA3 /* iOS */ = {
@@ -353,89 +293,33 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		B338FF821EA9BD85C671E54B182E429E /* Resources */ = {
+		B936EB213CF1B94E055ED5EF92848FD2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				57F43CB3B3E7197E66DCEE18DB6A4521 /* Lato-Black.ttf */,
-				7879C57E7029B18AAAEC5C1000EF363F /* Lato-BlackItalic.ttf */,
-				DEAAE1BF4CFB640D4EC50CB98DB1BC8B /* Lato-Bold.ttf */,
-				D1E44A95CF5CAA3C531511CCEB3ACC92 /* Lato-BoldItalic.ttf */,
-				404B3F170FBFB014B332F518F3D976A8 /* Lato-Hairline.ttf */,
-				DBFD5D04DB4C65FED02592A0EB931844 /* Lato-HairlineItalic.ttf */,
-				711611040685F6A5695DADD963D506D7 /* Lato-Italic.ttf */,
-				EABA853F810BE5197AD5E892C0C6B564 /* Lato-Light.ttf */,
-				7B46B9EFB7E9E5C6996C1EE25684D297 /* Lato-LightItalic.ttf */,
-				EE947D94E417CC6FE89F9EEA0C446162 /* Lato-Regular.ttf */,
+				3C561E4CD38C2D5F018D072202FEF3BC /* Cartography */,
+				707739425C1E76B818F1C65DB6F92F7B /* WeatherIconsKit */,
 			);
-			name = Resources;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		C17E9D3EBF203CC589A54347B2E753C3 /* Cartography */ = {
+		C3E6804D2018F281102714291E19B479 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				765A9C4B63605F2843863C9D4AB02609 /* Align.swift */,
-				7BB35E2D51C1F27AFD2322649606538D /* AutoresizingMaskLayoutProxy.swift */,
-				EA778A73A84A07BBF0C30E33B49B3B7A /* Coefficients.swift */,
-				0D6CB060AC84A4B8C3EB73AD103968C7 /* Compound.swift */,
-				E2C45790CE6BC4251BE4896C8B7C4167 /* Constrain.swift */,
-				2FE46A83DE9D4BB8858508FC9D224944 /* Constraint.swift */,
-				B3D0A62D2A903E53D598233A26ADBE3D /* ConstraintGroup.swift */,
-				423744E8C93C64025FB6E7098B64C759 /* Context.swift */,
-				21DB2A6CD1212EC96DDE68CECEC76AA6 /* Dimension.swift */,
-				8D1698A0F2D7CB98C0AD94E24FE09F40 /* Distribute.swift */,
-				2352D53A5BF6D85BDE955FCE6B690AF9 /* Edge.swift */,
-				8C3B96CF4FB70DE8872D1C21731EF7E4 /* Edges.swift */,
-				EE9326049A5942357C3086AC6F6FDEAB /* Expression.swift */,
-				BFCA3510033BD3D3855BD6594C3105B5 /* Extensions.swift */,
-				C3988E4A832F9A75755CE13592451BF1 /* LayoutGuide.swift */,
-				37E5280435BF5C53E8977A7481FD312C /* LayoutGuideProxy.swift */,
-				F82455E1E4697687DC397253DF1EA75B /* LayoutItem.swift */,
-				BBE7D6EAB9A36869972DEFE6B56B04F7 /* LayoutProxy.swift */,
-				F1A347E24246CC8CFEB090F2CAE7D588 /* LayoutProxy+TypeErasure.swift */,
-				8DB00E60E7EB86BECBF6ECB5498E0875 /* LayoutSupport.swift */,
-				CC875FD1B14593BFEBEFC8CE26B772DF /* LayoutSupportProxy.swift */,
-				60B7BE439CA17BAA4C6A8AAF6E38AE38 /* Point.swift */,
-				4D16774F4648757893A8441A1F92D47F /* Priority.swift */,
-				24C05338AF77EFDFB1B981B345B65307 /* Property.swift */,
-				4137DE330EF98A25567A39B566FA66CA /* Size.swift */,
-				CD41BF15A80E12687F4B6118B6DEA085 /* View.swift */,
-				C0F5A2FB321A14DE4AEC02F9DC6BA79A /* ViewProxy.swift */,
-				72C969ABA33F43F8A461CE1212D73494 /* Support Files */,
-			);
-			path = Cartography;
-			sourceTree = "<group>";
-		};
-		C305742CA14F5A2F0574025970C1C681 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				B7956B1411C9F7026C8D4C51F600D919 /* Info.plist */,
-				197C2829CBC4F78FBA28E939D2956C4B /* LatoFont.modulemap */,
-				0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */,
-				69213C78665854FF766C3A5B5BE824CA /* LatoFont-dummy.m */,
-				AE7485AE93A49399AC711CDB7B3EB3F8 /* LatoFont-prefix.pch */,
-				1FAC39DAFFDF84B0902477A414B7F7AE /* LatoFont-umbrella.h */,
-				5D77D293BA9EF31BDCC00043FD9EE8D6 /* ResourceBundle-LatoFont-Info.plist */,
+				8950720604EA0EE22A30A4CCB9C2FF34 /* Cartography.modulemap */,
+				B2D8883473DF48BB570529381D1A796F /* Cartography.xcconfig */,
+				77E837EA27AF194A12C61180DEA50B0D /* Cartography-dummy.m */,
+				212CAF32BB7A2135CA957D35D3CD534D /* Cartography-prefix.pch */,
+				7D524C1AF11B7E64BB15FD2C6075F958 /* Cartography-umbrella.h */,
+				622ACB95F4037C7CCA8FE65F0ECF841B /* Info.plist */,
 			);
 			name = "Support Files";
-			path = "../Target Support Files/LatoFont";
+			path = "../Target Support Files/Cartography";
 			sourceTree = "<group>";
 		};
-		CCF3D3C4623BEC827C6C8A6847DADDAD /* Products */ = {
+		D37C7E124F08DE1B1E122FC56FEC9530 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DC18167D084AB600EBB7743551FD7D45 /* Cartography.framework */,
-				B889CCD0FBBADBA112FA498B657C41C1 /* LatoFont.bundle */,
-				BB7CE2940E22F7EFC2CF8F7555B63936 /* LatoFont.framework */,
-				7E1B33BE7B07DE41366909C52A437AB3 /* Pods_Swifty_Forecast.framework */,
-				2C1E4DB554438FEB36CE86D87725C6DE /* WeatherIconsKit.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D95ED08C2C974DF3C8A31C1BA32C6053 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				8E135895AFEB320F7004DECF800CDE5F /* WeatherIcons-Regular.otf */,
+				6EB844A40050CC9B4E2EA99FC8CD8E6E /* WeatherIcons-Regular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -443,11 +327,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2CC3278E779457CCDD58D1D3930CEAE4 /* Headers */ = {
+		04655A33EB28D0C6B7260CC510A3E25A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D2747BAC45A6EA8219D64B76837858C /* Pods-Swifty Forecast-umbrella.h in Headers */,
+				058B55DDDDC1FCA1F85E8953999FB830 /* Pods-Swifty Forecast-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		37EA24CA1AD2EFB37827B09386B6329D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AC5EB2BB606589C5BBD88D3DCE2D7A2 /* FAKIcon.h in Headers */,
+				0FB6DAE8E897205247C42BC1D375A4EF /* WeatherIconsKit-umbrella.h in Headers */,
+				6C53BD0CC2CFCC453F15F77BA7C66BDE /* WeatherIconsKit.h in Headers */,
+				1556972CBDD955A5E2DB329BF723A46C /* WIKFontIcon.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,26 +351,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22C18133E55CC4E0633B633F3912F097 /* Cartography-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B3DBAF2B609F2F295874283AEA5840 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				164961A70FDD04B27CE7934AE44D781D /* FAKIcon.h in Headers */,
-				774B799BDE8BF1AADF00F412885B3F3D /* WeatherIconsKit-umbrella.h in Headers */,
-				5D0516B593D14D0C7D829717D60842F1 /* WeatherIconsKit.h in Headers */,
-				859C1F735F9DF514A047C65FCE9982B2 /* WIKFontIcon.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E1637954E94875256D50D085C396BE35 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9BCEC4AFD1B01B3597D567FE0AB0BC44 /* LatoFont-umbrella.h in Headers */,
-				499FF33C0104375324BF5D5B63A22422 /* UIFont+Lato.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,17 +371,17 @@
 			);
 			name = Cartography;
 			productName = Cartography;
-			productReference = DC18167D084AB600EBB7743551FD7D45 /* Cartography.framework */;
+			productReference = 3E20674BB048762AB7C4B49E6A11C84B /* Cartography.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7DDA7E1E09ADC1C64CCCFF08CB20B78D /* WeatherIconsKit */ = {
+		63FEC12E6AAA13E7E738945B659EDC3C /* WeatherIconsKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9355C0EF0FC86041797075C709A81494 /* Build configuration list for PBXNativeTarget "WeatherIconsKit" */;
+			buildConfigurationList = EB71994ECAA4A552F2BE98026431819E /* Build configuration list for PBXNativeTarget "WeatherIconsKit" */;
 			buildPhases = (
-				26DF9595F650A19B59CCA1579E621C9F /* Sources */,
-				ADD195DF913852BA147CFB7452E27A73 /* Frameworks */,
-				94B3DBAF2B609F2F295874283AEA5840 /* Headers */,
-				313D24B4C1DA237FE06A9D224814CC87 /* Resources */,
+				AA9D9C019751C4735FDE4020A7EBFBAA /* Sources */,
+				21A172473F5D382E521547D3F6F0D2DE /* Frameworks */,
+				37EA24CA1AD2EFB37827B09386B6329D /* Headers */,
+				C365F21AFFF9096821FBC3E1FE7D8EC7 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -514,64 +389,27 @@
 			);
 			name = WeatherIconsKit;
 			productName = WeatherIconsKit;
-			productReference = 2C1E4DB554438FEB36CE86D87725C6DE /* WeatherIconsKit.framework */;
+			productReference = A2D1ACF312649BF0BD153540A18E03AA /* WeatherIconsKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		942A9D7D01CE9FA0F2A9C8C1CC57951C /* LatoFont */ = {
+		BE8DBD06E470CBC3A6A39CF5430FB211 /* Pods-Swifty Forecast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A4352A7D86F025E02B70AC40A817B3E9 /* Build configuration list for PBXNativeTarget "LatoFont" */;
+			buildConfigurationList = 029868C44DE53F886797EC113F56C679 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */;
 			buildPhases = (
-				78EA4F85DAE9CFA8323162DBDB359A09 /* Sources */,
-				44FA040AD0C67FB8AB75409D60DFC515 /* Frameworks */,
-				3CCBA7BA158DEAF57C778F93F152BD65 /* Resources */,
-				E1637954E94875256D50D085C396BE35 /* Headers */,
+				093A4DCDB5A252FD16901314E91803B2 /* Sources */,
+				14EF2BA988715BD3B008C1716CF6BD1B /* Frameworks */,
+				04655A33EB28D0C6B7260CC510A3E25A /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				95C0B957ECA75573D01C761A2CCB95CD /* PBXTargetDependency */,
-			);
-			name = LatoFont;
-			productName = LatoFont;
-			productReference = BB7CE2940E22F7EFC2CF8F7555B63936 /* LatoFont.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		D943A72F146B72BD44DA9C569AA423FA /* Pods-Swifty Forecast */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C80150A67340D1D54A8C1E8FBDDF605 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */;
-			buildPhases = (
-				F6D0D8AC3FFE22D511DCA3371C9ECC46 /* Sources */,
-				C7D90F76EF5CC0E20DA80C9BEF530260 /* Frameworks */,
-				2CC3278E779457CCDD58D1D3930CEAE4 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E67FE0373965D945187AD2DCD8F05E1A /* PBXTargetDependency */,
-				20D68E1DD1BBBECC37E06586298BFE6E /* PBXTargetDependency */,
-				55ECBBACC94BF397E4ACF551E6BEE50E /* PBXTargetDependency */,
+				1A144A029991A5E7647109D6DF724AF1 /* PBXTargetDependency */,
+				DE22DF2056FB8AE7C21E2BB1A6DEB8B6 /* PBXTargetDependency */,
 			);
 			name = "Pods-Swifty Forecast";
 			productName = "Pods-Swifty Forecast";
-			productReference = 7E1B33BE7B07DE41366909C52A437AB3 /* Pods_Swifty_Forecast.framework */;
+			productReference = 6C00D9B4C3887E84AE35A41C472BE9DA /* Pods_Swifty_Forecast.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		DE8F2EA6BBEA8FD641321B92F8BA8C2B /* LatoFont-LatoFont */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BE8BABD1B77B1FF8531726075DC411E4 /* Build configuration list for PBXNativeTarget "LatoFont-LatoFont" */;
-			buildPhases = (
-				1B8535B1E65A076F2B01B51F93E9CEA4 /* Sources */,
-				B6990691653206C24C7B2C9DE26CC39B /* Frameworks */,
-				65C28337762D925FD5FB4EDE7737F202 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "LatoFont-LatoFont";
-			productName = "LatoFont-LatoFont";
-			productReference = B889CCD0FBBADBA112FA498B657C41C1 /* LatoFont.bundle */;
-			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -590,70 +428,34 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = CCF3D3C4623BEC827C6C8A6847DADDAD /* Products */;
+			productRefGroup = 97ACC266D74A697FC2ED9AB37C92E7CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				05B5E6B6BF53C2C31E616E4C5644E8BB /* Cartography */,
-				942A9D7D01CE9FA0F2A9C8C1CC57951C /* LatoFont */,
-				DE8F2EA6BBEA8FD641321B92F8BA8C2B /* LatoFont-LatoFont */,
-				D943A72F146B72BD44DA9C569AA423FA /* Pods-Swifty Forecast */,
-				7DDA7E1E09ADC1C64CCCFF08CB20B78D /* WeatherIconsKit */,
+				BE8DBD06E470CBC3A6A39CF5430FB211 /* Pods-Swifty Forecast */,
+				63FEC12E6AAA13E7E738945B659EDC3C /* WeatherIconsKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		313D24B4C1DA237FE06A9D224814CC87 /* Resources */ = {
+		C365F21AFFF9096821FBC3E1FE7D8EC7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65419FFB4343F39CB03890D5DAEB39FD /* WeatherIcons-Regular.otf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3CCBA7BA158DEAF57C778F93F152BD65 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FDC53F86779C136EE6E099AEC389796D /* LatoFont.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		65C28337762D925FD5FB4EDE7737F202 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CFCACE678B70021485804DA8A3C8ACE4 /* Lato-Black.ttf in Resources */,
-				938FB262A8F31934EA530F1AB86A3F3A /* Lato-BlackItalic.ttf in Resources */,
-				EE2DEE42051C135B4A982C05E02A5367 /* Lato-Bold.ttf in Resources */,
-				90F5892B40BD38B69E8D88C958373A8A /* Lato-BoldItalic.ttf in Resources */,
-				CAC2C9F67E42ECAD602108ACCA8706DD /* Lato-Hairline.ttf in Resources */,
-				7AE1D4765B31AC40AF3D774705CD04FC /* Lato-HairlineItalic.ttf in Resources */,
-				0C98CFEC996DEEB10E39FC50845A3D21 /* Lato-Italic.ttf in Resources */,
-				82ED0C7CC376B8FFC2E8A7E81074B17C /* Lato-Light.ttf in Resources */,
-				A641892548994B7BDCBB6BCC9383C524 /* Lato-LightItalic.ttf in Resources */,
-				B2E4E6A261F20F48A7B7E0F50AFAD415 /* Lato-Regular.ttf in Resources */,
+				94BB7E8EF6B3D264E5556D1E6DB1C745 /* WeatherIcons-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1B8535B1E65A076F2B01B51F93E9CEA4 /* Sources */ = {
+		093A4DCDB5A252FD16901314E91803B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		26DF9595F650A19B59CCA1579E621C9F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DE222EEB2FD8853FB48571C6A60AB73A /* FAKIcon.m in Sources */,
-				B98CC95209815BD031BE231C8050CCBB /* WeatherIconsKit-dummy.m in Sources */,
-				870BD9B8F123D7C19285D5FDE36D3D47 /* WIKFontIcon.m in Sources */,
+				3EF6956685830CB5E0558997D2EA8FF8 /* Pods-Swifty Forecast-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,49 +494,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		78EA4F85DAE9CFA8323162DBDB359A09 /* Sources */ = {
+		AA9D9C019751C4735FDE4020A7EBFBAA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFA6B53A709CB76C3EA03E5CA68A605F /* LatoFont-dummy.m in Sources */,
-				87015FBC04C616C1285E60A47D25419A /* UIFont+Lato.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F6D0D8AC3FFE22D511DCA3371C9ECC46 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9F14481C6E8A4683734C60FAEBDDF402 /* Pods-Swifty Forecast-dummy.m in Sources */,
+				E06C1A12DA50304F5891C18AC2FE8227 /* FAKIcon.m in Sources */,
+				C24B2B4A5478499DC03C2CFC086049D6 /* WeatherIconsKit-dummy.m in Sources */,
+				D83DA467B3F33B057CB1907394B13512 /* WIKFontIcon.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		20D68E1DD1BBBECC37E06586298BFE6E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = LatoFont;
-			target = 942A9D7D01CE9FA0F2A9C8C1CC57951C /* LatoFont */;
-			targetProxy = D25BBE6D62524A7A88F5AFF2B872BFAE /* PBXContainerItemProxy */;
-		};
-		55ECBBACC94BF397E4ACF551E6BEE50E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = WeatherIconsKit;
-			target = 7DDA7E1E09ADC1C64CCCFF08CB20B78D /* WeatherIconsKit */;
-			targetProxy = F05B1DE75123F9C55C915B01CF34DDE7 /* PBXContainerItemProxy */;
-		};
-		95C0B957ECA75573D01C761A2CCB95CD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "LatoFont-LatoFont";
-			target = DE8F2EA6BBEA8FD641321B92F8BA8C2B /* LatoFont-LatoFont */;
-			targetProxy = 50A850BC869F11CB26EBCFE0B5E9D9B4 /* PBXContainerItemProxy */;
-		};
-		E67FE0373965D945187AD2DCD8F05E1A /* PBXTargetDependency */ = {
+		1A144A029991A5E7647109D6DF724AF1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Cartography;
 			target = 05B5E6B6BF53C2C31E616E4C5644E8BB /* Cartography */;
-			targetProxy = 14B910373B5BD91A7413FCEBBD70ACF1 /* PBXContainerItemProxy */;
+			targetProxy = 3C70A5A7226AC29D9F1BEA9974C1F795 /* PBXContainerItemProxy */;
+		};
+		DE22DF2056FB8AE7C21E2BB1A6DEB8B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WeatherIconsKit;
+			target = 63FEC12E6AAA13E7E738945B659EDC3C /* WeatherIconsKit */;
+			targetProxy = E97117E649735A16987F3CDC005D633E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -798,25 +581,9 @@
 			};
 			name = Release;
 		};
-		13B5CEBF3B42CF105818081B535F6119 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/LatoFont";
-				INFOPLIST_FILE = "Target Support Files/LatoFont/ResourceBundle-LatoFont-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = LatoFont;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 		35CD2F04F4932C334716650A32F1BB13 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EA3F65AF342F93DDFF7F61D2C772FA4 /* Cartography.xcconfig */;
+			baseConfigurationReference = B2D8883473DF48BB570529381D1A796F /* Cartography.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -847,9 +614,9 @@
 			};
 			name = Release;
 		};
-		3D51C36F75519FD968F5F727590A3384 /* Release */ = {
+		441BA4C938488F47D5C23868BBC9B287 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B3BC98D5254C2CD6E71B0FEAD4E82DA /* WeatherIconsKit.xcconfig */;
+			baseConfigurationReference = 79F8C45F52F2DD06D6102EA507885165 /* WeatherIconsKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -872,126 +639,6 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		5E904906DF4A07D69D0E6A13E2261077 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/LatoFont";
-				INFOPLIST_FILE = "Target Support Files/LatoFont/ResourceBundle-LatoFont-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = LatoFont;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		707C307F78A6C28C01FE6C443D671B1A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7CD9154587F1AC53671442AA5628E365 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B3BC98D5254C2CD6E71B0FEAD4E82DA /* WeatherIconsKit.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/WeatherIconsKit/WeatherIconsKit-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/WeatherIconsKit/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/WeatherIconsKit/WeatherIconsKit.modulemap";
-				PRODUCT_MODULE_NAME = WeatherIconsKit;
-				PRODUCT_NAME = WeatherIconsKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8580342846C92E53CAD4951E9D800CC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1061,9 +708,45 @@
 			};
 			name = Debug;
 		};
+		AE5F3A5BDDF3C3491ACE361106F521B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		C34C00134F26343DBED64744162CF6E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7EA3F65AF342F93DDFF7F61D2C772FA4 /* Cartography.xcconfig */;
+			baseConfigurationReference = B2D8883473DF48BB570529381D1A796F /* Cartography.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1093,9 +776,9 @@
 			};
 			name = Debug;
 		};
-		C3EBE5A96E1517FE9193EE27D3667CC2 /* Release */ = {
+		CAE4DD41B6FA5CBB53086BBC0322E9D9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */;
+			baseConfigurationReference = 79F8C45F52F2DD06D6102EA507885165 /* WeatherIconsKit.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1106,14 +789,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LatoFont/LatoFont-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LatoFont/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/WeatherIconsKit/WeatherIconsKit-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/WeatherIconsKit/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LatoFont/LatoFont.modulemap";
-				PRODUCT_MODULE_NAME = LatoFont;
-				PRODUCT_NAME = LatoFont;
+				MODULEMAP_FILE = "Target Support Files/WeatherIconsKit/WeatherIconsKit.modulemap";
+				PRODUCT_MODULE_NAME = WeatherIconsKit;
+				PRODUCT_NAME = WeatherIconsKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1125,10 +808,12 @@
 			};
 			name = Release;
 		};
-		F35D661FDDFD05BC00F90CC8123B14FD /* Debug */ = {
+		EC143752F253E286687A14932F740DC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0865651C37E08B9BF8BA08F25518000D /* LatoFont.xcconfig */;
+			baseConfigurationReference = B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1138,18 +823,21 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LatoFont/LatoFont-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LatoFont/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/LatoFont/LatoFont.modulemap";
-				PRODUCT_MODULE_NAME = LatoFont;
-				PRODUCT_NAME = LatoFont;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1159,38 +847,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		029868C44DE53F886797EC113F56C679 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC143752F253E286687A14932F740DC7 /* Debug */,
+				AE5F3A5BDDF3C3491ACE361106F521B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
 				08638A96A528B1EC32DE62F8A728389D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C80150A67340D1D54A8C1E8FBDDF605 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8580342846C92E53CAD4951E9D800CC1 /* Debug */,
-				707C307F78A6C28C01FE6C443D671B1A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9355C0EF0FC86041797075C709A81494 /* Build configuration list for PBXNativeTarget "WeatherIconsKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7CD9154587F1AC53671442AA5628E365 /* Debug */,
-				3D51C36F75519FD968F5F727590A3384 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A4352A7D86F025E02B70AC40A817B3E9 /* Build configuration list for PBXNativeTarget "LatoFont" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F35D661FDDFD05BC00F90CC8123B14FD /* Debug */,
-				C3EBE5A96E1517FE9193EE27D3667CC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1204,11 +874,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BE8BABD1B77B1FF8531726075DC411E4 /* Build configuration list for PBXNativeTarget "LatoFont-LatoFont" */ = {
+		EB71994ECAA4A552F2BE98026431819E /* Build configuration list for PBXNativeTarget "WeatherIconsKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5E904906DF4A07D69D0E6A13E2261077 /* Debug */,
-				13B5CEBF3B42CF105818081B535F6119 /* Release */,
+				441BA4C938488F47D5C23868BBC9B287 /* Debug */,
+				CAE4DD41B6FA5CBB53086BBC0322E9D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
