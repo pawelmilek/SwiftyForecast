@@ -24,8 +24,8 @@ final class CityListTableDataSource: NSObject, CityListTableDataSourceDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueCell(for: indexPath) as CityCell
-    cell.city = self.cityAt(index: indexPath)
-    
+    let city = cityAt(index: indexPath)
+    cell.configurate(by: city)
     return cell
   }
   

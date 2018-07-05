@@ -34,8 +34,16 @@ struct CurrentForecast: Forecast {
 // MARK: - Temperature in Celsius
 extension CurrentForecast {
   
-  var temperatureInCelsius: Double {
+  private var temperatureInCelsius: Double {
     return (temperature - 32) * Double(5.0 / 9.0)
+  }
+  
+  var temperatureFormatted: String {
+    if MeasuringSystem.isMetric {
+      return temperatureInCelsius.convertedToString + "\u{00B0}"
+    } else {
+      return temperature.convertedToString + "\u{00B0}"
+    }
   }
   
 }

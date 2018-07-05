@@ -13,7 +13,6 @@ final class WebService {
   
   private let sessionShared: URLSession
   private lazy var baseURL: URL = {
-    
     return URL(string: "https://api.forecast.io")!
   }()
   

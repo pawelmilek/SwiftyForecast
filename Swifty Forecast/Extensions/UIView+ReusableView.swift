@@ -1,5 +1,5 @@
 //
-//  UITableViewCell+NibLoadableView.swift
+//  UIView+ReusableView.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 27/09/16.
@@ -8,4 +8,4 @@
 
 import UIKit
 
-extension UITableViewCell: NibLoadableView {}
+extension UIView: ReusableView {}

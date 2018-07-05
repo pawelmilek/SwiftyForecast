@@ -22,11 +22,8 @@ final class Geocoder {
       let latitude = coordinate.latitude
       let longitude = coordinate.longitude
       
-      DispatchQueue.main.async {
-        let coord = Coordinate(latitude: latitude, longitude: longitude)
-        completionHandler(coord)
-      }
-      
+      let coord = Coordinate(latitude: latitude, longitude: longitude)
+      completionHandler(coord)
     })
   }
   
@@ -43,11 +40,10 @@ final class Geocoder {
       let lat = location.coordinate.latitude
       let long = location.coordinate.longitude
       
-      DispatchQueue.main.async {
-        let coordinate = Coordinate(latitude: lat, longitude: long)
-        let city = City(name: cityName, country: country, coordinate: coordinate)
-        completionHandler(city)
-      }
+      let coordinate = Coordinate(latitude: lat, longitude: long)
+      let city = City(name: cityName, country: country, coordinate: coordinate)
+      completionHandler(city)
+      
     })
   }
 }

@@ -13,9 +13,20 @@ protocol Registrable: class {}
 
 
 extension Registrable where Self: UITableView {
-    func register<T: UITableViewCell>(cellClass: T.Type) {
-        let nib = UINib(nibName:  T.nibName, bundle: nil)
-        register(nib, forCellReuseIdentifier: T.reuseIdentifier)
-    }
-    
+  
+  func register<T: UITableViewCell>(cellClass: T.Type) {
+    let nib = UINib(nibName:  T.nibName, bundle: nil)
+    register(nib, forCellReuseIdentifier: T.reuseIdentifier)
+  }
+  
+}
+
+
+extension Registrable where Self: UICollectionView {
+  
+  func register<T: UICollectionViewCell>(cellClass: T.Type) {
+    let nib = UINib(nibName:  T.nibName, bundle: nil)
+    register(nib, forCellWithReuseIdentifier: T.reuseIdentifier)
+  }
+  
 }

@@ -161,17 +161,7 @@ extension DayForecastView {
     self.iconLabel.attributedText = IconType(rawValue: forecast.icon)!.fontIcon
     self.moonPhaseLabel.attributedText = forecast.moonPhase.icon
     self.descriptionLabel.text = forecast.summary
-    
-    if MeasuringSystem.isMetric {
-      let max = forecast.temperatureInCelsiusMax.roundAndConvertingToString() + "℃"
-      let min = forecast.temperatureInCelsiusMin.roundAndConvertingToString() + "℃"
-      self.temperaturesLabel.text = "\(max)/\(min)"
-    } else {
-      let max = forecast.temperatureMax.roundAndConvertingToString() + "℉"
-      let min = forecast.temperatureMin.roundAndConvertingToString() + "℉"
-      self.temperaturesLabel.text = "\(max)/\(min)"
-    }
-    
+    self.temperaturesLabel.text = "\(forecast.temperatureMaxFormatted)/\(forecast.temperatureMinFormatted)"
   }
 }
 

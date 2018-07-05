@@ -1,5 +1,5 @@
 //
-//  SwiftyForecastController.swift
+//  SwiftyForecastViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -9,14 +9,28 @@
 import Foundation
 import UIKit
 import Cartography
-import CoreLocation
 
-class SwiftyForecastController: UIViewController, CityListSelectDelegate, ViewSetupable {
-  private var measuringSystemSwitch: UISegmentedControl! = nil
+class SwiftyForecastViewController: UIViewController, CityListSelectDelegate, ViewSetupable {
+  @IBOutlet weak var currentForecastView: CurrentForecastView!
+  
+  private lazy var measuringSystemSegmentedControl: SegmentedControl = {
+    let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
+    segmentedControl.items = ["℉", "℃"]
+    segmentedControl.font = UIFont(name: "AvenirNext-Bold", size: 14)
+    segmentedControl.selectedLabelColor = .orange
+    segmentedControl.unselectedLabelColor = .white
+    segmentedControl.backgroundColor = .clear
+    segmentedControl.borderColor = .white
+    segmentedControl.thumbColor = .white
+    segmentedControl.selectedIndex = 0
+    segmentedControl.addTarget(self, action: #selector(SwiftyForecastViewController.measuringSystemSwitched(_:)), for: .valueChanged)
+    return segmentedControl
+  }()
+  
+  
   private var backgroundImageView: UIImageView! = nil
   private var scrollView: UIScrollView! = nil
   private var currentWeatherView: CurrentWeatherView! = nil
-  private var hourlyForecastView: HourlyForecastView! = nil
   private var dailyForecastView: DailyForecastView! = nil
   
   private var city: City?
@@ -26,45 +40,42 @@ class SwiftyForecastController: UIViewController, CityListSelectDelegate, ViewSe
       guard let weatherForecast = weatherForecast else { return }
       currentWeatherView.renderView(for: weatherForecast.currently, and: weatherForecast.city)
       dailyForecastView.renderView(for: weatherForecast.daily)
+      
+      currentForecastView.currentForecast = weatherForecast.currently
+      currentForecastView.hourlyForecast = weatherForecast.hourly
     }
-  }
-  
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
   }
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    retrieveWeatherData()
+    fetchWeatherForecast()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupLayout()
-    setupStyle()
+    
+    view.bringSubview(toFront: currentForecastView)
   }
 }
 
 
 // MARK: - Preper For Seuge
-extension SwiftyForecastController {
+extension SwiftyForecastViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier else { return }
+    guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
+    guard let cityListVC = segue.destination as? CityListTableViewController else { return }
     
-    if identifier == SegueIdentifierType.showCityListSegue.rawValue {
-      guard let cityListVC = segue.destination as? CityListTableController else { return }
-      cityListVC.delegate = self
-    }
+    cityListVC.delegate = self
   }
 }
 
 
 // MARK: - CityListSelectDelegate protocol
-extension SwiftyForecastController {
+extension SwiftyForecastViewController {
   
   func cityListDidSelect(city: City) {
     self.city = city
@@ -74,7 +85,7 @@ extension SwiftyForecastController {
 
 
 // MARK: - CustomViewSetupable
-extension SwiftyForecastController {
+extension SwiftyForecastViewController {
   func setup() {
     func setupBackgroundImageView() {
       backgroundImageView = UIImageView(frame: view.bounds)
@@ -86,7 +97,6 @@ extension SwiftyForecastController {
     
     func setupScrollViewSubViews() {
       currentWeatherView = CurrentWeatherView(frame: CGRect.zero)
-      hourlyForecastView = HourlyForecastView(frame: CGRect.zero)
       dailyForecastView = DailyForecastView(frame: CGRect.zero)
     }
     
@@ -96,22 +106,13 @@ extension SwiftyForecastController {
       scrollView.showsVerticalScrollIndicator = false
       
       scrollView.addSubview(currentWeatherView)
-      scrollView.addSubview(hourlyForecastView)
       scrollView.addSubview(dailyForecastView)
       view.addSubview(scrollView)
     }
     
-    func setScrollViewBorder() {
-      scrollView.layer.borderWidth = 1
-      scrollView.layer.borderColor = UIColor.yellow.cgColor
-    }
     
     func setMetricSystemSwitch() {
-      measuringSystemSwitch = UISegmentedControl(items: ["℉", "℃"])
-      measuringSystemSwitch.frame = CGRect(x: 0, y: 0, width: 130, height: 25)
-      measuringSystemSwitch.selectedSegmentIndex = 0
-      measuringSystemSwitch.addTarget(self, action: #selector(SwiftyForecastController.segmentedControllerTapped(_:)), for: .valueChanged)
-      navigationItem.titleView = measuringSystemSwitch
+      navigationItem.titleView = measuringSystemSegmentedControl
     }
     
     
@@ -119,6 +120,9 @@ extension SwiftyForecastController {
     setupScrollViewSubViews()
     setupScrollView()
     setMetricSystemSwitch()
+    
+    
+    currentForecastView.delegate = self
   }
   
   
@@ -161,9 +165,6 @@ extension SwiftyForecastController {
       }
     }
     
-    func setHourlyForecastViewConstrains() {
-      
-    }
     
     func setDailyForecastViewConstrains() {
       let bottomMargin: CGFloat = 8
@@ -179,62 +180,26 @@ extension SwiftyForecastController {
     setBackgroundConstrains()
     setScrollViewConstrains()
     setCurrentWeatherViewConstrains()
-    setHourlyForecastViewConstrains()
     setDailyForecastViewConstrains()
   }
-  
-  
-  func setupStyle() {
-    measuringSystemSwitch.tintColor = .white
-  }
 }
 
 
-// MARK: - Actions
-extension SwiftyForecastController {
+// MAKR: Fetch weather forecast
+private extension SwiftyForecastViewController {
   
-  @objc func segmentedControllerTapped(_ sender: UISegmentedControl) {
-    if sender.selectedSegmentIndex == 0 {
-      MeasuringSystem.isMetric = false // default, need to store user choose in local dba, UserDefaults.standard
-    } else {
-      MeasuringSystem.isMetric = true
-    }
-    
-    measuringSystemSwitched()
-  }
-  
-  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
-    retrieveWeatherData()
-  }
-  
-}
-
-
-
-// MARK: - Measuring System switched
-extension SwiftyForecastController {
-  
-  func measuringSystemSwitched() {
-    retrieveWeatherData()
-  }
-  
-}
-
-
-
-// MAKR: Retrieve Weather Data from JSON
-private extension SwiftyForecastController {
-  
-  func retrieveWeatherData() {
+  func fetchWeatherForecast() {
     LocationProvider.shared.getCurrentLocation() { [weak self] cityLocation in
       let request = ForecastRequest.make(by: cityLocation)
       WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
         switch response {
         case .success(let forecast):
-          print(forecast)
           let currentCityCoord = Coordinate(latitude: forecast.latitude, longitude: forecast.longitude)
+          
           Geocoder.findCity(at: currentCityCoord) { [weak self] city in
-            self?.weatherForecast = WeatherForecast(city: city, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+            DispatchQueue.main.async {
+              self?.weatherForecast = WeatherForecast(city: city, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+            }
           }
           
         case .failure(let error):
@@ -246,3 +211,67 @@ private extension SwiftyForecastController {
   
 }
 
+
+// MARK: - topDistance
+extension SwiftyForecastViewController: CurrentForecastViewDelegate {
+  
+  var topDistance: CGFloat {
+    get {
+      guard self.navigationController != nil else {
+        return 0
+      }
+      let barHeight = self.navigationController?.navigationBar.frame.height ?? 0
+      let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) : UIApplication.shared.statusBarFrame.height
+      return barHeight + statusBarHeight
+      
+    }
+  }
+  
+  
+  func currentForecastDidExpand() {
+    print("currentForecastDidExpand")
+    
+    self.currentForecastView.moreDetailsViewConstraint.constant = 0
+    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+      let height = self.view.frame.size.height - (2 * self.topDistance)
+      self.currentForecastView.frame.size.height = height
+      
+    }, completion: { completed in
+      if completed {
+        self.currentForecastView.moreDetailsViewConstraint.constant = 128
+        self.view.layoutIfNeeded()
+      }
+    })
+  }
+  
+  func currentForecastDidCollapse() {
+    print("currentForecastDidCollapse")
+    
+    self.currentForecastView.moreDetailsViewConstraint.constant = 128
+    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+      self.currentForecastView.frame.size.height = 305
+      
+    }, completion: { completed in
+      if completed {
+        self.currentForecastView.moreDetailsViewConstraint.constant = 0
+        self.view.layoutIfNeeded()
+      }
+    })
+  }
+  
+}
+
+
+// MARK: - Actions
+extension SwiftyForecastViewController {
+  
+  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
+    MeasuringSystem.isMetric = (sender.selectedIndex == 0 ? false : true)
+    fetchWeatherForecast()
+  }
+  
+  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+    fetchWeatherForecast()
+  }
+  
+}

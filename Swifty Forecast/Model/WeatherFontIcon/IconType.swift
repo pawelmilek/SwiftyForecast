@@ -46,7 +46,7 @@ enum IconType: String {
 extension IconType {
   
   var fontIcon: NSAttributedString {
-    let conditionFontSize: CGFloat = 39
+    let conditionFontSize: CGFloat = 30
     let moonPhaseFontSize: CGFloat = 34
     let thermometerFontSize: CGFloat = 50
     

@@ -51,7 +51,7 @@ extension LocationProvider {
     }
     
     guard isLocationServicesEnabled else {
-      AlertViewPresenter.shared.presentError(withMessage: "Please enable location for Mr. Jitters")
+      AlertViewPresenter.shared.presentError(withMessage: "Please enable location for Swifty Forecast")
       return
     }
     

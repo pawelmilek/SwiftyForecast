@@ -11,7 +11,7 @@ import Foundation
 
 protocol NewCityControllerDelegate: class {
   
-  func newCityControllerDidAdd(_ newCityController: NewCityController, city: City)
-  func newContactViewControllerDidCancel(_ newCityController: NewCityController)
+  func newCityControllerDidAdd(_ newCityController: NewCityViewController, city: City)
+  func newContactViewControllerDidCancel(_ newCityController: NewCityViewController)
   
 }

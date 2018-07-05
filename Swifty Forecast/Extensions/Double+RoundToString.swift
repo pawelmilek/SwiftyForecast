@@ -9,7 +9,9 @@
 import Foundation
 
 extension Double {
-    func roundAndConvertingToString() -> String {
-        return String(format: "%.0f", self)
-    }
+  
+  var convertedToString: String {
+    return String(format: "%.0f", self)
+  }
+  
 }

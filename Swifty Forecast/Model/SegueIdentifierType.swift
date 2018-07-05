@@ -10,6 +10,6 @@ import Foundation
 
 
 enum SegueIdentifierType: String {
-  case addCitySegue = "idAddCitySegue"
-  case showCityListSegue = "idShowCityListSegue"
+  case addCitySegue = "AddCityIdentifierSegue"
+  case showCityListSegue = "ShowCityListIdentifierSegue"
 }

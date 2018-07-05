@@ -10,36 +10,46 @@ import UIKit
 import LatoFont
 
 
-class CityCell: UITableViewCell, ViewSetupable {
-    @IBOutlet weak var cityNameLabel: UILabel!
-    
-    var city: City? {
-        didSet {
-            guard let city = self.city else { return }
-            self.cityNameLabel.text = "\(city.name), \(city.country)"
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.setupStyle()
-    }
+class CityCell: UITableViewCell {
+  @IBOutlet weak var cityNameLabel: UILabel!
+  
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    self.setup()
+  }
+  
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    configurate(by: .none)
+  }
 }
 
 
 
-// MARK: - CustomViewSetupable
+// MARK: - ViewSetupable
+extension CityCell: ViewSetupable {
+  
+  func setup() {
+    self.backgroundColor = .clear
+    
+    self.cityNameLabel.font = UIFont.latoLightFont(ofSize: 18)
+    self.cityNameLabel.textColor = .white
+    self.cityNameLabel.textAlignment = .left
+  }
+  
+}
+
+
 extension CityCell {
-    
-    func setup() {}
-    
-    func setupStyle() {
-        self.backgroundColor = .clear
-        
-        self.cityNameLabel.font = UIFont.latoLightFont(ofSize: 18) //latoFont(ofSize: 18)
-        self.cityNameLabel.textColor = .white
-        self.cityNameLabel.textAlignment = .left
+  
+  func configurate(by item: City?) {
+    if let city = item {
+      cityNameLabel.text = "\(city.name), \(city.country)"
+      cityNameLabel.alpha = 1
+    } else {
+      cityNameLabel.text = ""
+      cityNameLabel.alpha = 0
     }
-    
-    func renderView() {}
+  }
 }

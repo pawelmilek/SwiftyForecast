@@ -45,12 +45,28 @@ struct DailyData: Forecast {
 // MARK: - isMetricMeasuringSystem
 extension DailyData {
   
-  var temperatureInCelsiusMin: Double {
+  private var temperatureInCelsiusMin: Double {
     return (temperatureMin - 32) * Double(5.0 / 9.0)
   }
   
-  var temperatureInCelsiusMax: Double {
+  private var temperatureInCelsiusMax: Double {
     return (temperatureMax - 32) * Double(5.0 / 9.0)
+  }
+  
+  var temperatureMinFormatted: String {
+    if MeasuringSystem.isMetric {
+      return temperatureInCelsiusMin.convertedToString + "\u{00B0}"
+    } else {
+      return temperatureMin.convertedToString + "\u{00B0}"
+    }
+  }
+  
+  var temperatureMaxFormatted: String {
+    if MeasuringSystem.isMetric {
+      return temperatureInCelsiusMax.convertedToString + "\u{00B0}"
+    } else {
+      return temperatureMax.convertedToString + "\u{00B0}"
+    }
   }
   
 }

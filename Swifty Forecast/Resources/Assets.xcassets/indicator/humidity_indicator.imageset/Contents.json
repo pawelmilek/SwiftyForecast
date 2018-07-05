@@ -6,11 +6,11 @@
     },
     {
       "idiom" : "iphone",
+      "filename" : "humidity_indicator.png",
       "scale" : "2x"
     },
     {
       "idiom" : "iphone",
-      "filename" : "cloud_refresh.png",
       "scale" : "3x"
     }
   ],

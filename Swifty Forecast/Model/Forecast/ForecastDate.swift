@@ -25,8 +25,8 @@ struct ForecastDate {
 // MARK: - CustomStringConvertible
 extension ForecastDate {
   
-  var longDayMonth: String {
-    formatter.dateFormat = "dd MMMM"
+  var longDayMonth: String { // June 1
+    formatter.dateFormat = "MMMM d"
     let date = formatter.string(from: self.date)
     return date
   }

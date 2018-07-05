@@ -1,5 +1,5 @@
 //
-//  NewCityController.swift
+//  NewCityViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -10,9 +10,7 @@ import UIKit
 import Foundation
 import Cartography
 
-
-
-class NewCityController: UIViewController, UITextFieldDelegate, CustomViewLayoutSetupable, ViewSetupable {
+class NewCityViewController: UIViewController, UITextFieldDelegate, CustomViewLayoutSetupable, ViewSetupable {
   private var backgroundImageView: UIImageView! = nil
   @IBOutlet weak var cityName: UITextField!
   @IBOutlet weak var countryName: UITextField!
@@ -36,7 +34,7 @@ class NewCityController: UIViewController, UITextFieldDelegate, CustomViewLayout
 
 
 // MARK: - CustomViewLayoutSetupable
-extension NewCityController {
+extension NewCityViewController {
   
   func setupLayout() {
     let horizontalMerge: CGFloat = 8
@@ -70,7 +68,7 @@ extension NewCityController {
 
 
 // MARK: - CustomViewSetupable
-extension NewCityController {
+extension NewCityViewController {
   func setup() {
     func setupBackgroundImageView() {
       self.backgroundImageView = UIImageView(frame: self.view.bounds)
@@ -99,7 +97,7 @@ extension NewCityController {
 
 
 // MARK: - UITextFieldDelegate
-extension NewCityController {
+extension NewCityViewController {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
@@ -114,7 +112,7 @@ extension NewCityController {
 
 
 // MAKR: Actions
-private extension NewCityController {
+private extension NewCityViewController {
   
   @IBAction func cancelTapped(_ sender: UIBarButtonItem) {
     self.hideKeyboard()
@@ -159,7 +157,7 @@ private extension NewCityController {
 
 
 // MAKR: Close Keyboard
-private extension NewCityController {
+private extension NewCityViewController {
   
   func hideKeyboard() {
     for view in view.subviews {

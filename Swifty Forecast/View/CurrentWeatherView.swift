@@ -199,13 +199,7 @@ extension CurrentWeatherView {
     self.descriptionLabel.text = forecast.summary
     self.iconLabel.attributedText = IconType(rawValue: forecast.icon)!.fontIcon
     self.thermometerLabel.attributedText = IconType.thermometer.fontIcon
-    
-    
-    if MeasuringSystem.isMetric {
-      self.currentTemperatureLabel.text = forecast.temperatureInCelsius.roundAndConvertingToString() + "\u{00B0}"
-    } else {
-      self.currentTemperatureLabel.text = forecast.temperature.roundAndConvertingToString() + "\u{00B0}"
-    }
+    self.currentTemperatureLabel.text = forecast.temperatureFormatted
   }
   
 }
