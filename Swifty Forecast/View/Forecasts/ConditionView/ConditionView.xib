@@ -12,25 +12,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConditionView" customModule="Swifty_Forecast" customModuleProvider="target">
             <connections>
-                <outlet property="conditionImageView" destination="CkE-5a-txa" id="E0b-8N-eZ1"/>
+                <outlet property="conditionLabel" destination="oFQ-Hs-P9s" id="Uxx-23-VxB"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="y1k-uQ-IFp"/>
                 <outlet property="valueLabel" destination="imK-V9-yUz" id="DRb-hy-Rw0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="90" height="65"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CkE-5a-txa">
-                    <rect key="frame" x="22" y="8" width="25" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ValueLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imK-V9-yUz">
+                    <rect key="frame" x="18.5" y="40" width="53" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ConditionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFQ-Hs-P9s">
+                    <rect key="frame" x="9" y="10" width="73" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="25" id="Qwl-fe-iHX"/>
-                        <constraint firstAttribute="height" constant="20" id="mfS-Z9-3jc"/>
+                        <constraint firstAttribute="height" constant="25" id="e0I-5r-HsQ"/>
                     </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WindLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imK-V9-yUz">
-                    <rect key="frame" x="9" y="33" width="51" height="12"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -38,17 +40,17 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="imK-V9-yUz" firstAttribute="top" secondItem="CkE-5a-txa" secondAttribute="bottom" constant="5" id="0F0-kW-MWa"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="imK-V9-yUz" secondAttribute="bottom" constant="5" id="0Nc-lL-7aZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="imK-V9-yUz" secondAttribute="bottom" constant="10" id="0Nc-lL-7aZ"/>
+                <constraint firstItem="oFQ-Hs-P9s" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="51T-Qm-ceN"/>
                 <constraint firstItem="imK-V9-yUz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8C5-hE-LCG"/>
-                <constraint firstItem="CkE-5a-txa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GIc-lH-Z44"/>
-                <constraint firstItem="CkE-5a-txa" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="bWA-zV-jAT"/>
+                <constraint firstItem="imK-V9-yUz" firstAttribute="top" secondItem="oFQ-Hs-P9s" secondAttribute="bottom" constant="5" id="Wjf-HH-eye"/>
+                <constraint firstItem="oFQ-Hs-P9s" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oiC-sC-Kpe"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-61" y="15"/>
+            <point key="canvasLocation" x="-205" y="-20"/>
         </view>
     </objects>
 </document>

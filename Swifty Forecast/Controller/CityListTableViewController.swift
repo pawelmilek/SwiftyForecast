@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CityListTableViewController: UITableViewController, NewCityControllerDelegate, ViewSetupable {
+class CityListTableViewController: UITableViewController {
   var dataSourceDelegate: CityListTableDataSourceDelegate?
   var delegate: CityListSelectDelegate?
   
@@ -27,26 +27,23 @@ class CityListTableViewController: UITableViewController, NewCityControllerDeleg
 extension CityListTableViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier else { return }
-    
-    if identifier == SegueIdentifierType.addCitySegue.rawValue {
-      guard let navController = segue.destination as? UINavigationController,
-        let newCityVC = navController.topViewController as? NewCityViewController else { return }
+    guard let identifier = segue.identifier, identifier == SegueIdentifierType.addCitySegue.rawValue else { return }
+    guard let navController = segue.destination as? UINavigationController,
+          let newCityVC = navController.topViewController as? NewCityViewController else { return }
       
       newCityVC.delegate = self
-    }
   }
 }
 
 
-// MARK: - CustomViewSetupable
-extension CityListTableViewController {
+// MARK: - ViewSetupable protocol
+extension CityListTableViewController: ViewSetupable {
   
   func setup() {
-    self.dataSourceDelegate = CityListTableDataSource()
+    dataSourceDelegate = CityListTableDataSource()
     
-    self.tableView.register(cellClass: CityCell.self)
-    self.tableView.dataSource = self.dataSourceDelegate
+    self.tableView.register(cellClass: CityTableViewCell.self)
+    self.tableView.dataSource = dataSourceDelegate
     self.tableView.delegate = self
   }
   
@@ -71,19 +68,17 @@ extension CityListTableViewController {
 }
 
 
-// MARK: - NewCityControllerDelegate
-extension CityListTableViewController {
+// MARK: - NewCityControllerDelegate protocol
+extension CityListTableViewController: NewCityControllerDelegate {
   
   func newCityControllerDidAdd(_ newCityController: NewCityViewController, city: City) {
     let insertIndexPath = IndexPath(row: 0, section: 0)
     
-    
     newCityController.dismiss(animated: true) {
-      let database = Database.shared
       let row = insertIndexPath.row
       
       self.tableView.scrollToRow(at: insertIndexPath, at: .top, animated: true)
-      database.insert(city: city, at: row)
+      Database.shared.insert(city: city, at: row)
       self.tableView.insertRows(at: [insertIndexPath], with: .automatic)
     }
     
@@ -93,22 +88,20 @@ extension CityListTableViewController {
   func newContactViewControllerDidCancel(_ newCityController: NewCityViewController) {
     newCityController.dismiss(animated: true, completion: nil)
   }
+  
 }
-
-
-
 
 
 // MARK: - UITableViewDelegate protocol
 extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let selectedCity = dataSourceDelegate?.cityAt(index: indexPath) else { return }
+    guard let selectedCity = dataSourceDelegate?.city(at: indexPath) else { return }
     
     delegate?.cityListDidSelect(city: selectedCity)
     
     guard let _ = navigationController?.popViewController(animated: true) else {
-      self.dismiss(animated: true, completion: nil)
+      self.dismiss(animated: true)
       return
     }
   }

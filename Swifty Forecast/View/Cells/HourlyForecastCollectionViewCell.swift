@@ -21,7 +21,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    configurate(by: .none)
+    configure(by: .none)
   }
 }
 
@@ -50,9 +50,9 @@ extension HourlyForecastCollectionViewCell: ViewSetupable {
 
 extension HourlyForecastCollectionViewCell {
   
-  func configurate(by item: HourlyData?) {
+  func configure(by item: HourlyData?) {
     if let hourly = item {
-      timeLabel.text = hourly.time.time
+      timeLabel.text = hourly.date.time
       timeLabel.alpha = 1
       
       let icon = ConditionFontIcon.make(icon: hourly.icon, font: 25)

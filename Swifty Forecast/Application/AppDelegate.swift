@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
-  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     setupStyle()
     return true
@@ -34,7 +33,7 @@ extension AppDelegate {
 private extension AppDelegate {
   
   func setStatusBarStyle() {
-    UIApplication.shared.statusBarStyle = .lightContent
+    UIApplication.shared.statusBarStyle = .default
   }
   
   func setNavigationBarStyle() {
@@ -46,13 +45,12 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let color = UIColor.white
-      let textAttributes = [NSAttributedStringKey.foregroundColor : color]
+      let textAttributes = [NSAttributedStringKey.foregroundColor : UIColor.blackShade]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
     func setBarButtonItemColor() {
-      UINavigationBar.appearance().tintColor = .white
+      UINavigationBar.appearance().tintColor = .blackShade
     }
     
     setTransparentBackground()

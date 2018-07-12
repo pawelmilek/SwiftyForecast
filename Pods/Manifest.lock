@@ -1,28 +1,18 @@
 PODS:
-  - Cartography (3.0.2)
-  - WeatherIconsKit (1.0.0)
+  - NVActivityIndicatorView (4.3.0):
+    - NVActivityIndicatorView/Presenter (= 4.3.0)
+  - NVActivityIndicatorView/Presenter (4.3.0)
 
 DEPENDENCIES:
-  - Cartography (~> 3.0)
-  - WeatherIconsKit (from `https://github.com/gscalzo/WeatherIconsKit.git`)
+  - NVActivityIndicatorView (~> 4.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Cartography
-
-EXTERNAL SOURCES:
-  WeatherIconsKit:
-    :git: https://github.com/gscalzo/WeatherIconsKit.git
-
-CHECKOUT OPTIONS:
-  WeatherIconsKit:
-    :commit: effa8476b88010a5ea6d3cfcf5fb81db87ff5bfa
-    :git: https://github.com/gscalzo/WeatherIconsKit.git
+    - NVActivityIndicatorView
 
 SPEC CHECKSUMS:
-  Cartography: 231190d7d0b3107ce8d67c54189f059a509b3760
-  WeatherIconsKit: 84526a4cdf9da972c2866f24e40360420b1d40bf
+  NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
 
-PODFILE CHECKSUM: 510a9183b5fde60b3f77fc3744c83aa7c0fa685d
+PODFILE CHECKSUM: 0914422ddce8a3c0c054be776293793a3757a10e
 
 COCOAPODS: 1.5.3

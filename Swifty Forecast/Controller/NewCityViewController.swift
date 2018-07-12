@@ -8,12 +8,12 @@
 
 import UIKit
 import Foundation
-import Cartography
 
-class NewCityViewController: UIViewController, UITextFieldDelegate, CustomViewLayoutSetupable, ViewSetupable {
-  private var backgroundImageView: UIImageView! = nil
+class NewCityViewController: UIViewController, CustomViewLayoutSetupable {
   @IBOutlet weak var cityName: UITextField!
   @IBOutlet weak var countryName: UITextField!
+  
+  private var backgroundImageView: UIImageView! = nil
   weak var delegate: NewCityControllerDelegate? = nil
   var isConstraints = true
   
@@ -21,54 +21,21 @@ class NewCityViewController: UIViewController, UITextFieldDelegate, CustomViewLa
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    self.setup()
-    self.setupLayout()
-    self.setupStyle()
+    setup()
+    setupLayout()
+    setupStyle()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.cityName.becomeFirstResponder()
+    cityName.becomeFirstResponder()
   }
 }
 
 
-// MARK: - CustomViewLayoutSetupable
-extension NewCityViewController {
+// MARK: - ViewSetupable protocol
+extension NewCityViewController: ViewSetupable {
   
-  func setupLayout() {
-    let horizontalMerge: CGFloat = 8
-    let verticalMerge: CGFloat = 16
-    
-    func setCityNameTextFieldConstrains() {
-      constrain(self.cityName) { view in
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
-        let topMerge = statusBarHeight + navigationBarHeight + verticalMerge
-        
-        view.top == view.superview!.top + topMerge
-        view.left == view.superview!.left + horizontalMerge
-        view.right == view.superview!.right - horizontalMerge
-      }
-    }
-    
-    func setCountryNameTextFieldConstrains() {
-      constrain(self.countryName, self.cityName) { view, view2 in
-        view.top == view2.bottom + (verticalMerge - horizontalMerge)
-        view.left == view2.left
-        view.right == view2.right
-      }
-    }
-    
-    
-    setCityNameTextFieldConstrains()
-    setCountryNameTextFieldConstrains()
-  }
-}
-
-
-// MARK: - CustomViewSetupable
-extension NewCityViewController {
   func setup() {
     func setupBackgroundImageView() {
       self.backgroundImageView = UIImageView(frame: self.view.bounds)
@@ -83,26 +50,52 @@ extension NewCityViewController {
       self.countryName.delegate = self
     }
     
-    
     setTextFieldDelegates()
     setupBackgroundImageView()
-    
   }
   
   func setupStyle() {
     self.cityName.textColor = .orange
     self.countryName.textColor = .orange
   }
+  
+  func setupLayout() {
+    let horizontalMerge: CGFloat = 8
+    let verticalMerge: CGFloat = 16
+    
+    func setCityNameTextFieldConstrains() {
+//      constrain(self.cityName) { view in
+//        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+//        let navigationBarHeight = self.navigationController?.navigationBar.frame.height ?? 0
+//        let topMerge = statusBarHeight + navigationBarHeight + verticalMerge
+//
+//        view.top == view.superview!.top + topMerge
+//        view.left == view.superview!.left + horizontalMerge
+//        view.right == view.superview!.right - horizontalMerge
+//      }
+    }
+    
+    func setCountryNameTextFieldConstrains() {
+//      constrain(self.countryName, self.cityName) { view, view2 in
+//        view.top == view2.bottom + (verticalMerge - horizontalMerge)
+//        view.left == view2.left
+//        view.right == view2.right
+//      }
+    }
+    
+    setCityNameTextFieldConstrains()
+    setCountryNameTextFieldConstrains()
+  }
 }
 
 
-// MARK: - UITextFieldDelegate
-extension NewCityViewController {
+// MARK: - UITextFieldDelegate protocol
+extension NewCityViewController: UITextFieldDelegate {
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     
-    if textField == self.cityName {
+    if textField == cityName {
       self.countryName.becomeFirstResponder()
     }
     
@@ -121,23 +114,23 @@ private extension NewCityViewController {
   
   
   @IBAction func saveTapped(_ sender: UIBarButtonItem) {
-    func isCityNameNilOrEmpty() -> Bool {
+    var isCityNameNilOrEmpty: Bool {
       guard let name = self.cityName.text else { return true }
       return (name.trimmingCharacters(in: .whitespaces) == "") ? true : false
     }
     
-    func isCountryNameNilOrEmpty() -> Bool {
+    var isCountryNameNilOrEmpty: Bool {
       guard let country = self.countryName.text else { return true }
       return (country.trimmingCharacters(in: .whitespaces) == "") ? true : false
     }
     
     
-    if isCityNameNilOrEmpty() {
+    if isCityNameNilOrEmpty {
       AlertViewPresenter.shared.presentError(withMessage: "Check City Name text field.")
       return
     }
     
-    if isCountryNameNilOrEmpty() {
+    if isCountryNameNilOrEmpty {
       AlertViewPresenter.shared.presentError(withMessage: "Check Country Name text field.")
       return
     }
@@ -147,8 +140,8 @@ private extension NewCityViewController {
     let trimName = self.cityName.text!.trimmingCharacters(in: .whitespaces)
     let trimCountry = self.countryName.text!.trimmingCharacters(in: .whitespaces)
     
+    
     Geocoder.findCoordinate(by: "\(trimName), \(trimCountry)") { coord in
-      //print("\(coord)")
       let newCity = City(name: trimName, country: trimCountry, coordinate: coord)
       self.delegate?.newCityControllerDidAdd(self, city: newCity)
     }

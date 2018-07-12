@@ -48,6 +48,12 @@ import UIKit
     }
   }
   
+  @IBInspectable var borderWidth: CGFloat = 0.5 {
+    didSet {
+      layer.borderWidth = borderWidth
+    }
+  }
+  
   @IBInspectable var font: UIFont! = UIFont.systemFont(ofSize: 12) {
     didSet {
       setFont()
@@ -115,7 +121,7 @@ extension SegmentedControl: ViewSetupable {
   func setup() {
     layer.cornerRadius = frame.height / 2
     layer.borderColor = UIColor.orange.cgColor
-    layer.borderWidth = 0.5
+    layer.borderWidth = borderWidth
     backgroundColor = .clear
     
     setupLabels()

@@ -12,7 +12,7 @@ import UIKit
 final class CityListTableDataSource: NSObject, CityListTableDataSourceDelegate {
   private let database = Database.shared
   
-  func cityAt(index: IndexPath) -> City {
+  func city(at index: IndexPath) -> City {
     return self.database.cities[index.row]
   }
   
@@ -23,9 +23,10 @@ final class CityListTableDataSource: NSObject, CityListTableDataSourceDelegate {
   
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueCell(for: indexPath) as CityCell
-    let city = cityAt(index: indexPath)
-    cell.configurate(by: city)
+    let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
+    let item = city(at: indexPath)
+    cell.configure(by: item)
+    
     return cell
   }
   

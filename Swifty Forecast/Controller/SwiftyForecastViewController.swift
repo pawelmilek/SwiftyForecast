@@ -8,41 +8,35 @@
 
 import Foundation
 import UIKit
-import Cartography
 
-class SwiftyForecastViewController: UIViewController, CityListSelectDelegate, ViewSetupable {
+class SwiftyForecastViewController: UIViewController {
   @IBOutlet weak var currentForecastView: CurrentForecastView!
+  @IBOutlet weak var dailyForecastTableView: UITableView!
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = ["℉", "℃"]
     segmentedControl.font = UIFont(name: "AvenirNext-Bold", size: 14)
-    segmentedControl.selectedLabelColor = .orange
-    segmentedControl.unselectedLabelColor = .white
-    segmentedControl.backgroundColor = .clear
-    segmentedControl.borderColor = .white
-    segmentedControl.thumbColor = .white
+    segmentedControl.borderWidth = 1.0
+    segmentedControl.selectedLabelColor = .white
+    segmentedControl.unselectedLabelColor = .blackShade
+    segmentedControl.borderColor = .blackShade
+    segmentedControl.thumbColor = .blackShade
     segmentedControl.selectedIndex = 0
+    segmentedControl.backgroundColor = .clear
     segmentedControl.addTarget(self, action: #selector(SwiftyForecastViewController.measuringSystemSwitched(_:)), for: .valueChanged)
     return segmentedControl
   }()
   
-  
-  private var backgroundImageView: UIImageView! = nil
-  private var scrollView: UIScrollView! = nil
-  private var currentWeatherView: CurrentWeatherView! = nil
-  private var dailyForecastView: DailyForecastView! = nil
-  
+  private var collapsedCurrentForecastViewHeight: CGFloat!
   private var city: City?
   
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
-      currentWeatherView.renderView(for: weatherForecast.currently, and: weatherForecast.city)
-      dailyForecastView.renderView(for: weatherForecast.daily)
-      
-      currentForecastView.currentForecast = weatherForecast.currently
-      currentForecastView.hourlyForecast = weatherForecast.hourly
+      currentForecastView.configure(current: weatherForecast.currently)
+      currentForecastView.configure(hourly: weatherForecast.hourly)
+      dailyForecastTableView.reloadData()
     }
   }
   
@@ -55,9 +49,14 @@ class SwiftyForecastViewController: UIViewController, CityListSelectDelegate, Vi
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    setupLayout()
+    //    setupLayout()
+  }
+  
+  
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
     
-    view.bringSubview(toFront: currentForecastView)
+    collapsedCurrentForecastViewHeight = currentForecastView.frame.size.height
   }
 }
 
@@ -74,114 +73,44 @@ extension SwiftyForecastViewController {
 }
 
 
-// MARK: - CityListSelectDelegate protocol
-extension SwiftyForecastViewController {
-  
-  func cityListDidSelect(city: City) {
-    self.city = city
+// MARK: - ViewSetupable protocol
+extension SwiftyForecastViewController: ViewSetupable {
+  func setup() {
+    currentForecastView.delegate = self
+    setMetricSystemSegmentedControl()
+    setDailyForecastTableView()
   }
+  
+  
+  func setupLayout() {}
 }
 
 
+// MARK: - Private - Set metric system segmented control
+private extension SwiftyForecastViewController {
+  
+  func setMetricSystemSegmentedControl() {
+    navigationItem.titleView = measuringSystemSegmentedControl
+  }
+  
+}
 
-// MARK: - CustomViewSetupable
-extension SwiftyForecastViewController {
-  func setup() {
-    func setupBackgroundImageView() {
-      backgroundImageView = UIImageView(frame: view.bounds)
-      backgroundImageView.contentMode = .scaleAspectFill
-      backgroundImageView.clipsToBounds = true
-      backgroundImageView.image = UIImage(named: "background-default.png")
-      view.addSubview(backgroundImageView)
-    }
-    
-    func setupScrollViewSubViews() {
-      currentWeatherView = CurrentWeatherView(frame: CGRect.zero)
-      dailyForecastView = DailyForecastView(frame: CGRect.zero)
-    }
-    
-    
-    func setupScrollView() {
-      scrollView = UIScrollView(frame: view.bounds)
-      scrollView.showsVerticalScrollIndicator = false
-      
-      scrollView.addSubview(currentWeatherView)
-      scrollView.addSubview(dailyForecastView)
-      view.addSubview(scrollView)
-    }
-    
-    
-    func setMetricSystemSwitch() {
-      navigationItem.titleView = measuringSystemSegmentedControl
-    }
-    
-    
-    setupBackgroundImageView()
-    setupScrollViewSubViews()
-    setupScrollView()
-    setMetricSystemSwitch()
-    
-    
-    currentForecastView.delegate = self
+
+// MARK: - Private - Set daily Forecast TableView
+private extension SwiftyForecastViewController {
+  
+  func setDailyForecastTableView() {
+    dailyForecastTableView.register(cellClass: DailyForecastTableViewCell.self)
+    dailyForecastTableView.dataSource = self
+    dailyForecastTableView.showsVerticalScrollIndicator = false
+    dailyForecastTableView.allowsSelection = false
+    dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
+    dailyForecastTableView.estimatedRowHeight = 85
+    dailyForecastTableView.backgroundColor = .white
+    dailyForecastTableView.separatorStyle = .none
+    dailyForecastTableView.tableFooterView = UIView()
   }
   
-  
-  func setupLayout() {
-    let statusBarHeight = UIApplication.shared.statusBarFrame.height
-    let navigationBarHeight = navigationController?.navigationBar.frame.height ?? 0
-    
-    
-    func setBackgroundConstrains() {
-      constrain(backgroundImageView) { view in
-        view.top == view.superview!.top
-        view.bottom == view.superview!.bottom
-        view.left == view.superview!.left
-        view.right == view.superview!.right
-      }
-    }
-    
-    func setScrollViewConstrains() {
-      /*
-       * StatusBar is usually 20pt height, but it can change in situations:
-       * - when in the middle of call
-       * - when any app is using the microphone
-       * - when Hotspot is activated
-       */
-      constrain(scrollView) { view in
-        view.top == view.superview!.top + (statusBarHeight + navigationBarHeight)
-        view.bottom == view.superview!.bottom
-        view.left == view.superview!.left
-        view.right == view.superview!.right
-      }
-    }
-    
-    func setCurrentWeatherViewConstrains() {
-      constrain(currentWeatherView) { view in
-        view.width == view.superview!.width
-        view.centerX == view.superview!.centerX
-        
-        // set view at the bottom of the scrollView to enable scrolling
-        view.top == view.superview!.top + (statusBarHeight + navigationBarHeight)
-      }
-    }
-    
-    
-    func setDailyForecastViewConstrains() {
-      let bottomMargin: CGFloat = 8
-      
-      constrain(dailyForecastView, currentWeatherView) { view, view2 in
-        view.top == view2.bottom + bottomMargin
-        view.width == view.superview!.width
-        view.bottom == view.superview!.bottom - bottomMargin
-        view.centerX == view.superview!.centerX
-      }
-    }
-    
-    setBackgroundConstrains()
-    setScrollViewConstrains()
-    setCurrentWeatherViewConstrains()
-    setDailyForecastViewConstrains()
-  }
 }
 
 
@@ -189,6 +118,8 @@ extension SwiftyForecastViewController {
 private extension SwiftyForecastViewController {
   
   func fetchWeatherForecast() {
+    ActivityIndicator.shared.startAnimating(at: self.view)
+    
     LocationProvider.shared.getCurrentLocation() { [weak self] cityLocation in
       let request = ForecastRequest.make(by: cityLocation)
       WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
@@ -199,10 +130,12 @@ private extension SwiftyForecastViewController {
           Geocoder.findCity(at: currentCityCoord) { [weak self] city in
             DispatchQueue.main.async {
               self?.weatherForecast = WeatherForecast(city: city, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+              ActivityIndicator.shared.stopAnimating()
             }
           }
           
         case .failure(let error):
+          ActivityIndicator.shared.stopAnimating()
           error.handle()
         }
       })
@@ -212,51 +145,105 @@ private extension SwiftyForecastViewController {
 }
 
 
+
 // MARK: - topDistance
 extension SwiftyForecastViewController: CurrentForecastViewDelegate {
   
   var topDistance: CGFloat {
-    get {
-      guard self.navigationController != nil else {
-        return 0
-      }
-      let barHeight = self.navigationController?.navigationBar.frame.height ?? 0
-      let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) : UIApplication.shared.statusBarFrame.height
-      return barHeight + statusBarHeight
-      
-    }
+    guard let navigationController = navigationController else { return 0 }
+    let barHeight = navigationController.navigationBar.frame.height
+    let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) : UIApplication.shared.statusBarFrame.height
+    return barHeight + statusBarHeight
   }
   
   
   func currentForecastDidExpand() {
-    print("currentForecastDidExpand")
+    animateBouncingEffect()
     
-    self.currentForecastView.moreDetailsViewConstraint.constant = 0
-    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
-      let height = self.view.frame.size.height - (2 * self.topDistance)
+    self.currentForecastView.moreDetailsView.alpha = 0
+    let height = currentForecastView.frame.size.height + dailyForecastTableView.frame.size.height + 12
+    
+    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
       self.currentForecastView.frame.size.height = height
-      
-    }, completion: { completed in
-      if completed {
-        self.currentForecastView.moreDetailsViewConstraint.constant = 128
-        self.view.layoutIfNeeded()
+
+    }, completion: { isFinished in
+      if isFinished {
+        self.currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0).isActive = true
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+          self.currentForecastView.moreDetailsViewBottomConstraint.constant = 0
+          self.currentForecastView.moreDetailsView.alpha = 1
+        })
       }
     })
   }
   
   func currentForecastDidCollapse() {
-    print("currentForecastDidCollapse")
+    self.currentForecastView.moreDetailsView.alpha = 0
+    let height = self.currentForecastView.frame.size.height
+    self.currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0).isActive = false
     
-    self.currentForecastView.moreDetailsViewConstraint.constant = 128
-    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
-      self.currentForecastView.frame.size.height = 305
+    UIView.animate(withDuration: 0.38, delay: 0, options: .curveEaseIn, animations: {
+      self.currentForecastView.moreDetailsViewBottomConstraint.constant = height
       
-    }, completion: { completed in
-      if completed {
-        self.currentForecastView.moreDetailsViewConstraint.constant = 0
-        self.view.layoutIfNeeded()
+    }, completion: { isFinished in
+      if isFinished {
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
+          
+          self.currentForecastView.frame.size.height = self.collapsedCurrentForecastViewHeight
+          
+        }, completion: { isFinished in
+          
+        })
       }
     })
+  }
+  
+}
+
+
+// MARK: - CityListSelectDelegate protocol
+extension SwiftyForecastViewController: CityListSelectDelegate {
+  
+  func cityListDidSelect(city: City) {
+    self.city = city
+  }
+}
+
+
+// MARK: - animateBouncingEffect
+extension SwiftyForecastViewController {
+ 
+  func animateBouncingEffect() {
+    currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+    
+    UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
+      self.currentForecastView.transform = CGAffineTransform.identity
+    }, completion: { isFinished in
+      if isFinished {
+        
+      }
+    })
+  }
+  
+}
+
+
+// MARK: - UITableViewDataSource protcol
+extension SwiftyForecastViewController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return weatherForecast?.daily.data.count ?? 0
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let dailyItems = weatherForecast?.daily.data else { return UITableViewCell() }
+    
+    let item = dailyItems[indexPath.row]
+    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
+    
+    cell.configure(by: item)
+    return cell
   }
   
 }

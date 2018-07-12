@@ -13,39 +13,28 @@ final class CurrentForecastView: UIView {
   @IBOutlet private weak var iconLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
   @IBOutlet private weak var temperatureLabel: UILabel!
-  
-  @IBOutlet private weak var expandCollapseButton: UIButton!
   @IBOutlet private weak var windView: ConditionView!
   @IBOutlet private weak var humidityView: ConditionView!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
+
+  @IBOutlet weak var moreDetailsView: UIView!
+  @IBOutlet weak var moreDetailsViewBottomConstraint: NSLayoutConstraint!
   
-  @IBOutlet weak var moreDetailsViewConstraint: NSLayoutConstraint!
+  
+  private lazy var backgroundImageView: UIImageView = {
+    let imageView = UIImageView(frame: .zero)
+    imageView.image = UIImage(named: "background-default")
+    imageView.layer.masksToBounds = true
+    imageView.frame = contentView.bounds
+    imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    return imageView
+  }()
+  
   
   private var viewDidExpand = false
   weak var delegate: CurrentForecastViewDelegate?
-  
-  var currentForecast: CurrentForecast? {
-    didSet {
-      guard let currentForecast = currentForecast else { return }
-      
-      let icon = ConditionFontIcon.make(icon: currentForecast.icon, font: 90)
-      iconLabel.attributedText = icon?.attributedIcon
-      dateLabel.text = "\(currentForecast.time.weekday), \(currentForecast.time.longDayMonth)".uppercased()
-      temperatureLabel.text = currentForecast.temperatureFormatted
-      
-      
-      windView.configurate(condition: UIImage(named: "wind_indicator")!, value: "\(currentForecast.windSpeed)")
-      humidityView.configurate(condition: UIImage(named: "humidity_indicator")!, value: "\(currentForecast.humidity)")
-    }
-  }
-  
-  var hourlyForecast: HourlyForecast? {
-    didSet {
-      guard let _ = hourlyForecast else { return }
-      hourlyCollectionView.reloadData()
-    }
-  }
-
+  private var currentForecast: CurrentForecast?
+  private var hourlyForecast: HourlyForecast?
   
   
   override init(frame: CGRect) {
@@ -72,25 +61,24 @@ extension CurrentForecastView: ViewSetupable {
     addSubview(contentView)
     contentView.frame = self.bounds
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-  
-    contentView.backgroundColor = .red
-    contentView.layer.cornerRadius = 15
-    layer.cornerRadius = 15
-    contentView.clipsToBounds = true
-    clipsToBounds = true
+
+    contentView.addSubview(backgroundImageView)
+    contentView.sendSubview(toBack: backgroundImageView)
     
-    moreDetailsViewConstraint.constant = 0
-    
-    
+    setShadowForBaseView()
+    setRoundedCornersForContentView()
     setCollectionView()
+    addTapGestureRecognizer()
+    
+    configure(current: .none)
+    configure(hourly: .none)
   }
   
   func setupStyle() {
-    dateLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+    dateLabel.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
     dateLabel.textColor = .white
     dateLabel.textAlignment = .center
     
-    iconLabel.font = UIFont.systemFont(ofSize: 60, weight: .bold)
     iconLabel.textColor = .white
     iconLabel.textAlignment = .center
     
@@ -102,7 +90,26 @@ extension CurrentForecastView: ViewSetupable {
 }
 
 
-// MARK: - ViewSetupable protocol
+// MARK: - Set bottom shadow
+private extension CurrentForecastView {
+  
+  func setShadowForBaseView() {
+    backgroundColor = .clear
+    layer.shadowColor = UIColor.red.cgColor
+    layer.shadowOffset = CGSize(width: 0, height: 5)
+    layer.shadowOpacity = 0.5
+    layer.shadowRadius = 10
+    layer.masksToBounds = false
+  }
+  
+  func setRoundedCornersForContentView() {
+    contentView.layer.cornerRadius = 15
+    contentView.layer.masksToBounds = true
+  }
+}
+
+
+// MARK: - Set collection view
 private extension CurrentForecastView {
   
   func setCollectionView() {
@@ -114,6 +121,21 @@ private extension CurrentForecastView {
     hourlyCollectionView.backgroundColor = .blue
   }
   
+}
+
+
+
+// MARK: - Private - Add tap gesture recognizer
+private extension CurrentForecastView {
+  
+  func addTapGestureRecognizer() {
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureHandler(_:)))
+    tapGestureRecognizer.numberOfTapsRequired = 1
+    tapGestureRecognizer.numberOfTouchesRequired = 1
+    
+    addGestureRecognizer(tapGestureRecognizer)
+    isUserInteractionEnabled = true
+  }
 }
 
 
@@ -130,7 +152,7 @@ extension CurrentForecastView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier, for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
-    cell.configurate(by: hourlyForecast?.data[indexPath.item])
+    cell.configure(by: hourlyForecast?.data[indexPath.item])
     return cell
   }
   
@@ -147,14 +169,58 @@ extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
 }
 
 
+// MARK: UICollectionViewDelegateFlowLayout protocol
+extension CurrentForecastView {
+  
+  func configure(current forecast: CurrentForecast?) {
+    currentForecast = forecast
+    
+    if let forecast = forecast {
+      let icon = ConditionFontIcon.make(icon: forecast.icon, font: 100)
+      iconLabel.attributedText = icon?.attributedIcon
+      dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
+      temperatureLabel.text = forecast.temperatureFormatted
+
+      windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
+      humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
+      iconLabel.alpha = 1
+      dateLabel.alpha = 1
+      temperatureLabel.alpha = 1
+      windView.alpha = 1
+      humidityView.alpha = 1
+    } else {
+      iconLabel.alpha = 0
+      dateLabel.alpha = 0
+      temperatureLabel.alpha = 0
+      windView.alpha = 0
+      humidityView.alpha = 0
+    }
+  }
+  
+  func configure(hourly forecast: HourlyForecast?) {
+    hourlyForecast = forecast
+    
+    if let _ = forecast {
+      hourlyCollectionView.reloadData()
+      moreDetailsView.alpha = 1
+      
+    } else {
+      moreDetailsView.alpha = 0
+    }
+  }
+}
+
+
+
 // MARK: - Action
 extension CurrentForecastView {
   
-  @IBAction func expandCollapseButtonTapped(_ sender: UIButton) {
+  @objc func tapGestureHandler(_ sender: UITapGestureRecognizer) {
     viewDidExpand = !viewDidExpand
     
     if viewDidExpand {
       delegate?.currentForecastDidExpand()
+
     } else {
       delegate?.currentForecastDidCollapse()
     }

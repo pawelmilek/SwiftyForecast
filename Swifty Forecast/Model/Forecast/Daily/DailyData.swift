@@ -9,7 +9,7 @@
 import Foundation
 
 struct DailyData: Forecast {
-  var time: ForecastDate
+  var date: ForecastDate
   var summary: String
   var icon: String
   
@@ -76,7 +76,7 @@ extension DailyData {
 extension DailyData: Decodable {
   
   enum CodingKeys: String, CodingKey {
-    case time
+    case date = "time"
     case summary
     case icon
     
@@ -108,8 +108,8 @@ extension DailyData: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    let timestamp = try container.decode(Int.self, forKey: .time)
-    self.time = ForecastDate(timestamp: timestamp)
+    let timestamp = try container.decode(Int.self, forKey: .date)
+    self.date = ForecastDate(timestamp: timestamp)
     self.summary = try container.decode(String.self, forKey: .summary)
     self.icon = try container.decode(String.self, forKey: .icon)
     

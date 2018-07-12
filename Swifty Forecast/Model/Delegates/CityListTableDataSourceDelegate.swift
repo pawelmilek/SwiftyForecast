@@ -11,5 +11,5 @@ import UIKit
 
 
 protocol CityListTableDataSourceDelegate: class, UITableViewDataSource {
-  func cityAt(index: IndexPath) -> City
+  func city(at index: IndexPath) -> City
 }

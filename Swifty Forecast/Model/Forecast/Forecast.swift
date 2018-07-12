@@ -9,7 +9,7 @@
 import Foundation
 
 protocol Forecast {
-  var time: ForecastDate { get }
+  var date: ForecastDate { get }
   var summary: String { get }
   var icon: String { get }
   var precipIntensity: Double { get }

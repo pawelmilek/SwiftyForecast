@@ -10,12 +10,12 @@ import UIKit
 
 extension UIColor {
   
-  static var shakespeare: UIColor {
-    return UIColor.colorRGB(component: (r: 82, g: 179, b: 217))
+  static var blackShade: UIColor {
+    return UIColor.colorRGB(component: (r: 82, g: 82, b: 88))
   }
   
-  static var spray: UIColor {
-    return UIColor.colorRGB(component: (r: 129, g: 207, b: 224))
+  static var gray94: UIColor {
+    return UIColor.colorRGB(component: (r: 240, g: 240, b: 240))
   }
   
   static var ecstasy: UIColor {
