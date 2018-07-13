@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RCb-K9-8wf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RCb-K9-8wf">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,7 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,36 +15,34 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SwiftyForecastViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-1W-q0r">
-                                <rect key="frame" x="24" y="373" width="327" height="380"/>
+                                <rect key="frame" x="24" y="399" width="327" height="354"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="CurrentForecastView" customModule="Swifty_Forecast" customModuleProvider="target">
-                                <rect key="frame" x="24" y="96" width="327" height="265"/>
+                                <rect key="frame" x="24" y="96" width="327" height="291"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="5AL-Fh-OWB" secondAttribute="height" multiplier="327:265" id="Zga-sD-AIu"/>
+                                    <constraint firstAttribute="width" secondItem="5AL-Fh-OWB" secondAttribute="height" multiplier="109:97" id="eaf-NM-Dx5"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5AL-Fh-OWB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Bkq-SE-r3z"/>
-                            <constraint firstItem="mn2-1W-q0r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="WWx-cl-ju9"/>
-                            <constraint firstItem="mn2-1W-q0r" firstAttribute="top" secondItem="5AL-Fh-OWB" secondAttribute="bottom" constant="12" id="a1e-i4-mIW"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mn2-1W-q0r" secondAttribute="bottom" constant="25" id="c2W-E5-GJ6"/>
-                            <constraint firstItem="5AL-Fh-OWB" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="q34-kX-FKW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="mn2-1W-q0r" secondAttribute="trailing" constant="8" id="wwc-3e-HXh"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5AL-Fh-OWB" secondAttribute="trailing" constant="8" id="yUj-2U-eU9"/>
+                            <constraint firstItem="5AL-Fh-OWB" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="24" id="6G4-IL-ruu"/>
+                            <constraint firstItem="5AL-Fh-OWB" firstAttribute="top" secondItem="IuX-10-a2v" secondAttribute="top" constant="8" id="6sh-JO-9WY"/>
+                            <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="5AL-Fh-OWB" secondAttribute="trailing" constant="24" id="73G-Uf-kTa"/>
+                            <constraint firstItem="5AL-Fh-OWB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jym-vU-g9n"/>
+                            <constraint firstItem="mn2-1W-q0r" firstAttribute="top" secondItem="5AL-Fh-OWB" secondAttribute="bottom" constant="12" id="NMk-Qg-6ov"/>
+                            <constraint firstItem="IuX-10-a2v" firstAttribute="bottom" secondItem="mn2-1W-q0r" secondAttribute="bottom" constant="25" id="YCY-KV-NOr"/>
+                            <constraint firstItem="mn2-1W-q0r" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="24" id="bLt-4C-oiI"/>
+                            <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="mn2-1W-q0r" secondAttribute="trailing" constant="24" id="dDE-1H-qy9"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="IuX-10-a2v"/>
                     </view>
                     <navigationItem key="navigationItem" id="uKH-Pc-zJF">
                         <nil key="title"/>
@@ -75,10 +73,6 @@
         <scene sceneID="Npr-uc-QHM">
             <objects>
                 <viewController id="FHG-EA-ycm" customClass="NewCityViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Uyv-iU-jbq"/>
-                        <viewControllerLayoutGuide type="bottom" id="NTN-ic-0rw"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WfQ-XC-GfM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,6 +93,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="aYK-42-4oX"/>
                     </view>
                     <navigationItem key="navigationItem" title="New City" id="qpy-Rg-ZAC">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FM2-Bs-Rz3">

@@ -28,7 +28,8 @@ class SwiftyForecastViewController: UIViewController {
     return segmentedControl
   }()
   
-  private var collapsedCurrentForecastViewHeight: CGFloat!
+  private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
+  private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   private var city: City?
   
   var weatherForecast: WeatherForecast? {
@@ -51,13 +52,6 @@ class SwiftyForecastViewController: UIViewController {
     super.viewWillAppear(animated)
     //    setupLayout()
   }
-  
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
-    collapsedCurrentForecastViewHeight = currentForecastView.frame.size.height
-  }
 }
 
 
@@ -76,6 +70,9 @@ extension SwiftyForecastViewController {
 // MARK: - ViewSetupable protocol
 extension SwiftyForecastViewController: ViewSetupable {
   func setup() {
+    currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
+    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0)
+    
     currentForecastView.delegate = self
     setMetricSystemSegmentedControl()
     setDailyForecastTableView()
@@ -145,57 +142,34 @@ private extension SwiftyForecastViewController {
 }
 
 
-
-// MARK: - topDistance
+// MARK: - CurrentForecastViewDelegate protocol
 extension SwiftyForecastViewController: CurrentForecastViewDelegate {
   
-  var topDistance: CGFloat {
-    guard let navigationController = navigationController else { return 0 }
-    let barHeight = navigationController.navigationBar.frame.height
-    let statusBarHeight = UIApplication.shared.isStatusBarHidden ? CGFloat(0) : UIApplication.shared.statusBarFrame.height
-    return barHeight + statusBarHeight
-  }
-  
-  
-  func currentForecastDidExpand() {
+  func currentForecastDidExpandAnimation() {
     animateBouncingEffect()
-    
-    self.currentForecastView.moreDetailsView.alpha = 0
-    let height = currentForecastView.frame.size.height + dailyForecastTableView.frame.size.height + 12
-    
-    UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
-      self.currentForecastView.frame.size.height = height
 
-    }, completion: { isFinished in
-      if isFinished {
-        self.currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0).isActive = true
-        
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-          self.currentForecastView.moreDetailsViewBottomConstraint.constant = 0
-          self.currentForecastView.moreDetailsView.alpha = 1
-        })
-      }
+    dailyForecastTableViewBottomConstraint?.isActive = true
+    currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
+
+    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+      self.currentForecastView.iconLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+      self.currentForecastView.dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      self.currentForecastView.temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      self.view.layoutIfNeeded()
     })
   }
   
-  func currentForecastDidCollapse() {
-    self.currentForecastView.moreDetailsView.alpha = 0
-    let height = self.currentForecastView.frame.size.height
-    self.currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0).isActive = false
+  func currentForecastDidCollapseAnimation() {
+    let height = currentForecastView.frame.size.height
     
-    UIView.animate(withDuration: 0.38, delay: 0, options: .curveEaseIn, animations: {
-      self.currentForecastView.moreDetailsViewBottomConstraint.constant = height
-      
-    }, completion: { isFinished in
-      if isFinished {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut, animations: {
-          
-          self.currentForecastView.frame.size.height = self.collapsedCurrentForecastViewHeight
-          
-        }, completion: { isFinished in
-          
-        })
-      }
+    currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
+    dailyForecastTableViewBottomConstraint?.isActive = false
+    
+    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+      self.currentForecastView.iconLabel.transform = .identity
+      self.currentForecastView.dateLabel.transform = .identity
+      self.currentForecastView.temperatureLabel.transform = .identity
+      self.view.layoutIfNeeded()
     })
   }
   
@@ -208,6 +182,7 @@ extension SwiftyForecastViewController: CityListSelectDelegate {
   func cityListDidSelect(city: City) {
     self.city = city
   }
+  
 }
 
 
@@ -218,7 +193,7 @@ extension SwiftyForecastViewController {
     currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     
     UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
-      self.currentForecastView.transform = CGAffineTransform.identity
+      self.currentForecastView.transform = .identity
     }, completion: { isFinished in
       if isFinished {
         

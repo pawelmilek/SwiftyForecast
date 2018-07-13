@@ -10,9 +10,9 @@ import UIKit
 
 final class CurrentForecastView: UIView {
   @IBOutlet private var contentView: UIView!
-  @IBOutlet private weak var iconLabel: UILabel!
-  @IBOutlet private weak var dateLabel: UILabel!
-  @IBOutlet private weak var temperatureLabel: UILabel!
+  @IBOutlet weak var iconLabel: UILabel!
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet private weak var windView: ConditionView!
   @IBOutlet private weak var humidityView: ConditionView!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
@@ -85,6 +85,9 @@ extension CurrentForecastView: ViewSetupable {
     temperatureLabel.font = UIFont.systemFont(ofSize: 90, weight: .bold)
     temperatureLabel.textColor = .white
     temperatureLabel.textAlignment = .center
+    
+    moreDetailsView.backgroundColor = .clear
+    hourlyCollectionView.backgroundColor = .clear
   }
   
 }
@@ -118,7 +121,7 @@ private extension CurrentForecastView {
     hourlyCollectionView.delegate = self
     hourlyCollectionView.showsVerticalScrollIndicator = false
     hourlyCollectionView.showsHorizontalScrollIndicator = true
-    hourlyCollectionView.backgroundColor = .blue
+    hourlyCollectionView.showsHorizontalScrollIndicator = false
   }
   
 }
@@ -219,10 +222,10 @@ extension CurrentForecastView {
     viewDidExpand = !viewDidExpand
     
     if viewDidExpand {
-      delegate?.currentForecastDidExpand()
+      delegate?.currentForecastDidExpandAnimation()
 
     } else {
-      delegate?.currentForecastDidCollapse()
+      delegate?.currentForecastDidCollapseAnimation()
     }
   }
   

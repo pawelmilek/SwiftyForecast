@@ -9,6 +9,6 @@
 import Foundation
 
 protocol CurrentForecastViewDelegate: class {
-  func currentForecastDidExpand()
-  func currentForecastDidCollapse()
+  func currentForecastDidExpandAnimation()
+  func currentForecastDidCollapseAnimation()
 }

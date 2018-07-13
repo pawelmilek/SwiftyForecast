@@ -49,10 +49,10 @@ extension ConditionView: ViewSetupable {
   
   func setupStyle() {
     valueLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
-    valueLabel.textColor = .black
+    valueLabel.textColor = .white
     valueLabel.textAlignment = .center
     
-    conditionLabel.textColor = .black
+    conditionLabel.textColor = .white
     conditionLabel.textAlignment = .center
   }
   
