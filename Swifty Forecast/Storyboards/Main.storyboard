@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-1W-q0r">
-                                <rect key="frame" x="24" y="399" width="327" height="354"/>
+                                <rect key="frame" x="24" y="399" width="327" height="342"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="CurrentForecastView" customModule="Swifty_Forecast" customModuleProvider="target">
@@ -30,30 +30,37 @@
                                     <constraint firstAttribute="width" secondItem="5AL-Fh-OWB" secondAttribute="height" multiplier="109:97" id="eaf-NM-Dx5"/>
                                 </constraints>
                             </view>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Fac-VP-Zav">
+                                <rect key="frame" x="168" y="741" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" white="0.59999999999999998" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="currentPageIndicatorTintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="5AL-Fh-OWB" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="24" id="6G4-IL-ruu"/>
                             <constraint firstItem="5AL-Fh-OWB" firstAttribute="top" secondItem="IuX-10-a2v" secondAttribute="top" constant="8" id="6sh-JO-9WY"/>
                             <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="5AL-Fh-OWB" secondAttribute="trailing" constant="24" id="73G-Uf-kTa"/>
+                            <constraint firstItem="Fac-VP-Zav" firstAttribute="bottom" secondItem="IuX-10-a2v" secondAttribute="bottom" id="8QK-QC-uAX"/>
                             <constraint firstItem="5AL-Fh-OWB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jym-vU-g9n"/>
                             <constraint firstItem="mn2-1W-q0r" firstAttribute="top" secondItem="5AL-Fh-OWB" secondAttribute="bottom" constant="12" id="NMk-Qg-6ov"/>
-                            <constraint firstItem="IuX-10-a2v" firstAttribute="bottom" secondItem="mn2-1W-q0r" secondAttribute="bottom" constant="25" id="YCY-KV-NOr"/>
+                            <constraint firstItem="Fac-VP-Zav" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QtJ-VY-l6u"/>
                             <constraint firstItem="mn2-1W-q0r" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="24" id="bLt-4C-oiI"/>
                             <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="mn2-1W-q0r" secondAttribute="trailing" constant="24" id="dDE-1H-qy9"/>
+                            <constraint firstItem="IuX-10-a2v" firstAttribute="bottom" secondItem="mn2-1W-q0r" secondAttribute="bottom" constant="37" id="gki-Dw-F8v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IuX-10-a2v"/>
                     </view>
                     <navigationItem key="navigationItem" id="uKH-Pc-zJF">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" image="cloud_refresh" id="flu-Un-bTJ">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_cloud_refresh" id="flu-Un-bTJ">
                             <inset key="imageInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
                             <connections>
                                 <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" id="5NO-2r-Jhs"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="HIE-A6-hH8">
+                        <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
                             <connections>
                                 <segue destination="ydj-fi-6FQ" kind="show" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
@@ -72,51 +79,20 @@
         <!--New City-->
         <scene sceneID="Npr-uc-QHM">
             <objects>
-                <viewController id="FHG-EA-ycm" customClass="NewCityViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FHG-EA-ycm" customClass="AddNewCityViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WfQ-XC-GfM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TlV-fo-St9">
-                                <rect key="frame" x="16" y="91" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Country Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEz-AD-7FG">
-                                <rect key="frame" x="16" y="136" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="aYK-42-4oX"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New City" id="qpy-Rg-ZAC">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FM2-Bs-Rz3">
-                            <connections>
-                                <action selector="cancelTapped:" destination="FHG-EA-ycm" id="jjj-Bo-Krp"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="NOI-1v-jDl">
-                            <connections>
-                                <action selector="saveTapped:" destination="FHG-EA-ycm" id="C8X-6M-dNV"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="cityName" destination="TlV-fo-St9" id="05g-PK-FrQ"/>
-                        <outlet property="countryName" destination="JEz-AD-7FG" id="qPM-Ds-vLT"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="New City" id="qpy-Rg-ZAC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dfj-SJ-ARo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2630" y="-588"/>
+            <point key="canvasLocation" x="2629.5999999999999" y="-588.17733990147781"/>
         </scene>
-        <!--City List Table View Controller-->
+        <!-- -->
         <scene sceneID="a6q-Ke-vaD">
             <objects>
                 <tableViewController id="ydj-fi-6FQ" customClass="CityListTableViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
@@ -139,10 +115,13 @@
                             <outlet property="delegate" destination="ydj-fi-6FQ" id="SWU-Pu-s1k"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="oqD-Tk-QaE">
+                    <navigationItem key="navigationItem" title=" " id="oqD-Tk-QaE">
+                        <barButtonItem key="backBarButtonItem" title=" " id="HqZ-3t-oBN"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zmc-f6-PMu">
                             <connections>
-                                <segue destination="FHG-EA-ycm" kind="show" id="4uj-e4-TCO"/>
+                                <segue destination="FHG-EA-ycm" kind="popoverPresentation" popoverAnchorBarButtonItem="zmc-f6-PMu" id="4uj-e4-TCO">
+                                    <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -171,6 +150,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cloud_refresh" width="28" height="28"/>
+        <image name="ic_cloud_refresh" width="24" height="24"/>
+        <image name="ic_menu" width="24" height="24"/>
     </resources>
 </document>

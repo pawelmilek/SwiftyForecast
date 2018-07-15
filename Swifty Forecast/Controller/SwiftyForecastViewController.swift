@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class SwiftyForecastViewController: UIViewController {
-  @IBOutlet weak var currentForecastView: CurrentForecastView!
-  @IBOutlet weak var dailyForecastTableView: UITableView!
+  @IBOutlet private weak var currentForecastView: CurrentForecastView!
+  @IBOutlet private weak var dailyForecastTableView: UITableView!
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
@@ -27,6 +27,7 @@ class SwiftyForecastViewController: UIViewController {
     segmentedControl.addTarget(self, action: #selector(SwiftyForecastViewController.measuringSystemSwitched(_:)), for: .valueChanged)
     return segmentedControl
   }()
+  
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
@@ -69,17 +70,34 @@ extension SwiftyForecastViewController {
 
 // MARK: - ViewSetupable protocol
 extension SwiftyForecastViewController: ViewSetupable {
+  
   func setup() {
-    currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
-    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0)
-    
-    currentForecastView.delegate = self
+    setCurrentForecastViewDelegate()
+    setSupportingCurrentForecastViewConstraints()
     setMetricSystemSegmentedControl()
     setDailyForecastTableView()
   }
   
+}
+
+
+// MARK: - Private - Set currentForecastView delegate
+private extension SwiftyForecastViewController {
   
-  func setupLayout() {}
+  func setCurrentForecastViewDelegate() {
+    currentForecastView.delegate = self
+  }
+  
+}
+
+
+// MARK: - Private - Set currentForecastView constraints
+private extension SwiftyForecastViewController {
+  
+  func setSupportingCurrentForecastViewConstraints() {
+    currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
+    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0)
+  }
 }
 
 
@@ -117,25 +135,36 @@ private extension SwiftyForecastViewController {
   func fetchWeatherForecast() {
     ActivityIndicator.shared.startAnimating(at: self.view)
     
-    LocationProvider.shared.getCurrentLocation() { [weak self] cityLocation in
-      let request = ForecastRequest.make(by: cityLocation)
-      WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
-        switch response {
-        case .success(let forecast):
-          let currentCityCoord = Coordinate(latitude: forecast.latitude, longitude: forecast.longitude)
-          
-          Geocoder.findCity(at: currentCityCoord) { [weak self] city in
+    GooglePlacesHelper.getCurrentPlace() { (place, error) in
+      if let error = error {
+        AlertViewPresenter.shared.presentError(withMessage: "Google Places error: \(error.localizedDescription)")
+        return
+      }
+      
+      if let place = place {
+        let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        let request = ForecastRequest.make(by: coordinate)
+
+        WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+          switch response {
+          case .success(let forecast):
             DispatchQueue.main.async {
-              self?.weatherForecast = WeatherForecast(city: city, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+              let city = City(addressComponents: place.addressComponents, coordinate: coordinate)
+              self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
               ActivityIndicator.shared.stopAnimating()
             }
+            
+          case .failure(let error):
+            DispatchQueue.main.async {
+              ActivityIndicator.shared.stopAnimating()
+              error.handle()
+            }
           }
-          
-        case .failure(let error):
-          ActivityIndicator.shared.stopAnimating()
-          error.handle()
-        }
-      })
+        })
+        
+      } else {
+        AlertViewPresenter.shared.presentError(withMessage: "Google Places error: No place found.")
+      }
     }
   }
   
@@ -147,14 +176,12 @@ extension SwiftyForecastViewController: CurrentForecastViewDelegate {
   
   func currentForecastDidExpandAnimation() {
     animateBouncingEffect()
-
-    dailyForecastTableViewBottomConstraint?.isActive = true
+    
     currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
-
+    dailyForecastTableViewBottomConstraint?.isActive = true
+    
     UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-      self.currentForecastView.iconLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-      self.currentForecastView.dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-      self.currentForecastView.temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      self.currentForecastView.animateLabelsScaling()
       self.view.layoutIfNeeded()
     })
   }
@@ -166,9 +193,7 @@ extension SwiftyForecastViewController: CurrentForecastViewDelegate {
     dailyForecastTableViewBottomConstraint?.isActive = false
     
     UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-      self.currentForecastView.iconLabel.transform = .identity
-      self.currentForecastView.dateLabel.transform = .identity
-      self.currentForecastView.temperatureLabel.transform = .identity
+      self.currentForecastView.animateLabelsIdentity()
       self.view.layoutIfNeeded()
     })
   }
@@ -176,10 +201,10 @@ extension SwiftyForecastViewController: CurrentForecastViewDelegate {
 }
 
 
-// MARK: - CityListSelectDelegate protocol
-extension SwiftyForecastViewController: CityListSelectDelegate {
+// MARK: - CityListTableViewControllerDelegate protocol
+extension SwiftyForecastViewController: CityListTableViewControllerDelegate {
   
-  func cityListDidSelect(city: City) {
+  func cityListTableViewDidSelect(city: City) {
     self.city = city
   }
   
@@ -188,16 +213,12 @@ extension SwiftyForecastViewController: CityListSelectDelegate {
 
 // MARK: - animateBouncingEffect
 extension SwiftyForecastViewController {
- 
+  
   func animateBouncingEffect() {
     currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     
     UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
       self.currentForecastView.transform = .identity
-    }, completion: { isFinished in
-      if isFinished {
-        
-      }
     })
   }
   

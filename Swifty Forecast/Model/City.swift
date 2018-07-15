@@ -7,37 +7,24 @@
 //
 
 import Foundation
+import GooglePlaces
 
-final class City: NSObject, NSCoding {
+struct City {
   var name: String
   var country: String
+  var state: String
+  var zipcode: String
   var coordinate: Coordinate
-  
-  
-  init(name: String, country: String, coordinate: Coordinate) {
-    self.name = name
-    self.country = country
-    self.coordinate = coordinate
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    self.name = aDecoder.decodeObject(forKey: "name") as! String
-    self.country = aDecoder.decodeObject(forKey: "country") as! String
-    self.coordinate = aDecoder.decodeObject(forKey: "coordinate") as! Coordinate
-  }
-  
-  func encode(with aCoder: NSCoder) {
-    aCoder.encode(self.name, forKey: "name")
-    aCoder.encode(self.country, forKey: "country")
-    aCoder.encode(self.coordinate, forKey: "coordinate")
-  }
 }
-
 
 extension City {
   
-  var fullName: String {
-    return "\(self.name), \(self.country)"
+  init(addressComponents: [GMSAddressComponent]?, coordinate: Coordinate) {
+    let name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? ""
+    let state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? ""
+    let country = addressComponents?.first(where: {$0.type == "country"})?.name ?? ""
+    let postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? ""
+    
+    self.init(name: name, country: country, state: state, zipcode: postalCode, coordinate: coordinate)
   }
-  
 }

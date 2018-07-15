@@ -18,12 +18,11 @@ struct WeatherForecast {
 
 extension WeatherForecast {
   
-  var cityName: String {
-    return self.city.name
-  }
-  
-  var cityAndCountry: String {
-    return self.city.fullName
+  init(city: City, forecastResponse: ForecastResponse) {
+    self.city = city
+    self.currently = forecastResponse.currently
+    self.hourly = forecastResponse.hourly
+    self.daily = forecastResponse.daily
   }
   
 }

@@ -27,7 +27,7 @@ struct CurrentForecast: Forecast {
   var visibility: Double
   var ozone: Double
   let nearestStormDistance: Int
-  let nearestStormBearing: Int
+  let nearestStormBearing: Int?
 }
 
 
@@ -97,6 +97,6 @@ extension CurrentForecast: Decodable {
     self.visibility = try container.decode(Double.self, forKey: .visibility)
     self.ozone = try container.decode(Double.self, forKey: .ozone)
     self.nearestStormDistance = try container.decode(Int.self, forKey: .nearestStormDistance)
-    self.nearestStormBearing = try container.decode(Int.self, forKey: .nearestStormBearing)
+    self.nearestStormBearing = try container.decodeIfPresent(Int.self, forKey: .nearestStormBearing)
   }
 }

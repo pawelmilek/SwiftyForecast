@@ -9,8 +9,7 @@
 import UIKit
 
 class CityListTableViewController: UITableViewController {
-  var dataSourceDelegate: CityListTableDataSourceDelegate?
-  var delegate: CityListSelectDelegate?
+  var delegate: CityListTableViewControllerDelegate?
   
   
   override func viewDidLoad() {
@@ -29,7 +28,7 @@ extension CityListTableViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.addCitySegue.rawValue else { return }
     guard let navController = segue.destination as? UINavigationController,
-          let newCityVC = navController.topViewController as? NewCityViewController else { return }
+          let newCityVC = navController.topViewController as? AddNewCityViewController else { return }
       
       newCityVC.delegate = self
   }
@@ -40,10 +39,10 @@ extension CityListTableViewController {
 extension CityListTableViewController: ViewSetupable {
   
   func setup() {
-    dataSourceDelegate = CityListTableDataSource()
+//    dataSourceDelegate = CityListTableDataSource()
     
     self.tableView.register(cellClass: CityTableViewCell.self)
-    self.tableView.dataSource = dataSourceDelegate
+//    self.tableView.dataSource = dataSourceDelegate
     self.tableView.delegate = self
   }
   
@@ -51,41 +50,45 @@ extension CityListTableViewController: ViewSetupable {
   func setupStyle() {
     self.navigationItem.title = "City List"
     self.tableView.separatorColor = .white
-    
-    
-    func setTransparentTableViewBackground() {
-      let backgroundImage = UIImage(named: "background-default.png")
-      let imageView = UIImageView(image: backgroundImage)
-      imageView.contentMode = .scaleAspectFill
-      
-      self.tableView.backgroundView = imageView
-      self.tableView.backgroundColor = .clear
-      self.tableView.tableFooterView = UIView(frame: CGRect.zero)
-    }
-    
     setTransparentTableViewBackground()
   }
+}
+
+
+// MARK: - Private - Set transparent background of TableView
+private extension CityListTableViewController {
+
+  func setTransparentTableViewBackground() {
+    let backgroundImage = UIImage(named: "background-default.png")
+    let imageView = UIImageView(image: backgroundImage)
+    imageView.contentMode = .scaleAspectFill
+    
+    self.tableView.backgroundView = imageView
+    self.tableView.backgroundColor = .clear
+    self.tableView.tableFooterView = UIView(frame: .zero)
+  }
+  
 }
 
 
 // MARK: - NewCityControllerDelegate protocol
 extension CityListTableViewController: NewCityControllerDelegate {
   
-  func newCityControllerDidAdd(_ newCityController: NewCityViewController, city: City) {
+  func newCityControllerDidAdd(_ newCityController: AddNewCityViewController, city: City) {
     let insertIndexPath = IndexPath(row: 0, section: 0)
     
     newCityController.dismiss(animated: true) {
       let row = insertIndexPath.row
       
       self.tableView.scrollToRow(at: insertIndexPath, at: .top, animated: true)
-      Database.shared.insert(city: city, at: row)
+//      Database.shared.insert(city: city, at: row)
       self.tableView.insertRows(at: [insertIndexPath], with: .automatic)
     }
     
   }
   
   
-  func newContactViewControllerDidCancel(_ newCityController: NewCityViewController) {
+  func newContactViewControllerDidCancel(_ newCityController: AddNewCityViewController) {
     newCityController.dismiss(animated: true, completion: nil)
   }
   
@@ -96,10 +99,6 @@ extension CityListTableViewController: NewCityControllerDelegate {
 extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let selectedCity = dataSourceDelegate?.city(at: indexPath) else { return }
-    
-    delegate?.cityListDidSelect(city: selectedCity)
-    
     guard let _ = navigationController?.popViewController(animated: true) else {
       self.dismiss(animated: true)
       return
