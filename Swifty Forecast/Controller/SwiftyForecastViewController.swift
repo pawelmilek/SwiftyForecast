@@ -31,7 +31,12 @@ class SwiftyForecastViewController: UIViewController {
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
-  private var city: City?
+  private var citysForecast: City? {
+    didSet {
+      guard let citysForecast = citysForecast else { return }
+      fetchWeatherForecast(for: citysForecast)
+    }
+  }
   
   var weatherForecast: WeatherForecast? {
     didSet {
@@ -47,11 +52,6 @@ class SwiftyForecastViewController: UIViewController {
     super.viewDidLoad()
     setup()
     fetchWeatherForecast()
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    //    setupLayout()
   }
 }
 
@@ -144,7 +144,7 @@ private extension SwiftyForecastViewController {
       if let place = place {
         let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         let request = ForecastRequest.make(by: coordinate)
-
+        
         WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
@@ -166,6 +166,28 @@ private extension SwiftyForecastViewController {
         AlertViewPresenter.shared.presentError(withMessage: "Google Places error: No place found.")
       }
     }
+  }
+  
+  
+  func fetchWeatherForecast(for city: City) {
+    ActivityIndicator.shared.startAnimating(at: self.view)
+    
+    let request = ForecastRequest.make(by: city.coordinate)
+    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+      switch response {
+      case .success(let forecast):
+        DispatchQueue.main.async {
+          self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
+          ActivityIndicator.shared.stopAnimating()
+        }
+        
+      case .failure(let error):
+        DispatchQueue.main.async {
+          ActivityIndicator.shared.stopAnimating()
+          error.handle()
+        }
+      }
+    })
   }
   
 }
@@ -201,18 +223,8 @@ extension SwiftyForecastViewController: CurrentForecastViewDelegate {
 }
 
 
-// MARK: - CityListTableViewControllerDelegate protocol
-extension SwiftyForecastViewController: CityListTableViewControllerDelegate {
-  
-  func cityListTableViewDidSelect(city: City) {
-    self.city = city
-  }
-  
-}
-
-
-// MARK: - animateBouncingEffect
-extension SwiftyForecastViewController {
+// MARK: - Private - animateBouncingEffect
+private extension SwiftyForecastViewController {
   
   func animateBouncingEffect() {
     currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -220,6 +232,16 @@ extension SwiftyForecastViewController {
     UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
       self.currentForecastView.transform = .identity
     })
+  }
+  
+}
+
+
+// MARK: - CityListTableViewControllerDelegate protocol
+extension SwiftyForecastViewController: CityListTableViewControllerDelegate {
+  
+  func cityListController(_ cityListTableViewController: CityListTableViewController, didSelect city: City) {
+    self.citysForecast = city
   }
   
 }

@@ -7,9 +7,44 @@
 //
 
 import UIKit
+import GooglePlaces
+
 
 class CityListTableViewController: UITableViewController {
-  var delegate: CityListTableViewControllerDelegate?
+  private lazy var autocompleteController: GMSAutocompleteViewController = {
+    let autocompleteVC = GMSAutocompleteViewController()
+    autocompleteVC.delegate = self
+    return autocompleteVC
+  }()
+  
+  
+  private lazy var footerView: UIView = {
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+    let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+    let addNewCityButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+    
+    backButton.translatesAutoresizingMaskIntoConstraints = false
+    backButton.setImage(UIImage(named: "ic_arrow_left"), for: .normal)
+    backButton.addTarget(self, action: #selector(CityListTableViewController.backButtonTapped(_:)), for: .touchUpInside)
+    
+    addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
+    addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
+    addNewCityButton.addTarget(self, action: #selector(CityListTableViewController.addNewCityButtonTapped(_:)), for: .touchUpInside)
+    
+    view.addSubview(backButton)
+    view.addSubview(addNewCityButton)
+    
+    view.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0).isActive = true
+    view.centerYAnchor.constraint(equalTo: backButton.centerYAnchor).isActive = true
+    
+    view.trailingAnchor.constraint(equalTo: addNewCityButton.trailingAnchor, constant: 8).isActive = true
+    view.centerYAnchor.constraint(equalTo: addNewCityButton.centerYAnchor).isActive = true
+
+    return view
+  }()
+  
+  private var cities: [City] = []
+  weak var delegate: CityListTableViewControllerDelegate?
   
   
   override func viewDidLoad() {
@@ -18,20 +53,6 @@ class CityListTableViewController: UITableViewController {
     self.setup()
     self.setupStyle()
   }
-  
-}
-
-
-// MARK: - Prepare For Segue
-extension CityListTableViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.addCitySegue.rawValue else { return }
-    guard let navController = segue.destination as? UINavigationController,
-          let newCityVC = navController.topViewController as? AddNewCityViewController else { return }
-      
-      newCityVC.delegate = self
-  }
 }
 
 
@@ -39,17 +60,15 @@ extension CityListTableViewController {
 extension CityListTableViewController: ViewSetupable {
   
   func setup() {
-//    dataSourceDelegate = CityListTableDataSource()
-    
-    self.tableView.register(cellClass: CityTableViewCell.self)
-//    self.tableView.dataSource = dataSourceDelegate
-    self.tableView.delegate = self
+    tableView.register(cellClass: CityTableViewCell.self)
+    tableView.dataSource = self
+    tableView.delegate = self
+    tableView.tableFooterView = footerView
   }
   
   
   func setupStyle() {
-    self.navigationItem.title = "City List"
-    self.tableView.separatorColor = .white
+    tableView.separatorColor = .white
     setTransparentTableViewBackground()
   }
 }
@@ -57,39 +76,56 @@ extension CityListTableViewController: ViewSetupable {
 
 // MARK: - Private - Set transparent background of TableView
 private extension CityListTableViewController {
-
+  
   func setTransparentTableViewBackground() {
     let backgroundImage = UIImage(named: "background-default.png")
     let imageView = UIImageView(image: backgroundImage)
     imageView.contentMode = .scaleAspectFill
     
-    self.tableView.backgroundView = imageView
-    self.tableView.backgroundColor = .clear
-    self.tableView.tableFooterView = UIView(frame: .zero)
+    tableView.backgroundView = imageView
+    tableView.backgroundColor = .clear
   }
   
 }
 
 
-// MARK: - NewCityControllerDelegate protocol
-extension CityListTableViewController: NewCityControllerDelegate {
+// MARK: - Private add new city
+private extension CityListTableViewController {
   
-  func newCityControllerDidAdd(_ newCityController: AddNewCityViewController, city: City) {
-    let insertIndexPath = IndexPath(row: 0, section: 0)
-    
-    newCityController.dismiss(animated: true) {
-      let row = insertIndexPath.row
-      
-      self.tableView.scrollToRow(at: insertIndexPath, at: .top, animated: true)
-//      Database.shared.insert(city: city, at: row)
-      self.tableView.insertRows(at: [insertIndexPath], with: .automatic)
+  @objc func backButtonTapped(_ sender: UIButton?) {
+    guard let _ = navigationController?.popViewController(animated: true) else {
+      self.dismiss(animated: true)
+      return
     }
-    
   }
   
   
-  func newContactViewControllerDidCancel(_ newCityController: AddNewCityViewController) {
-    newCityController.dismiss(animated: true, completion: nil)
+  @objc func addNewCityButtonTapped(_ sender: UIButton) {
+    present(autocompleteController, animated: true)
+  }
+  
+  
+  func addNewCity(_ city: City) {
+    cities.append(city)
+    tableView.reloadData()
+  }
+  
+}
+
+
+// MARK: GMSAutocompleteViewControllerDelegate protocol
+extension CityListTableViewController {
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return cities.count
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
+    let item = cities[indexPath.row]
+    cell.configure(by: item)
+    
+    return cell
   }
   
 }
@@ -99,9 +135,51 @@ extension CityListTableViewController: NewCityControllerDelegate {
 extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard let _ = navigationController?.popViewController(animated: true) else {
-      self.dismiss(animated: true)
-      return
+    let selectedCity = cities[indexPath.row]
+    delegate?.cityListController(self, didSelect: selectedCity)
+    backButtonTapped(.none)
+  }
+  
+  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return true
+  }
+  
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      cities.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: .fade)
     }
   }
+  
 }
+
+
+// MARK: GMSAutocompleteViewControllerDelegate protocol
+extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
+  
+  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+    let selectedCity = City(addressComponents: place.addressComponents, coordinate: coordinate)
+    
+    addNewCity(selectedCity)
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+    AlertViewPresenter.shared.presentError(withMessage: "Error: \(error.localizedDescription)")
+  }
+  
+  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+  }
+  
+  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+  }
+  
+}
+

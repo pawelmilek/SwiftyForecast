@@ -26,8 +26,6 @@ struct CurrentForecast: Forecast {
   var uvIndex: Int
   var visibility: Double
   var ozone: Double
-  let nearestStormDistance: Int
-  let nearestStormBearing: Int?
 }
 
 
@@ -71,8 +69,6 @@ extension CurrentForecast: Decodable {
     case uvIndex
     case visibility
     case ozone
-    case nearestStormDistance
-    case nearestStormBearing
   }
   
   init(from decoder: Decoder) throws {
@@ -96,7 +92,5 @@ extension CurrentForecast: Decodable {
     self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
     self.visibility = try container.decode(Double.self, forKey: .visibility)
     self.ozone = try container.decode(Double.self, forKey: .ozone)
-    self.nearestStormDistance = try container.decode(Int.self, forKey: .nearestStormDistance)
-    self.nearestStormBearing = try container.decodeIfPresent(Int.self, forKey: .nearestStormBearing)
   }
 }

@@ -63,7 +63,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
                             <connections>
-                                <segue destination="ydj-fi-6FQ" kind="show" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
+                                <segue destination="ydj-fi-6FQ" kind="showDetail" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -75,22 +75,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037.5999999999999" y="-589.65517241379314"/>
-        </scene>
-        <!--New City-->
-        <scene sceneID="Npr-uc-QHM">
-            <objects>
-                <viewController id="FHG-EA-ycm" customClass="AddNewCityViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WfQ-XC-GfM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="aYK-42-4oX"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="New City" id="qpy-Rg-ZAC"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dfj-SJ-ARo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2629.5999999999999" y="-588.17733990147781"/>
         </scene>
         <!-- -->
         <scene sceneID="a6q-Ke-vaD">
@@ -117,13 +101,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title=" " id="oqD-Tk-QaE">
                         <barButtonItem key="backBarButtonItem" title=" " id="HqZ-3t-oBN"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="zmc-f6-PMu">
-                            <connections>
-                                <segue destination="FHG-EA-ycm" kind="popoverPresentation" popoverAnchorBarButtonItem="zmc-f6-PMu" id="4uj-e4-TCO">
-                                    <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVY-yt-HAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
