@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class SwiftyForecastViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
@@ -133,6 +134,15 @@ private extension SwiftyForecastViewController {
 private extension SwiftyForecastViewController {
   
   func fetchWeatherForecast() {
+    if let citysForecast = citysForecast {
+      fetchWeatherForecast(for: citysForecast)
+    } else {
+      fetchWeatherForecastForCurrentLocation()
+    }
+  }
+  
+  
+  func fetchWeatherForecastForCurrentLocation() {
     ActivityIndicator.shared.startAnimating(at: self.view)
     
     GooglePlacesHelper.getCurrentPlace() { (place, error) in
@@ -142,15 +152,19 @@ private extension SwiftyForecastViewController {
       }
       
       if let place = place {
-        let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        let latitude = place.coordinate.latitude
+        let longitude = place.coordinate.longitude
+        let coordinate = Coordinate(latitude: latitude, longitude: longitude)
         let request = ForecastRequest.make(by: coordinate)
         
         WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
-              let city = City(addressComponents: place.addressComponents, coordinate: coordinate)
+              let city = City(place: place, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
               self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
+              
+              ManagedObjectContextHelper.shared.saveContext()
               ActivityIndicator.shared.stopAnimating()
             }
             
@@ -171,7 +185,7 @@ private extension SwiftyForecastViewController {
   
   func fetchWeatherForecast(for city: City) {
     ActivityIndicator.shared.startAnimating(at: self.view)
-    
+
     let request = ForecastRequest.make(by: city.coordinate)
     WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
       switch response {
@@ -180,7 +194,7 @@ private extension SwiftyForecastViewController {
           self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
           ActivityIndicator.shared.stopAnimating()
         }
-        
+
       case .failure(let error):
         DispatchQueue.main.async {
           ActivityIndicator.shared.stopAnimating()
@@ -188,6 +202,40 @@ private extension SwiftyForecastViewController {
         }
       }
     })
+  }
+  
+  
+  // MARK: - TESTING!
+  func clearStorage() {
+    let managedObjectContext = ManagedObjectContextHelper.shared.mainContext
+    let cityFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: City.entityName)
+    let coordinateFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Coordinate.entityName)
+    let cityBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: cityFetchRequest)
+    let coordinateBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: coordinateFetchRequest)
+    
+    do {
+      try managedObjectContext.execute(cityBatchDeleteRequest)
+      try managedObjectContext.execute(coordinateBatchDeleteRequest)
+      try managedObjectContext.save()
+    } catch let error as NSError {
+      print(error)
+    }
+  }
+  
+  
+  func fetchFromStorage() -> [City]? {
+    let managedObjectContext = ManagedObjectContextHelper.shared.mainContext
+    let fetchRequest = City.createFetchRequest()
+    let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+    let countrySortDescriptor = NSSortDescriptor(key: "country", ascending: true)
+    fetchRequest.sortDescriptors = [nameSortDescriptor, countrySortDescriptor]
+    do {
+      let users = try managedObjectContext.fetch(fetchRequest)
+      return users
+    } catch let error {
+      print(error)
+      return nil
+    }
   }
   
 }
@@ -276,6 +324,7 @@ extension SwiftyForecastViewController {
   }
   
   @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+    clearStorage()
     fetchWeatherForecast()
   }
   

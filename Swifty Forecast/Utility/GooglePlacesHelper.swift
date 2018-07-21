@@ -19,6 +19,11 @@ struct GooglePlacesHelper {
 extension GooglePlacesHelper {
   
   static func getCurrentPlace(completionHandler: @escaping (_ place: GMSPlace?, _ error: Error?) -> ()) {
+    guard LocationProvider.shared.isLocationServicesEnabled else {
+      completionHandler(.none, .none)
+      return
+    }
+    
     sharedPlacesClient.currentPlace() { (placeLikelihoodList, error) in
       if error == nil {
         let place = placeLikelihoodList?.likelihoods.first?.place

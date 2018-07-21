@@ -9,7 +9,6 @@
 import UIKit
 import GooglePlaces
 
-
 class CityListTableViewController: UITableViewController {
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
@@ -158,8 +157,7 @@ extension CityListTableViewController {
 extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-    let selectedCity = City(addressComponents: place.addressComponents, coordinate: coordinate)
+    let selectedCity = City(place: place, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
     
     addNewCity(selectedCity)
     dismiss(animated: true, completion: nil)

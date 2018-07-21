@@ -31,16 +31,16 @@ extension WebService {
     
     sessionShared.dataTask(with: encodedURLRequest) { (data, _, error) in
       guard error == nil else {
-        completionHandler(.failure(.requestFailed))
+        completionHandler(.failure(WebServiceError.requestFailed))
         return
       }
       
       guard let data = data else {
-        completionHandler(.failure(.dataNotAvailable))
+        completionHandler(.failure(WebServiceError.dataNotAvailable))
         return
       }
       
-      completionHandler(Parser<M>.parseJSON(data))
+      completionHandler(Parser<M>.parseJSON(data, with: ManagedObjectContextHelper.shared.mainContext))
       }.resume()
   }
 }

@@ -62,3 +62,22 @@ extension MoonPhase: CustomStringConvertible {
     }
   }
 }
+
+
+// MARK: - Decodable protocol
+extension MoonPhase: Decodable {
+  private enum CodingKeys: String, CodingKey {
+    case moonPhase
+  }
+  
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let lunation = try container.decode(Float.self, forKey: .moonPhase)
+    
+    self.init(lunation: lunation)
+  }
+}
+
+
+

@@ -47,12 +47,10 @@ extension CurrentForecast {
 }
 
 
-
 // MARK: - Decodable protocol
 extension CurrentForecast: Decodable {
   
   enum CodingKeys: String, CodingKey {
-    case date = "time"
     case summary
     case icon
     case precipIntensity
@@ -73,9 +71,8 @@ extension CurrentForecast: Decodable {
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    
-    let timestamp = try container.decode(Int.self, forKey: .date)
-    self.date = ForecastDate(timestamp: timestamp)
+
+    self.date = try ForecastDate(from: decoder)
     self.summary = try container.decode(String.self, forKey: .summary)
     self.icon = try container.decode(String.self, forKey: .icon)
     self.precipIntensity = try container.decode(Double.self, forKey: .precipIntensity)

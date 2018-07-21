@@ -232,7 +232,7 @@ enum FontWeatherIconType: String {
 }
 
 
-// MARK: - String from the given CSS icon code. http://fontWeather.io/icons/
+// MARK: - String from the given CSS icon code. https://erikflowers.github.io/weather-icons/
 extension FontWeatherIconType {
   
   static func make(from name: String) -> FontWeatherIconType? {

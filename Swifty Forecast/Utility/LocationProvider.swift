@@ -42,14 +42,15 @@ final class LocationProvider: NSObject {
 
 // MARK: - get current location
 extension LocationProvider {
+  var isLocationServicesEnabled: Bool {
+    let isLocationServicesEnabled = CLLocationManager.locationServicesEnabled()
+    let isAuthorizedWhenInUse = CLLocationManager.authorizationStatus() == .authorizedWhenInUse
+    let isAuthorizedAlways = CLLocationManager.authorizationStatus() == .authorizedAlways
+    return isLocationServicesEnabled && (isAuthorizedWhenInUse || isAuthorizedAlways)
+  }
+  
   
   func getCurrentLocation(completionHandler: @escaping CompletionHandler) {
-    var isLocationServicesEnabled: Bool {
-      let isLocationServicesEnabled = CLLocationManager.locationServicesEnabled()
-      let isAuthorizedWhenInUse = CLLocationManager.authorizationStatus() == .authorizedWhenInUse
-      return isLocationServicesEnabled && isAuthorizedWhenInUse
-    }
-    
     guard isLocationServicesEnabled else {
       AlertViewPresenter.shared.presentError(withMessage: "Please enable location for Swifty Forecast")
       return
@@ -65,7 +66,7 @@ extension LocationProvider {
 
 // MARK: - CLLocationManagerDelegate protocl
 extension LocationProvider: CLLocationManagerDelegate {
-
+  
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard !didUpdateLocationsFlag else { return }
     guard let location = locations.first?.coordinate else { return }

@@ -76,23 +76,17 @@ extension DailyData {
 extension DailyData: Decodable {
   
   enum CodingKeys: String, CodingKey {
-    case date = "time"
     case summary
     case icon
-    
     case sunriseTime
     case sunsetTime
-    case moonPhase
-    
     case precipIntensity
     case precipProbability
-    
     case precipType
     case temperatureMin
     case temperatureMinTime
     case temperatureMax
     case temperatureMaxTime
-    
     case dewPoint
     case humidity
     case pressure
@@ -108,8 +102,7 @@ extension DailyData: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    let timestamp = try container.decode(Int.self, forKey: .date)
-    self.date = ForecastDate(timestamp: timestamp)
+    self.date = try ForecastDate(from: decoder)
     self.summary = try container.decode(String.self, forKey: .summary)
     self.icon = try container.decode(String.self, forKey: .icon)
     
@@ -118,12 +111,9 @@ extension DailyData: Decodable {
     self.sunriseTime = ForecastDate(timestamp: sunriseTimestamp)
     self.sunsetTime = ForecastDate(timestamp: sunsetTimestamp)
     
-    let moonPhaseLunation = try container.decode(Float.self, forKey: .moonPhase)
-    self.moonPhase = MoonPhase(lunation: moonPhaseLunation)
-    
+    self.moonPhase = try MoonPhase(from: decoder)
     self.precipIntensity = try container.decode(Double.self, forKey: .precipIntensity)
     self.precipProbability = try container.decode(Double.self, forKey: .precipProbability)
-    
     self.precipType = try container.decodeIfPresent(String.self, forKey: .precipType)
     
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)

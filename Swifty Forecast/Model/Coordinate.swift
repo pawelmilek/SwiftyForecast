@@ -7,38 +7,60 @@
 //
 
 import Foundation
+import CoreData
 
-
-struct Coordinate {
-  let latitude: Double
-  let longitude: Double
-}
-
-
-// MARK: - CustomStringConvertible
-extension Coordinate: Decodable {
-  
-  enum CodingKeys: String, CodingKey {
+final class Coordinate: NSManagedObject, Decodable {
+  private enum CodingKeys: String, CodingKey {
     case latitude
     case longitude
   }
   
-  init(from decoder: Decoder) throws {
+  @NSManaged var latitude: Double
+  @NSManaged var longitude: Double
+  
+  required convenience init(from decoder: Decoder) throws {
+    guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+      let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+      let entity = NSEntityDescription.entity(forEntityName: Coordinate.entityName, in: managedObjectContext) else {
+        fatalError("Failed to decode Coordinate")
+    }
+
+    self.init(entity: entity, insertInto: nil)
+
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    
     self.latitude = try container.decode(Double.self, forKey: .latitude)
     self.longitude = try container.decode(Double.self, forKey: .longitude)
   }
 }
 
 
+// MARK: - Convenience initializer
+extension Coordinate {
 
-// MARK: - CustomStringConvertible
-extension Coordinate: CustomStringConvertible {
+  convenience init(latitude: Double, longitude: Double, managedObjectContext: NSManagedObjectContext) {
+    let entity = NSEntityDescription.entity(forEntityName: Coordinate.entityName, in: managedObjectContext)!
+    self.init(entity: entity, insertInto: managedObjectContext)
+
+    self.latitude = latitude
+    self.longitude = longitude
+  }
   
-  var description: String {
-    let textualDesc = "/\(self.latitude),\(self.longitude)"
-    return textualDesc
+  convenience init(latitude: Double, longitude: Double) {
+    let entity = NSEntityDescription.entity(forEntityName: Coordinate.entityName, in: ManagedObjectContextHelper.shared.mainContext)!
+    self.init(entity: entity, insertInto: nil)
+    
+    self.latitude = latitude
+    self.longitude = longitude
+  }
+  
+}
+
+
+// MARK: - Create fetch request
+extension Coordinate {
+  
+  class func createFetchRequest() -> NSFetchRequest<Coordinate> {
+    return NSFetchRequest<Coordinate>(entityName: Coordinate.entityName)
   }
   
 }

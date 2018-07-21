@@ -25,7 +25,7 @@ class CityTableViewCell: UITableViewCell {
 
 
 
-// MARK: - ViewSetupable
+// MARK: - ViewSetupable protocol
 extension CityTableViewCell: ViewSetupable {
   
   func setup() {
@@ -39,6 +39,7 @@ extension CityTableViewCell: ViewSetupable {
 }
 
 
+// MARK: - Configure by city
 extension CityTableViewCell {
   
   func configure(by item: City?) {

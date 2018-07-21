@@ -62,3 +62,22 @@ extension ForecastDate: CustomStringConvertible {
   }
   
 }
+
+
+// MARK: - Decodable protocol
+extension ForecastDate: Decodable {
+  private enum CodingKeys: String, CodingKey {
+    case time
+  }
+  
+  
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let timestamp = try container.decode(Int.self, forKey: .time)
+    
+    self.init(timestamp: timestamp)
+  }
+}
+
+
+
