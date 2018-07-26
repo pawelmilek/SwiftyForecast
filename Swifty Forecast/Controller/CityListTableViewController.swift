@@ -13,6 +13,14 @@ class CityListTableViewController: UITableViewController {
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
     autocompleteVC.delegate = self
+    
+    autocompleteVC.primaryTextColor = .orange
+    autocompleteVC.primaryTextHighlightColor =  UIColor.orange.withAlphaComponent(0.6)
+    autocompleteVC.secondaryTextColor = .blackShade
+    autocompleteVC.tableCellSeparatorColor = UIColor.blackShade.withAlphaComponent(0.7)
+    autocompleteVC.setSearchTextInSearchBar(color: .orange, andFont: UIFont.systemFont(ofSize: 14, weight: .light))
+    autocompleteVC.setSearchTextFieldPlaceholder(color: UIColor.blackShade.withAlphaComponent(0.6), andFont: UIFont.systemFont(ofSize: 14, weight: .regular))
+    autocompleteVC.setSearchBarCancelButton(color: .orange, andFont: UIFont.systemFont(ofSize: 14, weight: .regular))
     return autocompleteVC
   }()
   
@@ -68,6 +76,7 @@ extension CityListTableViewController: ViewSetupable {
   
   func setupStyle() {
     tableView.separatorColor = .white
+//    view.backgroundColor = .orange
     setTransparentTableViewBackground()
   }
 }
@@ -77,7 +86,7 @@ extension CityListTableViewController: ViewSetupable {
 private extension CityListTableViewController {
   
   func setTransparentTableViewBackground() {
-    let backgroundImage = UIImage(named: "background-default.png")
+    let backgroundImage = UIImage(named: "swifty_background")
     let imageView = UIImageView(image: backgroundImage)
     imageView.contentMode = .scaleAspectFill
     
@@ -148,6 +157,10 @@ extension CityListTableViewController {
       cities.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .fade)
     }
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 80
   }
   
 }

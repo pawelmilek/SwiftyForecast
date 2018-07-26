@@ -40,6 +40,7 @@
 		E23CD76320ED9A3500F0F72A /* UICollectionView+Registrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76220ED9A3500F0F72A /* UICollectionView+Registrable.swift */; };
 		E23CD76720EDBC6900F0F72A /* FontWeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76620EDBC6900F0F72A /* FontWeatherIcon.swift */; };
 		E23CD76920EDBCDB00F0F72A /* ConditionFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */; };
+		E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */; };
 		E24FEB7720F684E1003E7861 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00920F97C4D00E4C115 /* CitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00820F97C4D00E4C115 /* CitySearchBar.swift */; };
@@ -122,6 +123,7 @@
 		E23CD76220ED9A3500F0F72A /* UICollectionView+Registrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Registrable.swift"; sourceTree = "<group>"; };
 		E23CD76620EDBC6900F0F72A /* FontWeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIcon.swift; sourceTree = "<group>"; };
 		E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionFontIcon.swift; sourceTree = "<group>"; };
+		E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSAutocompleteViewController+SearchBarStyle.swift"; sourceTree = "<group>"; };
 		E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00820F97C4D00E4C115 /* CitySearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySearchBar.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */,
+				E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */,
 				E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */,
 				E27E2FAE1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift */,
 				E27E2FAF1DA04D1D00B3EABF /* UITableView+Registrable.swift */,
@@ -680,6 +683,7 @@
 				E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
 				E221C23020FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
+				E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */,
 				E239980320E85987007D8CE4 /* DailyForecast.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* WebServiceError.swift in Sources */,
 				E23997F020E84371007D8CE4 /* WebServiceResultType.swift in Sources */,

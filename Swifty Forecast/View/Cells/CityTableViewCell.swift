@@ -9,7 +9,9 @@
 import UIKit
 
 class CityTableViewCell: UITableViewCell {
-  @IBOutlet weak var cityNameLabel: UILabel!
+  @IBOutlet private weak var currentTimeLabel: UILabel!
+  @IBOutlet private weak var cityNameLabel: UILabel!
+  @IBOutlet private weak var temperatureLabel: UILabel!
   
   
   override func awakeFromNib() {
@@ -29,11 +31,19 @@ class CityTableViewCell: UITableViewCell {
 extension CityTableViewCell: ViewSetupable {
   
   func setup() {
-    self.backgroundColor = .clear
+    backgroundColor = .clear
     
-    self.cityNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-    self.cityNameLabel.textColor = .white
-    self.cityNameLabel.textAlignment = .left
+    currentTimeLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+    currentTimeLabel.textColor = UIColor.blackShade
+    currentTimeLabel.textAlignment = .left
+    
+    cityNameLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+    cityNameLabel.textColor = .white
+    cityNameLabel.textAlignment = .left
+    
+    temperatureLabel.font = UIFont.systemFont(ofSize: 66, weight: .light)
+    temperatureLabel.textColor = .white
+    temperatureLabel.textAlignment = .right
   }
   
 }
@@ -44,11 +54,17 @@ extension CityTableViewCell {
   
   func configure(by item: City?) {
     if let city = item {
-      cityNameLabel.text = "\(city.name), \(city.country)"
+      cityNameLabel.text = city.name
       cityNameLabel.alpha = 1
     } else {
+//      currentTimeLabel.text = ""
+//      currentTimeLabel.alpha = 0
+      
       cityNameLabel.text = ""
       cityNameLabel.alpha = 0
+      
+//      temperatureLabel.text = ""
+//      temperatureLabel.alpha = 0
     }
   }
 }

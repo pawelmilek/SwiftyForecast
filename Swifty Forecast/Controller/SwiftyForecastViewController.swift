@@ -147,7 +147,8 @@ private extension SwiftyForecastViewController {
     
     GooglePlacesHelper.getCurrentPlace() { (place, error) in
       if let error = error {
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places error: \(error.localizedDescription)")
+        ActivityIndicator.shared.stopAnimating()
+        AlertViewPresenter.shared.presentError(withMessage: "Google Places: \(error.localizedDescription)")
         return
       }
       
@@ -177,7 +178,8 @@ private extension SwiftyForecastViewController {
         })
         
       } else {
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places error: No place found.")
+        ActivityIndicator.shared.stopAnimating()
+        AlertViewPresenter.shared.presentError(withMessage: "Google Places: No place found.")
       }
     }
   }
