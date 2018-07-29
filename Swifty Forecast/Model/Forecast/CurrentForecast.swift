@@ -38,9 +38,9 @@ extension CurrentForecast {
   
   var temperatureFormatted: String {
     if MeasuringSystem.isMetric {
-      return temperatureInCelsius.convertedToString + "\u{00B0}"
+      return temperatureInCelsius.roundedToNearestAsString + "\u{00B0}"
     } else {
-      return temperature.convertedToString + "\u{00B0}"
+      return temperature.roundedToNearestAsString + "\u{00B0}"
     }
   }
   

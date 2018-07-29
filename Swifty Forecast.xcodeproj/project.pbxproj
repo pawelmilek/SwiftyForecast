@@ -43,7 +43,6 @@
 		E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */; };
 		E24FEB7720F684E1003E7861 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
-		E25EF00920F97C4D00E4C115 /* CitySearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00820F97C4D00E4C115 /* CitySearchBar.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
 		E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */; };
 		E268FEE220FC29C50038F015 /* SwiftyForecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E268FEE020FC29C50038F015 /* SwiftyForecast.xcdatamodeld */; };
@@ -54,7 +53,7 @@
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
 		E27E2F8C1DA048B600B3EABF /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8B1DA048B600B3EABF /* CityTableViewCell.swift */; };
 		E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */; };
-		E27E2F921DA04C8C00B3EABF /* Double+RoundToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */; };
+		E27E2F921DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F911DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift */; };
 		E27E2FB41DA04D1D00B3EABF /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F931DA04D1D00B3EABF /* City.swift */; };
 		E27E2FB51DA04D1D00B3EABF /* CityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F941DA04D1D00B3EABF /* CityTableViewCell.xib */; };
 		E27E2FB61DA04D1D00B3EABF /* CityListTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F951DA04D1D00B3EABF /* CityListTableViewControllerDelegate.swift */; };
@@ -126,7 +125,6 @@
 		E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSAutocompleteViewController+SearchBarStyle.swift"; sourceTree = "<group>"; };
 		E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
-		E25EF00820F97C4D00E4C115 /* CitySearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySearchBar.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
 		E268FEE120FC29C50038F015 /* SwiftyForecast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftyForecast.xcdatamodel; sourceTree = "<group>"; };
@@ -137,7 +135,7 @@
 		E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E27E2F8B1DA048B600B3EABF /* CityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+RoundToString.swift"; sourceTree = "<group>"; };
+		E27E2F911DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Double+RoundedToNearestAsString.swift"; sourceTree = "<group>"; };
 		E27E2F931DA04D1D00B3EABF /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		E27E2F941DA04D1D00B3EABF /* CityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityTableViewCell.xib; sourceTree = "<group>"; };
 		E27E2F951DA04D1D00B3EABF /* CityListTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 				E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
-				E25EF00720F97C3400E4C115 /* CitySearchBar */,
 				E206E1CC20EC5E5E00AC72EA /* Forecasts */,
 				E23997F120E84389007D8CE4 /* AlertView */,
 				E23997D920E840E4007D8CE4 /* Cells */,
@@ -333,7 +330,7 @@
 		E23997DD20E84158007D8CE4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E27E2F911DA04C8C00B3EABF /* Double+RoundToString.swift */,
+				E27E2F911DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift */,
 				E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */,
 				E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */,
 				E27E2FAE1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift */,
@@ -430,14 +427,6 @@
 				E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */,
 			);
 			path = WeatherFontIcon;
-			sourceTree = "<group>";
-		};
-		E25EF00720F97C3400E4C115 /* CitySearchBar */ = {
-			isa = PBXGroup;
-			children = (
-				E25EF00820F97C4D00E4C115 /* CitySearchBar.swift */,
-			);
-			path = CitySearchBar;
 			sourceTree = "<group>";
 		};
 		E29911ED1D456EAC0083B484 = {
@@ -639,14 +628,13 @@
 				E206E1C320E9683B00AC72EA /* DailyData.swift in Sources */,
 				E206E1C920E9C2E500AC72EA /* WeatherForecast.swift in Sources */,
 				E24FEB7720F684E1003E7861 /* ActivityIndicator.swift in Sources */,
-				E27E2F921DA04C8C00B3EABF /* Double+RoundToString.swift in Sources */,
+				E27E2F921DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift in Sources */,
 				E2E0762320F51577008A5B63 /* UIFont+FontWeatherIcon.swift in Sources */,
 				E206E1D220EC76E100AC72EA /* CurrentForecastViewDelegate.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */,
 				E27E2FC91DA04D1D00B3EABF /* MoonPhase.swift in Sources */,
 				E27E2F8C1DA048B600B3EABF /* CityTableViewCell.swift in Sources */,
-				E25EF00920F97C4D00E4C115 /* CitySearchBar.swift in Sources */,
 				E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */,
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
 				E2E0762520F5165E008A5B63 /* FontLoader.swift in Sources */,

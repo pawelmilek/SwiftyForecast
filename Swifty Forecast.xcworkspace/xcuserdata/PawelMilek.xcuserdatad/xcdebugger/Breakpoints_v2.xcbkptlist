@@ -38,16 +38,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Model/City.swift"
-            timestampString = "553830873.639834"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.47308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "init(place:managedObjectContext:)"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.473882"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.474278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swifty_Forecast.WebServiceResultType&lt;Swifty_Forecast.ForecastResponse, Swifty_Forecast.WebServiceError&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.GMSPlace&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Swifty_Forecast.SwiftyForecastViewController.(fetchWeatherForecastForCurrentLocation in _E9022E50EE2CDF698E37066DEE7D319F)() -&gt; ()"
+                  moduleName = "Swifty Forecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/Swifty%20Forecast/Swifty%20Forecast/Controller/SwiftyForecastViewController.swift"
+                  timestampString = "554515485.2803839"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "2096">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swifty_Forecast.City) -&gt; () in closure #1 () -&gt; () in closure #1 (Swifty_Forecast.WebServiceResultType&lt;Swifty_Forecast.ForecastResponse, Swifty_Forecast.WebServiceError&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.GMSPlace&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Swifty_Forecast.SwiftyForecastViewController.(fetchWeatherForecastForCurrentLocation in _E9022E50EE2CDF698E37066DEE7D319F)() -&gt; ()"
+                  moduleName = "Swifty Forecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/Swifty%20Forecast/Swifty%20Forecast/Controller/SwiftyForecastViewController.swift"
+                  timestampString = "554515485.282416"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.474683"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.475078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swifty Forecast/Controller/SwiftyForecastViewController.swift"
+            timestampString = "554516381.47548"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "fetchWeatherForecastForCurrentLocation()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

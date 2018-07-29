@@ -27,8 +27,12 @@ class ManagedObjectContextHelper {
 
 extension ManagedObjectContextHelper {
   
-  func saveContext() {
+  func save() {
     ManagedObjectContextHelper.shared.appDelegate.saveContext()
+  }
+  
+  func reset() {
+     ManagedObjectContextHelper.shared.mainContext.reset()
   }
   
 }

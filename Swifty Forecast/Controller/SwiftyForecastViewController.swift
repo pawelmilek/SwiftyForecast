@@ -14,6 +14,8 @@ class SwiftyForecastViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
+  private let sharedMOC = ManagedObjectContextHelper.shared
+  
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = ["℉", "℃"]
@@ -32,10 +34,10 @@ class SwiftyForecastViewController: UIViewController {
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
-  private var citysForecast: City? {
+  private var currentCityForecast: City? {
     didSet {
-      guard let citysForecast = citysForecast else { return }
-      fetchWeatherForecast(for: citysForecast)
+      guard let currentCityForecast = currentCityForecast else { return }
+      fetchWeatherForecast(for: currentCityForecast)
     }
   }
   
@@ -134,8 +136,8 @@ private extension SwiftyForecastViewController {
 private extension SwiftyForecastViewController {
   
   func fetchWeatherForecast() {
-    if let citysForecast = citysForecast {
-      fetchWeatherForecast(for: citysForecast)
+    if let currentCityForecast = currentCityForecast {
+      fetchWeatherForecast(for: currentCityForecast)
     } else {
       fetchWeatherForecastForCurrentLocation()
     }
@@ -162,10 +164,30 @@ private extension SwiftyForecastViewController {
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
-              let city = City(place: place, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
-              self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
+              let unassociatedCity = City(place: place)
+              self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
-              ManagedObjectContextHelper.shared.saveContext()
+              if City.isDuplicate(city: unassociatedCity) == false {
+                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
+                self.sharedMOC.save()
+              } else {
+                // TODO: Update exists record and save
+                let request = City.createFetchRequest()
+                let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", unassociatedCity.name, unassociatedCity.country, unassociatedCity.coordinate)
+                request.predicate = predicate
+                
+                do {
+                  let result = try self.sharedMOC.mainContext.fetch(request)
+                  result.forEach {
+                    $0.coordinate = unassociatedCity.coordinate // update current forecast
+                  }
+                  
+                  self.sharedMOC.save()
+                } catch {
+                  CoreDataError.couldNotFetch.handle()
+                }
+              }
+              
               ActivityIndicator.shared.stopAnimating()
             }
             
@@ -209,7 +231,7 @@ private extension SwiftyForecastViewController {
   
   // MARK: - TESTING!
   func clearStorage() {
-    let managedObjectContext = ManagedObjectContextHelper.shared.mainContext
+    let managedObjectContext = sharedMOC.mainContext
     let cityFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: City.entityName)
     let coordinateFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Coordinate.entityName)
     let cityBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: cityFetchRequest)
@@ -226,7 +248,7 @@ private extension SwiftyForecastViewController {
   
   
   func fetchFromStorage() -> [City]? {
-    let managedObjectContext = ManagedObjectContextHelper.shared.mainContext
+    let managedObjectContext = sharedMOC.mainContext
     let fetchRequest = City.createFetchRequest()
     let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
     let countrySortDescriptor = NSSortDescriptor(key: "country", ascending: true)
@@ -273,7 +295,7 @@ extension SwiftyForecastViewController: CurrentForecastViewDelegate {
 }
 
 
-// MARK: - Private - animateBouncingEffect
+// MARK: - Private - Animate bouncing effect
 private extension SwiftyForecastViewController {
   
   func animateBouncingEffect() {
@@ -291,7 +313,7 @@ private extension SwiftyForecastViewController {
 extension SwiftyForecastViewController: CityListTableViewControllerDelegate {
   
   func cityListController(_ cityListTableViewController: CityListTableViewController, didSelect city: City) {
-    self.citysForecast = city
+    self.currentCityForecast = city
   }
   
 }

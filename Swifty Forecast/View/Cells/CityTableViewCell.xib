@@ -12,15 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="wMT-az-3p6" customClass="CityTableViewCell" customModule="Swifty_Forecast" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="66" id="wMT-az-3p6" customClass="CityTableViewCell" customModule="Swifty_Forecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMT-az-3p6" id="rHv-BN-8ye">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="70.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WN-FJ-OgU">
-                        <rect key="frame" x="16" y="37.5" width="111" height="36"/>
+                        <rect key="frame" x="16" y="24" width="111" height="36"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,7 +32,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="89" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZS-7y-BRr">
-                        <rect key="frame" x="280.5" y="11" width="78.5" height="63"/>
+                        <rect key="frame" x="280.5" y="11" width="78.5" height="49"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="66"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                 <outlet property="currentTimeLabel" destination="ZmF-mV-Gx2" id="qbR-la-GPF"/>
                 <outlet property="temperatureLabel" destination="8ZS-7y-BRr" id="GGm-mO-Qdm"/>
             </connections>
-            <point key="canvasLocation" x="246.5" y="-101.5"/>
+            <point key="canvasLocation" x="246.5" y="-108.5"/>
         </tableViewCell>
     </objects>
 </document>

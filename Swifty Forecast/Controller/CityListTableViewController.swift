@@ -10,6 +10,8 @@ import UIKit
 import GooglePlaces
 
 class CityListTableViewController: UITableViewController {
+  private let sharedMOC = ManagedObjectContextHelper.shared
+  
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
     autocompleteVC.delegate = self
@@ -46,11 +48,16 @@ class CityListTableViewController: UITableViewController {
     
     view.trailingAnchor.constraint(equalTo: addNewCityButton.trailingAnchor, constant: 8).isActive = true
     view.centerYAnchor.constraint(equalTo: addNewCityButton.centerYAnchor).isActive = true
-
+    
     return view
   }()
   
-  private var cities: [City] = []
+  private var cities: [City] = [] {
+    didSet {
+      tableView.reloadData()
+    }
+  }
+  
   weak var delegate: CityListTableViewControllerDelegate?
   
   
@@ -60,6 +67,10 @@ class CityListTableViewController: UITableViewController {
     self.setup()
     self.setupStyle()
   }
+  
+  deinit {
+    ManagedObjectContextHelper.shared.mainContext.reset()
+  }
 }
 
 
@@ -67,18 +78,45 @@ class CityListTableViewController: UITableViewController {
 extension CityListTableViewController: ViewSetupable {
   
   func setup() {
+    setTableview()
+    fetchCities()
+  }
+  
+  
+  func setupStyle() {
+    tableView.separatorColor = .white
+    setTransparentTableViewBackground()
+  }
+}
+
+
+// MARK: - Private - Set tableview
+private extension CityListTableViewController {
+  
+  func setTableview() {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
     tableView.tableFooterView = footerView
   }
   
+}
+
+
+// MARK: - Private - fetch cities
+private extension CityListTableViewController {
   
-  func setupStyle() {
-    tableView.separatorColor = .white
-//    view.backgroundColor = .orange
-    setTransparentTableViewBackground()
+  func fetchCities() {
+    let fetchRequest = City.createFetchRequest()
+    
+    do {
+      cities = try sharedMOC.mainContext.fetch(fetchRequest)
+    } catch {
+      CoreDataError.couldNotFetch.handle()
+    }
+    
   }
+  
 }
 
 
@@ -97,7 +135,7 @@ private extension CityListTableViewController {
 }
 
 
-// MARK: - Private add new city
+// MARK: - Private - Actions
 private extension CityListTableViewController {
   
   @objc func backButtonTapped(_ sender: UIButton?) {
@@ -112,16 +150,29 @@ private extension CityListTableViewController {
     present(autocompleteController, animated: true)
   }
   
+}
+
+
+
+// MARK: - Private - Insert/Delete city
+private extension CityListTableViewController {
   
-  func addNewCity(_ city: City) {
-    cities.append(city)
-    tableView.reloadData()
+  func insert(city: City) {
+    let newCity = City(unassociatedObject: city, managedObjectContext: sharedMOC.mainContext)
+    cities.append(newCity)
+    sharedMOC.save()
+  }
+  
+  
+  func deleteCity(at indexPath: IndexPath) {
+    let removed = cities.remove(at: indexPath.row)
+    //    sharedMOC.save()
   }
   
 }
 
 
-// MARK: GMSAutocompleteViewControllerDelegate protocol
+// MARK: - UITableViewDataSource protocol
 extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -154,13 +205,13 @@ extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      cities.remove(at: indexPath.row)
+      deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)
     }
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+    return 66
   }
   
 }
@@ -170,9 +221,9 @@ extension CityListTableViewController {
 extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    let selectedCity = City(place: place, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
+    let selectedCity = City(place: place)
     
-    addNewCity(selectedCity)
+    insert(city: selectedCity)
     dismiss(animated: true, completion: nil)
   }
   

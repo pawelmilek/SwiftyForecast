@@ -194,7 +194,7 @@ extension CurrentForecastView {
 }
 
 
-// MARK: - Configure current forecast
+// MARK: - Animate labels
 extension CurrentForecastView {
   
   func animateLabelsScaling() {

@@ -1,5 +1,5 @@
 //
-//  Double+RoundToString.swift
+//  Double+RoundedToNearestAsString.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 28/09/16.
@@ -10,8 +10,8 @@ import Foundation
 
 extension Double {
   
-  var convertedToString: String {
-    return String(format: "%.0f", self)
+  var roundedToNearestAsString: String {
+    return String(format: "%.0f", self.rounded())
   }
   
 }
