@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 @objc protocol ViewSetupable: class {
   func setup()
   @objc optional func setupStyle()

@@ -44,7 +44,7 @@ final class City: NSManagedObject {
   
   
   convenience init(place: GMSPlace) {
-    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: ManagedObjectContextHelper.shared.mainContext)!
+    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.mainContext)!
     self.init(entity: entity, insertInto: nil)
     
     let addressComponents = place.addressComponents
@@ -93,7 +93,7 @@ extension City {
     request.predicate = predicate
     
     do {
-      let result = try ManagedObjectContextHelper.shared.mainContext.fetch(request)
+      let result = try CoreDataStackHelper.shared.mainContext.fetch(request)
       if result.count > 0 {
         return true
       } else {

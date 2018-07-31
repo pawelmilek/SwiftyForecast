@@ -10,7 +10,7 @@ import UIKit
 import GooglePlaces
 
 class CityListTableViewController: UITableViewController {
-  private let sharedMOC = ManagedObjectContextHelper.shared
+  private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
@@ -69,7 +69,7 @@ class CityListTableViewController: UITableViewController {
   }
   
   deinit {
-    ManagedObjectContextHelper.shared.mainContext.reset()
+    CoreDataStackHelper.shared.mainContext.reset()
   }
 }
 
@@ -158,15 +158,35 @@ private extension CityListTableViewController {
 private extension CityListTableViewController {
   
   func insert(city: City) {
-    let newCity = City(unassociatedObject: city, managedObjectContext: sharedMOC.mainContext)
-    cities.append(newCity)
-    sharedMOC.save()
+    let managedContex = sharedMOC.mainContext
+    let newCity = City(unassociatedObject: city, managedObjectContext: managedContex)
+  
+    do {
+      try managedContex.save()
+      cities.append(newCity)
+    } catch {
+      CoreDataError.couldNotSave.handle()
+    }
+    
   }
   
   
   func deleteCity(at indexPath: IndexPath) {
     let removed = cities.remove(at: indexPath.row)
-    //    sharedMOC.save()
+    let request = City.createFetchRequest()
+    let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", removed.name, removed.country, removed.coordinate)
+    request.predicate = predicate
+    
+//    do {
+//      let result = try sharedMOC.mainContext.fetch(request)
+//      result.forEach {
+//        sharedMOC.mainContext.delete($0)
+//      }
+//      
+//      sharedMOC.save()
+//    } catch {
+//      CoreDataError.couldNotFetch.handle()
+//    }
   }
   
 }

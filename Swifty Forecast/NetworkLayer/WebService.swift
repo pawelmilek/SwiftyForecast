@@ -40,7 +40,7 @@ extension WebService {
         return
       }
       
-      completionHandler(Parser<M>.parseJSON(data, with: ManagedObjectContextHelper.shared.mainContext))
+      completionHandler(Parser<M>.parseJSON(data, with: CoreDataStackHelper.shared.mainContext))
       }.resume()
   }
 }

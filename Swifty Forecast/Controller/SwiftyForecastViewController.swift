@@ -14,7 +14,7 @@ class SwiftyForecastViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
-  private let sharedMOC = ManagedObjectContextHelper.shared
+  private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
@@ -164,12 +164,19 @@ private extension SwiftyForecastViewController {
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
+              let managedContex = CoreDataStackHelper.shared.mainContext
+              
               let unassociatedCity = City(place: place)
               self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if City.isDuplicate(city: unassociatedCity) == false {
-                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: ManagedObjectContextHelper.shared.mainContext)
-                self.sharedMOC.save()
+                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: managedContex)
+                do {
+                  try managedContex.save()
+                } catch {
+                  CoreDataError.couldNotSave.handle()
+                }
+                
               } else {
                 // TODO: Update exists record and save
                 let request = City.createFetchRequest()
@@ -177,12 +184,12 @@ private extension SwiftyForecastViewController {
                 request.predicate = predicate
                 
                 do {
-                  let result = try self.sharedMOC.mainContext.fetch(request)
+                  let result = try managedContex.fetch(request)
                   result.forEach {
                     $0.coordinate = unassociatedCity.coordinate // update current forecast
                   }
                   
-                  self.sharedMOC.save()
+                  try managedContex.save()
                 } catch {
                   CoreDataError.couldNotFetch.handle()
                 }

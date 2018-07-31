@@ -11,7 +11,7 @@ import UIKit
 
 final class AlertViewPresenter {
   static let shared = AlertViewPresenter()
-  weak var delegate: AlertViewPresenterDelegate?
+  typealias SubmitCompletionHandler = (String) -> ()
   
   private init() {}
 }
@@ -20,13 +20,13 @@ final class AlertViewPresenter {
 // MARK: - Present submit Alert
 extension AlertViewPresenter {
   
-  func presentSubmitAlert(in viewController: UIViewController, title: String, message: String, textFieldConfiguration: ((UITextField) -> ())? = nil) {
+  func presentSubmitAlert(in viewController: UIViewController, title: String, message: String, textFieldConfiguration: ((UITextField) -> ())? = nil, submitCompletionHandler: @escaping SubmitCompletionHandler) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addTextField(configurationHandler: textFieldConfiguration)
     
     let submitAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
-      guard let textField = alert.textFields?.first, textField.text?.isEmpty == false else { return }
-      self.delegate?.alertView(self, didSubmit: textField.text!)
+      guard let textField = alert.textFields?.first, let text = textField.text else { return }
+      submitCompletionHandler(text)
     })
     
     let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
@@ -45,7 +45,7 @@ extension AlertViewPresenter {
   func presentError(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
     let alertWindow = UIWindow(frame: UIScreen.main.bounds)
     alertWindow.rootViewController = UIViewController()
-    alertWindow.windowLevel = UIWindowLevelAlert + 1;
+    alertWindow.windowLevel = UIWindowLevelAlert + 1
     alertWindow.makeKeyAndVisible()
     
     let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)

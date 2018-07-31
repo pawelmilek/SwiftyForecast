@@ -1,5 +1,5 @@
 //
-//  ManagedObjectContextHelper.swift
+//  CoreDataStackHelper.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 18/07/2018.
@@ -10,29 +10,15 @@ import Foundation
 import UIKit
 import CoreData
 
-class ManagedObjectContextHelper {
-  static let shared = ManagedObjectContextHelper()
+class CoreDataStackHelper {
+  static let shared = CoreDataStackHelper()
   
   private var appDelegate: AppDelegate
-  var mainContext: NSManagedObjectContext
+  let mainContext: NSManagedObjectContext
   
   
   private init() {
     self.appDelegate = UIApplication.shared.delegate as! AppDelegate
     self.mainContext = self.appDelegate.persistentContainer.viewContext
   }
-}
-
-
-
-extension ManagedObjectContextHelper {
-  
-  func save() {
-    ManagedObjectContextHelper.shared.appDelegate.saveContext()
-  }
-  
-  func reset() {
-     ManagedObjectContextHelper.shared.mainContext.reset()
-  }
-  
 }

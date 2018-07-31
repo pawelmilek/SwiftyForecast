@@ -18,7 +18,7 @@
 		E221C22620FFACAE00CBB8F2 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */; };
 		E221C22820FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */; };
 		E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */; };
-		E221C23020FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22F20FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift */; };
+		E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E120E84371007D8CE4 /* ForecastRequest.swift */; };
 		E23997EB20E84371007D8CE4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebService.swift */; };
@@ -28,7 +28,6 @@
 		E23997EF20E84371007D8CE4 /* ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E720E84371007D8CE4 /* ErrorHandleable.swift */; };
 		E23997F020E84371007D8CE4 /* WebServiceResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E820E84371007D8CE4 /* WebServiceResultType.swift */; };
 		E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
-		E23997F520E84389007D8CE4 /* AlertViewPresenterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F320E84389007D8CE4 /* AlertViewPresenterDelegate.swift */; };
 		E23997FA20E8498D007D8CE4 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F920E8498D007D8CE4 /* ForecastResponse.swift */; };
 		E23997FC20E84AFB007D8CE4 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997FB20E84AFB007D8CE4 /* Forecast.swift */; };
 		E23997FF20E85643007D8CE4 /* CurrentForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997FE20E85643007D8CE4 /* CurrentForecast.swift */; };
@@ -100,7 +99,7 @@
 		E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+EntityName.swift"; sourceTree = "<group>"; };
 		E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+ ManagedObjectContext.swift"; sourceTree = "<group>"; };
-		E221C22F20FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectContextHelper.swift; sourceTree = "<group>"; };
+		E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E120E84371007D8CE4 /* ForecastRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastRequest.swift; sourceTree = "<group>"; };
 		E23997E220E84371007D8CE4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
@@ -110,7 +109,6 @@
 		E23997E720E84371007D8CE4 /* ErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandleable.swift; sourceTree = "<group>"; };
 		E23997E820E84371007D8CE4 /* WebServiceResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceResultType.swift; sourceTree = "<group>"; };
 		E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
-		E23997F320E84389007D8CE4 /* AlertViewPresenterDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenterDelegate.swift; sourceTree = "<group>"; };
 		E23997F920E8498D007D8CE4 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		E23997FB20E84AFB007D8CE4 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		E23997FE20E85643007D8CE4 /* CurrentForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecast.swift; sourceTree = "<group>"; };
@@ -235,7 +233,7 @@
 				E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */,
-				E221C22F20FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift */,
+				E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -374,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */,
-				E23997F320E84389007D8CE4 /* AlertViewPresenterDelegate.swift */,
 			);
 			path = AlertView;
 			sourceTree = "<group>";
@@ -644,7 +641,6 @@
 				E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */,
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* Parser.swift in Sources */,
-				E23997F520E84389007D8CE4 /* AlertViewPresenterDelegate.swift in Sources */,
 				E27E2FC81DA04D1D00B3EABF /* MeasuringSystem.swift in Sources */,
 				E206E1D020EC5E8900AC72EA /* CurrentForecastView.swift in Sources */,
 				E27E2FB41DA04D1D00B3EABF /* City.swift in Sources */,
@@ -669,7 +665,7 @@
 				E206E1C120E9673A00AC72EA /* HourlyForecast.swift in Sources */,
 				E23997EC20E84371007D8CE4 /* WebServiceRequest.swift in Sources */,
 				E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
-				E221C23020FFCBBF00CBB8F2 /* ManagedObjectContextHelper.swift in Sources */,
+				E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
 				E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */,
 				E239980320E85987007D8CE4 /* DailyForecast.swift in Sources */,
