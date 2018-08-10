@@ -26,7 +26,7 @@ extension UIImage {
     let fontAspectRatio: CGFloat = 1.28571429
     
     let fontSize = min(size.width / fontAspectRatio, size.height)
-    let attributes: [NSAttributedStringKey: Any] = [.font: UIFont.fontWeather(size: fontSize), .foregroundColor: textColor, .backgroundColor: backgroundColor, .paragraphStyle: paragraph]
+    let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.fontWeather(size: fontSize), .foregroundColor: textColor, .backgroundColor: backgroundColor, .paragraphStyle: paragraph]
     
     let attributedString = NSAttributedString(string: type.iconCode, attributes: attributes)
     
