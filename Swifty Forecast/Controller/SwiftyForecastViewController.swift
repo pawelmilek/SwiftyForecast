@@ -122,7 +122,7 @@ private extension SwiftyForecastViewController {
     dailyForecastTableView.dataSource = self
     dailyForecastTableView.showsVerticalScrollIndicator = false
     dailyForecastTableView.allowsSelection = false
-    dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
+    dailyForecastTableView.rowHeight = UITableView.automaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
     dailyForecastTableView.backgroundColor = .white
     dailyForecastTableView.separatorStyle = .none

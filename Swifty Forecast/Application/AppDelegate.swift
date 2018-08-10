@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let googlePlacesAPIKey = "AIzaSyBRU9w0-Tlx3HWnQg13QnlXyngHHJoakkU"
   var window: UIWindow?
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setupStyle()
     return true
@@ -80,7 +80,6 @@ extension AppDelegate {
 extension AppDelegate {
   
   func setupStyle() {
-    setStatusBarStyle()
     setNavigationBarStyle()
   }
   
@@ -89,11 +88,7 @@ extension AppDelegate {
 
 // MARK: - Set UINAvigationBar Attributes
 private extension AppDelegate {
-  
-  func setStatusBarStyle() {
-    UIApplication.shared.statusBarStyle = .default
-  }
-  
+
   func setNavigationBarStyle() {
     func setTransparentBackground() {
       UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
@@ -103,7 +98,7 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = [NSAttributedStringKey.foregroundColor : UIColor.blackShade]
+      let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blackShade]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     

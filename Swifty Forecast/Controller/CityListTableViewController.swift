@@ -52,12 +52,7 @@ class CityListTableViewController: UITableViewController {
     return view
   }()
   
-  private var cities: [City] = [] {
-    didSet {
-      tableView.reloadData()
-    }
-  }
-  
+  private var cities: [City] = []
   weak var delegate: CityListTableViewControllerDelegate?
   
   
@@ -177,16 +172,18 @@ private extension CityListTableViewController {
     let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", removed.name, removed.country, removed.coordinate)
     request.predicate = predicate
     
-//    do {
-//      let result = try sharedMOC.mainContext.fetch(request)
-//      result.forEach {
-//        sharedMOC.mainContext.delete($0)
-//      }
-//      
-//      sharedMOC.save()
-//    } catch {
-//      CoreDataError.couldNotFetch.handle()
-//    }
+    do {
+      if let result = try? sharedMOC.mainContext.fetch(request) {
+        result.forEach {
+          sharedMOC.mainContext.delete($0)
+        }
+        
+        try sharedMOC.mainContext.save()
+      }
+      
+    } catch {
+      CoreDataError.couldNotSave.handle()
+    }
   }
   
 }
@@ -223,7 +220,7 @@ extension CityListTableViewController {
     return true
   }
   
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)
@@ -244,6 +241,7 @@ extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
     let selectedCity = City(place: place)
     
     insert(city: selectedCity)
+    tableView.reloadData()
     dismiss(animated: true, completion: nil)
   }
   

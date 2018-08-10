@@ -61,8 +61,8 @@ extension DailyForecastTableViewCell {
         let monthRange = fullDate.range(of: month)
         
         let attributedString = NSMutableAttributedString(string: fullDate as String)
-        attributedString.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11, weight: .bold)], range: weekdayRange)
-        attributedString.addAttributes([NSAttributedStringKey.font: UIFont.systemFont(ofSize: 11, weight: .light)], range: monthRange)
+        attributedString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11, weight: .bold)], range: weekdayRange)
+        attributedString.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 11, weight: .light)], range: monthRange)
         
         return attributedString
       }
