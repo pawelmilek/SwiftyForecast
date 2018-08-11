@@ -1,5 +1,5 @@
 //
-//  SwiftyForecastViewController.swift
+//  ForecastPageContentViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -10,31 +10,17 @@ import Foundation
 import UIKit
 import CoreData
 
-class SwiftyForecastViewController: UIViewController {
+class ForecastPageContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
+  @IBOutlet private weak var pageControl: UIPageControl!
   
   private let sharedMOC = CoreDataStackHelper.shared
   
-  private lazy var measuringSystemSegmentedControl: SegmentedControl = {
-    let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
-    segmentedControl.items = ["℉", "℃"]
-    segmentedControl.font = UIFont(name: "AvenirNext-Bold", size: 14)
-    segmentedControl.borderWidth = 1.0
-    segmentedControl.selectedLabelColor = .white
-    segmentedControl.unselectedLabelColor = .blackShade
-    segmentedControl.borderColor = .blackShade
-    segmentedControl.thumbColor = .blackShade
-    segmentedControl.selectedIndex = 0
-    segmentedControl.backgroundColor = .clear
-    segmentedControl.addTarget(self, action: #selector(SwiftyForecastViewController.measuringSystemSwitched(_:)), for: .valueChanged)
-    return segmentedControl
-  }()
-  
-  
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
-  private var currentCityForecast: City? {
+  
+  var currentCityForecast: City? {
     didSet {
       guard let currentCityForecast = currentCityForecast else { return }
       fetchWeatherForecast(for: currentCityForecast)
@@ -50,6 +36,8 @@ class SwiftyForecastViewController: UIViewController {
     }
   }
   
+  var pageIndex: Int = 0
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -60,11 +48,11 @@ class SwiftyForecastViewController: UIViewController {
 
 
 // MARK: - Preper For Seuge
-extension SwiftyForecastViewController {
+extension ForecastPageContentViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
-    guard let cityListVC = segue.destination as? CityListTableViewController else { return }
+    guard let cityListVC = segue.destination as? ForecastCityListTableViewController else { return }
     
     cityListVC.delegate = self
   }
@@ -72,20 +60,20 @@ extension SwiftyForecastViewController {
 
 
 // MARK: - ViewSetupable protocol
-extension SwiftyForecastViewController: ViewSetupable {
+extension ForecastPageContentViewController: ViewSetupable {
   
   func setup() {
     setCurrentForecastViewDelegate()
     setSupportingCurrentForecastViewConstraints()
-    setMetricSystemSegmentedControl()
     setDailyForecastTableView()
+    setPageControl()
   }
   
 }
 
 
 // MARK: - Private - Set currentForecastView delegate
-private extension SwiftyForecastViewController {
+private extension ForecastPageContentViewController {
   
   func setCurrentForecastViewDelegate() {
     currentForecastView.delegate = self
@@ -95,7 +83,7 @@ private extension SwiftyForecastViewController {
 
 
 // MARK: - Private - Set currentForecastView constraints
-private extension SwiftyForecastViewController {
+private extension ForecastPageContentViewController {
   
   func setSupportingCurrentForecastViewConstraints() {
     currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
@@ -104,18 +92,8 @@ private extension SwiftyForecastViewController {
 }
 
 
-// MARK: - Private - Set metric system segmented control
-private extension SwiftyForecastViewController {
-  
-  func setMetricSystemSegmentedControl() {
-    navigationItem.titleView = measuringSystemSegmentedControl
-  }
-  
-}
-
-
 // MARK: - Private - Set daily Forecast TableView
-private extension SwiftyForecastViewController {
+private extension ForecastPageContentViewController {
   
   func setDailyForecastTableView() {
     dailyForecastTableView.register(cellClass: DailyForecastTableViewCell.self)
@@ -132,8 +110,17 @@ private extension SwiftyForecastViewController {
 }
 
 
+// MARK: - Private - Set page control
+private extension ForecastPageContentViewController {
+  
+  func setPageControl() {
+    pageControl.currentPage = pageIndex
+  }
+}
+
+
 // MAKR: Fetch weather forecast
-private extension SwiftyForecastViewController {
+private extension ForecastPageContentViewController {
   
   func fetchWeatherForecast() {
     if let currentCityForecast = currentCityForecast {
@@ -145,7 +132,7 @@ private extension SwiftyForecastViewController {
   
   
   func fetchWeatherForecastForCurrentLocation() {
-    ActivityIndicator.shared.startAnimating(at: self.view)
+    ActivityIndicator.shared.startAnimating(at: view)
     
     GooglePlacesHelper.getCurrentPlace() { (place, error) in
       if let error = error {
@@ -164,7 +151,7 @@ private extension SwiftyForecastViewController {
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
-              let managedContex = CoreDataStackHelper.shared.mainContext
+              let managedContex = self.sharedMOC.mainContext
               
               let unassociatedCity = City(place: place)
               self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
@@ -215,7 +202,7 @@ private extension SwiftyForecastViewController {
   
   
   func fetchWeatherForecast(for city: City) {
-    ActivityIndicator.shared.startAnimating(at: self.view)
+    ActivityIndicator.shared.startAnimating(at: view)
 
     let request = ForecastRequest.make(by: city.coordinate)
     WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
@@ -235,8 +222,101 @@ private extension SwiftyForecastViewController {
     })
   }
   
+}
+
+
+// MARK: - CurrentForecastViewDelegate protocol
+extension ForecastPageContentViewController: CurrentForecastViewDelegate {
   
-  // MARK: - TESTING!
+  func currentForecastDidExpandAnimation() {
+    animateBouncingEffect()
+    
+    currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
+    dailyForecastTableViewBottomConstraint?.isActive = true
+    
+    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+      self.currentForecastView.animateLabelsScaling()
+      self.view.layoutIfNeeded()
+    })
+  }
+  
+  func currentForecastDidCollapseAnimation() {
+    let height = currentForecastView.frame.size.height
+    
+    currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
+    dailyForecastTableViewBottomConstraint?.isActive = false
+    
+    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+      self.currentForecastView.animateLabelsIdentity()
+      self.view.layoutIfNeeded()
+    })
+  }
+  
+}
+
+
+// MARK: - Private - Animate bouncing effect
+private extension ForecastPageContentViewController {
+  
+  func animateBouncingEffect() {
+    currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+    
+    UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
+      self.currentForecastView.transform = .identity
+    })
+  }
+  
+}
+
+
+// MARK: - CityListTableViewControllerDelegate protocol
+extension ForecastPageContentViewController: CityListTableViewControllerDelegate {
+  
+  func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
+    self.currentCityForecast = city
+  }
+  
+}
+
+
+// MARK: - UITableViewDataSource protcol
+extension ForecastPageContentViewController: UITableViewDataSource {
+  
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return weatherForecast?.daily.data.count ?? 0
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    guard let dailyItems = weatherForecast?.daily.data else { return UITableViewCell() }
+    
+    let item = dailyItems[indexPath.row]
+    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
+    
+    cell.configure(by: item)
+    return cell
+  }
+  
+}
+
+
+// MARK: - Actions
+extension ForecastPageContentViewController {
+  
+  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
+    MeasuringSystem.isMetric = (sender.selectedIndex == 0 ? false : true)
+    fetchWeatherForecast()
+  }
+  
+  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+    fetchWeatherForecast()
+  }
+  
+}
+
+
+// MARK: - TESTING!!
+extension ForecastPageContentViewController {
+  
   func clearStorage() {
     let managedObjectContext = sharedMOC.mainContext
     let cityFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: City.entityName)
@@ -267,96 +347,6 @@ private extension SwiftyForecastViewController {
       print(error)
       return nil
     }
-  }
-  
-}
-
-
-// MARK: - CurrentForecastViewDelegate protocol
-extension SwiftyForecastViewController: CurrentForecastViewDelegate {
-  
-  func currentForecastDidExpandAnimation() {
-    animateBouncingEffect()
-    
-    currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
-    dailyForecastTableViewBottomConstraint?.isActive = true
-    
-    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-      self.currentForecastView.animateLabelsScaling()
-      self.view.layoutIfNeeded()
-    })
-  }
-  
-  func currentForecastDidCollapseAnimation() {
-    let height = currentForecastView.frame.size.height
-    
-    currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
-    dailyForecastTableViewBottomConstraint?.isActive = false
-    
-    UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
-      self.currentForecastView.animateLabelsIdentity()
-      self.view.layoutIfNeeded()
-    })
-  }
-  
-}
-
-
-// MARK: - Private - Animate bouncing effect
-private extension SwiftyForecastViewController {
-  
-  func animateBouncingEffect() {
-    currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-    
-    UIView.animate(withDuration: 1.8, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 6.0, options: .allowUserInteraction, animations: {
-      self.currentForecastView.transform = .identity
-    })
-  }
-  
-}
-
-
-// MARK: - CityListTableViewControllerDelegate protocol
-extension SwiftyForecastViewController: CityListTableViewControllerDelegate {
-  
-  func cityListController(_ cityListTableViewController: CityListTableViewController, didSelect city: City) {
-    self.currentCityForecast = city
-  }
-  
-}
-
-
-// MARK: - UITableViewDataSource protcol
-extension SwiftyForecastViewController: UITableViewDataSource {
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return weatherForecast?.daily.data.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let dailyItems = weatherForecast?.daily.data else { return UITableViewCell() }
-    
-    let item = dailyItems[indexPath.row]
-    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
-    
-    cell.configure(by: item)
-    return cell
-  }
-  
-}
-
-
-// MARK: - Actions
-extension SwiftyForecastViewController {
-  
-  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    MeasuringSystem.isMetric = (sender.selectedIndex == 0 ? false : true)
-    fetchWeatherForecast()
-  }
-  
-  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
-    clearStorage()
-    fetchWeatherForecast()
   }
   
 }

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RCb-K9-8wf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9cO-AN-PMu">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Swifty Forecast View Controller-->
+        <!--Forecast Page Content View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SwiftyForecastViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForecastPageContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ForecastPageContentViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -53,33 +52,21 @@
                     </view>
                     <navigationItem key="navigationItem" id="uKH-Pc-zJF">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_cloud_refresh" id="flu-Un-bTJ">
-                            <inset key="imageInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
-                            <connections>
-                                <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" id="5NO-2r-Jhs"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
-                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
-                            <connections>
-                                <segue destination="ydj-fi-6FQ" kind="showDetail" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="currentForecastView" destination="5AL-Fh-OWB" id="43J-Lk-4Qs"/>
                         <outlet property="dailyForecastTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
+                        <outlet property="pageControl" destination="Fac-VP-Zav" id="9g6-Nt-aOs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1037.5999999999999" y="-589.65517241379314"/>
+            <point key="canvasLocation" x="3468" y="-587"/>
         </scene>
         <!-- -->
         <scene sceneID="a6q-Ke-vaD">
             <objects>
-                <tableViewController id="ydj-fi-6FQ" customClass="CityListTableViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ydj-fi-6FQ" customClass="ForecastCityListTableViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qv6-0V-ehs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,7 +92,31 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVY-yt-HAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1836" y="-587"/>
+            <point key="canvasLocation" x="2015" y="-587"/>
+        </scene>
+        <!--Forecast Page View Controller-->
+        <scene sceneID="F9U-19-li5">
+            <objects>
+                <pageViewController storyboardIdentifier="ForecastPageViewController" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Z8e-U3-Fyk" customClass="ForecastPageViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="2bc-7R-0J1">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_cloud_refresh" id="flu-Un-bTJ">
+                            <inset key="imageInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <action selector="refreshButtonTapped:" destination="BYZ-38-t0r" id="5NO-2r-Jhs"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
+                            <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
+                            <connections>
+                                <segue destination="ydj-fi-6FQ" kind="showDetail" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gwd-eb-MpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213.5999999999999" y="-587.4384236453202"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qkm-JD-uwf">
@@ -123,7 +134,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bs2-y6-bL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="226.875" y="-586.26760563380287"/>
+            <point key="canvasLocation" x="2734" y="-587"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="U6s-NM-fDQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9cO-AN-PMu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eCp-bU-VKM">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Z8e-U3-Fyk" kind="relationship" relationship="rootViewController" id="SAO-Rr-FTY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BG7-Xt-vkZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="271.19999999999999" y="-587.4384236453202"/>
         </scene>
     </scenes>
     <resources>

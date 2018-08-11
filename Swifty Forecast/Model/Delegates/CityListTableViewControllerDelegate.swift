@@ -9,5 +9,5 @@
 import Foundation
 
 protocol CityListTableViewControllerDelegate: class {
-  func cityListController(_ cityListTableViewController: CityListTableViewController, didSelect city: City)
+  func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City)
 }

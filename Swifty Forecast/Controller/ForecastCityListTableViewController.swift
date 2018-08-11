@@ -1,5 +1,5 @@
 //
-//  CityListTableViewController.swift
+//  ForecastCityListTableViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -9,7 +9,7 @@
 import UIKit
 import GooglePlaces
 
-class CityListTableViewController: UITableViewController {
+class ForecastCityListTableViewController: UITableViewController {
   private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
@@ -33,12 +33,12 @@ class CityListTableViewController: UITableViewController {
     let addNewCityButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     
     backButton.translatesAutoresizingMaskIntoConstraints = false
-    backButton.setImage(UIImage(named: "ic_arrow_left"), for: .normal)
-    backButton.addTarget(self, action: #selector(CityListTableViewController.backButtonTapped(_:)), for: .touchUpInside)
+    backButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
+    backButton.addTarget(self, action: #selector(ForecastCityListTableViewController.backButtonTapped(_:)), for: .touchUpInside)
     
     addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
     addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
-    addNewCityButton.addTarget(self, action: #selector(CityListTableViewController.addNewCityButtonTapped(_:)), for: .touchUpInside)
+    addNewCityButton.addTarget(self, action: #selector(ForecastCityListTableViewController.addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(backButton)
     view.addSubview(addNewCityButton)
@@ -70,7 +70,7 @@ class CityListTableViewController: UITableViewController {
 
 
 // MARK: - ViewSetupable protocol
-extension CityListTableViewController: ViewSetupable {
+extension ForecastCityListTableViewController: ViewSetupable {
   
   func setup() {
     setTableview()
@@ -86,7 +86,7 @@ extension CityListTableViewController: ViewSetupable {
 
 
 // MARK: - Private - Set tableview
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func setTableview() {
     tableView.register(cellClass: CityTableViewCell.self)
@@ -99,7 +99,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - Private - fetch cities
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func fetchCities() {
     let fetchRequest = City.createFetchRequest()
@@ -116,7 +116,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - Private - Set transparent background of TableView
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func setTransparentTableViewBackground() {
     let backgroundImage = UIImage(named: "swifty_background")
@@ -131,7 +131,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - Private - Actions
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   @objc func backButtonTapped(_ sender: UIButton?) {
     guard let _ = navigationController?.popViewController(animated: true) else {
@@ -150,7 +150,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - Private - Insert/Delete city
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
     let managedContex = sharedMOC.mainContext
@@ -190,7 +190,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - UITableViewDataSource protocol
-extension CityListTableViewController {
+extension ForecastCityListTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return cities.count
@@ -208,7 +208,7 @@ extension CityListTableViewController {
 
 
 // MARK: - UITableViewDelegate protocol
-extension CityListTableViewController {
+extension ForecastCityListTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCity = cities[indexPath.row]
@@ -235,7 +235,7 @@ extension CityListTableViewController {
 
 
 // MARK: GMSAutocompleteViewControllerDelegate protocol
-extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
+extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
     let selectedCity = City(place: place)
