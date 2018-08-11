@@ -35,13 +35,15 @@ class ForecastPageViewController: UIPageViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-//    setupStyle()
+    //    setupStyle()
   }
   
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    MeasuringSystem.isMetric = (sender.selectedIndex == 0 ? false : true)
-//    fetchWeatherForecast()
+    let notificationName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
+    
+    let segmentedControlData: [String: SegmentedControl] = ["SegmentedControl": sender]
+    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: segmentedControlData)
   }
   
 }
@@ -78,7 +80,7 @@ private extension ForecastPageViewController {
       CoreDataError.couldNotFetch.handle()
     }
   }
- 
+  
 }
 
 
@@ -140,7 +142,7 @@ extension ForecastPageViewController: UIPageViewControllerDataSource {
     if  indexOfViewController == NSNotFound || indexOfViewController == 0 {
       return nil
     }
-
+    
     return forecastViewController(at: indexOfViewController - 1)
   }
   

@@ -44,6 +44,10 @@ class ForecastPageContentViewController: UIViewController {
     setup()
     fetchWeatherForecast()
   }
+  
+  deinit {
+    removeNotificationCenterObserver()
+  }
 }
 
 
@@ -67,6 +71,7 @@ extension ForecastPageContentViewController: ViewSetupable {
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
     setPageControl()
+    addNotificationCenterObserver()
   }
   
 }
@@ -116,6 +121,21 @@ private extension ForecastPageContentViewController {
   func setPageControl() {
     pageControl.currentPage = pageIndex
   }
+}
+
+
+// MARK: - Private - NotificationCenter
+private extension ForecastPageContentViewController {
+  
+  func addNotificationCenterObserver() {
+    let name = NotificationCenterKey.measuringSystemDidSwitchNotification.name
+    NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: name, object: nil)
+  }
+  
+  func removeNotificationCenterObserver() {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
 }
 
 
@@ -302,51 +322,14 @@ extension ForecastPageContentViewController: UITableViewDataSource {
 // MARK: - Actions
 extension ForecastPageContentViewController {
   
-  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    MeasuringSystem.isMetric = (sender.selectedIndex == 0 ? false : true)
+  @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
+    guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
+    MeasuringSystem.isMetric = (segmentedControl.selectedIndex == 0 ? false : true)
     fetchWeatherForecast()
   }
   
   @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
     fetchWeatherForecast()
-  }
-  
-}
-
-
-// MARK: - TESTING!!
-extension ForecastPageContentViewController {
-  
-  func clearStorage() {
-    let managedObjectContext = sharedMOC.mainContext
-    let cityFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: City.entityName)
-    let coordinateFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Coordinate.entityName)
-    let cityBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: cityFetchRequest)
-    let coordinateBatchDeleteRequest = NSBatchDeleteRequest(fetchRequest: coordinateFetchRequest)
-    
-    do {
-      try managedObjectContext.execute(cityBatchDeleteRequest)
-      try managedObjectContext.execute(coordinateBatchDeleteRequest)
-      try managedObjectContext.save()
-    } catch let error as NSError {
-      print(error)
-    }
-  }
-  
-  
-  func fetchFromStorage() -> [City]? {
-    let managedObjectContext = sharedMOC.mainContext
-    let fetchRequest = City.createFetchRequest()
-    let nameSortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-    let countrySortDescriptor = NSSortDescriptor(key: "country", ascending: true)
-    fetchRequest.sortDescriptors = [nameSortDescriptor, countrySortDescriptor]
-    do {
-      let users = try managedObjectContext.fetch(fetchRequest)
-      return users
-    } catch let error {
-      print(error)
-      return nil
-    }
   }
   
 }
