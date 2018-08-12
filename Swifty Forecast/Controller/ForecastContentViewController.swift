@@ -1,5 +1,5 @@
 //
-//  ForecastPageContentViewController.swift
+//  ForecastContentViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -10,13 +10,11 @@ import Foundation
 import UIKit
 import CoreData
 
-class ForecastPageContentViewController: UIViewController {
+class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
-  @IBOutlet private weak var pageControl: UIPageControl!
   
   private let sharedMOC = CoreDataStackHelper.shared
-  
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   
@@ -42,43 +40,34 @@ class ForecastPageContentViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     fetchWeatherForecast()
   }
   
   deinit {
-    removeNotificationCenterObserver()
-  }
-}
-
-
-// MARK: - Preper For Seuge
-extension ForecastPageContentViewController {
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
-    guard let cityListVC = segue.destination as? ForecastCityListTableViewController else { return }
-    
-    cityListVC.delegate = self
+    removeNotificationCenterObservers()
   }
 }
 
 
 // MARK: - ViewSetupable protocol
-extension ForecastPageContentViewController: ViewSetupable {
+extension ForecastContentViewController: ViewSetupable {
   
   func setup() {
     setCurrentForecastViewDelegate()
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
-    setPageControl()
-    addNotificationCenterObserver()
+    addNotificationCenterObservers()
   }
   
 }
 
 
 // MARK: - Private - Set currentForecastView delegate
-private extension ForecastPageContentViewController {
+private extension ForecastContentViewController {
   
   func setCurrentForecastViewDelegate() {
     currentForecastView.delegate = self
@@ -88,7 +77,7 @@ private extension ForecastPageContentViewController {
 
 
 // MARK: - Private - Set currentForecastView constraints
-private extension ForecastPageContentViewController {
+private extension ForecastContentViewController {
   
   func setSupportingCurrentForecastViewConstraints() {
     currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
@@ -98,7 +87,7 @@ private extension ForecastPageContentViewController {
 
 
 // MARK: - Private - Set daily Forecast TableView
-private extension ForecastPageContentViewController {
+private extension ForecastContentViewController {
   
   func setDailyForecastTableView() {
     dailyForecastTableView.register(cellClass: DailyForecastTableViewCell.self)
@@ -115,32 +104,26 @@ private extension ForecastPageContentViewController {
 }
 
 
-// MARK: - Private - Set page control
-private extension ForecastPageContentViewController {
-  
-  func setPageControl() {
-    pageControl.currentPage = pageIndex
-  }
-}
-
-
 // MARK: - Private - NotificationCenter
-private extension ForecastPageContentViewController {
+private extension ForecastContentViewController {
   
-  func addNotificationCenterObserver() {
-    let name = NotificationCenterKey.measuringSystemDidSwitchNotification.name
-    NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: name, object: nil)
+  func addNotificationCenterObservers() {
+    let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
+    NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: measuringSystemSwitchName, object: nil)
+    
+    let refreshName = NotificationCenterKey.refreshButtonDidPressNotification.name
+    NotificationCenter.default.addObserver(self, selector: #selector(refreshButtonDidTap(_:)), name: refreshName, object: nil)
   }
   
-  func removeNotificationCenterObserver() {
+  func removeNotificationCenterObservers() {
     NotificationCenter.default.removeObserver(self)
   }
   
 }
 
 
-// MAKR: Fetch weather forecast
-private extension ForecastPageContentViewController {
+// MAKR: - Private - Fetch weather forecast
+private extension ForecastContentViewController {
   
   func fetchWeatherForecast() {
     if let currentCityForecast = currentCityForecast {
@@ -246,7 +229,7 @@ private extension ForecastPageContentViewController {
 
 
 // MARK: - CurrentForecastViewDelegate protocol
-extension ForecastPageContentViewController: CurrentForecastViewDelegate {
+extension ForecastContentViewController: CurrentForecastViewDelegate {
   
   func currentForecastDidExpandAnimation() {
     animateBouncingEffect()
@@ -276,7 +259,7 @@ extension ForecastPageContentViewController: CurrentForecastViewDelegate {
 
 
 // MARK: - Private - Animate bouncing effect
-private extension ForecastPageContentViewController {
+private extension ForecastContentViewController {
   
   func animateBouncingEffect() {
     currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -289,18 +272,8 @@ private extension ForecastPageContentViewController {
 }
 
 
-// MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastPageContentViewController: CityListTableViewControllerDelegate {
-  
-  func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
-    self.currentCityForecast = city
-  }
-  
-}
-
-
 // MARK: - UITableViewDataSource protcol
-extension ForecastPageContentViewController: UITableViewDataSource {
+extension ForecastContentViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return weatherForecast?.daily.data.count ?? 0
@@ -320,7 +293,7 @@ extension ForecastPageContentViewController: UITableViewDataSource {
 
 
 // MARK: - Actions
-extension ForecastPageContentViewController {
+extension ForecastContentViewController {
   
   @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
@@ -328,7 +301,7 @@ extension ForecastPageContentViewController {
     fetchWeatherForecast()
   }
   
-  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
+  @objc func refreshButtonDidTap(_ notification: NSNotification) {
     fetchWeatherForecast()
   }
   

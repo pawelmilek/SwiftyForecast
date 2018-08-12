@@ -54,17 +54,20 @@ extension CityTableViewCell {
   
   func configure(by item: City?) {
     if let city = item {
-      cityNameLabel.text = city.name
+      currentTimeLabel.text = ""
+      currentTimeLabel.alpha = 0
+      cityNameLabel.text = city.name + ", " + city.country
       cityNameLabel.alpha = 1
-    } else {
-//      currentTimeLabel.text = ""
-//      currentTimeLabel.alpha = 0
+      temperatureLabel.text = ""
+      temperatureLabel.alpha = 0
       
+    } else {
+      currentTimeLabel.text = ""
+      currentTimeLabel.alpha = 0
       cityNameLabel.text = ""
       cityNameLabel.alpha = 0
-      
-//      temperatureLabel.text = ""
-//      temperatureLabel.alpha = 0
+      temperatureLabel.text = ""
+      temperatureLabel.alpha = 0
     }
   }
 }

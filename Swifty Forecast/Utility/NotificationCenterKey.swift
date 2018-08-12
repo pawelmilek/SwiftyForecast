@@ -9,7 +9,9 @@
 import Foundation
 
 enum NotificationCenterKey: String {
-    case measuringSystemDidSwitchNotification = "MeasuringSystemDidSwitch"
+  case measuringSystemDidSwitchNotification = "MeasuringSystemDidSwitch"
+  case refreshButtonDidPressNotification = "RefreshButtonDidPress"
+  case reloadPagesNotification = "ReloadPagesNotification"
 }
 
 
