@@ -161,6 +161,7 @@ private extension ForecastContentViewController {
               
               if City.isDuplicate(city: unassociatedCity) == false {
                 let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: managedContex)
+                
                 do {
                   try managedContex.save()
                 } catch {

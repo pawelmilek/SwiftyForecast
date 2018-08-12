@@ -34,11 +34,11 @@ class ForecastCityListTableViewController: UITableViewController {
     
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
-    backButton.addTarget(self, action: #selector(ForecastCityListTableViewController.backButtonTapped(_:)), for: .touchUpInside)
+    backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
     
     addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
     addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
-    addNewCityButton.addTarget(self, action: #selector(ForecastCityListTableViewController.addNewCityButtonTapped(_:)), for: .touchUpInside)
+    addNewCityButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(backButton)
     view.addSubview(addNewCityButton)
@@ -61,10 +61,6 @@ class ForecastCityListTableViewController: UITableViewController {
     
     self.setup()
     self.setupStyle()
-  }
-  
-  deinit {
-    CoreDataStackHelper.shared.mainContext.reset()
   }
 }
 
@@ -228,14 +224,14 @@ extension ForecastCityListTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
+    return indexPath.row == 0 ? false : true
   }
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
-      reloadPages()
       tableView.deleteRows(at: [indexPath], with: .fade)
+      reloadPages()
     }
   }
   
@@ -253,9 +249,8 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
     let selectedCity = City(place: place)
     
     insert(city: selectedCity)
-    reloadPages()
-    
     tableView.reloadData()
+    reloadPages()
     dismiss(animated: true, completion: nil)
   }
   

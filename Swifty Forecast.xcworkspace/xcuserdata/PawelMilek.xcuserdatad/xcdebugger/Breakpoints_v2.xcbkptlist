@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.578588"
+            timestampString = "555801823.4525779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "moveToPage(at:completion:)"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
+            landmarkName = "pageViewController(_:viewControllerBefore:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.57898"
+            timestampString = "555801823.4530129"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "moveToPage(at:completion:)"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "pageViewController(_:viewControllerBefore:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.5792"
+            timestampString = "555801823.45345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "moveToPage(at:completion:)"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "pageViewController(_:viewControllerAfter:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,93 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.5794131"
+            filePath = "Swifty Forecast/Controller/ForecastCityListTableViewController.swift"
+            timestampString = "555801823.453896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "moveToPage(at:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.579698"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "moveToPage(at:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Swifty_Forecast.ForecastMainViewController.(moveToPage in _6A6FA493E51119DD16D6C3F0E53302CC)(at: Swift.Int, completion: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "Swifty Forecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PawelMilek/Dev/Swift/Swifty%20Forecast/Swifty%20Forecast/Controller/ForecastMainViewController.swift"
-                  timestampString = "555732580.7758271"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "232"
-                  endingLineNumber = "232"
-                  offsetFromSymbolStart = "664">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Bool) -&gt; () in Swifty_Forecast.ForecastMainViewController.(moveToPage in _6A6FA493E51119DD16D6C3F0E53302CC)(at: Swift.Int, completion: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()"
-                  moduleName = "Swifty Forecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PawelMilek/Dev/Swift/Swifty%20Forecast/Swifty%20Forecast/Controller/ForecastMainViewController.swift"
-                  timestampString = "555732580.777878"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "233"
-                  endingLineNumber = "233"
-                  offsetFromSymbolStart = "52">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.579926"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "moveToPage(at:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "555732580.580139"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
-            landmarkName = "moveToPage(at:completion:)"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "backButtonTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
