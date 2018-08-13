@@ -32,17 +32,14 @@ class ForecastMainViewController: UIViewController {
     pageVC.dataSource = self
     pageVC.delegate = self
     
-//    if !cities.isEmpty {
-      let forecastContentVC = forecastContentViewController(at: 0)!
-      pageVC.setViewControllers([forecastContentVC], direction: .forward, animated: true)
-//    }
-    
+    let forecastContentVC = forecastContentViewController(at: 0)!
+    pageVC.setViewControllers([forecastContentVC], direction: .forward, animated: true)
     return pageVC
   }()
   
   private var cities: [City] = [] {
     didSet {
-      pendingIndex = nil
+      pendingIndex = 0
       currentIndex = 0
     }
   }
@@ -184,8 +181,11 @@ extension ForecastMainViewController {
 extension ForecastMainViewController: CityListTableViewControllerDelegate {
   
   func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
-    guard let newPositionIndex = cities.firstIndex(of: city) else { return }
-    moveToPage(at: newPositionIndex)
+    guard let newPageIndex = cities.firstIndex(of: city) else { return }
+    moveToPage(at: newPageIndex) {
+      self.currentIndex = newPageIndex
+      self.pendingIndex = nil
+    }
   }
   
 }
@@ -196,20 +196,16 @@ private extension ForecastMainViewController {
   
   func moveToPage(at index: Int, completion: (() -> ())? = nil) {
     guard let vc = forecastContentViewController(at: index) else { return }
+    guard index < cities.count else { return }
     
-    let numberOfViewControllers = cities.count
-    if index < numberOfViewControllers {
-      if index > currentIndex {
-        pageViewController.setViewControllers([vc], direction: .forward, animated: true, completion: { complete in
-          self.currentIndex = index
-          completion?()
-        })
-        
-      } else if index < currentIndex {
-        pageViewController.setViewControllers([vc], direction: .reverse, animated: true, completion: { complete in
-          self.currentIndex = index
-          completion?()
-        })
+    if index > currentIndex {
+      pageViewController.setViewControllers([vc], direction: .forward, animated: false) { complete in
+        completion?()
+      }
+      
+    } else if index < currentIndex {
+      pageViewController.setViewControllers([vc], direction: .reverse, animated: false) { complete in
+        completion?()
       }
     }
   }
@@ -232,7 +228,6 @@ private extension ForecastMainViewController {
 private extension ForecastMainViewController {
   
   func forecastContentViewController(at index: Int) -> ForecastContentViewController? {
-//    guard cities.isEmpty == false || (index >= cities.count) == false else { return nil }
     let storyboard = UIStoryboard(storyboard: .main)
     let forecastVC = storyboard.instantiateViewController(ForecastContentViewController.self)
     forecastVC.pageIndex = index

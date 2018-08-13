@@ -154,35 +154,16 @@ private extension ForecastContentViewController {
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
-              let managedContex = self.sharedMOC.mainContext
-              
               let unassociatedCity = City(place: place)
               self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if City.isDuplicate(city: unassociatedCity) == false {
-                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: managedContex)
+                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: self.sharedMOC.mainContext)
                 
                 do {
-                  try managedContex.save()
+                  try self.sharedMOC.mainContext.save()
                 } catch {
                   CoreDataError.couldNotSave.handle()
-                }
-                
-              } else {
-                // TODO: Update exists record and save
-                let request = City.createFetchRequest()
-                let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", unassociatedCity.name, unassociatedCity.country, unassociatedCity.coordinate)
-                request.predicate = predicate
-                
-                do {
-                  let result = try managedContex.fetch(request)
-                  result.forEach {
-                    $0.coordinate = unassociatedCity.coordinate // update current forecast
-                  }
-                  
-                  try managedContex.save()
-                } catch {
-                  CoreDataError.couldNotFetch.handle()
                 }
               }
               
@@ -207,7 +188,7 @@ private extension ForecastContentViewController {
   
   func fetchWeatherForecast(for city: City) {
     ActivityIndicator.shared.startAnimating(at: view)
-
+    
     let request = ForecastRequest.make(by: city.coordinate)
     WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
       switch response {
@@ -216,7 +197,7 @@ private extension ForecastContentViewController {
           self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
           ActivityIndicator.shared.stopAnimating()
         }
-
+        
       case .failure(let error):
         DispatchQueue.main.async {
           ActivityIndicator.shared.stopAnimating()

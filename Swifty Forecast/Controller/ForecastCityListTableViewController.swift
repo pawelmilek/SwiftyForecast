@@ -15,7 +15,6 @@ class ForecastCityListTableViewController: UITableViewController {
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
     autocompleteVC.delegate = self
-    
     autocompleteVC.primaryTextColor = .orange
     autocompleteVC.primaryTextHighlightColor =  UIColor.orange.withAlphaComponent(0.6)
     autocompleteVC.secondaryTextColor = .blackShade
@@ -26,7 +25,6 @@ class ForecastCityListTableViewController: UITableViewController {
     return autocompleteVC
   }()
   
-  
   private lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
     let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
@@ -35,32 +33,28 @@ class ForecastCityListTableViewController: UITableViewController {
     backButton.translatesAutoresizingMaskIntoConstraints = false
     backButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
     backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
-    
     addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
     addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
     addNewCityButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(backButton)
     view.addSubview(addNewCityButton)
-    
     view.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0).isActive = true
     view.centerYAnchor.constraint(equalTo: backButton.centerYAnchor).isActive = true
-    
     view.trailingAnchor.constraint(equalTo: addNewCityButton.trailingAnchor, constant: 8).isActive = true
     view.centerYAnchor.constraint(equalTo: addNewCityButton.centerYAnchor).isActive = true
-    
     return view
   }()
   
   private var cities: [City] = []
+  private var citiesLocalTime: [String: String] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.setup()
-    self.setupStyle()
+    setup()
+    setupStyle()
   }
 }
 
@@ -72,7 +66,6 @@ extension ForecastCityListTableViewController: ViewSetupable {
     setTableview()
     fetchCities()
   }
-  
   
   func setupStyle() {
     tableView.separatorColor = .white
@@ -94,7 +87,7 @@ private extension ForecastCityListTableViewController {
 }
 
 
-// MARK: - Private - fetch cities
+// MARK: - Private - Fetch cities and local time
 private extension ForecastCityListTableViewController {
   
   func fetchCities() {
@@ -105,7 +98,26 @@ private extension ForecastCityListTableViewController {
     } catch {
       CoreDataError.couldNotFetch.handle()
     }
+  }
+  
+  func fetchLocalTime(at city: City, completionHandler: @escaping (_ localTime: String) -> ()) {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
     
+    GeocoderHelper.findTimezone(at: city.coordinate) { timezone, error in
+      var localTime = ""
+      
+      if let timezone = timezone {
+        formatter.timeZone = timezone
+        localTime = formatter.string(from: Date())
+        
+      } else if let _ = error {
+        localTime = "N/A"
+      }
+      
+      completionHandler(localTime)
+    }
   }
   
 }
@@ -136,13 +148,11 @@ private extension ForecastCityListTableViewController {
     }
   }
   
-  
   @objc func addNewCityButtonTapped(_ sender: UIButton) {
     present(autocompleteController, animated: true)
   }
   
 }
-
 
 
 // MARK: - Private - Insert/Delete city
@@ -205,8 +215,21 @@ extension ForecastCityListTableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
-    let item = cities[indexPath.row]
-    cell.configure(by: item)
+    let row = indexPath.row
+    let city = cities[row]
+    
+    cell.tag = row
+    
+    if let localTime = citiesLocalTime["\(row)"] {
+      cell.configure(by: city, localTime: localTime)
+    } else {
+      fetchLocalTime(at: city) { localTime in
+        self.citiesLocalTime["\(row)"] = localTime
+        if cell.tag == row {
+          cell.configure(by: city, localTime: localTime)
+        }
+      }
+    }
     
     return cell
   }
