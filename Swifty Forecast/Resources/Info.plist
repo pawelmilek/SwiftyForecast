@@ -17,15 +17,15 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>The app requires location services to get weather in your area.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app requires location services to get weather in your area.</string>
 	<key>NSLocationWhenInUsageDescription</key>
 	<string>I need to know where you are.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>The app requires location services to get weather in your area.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
