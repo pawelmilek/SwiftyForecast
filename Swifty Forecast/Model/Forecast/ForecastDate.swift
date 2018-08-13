@@ -11,8 +11,8 @@ import Foundation
 
 struct ForecastDate {
   private let timestamp: Int
-  private var date: Date
-  private var formatter: DateFormatter
+  private let date: Date
+  private let formatter: DateFormatter
   
   init(timestamp: Int) {
     self.timestamp = timestamp

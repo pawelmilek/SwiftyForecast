@@ -1,5 +1,5 @@
 //
-//  CityListTableViewController.swift
+//  ForecastCityListTableViewController.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
@@ -9,13 +9,12 @@
 import UIKit
 import GooglePlaces
 
-class CityListTableViewController: UITableViewController {
+class ForecastCityListTableViewController: UITableViewController {
   private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
     autocompleteVC.delegate = self
-    
     autocompleteVC.primaryTextColor = .orange
     autocompleteVC.primaryTextHighlightColor =  UIColor.orange.withAlphaComponent(0.6)
     autocompleteVC.secondaryTextColor = .blackShade
@@ -26,57 +25,47 @@ class CityListTableViewController: UITableViewController {
     return autocompleteVC
   }()
   
-  
   private lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
     let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     let addNewCityButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     
     backButton.translatesAutoresizingMaskIntoConstraints = false
-    backButton.setImage(UIImage(named: "ic_arrow_left"), for: .normal)
-    backButton.addTarget(self, action: #selector(CityListTableViewController.backButtonTapped(_:)), for: .touchUpInside)
-    
+    backButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
+    backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
     addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
     addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
-    addNewCityButton.addTarget(self, action: #selector(CityListTableViewController.addNewCityButtonTapped(_:)), for: .touchUpInside)
+    addNewCityButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(backButton)
     view.addSubview(addNewCityButton)
-    
     view.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0).isActive = true
     view.centerYAnchor.constraint(equalTo: backButton.centerYAnchor).isActive = true
-    
     view.trailingAnchor.constraint(equalTo: addNewCityButton.trailingAnchor, constant: 8).isActive = true
     view.centerYAnchor.constraint(equalTo: addNewCityButton.centerYAnchor).isActive = true
-    
     return view
   }()
   
   private var cities: [City] = []
+  private var citiesLocalTime: [String: String] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    self.setup()
-    self.setupStyle()
-  }
-  
-  deinit {
-    CoreDataStackHelper.shared.mainContext.reset()
+    setup()
+    setupStyle()
   }
 }
 
 
 // MARK: - ViewSetupable protocol
-extension CityListTableViewController: ViewSetupable {
+extension ForecastCityListTableViewController: ViewSetupable {
   
   func setup() {
     setTableview()
     fetchCities()
   }
-  
   
   func setupStyle() {
     tableView.separatorColor = .white
@@ -86,7 +75,7 @@ extension CityListTableViewController: ViewSetupable {
 
 
 // MARK: - Private - Set tableview
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func setTableview() {
     tableView.register(cellClass: CityTableViewCell.self)
@@ -98,8 +87,8 @@ private extension CityListTableViewController {
 }
 
 
-// MARK: - Private - fetch cities
-private extension CityListTableViewController {
+// MARK: - Private - Fetch cities and local time
+private extension ForecastCityListTableViewController {
   
   func fetchCities() {
     let fetchRequest = City.createFetchRequest()
@@ -109,14 +98,33 @@ private extension CityListTableViewController {
     } catch {
       CoreDataError.couldNotFetch.handle()
     }
+  }
+  
+  func fetchLocalTime(at city: City, completionHandler: @escaping (_ localTime: String) -> ()) {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
     
+    GeocoderHelper.findTimezone(at: city.coordinate) { timezone, error in
+      var localTime = ""
+      
+      if let timezone = timezone {
+        formatter.timeZone = timezone
+        localTime = formatter.string(from: Date())
+        
+      } else if let _ = error {
+        localTime = "N/A"
+      }
+      
+      completionHandler(localTime)
+    }
   }
   
 }
 
 
 // MARK: - Private - Set transparent background of TableView
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func setTransparentTableViewBackground() {
     let backgroundImage = UIImage(named: "swifty_background")
@@ -131,7 +139,7 @@ private extension CityListTableViewController {
 
 
 // MARK: - Private - Actions
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   @objc func backButtonTapped(_ sender: UIButton?) {
     guard let _ = navigationController?.popViewController(animated: true) else {
@@ -140,7 +148,6 @@ private extension CityListTableViewController {
     }
   }
   
-  
   @objc func addNewCityButtonTapped(_ sender: UIButton) {
     present(autocompleteController, animated: true)
   }
@@ -148,9 +155,8 @@ private extension CityListTableViewController {
 }
 
 
-
 // MARK: - Private - Insert/Delete city
-private extension CityListTableViewController {
+private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
     let managedContex = sharedMOC.mainContext
@@ -189,8 +195,19 @@ private extension CityListTableViewController {
 }
 
 
+// MARK: - Private - Reload pages
+private extension ForecastCityListTableViewController {
+  
+  func reloadPages() {
+    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
+    NotificationCenter.default.post(name: reloadPagesName, object: nil)
+  }
+  
+}
+
+
 // MARK: - UITableViewDataSource protocol
-extension CityListTableViewController {
+extension ForecastCityListTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return cities.count
@@ -198,8 +215,21 @@ extension CityListTableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
-    let item = cities[indexPath.row]
-    cell.configure(by: item)
+    let row = indexPath.row
+    let city = cities[row]
+    
+    cell.tag = row
+    
+    if let localTime = citiesLocalTime["\(row)"] {
+      cell.configure(by: city, localTime: localTime)
+    } else {
+      fetchLocalTime(at: city) { localTime in
+        self.citiesLocalTime["\(row)"] = localTime
+        if cell.tag == row {
+          cell.configure(by: city, localTime: localTime)
+        }
+      }
+    }
     
     return cell
   }
@@ -208,7 +238,7 @@ extension CityListTableViewController {
 
 
 // MARK: - UITableViewDelegate protocol
-extension CityListTableViewController {
+extension ForecastCityListTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCity = cities[indexPath.row]
@@ -217,13 +247,14 @@ extension CityListTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
+    return indexPath.row == 0 ? false : true
   }
   
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)
+      reloadPages()
     }
   }
   
@@ -235,13 +266,14 @@ extension CityListTableViewController {
 
 
 // MARK: GMSAutocompleteViewControllerDelegate protocol
-extension CityListTableViewController: GMSAutocompleteViewControllerDelegate {
+extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
     let selectedCity = City(place: place)
     
     insert(city: selectedCity)
     tableView.reloadData()
+    reloadPages()
     dismiss(animated: true, completion: nil)
   }
   

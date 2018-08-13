@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -31,27 +30,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="89" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZS-7y-BRr">
-                        <rect key="frame" x="280.5" y="11" width="78.5" height="49"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="66"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="8ZS-7y-BRr" firstAttribute="trailing" secondItem="rHv-BN-8ye" secondAttribute="trailingMargin" id="Dxu-EI-q2i"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="8ZS-7y-BRr" secondAttribute="bottom" id="TBr-AP-3EF"/>
-                    <constraint firstItem="8ZS-7y-BRr" firstAttribute="top" secondItem="rHv-BN-8ye" secondAttribute="topMargin" id="bif-lc-qJN"/>
+                    <constraint firstItem="ZmF-mV-Gx2" firstAttribute="top" secondItem="rHv-BN-8ye" secondAttribute="topMargin" id="6gY-Wv-bnO"/>
+                    <constraint firstItem="ZmF-mV-Gx2" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leadingMargin" id="Z3R-EF-oRI"/>
                     <constraint firstItem="3WN-FJ-OgU" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leadingMargin" id="gDH-WG-ybG"/>
                     <constraint firstAttribute="bottomMargin" secondItem="3WN-FJ-OgU" secondAttribute="bottom" id="mcU-sN-aMI"/>
-                    <constraint firstItem="ZmF-mV-Gx2" firstAttribute="top" secondItem="8ZS-7y-BRr" secondAttribute="top" id="xve-e6-vxi"/>
                     <constraint firstItem="ZmF-mV-Gx2" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leadingMargin" id="yOl-MP-esu"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cityNameLabel" destination="3WN-FJ-OgU" id="gku-bm-K5X"/>
                 <outlet property="currentTimeLabel" destination="ZmF-mV-Gx2" id="qbR-la-GPF"/>
-                <outlet property="temperatureLabel" destination="8ZS-7y-BRr" id="GGm-mO-Qdm"/>
             </connections>
             <point key="canvasLocation" x="246.5" y="-108.5"/>
         </tableViewCell>

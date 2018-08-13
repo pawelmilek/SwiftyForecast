@@ -10,5 +10,5 @@ import Foundation
 
 
 struct MeasuringSystem {
-    static var isMetric = false
+  static var isMetric = false
 }

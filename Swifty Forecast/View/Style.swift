@@ -42,35 +42,4 @@ struct Style {
     static let glassIconColor = UIColor.gray
   }
   
-  
-  // MARK: - RestaurantCollectionViewCell
-  struct RestaurantCell {
-    static let defaultBackgroundColor = UIColor.white
-    
-    static let restaurantNameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
-    static let restaurantNameLabelTextColor = UIColor.white
-    static let restaurantNameLabelAlignment = NSTextAlignment.left
-    static let restaurantNameLabelNumberOfLines = 1
-    
-    static let categoryTypeLabelFont = UIFont(name: "AvenirNext-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .regular)
-    static let categoryTypeLabelTextColor = UIColor.white
-    static let categoryTypeLabelAlignment = NSTextAlignment.left
-    static let categoryTypeLabelNumberOfLines = 1
-  }
-  
-  // MARK: RestaurantMapTableViewCell
-  struct RestaurantMapCell {
-    static let defaultBackgroundColor = UIColor.white
-    
-    static let nameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
-    static let nameLabelTextColor = UIColor.black
-    static let nameLabelAlignment = NSTextAlignment.left
-    static let nameLabelNumberOfLines = 1
-    
-    static let addressLabelFont = UIFont(name: "AvenirNext-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .regular)
-    static let addressLabelTextColor = UIColor.black
-    static let addressLabelAlignment = NSTextAlignment.left
-    static let addressLabelNumberOfLines = 1
-  }
-  
 }
