@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.3.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CurrentForecastView" customModule="Swifty_Forecast" customModuleProvider="target">
             <connections>
+                <outlet property="cityNameLabel" destination="UYS-vs-b5M" id="JdV-Mp-7xA"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="f79-1N-K8t"/>
                 <outlet property="dateLabel" destination="P9o-Lu-cAJ" id="W4e-2T-LEb"/>
                 <outlet property="hourlyCollectionView" destination="5mr-9e-H9P" id="NwF-l3-24P"/>
@@ -28,8 +29,8 @@
             <rect key="frame" x="0.0" y="0.0" width="327" height="133"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-sZ-wTX">
-                    <rect key="frame" x="94" y="20" width="139" height="71.5"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-sZ-wTX">
+                    <rect key="frame" x="94" y="20" width="139" height="91"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="IconLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCg-Vw-7iy">
                             <rect key="frame" x="32.5" y="0.0" width="74" height="20.5"/>
@@ -38,13 +39,19 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="DateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P9o-Lu-cAJ">
-                            <rect key="frame" x="31" y="25.5" width="77.5" height="20.5"/>
+                            <rect key="frame" x="31" y="23.5" width="77.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CityNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYS-vs-b5M" userLabel="CityNameLabel">
+                            <rect key="frame" x="11" y="47" width="117" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="TemperatureLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iJP-Hy-yyQ">
-                            <rect key="frame" x="0.0" y="51" width="139" height="20.5"/>
+                            <rect key="frame" x="0.0" y="70.5" width="139" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -72,7 +79,7 @@
                             </subviews>
                         </stackView>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5mr-9e-H9P">
-                            <rect key="frame" x="0.0" y="120" width="327" height="85"/>
+                            <rect key="frame" x="0.0" y="110" width="327" height="95"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fk7-ib-bg2">
                                 <size key="itemSize" width="50" height="50"/>
@@ -88,7 +95,7 @@
                         <constraint firstAttribute="trailing" secondItem="5mr-9e-H9P" secondAttribute="trailing" id="WA3-PK-WuZ"/>
                         <constraint firstItem="5mr-9e-H9P" firstAttribute="leading" secondItem="uyA-35-njy" secondAttribute="leading" id="d9l-si-dQF"/>
                         <constraint firstAttribute="bottom" secondItem="5mr-9e-H9P" secondAttribute="bottom" constant="10" id="dY6-60-zBw"/>
-                        <constraint firstItem="5mr-9e-H9P" firstAttribute="top" secondItem="qvg-Ks-2T7" secondAttribute="bottom" constant="55" id="daJ-sY-Xru"/>
+                        <constraint firstItem="5mr-9e-H9P" firstAttribute="top" secondItem="qvg-Ks-2T7" secondAttribute="bottom" constant="45" id="daJ-sY-Xru"/>
                         <constraint firstAttribute="height" constant="215" id="dnP-fl-HrB"/>
                         <constraint firstItem="qvg-Ks-2T7" firstAttribute="top" secondItem="uyA-35-njy" secondAttribute="top" id="lt4-pO-DXL"/>
                         <constraint firstItem="qvg-Ks-2T7" firstAttribute="centerX" secondItem="uyA-35-njy" secondAttribute="centerX" id="oeR-Q2-E26"/>
@@ -107,7 +114,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="12.5" y="-503.5"/>
+            <point key="canvasLocation" x="-42" y="-515"/>
         </view>
     </objects>
 </document>

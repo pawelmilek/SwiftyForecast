@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let googlePlacesAPIKey = "AIzaSyBRU9w0-Tlx3HWnQg13QnlXyngHHJoakkU"
   var window: UIWindow?
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setupStyle()
     return true
@@ -98,7 +98,7 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = [NSAttributedString.Key.foregroundColor : UIColor.blackShade]
+      let textAttributes = [NSAttributedStringKey.foregroundColor : UIColor.blackShade]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
