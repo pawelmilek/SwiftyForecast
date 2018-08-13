@@ -1,5 +1,5 @@
 # Swifty Forecast version 2.0 inprogress <br /><br />
-![alt text](https://user-images.githubusercontent.com/9807660/44008823-26f1e0c0-9e6d-11e8-95a0-f9307bb6cbb1.gif)
+![alt text](https://user-images.githubusercontent.com/9807660/44054150-77c1bb66-9f07-11e8-9f8f-1a610a937038.gif)
 
 
 # Swifty Forecast version 1.0 <br /><br />
