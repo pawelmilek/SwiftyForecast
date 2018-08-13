@@ -84,7 +84,7 @@ extension ForecastMainViewController: ViewSetupable {
   }
   
   func setupLayout() {
-    view.bringSubviewToFront(pageControl)
+    view.bringSubview(toFront: pageControl)
   }
 }
 
@@ -109,9 +109,9 @@ private extension ForecastMainViewController {
 private extension ForecastMainViewController {
   
   func initializePageViewController() {
-    addChild(pageViewController)
+    addChildViewController(pageViewController)
     view.addSubview(pageViewController.view)
-    pageViewController.didMove(toParent: self)
+    pageViewController.didMove(toParentViewController: self)
   }
   
 }
@@ -181,7 +181,7 @@ extension ForecastMainViewController {
 extension ForecastMainViewController: CityListTableViewControllerDelegate {
   
   func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
-    guard let newPageIndex = cities.firstIndex(of: city) else { return }
+    guard let newPageIndex = cities.index(of: city) else { return }
     moveToPage(at: newPageIndex) {
       self.currentIndex = newPageIndex
       self.pendingIndex = nil
@@ -238,7 +238,7 @@ private extension ForecastMainViewController {
   
   func index(of forecastContentViewController: ForecastContentViewController) -> Int {
     guard let city = forecastContentViewController.currentCityForecast else { return NSNotFound }
-    return cities.firstIndex(of: city) ?? NSNotFound
+    return cities.index(of: city) ?? NSNotFound
   }
   
 }

@@ -28,7 +28,7 @@ class ForecastContentViewController: UIViewController {
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
-      currentForecastView.configure(current: weatherForecast.currently)
+      currentForecastView.configure(current: weatherForecast.currently, at: weatherForecast.city)
       currentForecastView.configure(hourly: weatherForecast.hourly)
       dailyForecastTableView.reloadData()
     }
@@ -94,7 +94,7 @@ private extension ForecastContentViewController {
     dailyForecastTableView.dataSource = self
     dailyForecastTableView.showsVerticalScrollIndicator = false
     dailyForecastTableView.allowsSelection = false
-    dailyForecastTableView.rowHeight = UITableView.automaticDimension
+    dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
     dailyForecastTableView.backgroundColor = .white
     dailyForecastTableView.separatorStyle = .none

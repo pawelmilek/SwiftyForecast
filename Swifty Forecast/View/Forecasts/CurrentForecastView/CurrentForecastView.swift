@@ -12,6 +12,7 @@ final class CurrentForecastView: UIView {
   @IBOutlet private var contentView: UIView!
   @IBOutlet private weak var iconLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
+  @IBOutlet private weak var cityNameLabel: UILabel!
   @IBOutlet private weak var temperatureLabel: UILabel!
   @IBOutlet private weak var windView: ConditionView!
   @IBOutlet private weak var humidityView: ConditionView!
@@ -59,17 +60,21 @@ extension CurrentForecastView: ViewSetupable {
     setCollectionView()
     addTapGestureRecognizer()
     
-    configure(current: .none)
+    configure(current: .none, at: .none)
     configure(hourly: .none)
   }
   
   func setupStyle() {
+    iconLabel.textColor = .white
+    iconLabel.textAlignment = .center
+    
     dateLabel.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
     dateLabel.textColor = .white
     dateLabel.textAlignment = .center
     
-    iconLabel.textColor = .white
-    iconLabel.textAlignment = .center
+    cityNameLabel.font = UIFont.systemFont(ofSize: 12, weight: .ultraLight)
+    cityNameLabel.textColor = .white
+    cityNameLabel.textAlignment = .center
     
     temperatureLabel.font = UIFont.systemFont(ofSize: 90, weight: .bold)
     temperatureLabel.textColor = .white
@@ -94,7 +99,7 @@ private extension CurrentForecastView {
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     
     contentView.addSubview(backgroundImageView)
-    contentView.sendSubviewToBack(backgroundImageView)
+    contentView.sendSubview(toBack: backgroundImageView)
   }
   
 }
@@ -153,19 +158,21 @@ private extension CurrentForecastView {
 // MARK: - Configure current forecast
 extension CurrentForecastView {
   
-  func configure(current forecast: CurrentForecast?) {
+  func configure(current forecast: CurrentForecast?, at city: City?) {
     currentForecast = forecast
     
     if let forecast = forecast {
       let icon = ConditionFontIcon.make(icon: forecast.icon, font: 100)
       iconLabel.attributedText = icon?.attributedIcon
       dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
+      cityNameLabel.text = city?.name
       temperatureLabel.text = forecast.temperatureFormatted
 
       windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
       humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
       iconLabel.alpha = 1
       dateLabel.alpha = 1
+      cityNameLabel.alpha = 1
       temperatureLabel.alpha = 1
       windView.alpha = 1
       humidityView.alpha = 1
@@ -173,6 +180,7 @@ extension CurrentForecastView {
     } else {
       iconLabel.alpha = 0
       dateLabel.alpha = 0
+      cityNameLabel.alpha = 0
       temperatureLabel.alpha = 0
       windView.alpha = 0
       humidityView.alpha = 0
@@ -200,12 +208,14 @@ extension CurrentForecastView {
   func animateLabelsScaling() {
     iconLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
     dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+    cityNameLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
     temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
   }
   
   func animateLabelsIdentity() {
     iconLabel.transform = .identity
     dateLabel.transform = .identity
+    cityNameLabel.transform = .identity
     temperatureLabel.transform = .identity
   }
   
@@ -232,7 +242,7 @@ extension CurrentForecastView: UICollectionViewDataSource {
 extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 50, height: 75)
+    return CGSize(width: 50, height: 85)
   }
   
 }

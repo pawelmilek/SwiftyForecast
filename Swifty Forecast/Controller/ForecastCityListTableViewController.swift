@@ -99,27 +99,7 @@ private extension ForecastCityListTableViewController {
       CoreDataError.couldNotFetch.handle()
     }
   }
-  
-  func fetchLocalTime(at city: City, completionHandler: @escaping (_ localTime: String) -> ()) {
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    formatter.dateStyle = .none
-    
-    GeocoderHelper.findTimezone(at: city.coordinate) { timezone, error in
-      var localTime = ""
-      
-      if let timezone = timezone {
-        formatter.timeZone = timezone
-        localTime = formatter.string(from: Date())
-        
-      } else if let _ = error {
-        localTime = "N/A"
-      }
-      
-      completionHandler(localTime)
-    }
-  }
-  
+
 }
 
 
@@ -223,7 +203,7 @@ extension ForecastCityListTableViewController {
     if let localTime = citiesLocalTime["\(row)"] {
       cell.configure(by: city, localTime: localTime)
     } else {
-      fetchLocalTime(at: city) { localTime in
+      city.fetchLocalTime { localTime in
         self.citiesLocalTime["\(row)"] = localTime
         if cell.tag == row {
           cell.configure(by: city, localTime: localTime)
@@ -250,7 +230,7 @@ extension ForecastCityListTableViewController {
     return indexPath.row == 0 ? false : true
   }
   
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)

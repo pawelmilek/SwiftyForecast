@@ -45,7 +45,7 @@ extension AlertViewPresenter {
   func presentError(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
     let alertWindow = UIWindow(frame: UIScreen.main.bounds)
     alertWindow.rootViewController = UIViewController()
-    alertWindow.windowLevel = UIWindow.Level.alert + 1
+    alertWindow.windowLevel = UIWindowLevelAlert + 1
     alertWindow.makeKeyAndVisible()
     
     let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)

@@ -58,34 +58,43 @@ final class City: NSManagedObject {
 }
 
 
-// MARK: - Is city exists
+// MARK: - Fetch local time
 extension City {
   
-  var isExists: Bool {
-    guard let context = managedObjectContext else {
-      CoreDataError.notAssociatedWithManagedObjectContext(entityName: City.entityName).handle()
-      return false
-    }
+  func fetchLocalTime(completionHandler: @escaping (_ localTime: String) -> ()) {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
     
-    let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", name, country, coordinate)
-    
-    request.predicate = predicate
-    
-    do {
-      let count = try context.count(for: request)
-      if count == NSNotFound {
-        return false
-      } else {
-        return true
+    GeocoderHelper.findTimezone(at: self.coordinate) { timezone, error in
+      var localTime = ""
+      
+      if let timezone = timezone {
+        formatter.timeZone = timezone
+        localTime = formatter.string(from: Date())
+        
+      } else if let _ = error {
+        localTime = "N/A"
       }
       
-    } catch {
-      CoreDataError.entityNotFound.handle()
-      return false
+      completionHandler(localTime)
     }
   }
   
+}
+
+// MARK: - Create fetch request
+extension City {
+  
+  class func createFetchRequest() -> NSFetchRequest<City> {
+    return NSFetchRequest<City>(entityName: City.entityName)
+  }
+  
+}
+
+
+// MARK: - Is city exists
+extension City {
   
   class func isDuplicate(city: City) -> Bool {
     let request = City.createFetchRequest()
@@ -103,20 +112,6 @@ extension City {
       CoreDataError.couldNotFetch.handle()
       return false
     }
-  }
-  
-}
-
-
-// MARK: - Create fetch request
-extension City {
-  
-  class func createFetchRequest() -> NSFetchRequest<City> {
-    return NSFetchRequest<City>(entityName: City.entityName)
-  }
-  
-  class func clone(city: City) {
-    
   }
   
 }
