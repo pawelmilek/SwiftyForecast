@@ -17,6 +17,8 @@ class ForecastContentViewController: UIViewController {
   private let sharedMOC = CoreDataStackHelper.shared
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
+  private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
+  private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   
   var currentCityForecast: City? {
     didSet {
@@ -81,6 +83,8 @@ private extension ForecastContentViewController {
   
   func setSupportingCurrentForecastViewConstraints() {
     currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
+    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint = currentForecastView.stackViewBottomToMoreDetailsTopConstraint
+    currentForecastViewStackViewBottomToSafeAreaBottomConstraint = currentForecastView.stackViewBottomToSafeAreaBottomConstraint
     dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0)
   }
 }
@@ -218,6 +222,8 @@ extension ForecastContentViewController: CurrentForecastViewDelegate {
     
     currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
     dailyForecastTableViewBottomConstraint?.isActive = true
+    currentForecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = false
+    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = true
     
     UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
       self.currentForecastView.animateLabelsScaling()
@@ -230,6 +236,8 @@ extension ForecastContentViewController: CurrentForecastViewDelegate {
     
     currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
     dailyForecastTableViewBottomConstraint?.isActive = false
+    currentForecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = true
+    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = false
     
     UIView.animate(withDuration: 0.5, delay: 0.1, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
       self.currentForecastView.animateLabelsIdentity()

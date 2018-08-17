@@ -19,6 +19,8 @@ final class CurrentForecastView: UIView {
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   @IBOutlet private weak var moreDetailsView: UIView!
   @IBOutlet weak var moreDetailsViewBottomConstraint: NSLayoutConstraint!
+  @IBOutlet weak var stackViewBottomToMoreDetailsTopConstraint: NSLayoutConstraint!
+  @IBOutlet weak var stackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint!
   
   private lazy var backgroundImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
@@ -206,10 +208,25 @@ extension CurrentForecastView {
 extension CurrentForecastView {
   
   func animateLabelsScaling() {
-    iconLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-    dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-    cityNameLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-    temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+    if UIScreen.PhoneModel.isPhoneSE {
+      iconLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      cityNameLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      
+    } else if UIScreen.PhoneModel.isPhone8 {
+      iconLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+      dateLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+      cityNameLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+      temperatureLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+      
+    } else {
+      iconLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+      dateLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+      cityNameLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+      temperatureLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+    }
+
   }
   
   func animateLabelsIdentity() {

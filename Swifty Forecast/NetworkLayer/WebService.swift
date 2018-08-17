@@ -12,10 +12,6 @@ final class WebService {
   static let shared = WebService()
   
   private let sessionShared: URLSession
-  private lazy var baseURL: URL = {
-    return URL(string: "https://api.forecast.io")!
-  }()
-  
   
   private init() {
     self.sessionShared = URLSession.shared
@@ -23,10 +19,11 @@ final class WebService {
 }
 
 
+// MARK: - Fetch data
 extension WebService {
   
   func fetch<M: Decodable>(_ typeOf: M.Type, with request: WebServiceRequest, completionHandler: @escaping (WebServiceResultType<M, WebServiceError>) -> ()) {
-    let urlRequest = URLRequest(url: baseURL.appendingPathComponent(request.path))
+    let urlRequest = request.urlRequest
     let encodedURLRequest = urlRequest.encode(with: request.parameters)
     
     sessionShared.dataTask(with: encodedURLRequest) { (data, _, error) in
@@ -43,4 +40,5 @@ extension WebService {
       completionHandler(Parser<M>.parseJSON(data, with: CoreDataStackHelper.shared.mainContext))
       }.resume()
   }
+  
 }

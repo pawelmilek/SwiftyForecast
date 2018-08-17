@@ -11,7 +11,9 @@ import Foundation
 struct ForecastRequest: WebServiceRequest {
   private let secretKey = "6a92402c27dfc4740168ec5c0673a760"
   
+  var baseURL = URL(string: "https://api.forecast.io")!
   var path = "forecast"
+  var urlRequest: URLRequest
   var parameters: Parameters
   var coordinate: Coordinate
   
@@ -20,6 +22,7 @@ struct ForecastRequest: WebServiceRequest {
     self.coordinate = coordinate
     self.path.append("/\(secretKey)")
     self.path.append("/\(coordinate.latitude),\(coordinate.longitude)")
+    self.urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
   }
 }
 
