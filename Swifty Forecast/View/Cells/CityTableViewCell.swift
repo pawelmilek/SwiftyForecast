@@ -35,7 +35,7 @@ extension CityTableViewCell: ViewSetupable {
     currentTimeLabel.textColor = UIColor.blackShade
     currentTimeLabel.textAlignment = .left
     
-    cityNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
+    cityNameLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
     cityNameLabel.textColor = .white
     cityNameLabel.textAlignment = .left
     
