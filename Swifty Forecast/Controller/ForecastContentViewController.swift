@@ -96,6 +96,7 @@ private extension ForecastContentViewController {
   func setDailyForecastTableView() {
     dailyForecastTableView.register(cellClass: DailyForecastTableViewCell.self)
     dailyForecastTableView.dataSource = self
+    dailyForecastTableView.delegate = self
     dailyForecastTableView.showsVerticalScrollIndicator = false
     dailyForecastTableView.allowsSelection = false
     dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
@@ -277,6 +278,16 @@ extension ForecastContentViewController: UITableViewDataSource {
     
     cell.configure(by: item)
     return cell
+  }
+  
+}
+
+
+// MARK: - UITableViewDelegate protocol
+extension ForecastContentViewController: UITableViewDelegate {
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 40
   }
   
 }

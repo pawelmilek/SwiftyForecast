@@ -11,7 +11,6 @@ import GooglePlaces
 
 struct GooglePlacesHelper {
   static private let sharedPlacesClient = GMSPlacesClient.shared()
-  
 }
 
 
