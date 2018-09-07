@@ -58,6 +58,11 @@ class ForecastMainViewController: UIViewController {
     setupLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    showOrHideEnableLocationServicesPrompt()
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
     guard let cityListVC = segue.destination as? ForecastCityListTableViewController else { return }
@@ -86,6 +91,7 @@ extension ForecastMainViewController: ViewSetupable {
   func setupLayout() {
     view.bringSubview(toFront: pageControl)
   }
+  
 }
 
 
@@ -94,6 +100,8 @@ private extension ForecastMainViewController {
   
   func fetchCities() {
     let fetchRequest = City.createFetchRequest()
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
+    fetchRequest.sortDescriptors = [currentLocalizedSort]
     
     do {
       cities = try CoreDataStackHelper.shared.mainContext.fetch(fetchRequest)
@@ -148,6 +156,34 @@ private extension ForecastMainViewController {
   func setPageControl() {
     pageControl.currentPage = currentIndex
     pageControl.numberOfPages = cities.count
+  }
+  
+}
+
+
+// MARK: - Private - Show or hide navigation prompt
+private extension ForecastMainViewController {
+  
+  func showOrHideEnableLocationServicesPrompt() {
+    let delayInSeconds = 2.0
+    DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) { [weak self] in
+      guard let strongSelf = self else { return }
+      
+      if LocationProvider.shared.isLocationServicesEnabled {
+        strongSelf.navigationItem.prompt = nil
+        
+      } else {
+        strongSelf.navigationItem.prompt = "Please enable location services!"
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds + 3) { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.navigationItem.prompt = nil
+          strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
+        }
+      }
+      
+      strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
+    }
+
   }
   
 }

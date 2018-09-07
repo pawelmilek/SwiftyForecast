@@ -20,13 +20,7 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   
-  var currentCityForecast: City? {
-    didSet {
-      guard let currentCityForecast = currentCityForecast else { return }
-      fetchWeatherForecast(for: currentCityForecast)
-    }
-  }
-  
+  var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
@@ -63,6 +57,7 @@ extension ForecastContentViewController: ViewSetupable {
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
     addNotificationCenterObservers()
+    
   }
   
 }
@@ -109,7 +104,7 @@ private extension ForecastContentViewController {
 }
 
 
-// MARK: - Private - NotificationCenter
+// MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
@@ -131,10 +126,15 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func fetchWeatherForecast() {
-    if let currentCityForecast = currentCityForecast {
-      fetchWeatherForecast(for: currentCityForecast)
-    } else {
+    var isCurrentLocationPage: Bool {
+      return pageIndex == 0
+    }
+    
+    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled { // Check current location
       fetchWeatherForecastForCurrentLocation()
+      
+    } else if let currentCityForecast = currentCityForecast {
+      fetchWeatherForecast(for: currentCityForecast)
     }
   }
   
@@ -142,12 +142,15 @@ private extension ForecastContentViewController {
   func fetchWeatherForecastForCurrentLocation() {
     ActivityIndicator.shared.startAnimating(at: view)
     
-    GooglePlacesHelper.getCurrentPlace() { (place, error) in
+    GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
+      guard let strongSelf = self else { return }
+      
       if let error = error {
         ActivityIndicator.shared.stopAnimating()
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places: \(error.localizedDescription)")
+        error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
         return
       }
+      
       
       if let place = place {
         let latitude = place.coordinate.latitude
@@ -160,13 +163,14 @@ private extension ForecastContentViewController {
           case .success(let forecast):
             DispatchQueue.main.async {
               let unassociatedCity = City(place: place)
-              self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
+              strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if City.isDuplicate(city: unassociatedCity) == false {
-                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: self.sharedMOC.mainContext)
+                let newCurrentCity = City(unassociatedObject: unassociatedCity, isCurrentLocalized: true, managedObjectContext: strongSelf.sharedMOC.mainContext)
+                strongSelf.currentCityForecast = newCurrentCity
                 
                 do {
-                  try self.sharedMOC.mainContext.save()
+                  try strongSelf.sharedMOC.mainContext.save()
                 } catch {
                   CoreDataError.couldNotSave.handle()
                 }
@@ -185,7 +189,7 @@ private extension ForecastContentViewController {
         
       } else {
         ActivityIndicator.shared.stopAnimating()
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places: No place found.")
+        GooglePlacesError.placeNotFound.handle()
       }
     }
   }
@@ -210,6 +214,26 @@ private extension ForecastContentViewController {
         }
       }
     })
+  }
+  
+}
+
+
+// MARK: - Private - Show settings alert view
+private extension ForecastContentViewController {
+  
+  func presentLocationServicesSettingsPopupAlert() {
+    let cancelAction: (UIAlertAction) -> () = { _ in }
+    
+    let settingsAction: (UIAlertAction) -> () = { _ in
+      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+    }
+    
+    let title = NSLocalizedString("Location Services Disabled", comment: "")
+    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
+    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
+    AlertViewPresenter.shared.presentPopupAlert(in: self, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
 }

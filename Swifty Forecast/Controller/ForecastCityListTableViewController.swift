@@ -54,7 +54,6 @@ class ForecastCityListTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    setupStyle()
   }
 }
 
@@ -63,43 +62,25 @@ class ForecastCityListTableViewController: UITableViewController {
 extension ForecastCityListTableViewController: ViewSetupable {
   
   func setup() {
-    setTableview()
+    setTableView()
     fetchCities()
   }
-  
-  func setupStyle() {
-    tableView.separatorColor = .white
-    setTransparentTableViewBackground()
-  }
+
 }
 
 
 // MARK: - Private - Set tableview
 private extension ForecastCityListTableViewController {
   
-  func setTableview() {
+  func setTableView() {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.separatorColor = .white
     tableView.tableFooterView = footerView
+    setTransparentTableViewBackground()
   }
   
-}
-
-
-// MARK: - Private - Fetch cities and local time
-private extension ForecastCityListTableViewController {
-  
-  func fetchCities() {
-    let fetchRequest = City.createFetchRequest()
-    
-    do {
-      cities = try sharedMOC.mainContext.fetch(fetchRequest)
-    } catch {
-      CoreDataError.couldNotFetch.handle()
-    }
-  }
-
 }
 
 
@@ -118,20 +99,21 @@ private extension ForecastCityListTableViewController {
 }
 
 
-// MARK: - Private - Actions
+// MARK: - Private - Fetch cities and local time
 private extension ForecastCityListTableViewController {
   
-  @objc func backButtonTapped(_ sender: UIButton?) {
-    guard let _ = navigationController?.popViewController(animated: true) else {
-      self.dismiss(animated: true)
-      return
+  func fetchCities() {
+    let fetchRequest = City.createFetchRequest()
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
+    fetchRequest.sortDescriptors = [currentLocalizedSort]
+    
+    do {
+      cities = try sharedMOC.mainContext.fetch(fetchRequest)
+    } catch {
+      CoreDataError.couldNotFetch.handle()
     }
   }
-  
-  @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    present(autocompleteController, animated: true)
-  }
-  
+
 }
 
 
@@ -140,7 +122,7 @@ private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
     let managedContex = sharedMOC.mainContext
-    let newCity = City(unassociatedObject: city, managedObjectContext: managedContex)
+    let newCity = City(unassociatedObject: city, isCurrentLocalized: false, managedObjectContext: managedContex)
   
     do {
       try managedContex.save()
@@ -271,6 +253,23 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
   
   func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+  }
+  
+}
+
+
+// MARK: - Private - Actions
+private extension ForecastCityListTableViewController {
+  
+  @objc func backButtonTapped(_ sender: UIButton?) {
+    guard let _ = navigationController?.popViewController(animated: true) else {
+      self.dismiss(animated: true)
+      return
+    }
+  }
+  
+  @objc func addNewCityButtonTapped(_ sender: UIButton) {
+    present(autocompleteController, animated: true)
   }
   
 }

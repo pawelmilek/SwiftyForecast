@@ -180,10 +180,10 @@ extension CurrentForecastView {
       humidityView.alpha = 1
       
     } else {
+      temperatureLabel.alpha = 0
       iconLabel.alpha = 0
       dateLabel.alpha = 0
       cityNameLabel.alpha = 0
-      temperatureLabel.alpha = 0
       windView.alpha = 0
       humidityView.alpha = 0
     }

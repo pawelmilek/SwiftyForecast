@@ -1,5 +1,5 @@
 //
-//  WebServiceResultType.swift
+//  ResultType.swift
 //  Swifty-Forecast
 //
 //  Created by Pawel Milek on 26/06/2018.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WebServiceResultType<T, E> where E: Error {
+enum ResultType<T, E> where E: Error {
   case success(T)
   case failure(E)
 }

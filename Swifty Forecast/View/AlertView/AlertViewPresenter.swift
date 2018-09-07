@@ -24,12 +24,12 @@ extension AlertViewPresenter {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addTextField(configurationHandler: textFieldConfiguration)
     
-    let submitAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
+    let submitAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
       guard let textField = alert.textFields?.first, let text = textField.text else { return }
       submitCompletionHandler(text)
     })
     
-    let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+    let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
     
     alert.addAction(submitAction)
     alert.addAction(cancel)
@@ -48,8 +48,8 @@ extension AlertViewPresenter {
     alertWindow.windowLevel = UIWindowLevelAlert + 1
     alertWindow.makeKeyAndVisible()
     
-    let alert = UIAlertController(title: "Error", message: msg, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "Ok", style: .default)
+    let alert = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: msg, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
     alert.addAction(okAction)
     
     alertWindow.rootViewController?.present(alert, animated: animated, completion: completion)

@@ -15,9 +15,10 @@ final class City: NSManagedObject {
   @NSManaged var country: String
   @NSManaged var state: String?
   @NSManaged var postalCode: String
+  @NSManaged var isCurrentLocalized: Bool
   @NSManaged var coordinate: Coordinate
   
-  convenience init(place: GMSPlace, managedObjectContext: NSManagedObjectContext) {
+  convenience init(place: GMSPlace, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
     let addressComponents = place.addressComponents
@@ -26,16 +27,18 @@ final class City: NSManagedObject {
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
+    self.isCurrentLocalized = isCurrentLocalized
     self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, managedObjectContext: managedObjectContext)
   }
   
-  convenience init(unassociatedObject: City, managedObjectContext: NSManagedObjectContext) {
+  convenience init(unassociatedObject: City, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
     self.name = unassociatedObject.name
     self.country = unassociatedObject.country
     self.state = unassociatedObject.state
     self.postalCode = unassociatedObject.postalCode
+    self.isCurrentLocalized = isCurrentLocalized
     
     let latitude = unassociatedObject.coordinate.latitude
     let longitude = unassociatedObject.coordinate.longitude
@@ -53,6 +56,7 @@ final class City: NSManagedObject {
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
+    self.isCurrentLocalized = false
     self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
   }
 }
