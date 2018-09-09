@@ -15,6 +15,9 @@
 		E206E1CE20EC5E7C00AC72EA /* CurrentForecastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E206E1CD20EC5E7C00AC72EA /* CurrentForecastView.xib */; };
 		E206E1D020EC5E8900AC72EA /* CurrentForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1CF20EC5E8900AC72EA /* CurrentForecastView.swift */; };
 		E206E1D220EC76E100AC72EA /* CurrentForecastViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1D120EC76E100AC72EA /* CurrentForecastViewDelegate.swift */; };
+		E20DA45B214348AD0047491B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkManager.swift */; };
+		E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */; };
+		E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2192258214483AA0093FEBD /* OfflineViewController.swift */; };
 		E221C22620FFACAE00CBB8F2 /* CoreDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */; };
 		E221C22820FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */; };
 		E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */; };
@@ -41,7 +44,7 @@
 		E23CD76920EDBCDB00F0F72A /* ConditionFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */; };
 		E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */; };
 		E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
-		E24FEB7720F684E1003E7861 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */; };
+		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
 		E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */; };
@@ -101,6 +104,9 @@
 		E206E1CD20EC5E7C00AC72EA /* CurrentForecastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentForecastView.xib; sourceTree = "<group>"; };
 		E206E1CF20EC5E8900AC72EA /* CurrentForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastView.swift; sourceTree = "<group>"; };
 		E206E1D120EC76E100AC72EA /* CurrentForecastViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastViewDelegate.swift; sourceTree = "<group>"; };
+		E20DA45A214348AD0047491B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReachabilityError+ErrorHandleable.swift"; sourceTree = "<group>"; };
+		E2192258214483AA0093FEBD /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataError.swift; sourceTree = "<group>"; };
 		E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+EntityName.swift"; sourceTree = "<group>"; };
 		E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+ ManagedObjectContext.swift"; sourceTree = "<group>"; };
@@ -127,7 +133,7 @@
 		E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionFontIcon.swift; sourceTree = "<group>"; };
 		E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSAutocompleteViewController+SearchBarStyle.swift"; sourceTree = "<group>"; };
 		E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+PhoneModel.swift"; sourceTree = "<group>"; };
-		E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
@@ -234,6 +240,14 @@
 			path = Forecasts;
 			sourceTree = "<group>";
 		};
+		E20DA459214348810047491B /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				E20DA45A214348AD0047491B /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
 		E21A0B9420EE88F5006AC409 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
-				E24FEB7620F684E1003E7861 /* ActivityIndicator.swift */,
+				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
 				E206E1CC20EC5E5E00AC72EA /* Forecasts */,
 				E23997F120E84389007D8CE4 /* AlertView */,
@@ -279,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				E27E2F7F1DA0482C00B3EABF /* ForecastCityListTableViewController.swift */,
+				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
 				E27E2F821DA0482C00B3EABF /* ForecastContentViewController.swift */,
 				E2B1D65B211FB26C00F0002A /* ForecastMainViewController.swift */,
 			);
@@ -341,6 +356,7 @@
 		E23997DD20E84158007D8CE4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */,
 				E27E2F911DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift */,
 				E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */,
 				E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */,
@@ -464,6 +480,7 @@
 			children = (
 				E23997DC20E84129007D8CE4 /* Application */,
 				E23997E520E84371007D8CE4 /* Errors */,
+				E20DA459214348810047491B /* NetworkManager */,
 				E23997DF20E84371007D8CE4 /* NetworkLayer */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E23997D320E84038007D8CE4 /* Protocols */,
@@ -575,10 +592,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -641,8 +660,9 @@
 				E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */,
 				E206E1C320E9683B00AC72EA /* DailyData.swift in Sources */,
 				E206E1C920E9C2E500AC72EA /* WeatherForecast.swift in Sources */,
-				E24FEB7720F684E1003E7861 /* ActivityIndicator.swift in Sources */,
+				E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */,
 				E27E2F921DA04C8C00B3EABF /* Double+RoundedToNearestAsString.swift in Sources */,
+				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
 				E2E0762320F51577008A5B63 /* UIFont+FontWeatherIcon.swift in Sources */,
 				E206E1D220EC76E100AC72EA /* CurrentForecastViewDelegate.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
@@ -655,6 +675,7 @@
 				E23997EF20E84371007D8CE4 /* ErrorHandleable.swift in Sources */,
 				E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */,
 				E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */,
+				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* Parser.swift in Sources */,
 				E27E2FC81DA04D1D00B3EABF /* MeasuringSystem.swift in Sources */,
@@ -664,6 +685,7 @@
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
 				E23CD75D20ED59FC00F0F72A /* ConditionView.swift in Sources */,
 				E2E0761F20F51274008A5B63 /* FontWeatherIconType.swift in Sources */,
+				E20DA45B214348AD0047491B /* NetworkManager.swift in Sources */,
 				E27E2F831DA0482C00B3EABF /* ForecastCityListTableViewController.swift in Sources */,
 				E27E2FB61DA04D1D00B3EABF /* CityListTableViewControllerDelegate.swift in Sources */,
 				E27E2FBC1DA04D1D00B3EABF /* ViewSetupable.swift in Sources */,

@@ -11,6 +11,8 @@ import UIKit
 class ForecastMainViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
+  private let network = NetworkManager.shared
+  
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = ["\u{00B0}" + "F", "\u{00B0}" + "C"]
@@ -85,6 +87,7 @@ extension ForecastMainViewController: ViewSetupable {
     initializePageViewController()
     setMetricSystemSegmentedControl()
     addNotificationCenterObserver()
+    setNetworkManagerWhenInternetIsNotAvailable()
     setPageControl()
   }
   
@@ -161,6 +164,29 @@ private extension ForecastMainViewController {
 }
 
 
+// MARK: - Private - Set NetworkManager when internet is not available
+private extension ForecastMainViewController {
+  
+  func setNetworkManagerWhenInternetIsNotAvailable() {
+    let whenNetworkIsNotAvailable: () -> () = {
+      let offlineViewController = OfflineViewController()
+      self.navigationController?.pushViewController(offlineViewController, animated: false)
+    }
+    
+    // Will run only once when app is launching
+    network.isUnreachable { _ in
+      whenNetworkIsNotAvailable()
+    }
+    
+    // Network listener to pick up network changes in real-time
+    network.whenUnreachable { _ in
+      whenNetworkIsNotAvailable()
+    }
+  }
+  
+}
+
+
 // MARK: - Private - Show or hide navigation prompt
 private extension ForecastMainViewController {
   
@@ -173,7 +199,7 @@ private extension ForecastMainViewController {
         strongSelf.navigationItem.prompt = nil
         
       } else {
-        strongSelf.navigationItem.prompt = "Please enable location services!"
+        strongSelf.navigationItem.prompt = NSLocalizedString("Please enable location services!", comment: "")
         DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds + 3) { [weak self] in
           guard let strongSelf = self else { return }
           strongSelf.navigationItem.prompt = nil

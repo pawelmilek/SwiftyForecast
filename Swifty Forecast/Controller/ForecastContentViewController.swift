@@ -1,6 +1,6 @@
 //
 //  ForecastContentViewController.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
 //  Created by Pawel Milek on 26/09/16.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
@@ -140,13 +140,13 @@ private extension ForecastContentViewController {
   
   
   func fetchWeatherForecastForCurrentLocation() {
-    ActivityIndicator.shared.startAnimating(at: view)
+    ActivityIndicatorView.shared.startAnimating(at: view)
     
     GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
       guard let strongSelf = self else { return }
       
       if let error = error {
-        ActivityIndicator.shared.stopAnimating()
+        ActivityIndicatorView.shared.stopAnimating()
         error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
         return
       }
@@ -176,19 +176,19 @@ private extension ForecastContentViewController {
                 }
               }
               
-              ActivityIndicator.shared.stopAnimating()
+              ActivityIndicatorView.shared.stopAnimating()
             }
             
           case .failure(let error):
             DispatchQueue.main.async {
-              ActivityIndicator.shared.stopAnimating()
+              ActivityIndicatorView.shared.stopAnimating()
               error.handle()
             }
           }
         })
         
       } else {
-        ActivityIndicator.shared.stopAnimating()
+        ActivityIndicatorView.shared.stopAnimating()
         GooglePlacesError.placeNotFound.handle()
       }
     }
@@ -196,7 +196,7 @@ private extension ForecastContentViewController {
   
   
   func fetchWeatherForecast(for city: City) {
-    ActivityIndicator.shared.startAnimating(at: view)
+    ActivityIndicatorView.shared.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
     WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
@@ -204,12 +204,12 @@ private extension ForecastContentViewController {
       case .success(let forecast):
         DispatchQueue.main.async {
           self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
-          ActivityIndicator.shared.stopAnimating()
+          ActivityIndicatorView.shared.stopAnimating()
         }
         
       case .failure(let error):
         DispatchQueue.main.async {
-          ActivityIndicator.shared.stopAnimating()
+          ActivityIndicatorView.shared.stopAnimating()
           error.handle()
         }
       }
