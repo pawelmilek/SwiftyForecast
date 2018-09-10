@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.829268"
+            timestampString = "558299896.094431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.82976"
+            timestampString = "558299896.094803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.830079"
+            timestampString = "558299896.095036"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "fetchWeatherForecastForCurrentLocation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,27 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.8303781"
+            timestampString = "558299896.095261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "fetchWeatherForecastForCurrentLocation()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.830641"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "fetchWeatherForecastForCurrentLocation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastMainViewController.swift"
-            timestampString = "558297962.8309129"
+            timestampString = "558299896.095507"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
@@ -138,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.830984"
+            timestampString = "558299896.09556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Swifty Forecast/Controller/ForecastContentViewController.swift"
-            timestampString = "558297962.831244"
+            timestampString = "558299896.095772"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
             landmarkName = "fetchWeatherForecastForCurrentLocation()"
             landmarkType = "7">
          </BreakpointContent>

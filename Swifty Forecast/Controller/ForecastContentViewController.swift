@@ -166,11 +166,11 @@ private extension ForecastContentViewController {
             DispatchQueue.main.async {
               let unassociatedCity = City(place: place)
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
-              strongSelf.fetchAndResetLocalizedCities()
               
               if City.isDuplicate(city: unassociatedCity) == false {
-                let newCurrentCity = City(unassociatedObject: unassociatedCity, isCurrentLocalized: true, managedObjectContext: strongSelf.sharedMOC.mainContext)
-                strongSelf.currentCityForecast = newCurrentCity
+                CoreDataManager.deleteCurrentLocalizedCity()
+                CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
+                strongSelf.currentCityForecast = unassociatedCity
                 strongSelf.reloadAndInitializeMainPageViewController()
                 
                 do {
@@ -180,7 +180,8 @@ private extension ForecastContentViewController {
                 }
                 
               } else {
-                strongSelf.setCurrentLocalized(city: unassociatedCity)
+                CoreDataManager.fetchAndResetLocalizedCities()
+                CoreDataManager.updateCurrentLocalized(city: unassociatedCity)
                 strongSelf.reloadDataInMainPageViewController()
               }
               
@@ -225,43 +226,6 @@ private extension ForecastContentViewController {
         }
       }
     })
-  }
-  
-}
-
-
-// MARK: - Private - Fetch and reset localized cities
-private extension ForecastContentViewController {
-  
-  func fetchAndResetLocalizedCities() {
-    // 1. Fetch all cities
-    // 2. Set isCurrentLocalized to 0
-    // 3. Insert new City and set isCurrentLocalized to 1
-    // 4. Save CoreData
-    let fetchRequest = City.createFetchRequest()
-    if let cities = try? CoreDataStackHelper.shared.mainContext.fetch(fetchRequest) {
-      cities.forEach {
-        $0.isCurrentLocalized = false
-      }
-    }
-  }
-  
-  func setCurrentLocalized(city: City) {
-    let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
-    request.predicate = predicate
-    
-    if let city = try? CoreDataStackHelper.shared.mainContext.fetch(request) {
-      city.forEach {
-        $0.isCurrentLocalized = true
-      }
-    }
-    
-    do {
-      try sharedMOC.mainContext.save()
-    } catch {
-      CoreDataError.couldNotSave.handle()
-    }
   }
   
 }

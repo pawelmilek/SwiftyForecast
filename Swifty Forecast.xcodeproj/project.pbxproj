@@ -82,6 +82,7 @@
 		E2D960812120F34800AE0B6E /* GeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocoderHelper.swift */; };
 		E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */; };
 		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
+		E2DCC9CB2146FA49003528F3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */; };
 		E2E012BC21337ECF004ABF55 /* GooglePlacesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E012BB21337ECF004ABF55 /* GooglePlacesError.swift */; };
 		E2E0761F20F51274008A5B63 /* FontWeatherIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */; };
 		E2E0762120F51506008A5B63 /* FontWeather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2E0762020F51506008A5B63 /* FontWeather.ttf */; };
@@ -173,6 +174,7 @@
 		E2D960802120F34800AE0B6E /* GeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderHelper.swift; sourceTree = "<group>"; };
 		E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseFontIcon.swift; sourceTree = "<group>"; };
 		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
+		E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E2E012BB21337ECF004ABF55 /* GooglePlacesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesError.swift; sourceTree = "<group>"; };
 		E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconType.swift; sourceTree = "<group>"; };
 		E2E0762020F51506008A5B63 /* FontWeather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontWeather.ttf; sourceTree = "<group>"; };
@@ -240,25 +242,19 @@
 			path = Forecasts;
 			sourceTree = "<group>";
 		};
-		E20DA459214348810047491B /* NetworkManager */ = {
-			isa = PBXGroup;
-			children = (
-				E20DA45A214348AD0047491B /* NetworkManager.swift */,
-			);
-			path = NetworkManager;
-			sourceTree = "<group>";
-		};
 		E21A0B9420EE88F5006AC409 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				E2E0761D20F5124C008A5B63 /* FontWeatherIcon */,
 				E23CD76A20EDBCE400F0F72A /* ForecastIcons */,
+				E20DA45A214348AD0047491B /* NetworkManager.swift */,
 				E2D960802120F34800AE0B6E /* GeocoderHelper.swift */,
 				E254B5CF2102C45000B34E8F /* LocationProvider.swift */,
 				E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */,
 				E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */,
+				E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -480,7 +476,6 @@
 			children = (
 				E23997DC20E84129007D8CE4 /* Application */,
 				E23997E520E84371007D8CE4 /* Errors */,
-				E20DA459214348810047491B /* NetworkManager */,
 				E23997DF20E84371007D8CE4 /* NetworkLayer */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E23997D320E84038007D8CE4 /* Protocols */,
@@ -665,6 +660,7 @@
 				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
 				E2E0762320F51577008A5B63 /* UIFont+FontWeatherIcon.swift in Sources */,
 				E206E1D220EC76E100AC72EA /* CurrentForecastViewDelegate.swift in Sources */,
+				E2DCC9CB2146FA49003528F3 /* CoreDataManager.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */,
 				E27E2FC91DA04D1D00B3EABF /* MoonPhase.swift in Sources */,
