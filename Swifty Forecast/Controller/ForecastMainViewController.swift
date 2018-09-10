@@ -146,6 +146,9 @@ private extension ForecastMainViewController {
   func addNotificationCenterObserver() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
     NotificationCenter.default.addObserver(self, selector: #selector(reloadPages(_:)), name: reloadPagesName, object: nil)
+    
+    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadPagesData(_:)), name: reloadDataName, object: nil)
   }
   
   func removeNotificationCenterObserver() {
@@ -226,6 +229,12 @@ extension ForecastMainViewController {
     setPageControl()
   }
   
+  @objc func reloadPagesData(_ notification: NSNotification) {
+    fetchCities()
+    setPageControl()
+  }
+  
+  
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
     let notificationName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
     
@@ -282,7 +291,7 @@ private extension ForecastMainViewController {
 
   func setInitialViewController(at index: Int = 0) {
     guard let forecastContentVC = forecastContentViewController(at: index) else { return }
-    pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
+    pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: false)
   }
 
 }

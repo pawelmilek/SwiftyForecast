@@ -95,7 +95,6 @@ extension LocationProvider: CLLocationManagerDelegate {
     guard let location = locations.first?.coordinate else { return }
     
     didUpdateLocationsFlag = true
-    
     DispatchQueue.main.async {
       self.currentLocation = location
       self.locationManager.stopUpdatingLocation()
@@ -114,6 +113,9 @@ extension LocationProvider: CLLocationManagerDelegate {
       if let authorizationCompletionBlock = authorizationCompletionBlock {
         authorizationCompletionBlock(false)
       }
+      
+    case .notDetermined:
+      requestAuthorization()
       
     default:
       break

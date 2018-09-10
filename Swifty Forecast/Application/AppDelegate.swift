@@ -22,10 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
     
-    
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setupStyle()
-    
     return true
   }
   

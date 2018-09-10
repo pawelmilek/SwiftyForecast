@@ -16,6 +16,8 @@ class ForecastContentViewController: UIViewController {
   
   typealias ForecastContentStyle = Style.ForecastContentVC
   private let sharedMOC = CoreDataStackHelper.shared
+  private let sharedActivityIndicator = ActivityIndicatorView.shared
+  
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
@@ -141,55 +143,61 @@ private extension ForecastContentViewController {
   
   
   func fetchWeatherForecastForCurrentLocation() {
-    ActivityIndicatorView.shared.startAnimating(at: view)
+    sharedActivityIndicator.startAnimating(at: view)
     
     GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
       guard let strongSelf = self else { return }
       
       if let error = error {
-        ActivityIndicatorView.shared.stopAnimating()
+        strongSelf.sharedActivityIndicator.stopAnimating()
         error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
         return
       }
-      
       
       if let place = place {
         let latitude = place.coordinate.latitude
         let longitude = place.coordinate.longitude
         let coordinate = Coordinate(latitude: latitude, longitude: longitude)
-        let request = ForecastRequest.make(by: coordinate)
         
+        let request = ForecastRequest.make(by: coordinate)
         WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
               let unassociatedCity = City(place: place)
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
+              strongSelf.fetchAndResetLocalizedCities()
               
               if City.isDuplicate(city: unassociatedCity) == false {
                 let newCurrentCity = City(unassociatedObject: unassociatedCity, isCurrentLocalized: true, managedObjectContext: strongSelf.sharedMOC.mainContext)
                 strongSelf.currentCityForecast = newCurrentCity
+                strongSelf.reloadAndInitializeMainPageViewController()
                 
                 do {
                   try strongSelf.sharedMOC.mainContext.save()
                 } catch {
                   CoreDataError.couldNotSave.handle()
                 }
+                
+              } else {
+                strongSelf.setCurrentLocalized(city: unassociatedCity)
+                strongSelf.reloadDataInMainPageViewController()
               }
               
-              ActivityIndicatorView.shared.stopAnimating()
+              
+              strongSelf.sharedActivityIndicator.stopAnimating()
             }
             
           case .failure(let error):
             DispatchQueue.main.async {
-              ActivityIndicatorView.shared.stopAnimating()
+              strongSelf.sharedActivityIndicator.stopAnimating()
               error.handle()
             }
           }
         })
         
       } else {
-        ActivityIndicatorView.shared.stopAnimating()
+        strongSelf.sharedActivityIndicator.stopAnimating()
         GooglePlacesError.placeNotFound.handle()
       }
     }
@@ -197,7 +205,7 @@ private extension ForecastContentViewController {
   
   
   func fetchWeatherForecast(for city: City) {
-    ActivityIndicatorView.shared.startAnimating(at: view)
+    sharedActivityIndicator.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
     WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
@@ -207,16 +215,69 @@ private extension ForecastContentViewController {
       case .success(let forecast):
         DispatchQueue.main.async {
           strongSelf.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
-          ActivityIndicatorView.shared.stopAnimating()
+          strongSelf.sharedActivityIndicator.stopAnimating()
         }
         
       case .failure(let error):
         DispatchQueue.main.async {
-          ActivityIndicatorView.shared.stopAnimating()
+          strongSelf.sharedActivityIndicator.stopAnimating()
           error.handle()
         }
       }
     })
+  }
+  
+}
+
+
+// MARK: - Private - Fetch and reset localized cities
+private extension ForecastContentViewController {
+  
+  func fetchAndResetLocalizedCities() {
+    // 1. Fetch all cities
+    // 2. Set isCurrentLocalized to 0
+    // 3. Insert new City and set isCurrentLocalized to 1
+    // 4. Save CoreData
+    let fetchRequest = City.createFetchRequest()
+    if let cities = try? CoreDataStackHelper.shared.mainContext.fetch(fetchRequest) {
+      cities.forEach {
+        $0.isCurrentLocalized = false
+      }
+    }
+  }
+  
+  func setCurrentLocalized(city: City) {
+    let request = City.createFetchRequest()
+    let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
+    request.predicate = predicate
+    
+    if let city = try? CoreDataStackHelper.shared.mainContext.fetch(request) {
+      city.forEach {
+        $0.isCurrentLocalized = true
+      }
+    }
+    
+    do {
+      try sharedMOC.mainContext.save()
+    } catch {
+      CoreDataError.couldNotSave.handle()
+    }
+  }
+  
+}
+
+
+// MARK: - Private - Reload pages
+private extension ForecastContentViewController {
+  
+  func reloadAndInitializeMainPageViewController() {
+    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
+    NotificationCenter.default.post(name: reloadPagesName, object: nil)
+  }
+  
+  func reloadDataInMainPageViewController() {
+    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
+    NotificationCenter.default.post(name: reloadDataName, object: nil)
   }
   
 }

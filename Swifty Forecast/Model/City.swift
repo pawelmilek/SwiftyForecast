@@ -25,7 +25,7 @@ final class City: NSManagedObject {
     
     self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
-    self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
+    self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
     self.isCurrentLocalized = isCurrentLocalized
     self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, managedObjectContext: managedObjectContext)

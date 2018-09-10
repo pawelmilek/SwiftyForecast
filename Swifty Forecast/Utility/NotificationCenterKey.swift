@@ -12,6 +12,7 @@ enum NotificationCenterKey: String {
   case measuringSystemDidSwitchNotification = "MeasuringSystemDidSwitch"
   case refreshButtonDidPressNotification = "RefreshButtonDidPress"
   case reloadPagesNotification = "ReloadPagesNotification"
+  case reloadPagesDataNotification = "ReloadPagesDataNotification"
 }
 
 

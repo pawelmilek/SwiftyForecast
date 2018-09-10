@@ -164,7 +164,7 @@ private extension ForecastCityListTableViewController {
 // MARK: - Private - Reload pages
 private extension ForecastCityListTableViewController {
   
-  func reloadPages() {
+  func reloadAndInitializeMainPageViewController() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
     NotificationCenter.default.post(name: reloadPagesName, object: nil)
   }
@@ -220,7 +220,7 @@ extension ForecastCityListTableViewController {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)
-      reloadPages()
+      reloadAndInitializeMainPageViewController()
     }
   }
   
@@ -239,7 +239,7 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
     
     insert(city: selectedCity)
     tableView.reloadData()
-    reloadPages()
+    reloadAndInitializeMainPageViewController()
     dismiss(animated: true, completion: nil)
   }
   
