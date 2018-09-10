@@ -293,9 +293,9 @@
 			isa = PBXGroup;
 			children = (
 				E27E2F7F1DA0482C00B3EABF /* ForecastCityListTableViewController.swift */,
-				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
 				E27E2F821DA0482C00B3EABF /* ForecastContentViewController.swift */,
 				E2B1D65B211FB26C00F0002A /* ForecastMainViewController.swift */,
+				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

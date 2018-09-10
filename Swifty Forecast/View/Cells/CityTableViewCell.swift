@@ -2,7 +2,7 @@
 //  CityTableViewCell.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -11,6 +11,8 @@ import UIKit
 class CityTableViewCell: UITableViewCell {
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
+  
+  typealias CityCellStyle = Style.CityCell
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -29,15 +31,15 @@ class CityTableViewCell: UITableViewCell {
 extension CityTableViewCell: ViewSetupable {
   
   func setup() {
-    backgroundColor = .clear
+    backgroundColor = CityCellStyle.backgroundColor
     
-    currentTimeLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-    currentTimeLabel.textColor = UIColor.blackShade
-    currentTimeLabel.textAlignment = .left
+    currentTimeLabel.font = CityCellStyle.currentTimeLabelFont
+    currentTimeLabel.textColor = CityCellStyle.currentTimeLabelTextColor
+    currentTimeLabel.textAlignment = CityCellStyle.currentTimeLabelTextAlignment
     
-    cityNameLabel.font = UIFont.systemFont(ofSize: 22, weight: .regular)
-    cityNameLabel.textColor = .white
-    cityNameLabel.textAlignment = .left
+    cityNameLabel.font = CityCellStyle.cityNameLabelFont
+    cityNameLabel.textColor = CityCellStyle.cityNameLabelTextColor
+    cityNameLabel.textAlignment = CityCellStyle.cityNameLabelTextAlignment
     
     configure(by: .none)
   }

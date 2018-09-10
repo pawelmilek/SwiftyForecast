@@ -11,19 +11,21 @@ import UIKit
 class ForecastMainViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
+  typealias ForecastMainStyle = Style.ForecastMainVC
   private let network = NetworkManager.shared
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = ["\u{00B0}" + "F", "\u{00B0}" + "C"]
-    segmentedControl.font = UIFont(name: "AvenirNext-Bold", size: 14)
-    segmentedControl.borderWidth = 1.0
-    segmentedControl.selectedLabelColor = .white
-    segmentedControl.unselectedLabelColor = .blackShade
-    segmentedControl.borderColor = .blackShade
-    segmentedControl.thumbColor = .blackShade
+    segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
+    segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
+    segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
+    segmentedControl.unselectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlUnselectedLabelColor
+    segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
+    segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
+    segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = 0
-    segmentedControl.backgroundColor = .clear
+    
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched(_:)), for: .valueChanged)
     return segmentedControl
   }()

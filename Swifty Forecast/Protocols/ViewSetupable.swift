@@ -2,7 +2,7 @@
 //  ViewSetupable.swift
 //  DVBChart
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 

@@ -13,6 +13,7 @@ class ConditionView: UIView {
   @IBOutlet private weak var conditionLabel: UILabel!
   @IBOutlet private weak var valueLabel: UILabel!
   
+  typealias ConditionStyle = Style.Condition
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -38,22 +39,22 @@ extension ConditionView: ViewSetupable {
     addSubview(contentView)
     contentView.frame = self.bounds
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    contentView.layer.cornerRadius = 5
+    contentView.layer.cornerRadius = ConditionStyle.cornerRadius
     contentView.clipsToBounds = true
-    layer.cornerRadius = 5
+    layer.cornerRadius = ConditionStyle.cornerRadius
     clipsToBounds = true
     
-    contentView.backgroundColor = UIColor.white.withAlphaComponent(0.3)
+    contentView.backgroundColor = ConditionStyle.backgroundColor
     backgroundColor = .clear
   }
   
   func setupStyle() {
-    valueLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
-    valueLabel.textColor = .white
-    valueLabel.textAlignment = .center
+    valueLabel.font = ConditionStyle.valueLabelFont
+    valueLabel.textColor = ConditionStyle.textColor
+    valueLabel.textAlignment = ConditionStyle.textAlignment
     
-    conditionLabel.textColor = .white
-    conditionLabel.textAlignment = .center
+    conditionLabel.textColor = ConditionStyle.textColor
+    conditionLabel.textAlignment = ConditionStyle.textAlignment
   }
   
 }

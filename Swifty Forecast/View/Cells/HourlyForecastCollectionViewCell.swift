@@ -13,6 +13,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   
+  typealias HourlyForecastStyle = Style.HourlyForecastCell
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -31,18 +32,18 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
 extension HourlyForecastCollectionViewCell: ViewSetupable {
   
   func setup() {
-    backgroundColor = .clear
+    backgroundColor = HourlyForecastStyle.backgroundColor
     
-    timeLabel.font = UIFont.systemFont(ofSize: 11, weight: .light)
-    timeLabel.textColor = .white
-    timeLabel.textAlignment = .center
+    timeLabel.font = HourlyForecastStyle.timeLabelFont
+    timeLabel.textColor = HourlyForecastStyle.timeLabelTextColor
+    timeLabel.textAlignment = HourlyForecastStyle.timeLabelTextAlignment
     
-    iconLabel.textColor = .white
-    iconLabel.textAlignment = .center
+    iconLabel.textColor = HourlyForecastStyle.iconLabelTextColor
+    iconLabel.textAlignment = HourlyForecastStyle.iconLabelTextAlignment
     
-    temperatureLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
-    temperatureLabel.textColor = .white
-    temperatureLabel.textAlignment = .center
+    temperatureLabel.font = HourlyForecastStyle.temperatureLabelFont
+    temperatureLabel.textColor = HourlyForecastStyle.temperatureLabelTextColor
+    temperatureLabel.textAlignment = HourlyForecastStyle.temperatureLabelTextAlignment
   }
   
 }

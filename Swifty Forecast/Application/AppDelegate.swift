@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -107,12 +107,12 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = [NSAttributedStringKey.foregroundColor : UIColor.blackShade]
+      let textAttributes = [NSAttributedStringKey.foregroundColor : Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
     func setBarButtonItemColor() {
-      UINavigationBar.appearance().tintColor = .blackShade
+      UINavigationBar.appearance().tintColor = Style.NavigationBar.barButtonItemColor
     }
     
     setTransparentBackground()

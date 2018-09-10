@@ -10,6 +10,7 @@ import UIKit
 
 class OfflineViewController: UIViewController {
   private let network = NetworkManager.shared
+  typealias OfflineStyle = Style.OfflineVC
   
   private var offLineImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
@@ -21,9 +22,9 @@ class OfflineViewController: UIViewController {
   private var descriptionLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.text = NSLocalizedString("You are offline, connect to the internet.", comment: "")
-    label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-    label.textColor = UIColor.blackShade
-    label.textAlignment = .left
+    label.font = OfflineStyle.descriptionLabelFont
+    label.textColor = OfflineStyle.descriptionLabelTextColor
+    label.textAlignment = OfflineStyle.descriptionLabelTextAlignment
     label.numberOfLines = 1
     return label
   }()
@@ -45,6 +46,7 @@ class OfflineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    setupStyle()
   }
   
   
@@ -83,11 +85,14 @@ extension OfflineViewController: ViewSetupable {
     stackView.addArrangedSubview(descriptionLabel)
     
     view.addSubview(stackView)
-    view.backgroundColor = .white
-    
+
     stackView.translatesAutoresizingMaskIntoConstraints = false
     view.safeAreaLayoutGuide.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
     view.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
+  }
+  
+  func setupStyle() {
+    view.backgroundColor = OfflineStyle.backgroundColor
   }
   
 }

@@ -2,7 +2,7 @@
 //  City.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -102,7 +102,7 @@ extension City {
   
   class func isDuplicate(city: City) -> Bool {
     let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ && country == %@ && postalCode == %@", city.name, city.country, city.postalCode)
+    let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
     request.predicate = predicate
     
     do {

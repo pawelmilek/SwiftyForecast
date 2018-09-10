@@ -33,9 +33,11 @@ final class CurrentForecastView: UIView {
   
   
   private var viewDidExpand = false
-  weak var delegate: CurrentForecastViewDelegate?
   private var currentForecast: CurrentForecast?
   private var hourlyForecast: HourlyForecast?
+  weak var delegate: CurrentForecastViewDelegate?
+  
+  typealias ForecastStyle = Style.CurrentForecast
   
   
   override init(frame: CGRect) {
@@ -67,23 +69,23 @@ extension CurrentForecastView: ViewSetupable {
   }
   
   func setupStyle() {
-    iconLabel.textColor = .white
-    iconLabel.textAlignment = .center
+    iconLabel.textColor = ForecastStyle.textColor
+    iconLabel.textAlignment = ForecastStyle.textAlignment
     
-    dateLabel.font = UIFont.systemFont(ofSize: 15, weight: .heavy)
-    dateLabel.textColor = .white
-    dateLabel.textAlignment = .center
+    dateLabel.font = ForecastStyle.dateLabelFont
+    dateLabel.textColor = ForecastStyle.textColor
+    dateLabel.textAlignment = ForecastStyle.textAlignment
     
-    cityNameLabel.font = UIFont.systemFont(ofSize: 12, weight: .ultraLight)
-    cityNameLabel.textColor = .white
-    cityNameLabel.textAlignment = .center
+    cityNameLabel.font = ForecastStyle.cityNameLabelFont
+    cityNameLabel.textColor = ForecastStyle.textColor
+    cityNameLabel.textAlignment = ForecastStyle.textAlignment
     
-    temperatureLabel.font = UIFont.systemFont(ofSize: 90, weight: .bold)
-    temperatureLabel.textColor = .white
-    temperatureLabel.textAlignment = .center
+    temperatureLabel.font = ForecastStyle.temperatureLabelFont
+    temperatureLabel.textColor = ForecastStyle.textColor
+    temperatureLabel.textAlignment = ForecastStyle.textAlignment
     
-    moreDetailsView.backgroundColor = .clear
-    hourlyCollectionView.backgroundColor = .clear
+    moreDetailsView.backgroundColor = ForecastStyle.backgroundColor
+    hourlyCollectionView.backgroundColor = ForecastStyle.backgroundColor
   }
   
 }
@@ -97,7 +99,7 @@ private extension CurrentForecastView {
     Bundle.main.loadNibNamed(nibName, owner: self, options: [:])
     
     addSubview(contentView)
-    contentView.frame = self.bounds
+    contentView.frame = bounds
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     
     contentView.addSubview(backgroundImageView)
@@ -111,16 +113,16 @@ private extension CurrentForecastView {
 private extension CurrentForecastView {
   
   func setShadowForBaseView() {
-    backgroundColor = .clear
-    layer.shadowColor = UIColor.red.cgColor
-    layer.shadowOffset = CGSize(width: 0, height: 5)
-    layer.shadowOpacity = 0.5
-    layer.shadowRadius = 10
+    backgroundColor = ForecastStyle.backgroundColor
+    layer.shadowColor = ForecastStyle.shadowColor
+    layer.shadowOffset = ForecastStyle.shadowOffset
+    layer.shadowOpacity = ForecastStyle.shadowOpacity
+    layer.shadowRadius = ForecastStyle.shadowRadius
     layer.masksToBounds = false
   }
   
   func setRoundedCornersForContentView() {
-    contentView.layer.cornerRadius = 15
+    contentView.layer.cornerRadius = ForecastStyle.cornerRadius
     contentView.layer.masksToBounds = true
   }
 }

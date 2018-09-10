@@ -2,7 +2,7 @@
 //  ForecastContentViewController.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -14,6 +14,7 @@ class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
+  typealias ForecastContentStyle = Style.ForecastContentVC
   private let sharedMOC = CoreDataStackHelper.shared
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
@@ -96,8 +97,8 @@ private extension ForecastContentViewController {
     dailyForecastTableView.allowsSelection = false
     dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
-    dailyForecastTableView.backgroundColor = .white
-    dailyForecastTableView.separatorStyle = .none
+    dailyForecastTableView.backgroundColor = ForecastContentStyle.tableViewBackgroundColor
+    dailyForecastTableView.separatorStyle = ForecastContentStyle.tableViewSeparatorStyle
     dailyForecastTableView.tableFooterView = UIView()
   }
   
@@ -199,11 +200,13 @@ private extension ForecastContentViewController {
     ActivityIndicatorView.shared.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
-    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+      guard let strongSelf = self else { return }
+      
       switch response {
       case .success(let forecast):
         DispatchQueue.main.async {
-          self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
+          strongSelf.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
           ActivityIndicatorView.shared.stopAnimating()
         }
         
