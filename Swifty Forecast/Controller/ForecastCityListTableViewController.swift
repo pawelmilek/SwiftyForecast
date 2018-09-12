@@ -1,8 +1,8 @@
 //
 //  ForecastCityListTableViewController.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -10,39 +10,41 @@ import UIKit
 import GooglePlaces
 
 class ForecastCityListTableViewController: UITableViewController {
+  typealias ForecastCityStyle = Style.ForecastCityListVC
+  
   private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
     autocompleteVC.delegate = self
-    autocompleteVC.primaryTextColor = .orange
-    autocompleteVC.primaryTextHighlightColor =  UIColor.orange.withAlphaComponent(0.6)
-    autocompleteVC.secondaryTextColor = .blackShade
-    autocompleteVC.tableCellSeparatorColor = UIColor.blackShade.withAlphaComponent(0.7)
-    autocompleteVC.setSearchTextInSearchBar(color: .orange, andFont: UIFont.systemFont(ofSize: 14, weight: .light))
-    autocompleteVC.setSearchTextFieldPlaceholder(color: UIColor.blackShade.withAlphaComponent(0.6), andFont: UIFont.systemFont(ofSize: 14, weight: .regular))
-    autocompleteVC.setSearchBarCancelButton(color: .orange, andFont: UIFont.systemFont(ofSize: 14, weight: .regular))
+    autocompleteVC.primaryTextColor = ForecastCityStyle.autocompleteVCPrimaryTextColor
+    autocompleteVC.primaryTextHighlightColor = ForecastCityStyle.autocompleteVCPrimaryTextHighlightColor
+    autocompleteVC.secondaryTextColor = ForecastCityStyle.autocompleteVCSecondaryTextColor
+    autocompleteVC.tableCellSeparatorColor = ForecastCityStyle.autocompleteVCTableCellSeparatorColor
+    autocompleteVC.setSearchTextInSearchBar(color: ForecastCityStyle.autocompleteVCSSearchTextColorInSearchBar, andFont: ForecastCityStyle.autocompleteVCSSearchTextFontInSearchBar)
+    autocompleteVC.setSearchTextFieldPlaceholder(color: ForecastCityStyle.autocompleteVCSearchTextFieldColorPlaceholder, andFont: ForecastCityStyle.autocompleteVCSearchTextFieldFontPlaceholder)
+    autocompleteVC.setSearchBarCancelButton(color: ForecastCityStyle.autocompleteVCSearchBarCancelButtonColor, andFont: ForecastCityStyle.autocompleteVCSearchBarCancelButtonFont)
     return autocompleteVC
   }()
   
   private lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-    let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-    let addNewCityButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+    let arrowDownButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+    let addButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
     
-    backButton.translatesAutoresizingMaskIntoConstraints = false
-    backButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
-    backButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
-    addNewCityButton.translatesAutoresizingMaskIntoConstraints = false
-    addNewCityButton.setImage(UIImage(named: "ic_add"), for: .normal)
-    addNewCityButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
+    arrowDownButton.translatesAutoresizingMaskIntoConstraints = false
+    arrowDownButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
+    arrowDownButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+    addButton.translatesAutoresizingMaskIntoConstraints = false
+    addButton.setImage(UIImage(named: "ic_add"), for: .normal)
+    addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
-    view.addSubview(backButton)
-    view.addSubview(addNewCityButton)
-    view.leadingAnchor.constraint(equalTo: backButton.leadingAnchor, constant: 0).isActive = true
-    view.centerYAnchor.constraint(equalTo: backButton.centerYAnchor).isActive = true
-    view.trailingAnchor.constraint(equalTo: addNewCityButton.trailingAnchor, constant: 8).isActive = true
-    view.centerYAnchor.constraint(equalTo: addNewCityButton.centerYAnchor).isActive = true
+    view.addSubview(arrowDownButton)
+    view.addSubview(addButton)
+    view.leadingAnchor.constraint(equalTo: arrowDownButton.leadingAnchor, constant: -8).isActive = true
+    view.centerYAnchor.constraint(equalTo: arrowDownButton.centerYAnchor).isActive = true
+    view.trailingAnchor.constraint(equalTo: addButton.trailingAnchor, constant: 8).isActive = true
+    view.centerYAnchor.constraint(equalTo: addButton.centerYAnchor).isActive = true
     return view
   }()
   
@@ -51,10 +53,11 @@ class ForecastCityListTableViewController: UITableViewController {
   weak var delegate: CityListTableViewControllerDelegate?
   
   
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
-    setupStyle()
   }
 }
 
@@ -63,43 +66,25 @@ class ForecastCityListTableViewController: UITableViewController {
 extension ForecastCityListTableViewController: ViewSetupable {
   
   func setup() {
-    setTableview()
+    setTableView()
     fetchCities()
   }
-  
-  func setupStyle() {
-    tableView.separatorColor = .white
-    setTransparentTableViewBackground()
-  }
+
 }
 
 
 // MARK: - Private - Set tableview
 private extension ForecastCityListTableViewController {
   
-  func setTableview() {
+  func setTableView() {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
+    tableView.separatorColor = ForecastCityStyle.tableViewSeparatorColor
     tableView.tableFooterView = footerView
+    setTransparentTableViewBackground()
   }
   
-}
-
-
-// MARK: - Private - Fetch cities and local time
-private extension ForecastCityListTableViewController {
-  
-  func fetchCities() {
-    let fetchRequest = City.createFetchRequest()
-    
-    do {
-      cities = try sharedMOC.mainContext.fetch(fetchRequest)
-    } catch {
-      CoreDataError.couldNotFetch.handle()
-    }
-  }
-
 }
 
 
@@ -112,26 +97,27 @@ private extension ForecastCityListTableViewController {
     imageView.contentMode = .scaleAspectFill
     
     tableView.backgroundView = imageView
-    tableView.backgroundColor = .clear
+    tableView.backgroundColor = ForecastCityStyle.tableViewBackgroundColor
   }
   
 }
 
 
-// MARK: - Private - Actions
+// MARK: - Private - Fetch cities and local time
 private extension ForecastCityListTableViewController {
   
-  @objc func backButtonTapped(_ sender: UIButton?) {
-    guard let _ = navigationController?.popViewController(animated: true) else {
-      self.dismiss(animated: true)
-      return
+  func fetchCities() {
+    let fetchRequest = City.createFetchRequest()
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
+    fetchRequest.sortDescriptors = [currentLocalizedSort]
+    
+    do {
+      cities = try sharedMOC.mainContext.fetch(fetchRequest)
+    } catch {
+      CoreDataError.couldNotFetch.handle()
     }
   }
-  
-  @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    present(autocompleteController, animated: true)
-  }
-  
+
 }
 
 
@@ -140,7 +126,7 @@ private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
     let managedContex = sharedMOC.mainContext
-    let newCity = City(unassociatedObject: city, managedObjectContext: managedContex)
+    let newCity = City(unassociatedObject: city, isCurrentLocalized: false, managedObjectContext: managedContex)
   
     do {
       try managedContex.save()
@@ -178,7 +164,7 @@ private extension ForecastCityListTableViewController {
 // MARK: - Private - Reload pages
 private extension ForecastCityListTableViewController {
   
-  func reloadPages() {
+  func reloadAndInitializeMainPageViewController() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
     NotificationCenter.default.post(name: reloadPagesName, object: nil)
   }
@@ -234,7 +220,7 @@ extension ForecastCityListTableViewController {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)
-      reloadPages()
+      reloadAndInitializeMainPageViewController()
     }
   }
   
@@ -253,7 +239,7 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
     
     insert(city: selectedCity)
     tableView.reloadData()
-    reloadPages()
+    reloadAndInitializeMainPageViewController()
     dismiss(animated: true, completion: nil)
   }
   
@@ -271,6 +257,23 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
   
   func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+  }
+  
+}
+
+
+// MARK: - Private - Actions
+private extension ForecastCityListTableViewController {
+  
+  @objc func backButtonTapped(_ sender: UIButton?) {
+    guard let _ = navigationController?.popViewController(animated: true) else {
+      self.dismiss(animated: true)
+      return
+    }
+  }
+  
+  @objc func addNewCityButtonTapped(_ sender: UIButton) {
+    present(autocompleteController, animated: true)
   }
   
 }

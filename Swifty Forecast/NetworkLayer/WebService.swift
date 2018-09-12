@@ -1,6 +1,6 @@
 //
 //  WebService.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
 //  Created by Pawel Milek on 26/06/2018.
 //  Copyright © 2018 Pawel Milek. All rights reserved.
@@ -22,18 +22,18 @@ final class WebService {
 // MARK: - Fetch data
 extension WebService {
   
-  func fetch<M: Decodable>(_ typeOf: M.Type, with request: WebServiceRequest, completionHandler: @escaping (WebServiceResultType<M, WebServiceError>) -> ()) {
+  func fetch<M: Decodable>(_ typeOf: M.Type, with request: WebServiceRequest, completionHandler: @escaping (ResultType<M, WebServiceError>) -> ()) {
     let urlRequest = request.urlRequest
     let encodedURLRequest = urlRequest.encode(with: request.parameters)
     
     sessionShared.dataTask(with: encodedURLRequest) { (data, _, error) in
       guard error == nil else {
-        completionHandler(.failure(WebServiceError.requestFailed))
+        completionHandler(.failure(.requestFailed))
         return
       }
       
       guard let data = data else {
-        completionHandler(.failure(WebServiceError.dataNotAvailable))
+        completionHandler(.failure(.dataNotAvailable))
         return
       }
       

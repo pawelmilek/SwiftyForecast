@@ -1,9 +1,9 @@
 //
-//  ActivityIndicator.swift
-//  Swifty-Forecast
+//  ActivityIndicatorView.swift
+//  Swifty Forecast
 //
-//  Created by Pawel Milek on 28/09/16.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
+//  Created by Pawel Milek on 11/08/2018.
+//  Copyright © 2018 Pawel Milek. All rights reserved.
 //
 
 import Foundation
@@ -11,8 +11,8 @@ import UIKit
 import NVActivityIndicatorView
 
 
-final class ActivityIndicator {
-  static let shared = ActivityIndicator()
+final class ActivityIndicatorView {
+  static let shared = ActivityIndicatorView()
 
   private lazy var activityIndicator: NVActivityIndicatorView = {
     let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
@@ -47,7 +47,7 @@ final class ActivityIndicator {
 
 
 // MARK: - Start/Stop indicator
-extension ActivityIndicator {
+extension ActivityIndicatorView {
   
   func startAnimating(at view: UIView) {
     DispatchQueue.main.async {

@@ -5,22 +5,26 @@ PODS:
   - NVActivityIndicatorView (4.3.0):
     - NVActivityIndicatorView/Presenter (= 4.3.0)
   - NVActivityIndicatorView/Presenter (4.3.0)
+  - ReachabilitySwift (4.2.1)
 
 DEPENDENCIES:
   - GooglePlaces (~> 2.7)
   - NVActivityIndicatorView (~> 4.3)
+  - ReachabilitySwift (~> 4.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - GoogleMaps
     - GooglePlaces
     - NVActivityIndicatorView
+    - ReachabilitySwift
 
 SPEC CHECKSUMS:
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GooglePlaces: 3d06e6c99654545b4738ce49648745779c25f2ef
   NVActivityIndicatorView: 963f62bf9f993fcf23218e55958e5b1761b9504c
+  ReachabilitySwift: 35720ffea59c1c76d15f885be77fd33e33985427
 
-PODFILE CHECKSUM: 83c5f4bc3d459a262f1297a83a9550463f8209db
+PODFILE CHECKSUM: e936e8f6051f82a14f47bd4eb34a1e6fef7a0e20
 
 COCOAPODS: 1.5.3

@@ -1,6 +1,6 @@
 //
 //  WebServiceError.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
 //  Created by Pawel Milek on 26/06/2018.
 //  Copyright © 2018 Pawel Milek. All rights reserved.
@@ -12,7 +12,7 @@ enum WebServiceError: ErrorHandleable {
   case unknownURL(url: String)
   case requestFailed
   case dataNotAvailable
-  case decodeFailed
+  case decoderFailed
   case failedToRetrieveContext
 }
 
@@ -31,7 +31,7 @@ extension WebServiceError {
     case .dataNotAvailable:
       return "Data not available."
       
-    case .decodeFailed:
+    case .decoderFailed:
       return "An error occurred while decoding data."
       
     case .failedToRetrieveContext:

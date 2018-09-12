@@ -1,8 +1,8 @@
 //
 //  ForecastContentViewController.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -14,19 +14,16 @@ class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
+  typealias ForecastContentStyle = Style.ForecastContentVC
   private let sharedMOC = CoreDataStackHelper.shared
+  private let sharedActivityIndicator = ActivityIndicatorView.shared
+  
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   
-  var currentCityForecast: City? {
-    didSet {
-      guard let currentCityForecast = currentCityForecast else { return }
-      fetchWeatherForecast(for: currentCityForecast)
-    }
-  }
-  
+  var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
@@ -63,6 +60,7 @@ extension ForecastContentViewController: ViewSetupable {
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
     addNotificationCenterObservers()
+    
   }
   
 }
@@ -101,15 +99,15 @@ private extension ForecastContentViewController {
     dailyForecastTableView.allowsSelection = false
     dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
-    dailyForecastTableView.backgroundColor = .white
-    dailyForecastTableView.separatorStyle = .none
+    dailyForecastTableView.backgroundColor = ForecastContentStyle.tableViewBackgroundColor
+    dailyForecastTableView.separatorStyle = ForecastContentStyle.tableViewSeparatorStyle
     dailyForecastTableView.tableFooterView = UIView()
   }
   
 }
 
 
-// MARK: - Private - NotificationCenter
+// MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
@@ -131,21 +129,28 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func fetchWeatherForecast() {
-    if let currentCityForecast = currentCityForecast {
-      fetchWeatherForecast(for: currentCityForecast)
-    } else {
+    var isCurrentLocationPage: Bool {
+      return pageIndex == 0
+    }
+    
+    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled { // Check current location
       fetchWeatherForecastForCurrentLocation()
+      
+    } else if let currentCityForecast = currentCityForecast {
+      fetchWeatherForecast(for: currentCityForecast)
     }
   }
   
   
   func fetchWeatherForecastForCurrentLocation() {
-    ActivityIndicator.shared.startAnimating(at: view)
+    sharedActivityIndicator.startAnimating(at: view)
     
-    GooglePlacesHelper.getCurrentPlace() { (place, error) in
+    GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
+      guard let strongSelf = self else { return }
+      
       if let error = error {
-        ActivityIndicator.shared.stopAnimating()
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places: \(error.localizedDescription)")
+        strongSelf.sharedActivityIndicator.stopAnimating()
+        error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
         return
       }
       
@@ -153,63 +158,110 @@ private extension ForecastContentViewController {
         let latitude = place.coordinate.latitude
         let longitude = place.coordinate.longitude
         let coordinate = Coordinate(latitude: latitude, longitude: longitude)
-        let request = ForecastRequest.make(by: coordinate)
         
+        let request = ForecastRequest.make(by: coordinate)
         WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
               let unassociatedCity = City(place: place)
-              self.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
+              strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if City.isDuplicate(city: unassociatedCity) == false {
-                let _ = City(unassociatedObject: unassociatedCity, managedObjectContext: self.sharedMOC.mainContext)
+                CoreDataManager.deleteCurrentLocalizedCity()
+                CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
+                strongSelf.currentCityForecast = unassociatedCity
+                strongSelf.reloadAndInitializeMainPageViewController()
                 
                 do {
-                  try self.sharedMOC.mainContext.save()
+                  try strongSelf.sharedMOC.mainContext.save()
                 } catch {
                   CoreDataError.couldNotSave.handle()
                 }
+                
+              } else {
+                CoreDataManager.fetchAndResetLocalizedCities()
+                CoreDataManager.updateCurrentLocalized(city: unassociatedCity)
+                strongSelf.reloadDataInMainPageViewController()
               }
               
-              ActivityIndicator.shared.stopAnimating()
+              
+              strongSelf.sharedActivityIndicator.stopAnimating()
             }
             
           case .failure(let error):
             DispatchQueue.main.async {
-              ActivityIndicator.shared.stopAnimating()
+              strongSelf.sharedActivityIndicator.stopAnimating()
               error.handle()
             }
           }
         })
         
       } else {
-        ActivityIndicator.shared.stopAnimating()
-        AlertViewPresenter.shared.presentError(withMessage: "Google Places: No place found.")
+        strongSelf.sharedActivityIndicator.stopAnimating()
+        GooglePlacesError.placeNotFound.handle()
       }
     }
   }
   
   
   func fetchWeatherForecast(for city: City) {
-    ActivityIndicator.shared.startAnimating(at: view)
+    sharedActivityIndicator.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
-    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+      guard let strongSelf = self else { return }
+      
       switch response {
       case .success(let forecast):
         DispatchQueue.main.async {
-          self.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
-          ActivityIndicator.shared.stopAnimating()
+          strongSelf.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
+          strongSelf.sharedActivityIndicator.stopAnimating()
         }
         
       case .failure(let error):
         DispatchQueue.main.async {
-          ActivityIndicator.shared.stopAnimating()
+          strongSelf.sharedActivityIndicator.stopAnimating()
           error.handle()
         }
       }
     })
+  }
+  
+}
+
+
+// MARK: - Private - Reload pages
+private extension ForecastContentViewController {
+  
+  func reloadAndInitializeMainPageViewController() {
+    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
+    NotificationCenter.default.post(name: reloadPagesName, object: nil)
+  }
+  
+  func reloadDataInMainPageViewController() {
+    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
+    NotificationCenter.default.post(name: reloadDataName, object: nil)
+  }
+  
+}
+
+
+// MARK: - Private - Show settings alert view
+private extension ForecastContentViewController {
+  
+  func presentLocationServicesSettingsPopupAlert() {
+    let cancelAction: (UIAlertAction) -> () = { _ in }
+    
+    let settingsAction: (UIAlertAction) -> () = { _ in
+      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+    }
+    
+    let title = NSLocalizedString("Location Services Disabled", comment: "")
+    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
+    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
+    AlertViewPresenter.shared.presentPopupAlert(in: self, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
 }

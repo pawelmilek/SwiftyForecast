@@ -13,6 +13,7 @@ class DailyForecastTableViewCell: UITableViewCell {
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
 
+  typealias DailyForecastCellStyle = Style.DailyForecastCell
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -30,18 +31,18 @@ class DailyForecastTableViewCell: UITableViewCell {
 extension DailyForecastTableViewCell: ViewSetupable {
   
   func setup() {
-    backgroundColor = .clear
+    backgroundColor = DailyForecastCellStyle.backgroundColor
   
-    dateLabel.textColor = .blackShade
-    dateLabel.textAlignment = .left
+    dateLabel.textColor = DailyForecastCellStyle.dateLabelTextColor
+    dateLabel.textAlignment = DailyForecastCellStyle.dateLabelTextAlignment
     dateLabel.numberOfLines = 2
     
-    iconLabel.textColor = .blackShade
-    iconLabel.textAlignment = .center
+    iconLabel.textColor = DailyForecastCellStyle.iconLabelTextColor
+    iconLabel.textAlignment = DailyForecastCellStyle.iconLabelTextAlignment
     
-    temperatureLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-    temperatureLabel.textColor = .blackShade
-    temperatureLabel.textAlignment = .center
+    temperatureLabel.font = DailyForecastCellStyle.temperatureLabelFont
+    temperatureLabel.textColor = DailyForecastCellStyle.temperatureLabelTextColor
+    temperatureLabel.textAlignment = DailyForecastCellStyle.temperatureLabelTextAlignment
   }
   
 }

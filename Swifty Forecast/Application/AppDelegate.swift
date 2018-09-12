@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  Swifty-Forecast
+//  Swifty Forecast
 //
-//  Created by Pawel Milek on 26/09/16.
+//  Created by Pawel Milek on 26/09/18.
 //  Copyright © 2016 Pawel Milek. All rights reserved.
 //
 
@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
+      if !isAuthorized {
+        self.presentLocationServicesSettingsPopupAlert()
+      }
+    }
+    
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setupStyle()
     return true
@@ -77,6 +83,7 @@ extension AppDelegate {
 }
 
 
+// MARK: - Setup style
 extension AppDelegate {
   
   func setupStyle() {
@@ -88,7 +95,7 @@ extension AppDelegate {
 
 // MARK: - Set UINAvigationBar Attributes
 private extension AppDelegate {
-
+  
   func setNavigationBarStyle() {
     func setTransparentBackground() {
       UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
@@ -98,17 +105,39 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = [NSAttributedStringKey.foregroundColor : UIColor.blackShade]
+      let textAttributes = [NSAttributedStringKey.foregroundColor : Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
     func setBarButtonItemColor() {
-      UINavigationBar.appearance().tintColor = .blackShade
+      UINavigationBar.appearance().tintColor = Style.NavigationBar.barButtonItemColor
     }
     
     setTransparentBackground()
     setTitleTextColor()
     setBarButtonItemColor()
+  }
+  
+}
+
+
+// MARK: - Private - Show settings alert view
+private extension AppDelegate {
+  
+  func presentLocationServicesSettingsPopupAlert() {
+    let cancelAction: (UIAlertAction) -> () = { _ in }
+    
+    let settingsAction: (UIAlertAction) -> () = { _ in
+      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+    }
+    
+    let title = NSLocalizedString("Location Services Disabled", comment: "")
+    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
+    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
+    
+    let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    AlertViewPresenter.shared.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
 }

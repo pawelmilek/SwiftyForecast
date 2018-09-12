@@ -11,17 +11,21 @@ import UIKit
 class ForecastMainViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
+  typealias ForecastMainStyle = Style.ForecastMainVC
+  private let network = NetworkManager.shared
+  
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = ["\u{00B0}" + "F", "\u{00B0}" + "C"]
-    segmentedControl.font = UIFont(name: "AvenirNext-Bold", size: 14)
-    segmentedControl.borderWidth = 1.0
-    segmentedControl.selectedLabelColor = .white
-    segmentedControl.unselectedLabelColor = .blackShade
-    segmentedControl.borderColor = .blackShade
-    segmentedControl.thumbColor = .blackShade
+    segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
+    segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
+    segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
+    segmentedControl.unselectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlUnselectedLabelColor
+    segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
+    segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
+    segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = 0
-    segmentedControl.backgroundColor = .clear
+    
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched(_:)), for: .valueChanged)
     return segmentedControl
   }()
@@ -58,6 +62,11 @@ class ForecastMainViewController: UIViewController {
     setupLayout()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    showOrHideEnableLocationServicesPrompt()
+  }
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
     guard let cityListVC = segue.destination as? ForecastCityListTableViewController else { return }
@@ -80,12 +89,14 @@ extension ForecastMainViewController: ViewSetupable {
     initializePageViewController()
     setMetricSystemSegmentedControl()
     addNotificationCenterObserver()
+    setNetworkManagerWhenInternetIsNotAvailable()
     setPageControl()
   }
   
   func setupLayout() {
     view.bringSubview(toFront: pageControl)
   }
+  
 }
 
 
@@ -94,6 +105,8 @@ private extension ForecastMainViewController {
   
   func fetchCities() {
     let fetchRequest = City.createFetchRequest()
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
+    fetchRequest.sortDescriptors = [currentLocalizedSort]
     
     do {
       cities = try CoreDataStackHelper.shared.mainContext.fetch(fetchRequest)
@@ -133,6 +146,9 @@ private extension ForecastMainViewController {
   func addNotificationCenterObserver() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
     NotificationCenter.default.addObserver(self, selector: #selector(reloadPages(_:)), name: reloadPagesName, object: nil)
+    
+    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
+    NotificationCenter.default.addObserver(self, selector: #selector(reloadPagesData(_:)), name: reloadDataName, object: nil)
   }
   
   func removeNotificationCenterObserver() {
@@ -153,6 +169,57 @@ private extension ForecastMainViewController {
 }
 
 
+// MARK: - Private - Set NetworkManager when internet is not available
+private extension ForecastMainViewController {
+  
+  func setNetworkManagerWhenInternetIsNotAvailable() {
+    let whenNetworkIsNotAvailable: () -> () = {
+      let offlineViewController = OfflineViewController()
+      self.navigationController?.pushViewController(offlineViewController, animated: false)
+    }
+    
+    // Will run only once when app is launching
+    network.isUnreachable { _ in
+      whenNetworkIsNotAvailable()
+    }
+    
+    // Network listener to pick up network changes in real-time
+    network.whenUnreachable { _ in
+      whenNetworkIsNotAvailable()
+    }
+  }
+  
+}
+
+
+// MARK: - Private - Show or hide navigation prompt
+private extension ForecastMainViewController {
+  
+  func showOrHideEnableLocationServicesPrompt() {
+    let delayInSeconds = 2.0
+    DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) { [weak self] in
+      guard let strongSelf = self else { return }
+      
+      if LocationProvider.shared.isLocationServicesEnabled {
+        strongSelf.navigationItem.prompt = nil
+        
+      } else {
+        strongSelf.navigationItem.prompt = NSLocalizedString("Please enable location services!", comment: "")
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds + 3) { [weak self] in
+          guard let strongSelf = self else { return }
+          strongSelf.navigationItem.prompt = nil
+          strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
+        }
+      }
+      
+      strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
+    }
+
+  }
+  
+}
+
+
 // MARK: - Actions
 extension ForecastMainViewController {
   
@@ -161,6 +228,12 @@ extension ForecastMainViewController {
     setInitialViewController()
     setPageControl()
   }
+  
+  @objc func reloadPagesData(_ notification: NSNotification) {
+    fetchCities()
+    setPageControl()
+  }
+  
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
     let notificationName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
@@ -218,7 +291,7 @@ private extension ForecastMainViewController {
 
   func setInitialViewController(at index: Int = 0) {
     guard let forecastContentVC = forecastContentViewController(at: index) else { return }
-    pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
+    pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: false)
   }
 
 }
