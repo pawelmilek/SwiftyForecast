@@ -13,8 +13,8 @@ import GooglePlaces
 extension GMSAutocompleteViewController {
   
   func setSearchTextInSearchBar(color: UIColor, andFont font: UIFont) {
-    let searchBarTextAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
-    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = searchBarTextAttributes
+    let searchBarTextAttributes = [NSAttributedString.Key.foregroundColor.rawValue: color, NSAttributedString.Key.font.rawValue: font]
+    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = convertToNSAttributedStringKeyDictionary(searchBarTextAttributes)
   }
   
   func setSearchTextFieldPlaceholder(color: UIColor, andFont font: UIFont) {
@@ -30,4 +30,9 @@ extension GMSAutocompleteViewController {
     UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes, for: .normal)
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.Key: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

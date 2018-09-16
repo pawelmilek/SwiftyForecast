@@ -252,7 +252,7 @@ private extension ForecastContentViewController {
     
     let settingsAction: (UIAlertAction) -> () = { _ in
       let settingsURL = URL(string: UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     let title = NSLocalizedString("Location Services Disabled", comment: "")
@@ -351,4 +351,9 @@ extension ForecastContentViewController {
     fetchWeatherForecast()
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

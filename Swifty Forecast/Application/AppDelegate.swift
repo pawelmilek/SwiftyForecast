@@ -105,7 +105,7 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = NSAttributedString.Key.foregroundColor : Style.NavigationBar.titleTextColor]
+      let textAttributes = [NSAttributedString.Key.foregroundColor: Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
@@ -128,8 +128,8 @@ private extension AppDelegate {
     let cancelAction: (UIAlertAction) -> () = { _ in }
     
     let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string:UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     let title = NSLocalizedString("Location Services Disabled", comment: "")
@@ -140,4 +140,9 @@ private extension AppDelegate {
     AlertViewPresenter.shared.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
