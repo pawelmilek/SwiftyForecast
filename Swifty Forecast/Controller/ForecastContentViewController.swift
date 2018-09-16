@@ -47,7 +47,7 @@ class ForecastContentViewController: UIViewController {
   }
   
   deinit {
-    removeNotificationCenterObservers()
+    removeNotificationCenterObserver()
   }
 }
 
@@ -59,7 +59,7 @@ extension ForecastContentViewController: ViewSetupable {
     setCurrentForecastViewDelegate()
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
-    addNotificationCenterObservers()
+    addNotificationCenterObserver()
     
   }
   
@@ -110,15 +110,12 @@ private extension ForecastContentViewController {
 // MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
-  func addNotificationCenterObservers() {
+  func addNotificationCenterObserver() {
     let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
     NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: measuringSystemSwitchName, object: nil)
-    
-    let refreshName = NotificationCenterKey.refreshButtonDidPressNotification.name
-    NotificationCenter.default.addObserver(self, selector: #selector(refreshButtonDidTap(_:)), name: refreshName, object: nil)
   }
   
-  func removeNotificationCenterObservers() {
+  func removeNotificationCenterObserver() {
     NotificationCenter.default.removeObserver(self)
   }
   
@@ -351,10 +348,6 @@ extension ForecastContentViewController {
   @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
     MeasuringSystem.isMetric = (segmentedControl.selectedIndex == 0 ? false : true)
-    fetchWeatherForecast()
-  }
-  
-  @objc func refreshButtonDidTap(_ notification: NSNotification) {
     fetchWeatherForecast()
   }
   

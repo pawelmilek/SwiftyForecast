@@ -28,23 +28,15 @@
                                     <constraint firstAttribute="width" secondItem="r7N-DF-PUt" secondAttribute="height" multiplier="1:1" id="Rqf-nF-SKM"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Dark Sky API" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0l4-5R-svg">
-                                <rect key="frame" x="283" y="653" width="87" height="8.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="7"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="oNP-2n-MY4" firstAttribute="trailing" secondItem="j7m-f6-y4J" secondAttribute="trailing" id="0nz-xc-VkH"/>
                             <constraint firstItem="j7m-f6-y4J" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2la-Ki-C30"/>
                             <constraint firstItem="oNP-2n-MY4" firstAttribute="bottom" secondItem="j7m-f6-y4J" secondAttribute="bottom" id="7Ff-pR-gGZ"/>
-                            <constraint firstItem="oNP-2n-MY4" firstAttribute="bottom" secondItem="0l4-5R-svg" secondAttribute="bottom" constant="5" id="LXK-3m-ZAU"/>
                             <constraint firstItem="r7N-DF-PUt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Uwz-ip-e0g"/>
                             <constraint firstItem="j7m-f6-y4J" firstAttribute="leading" secondItem="oNP-2n-MY4" secondAttribute="leading" id="Wad-09-3gR"/>
                             <constraint firstItem="r7N-DF-PUt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Ye9-R0-eoc"/>
-                            <constraint firstItem="oNP-2n-MY4" firstAttribute="trailing" secondItem="0l4-5R-svg" secondAttribute="trailing" constant="5" id="aTy-mK-VFL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oNP-2n-MY4"/>
                     </view>

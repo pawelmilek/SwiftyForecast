@@ -119,11 +119,11 @@
                         <viewLayoutGuide key="safeArea" id="FXa-FP-7Ye"/>
                     </view>
                     <navigationItem key="navigationItem" id="Tqf-EB-eGd">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="ic_cloud_refresh" id="flu-Un-bTJ">
-                            <inset key="imageInsets" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <barButtonItem key="leftBarButtonItem" image="ic_poweredby_small" id="flu-Un-bTJ">
+                            <inset key="imageInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
                             <connections>
-                                <action selector="refreshButtonTapped:" destination="BiV-X8-6kw" id="2Ox-Pl-Am2"/>
+                                <action selector="poweredByButtonTapped:" destination="BiV-X8-6kw" id="2Ox-Pl-Am2"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
@@ -161,7 +161,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_cloud_refresh" width="24" height="24"/>
         <image name="ic_menu" width="24" height="24"/>
+        <image name="ic_poweredby_small" width="60" height="24"/>
     </resources>
 </document>

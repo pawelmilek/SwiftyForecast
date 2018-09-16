@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ForecastMainViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
@@ -242,9 +243,11 @@ extension ForecastMainViewController {
     NotificationCenter.default.post(name: notificationName, object: nil, userInfo: segmentedControlData)
   }
   
-  @IBAction func refreshButtonTapped(_ sender: UIBarButtonItem) {
-    let notificationName = NotificationCenterKey.refreshButtonDidPressNotification.name
-    NotificationCenter.default.post(name: notificationName, object: nil)
+  @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {
+    if let url = URL(string: "https://darksky.net/poweredby/") {
+      let safariViewController = SFSafariViewController(url: url)
+      present(safariViewController, animated: true)
+    }
   }
   
 }
