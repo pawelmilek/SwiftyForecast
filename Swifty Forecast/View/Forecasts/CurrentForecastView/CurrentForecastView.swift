@@ -103,7 +103,7 @@ private extension CurrentForecastView {
     contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     
     contentView.addSubview(backgroundImageView)
-    contentView.sendSubview(toBack: backgroundImageView)
+    contentView.sendSubviewToBack(backgroundImageView)
   }
   
 }

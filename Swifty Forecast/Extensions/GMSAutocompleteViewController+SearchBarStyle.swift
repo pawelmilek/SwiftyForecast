@@ -13,12 +13,12 @@ import GooglePlaces
 extension GMSAutocompleteViewController {
   
   func setSearchTextInSearchBar(color: UIColor, andFont font: UIFont) {
-    let searchBarTextAttributes = [ NSAttributedStringKey.foregroundColor.rawValue: color, NSAttributedStringKey.font.rawValue: font]
+    let searchBarTextAttributes: [NSAttributedString.Key : Any] = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = searchBarTextAttributes
   }
   
   func setSearchTextFieldPlaceholder(color: UIColor, andFont font: UIFont) {
-    let placeholderAttributes = [ NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: font]
+    let placeholderAttributes = [ NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
     
     let attributedPlaceholder = NSAttributedString(string: "Search City", attributes: placeholderAttributes)
     UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).attributedPlaceholder = attributedPlaceholder
@@ -26,7 +26,7 @@ extension GMSAutocompleteViewController {
   
   
   func setSearchBarCancelButton(color: UIColor, andFont font: UIFont) {
-    let cancelButtonAttributes = [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: font]
+    let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
     UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes, for: .normal)
   }
   

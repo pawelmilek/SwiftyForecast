@@ -110,7 +110,7 @@ struct Style {
   // MARK: - ForecastContentViewController
   struct ForecastContentVC {
     static let tableViewBackgroundColor = UIColor.white
-    static let tableViewSeparatorStyle = UITableViewCellSeparatorStyle.none
+    static let tableViewSeparatorStyle = UITableViewCell.SeparatorStyle.none
   }
   
   

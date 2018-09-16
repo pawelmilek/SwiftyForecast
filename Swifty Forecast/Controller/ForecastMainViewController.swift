@@ -95,7 +95,7 @@ extension ForecastMainViewController: ViewSetupable {
   }
   
   func setupLayout() {
-    view.bringSubview(toFront: pageControl)
+    view.bringSubviewToFront(pageControl)
   }
   
 }
@@ -123,9 +123,9 @@ private extension ForecastMainViewController {
 private extension ForecastMainViewController {
   
   func initializePageViewController() {
-    addChildViewController(pageViewController)
+    addChild(pageViewController)
     view.addSubview(pageViewController.view)
-    pageViewController.didMove(toParentViewController: self)
+    pageViewController.didMove(toParent: self)
   }
   
 }

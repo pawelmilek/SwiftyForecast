@@ -97,7 +97,7 @@ private extension ForecastContentViewController {
     dailyForecastTableView.delegate = self
     dailyForecastTableView.showsVerticalScrollIndicator = false
     dailyForecastTableView.allowsSelection = false
-    dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
+    dailyForecastTableView.rowHeight = UITableView.automaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
     dailyForecastTableView.backgroundColor = ForecastContentStyle.tableViewBackgroundColor
     dailyForecastTableView.separatorStyle = ForecastContentStyle.tableViewSeparatorStyle
@@ -251,7 +251,7 @@ private extension ForecastContentViewController {
     let cancelAction: (UIAlertAction) -> () = { _ in }
     
     let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
       UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
     }
     

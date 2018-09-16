@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let googlePlacesAPIKey = "AIzaSyBRU9w0-Tlx3HWnQg13QnlXyngHHJoakkU"
   var window: UIWindow?
   
-  internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+  internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if !isAuthorized {
         self.presentLocationServicesSettingsPopupAlert()
@@ -105,7 +105,7 @@ private extension AppDelegate {
     }
     
     func setTitleTextColor() {
-      let textAttributes = [NSAttributedStringKey.foregroundColor : Style.NavigationBar.titleTextColor]
+      let textAttributes = NSAttributedString.Key.foregroundColor : Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
@@ -128,7 +128,7 @@ private extension AppDelegate {
     let cancelAction: (UIAlertAction) -> () = { _ in }
     
     let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
+      let settingsURL = URL(string:UIApplication.openSettingsURLString)!
       UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
     }
     

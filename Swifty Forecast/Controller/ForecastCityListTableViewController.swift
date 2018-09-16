@@ -217,7 +217,7 @@ extension ForecastCityListTableViewController {
     return indexPath.row == 0 ? false : true
   }
   
-  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       deleteCity(at: indexPath)
       tableView.deleteRows(at: [indexPath], with: .fade)

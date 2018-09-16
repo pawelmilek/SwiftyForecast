@@ -47,6 +47,12 @@
 		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
+		E2632409214DE32400BA0500 /* NVActivityIndicatorAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632401214DE32400BA0500 /* NVActivityIndicatorAnimationDelegate.swift */; };
+		E263240A214DE32400BA0500 /* NVActivityIndicatorPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632403214DE32400BA0500 /* NVActivityIndicatorPresenter.swift */; };
+		E263240B214DE32400BA0500 /* NVActivityIndicatorViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632404214DE32400BA0500 /* NVActivityIndicatorViewable.swift */; };
+		E263240C214DE32400BA0500 /* NVActivityIndicatorShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632405214DE32400BA0500 /* NVActivityIndicatorShape.swift */; };
+		E263240D214DE32400BA0500 /* NVActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632406214DE32400BA0500 /* NVActivityIndicatorView.swift */; };
+		E263240E214DE32400BA0500 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2632408214DE32400BA0500 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */; };
 		E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */; };
 		E268FEE220FC29C50038F015 /* SwiftyForecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E268FEE020FC29C50038F015 /* SwiftyForecast.xcdatamodeld */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
@@ -137,6 +143,12 @@
 		E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		E2632401214DE32400BA0500 /* NVActivityIndicatorAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationDelegate.swift; sourceTree = "<group>"; };
+		E2632403214DE32400BA0500 /* NVActivityIndicatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorPresenter.swift; sourceTree = "<group>"; };
+		E2632404214DE32400BA0500 /* NVActivityIndicatorViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorViewable.swift; sourceTree = "<group>"; };
+		E2632405214DE32400BA0500 /* NVActivityIndicatorShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorShape.swift; sourceTree = "<group>"; };
+		E2632406214DE32400BA0500 /* NVActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorView.swift; sourceTree = "<group>"; };
+		E2632408214DE32400BA0500 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallScaleMultiple.swift; sourceTree = "<group>"; };
 		E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
 		E268FEE120FC29C50038F015 /* SwiftyForecast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftyForecast.xcdatamodel; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
@@ -275,6 +287,7 @@
 		E23997D420E84058007D8CE4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E2632400214DE32400BA0500 /* NVActivityIndicatorView */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
@@ -453,6 +466,36 @@
 			path = ForecastIcons;
 			sourceTree = "<group>";
 		};
+		E2632400214DE32400BA0500 /* NVActivityIndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				E2632401214DE32400BA0500 /* NVActivityIndicatorAnimationDelegate.swift */,
+				E2632402214DE32400BA0500 /* Presenter */,
+				E2632405214DE32400BA0500 /* NVActivityIndicatorShape.swift */,
+				E2632406214DE32400BA0500 /* NVActivityIndicatorView.swift */,
+				E2632407214DE32400BA0500 /* Animations */,
+			);
+			name = NVActivityIndicatorView;
+			path = "../../../../Resources/Swifty Forecast/NVActivityIndicatorView";
+			sourceTree = "<group>";
+		};
+		E2632402214DE32400BA0500 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E2632403214DE32400BA0500 /* NVActivityIndicatorPresenter.swift */,
+				E2632404214DE32400BA0500 /* NVActivityIndicatorViewable.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		E2632407214DE32400BA0500 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				E2632408214DE32400BA0500 /* NVActivityIndicatorAnimationBallScaleMultiple.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		E29911ED1D456EAC0083B484 = {
 			isa = PBXGroup;
 			children = (
@@ -586,12 +629,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,11 +684,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27E2FCF1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift in Sources */,
+				E263240D214DE32400BA0500 /* NVActivityIndicatorView.swift in Sources */,
 				E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E27E2FCD1DA04D1D00B3EABF /* ReusableView.swift in Sources */,
 				E23997EB20E84371007D8CE4 /* WebService.swift in Sources */,
 				E206E1C520E968A300AC72EA /* HourlyData.swift in Sources */,
 				E27E2FD01DA04D1D00B3EABF /* UITableView+Registrable.swift in Sources */,
+				E263240E214DE32400BA0500 /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
 				E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */,
 				E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,
@@ -685,9 +728,11 @@
 				E27E2F831DA0482C00B3EABF /* ForecastCityListTableViewController.swift in Sources */,
 				E27E2FB61DA04D1D00B3EABF /* CityListTableViewControllerDelegate.swift in Sources */,
 				E27E2FBC1DA04D1D00B3EABF /* ViewSetupable.swift in Sources */,
+				E263240C214DE32400BA0500 /* NVActivityIndicatorShape.swift in Sources */,
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
 				E27E2FCB1DA04D1D00B3EABF /* NibLoadableView.swift in Sources */,
 				E27E2FCC1DA04D1D00B3EABF /* Registrable.swift in Sources */,
+				E2632409214DE32400BA0500 /* NVActivityIndicatorAnimationDelegate.swift in Sources */,
 				E27E2F861DA0482C00B3EABF /* ForecastContentViewController.swift in Sources */,
 				E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */,
 				E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */,
@@ -700,10 +745,12 @@
 				E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */,
 				E206E1C120E9673A00AC72EA /* HourlyForecast.swift in Sources */,
 				E23997EC20E84371007D8CE4 /* WebServiceRequest.swift in Sources */,
+				E263240B214DE32400BA0500 /* NVActivityIndicatorViewable.swift in Sources */,
 				E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
 				E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */,
 				E2E012BC21337ECF004ABF55 /* GooglePlacesError.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
+				E263240A214DE32400BA0500 /* NVActivityIndicatorPresenter.swift in Sources */,
 				E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */,
 				E239980320E85987007D8CE4 /* DailyForecast.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* WebServiceError.swift in Sources */,
@@ -838,7 +885,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/Swifty Forecast/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -855,7 +902,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/Swifty Forecast/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
