@@ -35,6 +35,7 @@ class ForecastCityListTableViewController: UITableViewController {
     arrowDownButton.translatesAutoresizingMaskIntoConstraints = false
     arrowDownButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
     arrowDownButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+    
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.setImage(UIImage(named: "ic_add"), for: .normal)
     addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
