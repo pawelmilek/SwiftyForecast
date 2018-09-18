@@ -113,6 +113,7 @@
 		E2A42E32214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0C214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */; };
 		E2A42E33214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift */; };
 		E2A42E34214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0E214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift */; };
+		E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
 		E2B1D656211E55F000F0002A /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D655211E55F000F0002A /* StoryboardIdentifiable.swift */; };
 		E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */; };
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
@@ -243,6 +244,7 @@
 		E2A42E0C214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScalePulseOutRapid.swift; sourceTree = "<group>"; };
 		E2A42E0D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulseRise.swift; sourceTree = "<group>"; };
 		E2A42E0E214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationOrbit.swift; sourceTree = "<group>"; };
+		E2A42E392151BC7D00F9A79A /* GeocoderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderError.swift; sourceTree = "<group>"; };
 		E2B1D655211E55F000F0002A /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardIdentifiable.swift"; sourceTree = "<group>"; };
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 		E23997E520E84371007D8CE4 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
+				E2A42E392151BC7D00F9A79A /* GeocoderError.swift */,
 				E23997E720E84371007D8CE4 /* ErrorHandleable.swift */,
 				E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */,
 				E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */,
@@ -822,6 +825,7 @@
 				E2A42E16214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
 				E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */,
 				E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */,
+				E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */,
 				E2A42E30214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E2A42E14214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
