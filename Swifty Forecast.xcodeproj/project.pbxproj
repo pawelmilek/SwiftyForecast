@@ -47,7 +47,6 @@
 		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
-		E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */; };
 		E268FEE220FC29C50038F015 /* SwiftyForecast.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E268FEE020FC29C50038F015 /* SwiftyForecast.xcdatamodeld */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
 		E27E2F831DA0482C00B3EABF /* ForecastCityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* ForecastCityListTableViewController.swift */; };
@@ -113,6 +112,7 @@
 		E2A42E32214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0C214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */; };
 		E2A42E33214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift */; };
 		E2A42E34214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E0E214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift */; };
+		E2A42E3821518AAF00F9A79A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E3721518AAF00F9A79A /* GeocoderError.swift */; };
 		E2B1D656211E55F000F0002A /* StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D655211E55F000F0002A /* StoryboardIdentifiable.swift */; };
 		E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */; };
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
@@ -121,7 +121,6 @@
 		E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */; };
 		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
 		E2DCC9CB2146FA49003528F3 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */; };
-		E2E012BC21337ECF004ABF55 /* GooglePlacesError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E012BB21337ECF004ABF55 /* GooglePlacesError.swift */; };
 		E2E0761F20F51274008A5B63 /* FontWeatherIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */; };
 		E2E0762120F51506008A5B63 /* FontWeather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2E0762020F51506008A5B63 /* FontWeather.ttf */; };
 		E2E0762320F51577008A5B63 /* UIFont+FontWeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0762220F51577008A5B63 /* UIFont+FontWeatherIcon.swift */; };
@@ -175,7 +174,6 @@
 		E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
-		E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesHelper.swift; sourceTree = "<group>"; };
 		E268FEE120FC29C50038F015 /* SwiftyForecast.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftyForecast.xcdatamodel; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* ForecastCityListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastCityListTableViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +241,7 @@
 		E2A42E0C214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationLineScalePulseOutRapid.swift; sourceTree = "<group>"; };
 		E2A42E0D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallPulseRise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationBallPulseRise.swift; sourceTree = "<group>"; };
 		E2A42E0E214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationOrbit.swift; sourceTree = "<group>"; };
+		E2A42E3721518AAF00F9A79A /* GeocoderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocoderError.swift; sourceTree = "<group>"; };
 		E2B1D655211E55F000F0002A /* StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardIdentifiable.swift; sourceTree = "<group>"; };
 		E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardIdentifiable.swift"; sourceTree = "<group>"; };
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
@@ -251,7 +250,6 @@
 		E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseFontIcon.swift; sourceTree = "<group>"; };
 		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		E2E012BB21337ECF004ABF55 /* GooglePlacesError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesError.swift; sourceTree = "<group>"; };
 		E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconType.swift; sourceTree = "<group>"; };
 		E2E0762020F51506008A5B63 /* FontWeather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontWeather.ttf; sourceTree = "<group>"; };
 		E2E0762220F51577008A5B63 /* UIFont+FontWeatherIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+FontWeatherIcon.swift"; sourceTree = "<group>"; };
@@ -326,7 +324,6 @@
 				E20DA45A214348AD0047491B /* NetworkManager.swift */,
 				E2D960802120F34800AE0B6E /* GeocoderHelper.swift */,
 				E254B5CF2102C45000B34E8F /* LocationProvider.swift */,
-				E268FEBB20FBE6730038F015 /* GooglePlacesHelper.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */,
 				E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */,
@@ -467,7 +464,7 @@
 				E221C22520FFACAE00CBB8F2 /* CoreDataError.swift */,
 				E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */,
 				E23997E620E84371007D8CE4 /* WebServiceError.swift */,
-				E2E012BB21337ECF004ABF55 /* GooglePlacesError.swift */,
+				E2A42E3721518AAF00F9A79A /* GeocoderError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -651,7 +648,7 @@
 				E29911F31D456EAC0083B484 /* Frameworks */,
 				E29911F41D456EAC0083B484 /* Resources */,
 				00C345CACB0055681DAAED4B /* [CP] Embed Pods Frameworks */,
-				3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */,
+				81EF0EA16B17573C8FFEDAFA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -735,7 +732,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */ = {
+		81EF0EA16B17573C8FFEDAFA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -822,6 +819,7 @@
 				E2A42E16214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
 				E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */,
 				E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */,
+				E2A42E3821518AAF00F9A79A /* GeocoderError.swift in Sources */,
 				E2A42E30214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallSpinFadeLoader.swift in Sources */,
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E2A42E14214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
@@ -853,7 +851,6 @@
 				E27E2F861DA0482C00B3EABF /* ForecastContentViewController.swift in Sources */,
 				E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */,
 				E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */,
-				E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */,
 				E23CD76920EDBCDB00F0F72A /* ConditionFontIcon.swift in Sources */,
 				E23997FF20E85643007D8CE4 /* CurrentForecast.swift in Sources */,
 				E2B1D65C211FB26C00F0002A /* ForecastMainViewController.swift in Sources */,
@@ -870,7 +867,6 @@
 				E2A42E1F214DEE5E00F9A79A /* NVActivityIndicatorAnimationSemiCircleSpin.swift in Sources */,
 				E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
 				E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */,
-				E2E012BC21337ECF004ABF55 /* GooglePlacesError.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
 				E2A42E10214DEE5E00F9A79A /* NVActivityIndicatorPresenter.swift in Sources */,
 				E23FA39E21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift in Sources */,

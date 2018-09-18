@@ -13,14 +13,13 @@ import CoreLocation
 final class LocationProvider: NSObject {
   static let shared = LocationProvider()
 
-  typealias CompletionHandler = (Coordinate) -> ()
+  typealias CompletionHandler = (CLLocation) -> ()
   
   private let locationManager = CLLocationManager()
-  private var currentLocation: CLLocationCoordinate2D? {
+  private var currentLocation: CLLocation? {
     didSet {
       guard let currentLocation = currentLocation else { return }
-      let coordinate = Coordinate(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-      self.locationFound?(coordinate)
+      self.locationFound?(currentLocation)
     }
   }
   
@@ -75,7 +74,7 @@ extension LocationProvider {
   
   func getCurrentLocation(completionHandler: @escaping CompletionHandler) {
     guard isLocationServicesEnabled else {
-      AlertViewPresenter.shared.presentError(withMessage: "Please enable location.")
+      presentLocationServicesSettingsPopupAlert()
       return
     }
     
@@ -92,7 +91,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard !didUpdateLocationsFlag else { return }
-    guard let location = locations.first?.coordinate else { return }
+    guard let location = locations.first else { return }
     
     didUpdateLocationsFlag = true
     DispatchQueue.main.async {
@@ -130,3 +129,29 @@ extension LocationProvider: CLLocationManagerDelegate {
   
 }
 
+
+// MARK: - Show settings alert view
+extension LocationProvider {
+  
+  func presentLocationServicesSettingsPopupAlert() {
+    let cancelAction: (UIAlertAction) -> () = { _ in }
+    
+    let settingsAction: (UIAlertAction) -> () = { _ in
+      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+    }
+    
+    let title = NSLocalizedString("Location Services Disabled", comment: "")
+    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
+    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
+    
+    let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    AlertViewPresenter.shared.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
+  }
+  
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+  return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if !isAuthorized {
-        self.presentLocationServicesSettingsPopupAlert()
+        LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
       }
     }
     
@@ -118,31 +118,4 @@ private extension AppDelegate {
     setBarButtonItemColor()
   }
   
-}
-
-
-// MARK: - Private - Show settings alert view
-private extension AppDelegate {
-  
-  func presentLocationServicesSettingsPopupAlert() {
-    let cancelAction: (UIAlertAction) -> () = { _ in }
-    
-    let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-    }
-    
-    let title = NSLocalizedString("Location Services Disabled", comment: "")
-    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
-    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
-    
-    let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-    AlertViewPresenter.shared.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
-  }
-  
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

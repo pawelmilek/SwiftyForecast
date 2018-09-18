@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import GooglePlaces
 import CoreData
+import GooglePlaces
 
 final class City: NSManagedObject {
   @NSManaged var name: String
@@ -18,18 +18,17 @@ final class City: NSManagedObject {
   @NSManaged var isCurrentLocalized: Bool
   @NSManaged var coordinate: Coordinate
   
-  convenience init(place: GMSPlace, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
+  convenience init(name: String, country: String, state: String?, postalCode: String, coordinate: (lat: Double, long: Double), isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
-    let addressComponents = place.addressComponents
-    
-    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
-    self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
-    self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
-    self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
+    self.name = name
+    self.country = country
+    self.state = state
+    self.postalCode = postalCode
     self.isCurrentLocalized = isCurrentLocalized
-    self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, managedObjectContext: managedObjectContext)
+    self.coordinate = Coordinate(latitude: coordinate.lat, longitude: coordinate.long, managedObjectContext: managedObjectContext)
   }
+  
   
   convenience init(unassociatedObject: City, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
@@ -46,12 +45,24 @@ final class City: NSManagedObject {
   }
   
   
+  convenience init(name: String, country: String, state: String?, postalCode: String, coordinate: (lat: Double, long: Double)) {
+    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.mainContext)!
+    self.init(entity: entity, insertInto: nil)
+    
+    self.name = name
+    self.country = country
+    self.state = state
+    self.postalCode = postalCode
+    self.isCurrentLocalized = false
+    self.coordinate = Coordinate(latitude: coordinate.lat, longitude: coordinate.long)
+  }
+  
+  
   convenience init(place: GMSPlace) {
     let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.mainContext)!
     self.init(entity: entity, insertInto: nil)
     
     let addressComponents = place.addressComponents
-    
     self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
@@ -59,6 +70,7 @@ final class City: NSManagedObject {
     self.isCurrentLocalized = false
     self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
   }
+  
 }
 
 

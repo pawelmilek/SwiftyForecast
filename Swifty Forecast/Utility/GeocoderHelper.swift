@@ -11,34 +11,45 @@ import CoreLocation
 
 final class GeocoderHelper {
   
-  class func findCoordinate(by address: String, completionHandler: @escaping (_ coordinate: Coordinate?, _ error: Error?) -> ()) {
+  class func findCoordinate(by address: String, completionHandler: @escaping (_ coordinate: CLLocationCoordinate2D?, _ error: GeocoderError?) -> ()) {
     let geocoder = CLGeocoder()
     
     geocoder.geocodeAddressString(address, completionHandler: { (placemarks, error) in
       guard let placemark = placemarks?.last, error == nil else {
-        completionHandler(nil, error)
+        completionHandler(nil, GeocoderError.coordinateNotFound)
         return
       }
       
       let location = placemark.location
-      let coordinate = location!.coordinate
-      let latitude = coordinate.latitude
-      let longitude = coordinate.longitude
+      let coordinate = location?.coordinate
       
-      
-      let coord = Coordinate(latitude: latitude, longitude: longitude)
-      completionHandler(coord, nil)
+      completionHandler(coordinate, nil)
     })
   }
   
   
-  class func findTimezone(at coordinate: Coordinate, completionHandler: @escaping (TimeZone?, Error?) -> ()) {
+  class func findPlace(at coordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ placemark: CLPlacemark?, _ error: GeocoderError?) -> ()) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude), longitude: CLLocationDegrees(coordinate.longitude))
     let geocoder = CLGeocoder()
     
     geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
       guard let placemark = placemarks?.first, error == nil else {
-        completionHandler(nil, error)
+        completionHandler(nil, GeocoderError.placeNotFound)
+        return
+      }
+      
+      completionHandler(placemark, nil)
+    })
+  }
+  
+  
+  class func findTimezone(at coordinate: Coordinate, completionHandler: @escaping (TimeZone?, GeocoderError?) -> ()) {
+    let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude), longitude: CLLocationDegrees(coordinate.longitude))
+    let geocoder = CLGeocoder()
+    
+    geocoder.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+      guard let placemark = placemarks?.first, error == nil else {
+        completionHandler(nil, GeocoderError.timezoneNotFound)
         return
       }
       

@@ -142,61 +142,67 @@ private extension ForecastContentViewController {
   func fetchWeatherForecastForCurrentLocation() {
     sharedActivityIndicator.startAnimating(at: view)
     
-    GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
-      guard let strongSelf = self else { return }
-      
-      if let error = error {
-        strongSelf.sharedActivityIndicator.stopAnimating()
-        error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
-        return
-      }
-      
-      if let place = place {
-        let latitude = place.coordinate.latitude
-        let longitude = place.coordinate.longitude
-        let coordinate = Coordinate(latitude: latitude, longitude: longitude)
+    LocationProvider.shared.getCurrentLocation { [weak self] location in
+      GeocoderHelper.findPlace(at: location.coordinate) { placemark, error in
+        guard let strongSelf = self else { return }
         
-        let request = ForecastRequest.make(by: coordinate)
-        WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
-          switch response {
-          case .success(let forecast):
-            DispatchQueue.main.async {
-              let unassociatedCity = City(place: place)
-              strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
-              
-              if City.isDuplicate(city: unassociatedCity) == false {
-                CoreDataManager.deleteCurrentLocalizedCity()
-                CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
-                strongSelf.currentCityForecast = unassociatedCity
-                strongSelf.reloadAndInitializeMainPageViewController()
+        if let error = error {
+          strongSelf.sharedActivityIndicator.stopAnimating()
+          error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
+          return
+        }
+        
+        if let place = placemark {
+          let name = place.locality ?? ""
+          let state = place.administrativeArea ?? ""
+          let country = place.country ?? ""
+          let postalCode = place.postalCode ?? ""
+          let latitude = place.location!.coordinate.latitude
+          let longitude = place.location!.coordinate.longitude
+          
+          let coordinate = Coordinate(latitude: latitude, longitude: longitude)
+          
+          let request = ForecastRequest.make(by: coordinate)
+          WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+            switch response {
+            case .success(let forecast):
+              DispatchQueue.main.async {
+                let unassociatedCity = City(name: name, country: country, state: state, postalCode: postalCode, coordinate: (latitude, longitude))
+                strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
                 
-                do {
-                  try strongSelf.sharedMOC.mainContext.save()
-                } catch {
-                  CoreDataError.couldNotSave.handle()
+                if City.isDuplicate(city: unassociatedCity) == false {
+                  CoreDataManager.deleteCurrentLocalizedCity()
+                  CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
+                  strongSelf.currentCityForecast = unassociatedCity
+                  strongSelf.reloadAndInitializeMainPageViewController()
+                  
+                  do {
+                    try strongSelf.sharedMOC.mainContext.save()
+                  } catch {
+                    CoreDataError.couldNotSave.handle()
+                  }
+                  
+                } else {
+                  CoreDataManager.fetchAndResetLocalizedCities()
+                  CoreDataManager.updateCurrentLocalized(city: unassociatedCity)
+                  strongSelf.reloadDataInMainPageViewController()
                 }
                 
-              } else {
-                CoreDataManager.fetchAndResetLocalizedCities()
-                CoreDataManager.updateCurrentLocalized(city: unassociatedCity)
-                strongSelf.reloadDataInMainPageViewController()
+                strongSelf.sharedActivityIndicator.stopAnimating()
               }
               
-              
-              strongSelf.sharedActivityIndicator.stopAnimating()
+            case .failure(let error):
+              DispatchQueue.main.async {
+                strongSelf.sharedActivityIndicator.stopAnimating()
+                error.handle()
+              }
             }
-            
-          case .failure(let error):
-            DispatchQueue.main.async {
-              strongSelf.sharedActivityIndicator.stopAnimating()
-              error.handle()
-            }
-          }
-        })
-        
-      } else {
-        strongSelf.sharedActivityIndicator.stopAnimating()
-        GooglePlacesError.placeNotFound.handle()
+          })
+          
+        } else {
+          strongSelf.sharedActivityIndicator.stopAnimating()
+          GeocoderError.placeNotFound.handle()
+        }
       }
     }
   }
@@ -355,5 +361,5 @@ extension ForecastContentViewController {
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+  return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
