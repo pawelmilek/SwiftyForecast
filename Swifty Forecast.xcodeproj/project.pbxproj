@@ -24,7 +24,7 @@
 		E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E120E84371007D8CE4 /* ForecastRequest.swift */; };
-		E23997EB20E84371007D8CE4 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebService.swift */; };
+		E23997EB20E84371007D8CE4 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebServiceManager.swift */; };
 		E23997EC20E84371007D8CE4 /* WebServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E320E84371007D8CE4 /* WebServiceRequest.swift */; };
 		E23997ED20E84371007D8CE4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E420E84371007D8CE4 /* Parser.swift */; };
 		E23997EE20E84371007D8CE4 /* WebServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* WebServiceError.swift */; };
@@ -152,7 +152,7 @@
 		E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E120E84371007D8CE4 /* ForecastRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastRequest.swift; sourceTree = "<group>"; };
-		E23997E220E84371007D8CE4 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		E23997E220E84371007D8CE4 /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
 		E23997E320E84371007D8CE4 /* WebServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceRequest.swift; sourceTree = "<group>"; };
 		E23997E420E84371007D8CE4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* WebServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceError.swift; sourceTree = "<group>"; };
@@ -351,10 +351,10 @@
 		E23997D420E84058007D8CE4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E2A42DE6214DEE5E00F9A79A /* NVActivityIndicatorView */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
+				E2A42DE6214DEE5E00F9A79A /* NVActivityIndicatorView */,
 				E206E1CC20EC5E5E00AC72EA /* Forecasts */,
 				E23997F120E84389007D8CE4 /* AlertView */,
 				E23997D920E840E4007D8CE4 /* Cells */,
@@ -453,7 +453,7 @@
 				E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */,
 				E23997E320E84371007D8CE4 /* WebServiceRequest.swift */,
 				E23997E120E84371007D8CE4 /* ForecastRequest.swift */,
-				E23997E220E84371007D8CE4 /* WebService.swift */,
+				E23997E220E84371007D8CE4 /* WebServiceManager.swift */,
 				E23997E820E84371007D8CE4 /* ResultType.swift */,
 				E23997E420E84371007D8CE4 /* Parser.swift */,
 			);
@@ -783,7 +783,7 @@
 				E2A42E25214DEE5E00F9A79A /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E27E2FCD1DA04D1D00B3EABF /* ReusableView.swift in Sources */,
-				E23997EB20E84371007D8CE4 /* WebService.swift in Sources */,
+				E23997EB20E84371007D8CE4 /* WebServiceManager.swift in Sources */,
 				E206E1C520E968A300AC72EA /* HourlyData.swift in Sources */,
 				E2A42E28214DEE5E00F9A79A /* NVActivityIndicatorAnimationTriangleSkewSpin.swift in Sources */,
 				E27E2FD01DA04D1D00B3EABF /* UITableView+Registrable.swift in Sources */,
@@ -944,7 +944,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -995,7 +995,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1014,7 +1014,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/Swifty Forecast/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1031,7 +1031,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/Swifty Forecast/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";

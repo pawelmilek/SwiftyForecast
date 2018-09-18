@@ -157,7 +157,7 @@ private extension ForecastContentViewController {
         let coordinate = Coordinate(latitude: latitude, longitude: longitude)
         
         let request = ForecastRequest.make(by: coordinate)
-        WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+        WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
@@ -206,7 +206,7 @@ private extension ForecastContentViewController {
     sharedActivityIndicator.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
-    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {

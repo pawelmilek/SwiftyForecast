@@ -26,6 +26,18 @@ struct Style {
     static let shadowRadius: CGFloat = 10.0
     static let cornerRadius: CGFloat = 15.0
     
+    static var conditionFontIconSize: CGFloat {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return 70
+        
+      } else if UIScreen.PhoneModel.isPhone8 {
+        return 100
+        
+      } else {
+        return 130
+      }
+    }
+    
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
     static let dateLabelFont = UIFont.systemFont(ofSize: 15, weight: .heavy)

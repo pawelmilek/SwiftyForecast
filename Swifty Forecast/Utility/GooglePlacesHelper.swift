@@ -23,6 +23,7 @@ extension GooglePlacesHelper {
       return
     }
     
+    
     sharedPlacesClient.currentPlace() { placeLikelihoodList, error in
       guard let place = placeLikelihoodList?.likelihoods.first?.place, error == nil else {
         completionHandler(nil, .placeNotFound)

@@ -1,5 +1,5 @@
 //
-//  WebService.swift
+//  WebServiceManager.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 26/06/2018.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class WebService {
-  static let shared = WebService()
+final class WebServiceManager {
+  static let shared = WebServiceManager()
   
   private let sessionShared: URLSession
   
@@ -20,13 +20,13 @@ final class WebService {
 
 
 // MARK: - Fetch data
-extension WebService {
+extension WebServiceManager {
   
   func fetch<M: Decodable>(_ typeOf: M.Type, with request: WebServiceRequest, completionHandler: @escaping (ResultType<M, WebServiceError>) -> ()) {
     let urlRequest = request.urlRequest
     let encodedURLRequest = urlRequest.encode(with: request.parameters)
     
-    sessionShared.dataTask(with: encodedURLRequest) { (data, _, error) in
+    sessionShared.dataTask(with: encodedURLRequest) { (data, response, error) in
       guard error == nil else {
         completionHandler(.failure(.requestFailed))
         return

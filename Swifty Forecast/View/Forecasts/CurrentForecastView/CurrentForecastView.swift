@@ -166,7 +166,8 @@ extension CurrentForecastView {
     currentForecast = forecast
     
     if let forecast = forecast {
-      let icon = ConditionFontIcon.make(icon: forecast.icon, font: 100)
+      let fontSize = ForecastStyle.conditionFontIconSize
+      let icon = ConditionFontIcon.make(icon: forecast.icon, font: fontSize)
       iconLabel.attributedText = icon?.attributedIcon
       dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
       cityNameLabel.text = city?.name
@@ -211,19 +212,19 @@ extension CurrentForecastView {
   
   func animateLabelsScaling() {
     if UIScreen.PhoneModel.isPhoneSE {
-      iconLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+      iconLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
       dateLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
       cityNameLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
       temperatureLabel.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
       
     } else if UIScreen.PhoneModel.isPhone8 {
-      iconLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+      iconLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
       dateLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
       cityNameLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
       temperatureLabel.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
       
     } else {
-      iconLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
+      iconLabel.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
       dateLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
       cityNameLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
       temperatureLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
