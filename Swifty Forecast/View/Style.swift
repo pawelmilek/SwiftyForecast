@@ -40,9 +40,9 @@ struct Style {
     
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
-    static let dateLabelFont = UIFont.systemFont(ofSize: 15, weight: .heavy)
-    static let cityNameLabelFont = UIFont.systemFont(ofSize: 12, weight: .ultraLight)
-    static let temperatureLabelFont = UIFont.systemFont(ofSize: 90, weight: .bold)
+    static let dateLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
+    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 12)
+    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Light", size: 90)
   }
   
   
@@ -50,7 +50,7 @@ struct Style {
   struct Condition {
     static let backgroundColor = UIColor.white.withAlphaComponent(0.3)
     static let cornerRadius: CGFloat = 5.0
-    static let valueLabelFont = UIFont.systemFont(ofSize: 11, weight: .bold)
+    static let valueLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 12)
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
   }
@@ -59,13 +59,15 @@ struct Style {
   // MARK: - CityTableViewCell
   struct CityCell {
     static let backgroundColor = UIColor.clear
-    static let currentTimeLabelFont = UIFont.systemFont(ofSize: 17, weight: .medium)
+    static let currentTimeLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
     static let currentTimeLabelTextColor = UIColor.blackShade
     static let currentTimeLabelTextAlignment = NSTextAlignment.left
     
-    static let cityNameLabelFont = UIFont.systemFont(ofSize: 22, weight: .regular)
+    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 20)
     static let cityNameLabelTextColor = UIColor.white
     static let cityNameLabelTextAlignment = NSTextAlignment.left
+    
+    static let separatorColor = UIColor.white.withAlphaComponent(0.8)
   }
   
   
@@ -79,23 +81,28 @@ struct Style {
     static let iconLabelTextColor = UIColor.blackShade
     static let iconLabelTextAlignment = NSTextAlignment.center
     
-    static let temperatureLabelFont = UIFont.systemFont(ofSize: 17, weight: .bold)
+    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Light", size: 17)
     static let temperatureLabelTextColor = UIColor.blackShade
     static let temperatureLabelTextAlignment = NSTextAlignment.center
+    
+    static let weekdayLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 11)!
+    static let monthLabelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+    
+    static let conditionFontIconSize: CGFloat = 22
   }
   
   // MARK: - HourlyForecastCollectionViewCell
   struct HourlyForecastCell {
     static let backgroundColor = UIColor.clear
     
-    static let timeLabelFont = UIFont.systemFont(ofSize: 11, weight: .light)
+    static let timeLabelFont = UIFont(name: "HelveticaNeue-Light", size: 11)
     static let timeLabelTextColor = UIColor.white
     static let timeLabelTextAlignment = NSTextAlignment.center
     
     static let iconLabelTextColor = UIColor.white
     static let iconLabelTextAlignment = NSTextAlignment.center
     
-    static let temperatureLabelFont = UIFont.systemFont(ofSize: 11, weight: .bold)
+    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 13)
     static let temperatureLabelTextColor = UIColor.white
     static let temperatureLabelTextAlignment = NSTextAlignment.center
   }
@@ -113,8 +120,7 @@ struct Style {
     static let autocompleteVCSearchTextFieldFontPlaceholder = UIFont.systemFont(ofSize: 14, weight: .regular)
     static let autocompleteVCSearchBarCancelButtonColor = UIColor.orange
     static let autocompleteVCSearchBarCancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-    
-    static let tableViewSeparatorColor = UIColor.white
+
     static let tableViewBackgroundColor = UIColor.clear
   }
   
@@ -128,7 +134,7 @@ struct Style {
   
   // MARK: - ForecastMainViewController
   struct ForecastMainVC {
-    static let measuringSystemSegmentedControlFont = UIFont(name: "AvenirNext-Bold", size: 14)
+    static let measuringSystemSegmentedControlFont = UIFont(name: "HelveticaNeue-Medium", size: 14)
     static let measuringSystemSegmentedControlBorderWidth: CGFloat = 1.0
     static let measuringSystemSegmentedControlSelectedLabelColor = UIColor.white
     

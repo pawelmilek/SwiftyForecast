@@ -28,23 +28,17 @@ class ForecastCityListTableViewController: UITableViewController {
   }()
   
   private lazy var footerView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-    let arrowDownButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-    let addButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-    
-    arrowDownButton.translatesAutoresizingMaskIntoConstraints = false
-    arrowDownButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
-    arrowDownButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+    let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
-    addButton.setImage(UIImage(named: "ic_add"), for: .normal)
+    addButton.setBackgroundImage(UIImage(named: "ic_add"), for: .normal)
     addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
-    view.addSubview(arrowDownButton)
     view.addSubview(addButton)
-    view.leadingAnchor.constraint(equalTo: arrowDownButton.leadingAnchor, constant: -8).isActive = true
-    view.centerYAnchor.constraint(equalTo: arrowDownButton.centerYAnchor).isActive = true
-    view.trailingAnchor.constraint(equalTo: addButton.trailingAnchor, constant: 8).isActive = true
+    addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    addButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    view.centerXAnchor.constraint(equalTo: addButton.centerXAnchor).isActive = true
     view.centerYAnchor.constraint(equalTo: addButton.centerYAnchor).isActive = true
     return view
   }()
@@ -52,8 +46,6 @@ class ForecastCityListTableViewController: UITableViewController {
   private var cities: [City] = []
   private var citiesLocalTime: [String: String] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
-  
-  
   
   
   override func viewDidLoad() {
@@ -81,7 +73,7 @@ private extension ForecastCityListTableViewController {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.separatorColor = ForecastCityStyle.tableViewSeparatorColor
+    tableView.separatorStyle = .none
     tableView.tableFooterView = footerView
     setTransparentTableViewBackground()
   }
@@ -226,7 +218,7 @@ extension ForecastCityListTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 66
+    return 60
   }
   
 }
