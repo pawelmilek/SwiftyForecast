@@ -63,7 +63,7 @@ final class City: NSManagedObject {
 }
 
 
-// MARK: - Fetch local time
+// MARK: - Local time
 extension City {
   
   var localTime: String {
@@ -82,28 +82,6 @@ extension City {
     }
     
     return localTime
-  }
-  
-  
-  func fetchLocalTime(completionHandler: @escaping (_ localTime: String) -> ()) {
-    let formatter = DateFormatter()
-    formatter.timeStyle = .short
-    formatter.dateStyle = .none
-    
-    let locationCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-    GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
-      var localTime = ""
-      
-      if let timezone = timezone {
-        formatter.timeZone = timezone
-        localTime = formatter.string(from: Date())
-        
-      } else if let _ = error {
-        localTime = "N/A"
-      }
-      
-      completionHandler(localTime)
-    }
   }
   
 }
