@@ -97,7 +97,7 @@ private extension ForecastContentViewController {
     dailyForecastTableView.delegate = self
     dailyForecastTableView.showsVerticalScrollIndicator = false
     dailyForecastTableView.allowsSelection = false
-    dailyForecastTableView.rowHeight = UITableViewAutomaticDimension
+    dailyForecastTableView.rowHeight = UITableView.automaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
     dailyForecastTableView.backgroundColor = ForecastContentStyle.tableViewBackgroundColor
     dailyForecastTableView.separatorStyle = ForecastContentStyle.tableViewSeparatorStyle
@@ -157,7 +157,7 @@ private extension ForecastContentViewController {
         let coordinate = Coordinate(latitude: latitude, longitude: longitude)
         
         let request = ForecastRequest.make(by: coordinate)
-        WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+        WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
@@ -206,7 +206,7 @@ private extension ForecastContentViewController {
     sharedActivityIndicator.startAnimating(at: view)
     
     let request = ForecastRequest.make(by: city.coordinate)
-    WebService.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {
@@ -251,8 +251,8 @@ private extension ForecastContentViewController {
     let cancelAction: (UIAlertAction) -> () = { _ in }
     
     let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplicationOpenSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
+      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
     }
     
     let title = NSLocalizedString("Location Services Disabled", comment: "")
@@ -351,4 +351,9 @@ extension ForecastContentViewController {
     fetchWeatherForecast()
   }
   
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

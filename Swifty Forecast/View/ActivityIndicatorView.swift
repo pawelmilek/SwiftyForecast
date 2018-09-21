@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-import NVActivityIndicatorView
-
 
 final class ActivityIndicatorView {
   static let shared = ActivityIndicatorView()
