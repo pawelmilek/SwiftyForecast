@@ -44,7 +44,7 @@ class ForecastCityListTableViewController: UITableViewController {
   }()
   
   private var cities: [City] = []
-  private var citiesLocalTime: [String: String] = [:]
+  private var citiesTimeZone: [String: TimeZone] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
   
   
@@ -179,13 +179,28 @@ extension ForecastCityListTableViewController {
     
     cell.tag = row
     
-    if let localTime = citiesLocalTime["\(row)"] {
-      cell.configure(by: city, localTime: localTime)
+    if let _ = city.timeZone {
+      cell.configure(by: city)
+      
     } else {
-      city.fetchLocalTime { localTime in
-        self.citiesLocalTime["\(row)"] = localTime
-        if cell.tag == row {
-          cell.configure(by: city, localTime: localTime)
+      if let timeZone = citiesTimeZone["\(row)"] {
+        city.timeZone = timeZone
+        cell.configure(by: city)
+        
+      } else {
+        let coordinate = CLLocationCoordinate2D(latitude: city.coordinate.latitude, longitude: city.coordinate.longitude)
+        fetchTimeZone(from: coordinate) { timeZone in
+          self.citiesTimeZone["\(row)"] = timeZone
+          if cell.tag == row {
+            do {
+              city.timeZone = timeZone
+              try self.sharedMOC.mainContext.save()
+              cell.configure(by: city)
+              
+            } catch {
+              CoreDataError.couldNotSave.handle()
+            }
+          }
         }
       }
     }
@@ -227,13 +242,13 @@ extension ForecastCityListTableViewController {
 // MARK: GMSAutocompleteViewControllerDelegate protocol
 extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
-  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    let selectedCity = City(place: place)
-    
-    insert(city: selectedCity)
-    tableView.reloadData()
-    reloadAndInitializeMainPageViewController()
-    dismiss(animated: true, completion: nil)
+  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
+      let selectedCity = City(place: place)
+
+      self.insert(city: selectedCity)
+      self.tableView.reloadData()
+      self.reloadAndInitializeMainPageViewController()
+      self.dismiss(animated: true, completion: nil)
   }
   
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -271,3 +286,19 @@ private extension ForecastCityListTableViewController {
   
 }
 
+
+// MARK: - Private - Fetch local time
+private extension ForecastCityListTableViewController {
+  
+  func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
+    GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
+      if let timezone = timezone {
+        completionHandler(timezone)
+        
+      } else {
+        completionHandler(nil)
+      }
+    }
+  }
+  
+}

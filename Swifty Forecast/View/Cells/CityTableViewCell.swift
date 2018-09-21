@@ -53,8 +53,14 @@ extension CityTableViewCell: ViewSetupable {
 extension CityTableViewCell {
   
   func configure(by city: City?, localTime: String? = nil) {
-    if let city = city {
+    if let city = city, let localTime = localTime {
       currentTimeLabel.text = localTime
+      currentTimeLabel.alpha = 1
+      cityNameLabel.text = city.name + ", " + city.country
+      cityNameLabel.alpha = 1
+      
+    } else if let city = city {
+      currentTimeLabel.text = city.localTime
       currentTimeLabel.alpha = 1
       cityNameLabel.text = city.name + ", " + city.country
       cityNameLabel.alpha = 1

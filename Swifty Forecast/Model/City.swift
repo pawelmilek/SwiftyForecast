@@ -17,6 +17,7 @@ final class City: NSManagedObject {
   @NSManaged var postalCode: String
   @NSManaged var isCurrentLocalized: Bool
   @NSManaged var coordinate: Coordinate
+  @NSManaged var timeZone: TimeZone?
   
   convenience init(place: GMSPlace, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
@@ -65,12 +66,32 @@ final class City: NSManagedObject {
 // MARK: - Fetch local time
 extension City {
   
+  var localTime: String {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
+    
+    var localTime = ""
+    
+    if let timezone = self.timeZone {
+      formatter.timeZone = timezone
+      localTime = formatter.string(from: Date())
+      
+    } else {
+      localTime = "N/A"
+    }
+    
+    return localTime
+  }
+  
+  
   func fetchLocalTime(completionHandler: @escaping (_ localTime: String) -> ()) {
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .none
     
-    GeocoderHelper.findTimezone(at: self.coordinate) { timezone, error in
+    let locationCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+    GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
       var localTime = ""
       
       if let timezone = timezone {
@@ -86,6 +107,7 @@ extension City {
   }
   
 }
+
 
 // MARK: - Create fetch request
 extension City {
