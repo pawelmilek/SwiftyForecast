@@ -43,7 +43,7 @@ final class GeocoderHelper {
   }
   
   
-  class func findTimezone(at coordinate: Coordinate, completionHandler: @escaping (TimeZone?, GeocoderError?) -> ()) {
+  class func findTimeZone(at coordinate: CLLocationCoordinate2D, completionHandler: @escaping (TimeZone?, GeocoderError?) -> ()) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude), longitude: CLLocationDegrees(coordinate.longitude))
     let geocoder = CLGeocoder()
     
