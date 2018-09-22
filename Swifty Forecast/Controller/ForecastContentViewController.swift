@@ -148,7 +148,7 @@ private extension ForecastContentViewController {
         
         if let error = error {
           strongSelf.sharedActivityIndicator.stopAnimating()
-          error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
+          error == .locationDisabled ? LocationProvider.shared.presentLocationServicesSettingsPopupAlert() : error.handle()
           return
         }
         
@@ -250,26 +250,6 @@ private extension ForecastContentViewController {
 }
 
 
-// MARK: - Private - Show settings alert view
-private extension ForecastContentViewController {
-  
-  func presentLocationServicesSettingsPopupAlert() {
-    let cancelAction: (UIAlertAction) -> () = { _ in }
-    
-    let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-    }
-    
-    let title = NSLocalizedString("Location Services Disabled", comment: "")
-    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
-    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
-    AlertViewPresenter.shared.presentPopupAlert(in: self, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
-  }
-  
-}
-
-
 // MARK: - CurrentForecastViewDelegate protocol
 extension ForecastContentViewController: CurrentForecastViewDelegate {
   
@@ -357,9 +337,4 @@ extension ForecastContentViewController {
     fetchWeatherForecast()
   }
   
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-  return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
