@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if !isAuthorized {
         LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+      } else {
+        LocationProvider.shared.requestLocation()
       }
     }
     
@@ -26,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setupStyle()
     return true
   }
+  
+//  func applicationDidBecomeActive(_ application: UIApplication) {
+//    print("applicationDidBecomeActive")
+//  }
   
   func applicationWillTerminate(_ application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.

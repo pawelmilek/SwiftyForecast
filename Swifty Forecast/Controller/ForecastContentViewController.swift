@@ -48,7 +48,7 @@ class ForecastContentViewController: UIViewController {
   }
   
   deinit {
-    removeNotificationCenterObserver()
+    removeNotificationCenterObservers()
   }
 }
 
@@ -60,7 +60,7 @@ extension ForecastContentViewController: ViewSetupable {
     setCurrentForecastViewDelegate()
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
-    addNotificationCenterObserver()
+    addNotificationCenterObservers()
   }
   
 }
@@ -110,12 +110,13 @@ private extension ForecastContentViewController {
 // MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
-  func addNotificationCenterObserver() {
+  func addNotificationCenterObservers() {
     let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
     NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: measuringSystemSwitchName, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
   }
   
-  func removeNotificationCenterObserver() {
+  func removeNotificationCenterObservers() {
     NotificationCenter.default.removeObserver(self)
   }
   
@@ -164,7 +165,7 @@ private extension ForecastContentViewController {
               let unassociatedCity = City(place: place)
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
-              if City.isDuplicate(city: unassociatedCity) == false {
+              if City.isExists(city: unassociatedCity) == false {
                 CoreDataManager.deleteCurrentLocalizedCity()
                 CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
@@ -329,6 +330,16 @@ extension ForecastContentViewController {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
     MeasuringSystem.isMetric = (segmentedControl.selectedIndex == 0 ? false : true)
     fetchWeatherForecast()
+  }
+  
+  @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
+    
+    sharedLocationProvider.requestLocation { [weak self] newLocation in
+      if previousLocation.distance(from: newLocation) != 0 {
+        self?.fetchWeatherForecast()
+      }
+    }
   }
   
 }

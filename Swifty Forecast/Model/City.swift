@@ -100,7 +100,7 @@ extension City {
 // MARK: - Is city exists
 extension City {
   
-  class func isDuplicate(city: City) -> Bool {
+  class func isExists(city: City) -> Bool {
     let request = City.createFetchRequest()
     let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
     request.predicate = predicate

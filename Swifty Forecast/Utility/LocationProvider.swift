@@ -12,22 +12,19 @@ import CoreLocation
 
 final class LocationProvider: NSObject {
   static let shared = LocationProvider()
-
-  typealias CompletionHandler = (Coordinate) -> ()
+  
+  typealias CompletionHandler = (CLLocation) -> ()
   
   private let locationManager = CLLocationManager()
-  private var currentLocation: CLLocationCoordinate2D? {
-    didSet {
-      guard let currentLocation = currentLocation else { return }
-      let coordinate = Coordinate(latitude: currentLocation.latitude, longitude: currentLocation.longitude)
-      self.locationFound?(coordinate)
-    }
-  }
-  
   private var didUpdateLocationsFlag = false
   private var locationFound: CompletionHandler?
   var authorizationCompletionBlock: ((_ isAuthorized: Bool)->())? = { _ in }
-  
+  var currentLocation: CLLocation? {
+    didSet {
+      guard let currentLocation = currentLocation else { return }
+      self.locationFound?(currentLocation)
+    }
+  }
   
   
   private override init() {
@@ -43,7 +40,7 @@ final class LocationProvider: NSObject {
 }
 
 
-// MARK: - Private - Request authorization
+// MARK: - Request authorization
 extension LocationProvider {
   
   func requestAuthorization() {
@@ -66,14 +63,19 @@ extension LocationProvider {
     
     return isLocationServicesEnabled && (isAuthorizedWhenInUse || isAuthorizedAlways)
   }
-
+  
 }
 
 
 // MARK: - Get current location
 extension LocationProvider {
   
-  func getCurrentLocation(completionHandler: @escaping CompletionHandler) {
+  func requestLocation() {
+    locationManager.requestLocation()
+  }
+  
+  
+  func requestLocation(completionHandler: @escaping CompletionHandler) {
     guard isLocationServicesEnabled else {
       presentLocationServicesSettingsPopupAlert()
       return
@@ -92,7 +94,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard !didUpdateLocationsFlag else { return }
-    guard let location = locations.first?.coordinate else { return }
+    guard let location = locations.first else { return }
     
     didUpdateLocationsFlag = true
     DispatchQueue.main.async {
