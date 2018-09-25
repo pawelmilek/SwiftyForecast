@@ -28,32 +28,24 @@ class ForecastCityListTableViewController: UITableViewController {
   }()
   
   private lazy var footerView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-    let arrowDownButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-    let addButton = UIButton(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-    
-    arrowDownButton.translatesAutoresizingMaskIntoConstraints = false
-    arrowDownButton.setImage(UIImage(named: "ic_arrow_down"), for: .normal)
-    arrowDownButton.addTarget(self, action: #selector(backButtonTapped(_:)), for: .touchUpInside)
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+    let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
-    addButton.setImage(UIImage(named: "ic_add"), for: .normal)
+    addButton.setBackgroundImage(UIImage(named: "ic_add"), for: .normal)
     addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
-    view.addSubview(arrowDownButton)
     view.addSubview(addButton)
-    view.leadingAnchor.constraint(equalTo: arrowDownButton.leadingAnchor, constant: -8).isActive = true
-    view.centerYAnchor.constraint(equalTo: arrowDownButton.centerYAnchor).isActive = true
-    view.trailingAnchor.constraint(equalTo: addButton.trailingAnchor, constant: 8).isActive = true
+    addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    addButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    view.centerXAnchor.constraint(equalTo: addButton.centerXAnchor).isActive = true
     view.centerYAnchor.constraint(equalTo: addButton.centerYAnchor).isActive = true
     return view
   }()
   
   private var cities: [City] = []
-  private var citiesLocalTime: [String: String] = [:]
+  private var citiesTimeZone: [String: TimeZone] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
-  
-  
   
   
   override func viewDidLoad() {
@@ -81,7 +73,7 @@ private extension ForecastCityListTableViewController {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.separatorColor = ForecastCityStyle.tableViewSeparatorColor
+    tableView.separatorStyle = .none
     tableView.tableFooterView = footerView
     setTransparentTableViewBackground()
   }
@@ -187,13 +179,28 @@ extension ForecastCityListTableViewController {
     
     cell.tag = row
     
-    if let localTime = citiesLocalTime["\(row)"] {
-      cell.configure(by: city, localTime: localTime)
+    if let _ = city.timeZone {
+      cell.configure(by: city)
+      
     } else {
-      city.fetchLocalTime { localTime in
-        self.citiesLocalTime["\(row)"] = localTime
-        if cell.tag == row {
-          cell.configure(by: city, localTime: localTime)
+      if let timeZone = citiesTimeZone["\(row)"] {
+        city.timeZone = timeZone
+        cell.configure(by: city)
+        
+      } else {
+        let coordinate = CLLocationCoordinate2D(latitude: city.coordinate.latitude, longitude: city.coordinate.longitude)
+        fetchTimeZone(from: coordinate) { timeZone in
+          self.citiesTimeZone["\(row)"] = timeZone
+          if cell.tag == row {
+            do {
+              city.timeZone = timeZone
+              try self.sharedMOC.mainContext.save()
+              cell.configure(by: city)
+              
+            } catch {
+              CoreDataError.couldNotSave.handle()
+            }
+          }
         }
       }
     }
@@ -226,7 +233,7 @@ extension ForecastCityListTableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 66
+    return 60
   }
   
 }
@@ -235,13 +242,13 @@ extension ForecastCityListTableViewController {
 // MARK: GMSAutocompleteViewControllerDelegate protocol
 extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
-  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-    let selectedCity = City(place: place)
-    
-    insert(city: selectedCity)
-    tableView.reloadData()
-    reloadAndInitializeMainPageViewController()
-    dismiss(animated: true, completion: nil)
+  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
+      let selectedCity = City(place: place)
+
+      self.insert(city: selectedCity)
+      self.tableView.reloadData()
+      self.reloadAndInitializeMainPageViewController()
+      self.dismiss(animated: true, completion: nil)
   }
   
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
@@ -279,3 +286,19 @@ private extension ForecastCityListTableViewController {
   
 }
 
+
+// MARK: - Private - Fetch local time
+private extension ForecastCityListTableViewController {
+  
+  func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
+    GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
+      if let timezone = timezone {
+        completionHandler(timezone)
+        
+      } else {
+        completionHandler(nil)
+      }
+    }
+  }
+  
+}

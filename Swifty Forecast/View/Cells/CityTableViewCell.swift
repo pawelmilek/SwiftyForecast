@@ -11,6 +11,7 @@ import UIKit
 class CityTableViewCell: UITableViewCell {
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
+  @IBOutlet private weak var separatorView: UIView!
   
   typealias CityCellStyle = Style.CityCell
   
@@ -32,6 +33,7 @@ extension CityTableViewCell: ViewSetupable {
   
   func setup() {
     backgroundColor = CityCellStyle.backgroundColor
+    selectionStyle = .none
     
     currentTimeLabel.font = CityCellStyle.currentTimeLabelFont
     currentTimeLabel.textColor = CityCellStyle.currentTimeLabelTextColor
@@ -40,7 +42,7 @@ extension CityTableViewCell: ViewSetupable {
     cityNameLabel.font = CityCellStyle.cityNameLabelFont
     cityNameLabel.textColor = CityCellStyle.cityNameLabelTextColor
     cityNameLabel.textAlignment = CityCellStyle.cityNameLabelTextAlignment
-    
+    separatorView.backgroundColor = CityCellStyle.separatorColor
     configure(by: .none)
   }
   
@@ -51,8 +53,14 @@ extension CityTableViewCell: ViewSetupable {
 extension CityTableViewCell {
   
   func configure(by city: City?, localTime: String? = nil) {
-    if let city = city {
+    if let city = city, let localTime = localTime {
       currentTimeLabel.text = localTime
+      currentTimeLabel.alpha = 1
+      cityNameLabel.text = city.name + ", " + city.country
+      cityNameLabel.alpha = 1
+      
+    } else if let city = city {
+      currentTimeLabel.text = city.localTime
       currentTimeLabel.alpha = 1
       cityNameLabel.text = city.name + ", " + city.country
       cityNameLabel.alpha = 1

@@ -77,7 +77,6 @@ class ForecastMainViewController: UIViewController {
   
   deinit {
     removeNotificationCenterObserver()
-    CoreDataStackHelper.shared.mainContext.reset()
   }
 }
 
