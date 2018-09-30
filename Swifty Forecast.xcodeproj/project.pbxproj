@@ -22,6 +22,10 @@
 		E221C22820FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */; };
 		E221C22E20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */; };
 		E221C23020FFCBBF00CBB8F2 /* CoreDataStackHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */; };
+		E22441782161909E009D409F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E224416321618EA4009D409F /* NotificationCenter.framework */; };
+		E224417B2161909E009D409F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224417A2161909E009D409F /* TodayViewController.swift */; };
+		E224417E2161909E009D409F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E224417C2161909E009D409F /* MainInterface.storyboard */; };
+		E22441822161909E009D409F /* Swifty Forecast Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E22441772161909E009D409F /* Swifty Forecast Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E120E84371007D8CE4 /* ForecastRequest.swift */; };
 		E23997EB20E84371007D8CE4 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebServiceManager.swift */; };
@@ -133,6 +137,30 @@
 		E2F17C2E20F4097C00068BD2 /* DailyForecastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F17C2C20F4097C00068BD2 /* DailyForecastTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E22441802161909E009D409F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E29911EE1D456EAC0083B484 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E22441762161909E009D409F;
+			remoteInfo = "Swifty Forecast Widget";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E224417221618EA4009D409F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E22441822161909E009D409F /* Swifty Forecast Widget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0FA80B7D31EDB3A5B3AF1FC1 /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Forecast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
 		15C2BEB65835CB7ABA4F7B97 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +179,11 @@
 		E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+EntityName.swift"; sourceTree = "<group>"; };
 		E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+ ManagedObjectContext.swift"; sourceTree = "<group>"; };
 		E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
+		E224416321618EA4009D409F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		E22441772161909E009D409F /* Swifty Forecast Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swifty Forecast Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E224417A2161909E009D409F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		E224417D2161909E009D409F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E224417F2161909E009D409F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E120E84371007D8CE4 /* ForecastRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastRequest.swift; sourceTree = "<group>"; };
 		E23997E220E84371007D8CE4 /* WebServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceManager.swift; sourceTree = "<group>"; };
@@ -266,6 +299,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E22441742161909E009D409F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E22441782161909E009D409F /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F31D456EAC0083B484 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				15C2BEB65835CB7ABA4F7B97 /* Pods_Swifty_Forecast.framework */,
+				E224416321618EA4009D409F /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -336,6 +378,16 @@
 				E2DCC9CA2146FA49003528F3 /* CoreDataManager.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		E22441792161909E009D409F /* Swifty Forecast Widget */ = {
+			isa = PBXGroup;
+			children = (
+				E224417A2161909E009D409F /* TodayViewController.swift */,
+				E224417C2161909E009D409F /* MainInterface.storyboard */,
+				E224417F2161909E009D409F /* Info.plist */,
+			);
+			path = "Swifty Forecast Widget";
 			sourceTree = "<group>";
 		};
 		E23997D320E84038007D8CE4 /* Protocols */ = {
@@ -538,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				E29911F81D456EAD0083B484 /* Swifty Forecast */,
+				E22441792161909E009D409F /* Swifty Forecast Widget */,
 				E29911F71D456EAC0083B484 /* Products */,
 				D6B0B3BE392A2E020DFDE116 /* Pods */,
 				14FF84B878F0E000118ED0A2 /* Frameworks */,
@@ -548,6 +601,7 @@
 			isa = PBXGroup;
 			children = (
 				E29911F61D456EAC0083B484 /* Swifty Forecast.app */,
+				E22441772161909E009D409F /* Swifty Forecast Widget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -646,6 +700,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E22441762161909E009D409F /* Swifty Forecast Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "Swifty Forecast Widget" */;
+			buildPhases = (
+				E22441732161909E009D409F /* Sources */,
+				E22441742161909E009D409F /* Frameworks */,
+				E22441752161909E009D409F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swifty Forecast Widget";
+			productName = "Swifty Forecast Widget";
+			productReference = E22441772161909E009D409F /* Swifty Forecast Widget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E29911F51D456EAC0083B484 /* Swifty Forecast */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */;
@@ -656,10 +727,12 @@
 				E29911F41D456EAC0083B484 /* Resources */,
 				00C345CACB0055681DAAED4B /* [CP] Embed Pods Frameworks */,
 				3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */,
+				E224417221618EA4009D409F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E22441812161909E009D409F /* PBXTargetDependency */,
 			);
 			name = "Swifty Forecast";
 			productName = "Swifty Forecast";
@@ -672,10 +745,15 @@
 		E29911EE1D456EAC0083B484 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Pawel Milek";
 				TargetAttributes = {
+					E22441762161909E009D409F = {
+						CreatedOnToolsVersion = 10.0;
+						DevelopmentTeam = N3HG6C68EY;
+						ProvisioningStyle = Automatic;
+					};
 					E29911F51D456EAC0083B484 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = N3HG6C68EY;
@@ -702,11 +780,20 @@
 			projectRoot = "";
 			targets = (
 				E29911F51D456EAC0083B484 /* Swifty Forecast */,
+				E22441762161909E009D409F /* Swifty Forecast Widget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E22441752161909E009D409F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E224417E2161909E009D409F /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F41D456EAC0083B484 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -783,6 +870,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E22441732161909E009D409F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E224417B2161909E009D409F /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F21D456EAC0083B484 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -906,7 +1001,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E22441812161909E009D409F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E22441762161909E009D409F /* Swifty Forecast Widget */;
+			targetProxy = E22441802161909E009D409F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E224417C2161909E009D409F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E224417D2161909E009D409F /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		E22441842161909E009D409F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N3HG6C68EY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Swifty Forecast Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast.Swifty-Forecast-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E22441852161909E009D409F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N3HG6C68EY;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Swifty Forecast Widget/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast.Swifty-Forecast-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E29912061D456EAD0083B484 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1052,6 +1216,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "Swifty Forecast Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E22441842161909E009D409F /* Debug */,
+				E22441852161909E009D409F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "Swifty Forecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
