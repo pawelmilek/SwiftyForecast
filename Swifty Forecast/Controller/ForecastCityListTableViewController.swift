@@ -118,6 +118,8 @@ private extension ForecastCityListTableViewController {
 private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
+    guard City.isExists(city: city) == false else { return }
+    
     let managedContex = sharedMOC.mainContext
     let newCity = City(unassociatedObject: city, isCurrentLocalized: false, managedObjectContext: managedContex)
   

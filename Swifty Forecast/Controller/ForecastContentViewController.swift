@@ -17,6 +17,7 @@ class ForecastContentViewController: UIViewController {
   typealias ForecastContentStyle = Style.ForecastContentVC
   private let sharedMOC = CoreDataStackHelper.shared
   private let sharedActivityIndicator = ActivityIndicatorView.shared
+  private let sharedLocationProvider = LocationProvider.shared
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
@@ -47,7 +48,7 @@ class ForecastContentViewController: UIViewController {
   }
   
   deinit {
-    removeNotificationCenterObserver()
+    removeNotificationCenterObservers()
   }
 }
 
@@ -59,8 +60,7 @@ extension ForecastContentViewController: ViewSetupable {
     setCurrentForecastViewDelegate()
     setSupportingCurrentForecastViewConstraints()
     setDailyForecastTableView()
-    addNotificationCenterObserver()
-    
+    addNotificationCenterObservers()
   }
   
 }
@@ -110,12 +110,13 @@ private extension ForecastContentViewController {
 // MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
-  func addNotificationCenterObserver() {
+  func addNotificationCenterObservers() {
     let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
     NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: measuringSystemSwitchName, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
   }
   
-  func removeNotificationCenterObserver() {
+  func removeNotificationCenterObservers() {
     NotificationCenter.default.removeObserver(self)
   }
   
@@ -130,7 +131,7 @@ private extension ForecastContentViewController {
       return pageIndex == 0
     }
     
-    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled { // Check current location
+    if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled { // Check current location
       fetchWeatherForecastForCurrentLocation()
       
     } else if let currentCityForecast = currentCityForecast {
@@ -147,7 +148,7 @@ private extension ForecastContentViewController {
       
       if let error = error {
         strongSelf.sharedActivityIndicator.stopAnimating()
-        error == .locationDisabled ? strongSelf.presentLocationServicesSettingsPopupAlert() : error.handle()
+        error == .locationDisabled ? strongSelf.sharedLocationProvider.presentLocationServicesSettingsPopupAlert() : error.handle()
         return
       }
       
@@ -164,7 +165,7 @@ private extension ForecastContentViewController {
               let unassociatedCity = City(place: place)
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
-              if City.isDuplicate(city: unassociatedCity) == false {
+              if City.isExists(city: unassociatedCity) == false {
                 CoreDataManager.deleteCurrentLocalizedCity()
                 CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
@@ -239,26 +240,6 @@ private extension ForecastContentViewController {
   func reloadDataInMainPageViewController() {
     let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
     NotificationCenter.default.post(name: reloadDataName, object: nil)
-  }
-  
-}
-
-
-// MARK: - Private - Show settings alert view
-private extension ForecastContentViewController {
-  
-  func presentLocationServicesSettingsPopupAlert() {
-    let cancelAction: (UIAlertAction) -> () = { _ in }
-    
-    let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-    }
-    
-    let title = NSLocalizedString("Location Services Disabled", comment: "")
-    let message = NSLocalizedString("Please enable Location Based Services. We will keep your location private", comment: "")
-    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
-    AlertViewPresenter.shared.presentPopupAlert(in: self, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
 }
@@ -351,9 +332,14 @@ extension ForecastContentViewController {
     fetchWeatherForecast()
   }
   
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+  @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
+    
+    sharedLocationProvider.requestLocation { [weak self] newLocation in
+      if previousLocation.distance(from: newLocation) != 0 {
+        self?.fetchWeatherForecast()
+      }
+    }
+  }
+  
 }
