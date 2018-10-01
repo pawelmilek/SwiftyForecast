@@ -16,6 +16,8 @@ final class CurrentForecastView: UIView {
   @IBOutlet private weak var temperatureLabel: UILabel!
   @IBOutlet private weak var windView: ConditionView!
   @IBOutlet private weak var humidityView: ConditionView!
+  @IBOutlet private weak var sunriseView: ConditionView!
+  @IBOutlet private weak var sunsetView: ConditionView!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   @IBOutlet private weak var moreDetailsView: UIView!
   @IBOutlet weak var moreDetailsViewBottomConstraint: NSLayoutConstraint!
@@ -34,6 +36,7 @@ final class CurrentForecastView: UIView {
   
   private var viewDidExpand = false
   private var currentForecast: CurrentForecast?
+  private var currentForecastDetails: DailyData?
   private var hourlyForecast: HourlyForecast?
   weak var delegate: CurrentForecastViewDelegate?
   
@@ -64,7 +67,7 @@ extension CurrentForecastView: ViewSetupable {
     setCollectionView()
     addTapGestureRecognizer()
     
-    configure(current: .none, at: .none)
+    configure(current: .none, currentDayDetails: .none, at: .none)
     configure(hourly: .none)
   }
   
@@ -162,10 +165,11 @@ private extension CurrentForecastView {
 // MARK: - Configure current forecast
 extension CurrentForecastView {
   
-  func configure(current forecast: CurrentForecast?, at city: City?) {
+  func configure(current forecast: CurrentForecast?, currentDayDetails details: DailyData?, at city: City?) {
     currentForecast = forecast
+    currentForecastDetails = details
     
-    if let forecast = forecast {
+    if let forecast = forecast, let details = details {
       let fontSize = ForecastStyle.conditionFontIconSize
       let icon = ConditionFontIcon.make(icon: forecast.icon, font: fontSize)
       iconLabel.attributedText = icon?.attributedIcon
@@ -175,6 +179,8 @@ extension CurrentForecastView {
 
       windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
       humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
+      sunriseView.configure(condition: .sunrise, value: details.sunriseTime.time)
+      sunsetView.configure(condition: .sunset, value: details.sunsetTime.time)
       iconLabel.alpha = 1
       dateLabel.alpha = 1
       cityNameLabel.alpha = 1

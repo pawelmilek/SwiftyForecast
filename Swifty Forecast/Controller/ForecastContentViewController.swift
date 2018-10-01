@@ -27,8 +27,8 @@ class ForecastContentViewController: UIViewController {
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
-      guard let weatherForecast = weatherForecast else { return }
-      currentForecastView.configure(current: weatherForecast.currently, at: weatherForecast.city)
+      guard let weatherForecast = weatherForecast, let currentDayDetails = weatherForecast.daily.currentDayData else { return }
+      currentForecastView.configure(current: weatherForecast.currently, currentDayDetails: currentDayDetails, at: weatherForecast.city)
       currentForecastView.configure(hourly: weatherForecast.hourly)
       dailyForecastTableView.reloadData()
     }
@@ -297,11 +297,11 @@ private extension ForecastContentViewController {
 extension ForecastContentViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return weatherForecast?.daily.data.count ?? 0
+    return weatherForecast?.daily.numberOfDays ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let dailyItems = weatherForecast?.daily.data else { return UITableViewCell() }
+    guard let dailyItems = weatherForecast?.daily.sevenDaysData else { return UITableViewCell() }
     
     let item = dailyItems[indexPath.row]
     let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)

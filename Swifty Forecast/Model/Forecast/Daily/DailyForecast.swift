@@ -8,12 +8,28 @@
 import Foundation
 
 struct DailyForecast {
-  var summary: String
-  var icon: String
-  var data: [DailyData]
+  let summary: String
+  let icon: String
+  private let data: [DailyData]
 }
 
 
+// MARK: - Number of days (exclude current day)
+extension DailyForecast {
+  
+  var numberOfDays: Int {
+    return data.count - 1
+  }
+  
+  var sevenDaysData: [DailyData] {
+    let sevenDaysData = Array(data.dropFirst())
+    return sevenDaysData
+  }
+  
+  var currentDayData: DailyData? {
+    return data.first
+  }
+}
 
 
 // MARK: - Decodable protocol
@@ -30,7 +46,6 @@ extension DailyForecast: Decodable {
     self.summary = try container.decode(String.self, forKey: .summary)
     self.icon = try container.decode(String.self, forKey: .icon)
     self.data = try container.decode([DailyData].self, forKey: .data)
-    self.data.removeFirst()
   }
   
 }

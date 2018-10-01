@@ -9,9 +9,9 @@
 import Foundation
 
 struct HourlyForecast {
-  var summary: String
-  var icon: String
-  var data: [HourlyData]
+  let summary: String
+  let icon: String
+  let data: [HourlyData]
 }
 
 

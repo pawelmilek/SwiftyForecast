@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,13 +23,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ValueLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imK-V9-yUz">
-                    <rect key="frame" x="18.5" y="32" width="53" height="26"/>
+                    <rect key="frame" x="18.5" y="35" width="53" height="24"/>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ConditionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFQ-Hs-P9s">
-                    <rect key="frame" x="9" y="7" width="73" height="25"/>
+                    <rect key="frame" x="8.5" y="7" width="73" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="e0I-5r-HsQ"/>
                     </constraints>
@@ -40,10 +40,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="imK-V9-yUz" secondAttribute="bottom" constant="7" id="0Nc-lL-7aZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="imK-V9-yUz" secondAttribute="bottom" constant="6" id="0Nc-lL-7aZ"/>
                 <constraint firstItem="oFQ-Hs-P9s" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="7" id="51T-Qm-ceN"/>
                 <constraint firstItem="imK-V9-yUz" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8C5-hE-LCG"/>
-                <constraint firstItem="imK-V9-yUz" firstAttribute="top" secondItem="oFQ-Hs-P9s" secondAttribute="bottom" id="Wjf-HH-eye"/>
+                <constraint firstItem="imK-V9-yUz" firstAttribute="top" secondItem="oFQ-Hs-P9s" secondAttribute="bottom" constant="3" id="Wjf-HH-eye"/>
                 <constraint firstItem="oFQ-Hs-P9s" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="oiC-sC-Kpe"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

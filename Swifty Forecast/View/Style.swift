@@ -53,9 +53,11 @@ struct Style {
   struct Condition {
     static let backgroundColor = UIColor.white.withAlphaComponent(0.3)
     static let cornerRadius: CGFloat = 5.0
-    static let valueLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 12)
+    static let valueLabelFont = UIFont(name: "HelveticaNeue", size: 11)
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
+    static let conditionFontSize = CGFloat(20)
+    
   }
   
   
