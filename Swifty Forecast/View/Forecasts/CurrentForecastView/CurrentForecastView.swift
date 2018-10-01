@@ -193,9 +193,8 @@ extension CurrentForecastView {
   }
   
   func configure(hourly forecast: HourlyForecast?) {
-    hourlyForecast = forecast
-    
-    if let _ = forecast {
+    if let forecast = forecast {
+      hourlyForecast = forecast
       hourlyCollectionView.reloadData()
       moreDetailsView.alpha = 1
       

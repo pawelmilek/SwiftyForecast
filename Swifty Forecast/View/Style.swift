@@ -16,6 +16,9 @@ struct Style {
     static let titleTextColor = UIColor.blackShade
   }
   
+  struct WeatherForecastWidget {
+    
+  }
   
   // MARK: - CurrentForecastView
   struct CurrentForecast {

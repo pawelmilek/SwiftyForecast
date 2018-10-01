@@ -26,6 +26,17 @@
 		E224417B2161909E009D409F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224417A2161909E009D409F /* TodayViewController.swift */; };
 		E224417E2161909E009D409F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E224417C2161909E009D409F /* MainInterface.storyboard */; };
 		E22441822161909E009D409F /* Swifty Forecast Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E22441772161909E009D409F /* Swifty Forecast Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E2244186216198D0009D409F /* ViewSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9B1DA04D1D00B3EABF /* ViewSetupable.swift */; };
+		E2244187216199B6009D409F /* ConditionFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */; };
+		E224418821619A15009D409F /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
+		E224418921619A15009D409F /* FontWeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76620EDBC6900F0F72A /* FontWeatherIcon.swift */; };
+		E224418A21619A15009D409F /* FontWeatherIconType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */; };
+		E224418B21619A15009D409F /* UIFont+FontWeatherIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0762220F51577008A5B63 /* UIFont+FontWeatherIcon.swift */; };
+		E224418C21619A36009D409F /* ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E720E84371007D8CE4 /* ErrorHandleable.swift */; };
+		E224418E21619A4C009D409F /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
+		E224418F21619A64009D409F /* FontWeather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2E0762020F51506008A5B63 /* FontWeather.ttf */; };
+		E224419021619A7A009D409F /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0762420F5165E008A5B63 /* FontLoader.swift */; };
+		E224419121619FA9009D409F /* UIColor+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E120E84371007D8CE4 /* ForecastRequest.swift */; };
 		E23997EB20E84371007D8CE4 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebServiceManager.swift */; };
@@ -790,6 +801,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E224418F21619A64009D409F /* FontWeather.ttf in Resources */,
 				E224417E2161909E009D409F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -874,6 +886,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E224419121619FA9009D409F /* UIColor+Flat.swift in Sources */,
+				E224419021619A7A009D409F /* FontLoader.swift in Sources */,
+				E224418E21619A4C009D409F /* AlertViewPresenter.swift in Sources */,
+				E224418C21619A36009D409F /* ErrorHandleable.swift in Sources */,
+				E224418821619A15009D409F /* FontWeatherIconError.swift in Sources */,
+				E224418921619A15009D409F /* FontWeatherIcon.swift in Sources */,
+				E224418A21619A15009D409F /* FontWeatherIconType.swift in Sources */,
+				E224418B21619A15009D409F /* UIFont+FontWeatherIcon.swift in Sources */,
+				E2244187216199B6009D409F /* ConditionFontIcon.swift in Sources */,
+				E2244186216198D0009D409F /* ViewSetupable.swift in Sources */,
 				E224417B2161909E009D409F /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1034,7 +1056,7 @@
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Swifty Forecast Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1043,7 +1065,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1060,14 +1082,14 @@
 				DEVELOPMENT_TEAM = N3HG6C68EY;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "Swifty Forecast Widget/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast.Swifty-Forecast-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
