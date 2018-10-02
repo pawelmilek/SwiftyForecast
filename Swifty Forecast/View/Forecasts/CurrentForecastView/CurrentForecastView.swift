@@ -179,8 +179,26 @@ extension CurrentForecastView {
 
       windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
       humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
-      sunriseView.configure(condition: .sunrise, value: details.sunriseTime.time)
-      sunsetView.configure(condition: .sunset, value: details.sunsetTime.time)
+      
+      let cityTimeZone = city?.timeZone
+      var sunriseTime: String {
+        if let cityTimeZone = cityTimeZone {
+          return details.sunriseTime.time(by: cityTimeZone)
+        } else {
+          return details.sunriseTime.time
+        }
+      }
+      
+      var sunsetTime: String {
+        if let cityTimeZone = cityTimeZone {
+          return details.sunsetTime.time(by: cityTimeZone)
+        } else {
+          return details.sunsetTime.time
+        }
+      }
+      
+      sunriseView.configure(condition: .sunrise, value: sunriseTime)
+      sunsetView.configure(condition: .sunset, value: sunsetTime)
       iconLabel.alpha = 1
       dateLabel.alpha = 1
       cityNameLabel.alpha = 1

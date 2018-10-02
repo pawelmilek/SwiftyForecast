@@ -16,8 +16,35 @@ struct Style {
     static let titleTextColor = UIColor.blackShade
   }
   
-  struct WeatherForecastWidget {
+  // MARK: - WeatherForecastWidget
+  struct WeatherWidget {
+    static let iconLabelFontSize = CGFloat(55)
+    static let iconLabelTextColor = UIColor.white
     
+    static let cityNameLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 20)
+    static let cityNameLabelTextColor = UIColor.blackShade
+    static let cityNameLabelTextAlignment = NSTextAlignment.left
+    static let cityNameLabelNumberOfLines = 1
+    
+    static let conditionSummaryLabelFont = UIFont(name:  "HelveticaNeue-Medium", size: 13)
+    static let conditionSummaryLabelTextColor = UIColor.blackShade
+    static let conditionSummaryLabelTextAlignment = NSTextAlignment.left
+    static let conditionSummaryLabelNumberOfLines = 2
+    
+    static let humidityLabelFont = UIFont(name:  "HelveticaNeue-Medium", size: 13)
+    static let humidityLabelTextColor = UIColor.blackShade
+    static let humidityLabelTextAlignment = NSTextAlignment.left
+    static let humidityLabelNumberOfLines = 1
+    
+    static let temperatureLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 60)
+    static let temperatureLabelTextColor = UIColor.blackShade
+    static let temperatureLabelTextAlignment = NSTextAlignment.left
+    static let temperatureLabelNumberOfLines = 1
+    
+    static let temperatureMaxMinLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 16)
+    static let temperatureMaxMinLabelTextColor = UIColor.blackShade
+    static let temperatureMaxMinLabelTextAlignment = NSTextAlignment.left
+    static let temperatureMaxMinLabelNumberOfLines = 1
   }
   
   // MARK: - CurrentForecastView

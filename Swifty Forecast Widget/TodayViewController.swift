@@ -17,9 +17,12 @@ class TodayViewController: UIViewController {
   @IBOutlet private weak var temperatureLabel: UILabel!
   @IBOutlet private weak var temperatureMaxMinLabel: UILabel!
   
+  typealias WidgetStyle = Style.WeatherWidget
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setup()
+    setupStyle()
   }
   
 }
@@ -28,39 +31,43 @@ class TodayViewController: UIViewController {
 extension TodayViewController: ViewSetupable {
   
   func setup() {
-    let icon = ConditionFontIcon.make(icon: "partly-cloudy-day", font: 55)
-    iconLabel.textColor = UIColor.white
+    let icon = ConditionFontIcon.make(icon: "partly-cloudy-day", font: WidgetStyle.iconLabelFontSize)
     iconLabel.attributedText = icon?.attributedIcon
     
     cityNameLabel.text = "Chicago"
-    cityNameLabel.font = UIFont(name:  "HelveticaNeue-Light", size: 20)
-    cityNameLabel.textColor = UIColor.blackShade
-    cityNameLabel.textAlignment = .left
-    cityNameLabel.numberOfLines = 1
-    
     conditionSummaryLabel.text = "Partly cloudy day"
-    conditionSummaryLabel.font = UIFont(name:  "HelveticaNeue-Medium", size: 13)
-    conditionSummaryLabel.textColor = UIColor.blackShade
-    conditionSummaryLabel.textAlignment = .left
-    conditionSummaryLabel.numberOfLines = 2
-    
     humidityLabel.text = "Humidity: 67%"
-    humidityLabel.font = UIFont(name:  "HelveticaNeue-Medium", size: 13)
-    humidityLabel.textColor = UIColor.blackShade
-    humidityLabel.textAlignment = .left
-    humidityLabel.numberOfLines = 1
-    
     temperatureLabel.text = "85" + "\u{00B0}"
-    temperatureLabel.font = UIFont(name:  "HelveticaNeue-Light", size: 60)
-    temperatureLabel.textColor = UIColor.blackShade
-    temperatureLabel.textAlignment = .left
-    temperatureLabel.numberOfLines = 1
-    
     temperatureMaxMinLabel.text = "60\u{00B0} / 45\u{00B0}"
-    temperatureMaxMinLabel.font = UIFont(name:  "HelveticaNeue-Light", size: 16)
-    temperatureMaxMinLabel.textColor = UIColor.blackShade
-    temperatureMaxMinLabel.textAlignment = .left
-    temperatureMaxMinLabel.numberOfLines = 1
+  }
+  
+  func setupStyle() {
+    iconLabel.textColor = WidgetStyle.iconLabelTextColor
+    
+    cityNameLabel.font = WidgetStyle.cityNameLabelFont
+    cityNameLabel.textColor = WidgetStyle.cityNameLabelTextColor
+    cityNameLabel.textAlignment = WidgetStyle.cityNameLabelTextAlignment
+    cityNameLabel.numberOfLines = WidgetStyle.cityNameLabelNumberOfLines
+    
+    conditionSummaryLabel.font = WidgetStyle.conditionSummaryLabelFont
+    conditionSummaryLabel.textColor = WidgetStyle.conditionSummaryLabelTextColor
+    conditionSummaryLabel.textAlignment = WidgetStyle.conditionSummaryLabelTextAlignment
+    conditionSummaryLabel.numberOfLines = WidgetStyle.conditionSummaryLabelNumberOfLines
+    
+    humidityLabel.font = WidgetStyle.humidityLabelFont
+    humidityLabel.textColor = WidgetStyle.humidityLabelTextColor
+    humidityLabel.textAlignment = WidgetStyle.humidityLabelTextAlignment
+    humidityLabel.numberOfLines = WidgetStyle.humidityLabelNumberOfLines
+    
+    temperatureLabel.font = WidgetStyle.temperatureLabelFont
+    temperatureLabel.textColor = WidgetStyle.temperatureLabelTextColor
+    temperatureLabel.textAlignment = WidgetStyle.temperatureLabelTextAlignment
+    temperatureLabel.numberOfLines = WidgetStyle.temperatureLabelNumberOfLines
+    
+    temperatureMaxMinLabel.font = WidgetStyle.temperatureMaxMinLabelFont
+    temperatureMaxMinLabel.textColor = WidgetStyle.temperatureMaxMinLabelTextColor
+    temperatureMaxMinLabel.textAlignment = WidgetStyle.temperatureMaxMinLabelTextAlignment
+    temperatureMaxMinLabel.numberOfLines = WidgetStyle.temperatureMaxMinLabelNumberOfLines
   }
   
 }

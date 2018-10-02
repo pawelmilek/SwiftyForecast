@@ -37,6 +37,8 @@
 		E224418F21619A64009D409F /* FontWeather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2E0762020F51506008A5B63 /* FontWeather.ttf */; };
 		E224419021619A7A009D409F /* FontLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E0762420F5165E008A5B63 /* FontLoader.swift */; };
 		E224419121619FA9009D409F /* UIColor+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */; };
+		E22441922162E38D009D409F /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
+		E22441932162E39D009D409F /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E120E84371007D8CE4 /* ForecastRequest.swift */; };
 		E23997EB20E84371007D8CE4 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebServiceManager.swift */; };
@@ -886,6 +888,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E22441932162E39D009D409F /* UIScreen+PhoneModel.swift in Sources */,
+				E22441922162E38D009D409F /* Style.swift in Sources */,
 				E224419121619FA9009D409F /* UIColor+Flat.swift in Sources */,
 				E224419021619A7A009D409F /* FontLoader.swift in Sources */,
 				E224418E21619A4C009D409F /* AlertViewPresenter.swift in Sources */,

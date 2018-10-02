@@ -67,20 +67,13 @@ final class City: NSManagedObject {
 extension City {
   
   var localTime: String {
+    guard let timezone = self.timeZone else { return "N/A" }
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .none
+    formatter.timeZone = timezone
     
-    var localTime = ""
-    
-    if let timezone = self.timeZone {
-      formatter.timeZone = timezone
-      localTime = formatter.string(from: Date())
-      
-    } else {
-      localTime = "N/A"
-    }
-    
+    let localTime = formatter.string(from: Date())
     return localTime
   }
   
