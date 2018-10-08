@@ -18,20 +18,48 @@ struct Style {
   
   // MARK: - WeatherForecastWidget
   struct WeatherWidget {
-    static let iconLabelFontSize = CGFloat(55)
+    static var iconLabelFontSize: CGFloat {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return CGFloat(50)
+      } else {
+        return CGFloat(55)
+      }
+    }
+    
     static let iconLabelTextColor = UIColor.white
     
-    static let cityNameLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 20)
+    static var cityNameLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Light", size: 15)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Light", size: 20)
+      }
+    }
+    
     static let cityNameLabelTextColor = UIColor.blackShade
     static let cityNameLabelTextAlignment = NSTextAlignment.left
     static let cityNameLabelNumberOfLines = 1
     
-    static let conditionSummaryLabelFont = UIFont(name:  "HelveticaNeue-Medium", size: 13)
+    static var conditionSummaryLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+      }
+    }
+    
     static let conditionSummaryLabelTextColor = UIColor.blackShade
     static let conditionSummaryLabelTextAlignment = NSTextAlignment.left
     static let conditionSummaryLabelNumberOfLines = 2
     
-    static let humidityLabelFont = UIFont(name:  "HelveticaNeue-Medium", size: 13)
+    static var humidityLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+      }
+    }
+    
     static let humidityLabelTextColor = UIColor.blackShade
     static let humidityLabelTextAlignment = NSTextAlignment.left
     static let humidityLabelNumberOfLines = 1
