@@ -45,7 +45,7 @@ class TodayViewController: UIViewController {
     fetchWeatherForecast { error in
       if error == nil {
         self.configure()
-        self.hourlyCollectionView.reloadData()
+        self.updateHourlyForecast()
       }
     }
   }
@@ -53,7 +53,7 @@ class TodayViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
-    //    updateHourlyForecast()
+    updateHourlyForecast()
   }
 }
 
@@ -61,19 +61,9 @@ class TodayViewController: UIViewController {
 extension TodayViewController: ViewSetupable {
   
   func setup() {
-    extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     setCollectionView()
-    
-    let icon = ConditionFontIcon.make(icon: "partly-cloudy-day", font: WidgetStyle.iconLabelFontSize)
-    iconLabel.attributedText = icon?.attributedIcon
-    
-    cityNameLabel.text = "Chicago"
-    conditionSummaryLabel.text = "Partly cloudy day"
-    humidityLabel.text = "Humidity: 67%"
-    temperatureLabel.text = "85" + "\u{00B0}"
-    temperatureMaxMinLabel.text = "60\u{00B0} / 45\u{00B0}"
-
-    self.view.addGestureRecognizer(tapGesture)
+    extensionContext?.widgetLargestAvailableDisplayMode = .expanded
+    view.addGestureRecognizer(tapGesture)
   }
   
   func setupStyle() {
@@ -191,7 +181,7 @@ private extension TodayViewController {
     }
     
     if expanded {
-      hourlyCollectionView.reloadData()
+      updateHourlyForecast()
     }
   }
   
@@ -203,7 +193,10 @@ private extension TodayViewController {
       }
     }
   }
-  
+
+  func updateHourlyForecast() {
+    hourlyCollectionView.reloadData()
+  }
 }
 
 // MARK: - NCWidgetProviding protocol
@@ -213,7 +206,7 @@ extension TodayViewController: NCWidgetProviding {
     fetchWeatherForecast { error in
       if error == nil {
         self.configure()
-        self.hourlyCollectionView.reloadData()
+        self.updateHourlyForecast()
         completionHandler(.newData)
         
       } else {
