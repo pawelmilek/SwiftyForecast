@@ -10,16 +10,70 @@ import Foundation
 import GooglePlaces
 import CoreData
 
-final class City: NSManagedObject {
+final class City: NSManagedObject, Codable {
+  private enum CodingKeys: String, CodingKey {
+    case name
+    case country
+    case state
+    case postalCode
+    case isCurrentLocalization
+    case latitude
+    case longitude
+    case timeZone
+    case lastUpdate
+  }
+  
   @NSManaged var name: String
   @NSManaged var country: String
   @NSManaged var state: String?
   @NSManaged var postalCode: String
-  @NSManaged var isCurrentLocalized: Bool
-  @NSManaged var coordinate: Coordinate
+  @NSManaged var isCurrentLocalization: Bool
+  @NSManaged var latitude: Double
+  @NSManaged var longitude: Double
   @NSManaged var timeZone: TimeZone?
+  @NSManaged var lastUpdate: Date?
   
-  convenience init(place: GMSPlace, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
+  
+  required convenience init(from decoder: Decoder) throws {
+    var entityDescription: NSEntityDescription?
+        
+    if let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext,
+      let managedObjectContext = decoder.userInfo[codingUserInfoKeyManagedObjectContext] as? NSManagedObjectContext,
+      let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: managedObjectContext) {
+      entityDescription = entity
+    } else {
+      entityDescription = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.managedContext)
+    }
+    
+    self.init(entity: entityDescription!, insertInto: nil)
+    
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    self.name = try container.decode(String.self, forKey: .name)
+    self.country = try container.decode(String.self, forKey: .country)
+    self.state = try container.decodeIfPresent(String.self, forKey: .state)
+    self.postalCode = try container.decode(String.self, forKey: .postalCode)
+    self.isCurrentLocalization = try container.decode(Bool.self, forKey: .isCurrentLocalization)
+    self.latitude = try container.decode(Double.self, forKey: .latitude)
+    self.longitude = try container.decode(Double.self, forKey: .longitude)
+    self.timeZone = try container.decodeIfPresent(TimeZone.self, forKey: .timeZone)
+    self.lastUpdate = try container.decodeIfPresent(Date.self, forKey: .lastUpdate)
+  }
+  
+  func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(name, forKey: .name)
+    try container.encode(country, forKey: .country)
+    try container.encode(state, forKey: .state)
+    try container.encode(postalCode, forKey: .postalCode)
+    try container.encode(isCurrentLocalization, forKey: .isCurrentLocalization)
+    try container.encode(latitude, forKey: .latitude)
+    try container.encode(longitude, forKey: .longitude)
+    try container.encodeIfPresent(timeZone, forKey: .timeZone)
+    try container.encodeIfPresent(lastUpdate, forKey: .lastUpdate)
+  }
+
+  
+  convenience init(place: GMSPlace, isCurrentLocalization: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
     let addressComponents = place.addressComponents
@@ -28,27 +82,29 @@ final class City: NSManagedObject {
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
-    self.isCurrentLocalized = isCurrentLocalized
-    self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude, managedObjectContext: managedObjectContext)
+    self.isCurrentLocalization = isCurrentLocalization
+    self.latitude = place.coordinate.latitude
+    self.longitude = place.coordinate.longitude
+    self.lastUpdate = Date()
   }
   
-  convenience init(unassociatedObject: City, isCurrentLocalized: Bool, managedObjectContext: NSManagedObjectContext) {
+  
+  convenience init(unassociatedObject: City, isCurrentLocalization: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
     self.name = unassociatedObject.name
     self.country = unassociatedObject.country
     self.state = unassociatedObject.state
     self.postalCode = unassociatedObject.postalCode
-    self.isCurrentLocalized = isCurrentLocalized
-    
-    let latitude = unassociatedObject.coordinate.latitude
-    let longitude = unassociatedObject.coordinate.longitude
-    self.coordinate = Coordinate(latitude: latitude, longitude: longitude, managedObjectContext: managedObjectContext)
+    self.isCurrentLocalization = isCurrentLocalization
+    self.latitude = unassociatedObject.latitude
+    self.longitude = unassociatedObject.longitude
+    self.lastUpdate = Date()
   }
   
   
   convenience init(place: GMSPlace) {
-    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.mainContext)!
+    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.managedContext)!
     self.init(entity: entity, insertInto: nil)
     
     let addressComponents = place.addressComponents
@@ -57,8 +113,10 @@ final class City: NSManagedObject {
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
-    self.isCurrentLocalized = false
-    self.coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+    self.isCurrentLocalization = false
+    self.lastUpdate = Date()
+    self.latitude = place.coordinate.latitude
+    self.longitude = place.coordinate.longitude
   }
 }
 
@@ -99,7 +157,7 @@ extension City {
     request.predicate = predicate
     
     do {
-      let result = try CoreDataStackHelper.shared.mainContext.fetch(request)
+      let result = try CoreDataStackHelper.shared.managedContext.fetch(request)
       if result.count > 0 {
         return true
       } else {

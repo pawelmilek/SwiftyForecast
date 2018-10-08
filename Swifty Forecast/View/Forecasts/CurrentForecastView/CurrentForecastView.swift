@@ -33,7 +33,6 @@ final class CurrentForecastView: UIView {
     return imageView
   }()
   
-  
   private var viewDidExpand = false
   private var currentForecast: CurrentForecast?
   private var currentForecastDetails: DailyData?
@@ -139,7 +138,6 @@ private extension CurrentForecastView {
     hourlyCollectionView.dataSource = self
     hourlyCollectionView.delegate = self
     hourlyCollectionView.showsVerticalScrollIndicator = false
-    hourlyCollectionView.showsHorizontalScrollIndicator = true
     hourlyCollectionView.showsHorizontalScrollIndicator = false
   }
   
@@ -172,14 +170,6 @@ extension CurrentForecastView {
     if let forecast = forecast, let details = details {
       let fontSize = ForecastStyle.conditionFontIconSize
       let icon = ConditionFontIcon.make(icon: forecast.icon, font: fontSize)
-      iconLabel.attributedText = icon?.attributedIcon
-      dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
-      cityNameLabel.text = city?.name
-      temperatureLabel.text = forecast.temperatureFormatted
-
-      windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
-      humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
-      
       let cityTimeZone = city?.timeZone
       var sunriseTime: String {
         if let cityTimeZone = cityTimeZone {
@@ -197,14 +187,24 @@ extension CurrentForecastView {
         }
       }
       
+      iconLabel.attributedText = icon?.attributedIcon
+      dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
+      cityNameLabel.text = city?.name
+      temperatureLabel.text = forecast.temperatureFormatted
+
+      windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
+      humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
       sunriseView.configure(condition: .sunrise, value: sunriseTime)
       sunsetView.configure(condition: .sunset, value: sunsetTime)
+      
       iconLabel.alpha = 1
       dateLabel.alpha = 1
       cityNameLabel.alpha = 1
       temperatureLabel.alpha = 1
       windView.alpha = 1
       humidityView.alpha = 1
+      sunriseView.alpha = 1
+      sunsetView.alpha = 1
       
     } else {
       temperatureLabel.alpha = 0
@@ -213,6 +213,8 @@ extension CurrentForecastView {
       cityNameLabel.alpha = 0
       windView.alpha = 0
       humidityView.alpha = 0
+      sunriseView.alpha = 0
+      sunsetView.alpha = 0
     }
   }
   

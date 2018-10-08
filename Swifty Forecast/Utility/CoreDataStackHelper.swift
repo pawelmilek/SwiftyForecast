@@ -7,18 +7,26 @@
 //
 
 import Foundation
-import UIKit
 import CoreData
 
 class CoreDataStackHelper {
   static let shared = CoreDataStackHelper()
-  
-  private var appDelegate: AppDelegate
-  let mainContext: NSManagedObjectContext
-  
+  private let stack: CoreDataStack
   
   private init() {
-    self.appDelegate = UIApplication.shared.delegate as! AppDelegate
-    self.mainContext = self.appDelegate.persistentContainer.viewContext
+    self.stack = CoreDataStack(modelName: "SwiftyForecast")
+  }
+  
+  
+  var managedContext: NSManagedObjectContext {
+    return stack.managedContext
+  }
+  
+//  var savingContext: NSManagedObjectContext {
+//    return stack.savingContext
+//  }
+  
+  func saveContext() {
+    stack.saveContext()
   }
 }

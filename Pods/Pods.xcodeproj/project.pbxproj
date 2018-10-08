@@ -11,13 +11,23 @@
 		09220E61F2B487255C06C9A5461F5CD5 /* ReachabilitySwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B765756DE2488FEDBE4A7321926C470 /* ReachabilitySwift-dummy.m */; };
 		0F52E3B508C3CD21FD96B4FBD1730F31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */; };
 		21EC9C5D90F9F601134BB678361E5B79 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */; };
+		49EB86DF6FE8DD7711CDA2054F3458E2 /* Pods-Swifty Forecast Widget-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3055EBFF835025205BD3E6B6CADDDBEC /* Pods-Swifty Forecast Widget-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		76E909CE241F647320C00809B73B79C5 /* ReachabilitySwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DE04BCAF2F074A767CBD8109F5ED9EA1 /* ReachabilitySwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		878BC041BB0EB90E017F7782CA7D6E09 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */; };
-		87F358A7578DE41DA324F93D3B76C866 /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		878BC041BB0EB90E017F7782CA7D6E09 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C6D6EEEED7BA6FC95CB16BA5B7ED2AD /* Pods-Swifty Forecast-dummy.m */; };
+		87F358A7578DE41DA324F93D3B76C866 /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B9ABDEEF374A3070CED6155E12CCA7FE /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CFC55E3E6C3ABF42DD46859A8331A688 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */; };
+		D21C0E3543D43A4948BB232C9BD7582D /* Pods-Swifty Forecast Widget-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91368AF2E4B8EFC3AE486C61D0EF831C /* Pods-Swifty Forecast Widget-dummy.m */; };
+		EFC1AF3EC9BE1376996C48104D814F2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0F97C56F03B8257F334DA41B5AD21019 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3D112B912E2E3E9E143994E2B9D96EB2;
+			remoteInfo = ReachabilitySwift;
+		};
 		A78E36D83B21CA3699667C1B4D8704BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -28,31 +38,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
+		06625D12AFDD495400CA2BD9C3EBB559 /* Pods-Swifty Forecast Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		0B4CD802202F567E4036DFE1F2BB0817 /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
+		21E73736E09D5C61DD4EC916A61A89E2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26CB4F8CDAE3628039E7526AB697CAD4 /* Pods-Swifty Forecast Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast Widget.release.xcconfig"; sourceTree = "<group>"; };
 		26D031DB79AF052F5D159743DB4D9170 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		26D910ED11ADCA0344FAF4AA9F073791 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
-		439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast.framework; path = "Pods-Swifty Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ADA7437A85AB977917EE6D10175FCDE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
-		5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
-		61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
+		2C6D6EEEED7BA6FC95CB16BA5B7ED2AD /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
+		3055EBFF835025205BD3E6B6CADDDBEC /* Pods-Swifty Forecast Widget-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast Widget-umbrella.h"; sourceTree = "<group>"; };
+		3C62ACDAA627FE8A149F43E2B9B21CF7 /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
+		536EF54C6D9E28C7721E219DDA56F421 /* Pods-Swifty Forecast Widget.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast Widget.modulemap"; sourceTree = "<group>"; };
+		5C4F4F0619812F7ABA473F099C71926B /* Pods-Swifty Forecast Widget-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast Widget-resources.sh"; sourceTree = "<group>"; };
 		690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReachabilitySwift.xcconfig; sourceTree = "<group>"; };
-		6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
 		6F6923DB83B7E54B0019F1570C6167BF /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
+		7726E1F7A25AF15D6907D40B2C8015DE /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		777C4FF026F99F96DDDA9D718E8A94DA /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
 		77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		7B765756DE2488FEDBE4A7321926C470 /* ReachabilitySwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReachabilitySwift-dummy.m"; sourceTree = "<group>"; };
 		7F7F31388A15F244F1D8A0347C59F2AB /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
-		808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
-		92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
+		8EC5E76723224AC1AF2C04AC8649A48F /* Pods-Swifty Forecast Widget-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast Widget-acknowledgements.markdown"; sourceTree = "<group>"; };
+		91368AF2E4B8EFC3AE486C61D0EF831C /* Pods-Swifty Forecast Widget-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast Widget-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A5F486E0580BAC963527EE92995663FC /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BE1E0759864B3A6C196B31D6AD88D99 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3D777EB82B0D937253ADF323FF7DDCA /* Pods_Swifty_Forecast_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast_Widget.framework; path = "Pods-Swifty Forecast Widget.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A6A76388B87AAC74CF9C66FE104DB8C8 /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
+		A9F18E903E5F961C0D4096B5DE67178B /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast.framework; path = "Pods-Swifty Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD7B0B5736B280723645928FD0E22D5A /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
 		B0EFBC2231A66463CF83151D690105ED /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1B42EB33B63B0D0E6C8867DDED34B06 /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
 		B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
+		B62A4282B83D288D1F131970FB178145 /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
+		B9ABDEEF374A3070CED6155E12CCA7FE /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
+		BD3D889D52764F4D64A05A4103425FFD /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
+		C8A9CACBBDBF842F246746985E921081 /* Pods-Swifty Forecast Widget-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast Widget-acknowledgements.plist"; sourceTree = "<group>"; };
 		DE04BCAF2F074A767CBD8109F5ED9EA1 /* ReachabilitySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-umbrella.h"; sourceTree = "<group>"; };
+		E5F3E14B69E37FAFA234B25A2002363C /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +82,14 @@
 			files = (
 				CFC55E3E6C3ABF42DD46859A8331A688 /* Foundation.framework in Frameworks */,
 				21EC9C5D90F9F601134BB678361E5B79 /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84EE3246783DF3BFE74A11E1936C472A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFC1AF3EC9BE1376996C48104D814F2F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,14 +104,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E89FCEEF42F82A8E48C380ECD207CDC /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				716D807A27FB186396C7C3550B40BDCA /* Pods-Swifty Forecast */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
 		1A902F5383405DB6A55DA17D0ADCF59E /* GooglePlaces */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +121,15 @@
 				77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		316F3CA42218021D36D0D0975CA7F983 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5D718DA97B7076BCD598003667EFCB24 /* Pods-Swifty Forecast */,
+				B4867A418F99BBE0AD3120DFD65E4B97 /* Pods-Swifty Forecast Widget */,
+			);
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
@@ -137,28 +166,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5FA1E84B39883FDFDB27B3A12FF72925 /* Products */ = {
+		5D718DA97B7076BCD598003667EFCB24 /* Pods-Swifty Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */,
-				A5F486E0580BAC963527EE92995663FC /* Reachability.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		716D807A27FB186396C7C3550B40BDCA /* Pods-Swifty Forecast */ = {
-			isa = PBXGroup;
-			children = (
-				4ADA7437A85AB977917EE6D10175FCDE /* Info.plist */,
-				808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */,
-				5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */,
-				5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */,
-				4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */,
-				6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */,
-				036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */,
-				92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */,
-				B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */,
-				61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */,
+				9BE1E0759864B3A6C196B31D6AD88D99 /* Info.plist */,
+				BD3D889D52764F4D64A05A4103425FFD /* Pods-Swifty Forecast.modulemap */,
+				B62A4282B83D288D1F131970FB178145 /* Pods-Swifty Forecast-acknowledgements.markdown */,
+				B1B42EB33B63B0D0E6C8867DDED34B06 /* Pods-Swifty Forecast-acknowledgements.plist */,
+				2C6D6EEEED7BA6FC95CB16BA5B7ED2AD /* Pods-Swifty Forecast-dummy.m */,
+				A6A76388B87AAC74CF9C66FE104DB8C8 /* Pods-Swifty Forecast-frameworks.sh */,
+				777C4FF026F99F96DDDA9D718E8A94DA /* Pods-Swifty Forecast-resources.sh */,
+				B9ABDEEF374A3070CED6155E12CCA7FE /* Pods-Swifty Forecast-umbrella.h */,
+				3C62ACDAA627FE8A149F43E2B9B21CF7 /* Pods-Swifty Forecast.debug.xcconfig */,
+				E5F3E14B69E37FAFA234B25A2002363C /* Pods-Swifty Forecast.release.xcconfig */,
 			);
 			name = "Pods-Swifty Forecast";
 			path = "Target Support Files/Pods-Swifty Forecast";
@@ -170,8 +190,8 @@
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
 				E4B335541917EFEADB7AE1C0C51BFFA2 /* Pods */,
-				5FA1E84B39883FDFDB27B3A12FF72925 /* Products */,
-				0E89FCEEF42F82A8E48C380ECD207CDC /* Targets Support Files */,
+				A80269B303EF3C54D6FF9D219B1A98B5 /* Products */,
+				316F3CA42218021D36D0D0975CA7F983 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -181,6 +201,33 @@
 				26D031DB79AF052F5D159743DB4D9170 /* GoogleMapsBase.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A80269B303EF3C54D6FF9D219B1A98B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9F18E903E5F961C0D4096B5DE67178B /* Pods_Swifty_Forecast.framework */,
+				A3D777EB82B0D937253ADF323FF7DDCA /* Pods_Swifty_Forecast_Widget.framework */,
+				7726E1F7A25AF15D6907D40B2C8015DE /* Reachability.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B4867A418F99BBE0AD3120DFD65E4B97 /* Pods-Swifty Forecast Widget */ = {
+			isa = PBXGroup;
+			children = (
+				21E73736E09D5C61DD4EC916A61A89E2 /* Info.plist */,
+				536EF54C6D9E28C7721E219DDA56F421 /* Pods-Swifty Forecast Widget.modulemap */,
+				8EC5E76723224AC1AF2C04AC8649A48F /* Pods-Swifty Forecast Widget-acknowledgements.markdown */,
+				C8A9CACBBDBF842F246746985E921081 /* Pods-Swifty Forecast Widget-acknowledgements.plist */,
+				91368AF2E4B8EFC3AE486C61D0EF831C /* Pods-Swifty Forecast Widget-dummy.m */,
+				5C4F4F0619812F7ABA473F099C71926B /* Pods-Swifty Forecast Widget-resources.sh */,
+				3055EBFF835025205BD3E6B6CADDDBEC /* Pods-Swifty Forecast Widget-umbrella.h */,
+				06625D12AFDD495400CA2BD9C3EBB559 /* Pods-Swifty Forecast Widget.debug.xcconfig */,
+				26CB4F8CDAE3628039E7526AB697CAD4 /* Pods-Swifty Forecast Widget.release.xcconfig */,
+			);
+			name = "Pods-Swifty Forecast Widget";
+			path = "Target Support Files/Pods-Swifty Forecast Widget";
 			sourceTree = "<group>";
 		};
 		D9911891B4656CF3B9D14F9A340BD3B4 /* GoogleMaps */ = {
@@ -227,6 +274,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		6304B1B7C72BAB65681F5F1EC1BB66E1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EB86DF6FE8DD7711CDA2054F3458E2 /* Pods-Swifty Forecast Widget-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B375F4A8E0C7E62B415E39E7AAE1CE55 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,7 +316,25 @@
 			);
 			name = "Pods-Swifty Forecast";
 			productName = "Pods-Swifty Forecast";
-			productReference = 439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */;
+			productReference = A9F18E903E5F961C0D4096B5DE67178B /* Pods_Swifty_Forecast.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		2B8979E25C002CD686A6FA9B91BE2051 /* Pods-Swifty Forecast Widget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A77F621E7A0F6A7E621F1B570CE7DA77 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast Widget" */;
+			buildPhases = (
+				E43AA85608C960273F118960A6663C81 /* Sources */,
+				84EE3246783DF3BFE74A11E1936C472A /* Frameworks */,
+				6304B1B7C72BAB65681F5F1EC1BB66E1 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BBA5A0AE373A83A60B39D6413BF97247 /* PBXTargetDependency */,
+			);
+			name = "Pods-Swifty Forecast Widget";
+			productName = "Pods-Swifty Forecast Widget";
+			productReference = A3D777EB82B0D937253ADF323FF7DDCA /* Pods_Swifty_Forecast_Widget.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */ = {
@@ -278,7 +351,7 @@
 			);
 			name = ReachabilitySwift;
 			productName = ReachabilitySwift;
-			productReference = A5F486E0580BAC963527EE92995663FC /* Reachability.framework */;
+			productReference = 7726E1F7A25AF15D6907D40B2C8015DE /* Reachability.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -298,11 +371,12 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 5FA1E84B39883FDFDB27B3A12FF72925 /* Products */;
+			productRefGroup = A80269B303EF3C54D6FF9D219B1A98B5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				162556E2B262E6D1F179D3D26C43C037 /* Pods-Swifty Forecast */,
+				2B8979E25C002CD686A6FA9B91BE2051 /* Pods-Swifty Forecast Widget */,
 				3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */,
 			);
 		};
@@ -326,6 +400,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E43AA85608C960273F118960A6663C81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D21C0E3543D43A4948BB232C9BD7582D /* Pods-Swifty Forecast Widget-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -334,6 +416,12 @@
 			name = ReachabilitySwift;
 			target = 3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */;
 			targetProxy = A78E36D83B21CA3699667C1B4D8704BB /* PBXContainerItemProxy */;
+		};
+		BBA5A0AE373A83A60B39D6413BF97247 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ReachabilitySwift;
+			target = 3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */;
+			targetProxy = 0F97C56F03B8257F334DA41B5AD21019 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -396,9 +484,46 @@
 			};
 			name = Release;
 		};
+		15895655BE13B04016840E1CD94DC65F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06625D12AFDD495400CA2BD9C3EBB559 /* Pods-Swifty Forecast Widget.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast Widget/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		46E410247635907E1552481787FD7547 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */;
+			baseConfigurationReference = E5F3E14B69E37FAFA234B25A2002363C /* Pods-Swifty Forecast.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -434,7 +559,7 @@
 		};
 		54A209428D4308B3C374868DA44867B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */;
+			baseConfigurationReference = 3C62ACDAA627FE8A149F43E2B9B21CF7 /* Pods-Swifty Forecast.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
@@ -462,6 +587,39 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		9410877BE97F780D0A65607792CA3AB2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
+				PRODUCT_MODULE_NAME = Reachability;
+				PRODUCT_NAME = Reachability;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -531,10 +689,11 @@
 			};
 			name = Debug;
 		};
-		C5706FD70DAF768DC7B5DE312855A0D2 /* Release */ = {
+		AC69B19402C7E5A81BFF4CB856963537 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -564,10 +723,13 @@
 			};
 			name = Release;
 		};
-		EA314AD093D621A9A5B659F6D3D44F34 /* Debug */ = {
+		CA2FC2BA4AA4C2AC8EA73B70BC300730 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */;
+			baseConfigurationReference = 26CB4F8CDAE3628039E7526AB697CAD4 /* Pods-Swifty Forecast Widget.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -577,24 +739,26 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast Widget/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
-				PRODUCT_MODULE_NAME = Reachability;
-				PRODUCT_NAME = Reachability;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -611,8 +775,8 @@
 		3DA38AE3B6D986FAF9B947A25F29FF60 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EA314AD093D621A9A5B659F6D3D44F34 /* Debug */,
-				C5706FD70DAF768DC7B5DE312855A0D2 /* Release */,
+				9410877BE97F780D0A65607792CA3AB2 /* Debug */,
+				AC69B19402C7E5A81BFF4CB856963537 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -622,6 +786,15 @@
 			buildConfigurations = (
 				54A209428D4308B3C374868DA44867B5 /* Debug */,
 				46E410247635907E1552481787FD7547 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A77F621E7A0F6A7E621F1B570CE7DA77 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast Widget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15895655BE13B04016840E1CD94DC65F /* Debug */,
+				CA2FC2BA4AA4C2AC8EA73B70BC300730 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

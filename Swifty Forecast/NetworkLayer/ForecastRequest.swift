@@ -15,9 +15,9 @@ struct ForecastRequest: WebServiceRequest {
   var path = "forecast"
   var urlRequest: URLRequest
   var parameters: Parameters
-  var coordinate: Coordinate
+  var coordinate: (latitude: Double, longitude: Double)
   
-  private init(parameters: Parameters, coordinate: Coordinate) {
+  private init(parameters: Parameters, coordinate: (latitude: Double, longitude: Double)) {
     self.parameters = parameters
     self.coordinate = coordinate
     self.path.append("/\(secretKey)")
@@ -30,7 +30,7 @@ struct ForecastRequest: WebServiceRequest {
 // MARK: - Factory method
 extension ForecastRequest {
   
-  static func make(by coordinate: Coordinate) -> ForecastRequest {
+  static func make(by coordinate: (latitude: Double, longitude: Double)) -> ForecastRequest {
     let defaultParameters = ["exclude": "minutely,alerts,flags", "units": "us"]
     return ForecastRequest(parameters: defaultParameters, coordinate: coordinate)
   }

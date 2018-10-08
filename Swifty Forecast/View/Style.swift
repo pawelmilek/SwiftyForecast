@@ -41,7 +41,7 @@ struct Style {
     static let temperatureLabelTextAlignment = NSTextAlignment.left
     static let temperatureLabelNumberOfLines = 1
     
-    static let temperatureMaxMinLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 16)
+    static let temperatureMaxMinLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 20)
     static let temperatureMaxMinLabelTextColor = UIColor.blackShade
     static let temperatureMaxMinLabelTextAlignment = NSTextAlignment.left
     static let temperatureMaxMinLabelNumberOfLines = 1

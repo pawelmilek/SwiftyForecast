@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct ForecastDate {
   private let date: Date
   private let formatter: DateFormatter
