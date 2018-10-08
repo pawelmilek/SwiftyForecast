@@ -9,7 +9,6 @@
 import UIKit
 import NotificationCenter
 
-
 class TodayViewController: UIViewController {
   @IBOutlet private weak var iconLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
@@ -48,12 +47,6 @@ class TodayViewController: UIViewController {
         self.updateHourlyForecast()
       }
     }
-  }
-
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    updateHourlyForecast()
   }
 }
 
@@ -105,6 +98,8 @@ private extension TodayViewController {
     hourlyCollectionView.register(cellClass: HourlyForecastCollectionViewCell.self)
     hourlyCollectionView.dataSource = self
     hourlyCollectionView.delegate = self
+    hourlyCollectionView.alwaysBounceHorizontal = false
+    hourlyCollectionView.alwaysBounceVertical = false
     hourlyCollectionView.showsVerticalScrollIndicator = false
     hourlyCollectionView.showsHorizontalScrollIndicator = false
     hourlyCollectionView.backgroundColor = .clear
@@ -206,7 +201,7 @@ extension TodayViewController: NCWidgetProviding {
     fetchWeatherForecast { error in
       if error == nil {
         self.configure()
-        self.updateHourlyForecast()
+        self.toggleHourlyForecast()
         completionHandler(.newData)
         
       } else {

@@ -36,7 +36,7 @@ struct Style {
     static let humidityLabelTextAlignment = NSTextAlignment.left
     static let humidityLabelNumberOfLines = 1
     
-    static let temperatureLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 60)
+    static let temperatureLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 57)
     static let temperatureLabelTextColor = UIColor.blackShade
     static let temperatureLabelTextAlignment = NSTextAlignment.left
     static let temperatureLabelNumberOfLines = 1
