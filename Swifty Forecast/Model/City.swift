@@ -92,7 +92,6 @@ final class City: NSManagedObject, Codable {
     self.isCurrentLocalization = isCurrentLocalization
     self.latitude = place.coordinate.latitude
     self.longitude = place.coordinate.longitude
-    self.lastUpdate = Date()
   }
   
   
@@ -106,7 +105,6 @@ final class City: NSManagedObject, Codable {
     self.isCurrentLocalization = isCurrentLocalization
     self.latitude = unassociatedObject.latitude
     self.longitude = unassociatedObject.longitude
-    self.lastUpdate = Date()
   }
   
   
@@ -121,7 +119,6 @@ final class City: NSManagedObject, Codable {
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
     self.isCurrentLocalization = false
-    self.lastUpdate = Date()
     self.latitude = place.coordinate.latitude
     self.longitude = place.coordinate.longitude
   }
