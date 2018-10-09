@@ -35,6 +35,12 @@ final class City: NSManagedObject, Codable {
   @NSManaged var coordinate: Coordinate?
   
   
+  override func awakeFromInsert() {
+    super.awakeFromInsert()
+    lastUpdate = Date()
+  }
+  
+  
   required convenience init(from decoder: Decoder) throws {
     var entityDescription: NSEntityDescription?
         
