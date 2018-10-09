@@ -32,6 +32,7 @@ final class City: NSManagedObject, Codable {
   @NSManaged var longitude: Double
   @NSManaged var timeZone: TimeZone?
   @NSManaged var lastUpdate: Date?
+  @NSManaged var coordinate: Coordinate?
   
   
   required convenience init(from decoder: Decoder) throws {

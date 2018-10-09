@@ -14,6 +14,7 @@ class CoreDataStackHelper {
   private let stack: CoreDataStack
   
   private init() {
+//    let manager = DataMigrationManager(modelNamed: "SwiftyForecast", enableMigrations: true)
     self.stack = CoreDataStack(modelName: "SwiftyForecast")
   }
   
