@@ -86,6 +86,8 @@ extension TodayViewController: ViewSetupable {
     temperatureMaxMinLabel.textColor = WidgetStyle.temperatureMaxMinLabelTextColor
     temperatureMaxMinLabel.textAlignment = WidgetStyle.temperatureMaxMinLabelTextAlignment
     temperatureMaxMinLabel.numberOfLines = WidgetStyle.temperatureMaxMinLabelNumberOfLines
+    
+    hideLabels()
   }
   
 }
@@ -156,29 +158,23 @@ private extension TodayViewController {
       temperatureMaxMinLabel.alpha = 1
 
     } else {
-      iconLabel.alpha = 0
-      cityNameLabel.alpha = 0
-      conditionSummaryLabel.alpha = 0
-      humidityLabel.alpha = 0
-      temperatureLabel.alpha = 0
-      temperatureMaxMinLabel.alpha = 0
+      hideLabels()
     }
+  }
+  
+  func hideLabels() {
+    iconLabel.alpha = 0
+    cityNameLabel.alpha = 0
+    conditionSummaryLabel.alpha = 0
+    humidityLabel.alpha = 0
+    temperatureLabel.alpha = 0
+    temperatureMaxMinLabel.alpha = 0
   }
 }
 
 
 // MARK: - Private - Actions
 private extension TodayViewController {
-  
-  func toggleHourlyForecast() {
-    var expanded: Bool {
-      return extensionContext?.widgetActiveDisplayMode == .expanded
-    }
-    
-    if expanded {
-      updateHourlyForecast()
-    }
-  }
   
   @objc func launchHostingApp(_ sender: AnyObject) {
     guard let hostApplicationUrl = URL(string: "host-screen:") else { return }
@@ -201,7 +197,7 @@ extension TodayViewController: NCWidgetProviding {
     fetchWeatherForecast { error in
       if error == nil {
         self.configure()
-        self.toggleHourlyForecast()
+        self.updateHourlyForecast()
         completionHandler(.newData)
         
       } else {
@@ -219,7 +215,6 @@ extension TodayViewController: NCWidgetProviding {
   func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
     let expanded = activeDisplayMode == .expanded
     preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 200) : maxSize
-    toggleHourlyForecast()
   }
   
 }
