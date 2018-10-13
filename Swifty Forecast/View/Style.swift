@@ -16,6 +16,64 @@ struct Style {
     static let titleTextColor = UIColor.blackShade
   }
   
+  // MARK: - WeatherForecastWidget
+  struct WeatherWidget {
+    static var iconLabelFontSize: CGFloat {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return CGFloat(50)
+      } else {
+        return CGFloat(55)
+      }
+    }
+    
+    static let iconLabelTextColor = UIColor.white
+    
+    static var cityNameLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Light", size: 15)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Light", size: 20)
+      }
+    }
+    
+    static let cityNameLabelTextColor = UIColor.blackShade
+    static let cityNameLabelTextAlignment = NSTextAlignment.left
+    static let cityNameLabelNumberOfLines = 1
+    
+    static var conditionSummaryLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+      }
+    }
+    
+    static let conditionSummaryLabelTextColor = UIColor.blackShade
+    static let conditionSummaryLabelTextAlignment = NSTextAlignment.left
+    static let conditionSummaryLabelNumberOfLines = 2
+    
+    static var humidityLabelFont: UIFont? {
+      if UIScreen.PhoneModel.isPhoneSE {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+      } else {
+        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+      }
+    }
+    
+    static let humidityLabelTextColor = UIColor.blackShade
+    static let humidityLabelTextAlignment = NSTextAlignment.left
+    static let humidityLabelNumberOfLines = 1
+    
+    static let temperatureLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 57)
+    static let temperatureLabelTextColor = UIColor.blackShade
+    static let temperatureLabelTextAlignment = NSTextAlignment.left
+    static let temperatureLabelNumberOfLines = 1
+    
+    static let temperatureMaxMinLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 20)
+    static let temperatureMaxMinLabelTextColor = UIColor.blackShade
+    static let temperatureMaxMinLabelTextAlignment = NSTextAlignment.left
+    static let temperatureMaxMinLabelNumberOfLines = 1
+  }
   
   // MARK: - CurrentForecastView
   struct CurrentForecast {
@@ -50,9 +108,11 @@ struct Style {
   struct Condition {
     static let backgroundColor = UIColor.white.withAlphaComponent(0.3)
     static let cornerRadius: CGFloat = 5.0
-    static let valueLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 12)
+    static let valueLabelFont = UIFont(name: "HelveticaNeue", size: 11)
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
+    static let conditionFontSize = CGFloat(20)
+    
   }
   
   

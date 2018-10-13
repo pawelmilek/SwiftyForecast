@@ -9,36 +9,36 @@
 import Foundation
 
 struct DailyData: Forecast {
-  var date: ForecastDate
-  var summary: String
-  var icon: String
+  let date: ForecastDate
+  let summary: String
+  let icon: String
   
-  var sunriseTime: ForecastDate
-  var sunsetTime: ForecastDate
-  var moonPhase: MoonPhase
-  var precipIntensity: Double
-  var precipProbability: Double
+  let sunriseTime: ForecastDate
+  let sunsetTime: ForecastDate
+  let moonPhase: MoonPhase
+  let precipIntensity: Double
+  let precipProbability: Double
   
-  var temperature: Double = 0
-  var apparentTemperature: Double = 0
+  let temperature: Double = 0
+  let apparentTemperature: Double = 0
   
-  var precipType: String?
-  var temperatureMin: Double
-  var temperatureMinTime: ForecastDate
-  var temperatureMax: Double
-  var temperatureMaxTime: ForecastDate
+  let precipType: String?
+  let temperatureMin: Double
+  let temperatureMinTime: ForecastDate
+  let temperatureMax: Double
+  let temperatureMaxTime: ForecastDate
   
-  var dewPoint: Double
-  var humidity: Double
-  var pressure: Double
-  var windSpeed: Double
-  var windGust: Double
+  let dewPoint: Double
+  let humidity: Double
+  let pressure: Double
+  let windSpeed: Double
+  let windGust: Double
   
-  var windBearing: Double
-  var cloudCover: Double
-  var uvIndex: Int
-  var visibility: Double
-  var ozone: Double
+  let windBearing: Double
+  let cloudCover: Double
+  let uvIndex: Int
+  let visibility: Double
+  let ozone: Double
 }
 
 

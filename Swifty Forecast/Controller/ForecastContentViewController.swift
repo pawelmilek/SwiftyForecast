@@ -15,7 +15,7 @@ class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
   typealias ForecastContentStyle = Style.ForecastContentVC
-  private let sharedMOC = CoreDataStackHelper.shared
+  private let sharedStack = CoreDataStackHelper.shared
   private let sharedActivityIndicator = ActivityIndicatorView.shared
   private let sharedLocationProvider = LocationProvider.shared
   
@@ -27,8 +27,8 @@ class ForecastContentViewController: UIViewController {
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
-      guard let weatherForecast = weatherForecast else { return }
-      currentForecastView.configure(current: weatherForecast.currently, at: weatherForecast.city)
+      guard let weatherForecast = weatherForecast, let currentDayDetails = weatherForecast.daily.currentDayData else { return }
+      currentForecastView.configure(current: weatherForecast.currently, currentDayDetails: currentDayDetails, at: weatherForecast.city)
       currentForecastView.configure(hourly: weatherForecast.hourly)
       dailyForecastTableView.reloadData()
     }
@@ -133,7 +133,7 @@ private extension ForecastContentViewController {
     
     if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled { // Check current location
       fetchWeatherForecastForCurrentLocation()
-      
+  
     } else if let currentCityForecast = currentCityForecast {
       fetchWeatherForecast(for: currentCityForecast)
     }
@@ -155,9 +155,8 @@ private extension ForecastContentViewController {
       if let place = place {
         let latitude = place.coordinate.latitude
         let longitude = place.coordinate.longitude
-        let coordinate = Coordinate(latitude: latitude, longitude: longitude)
-        
-        let request = ForecastRequest.make(by: coordinate)
+
+        let request = ForecastRequest.make(by: (latitude, longitude))
         WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
@@ -166,23 +165,19 @@ private extension ForecastContentViewController {
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if City.isExists(city: unassociatedCity) == false {
-                CoreDataManager.deleteCurrentLocalizedCity()
-                CoreDataManager.insertCurrentLocalized(city: unassociatedCity)
+                LocalizedCityManager.deleteCurrentLocalizedCity()
+                LocalizedCityManager.insertCurrentLocalized(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
                 strongSelf.reloadAndInitializeMainPageViewController()
-                
-                do {
-                  try strongSelf.sharedMOC.mainContext.save()
-                } catch {
-                  CoreDataError.couldNotSave.handle()
-                }
+                strongSelf.sharedStack.saveContext()
+                SharedGroupContainer.setShared(city: unassociatedCity)
                 
               } else {
-                CoreDataManager.fetchAndResetLocalizedCities()
-                CoreDataManager.updateCurrentLocalized(city: unassociatedCity)
+                LocalizedCityManager.fetchAndResetLocalizedCities()
+                LocalizedCityManager.updateCurrentLocalized(city: unassociatedCity)
                 strongSelf.reloadDataInMainPageViewController()
+                SharedGroupContainer.setShared(city: unassociatedCity)
               }
-              
               
               strongSelf.sharedActivityIndicator.stopAnimating()
             }
@@ -206,7 +201,7 @@ private extension ForecastContentViewController {
   func fetchWeatherForecast(for city: City) {
     sharedActivityIndicator.startAnimating(at: view)
     
-    let request = ForecastRequest.make(by: city.coordinate)
+    let request = ForecastRequest.make(by: (city.latitude, city.longitude))
     WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
       
@@ -297,11 +292,11 @@ private extension ForecastContentViewController {
 extension ForecastContentViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return weatherForecast?.daily.data.count ?? 0
+    return weatherForecast?.daily.numberOfDays ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let dailyItems = weatherForecast?.daily.data else { return UITableViewCell() }
+    guard let dailyItems = weatherForecast?.daily.sevenDaysData else { return UITableViewCell() }
     
     let item = dailyItems[indexPath.row]
     let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)

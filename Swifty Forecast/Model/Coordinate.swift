@@ -46,7 +46,7 @@ extension Coordinate {
   }
   
   convenience init(latitude: Double, longitude: Double) {
-    let entity = NSEntityDescription.entity(forEntityName: Coordinate.entityName, in: CoreDataStackHelper.shared.mainContext)!
+    let entity = NSEntityDescription.entity(forEntityName: Coordinate.entityName, in: CoreDataStackHelper.shared.managedContext)!
     self.init(entity: entity, insertInto: nil)
     
     self.latitude = latitude

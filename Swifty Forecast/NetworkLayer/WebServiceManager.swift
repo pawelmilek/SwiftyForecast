@@ -37,7 +37,7 @@ extension WebServiceManager {
         return
       }
       
-      completionHandler(Parser<M>.parseJSON(data, with: CoreDataStackHelper.shared.mainContext))
+      completionHandler(Parser<M>.parseJSON(data, with: CoreDataStackHelper.shared.managedContext))
       }.resume()
   }
   

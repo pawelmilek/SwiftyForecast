@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreData
 import SafariServices
 
 class ForecastMainViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
   typealias ForecastMainStyle = Style.ForecastMainVC
+  
   private let network = NetworkManager.shared
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
@@ -42,13 +44,23 @@ class ForecastMainViewController: UIViewController {
     return pageVC
   }()
   
-  private var cities: [City] = [] {
-    didSet {
-      pendingIndex = 0
-      currentIndex = 0
-    }
-  }
 
+  private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
+  
+  private lazy var cities: NSFetchedResultsController<City> = {
+    let context = CoreDataStackHelper.shared.managedContext
+    let request = City.createFetchRequest()
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalization", ascending: false)
+    request.sortDescriptors = [currentLocalizedSort]
+    
+    let cities = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    return cities
+  }()
+  
+  private var cityCount: Int {
+    return cities.fetchedObjects?.count ?? 0
+  }
+  
   private var pendingIndex: Int?
   private var currentIndex = 0 {
     didSet {
@@ -73,6 +85,7 @@ class ForecastMainViewController: UIViewController {
     guard let cityListVC = segue.destination as? ForecastCityListTableViewController else { return }
     
     cityListVC.delegate = self
+    cityListVC.managedObjectContext = stack.managedContext
   }
   
   deinit {
@@ -104,12 +117,8 @@ extension ForecastMainViewController: ViewSetupable {
 private extension ForecastMainViewController {
   
   func fetchCities() {
-    let fetchRequest = City.createFetchRequest()
-    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
-    fetchRequest.sortDescriptors = [currentLocalizedSort]
-    
     do {
-      cities = try CoreDataStackHelper.shared.mainContext.fetch(fetchRequest)
+      try cities.performFetch()
     } catch {
       CoreDataError.couldNotFetch.handle()
     }
@@ -163,7 +172,7 @@ private extension ForecastMainViewController {
   
   func setPageControl() {
     pageControl.currentPage = currentIndex
-    pageControl.numberOfPages = cities.count
+    pageControl.numberOfPages = cityCount
   }
   
 }
@@ -214,7 +223,6 @@ private extension ForecastMainViewController {
       
       strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
     }
-
   }
   
 }
@@ -233,7 +241,6 @@ extension ForecastMainViewController {
     fetchCities()
     setPageControl()
   }
-  
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
     let notificationName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
@@ -256,7 +263,8 @@ extension ForecastMainViewController {
 extension ForecastMainViewController: CityListTableViewControllerDelegate {
   
   func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
-    guard let newPageIndex = cities.index(of: city) else { return }
+    guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
+  
     moveToPage(at: newPageIndex) {
       self.currentIndex = newPageIndex
       self.pendingIndex = nil
@@ -271,7 +279,7 @@ private extension ForecastMainViewController {
   
   func moveToPage(at index: Int, completion: (() -> ())? = nil) {
     guard let vc = forecastContentViewController(at: index) else { return }
-    guard index < cities.count else { return }
+    guard index < cityCount else { return }
     
     if index > currentIndex {
       pageViewController.setViewControllers([vc], direction: .forward, animated: false) { complete in
@@ -306,14 +314,21 @@ private extension ForecastMainViewController {
     let storyboard = UIStoryboard(storyboard: .main)
     let forecastVC = storyboard.instantiateViewController(ForecastContentViewController.self)
     forecastVC.pageIndex = index
-    forecastVC.currentCityForecast = cities.isEmpty == true ? nil : cities[index]
     
+    if cityCount > 0 {
+      let indexPath = IndexPath(row: index, section: 0)
+      let city = cities.object(at: indexPath)
+      forecastVC.currentCityForecast = city
+    } else {
+      forecastVC.currentCityForecast = nil
+    }
+
     return forecastVC
   }
   
   func index(of forecastContentViewController: ForecastContentViewController) -> Int {
     guard let city = forecastContentViewController.currentCityForecast else { return NSNotFound }
-    return cities.index(of: city) ?? NSNotFound
+    return cities.indexPath(forObject: city)?.row ?? NSNotFound
   }
   
 }
@@ -338,7 +353,7 @@ extension ForecastMainViewController: UIPageViewControllerDataSource {
     guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
     
     let indexOfViewController = index(of: forecastPageContentViewController)
-    if indexOfViewController == NSNotFound || (indexOfViewController + 1) == cities.count {
+    if indexOfViewController == NSNotFound || (indexOfViewController + 1) == cityCount {
       return nil
     }
 

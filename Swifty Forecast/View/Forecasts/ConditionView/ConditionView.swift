@@ -49,12 +49,12 @@ extension ConditionView: ViewSetupable {
   }
   
   func setupStyle() {
+    conditionLabel.textColor = ConditionStyle.textColor
+    conditionLabel.textAlignment = ConditionStyle.textAlignment
+    
     valueLabel.font = ConditionStyle.valueLabelFont
     valueLabel.textColor = ConditionStyle.textColor
     valueLabel.textAlignment = ConditionStyle.textAlignment
-    
-    conditionLabel.textColor = ConditionStyle.textColor
-    conditionLabel.textAlignment = ConditionStyle.textAlignment
   }
   
 }
@@ -64,7 +64,7 @@ extension ConditionView: ViewSetupable {
 extension ConditionView {
   
   func configure(condition icon: FontWeatherIconType, value: String) {
-    conditionLabel.attributedText = icon.attributedString(font: 16)
+    conditionLabel.attributedText = icon.attributedString(font: ConditionStyle.conditionFontSize)
     valueLabel.text = value
   }
   

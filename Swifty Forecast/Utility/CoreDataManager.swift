@@ -8,8 +8,8 @@
 
 import Foundation
 
-final class CoreDataManager {
-  static private let sharedMOC = CoreDataStackHelper.shared
+final class LocalizedCityManager {
+  static private let sharedStack = CoreDataStackHelper.shared
   
   
   static func deleteCurrentLocalizedCity() {
@@ -17,28 +17,24 @@ final class CoreDataManager {
     let predicate = NSPredicate(format: "isCurrentLocalized == %@", NSNumber(value: true))
     request.predicate = predicate
     
-    if let cities = try? sharedMOC.mainContext.fetch(request) {
+    if let cities = try? sharedStack.managedContext.fetch(request) {
       for city in cities {
-        sharedMOC.mainContext.delete(city)
+        sharedStack.managedContext.delete(city)
       }
       
-      do {
-        try sharedMOC.mainContext.save()
-      } catch {
-        CoreDataError.couldNotSave.handle()
-      }
+      sharedStack.saveContext()
     }
   }
   
   
   static func insertCurrentLocalized(city: City) {
-    let _ = City(unassociatedObject: city, isCurrentLocalized: true, managedObjectContext: sharedMOC.mainContext)
+    let _ = City(unassociatedObject: city, isCurrentLocalized: true, managedObjectContext: sharedStack.managedContext)
   }
   
   
   static func fetchAndResetLocalizedCities() {
     let fetchRequest = City.createFetchRequest()
-    if let cities = try? sharedMOC.mainContext.fetch(fetchRequest) {
+    if let cities = try? sharedStack.managedContext.fetch(fetchRequest) {
       cities.forEach {
         $0.isCurrentLocalized = false
       }
@@ -51,17 +47,13 @@ final class CoreDataManager {
     let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
     request.predicate = predicate
     
-    if let city = try? sharedMOC.mainContext.fetch(request) {
+    if let city = try? sharedStack.managedContext.fetch(request) {
       city.forEach {
         $0.isCurrentLocalized = true
       }
     }
     
-    do {
-      try sharedMOC.mainContext.save()
-    } catch {
-      CoreDataError.couldNotSave.handle()
-    }
+    sharedStack.saveContext()
   }
   
 }

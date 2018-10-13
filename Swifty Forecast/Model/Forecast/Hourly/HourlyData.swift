@@ -9,23 +9,23 @@
 import Foundation
 
 struct HourlyData: Forecast {
-  var date: ForecastDate
-  var summary: String
-  var icon: String
-  var precipIntensity: Double
-  var precipProbability: Double
-  var temperature: Double
-  var apparentTemperature: Double
-  var dewPoint: Double
-  var humidity: Double
-  var pressure: Double
-  var windSpeed: Double
-  var windGust: Double
-  var windBearing: Double
-  var cloudCover: Double
-  var uvIndex: Int
-  var visibility: Double
-  var ozone: Double
+  let date: ForecastDate
+  let summary: String
+  let icon: String
+  let precipIntensity: Double
+  let precipProbability: Double
+  let temperature: Double
+  let apparentTemperature: Double
+  let dewPoint: Double
+  let humidity: Double
+  let pressure: Double
+  let windSpeed: Double
+  let windGust: Double
+  let windBearing: Double
+  let cloudCover: Double
+  let uvIndex: Int
+  let visibility: Double
+  let ozone: Double
 }
 
 

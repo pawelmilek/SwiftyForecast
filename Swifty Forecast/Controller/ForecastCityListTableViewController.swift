@@ -7,12 +7,11 @@
 //
 
 import UIKit
+import CoreData
 import GooglePlaces
 
-class ForecastCityListTableViewController: UITableViewController {
+class ForecastCityListTableViewController: UITableViewController, UsesCoreDataObjects {
   typealias ForecastCityStyle = Style.ForecastCityListVC
-  
-  private let sharedMOC = CoreDataStackHelper.shared
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
     let autocompleteVC = GMSAutocompleteViewController()
@@ -46,6 +45,7 @@ class ForecastCityListTableViewController: UITableViewController {
   private var cities: [City] = []
   private var citiesTimeZone: [String: TimeZone] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
+  var managedObjectContext: NSManagedObjectContext?
   
   
   override func viewDidLoad() {
@@ -62,7 +62,7 @@ extension ForecastCityListTableViewController: ViewSetupable {
     setTableView()
     fetchCities()
   }
-
+  
 }
 
 
@@ -100,17 +100,18 @@ private extension ForecastCityListTableViewController {
 private extension ForecastCityListTableViewController {
   
   func fetchCities() {
+    guard let managedObjectContext = managedObjectContext else { return }
     let fetchRequest = City.createFetchRequest()
-    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalized", ascending: false)
+    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalization", ascending: false)
     fetchRequest.sortDescriptors = [currentLocalizedSort]
     
     do {
-      cities = try sharedMOC.mainContext.fetch(fetchRequest)
+      cities = try managedObjectContext.fetch(fetchRequest)
     } catch {
       CoreDataError.couldNotFetch.handle()
     }
   }
-
+  
 }
 
 
@@ -119,38 +120,41 @@ private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
     guard City.isExists(city: city) == false else { return }
+    guard let managedObjectContext = managedObjectContext else { return }
     
-    let managedContex = sharedMOC.mainContext
-    let newCity = City(unassociatedObject: city, isCurrentLocalized: false, managedObjectContext: managedContex)
-  
+    let newCity = City(unassociatedObject: city, isCurrentLocalization: false, managedObjectContext: managedObjectContext)
+    
     do {
-      try managedContex.save()
+      try managedObjectContext.save()
       cities.append(newCity)
     } catch {
       CoreDataError.couldNotSave.handle()
     }
-    
   }
   
   
   func deleteCity(at indexPath: IndexPath) {
+    guard let managedObjectContext = managedObjectContext else { return }
+    
     let removed = cities.remove(at: indexPath.row)
     let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ AND country == %@ AND coordinate == %@", removed.name, removed.country, removed.coordinate)
+    let predicate = NSPredicate(format: "name == %@ AND country == %@", removed.name, removed.country)
     request.predicate = predicate
     
-    do {
-      if let result = try? sharedMOC.mainContext.fetch(request) {
-        result.forEach {
-          sharedMOC.mainContext.delete($0)
-        }
-        
-        try sharedMOC.mainContext.save()
+    
+    if let result = try? managedObjectContext.fetch(request) {
+      result.forEach {
+        managedObjectContext.delete($0)
       }
       
-    } catch {
-      CoreDataError.couldNotSave.handle()
+      do {
+        try managedObjectContext.save()
+      } catch {
+        CoreDataError.couldNotSave.handle()
+      }
     }
+    
+    
   }
   
 }
@@ -190,18 +194,19 @@ extension ForecastCityListTableViewController {
         cell.configure(by: city)
         
       } else {
-        let coordinate = CLLocationCoordinate2D(latitude: city.coordinate.latitude, longitude: city.coordinate.longitude)
+        let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
         fetchTimeZone(from: coordinate) { timeZone in
           self.citiesTimeZone["\(row)"] = timeZone
           if cell.tag == row {
+            city.timeZone = timeZone
             do {
-              city.timeZone = timeZone
-              try self.sharedMOC.mainContext.save()
-              cell.configure(by: city)
-              
+              try self.managedObjectContext?.save()
+            
             } catch {
               CoreDataError.couldNotSave.handle()
             }
+            
+            cell.configure(by: city)
           }
         }
       }
@@ -241,16 +246,17 @@ extension ForecastCityListTableViewController {
 }
 
 
+
 // MARK: GMSAutocompleteViewControllerDelegate protocol
 extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
-      let selectedCity = City(place: place)
-
-      self.insert(city: selectedCity)
-      self.tableView.reloadData()
-      self.reloadAndInitializeMainPageViewController()
-      self.dismiss(animated: true, completion: nil)
+    let selectedCity = City(place: place)
+    
+    self.insert(city: selectedCity)
+    self.tableView.reloadData()
+    self.reloadAndInitializeMainPageViewController()
+    self.dismiss(animated: true, completion: nil)
   }
   
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

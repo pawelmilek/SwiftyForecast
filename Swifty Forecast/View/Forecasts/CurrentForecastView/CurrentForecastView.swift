@@ -16,6 +16,8 @@ final class CurrentForecastView: UIView {
   @IBOutlet private weak var temperatureLabel: UILabel!
   @IBOutlet private weak var windView: ConditionView!
   @IBOutlet private weak var humidityView: ConditionView!
+  @IBOutlet private weak var sunriseView: ConditionView!
+  @IBOutlet private weak var sunsetView: ConditionView!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   @IBOutlet private weak var moreDetailsView: UIView!
   @IBOutlet weak var moreDetailsViewBottomConstraint: NSLayoutConstraint!
@@ -31,9 +33,9 @@ final class CurrentForecastView: UIView {
     return imageView
   }()
   
-  
   private var viewDidExpand = false
   private var currentForecast: CurrentForecast?
+  private var currentForecastDetails: DailyData?
   private var hourlyForecast: HourlyForecast?
   weak var delegate: CurrentForecastViewDelegate?
   
@@ -64,7 +66,7 @@ extension CurrentForecastView: ViewSetupable {
     setCollectionView()
     addTapGestureRecognizer()
     
-    configure(current: .none, at: .none)
+    configure(current: .none, currentDayDetails: .none, at: .none)
     configure(hourly: .none)
   }
   
@@ -136,7 +138,6 @@ private extension CurrentForecastView {
     hourlyCollectionView.dataSource = self
     hourlyCollectionView.delegate = self
     hourlyCollectionView.showsVerticalScrollIndicator = false
-    hourlyCollectionView.showsHorizontalScrollIndicator = true
     hourlyCollectionView.showsHorizontalScrollIndicator = false
   }
   
@@ -162,12 +163,30 @@ private extension CurrentForecastView {
 // MARK: - Configure current forecast
 extension CurrentForecastView {
   
-  func configure(current forecast: CurrentForecast?, at city: City?) {
+  func configure(current forecast: CurrentForecast?, currentDayDetails details: DailyData?, at city: City?) {
     currentForecast = forecast
+    currentForecastDetails = details
     
-    if let forecast = forecast {
+    if let forecast = forecast, let details = details {
       let fontSize = ForecastStyle.conditionFontIconSize
       let icon = ConditionFontIcon.make(icon: forecast.icon, font: fontSize)
+      let cityTimeZone = city?.timeZone
+      var sunriseTime: String {
+        if let cityTimeZone = cityTimeZone {
+          return details.sunriseTime.time(by: cityTimeZone)
+        } else {
+          return details.sunriseTime.time
+        }
+      }
+      
+      var sunsetTime: String {
+        if let cityTimeZone = cityTimeZone {
+          return details.sunsetTime.time(by: cityTimeZone)
+        } else {
+          return details.sunsetTime.time
+        }
+      }
+      
       iconLabel.attributedText = icon?.attributedIcon
       dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
       cityNameLabel.text = city?.name
@@ -175,12 +194,17 @@ extension CurrentForecastView {
 
       windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
       humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
+      sunriseView.configure(condition: .sunrise, value: sunriseTime)
+      sunsetView.configure(condition: .sunset, value: sunsetTime)
+      
       iconLabel.alpha = 1
       dateLabel.alpha = 1
       cityNameLabel.alpha = 1
       temperatureLabel.alpha = 1
       windView.alpha = 1
       humidityView.alpha = 1
+      sunriseView.alpha = 1
+      sunsetView.alpha = 1
       
     } else {
       temperatureLabel.alpha = 0
@@ -189,13 +213,14 @@ extension CurrentForecastView {
       cityNameLabel.alpha = 0
       windView.alpha = 0
       humidityView.alpha = 0
+      sunriseView.alpha = 0
+      sunsetView.alpha = 0
     }
   }
   
   func configure(hourly forecast: HourlyForecast?) {
-    hourlyForecast = forecast
-    
-    if let _ = forecast {
+    if let forecast = forecast {
+      hourlyForecast = forecast
       hourlyCollectionView.reloadData()
       moreDetailsView.alpha = 1
       

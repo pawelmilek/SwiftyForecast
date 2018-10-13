@@ -9,7 +9,6 @@
 import Foundation
 
 struct ForecastResponse {
-  let coordinate: Coordinate
   let timezone: String
   let currently: CurrentForecast
   let hourly: HourlyForecast
@@ -30,7 +29,6 @@ extension ForecastResponse: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    self.coordinate = try Coordinate(from: decoder)
     self.timezone = try container.decode(String.self, forKey: .timezone)
     self.currently = try container.decode(CurrentForecast.self, forKey: .currently)
     self.hourly = try container.decode(HourlyForecast.self, forKey: .hourly)
