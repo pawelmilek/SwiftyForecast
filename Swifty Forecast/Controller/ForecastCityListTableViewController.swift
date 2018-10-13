@@ -138,7 +138,7 @@ private extension ForecastCityListTableViewController {
     
     let removed = cities.remove(at: indexPath.row)
     let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ AND country == %@ AND latitude == %@ AND longitude == %@", removed.name, removed.country, removed.latitude, removed.longitude)
+    let predicate = NSPredicate(format: "name == %@ AND country == %@", removed.name, removed.country)
     request.predicate = predicate
     
     
