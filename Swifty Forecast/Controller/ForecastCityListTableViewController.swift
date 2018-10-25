@@ -119,7 +119,7 @@ private extension ForecastCityListTableViewController {
 private extension ForecastCityListTableViewController {
   
   func insert(city: City) {
-    guard City.isExists(city: city) == false else { return }
+    guard city.isExists() == false else { return }
     guard let managedObjectContext = managedObjectContext else { return }
     
     let newCity = City(unassociatedObject: city, isCurrentLocalization: false, managedObjectContext: managedObjectContext)

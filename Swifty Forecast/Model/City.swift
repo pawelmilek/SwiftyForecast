@@ -152,12 +152,12 @@ extension City {
 }
 
 
-// MARK: - Is city exists
+// MARK: - Is city exists in Core Data
 extension City {
   
-  class func isExists(city: City) -> Bool {
+  func isExists() -> Bool {
     let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
+    let predicate = NSPredicate(format: "name == %@ && country == %@", self.name, self.country)
     request.predicate = predicate
     
     do {

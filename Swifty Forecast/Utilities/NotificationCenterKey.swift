@@ -13,6 +13,7 @@ enum NotificationCenterKey: String {
   case refreshButtonDidPressNotification = "RefreshButtonDidPress"
   case reloadPagesNotification = "ReloadPagesNotification"
   case reloadPagesDataNotification = "ReloadPagesDataNotification"
+  case locationServiceDidBecomeEnable = "locationServiceDidBecomeEnableNotification"
 }
 
 
