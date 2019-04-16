@@ -8,7 +8,6 @@
 
 import UIKit
 import GooglePlaces
-import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
       } else {
         LocationProvider.shared.requestLocation()
+        let locationServiceDidBecomeEnable = NotificationCenterKey.locationServiceDidBecomeEnable.name
+        NotificationCenter.default.post(name: locationServiceDidBecomeEnable, object: nil)
       }
     }
     

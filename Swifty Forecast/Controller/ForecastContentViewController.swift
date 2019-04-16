@@ -23,6 +23,7 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
+  private var isFeatchingForecast = false
   
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
@@ -112,8 +113,11 @@ private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
     let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
+    let locationAuthorizationDidBecomeEnable = NotificationCenterKey.locationServiceDidBecomeEnable.name
+    
     NotificationCenter.default.addObserver(self, selector: #selector(measuringSystemDidSwitch(_:)), name: measuringSystemSwitchName, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(locationServiceDidBecomeEnable(_:)), name: locationAuthorizationDidBecomeEnable, object: nil)
   }
   
   func removeNotificationCenterObservers() {
@@ -127,11 +131,18 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func fetchWeatherForecast() {
+    guard !isFeatchingForecast else { return }
+    
+//    guard checkAndDecideWhenToFetchNewForecast() else {
+//      reloadForecast()
+//      return
+//    }
+    
     var isCurrentLocationPage: Bool {
       return pageIndex == 0
     }
     
-    if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled { // Check current location
+    if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled {
       fetchWeatherForecastForCurrentLocation()
   
     } else if let currentCityForecast = currentCityForecast {
@@ -142,9 +153,11 @@ private extension ForecastContentViewController {
   
   func fetchWeatherForecastForCurrentLocation() {
     sharedActivityIndicator.startAnimating(at: view)
+    isFeatchingForecast = true
     
     GooglePlacesHelper.getCurrentPlace() { [weak self] (place, error) in
       guard let strongSelf = self else { return }
+      strongSelf.isFeatchingForecast = false
       
       if let error = error {
         strongSelf.sharedActivityIndicator.stopAnimating()
@@ -164,21 +177,20 @@ private extension ForecastContentViewController {
               let unassociatedCity = City(place: place)
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
-              if City.isExists(city: unassociatedCity) == false {
+              if unassociatedCity.isExists() == false {
                 LocalizedCityManager.deleteCurrentLocalizedCity()
                 LocalizedCityManager.insertCurrentLocalized(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
                 strongSelf.reloadAndInitializeMainPageViewController()
                 strongSelf.sharedStack.saveContext()
-                SharedGroupContainer.setShared(city: unassociatedCity)
                 
               } else {
                 LocalizedCityManager.fetchAndResetLocalizedCities()
                 LocalizedCityManager.updateCurrentLocalized(city: unassociatedCity)
                 strongSelf.reloadDataInMainPageViewController()
-                SharedGroupContainer.setShared(city: unassociatedCity)
               }
               
+              SharedGroupContainer.setShared(city: unassociatedCity)
               strongSelf.sharedActivityIndicator.stopAnimating()
             }
             
@@ -200,10 +212,12 @@ private extension ForecastContentViewController {
   
   func fetchWeatherForecast(for city: City) {
     sharedActivityIndicator.startAnimating(at: view)
+    isFeatchingForecast = true
     
     let request = ForecastRequest.make(by: (city.latitude, city.longitude))
     WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
+      strongSelf.isFeatchingForecast = false
       
       switch response {
       case .success(let forecast):
@@ -219,6 +233,28 @@ private extension ForecastContentViewController {
         }
       }
     })
+  }
+  
+}
+
+
+// MARK: - Private - Check and decide when to fetch new forecast
+private extension ForecastContentViewController {
+  
+  func checkAndDecideWhenToFetchNewForecast() -> Bool {
+    let currentDate = Date()
+    let cityLastUpdate = currentCityForecast?.lastUpdate ?? Date()
+    
+    let differenceInSeconds = Int(currentDate.timeIntervalSince(cityLastUpdate))
+    let (hours, minutes, seconds) = differenceInSeconds.convertToHoursMinutesSeconds
+    print((hours, minutes, seconds))
+    
+    if hours > 0 || minutes > 30 {
+      return true
+      
+    } else {
+      return false
+    }
   }
   
 }
@@ -321,20 +357,35 @@ extension ForecastContentViewController: UITableViewDelegate {
 // MARK: - Actions
 extension ForecastContentViewController {
   
+  @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
+    fetchWeatherForecastForCurrentLocation()
+  }
+  
+  
   @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
-    MeasuringSystem.isMetric = (segmentedControl.selectedIndex == 0 ? false : true)
-    fetchWeatherForecast()
+    MeasuringSystem.selected = (segmentedControl.selectedIndex == 0 ? .imperial : .metric)
+    reloadForecast()
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
-    
-    sharedLocationProvider.requestLocation { [weak self] newLocation in
-      if previousLocation.distance(from: newLocation) != 0 {
-        self?.fetchWeatherForecast()
-      }
-    }
+    fetchWeatherForecast() // TODO: Change it after implementing CoreData for WeatherForecast!
+//    guard sharedLocationProvider.isLocationServicesEnabled else { return }
+//    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
+//
+//    sharedLocationProvider.requestLocation { [weak self] newLocation in
+//      let minDistanceInMeters = 500.00
+//      let didUserChangeHisLocation = previousLocation.distance(from: newLocation) >= minDistanceInMeters
+//      if didUserChangeHisLocation {
+//        self?.fetchWeatherForecast()
+//      }
+//    }
+  }
+  
+  
+  private func reloadForecast() {
+    guard let previousWeatherForecast = weatherForecast else { return }
+    weatherForecast = previousWeatherForecast
   }
   
 }

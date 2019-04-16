@@ -16,6 +16,7 @@ class ForecastMainViewController: UIViewController {
   typealias ForecastMainStyle = Style.ForecastMainVC
   
   private let network = NetworkManager.shared
+  private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
@@ -44,9 +45,6 @@ class ForecastMainViewController: UIViewController {
     return pageVC
   }()
   
-
-  private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
-  
   private lazy var cities: NSFetchedResultsController<City> = {
     let context = CoreDataStackHelper.shared.managedContext
     let request = City.createFetchRequest()
@@ -61,6 +59,7 @@ class ForecastMainViewController: UIViewController {
     return cities.fetchedObjects?.count ?? 0
   }
   
+  private var contentViewiewControllers: [ForecastContentViewController] = []
   private var pendingIndex: Int?
   private var currentIndex = 0 {
     didSet {
@@ -98,6 +97,7 @@ class ForecastMainViewController: UIViewController {
 extension ForecastMainViewController: ViewSetupable {
   
   func setup() {
+    fetchCitiesAndSetLastUpdate()
     fetchCities()
     initializePageViewController()
     setMetricSystemSegmentedControl()
@@ -113,12 +113,22 @@ extension ForecastMainViewController: ViewSetupable {
 }
 
 
+// MARK: - Private - Fetch cities and set new CoreData attribute lastUpdate if not exists.
+private extension ForecastMainViewController {
+  
+  func fetchCitiesAndSetLastUpdate() {
+    LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
+  }
+}
+
+
 // MARK: - Private - fetch cities
 private extension ForecastMainViewController {
   
   func fetchCities() {
     do {
       try cities.performFetch()
+
     } catch {
       CoreDataError.couldNotFetch.handle()
     }
@@ -311,8 +321,16 @@ private extension ForecastMainViewController {
 private extension ForecastMainViewController {
   
   func forecastContentViewController(at index: Int) -> ForecastContentViewController? {
-    let storyboard = UIStoryboard(storyboard: .main)
-    let forecastVC = storyboard.instantiateViewController(ForecastContentViewController.self)
+    var forecastVC: ForecastContentViewController!
+    
+    if !contentViewiewControllers.isEmpty && index <= contentViewiewControllers.count - 1 {
+      forecastVC = contentViewiewControllers[index]
+    } else {
+      let storyboard = UIStoryboard(storyboard: .main)
+      forecastVC = storyboard.instantiateViewController(ForecastContentViewController.self)
+      contentViewiewControllers.append(forecastVC)
+    }
+    
     forecastVC.pageIndex = index
     
     if cityCount > 0 {

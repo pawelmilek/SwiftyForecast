@@ -8,6 +8,9 @@
 
 import Foundation
 
-struct MeasuringSystem {
-  static var isMetric = false
+enum MeasuringSystem {
+  case metric
+  case imperial
+  
+  static var selected: MeasuringSystem = .imperial
 }

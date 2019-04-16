@@ -37,6 +37,7 @@ final class LocalizedCityManager {
     if let cities = try? sharedStack.managedContext.fetch(fetchRequest) {
       cities.forEach {
         $0.isCurrentLocalization = false
+        $0.lastUpdate = Date()
       }
     }
   }
@@ -50,6 +51,7 @@ final class LocalizedCityManager {
     if let city = try? sharedStack.managedContext.fetch(request) {
       city.forEach {
         $0.isCurrentLocalization = true
+        $0.lastUpdate = Date()
       }
     }
     
@@ -70,27 +72,17 @@ final class LocalizedCityManager {
   }
   
   
-  static func checkIfPerformForecastFetch(for city: City) -> Bool {
-    let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
-    request.predicate = predicate
-    
-    var updateForecast = false
-    let fiveMinutesInterval: Double = 60 * 1
-    
-    if let city = try? sharedStack.managedContext.fetch(request) {
-      if let city = city.first, let lastUpdate = city.lastUpdate {
-        let timeInterval = Date().timeIntervalSince(lastUpdate)
-        if (timeInterval >= fiveMinutesInterval) {
-          updateForecast = true
-        } else {
-          updateForecast = false
+  static func setCitiesLastUpdateDateAfterCoreDataMigration() {
+    let fetchRequest = City.createFetchRequest()
+    if let cities = try? sharedStack.managedContext.fetch(fetchRequest) {
+      cities.forEach {
+        if $0.lastUpdate == nil {
+          $0.lastUpdate = Date()
         }
       }
     }
     
-    return updateForecast
-    
+    sharedStack.saveContext()
   }
   
 }
