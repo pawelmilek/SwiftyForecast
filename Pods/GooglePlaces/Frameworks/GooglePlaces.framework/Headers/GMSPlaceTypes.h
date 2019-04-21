@@ -1,6 +1,6 @@
 //
 //  GMSPlaceTypes.h
-//  Google Places SDK for iOS
+//  Google Places API for iOS
 //
 //  Copyright 2016 Google Inc.
 //

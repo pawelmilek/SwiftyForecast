@@ -572,7 +572,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0E15E9BEFBD84010DBC70B85A600673F /* Debug */ = {
+		4178AD19697C4933272706F9F7F35D94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
 			buildSettings = {
@@ -580,22 +580,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		37BDA340DE09863C0E43FF582F4AFECC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -901,22 +886,6 @@
 			};
 			name = Debug;
 		};
-		B1278E3D3FBFBCF8A8632C6B351621D6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
 		D42B9E0709D444DBD9161FE4A6FA0FC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AE5629183CC15620DD182AD08909C5B /* Pods-Swifty Forecast Widget.debug.xcconfig */;
@@ -953,15 +922,15 @@
 			};
 			name = Debug;
 		};
-		DEDD9613984989BF9585306ED1F4F63A /* Release */ = {
+		DE1F93A60A3CF4759F5596F31F1214CC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
+			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -969,14 +938,45 @@
 			};
 			name = Release;
 		};
+		E3750B548B799BAE89D37FF56294989E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FF551EC37BFF6AD35DD0CC5D571A9450 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		2FC2AC47FDB0310285CE777F18CD1532 /* Build configuration list for PBXAggregateTarget "GooglePlaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				37BDA340DE09863C0E43FF582F4AFECC /* Debug */,
-				DEDD9613984989BF9585306ED1F4F63A /* Release */,
+				FF551EC37BFF6AD35DD0CC5D571A9450 /* Debug */,
+				E3750B548B799BAE89D37FF56294989E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -984,8 +984,8 @@
 		46921981F609C5BA3CB72EC4EA41299D /* Build configuration list for PBXAggregateTarget "GoogleMaps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E15E9BEFBD84010DBC70B85A600673F /* Debug */,
-				B1278E3D3FBFBCF8A8632C6B351621D6 /* Release */,
+				4178AD19697C4933272706F9F7F35D94 /* Debug */,
+				DE1F93A60A3CF4759F5596F31F1214CC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

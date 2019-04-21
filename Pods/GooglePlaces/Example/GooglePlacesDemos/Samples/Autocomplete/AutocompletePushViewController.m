@@ -18,11 +18,10 @@
 #import <GooglePlaces/GooglePlaces.h>
 
 @interface AutocompletePushViewController () <GMSAutocompleteViewControllerDelegate>
+@property(nonatomic, strong) GMSAutocompleteViewController *autocompleteViewController;
 @end
 
-@implementation AutocompletePushViewController {
-  UIButton *_showAutocompleteWidgetButton;
-}
+@implementation AutocompletePushViewController
 
 + (NSString *)demoTitle {
   return NSLocalizedString(
@@ -36,32 +35,26 @@
   [super viewDidLoad];
 
   // Configure the UI. Tell our superclass we want a button and a result view below that.
-  _showAutocompleteWidgetButton =
+  UIButton *button =
       [self createShowAutocompleteButton:@selector(showAutocompleteWidgetButtonTapped)];
+  [self addResultViewBelow:button];
 }
 
-#pragma mark - Creation of |GMSAutocompleteViewController| instance.
+#pragma mark - Getters/Setters
 
-- (GMSAutocompleteViewController *)autocompleteViewControllerInstance {
-  GMSAutocompleteViewController *autocompleteViewController =
-      [[GMSAutocompleteViewController alloc] init];
-  autocompleteViewController.delegate = self;
-  autocompleteViewController.autocompleteBoundsMode = self.autocompleteBoundsMode;
-  autocompleteViewController.autocompleteBounds = self.autocompleteBounds;
-  autocompleteViewController.autocompleteFilter = self.autocompleteFilter;
-  autocompleteViewController.placeFields = self.placeFields;
-
-  // Returns new GMSAutocompleteViewController instance.
-  return autocompleteViewController;
+- (GMSAutocompleteViewController *)autocompleteViewController {
+  if (_autocompleteViewController == nil) {
+    _autocompleteViewController = [[GMSAutocompleteViewController alloc] init];
+    _autocompleteViewController.delegate = self;
+  }
+  return _autocompleteViewController;
 }
 
 #pragma mark - Actions
 
 - (IBAction)showAutocompleteWidgetButtonTapped {
-  // When the button is tapped just push a new autocomplete view controller onto the stack.
-  [self.navigationController pushViewController:[self autocompleteViewControllerInstance]
-                                       animated:YES];
-  [_showAutocompleteWidgetButton setHidden:YES];
+  // When the button is tapped just push the autocomplete view controller onto the stack.
+  [self.navigationController pushViewController:self.autocompleteViewController animated:YES];
 }
 
 #pragma mark - GMSAutocompleteViewControllerDelegate

@@ -3,11 +3,11 @@ This application makes use of the following third party libraries:
 
 ## GoogleMaps
 
-Copyright 2019 Google
+Copyright 2018 Google
 
 ## GooglePlaces
 
-Copyright 2019 Google
+Copyright 2018 Google
 
 ## ReachabilitySwift
 

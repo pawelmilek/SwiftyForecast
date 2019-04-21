@@ -85,7 +85,7 @@ public extension NVActivityIndicatorViewable where Self: UIViewController {
 
      - parameter fadeOutAnimation: fade out animation.
      */
-    public func stopAnimating(_ fadeOutAnimation: FadeOutAnimation? = NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION) {
+    func stopAnimating(_ fadeOutAnimation: FadeOutAnimation? = NVActivityIndicatorView.DEFAULT_FADE_OUT_ANIMATION) {
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating(fadeOutAnimation)
     }
 }

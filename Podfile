@@ -2,7 +2,7 @@ platform :ios, '11.0'
 use_frameworks!
 
 def shared_pods
-  pod 'GooglePlaces', '~> 3.1'
+  pod 'GooglePlaces', '~> 2.7'
   pod 'ReachabilitySwift', '~> 4.3'
 end
 
