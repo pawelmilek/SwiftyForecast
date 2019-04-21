@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1257E866D4BB0ED7A927ADC78106A3BC"
-               BuildableName = "Pods_Swifty_Forecast.framework"
-               BlueprintName = "Pods-Swifty Forecast"
+               BlueprintIdentifier = "BCE3DE68053C99B18AAD56BE1F98BD73"
+               BuildableName = "GoogleMaps"
+               BlueprintName = "GoogleMaps"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1257E866D4BB0ED7A927ADC78106A3BC"
-            BuildableName = "Pods_Swifty_Forecast.framework"
-            BlueprintName = "Pods-Swifty Forecast"
+            BlueprintIdentifier = "BCE3DE68053C99B18AAD56BE1F98BD73"
+            BuildableName = "GoogleMaps"
+            BlueprintName = "GoogleMaps"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

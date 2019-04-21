@@ -54,7 +54,7 @@ public extension NVActivityIndicatorViewable where Self: UIViewController {
      - parameter minimumDisplayTime:   minimum display time of UI blocker.
      - parameter fadeInAnimation:      fade in animation.
      */
-    public func startAnimating(
+    func startAnimating(
         _ size: CGSize? = nil,
         message: String? = nil,
         messageFont: UIFont? = nil,

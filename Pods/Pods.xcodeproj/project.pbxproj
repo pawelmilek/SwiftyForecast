@@ -6,271 +6,339 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		1AD73B07D0A43E21F0EE0F993215B9D8 /* GooglePlaces */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 2FC2AC47FDB0310285CE777F18CD1532 /* Build configuration list for PBXAggregateTarget "GooglePlaces" */;
+			buildPhases = (
+			);
+			dependencies = (
+				D42315111F400C0605ACCD6B5CAF2178 /* PBXTargetDependency */,
+			);
+			name = GooglePlaces;
+			productName = GooglePlaces;
+		};
+		BCE3DE68053C99B18AAD56BE1F98BD73 /* GoogleMaps */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 46921981F609C5BA3CB72EC4EA41299D /* Build configuration list for PBXAggregateTarget "GoogleMaps" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = GoogleMaps;
+			productName = GoogleMaps;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		0661216F6C0D7803805E42A7AA034D0E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D910ED11ADCA0344FAF4AA9F073791 /* Reachability.swift */; };
-		09220E61F2B487255C06C9A5461F5CD5 /* ReachabilitySwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B765756DE2488FEDBE4A7321926C470 /* ReachabilitySwift-dummy.m */; };
-		0F52E3B508C3CD21FD96B4FBD1730F31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */; };
-		21EC9C5D90F9F601134BB678361E5B79 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */; };
-		76E909CE241F647320C00809B73B79C5 /* ReachabilitySwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = DE04BCAF2F074A767CBD8109F5ED9EA1 /* ReachabilitySwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		878BC041BB0EB90E017F7782CA7D6E09 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */; };
-		87F358A7578DE41DA324F93D3B76C866 /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CFC55E3E6C3ABF42DD46859A8331A688 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */; };
+		350A522F7867C2A112837AD39FDD707C /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D14ECBEA814DD5530B4BA38AED03DE04 /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47039C9D6CCBAC36A9DF6A1EEBC186C7 /* ReachabilitySwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E01B77C933D08902D5253D62B6E37E4 /* ReachabilitySwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51EB61BFE6E9DC495CA03CDD0572B08E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206F61F57E8825AE917171392A051408 /* Foundation.framework */; };
+		8C3A1935924883745AFFD97FDCE43F84 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08D4BF83894C2874707093774AD1CA /* Pods-Swifty Forecast-dummy.m */; };
+		9379900ECDFDD821B27565D8FAD7452E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */; };
+		BECEEB5B03C2FB1AF3480549BA9B14D3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */; };
+		C5F0928914874A82BA0C8C8F226C701F /* ReachabilitySwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0731F2439E4B0C7E11AD59387AF0D2 /* ReachabilitySwift-dummy.m */; };
+		C83963BE2AD3C7C5C9E983B7C0272AA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206F61F57E8825AE917171392A051408 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A78E36D83B21CA3699667C1B4D8704BB /* PBXContainerItemProxy */ = {
+		1E1580134CC3E886017533914D2C0F4D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 3D112B912E2E3E9E143994E2B9D96EB2;
+			remoteGlobalIDString = BCE3DE68053C99B18AAD56BE1F98BD73;
+			remoteInfo = GoogleMaps;
+		};
+		6EB1C2DD30E6564FC3135C9E8002D8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCE3DE68053C99B18AAD56BE1F98BD73;
+			remoteInfo = GoogleMaps;
+		};
+		A184B85DD67867176DD4F94218E1DB85 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AD73B07D0A43E21F0EE0F993215B9D8;
+			remoteInfo = GooglePlaces;
+		};
+		B271138DA6E9DAFF9578568B1178425F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6811CA65C6361D1C00A2DC3D5EF94B54;
 			remoteInfo = ReachabilitySwift;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
-		0B4CD802202F567E4036DFE1F2BB0817 /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
-		26D031DB79AF052F5D159743DB4D9170 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
-		26D910ED11ADCA0344FAF4AA9F073791 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
-		439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast.framework; path = "Pods-Swifty Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4ADA7437A85AB977917EE6D10175FCDE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
-		5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
-		61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
-		690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReachabilitySwift.xcconfig; sourceTree = "<group>"; };
-		6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
-		6F6923DB83B7E54B0019F1570C6167BF /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
-		77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		7B765756DE2488FEDBE4A7321926C470 /* ReachabilitySwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReachabilitySwift-dummy.m"; sourceTree = "<group>"; };
-		7F7F31388A15F244F1D8A0347C59F2AB /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
-		808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
-		92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A5F486E0580BAC963527EE92995663FC /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AD7B0B5736B280723645928FD0E22D5A /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
-		B0EFBC2231A66463CF83151D690105ED /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
-		DE04BCAF2F074A767CBD8109F5ED9EA1 /* ReachabilitySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-umbrella.h"; sourceTree = "<group>"; };
+		0CD78221E1B0C7FB15429306AE71D646 /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
+		11800F9BB4550AFFAC44F10AD3216117 /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
+		206F61F57E8825AE917171392A051408 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		50D343039D7EAAEB3EAB81213DE73263 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
+		5E01B77C933D08902D5253D62B6E37E4 /* ReachabilitySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-umbrella.h"; sourceTree = "<group>"; };
+		5EDD3D79B202ED9DD5459F72D0378C0E /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
+		79BADE891810D5A4596D66595AEA07CB /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
+		7BC5A9CC5858C8B11472E44EAA8B860F /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
+		8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
+		942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.xcconfig; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AB196DEF48BDA7C8B00ABC1ED700E2F1 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
+		AC0731F2439E4B0C7E11AD59387AF0D2 /* ReachabilitySwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReachabilitySwift-dummy.m"; sourceTree = "<group>"; };
+		BA25877DB74C7B068C1E3AE9A10E44B3 /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
+		C55A0BBE02667C3DCF0AB8000C3C80A9 /* Pods-Swifty Forecast-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-Info.plist"; sourceTree = "<group>"; };
+		C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReachabilitySwift.xcconfig; sourceTree = "<group>"; };
+		CD3050555607C2076ECCDF4FD95572C0 /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14ECBEA814DD5530B4BA38AED03DE04 /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
+		D48035401C2D8CAA48B92284B1332E4B /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
+		DAB0B1D9CDCA4E06CB5BF4D921B27070 /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
+		E5BD399A73D44756BBFAFCC2E8A65F18 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
+		E7E03AB8B80114E1E0DBD0DE5859B882 /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
+		EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.xcconfig; sourceTree = "<group>"; };
+		F1B2194A82EB210DB2B277E0AC21FB21 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F67E179F84A46DCED48B12D876B17D3D /* ReachabilitySwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ReachabilitySwift-Info.plist"; sourceTree = "<group>"; };
+		FC08D4BF83894C2874707093774AD1CA /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7905C6DA1FA4758ADA91DE2B4A3271F0 /* Frameworks */ = {
+		E3B04FCF3210E8B3BF6B467A64B28D0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFC55E3E6C3ABF42DD46859A8331A688 /* Foundation.framework in Frameworks */,
-				21EC9C5D90F9F601134BB678361E5B79 /* SystemConfiguration.framework in Frameworks */,
+				C83963BE2AD3C7C5C9E983B7C0272AA9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8DB0C2163E988A1E99FAA4B97BC8563F /* Frameworks */ = {
+		F3FF6A340FFEA1F4CF22D90DCE43D7E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F52E3B508C3CD21FD96B4FBD1730F31 /* Foundation.framework in Frameworks */,
+				51EB61BFE6E9DC495CA03CDD0572B08E /* Foundation.framework in Frameworks */,
+				9379900ECDFDD821B27565D8FAD7452E /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0E89FCEEF42F82A8E48C380ECD207CDC /* Targets Support Files */ = {
+		08BA87AB735A8E5A236AC7382417F8E2 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				716D807A27FB186396C7C3550B40BDCA /* Pods-Swifty Forecast */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		1A902F5383405DB6A55DA17D0ADCF59E /* GooglePlaces */ = {
-			isa = PBXGroup;
-			children = (
-				584244365D4618B59CE3275927829957 /* Frameworks */,
-				DE8C9FB4DFC5CBFBAF4B6B345BCD98F4 /* Resources */,
-			);
-			name = GooglePlaces;
-			path = GooglePlaces;
-			sourceTree = "<group>";
-		};
-		27B754B14E7F5BDD025A603861F1DD97 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				B1C3A1F100D6DE00B711E31320AFB0EB /* Foundation.framework */,
-				77AA8FC57764E9577CA25AFE700170D3 /* SystemConfiguration.framework */,
+				206F61F57E8825AE917171392A051408 /* Foundation.framework */,
+				4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
+		12B7B2022F0C043E1501FB0E12678447 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				27B754B14E7F5BDD025A603861F1DD97 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4DC95A81C8EA0D79AADC6D6F0E904665 /* ReachabilitySwift */ = {
-			isa = PBXGroup;
-			children = (
-				26D910ED11ADCA0344FAF4AA9F073791 /* Reachability.swift */,
-				E28561550A987E915EBA18BE09C08E0F /* Support Files */,
-			);
-			name = ReachabilitySwift;
-			path = ReachabilitySwift;
-			sourceTree = "<group>";
-		};
-		562C73660D344ECF468D59B627EAD68A /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				8922AC3B27783EE4D542F71166FADB0D /* Frameworks */,
+				AC43663048590D78A0B6F9236DC21484 /* Frameworks */,
 			);
 			name = Base;
 			sourceTree = "<group>";
 		};
-		584244365D4618B59CE3275927829957 /* Frameworks */ = {
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7F7F31388A15F244F1D8A0347C59F2AB /* GooglePlaces.framework */,
+				08BA87AB735A8E5A236AC7382417F8E2 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5FA1E84B39883FDFDB27B3A12FF72925 /* Products */ = {
+		171201358740F90A720A8E598A1C379C /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */,
-				A5F486E0580BAC963527EE92995663FC /* Reachability.framework */,
+				1A9DFDDFC7F7D9A5B6FACA55EE093F90 /* Pods-Swifty Forecast */,
 			);
-			name = Products;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		716D807A27FB186396C7C3550B40BDCA /* Pods-Swifty Forecast */ = {
+		1A9DFDDFC7F7D9A5B6FACA55EE093F90 /* Pods-Swifty Forecast */ = {
 			isa = PBXGroup;
 			children = (
-				4ADA7437A85AB977917EE6D10175FCDE /* Info.plist */,
-				808FCEF5EBF0C75711C23F5D60319815 /* Pods-Swifty Forecast.modulemap */,
-				5CAC07596EADAFB347BABE8A63BFB99C /* Pods-Swifty Forecast-acknowledgements.markdown */,
-				5F8EB1845B252A591C8E96A9960881E4 /* Pods-Swifty Forecast-acknowledgements.plist */,
-				4ECC688A21E22254C109AC06638461F5 /* Pods-Swifty Forecast-dummy.m */,
-				6BF7DA9C4DAF669AB9CEB59E055D9D0D /* Pods-Swifty Forecast-frameworks.sh */,
-				036A853A7970F4B290F5C65CC9CC38BE /* Pods-Swifty Forecast-resources.sh */,
-				92A10EABC9692084AD25E8B1D2CDC6BB /* Pods-Swifty Forecast-umbrella.h */,
-				B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */,
-				61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */,
+				5EDD3D79B202ED9DD5459F72D0378C0E /* Pods-Swifty Forecast.modulemap */,
+				BA25877DB74C7B068C1E3AE9A10E44B3 /* Pods-Swifty Forecast-acknowledgements.markdown */,
+				D48035401C2D8CAA48B92284B1332E4B /* Pods-Swifty Forecast-acknowledgements.plist */,
+				FC08D4BF83894C2874707093774AD1CA /* Pods-Swifty Forecast-dummy.m */,
+				11800F9BB4550AFFAC44F10AD3216117 /* Pods-Swifty Forecast-frameworks.sh */,
+				C55A0BBE02667C3DCF0AB8000C3C80A9 /* Pods-Swifty Forecast-Info.plist */,
+				7BC5A9CC5858C8B11472E44EAA8B860F /* Pods-Swifty Forecast-resources.sh */,
+				D14ECBEA814DD5530B4BA38AED03DE04 /* Pods-Swifty Forecast-umbrella.h */,
+				79BADE891810D5A4596D66595AEA07CB /* Pods-Swifty Forecast.debug.xcconfig */,
+				DAB0B1D9CDCA4E06CB5BF4D921B27070 /* Pods-Swifty Forecast.release.xcconfig */,
 			);
 			name = "Pods-Swifty Forecast";
 			path = "Target Support Files/Pods-Swifty Forecast";
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		41F899A72E43802B9D549CD85D1E9B82 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				E4B335541917EFEADB7AE1C0C51BFFA2 /* Pods */,
-				5FA1E84B39883FDFDB27B3A12FF72925 /* Products */,
-				0E89FCEEF42F82A8E48C380ECD207CDC /* Targets Support Files */,
+				942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */,
 			);
+			name = "Support Files";
+			path = "../Target Support Files/GooglePlaces";
 			sourceTree = "<group>";
 		};
-		8922AC3B27783EE4D542F71166FADB0D /* Frameworks */ = {
+		575AEBC24A71DF86DBDDFC194BDB3D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				26D031DB79AF052F5D159743DB4D9170 /* GoogleMapsBase.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D9911891B4656CF3B9D14F9A340BD3B4 /* GoogleMaps */ = {
-			isa = PBXGroup;
-			children = (
-				562C73660D344ECF468D59B627EAD68A /* Base */,
-			);
-			name = GoogleMaps;
-			path = GoogleMaps;
-			sourceTree = "<group>";
-		};
-		DE8C9FB4DFC5CBFBAF4B6B345BCD98F4 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6F6923DB83B7E54B0019F1570C6167BF /* GooglePlaces.bundle */,
+				50D343039D7EAAEB3EAB81213DE73263 /* GooglePlaces.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		E28561550A987E915EBA18BE09C08E0F /* Support Files */ = {
+		76AC9A9C4DB622C3F7BD3AF1CAE19E79 /* ReachabilitySwift */ = {
 			isa = PBXGroup;
 			children = (
-				B0EFBC2231A66463CF83151D690105ED /* Info.plist */,
-				AD7B0B5736B280723645928FD0E22D5A /* ReachabilitySwift.modulemap */,
-				690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */,
-				7B765756DE2488FEDBE4A7321926C470 /* ReachabilitySwift-dummy.m */,
-				0B4CD802202F567E4036DFE1F2BB0817 /* ReachabilitySwift-prefix.pch */,
-				DE04BCAF2F074A767CBD8109F5ED9EA1 /* ReachabilitySwift-umbrella.h */,
+				8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */,
+				B911E37C809BEF98FCE2F92C80EE5EF4 /* Support Files */,
+			);
+			path = ReachabilitySwift;
+			sourceTree = "<group>";
+		};
+		86B5FF54CC6E39ED659A55779460D415 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/GoogleMaps";
+			sourceTree = "<group>";
+		};
+		8EAEB03BCD74DAE080F980E38DBA9A9A /* GoogleMaps */ = {
+			isa = PBXGroup;
+			children = (
+				12B7B2022F0C043E1501FB0E12678447 /* Base */,
+				86B5FF54CC6E39ED659A55779460D415 /* Support Files */,
+			);
+			path = GoogleMaps;
+			sourceTree = "<group>";
+		};
+		9757CBF82836948485CB16F00A10590B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8EAEB03BCD74DAE080F980E38DBA9A9A /* GoogleMaps */,
+				AA1CAD1A25E053F9AE9AE37B455A2814 /* GooglePlaces */,
+				76AC9A9C4DB622C3F7BD3AF1CAE19E79 /* ReachabilitySwift */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AA1CAD1A25E053F9AE9AE37B455A2814 /* GooglePlaces */ = {
+			isa = PBXGroup;
+			children = (
+				E4558EDA626974635C0FDB9CFF31EF2F /* Frameworks */,
+				575AEBC24A71DF86DBDDFC194BDB3D75 /* Resources */,
+				41F899A72E43802B9D549CD85D1E9B82 /* Support Files */,
+			);
+			path = GooglePlaces;
+			sourceTree = "<group>";
+		};
+		AC43663048590D78A0B6F9236DC21484 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5BD399A73D44756BBFAFCC2E8A65F18 /* GoogleMapsBase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B689AD7520B878EBF20D2825D4E57ED4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1B2194A82EB210DB2B277E0AC21FB21 /* Pods_Swifty_Forecast.framework */,
+				CD3050555607C2076ECCDF4FD95572C0 /* Reachability.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B911E37C809BEF98FCE2F92C80EE5EF4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0CD78221E1B0C7FB15429306AE71D646 /* ReachabilitySwift.modulemap */,
+				C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */,
+				AC0731F2439E4B0C7E11AD59387AF0D2 /* ReachabilitySwift-dummy.m */,
+				F67E179F84A46DCED48B12D876B17D3D /* ReachabilitySwift-Info.plist */,
+				E7E03AB8B80114E1E0DBD0DE5859B882 /* ReachabilitySwift-prefix.pch */,
+				5E01B77C933D08902D5253D62B6E37E4 /* ReachabilitySwift-umbrella.h */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/ReachabilitySwift";
 			sourceTree = "<group>";
 		};
-		E4B335541917EFEADB7AE1C0C51BFFA2 /* Pods */ = {
+		CF1408CF629C7361332E53B88F7BD30C = {
 			isa = PBXGroup;
 			children = (
-				D9911891B4656CF3B9D14F9A340BD3B4 /* GoogleMaps */,
-				1A902F5383405DB6A55DA17D0ADCF59E /* GooglePlaces */,
-				4DC95A81C8EA0D79AADC6D6F0E904665 /* ReachabilitySwift */,
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				9757CBF82836948485CB16F00A10590B /* Pods */,
+				B689AD7520B878EBF20D2825D4E57ED4 /* Products */,
+				171201358740F90A720A8E598A1C379C /* Targets Support Files */,
 			);
-			name = Pods;
+			sourceTree = "<group>";
+		};
+		E4558EDA626974635C0FDB9CFF31EF2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB196DEF48BDA7C8B00ABC1ED700E2F1 /* GooglePlaces.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		B375F4A8E0C7E62B415E39E7AAE1CE55 /* Headers */ = {
+		0285A7690F50750156F2491C2D8EC155 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87F358A7578DE41DA324F93D3B76C866 /* Pods-Swifty Forecast-umbrella.h in Headers */,
+				350A522F7867C2A112837AD39FDD707C /* Pods-Swifty Forecast-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F252A04892519A998CDDF952151CB592 /* Headers */ = {
+		EC598CA2528A6DF66B6DAFA2AAC4855F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76E909CE241F647320C00809B73B79C5 /* ReachabilitySwift-umbrella.h in Headers */,
+				47039C9D6CCBAC36A9DF6A1EEBC186C7 /* ReachabilitySwift-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		162556E2B262E6D1F179D3D26C43C037 /* Pods-Swifty Forecast */ = {
+		1257E866D4BB0ED7A927ADC78106A3BC /* Pods-Swifty Forecast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 955ADD1E9CDCC2BD4F09E360118BBB9A /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */;
+			buildConfigurationList = F4A6C0A461FDAF93EE554B8381BD8B87 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */;
 			buildPhases = (
-				B192C70CB493CEA6BD492D8D8494858A /* Sources */,
-				8DB0C2163E988A1E99FAA4B97BC8563F /* Frameworks */,
-				B375F4A8E0C7E62B415E39E7AAE1CE55 /* Headers */,
+				0285A7690F50750156F2491C2D8EC155 /* Headers */,
+				B4A23D8A096CFAE1B4F7B180B997F883 /* Sources */,
+				E3B04FCF3210E8B3BF6B467A64B28D0C /* Frameworks */,
+				33FA0267E8EF3FD9E8B5F195E088B1E6 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5F199E9012E6165695379CEA0DC29727 /* PBXTargetDependency */,
+				798807D5C598D3E51973EC0072246CA1 /* PBXTargetDependency */,
+				B402DBEF33766A01DE126DC2D189754B /* PBXTargetDependency */,
+				BB2712CD6B946CE5D1B676DC8AA8FB5D /* PBXTargetDependency */,
 			);
 			name = "Pods-Swifty Forecast";
 			productName = "Pods-Swifty Forecast";
-			productReference = 439056AAF5AE0D2FD2EFCAEF3A98A427 /* Pods_Swifty_Forecast.framework */;
+			productReference = F1B2194A82EB210DB2B277E0AC21FB21 /* Pods_Swifty_Forecast.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */ = {
+		6811CA65C6361D1C00A2DC3D5EF94B54 /* ReachabilitySwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3DA38AE3B6D986FAF9B947A25F29FF60 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */;
+			buildConfigurationList = E5A6D4E2D9D722D69066B1F03FED8E56 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */;
 			buildPhases = (
-				609898362F91A32D374E8C17BC8425C9 /* Sources */,
-				7905C6DA1FA4758ADA91DE2B4A3271F0 /* Frameworks */,
-				F252A04892519A998CDDF952151CB592 /* Headers */,
+				EC598CA2528A6DF66B6DAFA2AAC4855F /* Headers */,
+				0FF00E6A0114E125F2437D9E81659A68 /* Sources */,
+				F3FF6A340FFEA1F4CF22D90DCE43D7E9 /* Frameworks */,
+				13B92F26F265737B719F3A7882A8C395 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -278,67 +346,110 @@
 			);
 			name = ReachabilitySwift;
 			productName = ReachabilitySwift;
-			productReference = A5F486E0580BAC963527EE92995663FC /* Reachability.framework */;
+			productReference = CD3050555607C2076ECCDF4FD95572C0 /* Reachability.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					6811CA65C6361D1C00A2DC3D5EF94B54 = {
+						LastSwiftMigration = 1020;
+					};
+				};
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 5FA1E84B39883FDFDB27B3A12FF72925 /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = B689AD7520B878EBF20D2825D4E57ED4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				162556E2B262E6D1F179D3D26C43C037 /* Pods-Swifty Forecast */,
-				3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */,
+				BCE3DE68053C99B18AAD56BE1F98BD73 /* GoogleMaps */,
+				1AD73B07D0A43E21F0EE0F993215B9D8 /* GooglePlaces */,
+				1257E866D4BB0ED7A927ADC78106A3BC /* Pods-Swifty Forecast */,
+				6811CA65C6361D1C00A2DC3D5EF94B54 /* ReachabilitySwift */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		609898362F91A32D374E8C17BC8425C9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		13B92F26F265737B719F3A7882A8C395 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0661216F6C0D7803805E42A7AA034D0E /* Reachability.swift in Sources */,
-				09220E61F2B487255C06C9A5461F5CD5 /* ReachabilitySwift-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B192C70CB493CEA6BD492D8D8494858A /* Sources */ = {
+		33FA0267E8EF3FD9E8B5F195E088B1E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0FF00E6A0114E125F2437D9E81659A68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				878BC041BB0EB90E017F7782CA7D6E09 /* Pods-Swifty Forecast-dummy.m in Sources */,
+				BECEEB5B03C2FB1AF3480549BA9B14D3 /* Reachability.swift in Sources */,
+				C5F0928914874A82BA0C8C8F226C701F /* ReachabilitySwift-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B4A23D8A096CFAE1B4F7B180B997F883 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C3A1935924883745AFFD97FDCE43F84 /* Pods-Swifty Forecast-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5F199E9012E6165695379CEA0DC29727 /* PBXTargetDependency */ = {
+		798807D5C598D3E51973EC0072246CA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GoogleMaps;
+			target = BCE3DE68053C99B18AAD56BE1F98BD73 /* GoogleMaps */;
+			targetProxy = 1E1580134CC3E886017533914D2C0F4D /* PBXContainerItemProxy */;
+		};
+		B402DBEF33766A01DE126DC2D189754B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GooglePlaces;
+			target = 1AD73B07D0A43E21F0EE0F993215B9D8 /* GooglePlaces */;
+			targetProxy = A184B85DD67867176DD4F94218E1DB85 /* PBXContainerItemProxy */;
+		};
+		BB2712CD6B946CE5D1B676DC8AA8FB5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ReachabilitySwift;
-			target = 3D112B912E2E3E9E143994E2B9D96EB2 /* ReachabilitySwift */;
-			targetProxy = A78E36D83B21CA3699667C1B4D8704BB /* PBXContainerItemProxy */;
+			target = 6811CA65C6361D1C00A2DC3D5EF94B54 /* ReachabilitySwift */;
+			targetProxy = B271138DA6E9DAFF9578568B1178425F /* PBXContainerItemProxy */;
+		};
+		D42315111F400C0605ACCD6B5CAF2178 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GoogleMaps;
+			target = BCE3DE68053C99B18AAD56BE1F98BD73 /* GoogleMaps */;
+			targetProxy = 6EB1C2DD30E6564FC3135C9E8002D8F7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		08638A96A528B1EC32DE62F8A728389D /* Release */ = {
+		4CE281642D6EE9FAB113046B4B6328A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -370,8 +481,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -390,17 +499,36 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		46E410247635907E1552481787FD7547 /* Release */ = {
+		508B6346141BA0D37C0E9364F14F0D5D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 61028102B91C6F6B0ECB751360164ABE /* Pods-Swifty Forecast.release.xcconfig */;
+			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		56379E564C418187E13215E793E9CEBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAB0B1D9CDCA4E06CB5BF4D921B27070 /* Pods-Swifty Forecast.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -411,7 +539,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -424,7 +552,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -432,43 +559,21 @@
 			};
 			name = Release;
 		};
-		54A209428D4308B3C374868DA44867B5 /* Debug */ = {
+		6B7D3526C4C5B3832EF0E531422E1201 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8D4F77D1F7ED0E58A31114499A10C4D /* Pods-Swifty Forecast.debug.xcconfig */;
+			baseConfigurationReference = 942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */ = {
+		6DFA1578582149B7E24AD55CBA30F07A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -500,8 +605,6 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -522,19 +625,23 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		C5706FD70DAF768DC7B5DE312855A0D2 /* Release */ = {
+		8EFAC559A98494464C6EC0914E3EB6C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */;
+			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -545,7 +652,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -555,8 +662,103 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8FBF532842AB7D75B83261E1A9DC2282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		956055B4BC9C85E1916BF4D6AF274D93 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79BADE891810D5A4596D66595AEA07CB /* Pods-Swifty Forecast.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		96D97437F13675808B29E179EA41E633 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7083A4BE4D860FEDC2063436AF7957B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
+				PRODUCT_MODULE_NAME = Reachability;
+				PRODUCT_NAME = Reachability;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -564,69 +766,55 @@
 			};
 			name = Release;
 		};
-		EA314AD093D621A9A5B659F6D3D44F34 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 690C5C692684E557DDC384A7D1762D03 /* ReachabilitySwift.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
-				PRODUCT_MODULE_NAME = Reachability;
-				PRODUCT_NAME = Reachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		2FC2AC47FDB0310285CE777F18CD1532 /* Build configuration list for PBXAggregateTarget "GooglePlaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9DAE5233986C01ADB6E67169C53A3FD2 /* Debug */,
-				08638A96A528B1EC32DE62F8A728389D /* Release */,
+				6B7D3526C4C5B3832EF0E531422E1201 /* Debug */,
+				508B6346141BA0D37C0E9364F14F0D5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3DA38AE3B6D986FAF9B947A25F29FF60 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */ = {
+		46921981F609C5BA3CB72EC4EA41299D /* Build configuration list for PBXAggregateTarget "GoogleMaps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EA314AD093D621A9A5B659F6D3D44F34 /* Debug */,
-				C5706FD70DAF768DC7B5DE312855A0D2 /* Release */,
+				96D97437F13675808B29E179EA41E633 /* Debug */,
+				8FBF532842AB7D75B83261E1A9DC2282 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		955ADD1E9CDCC2BD4F09E360118BBB9A /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				54A209428D4308B3C374868DA44867B5 /* Debug */,
-				46E410247635907E1552481787FD7547 /* Release */,
+				6DFA1578582149B7E24AD55CBA30F07A /* Debug */,
+				4CE281642D6EE9FAB113046B4B6328A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5A6D4E2D9D722D69066B1F03FED8E56 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EFAC559A98494464C6EC0914E3EB6C6 /* Debug */,
+				A7083A4BE4D860FEDC2063436AF7957B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4A6C0A461FDAF93EE554B8381BD8B87 /* Build configuration list for PBXNativeTarget "Pods-Swifty Forecast" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				956055B4BC9C85E1916BF4D6AF274D93 /* Debug */,
+				56379E564C418187E13215E793E9CEBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
