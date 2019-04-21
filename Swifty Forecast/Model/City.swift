@@ -85,7 +85,7 @@ final class City: NSManagedObject, Codable {
     
     let addressComponents = place.addressComponents
     
-    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
+    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name ?? "N/A"
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
@@ -114,7 +114,7 @@ final class City: NSManagedObject, Codable {
     
     let addressComponents = place.addressComponents
     
-    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
+    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name ?? "N/A"
     self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
     self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
     self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
