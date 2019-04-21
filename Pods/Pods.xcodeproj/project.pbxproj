@@ -16,7 +16,6 @@
 				D42315111F400C0605ACCD6B5CAF2178 /* PBXTargetDependency */,
 			);
 			name = GooglePlaces;
-			productName = GooglePlaces;
 		};
 		BCE3DE68053C99B18AAD56BE1F98BD73 /* GoogleMaps */ = {
 			isa = PBXAggregateTarget;
@@ -26,19 +25,19 @@
 			dependencies = (
 			);
 			name = GoogleMaps;
-			productName = GoogleMaps;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0522D747FA4423EA81B89A05F2166A56 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEC013208E34EF9AFB0A076627CC6B53 /* CoreTelephony.framework */; };
 		350A522F7867C2A112837AD39FDD707C /* Pods-Swifty Forecast-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D14ECBEA814DD5530B4BA38AED03DE04 /* Pods-Swifty Forecast-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47039C9D6CCBAC36A9DF6A1EEBC186C7 /* ReachabilitySwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E01B77C933D08902D5253D62B6E37E4 /* ReachabilitySwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		51EB61BFE6E9DC495CA03CDD0572B08E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206F61F57E8825AE917171392A051408 /* Foundation.framework */; };
 		8C3A1935924883745AFFD97FDCE43F84 /* Pods-Swifty Forecast-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08D4BF83894C2874707093774AD1CA /* Pods-Swifty Forecast-dummy.m */; };
-		9379900ECDFDD821B27565D8FAD7452E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */; };
+		B0C7983FE77157D77B79B1FD8BF25ECB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05FA6A29EA4BE09CEEB200985CBC5B24 /* SystemConfiguration.framework */; };
+		B48F398E2EE79370014F2DC799FD8DB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F4AE50866748433C24734CAB91EAA /* Foundation.framework */; };
 		BECEEB5B03C2FB1AF3480549BA9B14D3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */; };
 		C5F0928914874A82BA0C8C8F226C701F /* ReachabilitySwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0731F2439E4B0C7E11AD59387AF0D2 /* ReachabilitySwift-dummy.m */; };
-		C83963BE2AD3C7C5C9E983B7C0272AA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 206F61F57E8825AE917171392A051408 /* Foundation.framework */; };
+		C83963BE2AD3C7C5C9E983B7C0272AA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2F4AE50866748433C24734CAB91EAA /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,10 +72,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05FA6A29EA4BE09CEEB200985CBC5B24 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		0CD78221E1B0C7FB15429306AE71D646 /* ReachabilitySwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReachabilitySwift.modulemap; sourceTree = "<group>"; };
 		11800F9BB4550AFFAC44F10AD3216117 /* Pods-Swifty Forecast-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-frameworks.sh"; sourceTree = "<group>"; };
-		206F61F57E8825AE917171392A051408 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		50D343039D7EAAEB3EAB81213DE73263 /* GooglePlaces.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
 		5E01B77C933D08902D5253D62B6E37E4 /* ReachabilitySwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-umbrella.h"; sourceTree = "<group>"; };
 		5EDD3D79B202ED9DD5459F72D0378C0E /* Pods-Swifty Forecast.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Swifty Forecast.modulemap"; sourceTree = "<group>"; };
@@ -84,25 +82,37 @@
 		7BC5A9CC5858C8B11472E44EAA8B860F /* Pods-Swifty Forecast-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Swifty Forecast-resources.sh"; sourceTree = "<group>"; };
 		8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = Sources/Reachability.swift; sourceTree = "<group>"; };
 		942E10EAA4BA9A7AA37C1AC363C55F4E /* GooglePlaces.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GooglePlaces.xcconfig; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AB196DEF48BDA7C8B00ABC1ED700E2F1 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlaces.framework; path = Frameworks/GooglePlaces.framework; sourceTree = "<group>"; };
 		AC0731F2439E4B0C7E11AD59387AF0D2 /* ReachabilitySwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReachabilitySwift-dummy.m"; sourceTree = "<group>"; };
 		BA25877DB74C7B068C1E3AE9A10E44B3 /* Pods-Swifty Forecast-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Swifty Forecast-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BF2F4AE50866748433C24734CAB91EAA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		C55A0BBE02667C3DCF0AB8000C3C80A9 /* Pods-Swifty Forecast-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-Info.plist"; sourceTree = "<group>"; };
 		C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReachabilitySwift.xcconfig; sourceTree = "<group>"; };
-		CD3050555607C2076ECCDF4FD95572C0 /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD3050555607C2076ECCDF4FD95572C0 /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Reachability.framework; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D14ECBEA814DD5530B4BA38AED03DE04 /* Pods-Swifty Forecast-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Swifty Forecast-umbrella.h"; sourceTree = "<group>"; };
 		D48035401C2D8CAA48B92284B1332E4B /* Pods-Swifty Forecast-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Swifty Forecast-acknowledgements.plist"; sourceTree = "<group>"; };
 		DAB0B1D9CDCA4E06CB5BF4D921B27070 /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
 		E5BD399A73D44756BBFAFCC2E8A65F18 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMapsBase.framework; path = Base/Frameworks/GoogleMapsBase.framework; sourceTree = "<group>"; };
 		E7E03AB8B80114E1E0DBD0DE5859B882 /* ReachabilitySwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReachabilitySwift-prefix.pch"; sourceTree = "<group>"; };
 		EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GoogleMaps.xcconfig; sourceTree = "<group>"; };
-		F1B2194A82EB210DB2B277E0AC21FB21 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1B2194A82EB210DB2B277E0AC21FB21 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Swifty_Forecast.framework; path = "Pods-Swifty Forecast.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F67E179F84A46DCED48B12D876B17D3D /* ReachabilitySwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ReachabilitySwift-Info.plist"; sourceTree = "<group>"; };
 		FC08D4BF83894C2874707093774AD1CA /* Pods-Swifty Forecast-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Swifty Forecast-dummy.m"; sourceTree = "<group>"; };
+		FEC013208E34EF9AFB0A076627CC6B53 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		29BD10D3813E1638F29DAFE6D008DAB8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0522D747FA4423EA81B89A05F2166A56 /* CoreTelephony.framework in Frameworks */,
+				B48F398E2EE79370014F2DC799FD8DB6 /* Foundation.framework in Frameworks */,
+				B0C7983FE77157D77B79B1FD8BF25ECB /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E3B04FCF3210E8B3BF6B467A64B28D0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -111,25 +121,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F3FF6A340FFEA1F4CF22D90DCE43D7E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				51EB61BFE6E9DC495CA03CDD0572B08E /* Foundation.framework in Frameworks */,
-				9379900ECDFDD821B27565D8FAD7452E /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08BA87AB735A8E5A236AC7382417F8E2 /* iOS */ = {
+		03C5C200A0787E300053CFA8F53CA094 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				206F61F57E8825AE917171392A051408 /* Foundation.framework */,
-				4D716FF4D8E270E8C872C69221EFF896 /* SystemConfiguration.framework */,
+				172FF1A4DB956723C41A53A893ECB2B6 /* iOS */,
 			);
-			name = iOS;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		12B7B2022F0C043E1501FB0E12678447 /* Base */ = {
@@ -140,20 +140,22 @@
 			name = Base;
 			sourceTree = "<group>";
 		};
-		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				08BA87AB735A8E5A236AC7382417F8E2 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		171201358740F90A720A8E598A1C379C /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
 				1A9DFDDFC7F7D9A5B6FACA55EE093F90 /* Pods-Swifty Forecast */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		172FF1A4DB956723C41A53A893ECB2B6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				FEC013208E34EF9AFB0A076627CC6B53 /* CoreTelephony.framework */,
+				BF2F4AE50866748433C24734CAB91EAA /* Foundation.framework */,
+				05FA6A29EA4BE09CEEB200985CBC5B24 /* SystemConfiguration.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		1A9DFDDFC7F7D9A5B6FACA55EE093F90 /* Pods-Swifty Forecast */ = {
@@ -197,6 +199,7 @@
 				8182D0E0EFDC46B1D697D9C184921816 /* Reachability.swift */,
 				B911E37C809BEF98FCE2F92C80EE5EF4 /* Support Files */,
 			);
+			name = ReachabilitySwift;
 			path = ReachabilitySwift;
 			sourceTree = "<group>";
 		};
@@ -215,6 +218,7 @@
 				12B7B2022F0C043E1501FB0E12678447 /* Base */,
 				86B5FF54CC6E39ED659A55779460D415 /* Support Files */,
 			);
+			name = GoogleMaps;
 			path = GoogleMaps;
 			sourceTree = "<group>";
 		};
@@ -235,6 +239,7 @@
 				575AEBC24A71DF86DBDDFC194BDB3D75 /* Resources */,
 				41F899A72E43802B9D549CD85D1E9B82 /* Support Files */,
 			);
+			name = GooglePlaces;
 			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
@@ -273,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
+				03C5C200A0787E300053CFA8F53CA094 /* Frameworks */,
 				9757CBF82836948485CB16F00A10590B /* Pods */,
 				B689AD7520B878EBF20D2825D4E57ED4 /* Products */,
 				171201358740F90A720A8E598A1C379C /* Targets Support Files */,
@@ -337,7 +342,7 @@
 			buildPhases = (
 				EC598CA2528A6DF66B6DAFA2AAC4855F /* Headers */,
 				0FF00E6A0114E125F2437D9E81659A68 /* Sources */,
-				F3FF6A340FFEA1F4CF22D90DCE43D7E9 /* Frameworks */,
+				29BD10D3813E1638F29DAFE6D008DAB8 /* Frameworks */,
 				13B92F26F265737B719F3A7882A8C395 /* Resources */,
 			);
 			buildRules = (
@@ -357,18 +362,12 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
-				TargetAttributes = {
-					6811CA65C6361D1C00A2DC3D5EF94B54 = {
-						LastSwiftMigration = 1020;
-					};
-				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
@@ -449,6 +448,39 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2168B0D3779076DAD5057412BDD36224 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
+				PRODUCT_MODULE_NAME = Reachability;
+				PRODUCT_NAME = Reachability;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		4CE281642D6EE9FAB113046B4B6328A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -502,7 +534,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -558,6 +591,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		65A58BA547E0D6C03AF798926C8D2BDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
+				PRODUCT_MODULE_NAME = Reachability;
+				PRODUCT_NAME = Reachability;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		6B7D3526C4C5B3832EF0E531422E1201 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -637,38 +702,6 @@
 			};
 			name = Debug;
 		};
-		8EFAC559A98494464C6EC0914E3EB6C6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
-				PRODUCT_MODULE_NAME = Reachability;
-				PRODUCT_NAME = Reachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		8FBF532842AB7D75B83261E1A9DC2282 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EAF6F079D7CC3463C8B2A1A3C9933FC9 /* GoogleMaps.xcconfig */;
@@ -733,39 +766,6 @@
 			};
 			name = Debug;
 		};
-		A7083A4BE4D860FEDC2063436AF7957B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C74FA665C461C85F7B1C124316382337 /* ReachabilitySwift.xcconfig */;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/ReachabilitySwift/ReachabilitySwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ReachabilitySwift/ReachabilitySwift.modulemap";
-				PRODUCT_MODULE_NAME = Reachability;
-				PRODUCT_NAME = Reachability;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -799,8 +799,8 @@
 		E5A6D4E2D9D722D69066B1F03FED8E56 /* Build configuration list for PBXNativeTarget "ReachabilitySwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8EFAC559A98494464C6EC0914E3EB6C6 /* Debug */,
-				A7083A4BE4D860FEDC2063436AF7957B /* Release */,
+				65A58BA547E0D6C03AF798926C8D2BDE /* Debug */,
+				2168B0D3779076DAD5057412BDD36224 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
