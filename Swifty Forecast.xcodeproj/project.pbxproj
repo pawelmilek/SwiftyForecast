@@ -924,7 +924,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -933,7 +933,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */ = {
@@ -942,7 +942,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -951,7 +951,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		969FF7F61C7C3011085A273B /* [CP] Check Pods Manifest.lock */ = {
@@ -996,7 +996,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1005,7 +1005,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
