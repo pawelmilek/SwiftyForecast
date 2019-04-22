@@ -194,6 +194,11 @@
 		E2CF4D76226E7A4100062E36 /* ForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* ForecastService.swift */; };
 		E2CF4D78226E7B4600062E36 /* DailyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D77226E7B4600062E36 /* DailyDataViewModel.swift */; };
 		E2CF4D7A226E7B6000062E36 /* DefaultDailyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D79226E7B6000062E36 /* DefaultDailyDataViewModel.swift */; };
+		E2CF4D7C226E831900062E36 /* HourlyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyDataViewModel.swift */; };
+		E2CF4D7E226E838E00062E36 /* DefaultHourlyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7D226E838E00062E36 /* DefaultHourlyDataViewModel.swift */; };
+		E2CF4D7F226E85ED00062E36 /* DefaultHourlyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7D226E838E00062E36 /* DefaultHourlyDataViewModel.swift */; };
+		E2CF4D80226E85F500062E36 /* HourlyDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyDataViewModel.swift */; };
+		E2CF4D82226E86B200062E36 /* CurrentForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D81226E86B200062E36 /* CurrentForecastViewModel.swift */; };
 		E2D960812120F34800AE0B6E /* GeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocoderHelper.swift */; };
 		E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */; };
 		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
@@ -371,6 +376,9 @@
 		E2CF4D75226E7A4100062E36 /* ForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastService.swift; sourceTree = "<group>"; };
 		E2CF4D77226E7B4600062E36 /* DailyDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDataViewModel.swift; sourceTree = "<group>"; };
 		E2CF4D79226E7B6000062E36 /* DefaultDailyDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDailyDataViewModel.swift; sourceTree = "<group>"; };
+		E2CF4D7B226E831900062E36 /* HourlyDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyDataViewModel.swift; sourceTree = "<group>"; };
+		E2CF4D7D226E838E00062E36 /* DefaultHourlyDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultHourlyDataViewModel.swift; sourceTree = "<group>"; };
+		E2CF4D81226E86B200062E36 /* CurrentForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastViewModel.swift; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* GeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderHelper.swift; sourceTree = "<group>"; };
 		E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseFontIcon.swift; sourceTree = "<group>"; };
 		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -790,6 +798,9 @@
 			isa = PBXGroup;
 			children = (
 				E2CF4D71226E78CF00062E36 /* CityViewModel.swift */,
+				E2CF4D81226E86B200062E36 /* CurrentForecastViewModel.swift */,
+				E2CF4D7B226E831900062E36 /* HourlyDataViewModel.swift */,
+				E2CF4D7D226E838E00062E36 /* DefaultHourlyDataViewModel.swift */,
 				E2CF4D77226E7B4600062E36 /* DailyDataViewModel.swift */,
 				E2CF4D73226E799700062E36 /* DefaultCityViewModel.swift */,
 				E2CF4D79226E7B6000062E36 /* DefaultDailyDataViewModel.swift */,
@@ -1045,6 +1056,7 @@
 				E20010212167D7AD008E6090 /* MeasuringSystem.swift in Sources */,
 				E200103E216A9527008E6090 /* WebServiceError.swift in Sources */,
 				E200104C216A9614008E6090 /* ForecastRequest.swift in Sources */,
+				E2CF4D7F226E85ED00062E36 /* DefaultHourlyDataViewModel.swift in Sources */,
 				E20010292167D84C008E6090 /* UIView+NibLoadableView.swift in Sources */,
 				E200104F216A9625008E6090 /* WebServiceManager.swift in Sources */,
 				E2001035216A949A008E6090 /* LocalizedCityManager.swift in Sources */,
@@ -1054,6 +1066,7 @@
 				E200101E2167D77B008E6090 /* HourlyData.swift in Sources */,
 				E20010202167D7A0008E6090 /* Forecast.swift in Sources */,
 				E2001038216A94C1008E6090 /* CoreDataStack.swift in Sources */,
+				E2CF4D80226E85F500062E36 /* HourlyDataViewModel.swift in Sources */,
 				E224419021619A7A009D409F /* FontLoader.swift in Sources */,
 				E20010232167D7CE008E6090 /* Registrable.swift in Sources */,
 				E20010262167D806008E6090 /* ReusableView.swift in Sources */,
@@ -1117,9 +1130,11 @@
 				E2342104216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel in Sources */,
 				E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */,
 				E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */,
+				E2CF4D7E226E838E00062E36 /* DefaultHourlyDataViewModel.swift in Sources */,
 				E2A42E2F214DEE5E00F9A79A /* NVActivityIndicatorAnimationCubeTransition.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,
 				E27E2FD21DA04D1D00B3EABF /* UIView+ReusableView.swift in Sources */,
+				E2CF4D7C226E831900062E36 /* HourlyDataViewModel.swift in Sources */,
 				E23997EA20E84371007D8CE4 /* ForecastRequest.swift in Sources */,
 				E206E1C320E9683B00AC72EA /* DailyData.swift in Sources */,
 				E206E1C920E9C2E500AC72EA /* WeatherForecast.swift in Sources */,
@@ -1181,6 +1196,7 @@
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
 				E2A42E1B214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */,
 				E27E2FCB1DA04D1D00B3EABF /* NibLoadableView.swift in Sources */,
+				E2CF4D82226E86B200062E36 /* CurrentForecastViewModel.swift in Sources */,
 				E27E2FCC1DA04D1D00B3EABF /* Registrable.swift in Sources */,
 				E2A42E17214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
 				E2A42E0F214DEE5E00F9A79A /* NVActivityIndicatorAnimationDelegate.swift in Sources */,

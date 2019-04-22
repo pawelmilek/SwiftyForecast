@@ -276,7 +276,9 @@ extension CurrentForecastView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier, for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
-    cell.configure(by: hourlyForecast?.data[indexPath.item])
+    
+    guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
+    cell.configure(by: DefaultHourlyDataViewModel(hourlyData: item))
     return cell
   }
   

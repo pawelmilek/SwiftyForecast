@@ -4,9 +4,6 @@ class DailyForecastTableViewCell: UITableViewCell {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
-
-  typealias DailyForecastCellStyle = Style.DailyForecastCell
-  private var viewModel: DailyDataViewModel?
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -19,23 +16,22 @@ class DailyForecastTableViewCell: UITableViewCell {
   }
 }
 
-
 // MARK: - ViewSetupable protocol
 extension DailyForecastTableViewCell: ViewSetupable {
   
   func setUp() {
-    backgroundColor = DailyForecastCellStyle.backgroundColor
+    backgroundColor = Style.DailyForecastCell.backgroundColor
   
-    dateLabel.textColor = DailyForecastCellStyle.dateLabelTextColor
-    dateLabel.textAlignment = DailyForecastCellStyle.dateLabelTextAlignment
+    dateLabel.textColor = Style.DailyForecastCell.dateLabelTextColor
+    dateLabel.textAlignment = Style.DailyForecastCell.dateLabelTextAlignment
     dateLabel.numberOfLines = 2
     
-    iconLabel.textColor = DailyForecastCellStyle.iconLabelTextColor
-    iconLabel.textAlignment = DailyForecastCellStyle.iconLabelTextAlignment
+    iconLabel.textColor = Style.DailyForecastCell.iconLabelTextColor
+    iconLabel.textAlignment = Style.DailyForecastCell.iconLabelTextAlignment
     
-    temperatureLabel.font = DailyForecastCellStyle.temperatureLabelFont
-    temperatureLabel.textColor = DailyForecastCellStyle.temperatureLabelTextColor
-    temperatureLabel.textAlignment = DailyForecastCellStyle.temperatureLabelTextAlignment
+    temperatureLabel.font = Style.DailyForecastCell.temperatureLabelFont
+    temperatureLabel.textColor = Style.DailyForecastCell.temperatureLabelTextColor
+    temperatureLabel.textAlignment = Style.DailyForecastCell.temperatureLabelTextAlignment
   }
   
 }
@@ -58,4 +54,5 @@ extension DailyForecastTableViewCell {
       temperatureLabel.alpha = 0
     }
   }
+  
 }

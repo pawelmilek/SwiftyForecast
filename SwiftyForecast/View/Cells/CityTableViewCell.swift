@@ -5,8 +5,6 @@ class CityTableViewCell: UITableViewCell {
   @IBOutlet private weak var cityNameLabel: UILabel!
   @IBOutlet private weak var separatorView: UIView!
   
-  typealias CityCellStyle = Style.CityCell
-  
   override func awakeFromNib() {
     super.awakeFromNib()
     setUp()
@@ -18,28 +16,25 @@ class CityTableViewCell: UITableViewCell {
   }
 }
 
-
-
 // MARK: - ViewSetupable protocol
 extension CityTableViewCell: ViewSetupable {
   
   func setUp() {
-    backgroundColor = CityCellStyle.backgroundColor
+    backgroundColor = Style.CityCell.backgroundColor
     selectionStyle = .none
     
-    currentTimeLabel.font = CityCellStyle.currentTimeLabelFont
-    currentTimeLabel.textColor = CityCellStyle.currentTimeLabelTextColor
-    currentTimeLabel.textAlignment = CityCellStyle.currentTimeLabelTextAlignment
+    currentTimeLabel.font = Style.CityCell.currentTimeLabelFont
+    currentTimeLabel.textColor = Style.CityCell.currentTimeLabelTextColor
+    currentTimeLabel.textAlignment = Style.CityCell.currentTimeLabelTextAlignment
     
-    cityNameLabel.font = CityCellStyle.cityNameLabelFont
-    cityNameLabel.textColor = CityCellStyle.cityNameLabelTextColor
-    cityNameLabel.textAlignment = CityCellStyle.cityNameLabelTextAlignment
-    separatorView.backgroundColor = CityCellStyle.separatorColor
+    cityNameLabel.font = Style.CityCell.cityNameLabelFont
+    cityNameLabel.textColor = Style.CityCell.cityNameLabelTextColor
+    cityNameLabel.textAlignment = Style.CityCell.cityNameLabelTextAlignment
+    separatorView.backgroundColor = Style.CityCell.separatorColor
     configure(by: .none)
   }
   
 }
-
 
 // MARK: - Configure by city
 extension CityTableViewCell {

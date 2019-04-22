@@ -20,23 +20,6 @@ struct HourlyData: Forecast {
   let ozone: Double
 }
 
-// MARK: - isMetricMeasuringSystem
-extension HourlyData {
-  
-  private var temperatureInCelsius: Double {
-    return (temperature - 32) * Double(5.0 / 9.0)
-  }
-  
-  var temperatureFormatted: String {
-    if MeasuringSystem.selected == .metric {
-      return temperatureInCelsius.roundedToNearestAsString + "\u{00B0}"
-    } else {
-      return temperature.roundedToNearestAsString + "\u{00B0}"
-    }
-  }
-  
-}
-
 // MARK: - Decodable protocol
 extension HourlyData: Decodable {
   
