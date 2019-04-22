@@ -1,11 +1,3 @@
-//
-//  ForecastRequest.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/06/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
 struct ForecastRequest: WebServiceRequest {
@@ -25,7 +17,6 @@ struct ForecastRequest: WebServiceRequest {
     self.urlRequest = URLRequest(url: baseURL.appendingPathComponent(path))
   }
 }
-
 
 // MARK: - Factory method
 extension ForecastRequest {

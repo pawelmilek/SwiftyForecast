@@ -1,11 +1,3 @@
-//
-//  CoreDataError.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 18/07/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
 enum CoreDataError: ErrorHandleable {
@@ -14,7 +6,6 @@ enum CoreDataError: ErrorHandleable {
   case couldNotFetch
   case notAssociatedWithManagedObjectContext(entityName: String)
 }
-
 
 // MARK: - ErrorHandleable protocol
 extension CoreDataError {

@@ -1,6 +1,3 @@
-//  Created by Pawel Milek on 11/08/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
 import Foundation
 import UIKit
 

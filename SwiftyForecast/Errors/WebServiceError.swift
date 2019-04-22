@@ -1,11 +1,3 @@
-//
-//  WebServiceError.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/06/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
 enum WebServiceError: ErrorHandleable {
@@ -15,7 +7,6 @@ enum WebServiceError: ErrorHandleable {
   case decoderFailed
   case failedToRetrieveContext
 }
-
 
 // MARK: - ErrorHandleable protocol
 extension WebServiceError {

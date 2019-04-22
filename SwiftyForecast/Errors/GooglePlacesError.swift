@@ -1,18 +1,9 @@
-//
-//  GooglePlacesError.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/08/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
 enum GooglePlacesError: ErrorHandleable {
   case placeNotFound
   case locationDisabled
 }
-
 
 // MARK: - ErrorHandleable protocol
 extension GooglePlacesError {

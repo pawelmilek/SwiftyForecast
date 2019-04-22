@@ -1,11 +1,3 @@
-//
-//  FontWeatherIconError.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 10/07/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
 enum FontWeatherIconError: ErrorHandleable {
@@ -14,7 +6,6 @@ enum FontWeatherIconError: ErrorHandleable {
   case fontDataFailed
   case fontRegistrationFailed(description: String)
 }
-
 
 // MARK: - ErrorHandleable protocol
 extension FontWeatherIconError {

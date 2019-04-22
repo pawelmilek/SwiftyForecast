@@ -11,7 +11,7 @@ import CoreData
 
 struct Parser<M> where M: Decodable {
   
-  static func parseJSON(_ data: Data) -> ResultType<M, WebServiceError> {
+  static func parseJSON(_ data: Data) -> Result<M, WebServiceError> {
     do {
       let decodedModel = try JSONDecoder().decode(M.self, from: data)
       return .success(decodedModel)
@@ -22,7 +22,7 @@ struct Parser<M> where M: Decodable {
     }
   }
   
-  static func parseJSON(_ data: Data, with context: NSManagedObjectContext) -> ResultType<M, WebServiceError> {
+  static func parseJSON(_ data: Data, with context: NSManagedObjectContext) -> Result<M, WebServiceError> {
     guard let codingUserInfoKeyManagedObjectContext = CodingUserInfoKey.managedObjectContext else {
       fatalError(WebServiceError.failedToRetrieveContext.description)
     }

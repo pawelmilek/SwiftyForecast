@@ -42,10 +42,10 @@ extension HourlyForecastCollectionViewCell {
   func configure(by hourly: HourlyDataViewModel?) {
     if let hourly = hourly {
       timeLabel.text = hourly.time
-      timeLabel.alpha = 1
       iconLabel.attributedText = hourly.conditionIcon
-      iconLabel.alpha = 1
       temperatureLabel.text = hourly.temperature
+      timeLabel.alpha = 1
+      iconLabel.alpha = 1
       temperatureLabel.alpha = 1
     } else {
       timeLabel.alpha = 0

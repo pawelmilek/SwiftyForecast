@@ -49,7 +49,6 @@
 		E200104D216A9625008E6090 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E200104E216A9625008E6090 /* WebServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E320E84371007D8CE4 /* WebServiceRequest.swift */; };
 		E200104F216A9625008E6090 /* WebServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* WebServiceManager.swift */; };
-		E2001050216A9625008E6090 /* ResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E820E84371007D8CE4 /* ResultType.swift */; };
 		E2001051216A9625008E6090 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E420E84371007D8CE4 /* Parser.swift */; };
 		E2001052216A981F008E6090 /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FA81DA04D1D00B3EABF /* MoonPhase.swift */; };
 		E2001053216A9834008E6090 /* MoonPhaseFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */; };
@@ -101,7 +100,6 @@
 		E23997ED20E84371007D8CE4 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E420E84371007D8CE4 /* Parser.swift */; };
 		E23997EE20E84371007D8CE4 /* WebServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* WebServiceError.swift */; };
 		E23997EF20E84371007D8CE4 /* ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E720E84371007D8CE4 /* ErrorHandleable.swift */; };
-		E23997F020E84371007D8CE4 /* ResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E820E84371007D8CE4 /* ResultType.swift */; };
 		E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
 		E23997FA20E8498D007D8CE4 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F920E8498D007D8CE4 /* ForecastResponse.swift */; };
 		E23997FC20E84AFB007D8CE4 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997FB20E84AFB007D8CE4 /* Forecast.swift */; };
@@ -280,7 +278,6 @@
 		E23997E420E84371007D8CE4 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* WebServiceError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceError.swift; sourceTree = "<group>"; };
 		E23997E720E84371007D8CE4 /* ErrorHandleable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandleable.swift; sourceTree = "<group>"; };
-		E23997E820E84371007D8CE4 /* ResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultType.swift; sourceTree = "<group>"; };
 		E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E23997F920E8498D007D8CE4 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		E23997FB20E84AFB007D8CE4 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
@@ -615,7 +612,6 @@
 				E23997E320E84371007D8CE4 /* WebServiceRequest.swift */,
 				E23997E120E84371007D8CE4 /* ForecastRequest.swift */,
 				E23997E220E84371007D8CE4 /* WebServiceManager.swift */,
-				E23997E820E84371007D8CE4 /* ResultType.swift */,
 				E23997E420E84371007D8CE4 /* Parser.swift */,
 			);
 			path = NetworkLayer;
@@ -1073,7 +1069,6 @@
 				E200103A216A94EA008E6090 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
 				E2342101216C1944007BB8F0 /* DataMigrationManager.swift in Sources */,
 				E2001051216A9625008E6090 /* Parser.swift in Sources */,
-				E2001050216A9625008E6090 /* ResultType.swift in Sources */,
 				E2001039216A94C4008E6090 /* CoreDataStackHelper.swift in Sources */,
 				E224418E21619A4C009D409F /* AlertViewPresenter.swift in Sources */,
 				E224418C21619A36009D409F /* ErrorHandleable.swift in Sources */,
@@ -1231,7 +1226,6 @@
 				E2A42E26214DEE5E00F9A79A /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
 				E2A42E31214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScaleParty.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* WebServiceError.swift in Sources */,
-				E23997F020E84371007D8CE4 /* ResultType.swift in Sources */,
 				E268FEE220FC29C50038F015 /* SwiftyForecast.xcdatamodeld in Sources */,
 				E23CD76720EDBC6900F0F72A /* FontWeatherIcon.swift in Sources */,
 				E2A42E34214DEE5E00F9A79A /* NVActivityIndicatorAnimationOrbit.swift in Sources */,
