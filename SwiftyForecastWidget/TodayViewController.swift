@@ -1,11 +1,3 @@
-//
-//  TodayViewController.swift
-//  WeatherForecastWidget
-//
-//  Created by Pawel Milek on 30/09/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 import NotificationCenter
 
@@ -31,7 +23,6 @@ class TodayViewController: UIViewController {
     gestureRecognizer.numberOfTapsRequired = 1
     return gestureRecognizer
   }()
-  
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -92,7 +83,6 @@ extension TodayViewController: ViewSetupable {
   
 }
 
-
 // MARK: - Set collection view
 private extension TodayViewController {
   
@@ -108,7 +98,6 @@ private extension TodayViewController {
   }
   
 }
-
 
 // MARK: - Configure current forecast
 private extension TodayViewController {
@@ -172,7 +161,6 @@ private extension TodayViewController {
   }
 }
 
-
 // MARK: - Private - Actions
 private extension TodayViewController {
   
@@ -219,7 +207,6 @@ extension TodayViewController: NCWidgetProviding {
   
 }
 
-
 // MARK - CollectionViewDataSource delegate
 extension TodayViewController: UICollectionViewDataSource {
   
@@ -237,7 +224,6 @@ extension TodayViewController: UICollectionViewDataSource {
     return cell
   }
 }
-
 
 // MARK: UICollectionViewDelegateFlowLayout protocol
 extension TodayViewController: UICollectionViewDelegateFlowLayout {
