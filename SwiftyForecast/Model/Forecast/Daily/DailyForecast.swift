@@ -13,7 +13,6 @@ struct DailyForecast {
   private let data: [DailyData]
 }
 
-
 // MARK: - Number of days (exclude current day)
 extension DailyForecast {
   

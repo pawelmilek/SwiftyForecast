@@ -3,7 +3,7 @@ import Foundation
 struct DefaultHourlyDataViewModel: HourlyDataViewModel {
   var time: String
   var conditionIcon: NSAttributedString?
-  private let hourlyData: HourlyData
+  private var hourlyData: HourlyData
   
   init(hourlyData: HourlyData) {
     self.hourlyData = hourlyData
@@ -18,9 +18,9 @@ extension DefaultHourlyDataViewModel {
   var temperature: String {
     if MeasuringSystem.selected == .metric {
       let temperatureInCelsius = (hourlyData.temperature - 32) * Double(5.0 / 9.0)
-      return temperatureInCelsius.roundedToNearestAsString + "\u{00B0}"
+      return temperatureInCelsius.roundedToString + "\u{00B0}"
     } else {
-      return hourlyData.temperature.roundedToNearestAsString + "\u{00B0}"
+      return hourlyData.temperature.roundedToString + "\u{00B0}"
     }
   }
   

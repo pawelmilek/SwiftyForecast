@@ -1,5 +1,3 @@
-import Foundation
-
 enum FontWeatherIconError: ErrorHandleable {
   case fileNotFound(name: String)
   case unknownFontURL(urlString: String)

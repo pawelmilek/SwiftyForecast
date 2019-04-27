@@ -1,11 +1,3 @@
-//
-//  Parser.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 27/06/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
@@ -39,4 +31,29 @@ struct Parser<M> where M: Decodable {
     }
   }
   
+  // TODO: REmove!!
+  fileprivate static func prettyJSONPrint(_ data: Data) {
+    let dictonary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+    let json = stringify(json: dictonary!, prettyPrinted: true)
+    print(json)
+  }
+  
+  static func stringify(json: [String: Any], prettyPrinted: Bool = false) -> String {
+    var options: JSONSerialization.WritingOptions = []
+    if prettyPrinted {
+      options = JSONSerialization.WritingOptions.prettyPrinted
+    }
+    
+    do {
+      let data = try JSONSerialization.data(withJSONObject: json, options: options)
+      if let string = String(data: data, encoding: .utf8) {
+        return string
+      }
+    } catch {
+      print(error)
+    }
+    
+    return ""
+  }
+
 }

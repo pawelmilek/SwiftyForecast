@@ -132,11 +132,6 @@ private extension ForecastContentViewController {
   func fetchWeatherForecast() {
     guard !isFeatchingForecast else { return }
     
-//    guard checkAndDecideWhenToFetchNewForecast() else {
-//      reloadForecast()
-//      return
-//    }
-    
     var isCurrentLocationPage: Bool {
       return pageIndex == 0
     }

@@ -46,17 +46,17 @@ extension DailyData {
   
   var temperatureMinFormatted: String {
     if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMin.roundedToNearestAsString + "\u{00B0}"
+      return temperatureInCelsiusMin.roundedToString + "\u{00B0}"
     } else {
-      return temperatureMin.roundedToNearestAsString + "\u{00B0}"
+      return temperatureMin.roundedToString + "\u{00B0}"
     }
   }
   
   var temperatureMaxFormatted: String {
     if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMax.roundedToNearestAsString + "\u{00B0}"
+      return temperatureInCelsiusMax.roundedToString + "\u{00B0}"
     } else {
-      return temperatureMax.roundedToNearestAsString + "\u{00B0}"
+      return temperatureMax.roundedToString + "\u{00B0}"
     }
   }
   
