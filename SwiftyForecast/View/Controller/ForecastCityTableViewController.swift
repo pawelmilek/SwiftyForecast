@@ -1,16 +1,8 @@
-//
-//  ForecastCityListTableViewController.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/09/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import GooglePlaces
 
-class ForecastCityListTableViewController: UITableViewController, UsesCoreDataObjects {
+class ForecastCityTableViewController: UITableViewController, UsesCoreDataObjects {
   typealias ForecastCityStyle = Style.ForecastCityListVC
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
@@ -56,7 +48,7 @@ class ForecastCityListTableViewController: UITableViewController, UsesCoreDataOb
 
 
 // MARK: - ViewSetupable protocol
-extension ForecastCityListTableViewController: ViewSetupable {
+extension ForecastCityTableViewController: ViewSetupable {
   
   func setUp() {
     setTableView()
@@ -67,7 +59,7 @@ extension ForecastCityListTableViewController: ViewSetupable {
 
 
 // MARK: - Private - Set tableview
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func setTableView() {
     tableView.register(cellClass: CityTableViewCell.self)
@@ -82,7 +74,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - Private - Set transparent background of TableView
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func setTransparentTableViewBackground() {
     let backgroundImage = UIImage(named: "swifty_background")
@@ -97,7 +89,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - Private - Fetch cities and local time
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func fetchCities() {
     guard let managedObjectContext = managedObjectContext else { return }
@@ -116,7 +108,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - Private - Insert/Delete city
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func insert(city: City) {
     guard city.isExists() == false else { return }
@@ -161,7 +153,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - Private - Reload pages
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func reloadAndInitializeMainPageViewController() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
@@ -172,7 +164,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - UITableViewDataSource protocol
-extension ForecastCityListTableViewController {
+extension ForecastCityTableViewController {
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return cities.count
@@ -219,7 +211,7 @@ extension ForecastCityListTableViewController {
 
 
 // MARK: - UITableViewDelegate protocol
-extension ForecastCityListTableViewController {
+extension ForecastCityTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCity = cities[indexPath.row]
@@ -248,7 +240,7 @@ extension ForecastCityListTableViewController {
 
 
 // MARK: GMSAutocompleteViewControllerDelegate protocol
-extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDelegate {
+extension ForecastCityTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
     let selectedCity = City(place: place)
@@ -279,7 +271,7 @@ extension ForecastCityListTableViewController: GMSAutocompleteViewControllerDele
 
 
 // MARK: - Private - Actions
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   @objc func backButtonTapped(_ sender: UIButton?) {
     guard let _ = navigationController?.popViewController(animated: true) else {
@@ -296,7 +288,7 @@ private extension ForecastCityListTableViewController {
 
 
 // MARK: - Private - Fetch local time
-private extension ForecastCityListTableViewController {
+private extension ForecastCityTableViewController {
   
   func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
     GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
