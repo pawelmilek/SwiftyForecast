@@ -1,17 +1,8 @@
-//
-//  Registrable.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/09/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
 import UIKit
-
 
 protocol Registrable: AnyObject {}
 
-
+// MARK: - Register table cell
 extension Registrable where Self: UITableView {
   
   func register<T: UITableViewCell>(cellClass: T.Type) {
@@ -21,7 +12,7 @@ extension Registrable where Self: UITableView {
   
 }
 
-
+// MARK: - Register collection cell
 extension Registrable where Self: UICollectionView {
   
   func register<T: UICollectionViewCell>(cellClass: T.Type) {

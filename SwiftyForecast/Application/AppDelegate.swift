@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/09/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 import GooglePlaces
 
@@ -26,21 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
-    setupStyle()
+    setUpStyle()
     return true
   }
 }
 
-
 // MARK: - Setup style
 extension AppDelegate {
   
-  func setupStyle() {
+  func setUpStyle() {
     setNavigationBarStyle()
   }
   
 }
-
 
 // MARK: - Set UINAvigationBar Attributes
 private extension AppDelegate {

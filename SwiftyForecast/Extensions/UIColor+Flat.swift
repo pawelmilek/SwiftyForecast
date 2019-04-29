@@ -1,11 +1,3 @@
-//
-//  UIColor+Flat.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 28/09/18.
-//  Copyright © 2016 imac. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {
@@ -24,7 +16,7 @@ extension UIColor {
   
 }
 
-
+// MARK: - ColorRGB component
 private extension UIColor {
   
   class func colorRGB(component: (r: CGFloat, g: CGFloat, b: CGFloat)) -> UIColor {

@@ -6,7 +6,9 @@ final class ActivityIndicatorView {
 
   private lazy var activityIndicator: NVActivityIndicatorView = {
     let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-    let indicator = NVActivityIndicatorView(frame: frame, type: .ballScaleRippleMultiple, color: UIColor.orange.withAlphaComponent(0.6))
+    let indicator = NVActivityIndicatorView(frame: frame,
+                                            type: .ballScaleRippleMultiple,
+                                            color: Style.ActivityIndicator.indicatorColor)
     return indicator
   }()
   

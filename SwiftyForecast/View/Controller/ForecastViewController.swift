@@ -1,16 +1,8 @@
-//
-//  ForecastMainViewController.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 11/08/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 import CoreData
 import SafariServices
 
-class ForecastMainViewController: UIViewController {
+class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
   typealias ForecastMainStyle = Style.ForecastMainVC
@@ -94,7 +86,7 @@ class ForecastMainViewController: UIViewController {
 
 
 // MARK: - ViewSetupable protocol
-extension ForecastMainViewController: ViewSetupable {
+extension ForecastViewController: ViewSetupable {
   
   func setUp() {
     fetchCitiesAndSetLastUpdate()
@@ -114,7 +106,7 @@ extension ForecastMainViewController: ViewSetupable {
 
 
 // MARK: - Private - Fetch cities and set new CoreData attribute lastUpdate if not exists.
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func fetchCitiesAndSetLastUpdate() {
     LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
@@ -123,7 +115,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - fetch cities
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func fetchCities() {
     do {
@@ -138,7 +130,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Initialize PageViewController
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func initializePageViewController() {
     addChild(pageViewController)
@@ -150,7 +142,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Set metric system segmented control
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func setMetricSystemSegmentedControl() {
     navigationItem.titleView = measuringSystemSegmentedControl
@@ -160,7 +152,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - NotificationCenter
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func addNotificationCenterObserver() {
     let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
@@ -178,7 +170,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Set page control
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func setPageControl() {
     pageControl.currentPage = currentIndex
@@ -189,7 +181,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Set NetworkManager when internet is not available
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func setNetworkManagerWhenInternetIsNotAvailable() {
     let whenNetworkIsNotAvailable: () -> () = {
@@ -212,7 +204,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Show or hide navigation prompt
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func showOrHideEnableLocationServicesPrompt() {
     let delayInSeconds = 2.0
@@ -239,7 +231,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Actions
-extension ForecastMainViewController {
+extension ForecastViewController {
   
   @objc func reloadPages(_ notification: NSNotification) {
     fetchCities()
@@ -270,7 +262,7 @@ extension ForecastMainViewController {
 
 
 // MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastMainViewController: CityListTableViewControllerDelegate {
+extension ForecastViewController: CityListTableViewControllerDelegate {
   
   func cityListController(_ cityListTableViewController: ForecastCityListTableViewController, didSelect city: City) {
     guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
@@ -285,7 +277,7 @@ extension ForecastMainViewController: CityListTableViewControllerDelegate {
 
 
 // MARK: - Private - Move to page at index
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func moveToPage(at index: Int, completion: (() -> ())? = nil) {
     guard let vc = forecastContentViewController(at: index) else { return }
@@ -307,7 +299,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Set dataSource and first ViewController
-private extension ForecastMainViewController {
+private extension ForecastViewController {
 
   func setInitialViewController(at index: Int = 0) {
     guard let forecastContentVC = forecastContentViewController(at: index) else { return }
@@ -318,7 +310,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - Private - Get ForecastPageViewController
-private extension ForecastMainViewController {
+private extension ForecastViewController {
   
   func forecastContentViewController(at index: Int) -> ForecastContentViewController? {
     var forecastVC: ForecastContentViewController!
@@ -353,7 +345,7 @@ private extension ForecastMainViewController {
 
 
 // MARK: - UIPageViewControllerDataSource protocol
-extension ForecastMainViewController: UIPageViewControllerDataSource {
+extension ForecastViewController: UIPageViewControllerDataSource {
   
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
@@ -382,7 +374,7 @@ extension ForecastMainViewController: UIPageViewControllerDataSource {
 
 
 // MARK: - UIPageViewControllerDelegate protocol
-extension ForecastMainViewController: UIPageViewControllerDelegate {
+extension ForecastViewController: UIPageViewControllerDelegate {
   
   func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
     guard let forecastContentViewController = pendingViewControllers.first as? ForecastContentViewController else { return }

@@ -8,11 +8,14 @@ final class AlertViewPresenter {
   private init() {}
 }
 
-
 // MARK: - Present submit Alert
 extension AlertViewPresenter {
   
-  func presentSubmitAlert(in viewController: UIViewController, title: String, message: String, textFieldConfiguration: ((UITextField) -> ())? = nil, submitCompletionHandler: @escaping SubmitCompletionHandler) {
+  func presentSubmitAlert(in viewController: UIViewController,
+                          title: String,
+                          message: String,
+                          textFieldConfiguration: ((UITextField) -> ())? = nil,
+                          submitCompletionHandler: @escaping SubmitCompletionHandler) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addTextField(configurationHandler: textFieldConfiguration)
     
@@ -29,7 +32,6 @@ extension AlertViewPresenter {
   }
   
 }
-
 
 // MARK: - Present Error Alert
 extension AlertViewPresenter {
@@ -49,11 +51,14 @@ extension AlertViewPresenter {
   
 }
 
-
 // MARK: - Present Popup Alert
 extension AlertViewPresenter {
   
-  func presentPopupAlert(in viewController: UIViewController, title: String?, message: String?, actionTitles: [String] = ["OK"], actions: [((UIAlertAction) -> ())?] = [nil]) {
+  func presentPopupAlert(in viewController: UIViewController,
+                         title: String?,
+                         message: String?,
+                         actionTitles: [String] = ["OK"],
+                         actions: [((UIAlertAction) -> ())?] = [nil]) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     for (index, title) in actionTitles.enumerated() {
@@ -64,4 +69,3 @@ extension AlertViewPresenter {
   }
   
 }
-

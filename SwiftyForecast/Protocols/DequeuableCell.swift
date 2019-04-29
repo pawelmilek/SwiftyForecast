@@ -1,17 +1,8 @@
-//
-//  DequeuableCell.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 26/09/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
 import UIKit
-
 
 protocol DequeuableCell: AnyObject {}
 
-
+// MARK: - Dequeue Cell
 extension DequeuableCell where Self: UITableView {
   
   func dequeueCell<T: UITableViewCell>(_ ofType: T.Type, for indexPath: IndexPath) -> T {

@@ -1,11 +1,3 @@
-//
-//  ConditionView.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 04/07/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 
 class ConditionView: UIView {
@@ -18,16 +10,15 @@ class ConditionView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUp()
-    setupStyle()
+    setUpStyle()
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setUp()
-    setupStyle()
+    setUpStyle()
   }
 }
-
 
 // MARK: ViewSetupable protocol
 extension ConditionView: ViewSetupable {
@@ -48,7 +39,7 @@ extension ConditionView: ViewSetupable {
     backgroundColor = .clear
   }
   
-  func setupStyle() {
+  func setUpStyle() {
     conditionLabel.textColor = ConditionStyle.textColor
     conditionLabel.textAlignment = ConditionStyle.textAlignment
     
@@ -58,7 +49,6 @@ extension ConditionView: ViewSetupable {
   }
   
 }
-
 
 // MARK: Configurate
 extension ConditionView {

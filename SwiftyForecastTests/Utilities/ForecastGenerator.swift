@@ -2,6 +2,10 @@ import Foundation
 
 struct ForecastGenerator {
   
+  static func generateTimezone() -> String {
+    return forecastResponse.timezone
+  }
+  
   static func generateCurrentForecast() -> CurrentForecast {
     return forecastResponse.currently
   }

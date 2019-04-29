@@ -1,11 +1,3 @@
-//
-//  CurrentForecastView.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 03/07/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 
 final class CurrentForecastView: UIView {
@@ -45,16 +37,15 @@ final class CurrentForecastView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUp()
-    setupStyle()
+    setUpStyle()
   }
   
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setUp()
-    setupStyle()
+    setUpStyle()
   }
 }
-
 
 // MARK: ViewSetupable protocol
 extension CurrentForecastView: ViewSetupable {
@@ -70,7 +61,7 @@ extension CurrentForecastView: ViewSetupable {
     configure(hourly: .none)
   }
   
-  func setupStyle() {
+  func setUpStyle() {
     iconLabel.textColor = ForecastStyle.textColor
     iconLabel.textAlignment = ForecastStyle.textAlignment
     
@@ -92,7 +83,6 @@ extension CurrentForecastView: ViewSetupable {
   
 }
 
-
 // MARK: - Set bottom shadow
 private extension CurrentForecastView {
   
@@ -109,7 +99,6 @@ private extension CurrentForecastView {
   }
   
 }
-
 
 // MARK: - Set bottom shadow
 private extension CurrentForecastView {
@@ -129,7 +118,6 @@ private extension CurrentForecastView {
   }
 }
 
-
 // MARK: - Set collection view
 private extension CurrentForecastView {
   
@@ -142,8 +130,6 @@ private extension CurrentForecastView {
   }
   
 }
-
-
 
 // MARK: - Private - Add tap gesture recognizer
 private extension CurrentForecastView {
@@ -158,7 +144,6 @@ private extension CurrentForecastView {
   }
   
 }
-
 
 // MARK: - Configure current forecast
 extension CurrentForecastView {
@@ -191,7 +176,7 @@ extension CurrentForecastView {
       dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
       cityNameLabel.text = city?.name
       temperatureLabel.text = forecast.temperatureFormatted
-
+      
       windView.configure(condition: .strongWind, value: "\(forecast.windSpeed)")
       humidityView.configure(condition: .humidity, value: "\(Int(forecast.humidity * 100))")
       sunriseView.configure(condition: .sunrise, value: sunriseTime)
@@ -231,7 +216,6 @@ extension CurrentForecastView {
   
 }
 
-
 // MARK: - Animate labels
 extension CurrentForecastView {
   
@@ -254,7 +238,7 @@ extension CurrentForecastView {
       cityNameLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
       temperatureLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
     }
-
+    
   }
   
   func animateLabelsIdentity() {
@@ -265,7 +249,6 @@ extension CurrentForecastView {
   }
   
 }
-
 
 // MARK: - UICollectionViewDataSource protocol
 extension CurrentForecastView: UICollectionViewDataSource {
@@ -284,7 +267,6 @@ extension CurrentForecastView: UICollectionViewDataSource {
   
 }
 
-
 // MARK: UICollectionViewDelegateFlowLayout protocol
 extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
   
@@ -294,7 +276,6 @@ extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
   
 }
 
-
 // MARK: - Action
 extension CurrentForecastView {
   
@@ -303,7 +284,7 @@ extension CurrentForecastView {
     
     if viewDidExpand {
       delegate?.currentForecastDidExpandAnimation()
-
+      
     } else {
       delegate?.currentForecastDidCollapseAnimation()
     }

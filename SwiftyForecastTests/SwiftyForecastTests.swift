@@ -1,7 +1,6 @@
 import XCTest
 
-class SwiftyForecastTests: XCTestCase {
-  var hourlyDataViewModel: HourlyDataViewModel!
+class SwiftyForecastTests: BaseSwiftyForecastTests {
   
   override func setUp() {
     super.setUp()
@@ -9,21 +8,12 @@ class SwiftyForecastTests: XCTestCase {
   
   override func tearDown() {
     super.tearDown()
-    
-    hourlyDataViewModel = nil
   }
   
-  func testHourlyForecast() {
-    let hourlyData = ForecastGenerator.generateHourlyForecast().data.first
-    hourlyDataViewModel = DefaultHourlyDataViewModel(hourlyData: hourlyData!)
-  }
-  
-  func testTemperatureRoundedToString() {
-//    let belowZero = -0.4
-//    belowZero.asString
+  func testForecastTimezone() {
+    let expectedValue = "America/Chicago"
     
-    // when: -0.4
-    // then: -1
+    XCTAssertEqual(timezone, expectedValue, "Forecast invalid timezone.")
   }
   
 }

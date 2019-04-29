@@ -216,4 +216,8 @@ struct Style {
     static let glassIconColor = UIColor.gray
   }
   
+  // MARK: ActivityIndicatorView
+  struct ActivityIndicator {
+    static let indicatorColor = UIColor.orange.withAlphaComponent(0.6)
+  }
 }

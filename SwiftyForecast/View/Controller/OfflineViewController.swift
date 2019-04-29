@@ -1,11 +1,3 @@
-//
-//  OfflineViewController.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 08/09/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import UIKit
 
 class OfflineViewController: UIViewController {
@@ -46,9 +38,8 @@ class OfflineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
-    setupStyle()
+    setUpStyle()
   }
-  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -60,7 +51,6 @@ class OfflineViewController: UIViewController {
     navigationController?.setNavigationBarHidden(false, animated: animated)
   }
 }
-
 
 // MARK: - ViewSetupable protocol
 extension OfflineViewController: ViewSetupable {
@@ -91,12 +81,11 @@ extension OfflineViewController: ViewSetupable {
     view.safeAreaLayoutGuide.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
   }
   
-  func setupStyle() {
+  func setUpStyle() {
     view.backgroundColor = OfflineStyle.backgroundColor
   }
   
 }
-
 
 // MARK: - Private - Show Main ViewController
 extension OfflineViewController {
