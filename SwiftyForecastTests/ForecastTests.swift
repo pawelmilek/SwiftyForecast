@@ -1,6 +1,6 @@
 import XCTest
 
-class SwiftyForecastTests: BaseSwiftyForecastTests {
+class ForecastTests: BaseSwiftyForecastTests {
   
   override func setUp() {
     super.setUp()

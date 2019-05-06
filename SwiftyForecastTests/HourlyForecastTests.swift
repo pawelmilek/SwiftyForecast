@@ -1,6 +1,6 @@
 import XCTest
 
-class SwiftyHourlyForecastTests: BaseSwiftyForecastTests {
+class HourlyForecastTests: BaseSwiftyForecastTests {
   var hourlyForecast: HourlyForecast!
   
   override func setUp() {
