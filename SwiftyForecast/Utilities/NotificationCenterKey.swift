@@ -1,26 +1,12 @@
-//
-//  NotificationCenterKey.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 01/10/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 
-enum NotificationCenterKey: String {
-  case measuringSystemDidSwitchNotification = "MeasuringSystemDidSwitch"
-  case refreshButtonDidPressNotification = "RefreshButtonDidPress"
-  case reloadPagesNotification = "ReloadPagesNotification"
-  case reloadPagesDataNotification = "ReloadPagesDataNotification"
-  case locationServiceDidBecomeEnable = "locationServiceDidBecomeEnableNotification"
-}
-
-
-extension NotificationCenterKey {
+public extension Notification.Name {
   
-  var name: NSNotification.Name {
-    return NSNotification.Name(rawValue: self.rawValue)
-  }
+  static let measuringSystemDidSwitch = Notification.Name("measuringSystemDidSwitch")
+  static let refreshButtonDidPress = Notification.Name("refreshButtonDidPress")
+  static let reloadPages = Notification.Name("reloadPages")
+  static let reloadPagesData = Notification.Name("reloadPagesData")
+  static let locationServiceDidBecomeEnable = Notification.Name("locationServiceDidBecomeEnable")
+  static let applicationDidBecomeActive = Notification.Name("applicationDidBecomeActive")
   
 }

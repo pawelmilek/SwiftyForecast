@@ -12,7 +12,7 @@ class ForecastViewController: UIViewController {
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
-    segmentedControl.items = ["\u{00B0}" + "F", "\u{00B0}" + "C"]
+    segmentedControl.items = [SegmentedControlItemType.fahrenheit, SegmentedControlItemType.celsius]
     segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
     segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
     segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
@@ -22,7 +22,7 @@ class ForecastViewController: UIViewController {
     segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = 0
     
-    segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched(_:)), for: .valueChanged)
+    segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
   }()
   
@@ -59,7 +59,6 @@ class ForecastViewController: UIViewController {
     }
   }
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
@@ -84,7 +83,6 @@ class ForecastViewController: UIViewController {
   }
 }
 
-
 // MARK: - ViewSetupable protocol
 extension ForecastViewController: ViewSetupable {
   
@@ -104,7 +102,6 @@ extension ForecastViewController: ViewSetupable {
   
 }
 
-
 // MARK: - Private - Fetch cities and set new CoreData attribute lastUpdate if not exists.
 private extension ForecastViewController {
   
@@ -112,7 +109,6 @@ private extension ForecastViewController {
     LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
   }
 }
-
 
 // MARK: - Private - fetch cities
 private extension ForecastViewController {
@@ -128,7 +124,6 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - Private - Initialize PageViewController
 private extension ForecastViewController {
   
@@ -140,7 +135,6 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - Private - Set metric system segmented control
 private extension ForecastViewController {
   
@@ -150,24 +144,19 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - Private - NotificationCenter
 private extension ForecastViewController {
   
   func addNotificationCenterObserver() {
-    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadPages(_:)), name: reloadPagesName, object: nil)
-    
-    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
-    NotificationCenter.default.addObserver(self, selector: #selector(reloadPagesData(_:)), name: reloadDataName, object: nil)
+    NotificationAdapter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
+    NotificationAdapter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
   }
   
   func removeNotificationCenterObserver() {
-    NotificationCenter.default.removeObserver(self)
+    NotificationAdapter.remove(observer: self)
   }
   
 }
-
 
 // MARK: - Private - Set page control
 private extension ForecastViewController {
@@ -178,7 +167,6 @@ private extension ForecastViewController {
   }
   
 }
-
 
 // MARK: - Private - Set NetworkManager when internet is not available
 private extension ForecastViewController {
@@ -201,7 +189,6 @@ private extension ForecastViewController {
   }
   
 }
-
 
 // MARK: - Private - Show or hide navigation prompt
 private extension ForecastViewController {
@@ -229,7 +216,6 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - Actions
 extension ForecastViewController {
   
@@ -245,10 +231,7 @@ extension ForecastViewController {
   }
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    let notificationName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
-    
-    let segmentedControlData: [String: SegmentedControl] = ["SegmentedControl": sender]
-    NotificationCenter.default.post(name: notificationName, object: nil, userInfo: segmentedControlData)
+    NotificationAdapter.post(.measuringSystemDidSwitch, object: nil, userInfo: ["SegmentedControl": sender])
   }
   
   @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {
@@ -259,7 +242,6 @@ extension ForecastViewController {
   }
   
 }
-
 
 // MARK: - CityListTableViewControllerDelegate protocol
 extension ForecastViewController: CityListTableViewControllerDelegate {
@@ -274,7 +256,6 @@ extension ForecastViewController: CityListTableViewControllerDelegate {
   }
   
 }
-
 
 // MARK: - Private - Move to page at index
 private extension ForecastViewController {
@@ -297,7 +278,6 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - Private - Set dataSource and first ViewController
 private extension ForecastViewController {
 
@@ -307,7 +287,6 @@ private extension ForecastViewController {
   }
 
 }
-
 
 // MARK: - Private - Get ForecastPageViewController
 private extension ForecastViewController {
@@ -343,11 +322,11 @@ private extension ForecastViewController {
   
 }
 
-
 // MARK: - UIPageViewControllerDataSource protocol
 extension ForecastViewController: UIPageViewControllerDataSource {
   
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerBefore viewController: UIViewController) -> UIViewController? {
     guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
     
     let indexOfViewController = index(of: forecastPageContentViewController)
@@ -359,7 +338,8 @@ extension ForecastViewController: UIPageViewControllerDataSource {
     
   }
   
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          viewControllerAfter viewController: UIViewController) -> UIViewController? {
     guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
     
     let indexOfViewController = index(of: forecastPageContentViewController)
@@ -372,16 +352,19 @@ extension ForecastViewController: UIPageViewControllerDataSource {
   
 }
 
-
 // MARK: - UIPageViewControllerDelegate protocol
 extension ForecastViewController: UIPageViewControllerDelegate {
   
-  func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          willTransitionTo pendingViewControllers: [UIViewController]) {
     guard let forecastContentViewController = pendingViewControllers.first as? ForecastContentViewController else { return }
     pendingIndex = forecastContentViewController.pageIndex
   }
   
-  func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          didFinishAnimating finished: Bool,
+                          previousViewControllers: [UIViewController],
+                          transitionCompleted completed: Bool) {
     guard completed else { return }
     
     if let currentPageIndex = pendingIndex {

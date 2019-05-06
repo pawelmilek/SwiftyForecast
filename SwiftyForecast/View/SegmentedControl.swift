@@ -1,18 +1,10 @@
-//
-//  SegmentedControl.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 28/09/18.
-//  Copyright © 2016 imac. All rights reserved.
-//
-
 import UIKit
 
 @IBDesignable class SegmentedControl: UIControl {
   private var labels = [UILabel]()
   private var thumbView = UIView()
   
-  var items: [String] = ["Item 1", "Item 2", "Item 3"] {
+  var items: [CustomStringConvertible] = [] {
     didSet {
       setupLabels()
     }
@@ -139,7 +131,7 @@ private extension SegmentedControl {
     
     for (index, item) in items.enumerated() {
       let label = UILabel(frame: .zero)
-      label.text = item
+      label.text = item.description
       label.textAlignment = .center
       label.textColor = (index == 0 ? selectedLabelColor : unselectedLabelColor)
       addSubview(label)

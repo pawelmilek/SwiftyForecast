@@ -234,6 +234,13 @@
 		E2CF4DD22276897C00062E36 /* Pods_Swifty_Forecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2CF4DD12276897C00062E36 /* Pods_Swifty_Forecast.framework */; };
 		E2CF4DD422768A9D00062E36 /* SwiftyDailyForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD322768A9D00062E36 /* SwiftyDailyForecastTests.swift */; };
 		E2CF4DD822768C3F00062E36 /* DefaultForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */; };
+		E2CF4DDA227E118100062E36 /* SegmentedControlItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD9227E118000062E36 /* SegmentedControlItemType.swift */; };
+		E2CF4DDB227E118100062E36 /* SegmentedControlItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD9227E118000062E36 /* SegmentedControlItemType.swift */; };
+		E2CF4DDD227E313400062E36 /* NotificationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DDC227E313400062E36 /* NotificationAdapter.swift */; };
+		E2CF4DDE227E313400062E36 /* NotificationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DDC227E313400062E36 /* NotificationAdapter.swift */; };
+		E2CF4DE0227E36DD00062E36 /* ForecastCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DDF227E36DD00062E36 /* ForecastCityViewModel.swift */; };
+		E2CF4DE1227E36DD00062E36 /* ForecastCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DDF227E36DD00062E36 /* ForecastCityViewModel.swift */; };
+		E2CF4DE2227FBA0E00062E36 /* NotificationCenterKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */; };
 		E2D960812120F34800AE0B6E /* GeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocoderHelper.swift */; };
 		E2DB17BB20EDCA08003982A0 /* MoonPhaseFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */; };
 		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
@@ -436,6 +443,9 @@
 		E2CF4DD12276897C00062E36 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2CF4DD322768A9D00062E36 /* SwiftyDailyForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyDailyForecastTests.swift; sourceTree = "<group>"; };
 		E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultForecastService.swift; sourceTree = "<group>"; };
+		E2CF4DD9227E118000062E36 /* SegmentedControlItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlItemType.swift; sourceTree = "<group>"; };
+		E2CF4DDC227E313400062E36 /* NotificationAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAdapter.swift; sourceTree = "<group>"; };
+		E2CF4DDF227E36DD00062E36 /* ForecastCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCityViewModel.swift; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* GeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderHelper.swift; sourceTree = "<group>"; };
 		E2DB17BA20EDCA08003982A0 /* MoonPhaseFontIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPhaseFontIcon.swift; sourceTree = "<group>"; };
 		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
@@ -548,6 +558,7 @@
 				E2DCC9CA2146FA49003528F3 /* LocalizedCityManager.swift */,
 				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
 				E23420FF216C18A3007BB8F0 /* DataMigrationManager.swift */,
+				E2CF4DDC227E313400062E36 /* NotificationAdapter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -594,9 +605,9 @@
 		E23997D520E84075007D8CE4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E27E2F7F1DA0482C00B3EABF /* ForecastCityTableViewController.swift */,
-				E27E2F821DA0482C00B3EABF /* ForecastContentViewController.swift */,
 				E2B1D65B211FB26C00F0002A /* ForecastViewController.swift */,
+				E27E2F821DA0482C00B3EABF /* ForecastContentViewController.swift */,
+				E27E2F7F1DA0482C00B3EABF /* ForecastCityTableViewController.swift */,
 				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
 			);
 			path = Controller;
@@ -643,6 +654,7 @@
 				E23420FB216C0F1C007BB8F0 /* Coordinate.swift */,
 				E27E2FA71DA04D1D00B3EABF /* MeasuringSystem.swift */,
 				E27E2FA81DA04D1D00B3EABF /* MoonPhase.swift */,
+				E2CF4DD9227E118000062E36 /* SegmentedControlItemType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -869,6 +881,7 @@
 			isa = PBXGroup;
 			children = (
 				E2CF4D71226E78CF00062E36 /* CityViewModel.swift */,
+				E2CF4DDF227E36DD00062E36 /* ForecastCityViewModel.swift */,
 				E2CF4D81226E86B200062E36 /* CurrentForecastViewModel.swift */,
 				E2CF4D77226E7B4600062E36 /* DailyDataViewModel.swift */,
 				E2CF4D73226E799700062E36 /* DefaultCityViewModel.swift */,
@@ -1316,12 +1329,14 @@
 				E2A42E2A214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
 				E23420FC216C0F1C007BB8F0 /* Coordinate.swift in Sources */,
 				E2CF4D7A226E7B6000062E36 /* DefaultDailyDataViewModel.swift in Sources */,
+				E2CF4DDA227E118100062E36 /* SegmentedControlItemType.swift in Sources */,
 				E2A42E1D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
 				E2A42E1C214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallScale.swift in Sources */,
 				E27E2F8C1DA048B600B3EABF /* CityTableViewCell.swift in Sources */,
 				E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */,
 				E2A42E2D214DEE5E00F9A79A /* NVActivityIndicatorAnimationPacman.swift in Sources */,
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
+				E2CF4DE0227E36DD00062E36 /* ForecastCityViewModel.swift in Sources */,
 				E2A42E22214DEE5E00F9A79A /* NVActivityIndicatorAnimationSquareSpin.swift in Sources */,
 				E2E0762520F5165E008A5B63 /* FontLoader.swift in Sources */,
 				E200102B2167D8E7008E6090 /* SharedGroupContainer.swift in Sources */,
@@ -1363,6 +1378,7 @@
 				E2A42E17214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallClipRotateMultiple.swift in Sources */,
 				E2A42E0F214DEE5E00F9A79A /* NVActivityIndicatorAnimationDelegate.swift in Sources */,
 				E27E2F861DA0482C00B3EABF /* ForecastContentViewController.swift in Sources */,
+				E2CF4DDD227E313400062E36 /* NotificationAdapter.swift in Sources */,
 				E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */,
 				E27E2FC11DA04D1D00B3EABF /* DequeuableCell.swift in Sources */,
 				E268FEBC20FBE6730038F015 /* GooglePlacesHelper.swift in Sources */,
@@ -1420,7 +1436,9 @@
 				E2CF4DAA2275014E00062E36 /* FileLoadable.swift in Sources */,
 				E2CF4DB32275058500062E36 /* DailyForecast.swift in Sources */,
 				E2CF4DD422768A9D00062E36 /* SwiftyDailyForecastTests.swift in Sources */,
+				E2CF4DE2227FBA0E00062E36 /* NotificationCenterKey.swift in Sources */,
 				E2CF4DB42275063200062E36 /* HourlyForecast.swift in Sources */,
+				E2CF4DDE227E313400062E36 /* NotificationAdapter.swift in Sources */,
 				E2CF4DB22275057E00062E36 /* CurrentForecast.swift in Sources */,
 				E2CF4D992274F6D600062E36 /* ConditionFontIcon.swift in Sources */,
 				E2CF4DBE2275085800062E36 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
@@ -1436,9 +1454,11 @@
 				E2CF4DB8227507B000062E36 /* Forecast.swift in Sources */,
 				E2CF4D962274F67E00062E36 /* DefaultHourlyDataViewModel.swift in Sources */,
 				E2CF4D972274F68700062E36 /* ForecastDate.swift in Sources */,
+				E2CF4DDB227E118100062E36 /* SegmentedControlItemType.swift in Sources */,
 				E2CF4DB02275039E00062E36 /* WebServiceError.swift in Sources */,
 				E2CF4DC42276824900062E36 /* BaseSwiftyForecastTests.swift in Sources */,
 				E2CF4D9A2274F6E700062E36 /* FontWeatherIcon.swift in Sources */,
+				E2CF4DE1227E36DD00062E36 /* ForecastCityViewModel.swift in Sources */,
 				E2CF4D9E2274F85400062E36 /* ForecastGenerator.swift in Sources */,
 				E2CF4DB62275078900062E36 /* Double+RoundedToString.swift in Sources */,
 				E2CF4D942274F5C900062E36 /* HourlyDataViewModel.swift in Sources */,

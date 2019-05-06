@@ -1,19 +1,9 @@
-//
-//  NetworkManager.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 07/09/2018.
-//  Copyright © 2018 Pawel Milek. All rights reserved.
-//
-
 import Foundation
 import Reachability
 
 final class NetworkManager {
   static let shared = NetworkManager()
-
   private let reachability: Reachability
-  
   
   private init() {
     self.reachability = Reachability()!
@@ -31,12 +21,14 @@ final class NetworkManager {
   }
 }
 
-
 // MARK: - Private - Register observer
 private extension NetworkManager {
   
   func registerObserver() {
-    NotificationCenter.default.addObserver(self, selector: #selector(networkStatusChanged(_:)), name: .reachabilityChanged, object: reachability)
+    NotificationAdapter.add(observer: self,
+                                  selector: #selector(networkStatusChanged),
+                                  for: .reachabilityChanged,
+                                  object: reachability)
   }
   
 }

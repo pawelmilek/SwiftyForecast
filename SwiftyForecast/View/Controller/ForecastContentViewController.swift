@@ -103,25 +103,13 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
-    let measuringSystemSwitchName = NotificationCenterKey.measuringSystemDidSwitchNotification.name
-    let locationAuthorizationDidBecomeEnable = NotificationCenterKey.locationServiceDidBecomeEnable.name
-    
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(measuringSystemDidSwitch(_:)),
-                                           name: measuringSystemSwitchName,
-                                           object: nil)
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(applicationDidBecomeActive(_:)),
-                                           name: UIApplication.didBecomeActiveNotification,
-                                           object: nil)
-    NotificationCenter.default.addObserver(self,
-                                           selector: #selector(locationServiceDidBecomeEnable(_:)),
-                                           name: locationAuthorizationDidBecomeEnable,
-                                           object: nil)
+    NotificationAdapter.add(observer: self, selector: #selector(measuringSystemDidSwitch), for: .measuringSystemDidSwitch)
+    NotificationAdapter.add(observer: self, selector: #selector(locationServiceDidBecomeEnable), for: .locationServiceDidBecomeEnable)
+    NotificationAdapter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
   }
   
   func removeNotificationCenterObservers() {
-    NotificationCenter.default.removeObserver(self)
+    NotificationAdapter.remove(observer: self)
   }
   
 }
@@ -257,13 +245,11 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func reloadAndInitializeMainPageViewController() {
-    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
-    NotificationCenter.default.post(name: reloadPagesName, object: nil)
+    NotificationAdapter.post(.reloadPages)
   }
   
   func reloadDataInMainPageViewController() {
-    let reloadDataName = NotificationCenterKey.reloadPagesDataNotification.name
-    NotificationCenter.default.post(name: reloadDataName, object: nil)
+    NotificationAdapter.post(.reloadPagesData)
   }
   
 }

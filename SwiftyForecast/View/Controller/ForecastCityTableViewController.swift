@@ -38,14 +38,13 @@ class ForecastCityTableViewController: UITableViewController, UsesCoreDataObject
   private var citiesTimeZone: [String: TimeZone] = [:]
   weak var delegate: CityListTableViewControllerDelegate?
   var managedObjectContext: NSManagedObjectContext?
-  
+//  var viewModel: ForecastCityViewModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
   }
 }
-
 
 // MARK: - ViewSetupable protocol
 extension ForecastCityTableViewController: ViewSetupable {
@@ -56,7 +55,6 @@ extension ForecastCityTableViewController: ViewSetupable {
   }
   
 }
-
 
 // MARK: - Private - Set tableview
 private extension ForecastCityTableViewController {
@@ -72,7 +70,6 @@ private extension ForecastCityTableViewController {
   
 }
 
-
 // MARK: - Private - Set transparent background of TableView
 private extension ForecastCityTableViewController {
   
@@ -86,7 +83,6 @@ private extension ForecastCityTableViewController {
   }
   
 }
-
 
 // MARK: - Private - Fetch cities and local time
 private extension ForecastCityTableViewController {
@@ -106,7 +102,6 @@ private extension ForecastCityTableViewController {
   
 }
 
-
 // MARK: - Private - Insert/Delete city
 private extension ForecastCityTableViewController {
   
@@ -123,7 +118,6 @@ private extension ForecastCityTableViewController {
       CoreDataError.couldNotSave.handle()
     }
   }
-  
   
   func deleteCity(at indexPath: IndexPath) {
     guard let managedObjectContext = managedObjectContext else { return }
@@ -145,27 +139,23 @@ private extension ForecastCityTableViewController {
         CoreDataError.couldNotSave.handle()
       }
     }
-    
-    
   }
   
 }
-
 
 // MARK: - Private - Reload pages
 private extension ForecastCityTableViewController {
   
   func reloadAndInitializeMainPageViewController() {
-    let reloadPagesName = NotificationCenterKey.reloadPagesNotification.name
-    NotificationCenter.default.post(name: reloadPagesName, object: nil)
+    NotificationAdapter.post(.reloadPages)
   }
   
 }
 
-
 // MARK: - UITableViewDataSource protocol
 extension ForecastCityTableViewController {
   
+  // TODO: Implement ForecastCityViewModel
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return cities.count
   }
@@ -209,7 +199,6 @@ extension ForecastCityTableViewController {
   
 }
 
-
 // MARK: - UITableViewDelegate protocol
 extension ForecastCityTableViewController {
   
@@ -236,8 +225,6 @@ extension ForecastCityTableViewController {
   }
   
 }
-
-
 
 // MARK: GMSAutocompleteViewControllerDelegate protocol
 extension ForecastCityTableViewController: GMSAutocompleteViewControllerDelegate {
@@ -269,7 +256,6 @@ extension ForecastCityTableViewController: GMSAutocompleteViewControllerDelegate
   
 }
 
-
 // MARK: - Private - Actions
 private extension ForecastCityTableViewController {
   
@@ -285,7 +271,6 @@ private extension ForecastCityTableViewController {
   }
   
 }
-
 
 // MARK: - Private - Fetch local time
 private extension ForecastCityTableViewController {
