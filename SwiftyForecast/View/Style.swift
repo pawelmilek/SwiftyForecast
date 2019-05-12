@@ -1,7 +1,3 @@
-//  Created by Pawel Milek on 28/09/18.
-//  Copyright © 2016 imac. All rights reserved.
-//
-import Foundation
 import UIKit
 
 struct Style {
@@ -203,12 +199,12 @@ struct Style {
   // MARK: - CitySearchBar
   struct CitySearchBar {
     static let backgroundColor = UIColor.ecstasy
-    static let cancelButtonFont = UIFont.init(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
+    static let cancelButtonFont = UIFont(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
     static let cancelButtonColor = UIColor.white
     static let cancelButtonBackgroundColor = UIColor.white
     
     static let searchTextFieldBackgroundColor = UIColor.white
-    static let searchTextFieldFont = UIFont.init(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
+    static let searchTextFieldFont = UIFont(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
     static let searchTextFieldColor = UIColor.black
     static let searchTextFieldPlaceholder = UIColor.gray
     static var searchTextFieldTintColor = UIColor.ecstasy

@@ -1,5 +1,3 @@
-import Foundation
-
 final class JSONFileLoader: FileLoadable {
   
   static func loadFile(with name: String) throws -> Data {    

@@ -1,5 +1,3 @@
-import Foundation
-
 struct DefaultCityViewModel: CityViewModel {
   var name: String
   var currentTime: String

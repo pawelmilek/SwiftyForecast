@@ -39,7 +39,7 @@ extension DailyForecastTableViewCell: ViewSetupable {
 // MARK: - Configurate cell by item
 extension DailyForecastTableViewCell {
   
-  func configure(by item: DailyDataViewModel?) {
+  func configure(by item: DailyForecastCellViewModel?) {
     if let daily = item {
       dateLabel.attributedText = daily.attributedDate
       dateLabel.alpha = 1

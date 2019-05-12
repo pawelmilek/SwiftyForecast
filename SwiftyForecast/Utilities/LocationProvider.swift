@@ -1,12 +1,3 @@
-//
-//  LocationProvider.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 28/09/18.
-//  Copyright © 2016 Pawel Milek. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import CoreLocation
 

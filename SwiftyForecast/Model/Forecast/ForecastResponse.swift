@@ -1,5 +1,3 @@
-import Foundation
-
 struct ForecastResponse {
   let timezone: String
   let currently: CurrentForecast

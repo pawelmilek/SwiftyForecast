@@ -1,5 +1,3 @@
-import Foundation
-
 struct ForecastGenerator {
   
   static func generateTimezone() -> String {

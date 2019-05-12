@@ -1,5 +1,3 @@
-import Foundation
-
 struct DailyData: Forecast {
   let date: ForecastDate
   let summary: String

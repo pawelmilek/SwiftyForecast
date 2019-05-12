@@ -220,7 +220,7 @@ extension TodayViewController: UICollectionViewDataSource {
     
     guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
     
-    cell.configure(by: DefaultHourlyDataViewModel(hourlyData: item))
+    cell.configure(by: DefaultHourlyForecastCellViewModel(hourlyData: item))
     return cell
   }
 }

@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 import CoreData
 
@@ -330,7 +329,7 @@ extension ForecastContentViewController: UITableViewDataSource {
     let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
     
     let dailyData = dailyItems[indexPath.row]
-    cell.configure(by: DefaultDailyDataViewModel(dailyData: dailyData))
+    cell.configure(by: DefaultDailyForecastCellViewModel(dailyData: dailyData))
     return cell
   }
   

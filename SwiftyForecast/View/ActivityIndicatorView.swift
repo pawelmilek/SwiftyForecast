@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 final class ActivityIndicatorView {
@@ -16,7 +15,7 @@ final class ActivityIndicatorView {
   private var view: UIView? {
     didSet {
       guard let view = view else { return }
-      containerView.backgroundColor = UIColor.clear
+      containerView.backgroundColor = .clear
       containerView.addSubview(activityIndicator)
       view.addSubview(containerView)
       

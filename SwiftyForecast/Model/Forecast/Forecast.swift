@@ -1,5 +1,3 @@
-import Foundation
-
 protocol Forecast {
   var date: ForecastDate { get }
   var summary: String { get }

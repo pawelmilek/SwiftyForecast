@@ -1,5 +1,3 @@
-import Foundation
-
 enum FileLoaderError: Error {
   case fileNotFound(name: String)
   case dataNotAvailable

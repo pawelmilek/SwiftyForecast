@@ -1,5 +1,3 @@
-import Foundation
-
 protocol CityViewModel {
   var name: String { get }
   var currentTime: String { get }

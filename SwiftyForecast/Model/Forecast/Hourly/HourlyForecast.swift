@@ -1,5 +1,3 @@
-import Foundation
-
 struct HourlyForecast {
   let summary: String
   let icon: String

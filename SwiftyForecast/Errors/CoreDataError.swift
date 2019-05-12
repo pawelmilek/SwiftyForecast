@@ -1,5 +1,3 @@
-import Foundation
-
 enum CoreDataError: ErrorHandleable {
   case entityNotFound
   case couldNotSave

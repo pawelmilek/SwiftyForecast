@@ -1,5 +1,3 @@
-import Foundation
-
 enum GeocoderError: ErrorHandleable {
   case coordinateNotFound
   case placeNotFound

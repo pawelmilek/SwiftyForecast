@@ -1,5 +1,3 @@
-import Foundation
-
 enum WebServiceError: ErrorHandleable {
   case unknownURL(url: String)
   case requestFailed
