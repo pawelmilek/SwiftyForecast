@@ -1,6 +1,6 @@
 import Foundation
 
-struct DefaultHourlyDataViewModel: HourlyDataViewModel {
+struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
   var time: String
   var conditionIcon: NSAttributedString?
   private var hourlyData: HourlyData
@@ -13,7 +13,7 @@ struct DefaultHourlyDataViewModel: HourlyDataViewModel {
 }
 
 // MARK: - Temperature in Celsius
-extension DefaultHourlyDataViewModel {
+extension DefaultHourlyForecastCellViewModel {
   
   var temperature: String {
     if MeasuringSystem.selected == .metric {

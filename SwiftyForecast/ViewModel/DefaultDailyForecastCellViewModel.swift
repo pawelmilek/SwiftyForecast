@@ -1,6 +1,6 @@
 import Foundation
 
-struct DefaultDailyDataViewModel: DailyDataViewModel {
+struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
   typealias DailyStyle = Style.DailyForecastCell
   
   var attributedDate: NSAttributedString

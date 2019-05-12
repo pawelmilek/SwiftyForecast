@@ -1,6 +1,6 @@
 import Foundation
 
-protocol HourlyDataViewModel {
+protocol HourlyForecastCellViewModel {
   var time: String { get }
   var conditionIcon: NSAttributedString? { get }
   var temperature: String { get }
