@@ -200,7 +200,8 @@ extension TodayViewController: NCWidgetProviding {
   }
   
   
-  func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+  func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode,
+                                        withMaximumSize maxSize: CGSize) {
     let expanded = activeDisplayMode == .expanded
     preferredContentSize = expanded ? CGSize(width: maxSize.width, height: 200) : maxSize
   }
@@ -210,12 +211,14 @@ extension TodayViewController: NCWidgetProviding {
 // MARK - CollectionViewDataSource delegate
 extension TodayViewController: UICollectionViewDataSource {
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
     let eightHoursForecast = 8
     return eightHoursForecast
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier, for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
     
     guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
@@ -228,7 +231,9 @@ extension TodayViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegateFlowLayout protocol
 extension TodayViewController: UICollectionViewDelegateFlowLayout {
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 50, height: 85)
   }
   

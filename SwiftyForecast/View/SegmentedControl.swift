@@ -52,8 +52,6 @@ import UIKit
     }
   }
   
-  
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUp()
@@ -63,7 +61,6 @@ import UIKit
     super.init(coder: aDecoder)
     setUp()
   }
-  
   
   override func layoutSubviews() {
     super.layoutSubviews()
@@ -88,7 +85,6 @@ import UIKit
     displayNewSelectedIndex()
   }
   
-  
   override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
     let location = touch.location(in: self)
     var calculatedIndex: Int?
@@ -105,7 +101,6 @@ import UIKit
     return true
   }
 }
-
 
 // MARK: - ViewSetupable protocol
 extension SegmentedControl: ViewSetupable {
@@ -141,7 +136,6 @@ private extension SegmentedControl {
   
 }
 
-
 // MARK: - Private - Display new selected index
 private extension SegmentedControl {
   
@@ -157,8 +151,6 @@ private extension SegmentedControl {
   }
   
 }
-
-
 
 // MARK: - Private - Set color and font
 private extension SegmentedControl {
@@ -177,4 +169,3 @@ private extension SegmentedControl {
   }
   
 }
-

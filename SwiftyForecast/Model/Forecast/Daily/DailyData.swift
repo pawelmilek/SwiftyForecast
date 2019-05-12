@@ -2,33 +2,20 @@ struct DailyData: Forecast {
   let date: ForecastDate
   let summary: String
   let icon: String
-  
   let sunriseTime: ForecastDate
   let sunsetTime: ForecastDate
   let moonPhase: MoonPhase
-  let precipIntensity: Double
-  let precipProbability: Double
-  
   let temperature: Double = 0
   let apparentTemperature: Double = 0
-  
   let precipType: String?
   let temperatureMin: Double
   let temperatureMinTime: ForecastDate
   let temperatureMax: Double
   let temperatureMaxTime: ForecastDate
-  
-  let dewPoint: Double
   let humidity: Double
   let pressure: Double
   let windSpeed: Double
-  let windGust: Double
-  
-  let windBearing: Double
-  let cloudCover: Double
   let uvIndex: Int
-  let visibility: Double
-  let ozone: Double
 }
 
 // MARK: - isMetricMeasuringSystem
@@ -68,23 +55,15 @@ extension DailyData: Decodable {
     case icon
     case sunriseTime
     case sunsetTime
-    case precipIntensity
-    case precipProbability
     case precipType
     case temperatureMin
     case temperatureMinTime
     case temperatureMax
     case temperatureMaxTime
-    case dewPoint
     case humidity
     case pressure
     case windSpeed
-    case windGust
-    case windBearing
-    case cloudCover
     case uvIndex
-    case visibility
-    case ozone
   }
   
   init(from decoder: Decoder) throws {
@@ -98,10 +77,7 @@ extension DailyData: Decodable {
     let sunsetTimestamp = try container.decode(Int.self, forKey: .sunsetTime)
     self.sunriseTime = ForecastDate(timestamp: sunriseTimestamp)
     self.sunsetTime = ForecastDate(timestamp: sunsetTimestamp)
-    
     self.moonPhase = try MoonPhase(from: decoder)
-    self.precipIntensity = try container.decode(Double.self, forKey: .precipIntensity)
-    self.precipProbability = try container.decode(Double.self, forKey: .precipProbability)
     self.precipType = try container.decodeIfPresent(String.self, forKey: .precipType)
     
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)
@@ -110,16 +86,9 @@ extension DailyData: Decodable {
     self.temperatureMinTime = ForecastDate(timestamp: temperatureMinTimestamp)
     self.temperatureMax = try container.decode(Double.self, forKey: .temperatureMax)
     self.temperatureMaxTime = ForecastDate(timestamp: temperatureMaxTimestamp)
-    
-    self.dewPoint = try container.decode(Double.self, forKey: .dewPoint)
     self.humidity = try container.decode(Double.self, forKey: .humidity)
     self.pressure = try container.decode(Double.self, forKey: .pressure)
     self.windSpeed = try container.decode(Double.self, forKey: .windSpeed)
-    self.windGust = try container.decode(Double.self, forKey: .windGust)
-    self.windBearing = try container.decode(Double.self, forKey: .windBearing)
-    self.cloudCover = try container.decode(Double.self, forKey: .cloudCover)
     self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
-    self.visibility = try container.decode(Double.self, forKey: .visibility)
-    self.ozone = try container.decode(Double.self, forKey: .ozone)
   }
 }

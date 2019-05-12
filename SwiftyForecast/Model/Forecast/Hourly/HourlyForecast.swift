@@ -16,9 +16,10 @@ extension HourlyForecast: Decodable {
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
+    let firstTwentyFourHourForecast = 24
     self.summary = try container.decode(String.self, forKey: .summary)
     self.icon = try container.decode(String.self, forKey: .icon)
-    self.data = try Array(container.decode([HourlyData].self, forKey: .data).prefix(24))
+    self.data = try Array(container.decode([HourlyData].self, forKey: .data).prefix(firstTwentyFourHourForecast))
   }
   
 }

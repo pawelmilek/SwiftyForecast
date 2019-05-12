@@ -1,13 +1,11 @@
 import Foundation
 
-struct MoonPhase {
+struct MoonPhase: Decodable {
   private let lunation: Float
-  
-  init(lunation: Float) {
-    self.lunation = lunation
+  private enum CodingKeys: String, CodingKey {
+    case lunation = "moonPhase"
   }
 }
-
 
 // MARK: - Icon
 extension MoonPhase {
@@ -17,7 +15,6 @@ extension MoonPhase {
   }
   
 }
-
 
 // MARK: - CustomStringConvertible protocol
 extension MoonPhase: CustomStringConvertible {
@@ -52,23 +49,5 @@ extension MoonPhase: CustomStringConvertible {
       return "NA"
     }
   }
-}
-
-
-// MARK: - Decodable protocol
-extension MoonPhase: Decodable {
-  private enum CodingKeys: String, CodingKey {
-    case moonPhase
-  }
   
-  
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    let lunation = try container.decode(Float.self, forKey: .moonPhase)
-    
-    self.init(lunation: lunation)
-  }
 }
-
-
-

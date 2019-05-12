@@ -25,7 +25,6 @@ final class Coordinate: NSManagedObject, Decodable {
   }
 }
 
-
 // MARK: - Convenience initializer
 extension Coordinate {
 
@@ -46,7 +45,6 @@ extension Coordinate {
   }
   
 }
-
 
 // MARK: - Create fetch request
 extension Coordinate {

@@ -26,13 +26,12 @@ final class CurrentForecastView: UIView {
   }()
   
   private var viewDidExpand = false
-  private var currentForecast: CurrentForecast?
-  private var currentForecastDetails: DailyData?
-  private var hourlyForecast: HourlyForecast?
+  private var currentForecast: CurrentForecast?   // DefaultCurrentForecastViewModel
+  private var currentForecastDetails: DailyData?  // DefaultDailyForecastViewViewModel
+  private var hourlyForecast: HourlyForecast?     // DefaultHourlyForecastCellViewModel
   weak var delegate: CurrentForecastViewDelegate?
   
   typealias ForecastStyle = Style.CurrentForecast
-  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -153,11 +152,8 @@ extension CurrentForecastView {
     currentForecastDetails = details
     
     if let forecast = forecast, let details = details {
-      let fontSize = ForecastStyle.conditionFontIconSize
-      let icon = ConditionFontIcon.make(icon: forecast.icon, font: fontSize)
-      let cityTimeZone = city?.timeZone
       var sunriseTime: String {
-        if let cityTimeZone = cityTimeZone {
+        if let cityTimeZone = city?.timeZone {
           return details.sunriseTime.time(by: cityTimeZone)
         } else {
           return details.sunriseTime.time
@@ -165,12 +161,14 @@ extension CurrentForecastView {
       }
       
       var sunsetTime: String {
-        if let cityTimeZone = cityTimeZone {
+        if let cityTimeZone = city?.timeZone {
           return details.sunsetTime.time(by: cityTimeZone)
         } else {
           return details.sunsetTime.time
         }
       }
+      
+      let icon = ConditionFontIcon.make(icon: forecast.icon, font: ForecastStyle.conditionFontIconSize)
       
       iconLabel.attributedText = icon?.attributedIcon
       dateLabel.text = "\(forecast.date.weekday), \(forecast.date.longDayMonth)".uppercased()
@@ -238,7 +236,6 @@ extension CurrentForecastView {
       cityNameLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
       temperatureLabel.transform = CGAffineTransform(scaleX: 1.6, y: 1.6)
     }
-    
   }
   
   func animateLabelsIdentity() {
@@ -258,9 +255,10 @@ extension CurrentForecastView: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier, for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
-    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier,
+                                                        for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
     guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
+    
     cell.configure(by: DefaultHourlyForecastCellViewModel(hourlyData: item))
     return cell
   }
@@ -270,7 +268,9 @@ extension CurrentForecastView: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegateFlowLayout protocol
 extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 50, height: 85)
   }
   
