@@ -15,6 +15,10 @@ struct ForecastGenerator {
   static func generateDailyForecast() -> DailyForecast {
     return forecastResponse.daily
   }
+}
+
+// MARK: - Private - Generate forecast response from a stub
+extension ForecastGenerator {
   
   private static var forecastResponse: ForecastResponse {
     return ForecastGenerator.generateForecast()!
@@ -23,18 +27,21 @@ struct ForecastGenerator {
   private static func generateForecast() -> ForecastResponse? {
     do {
       let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub")
-      let result = Parser<ForecastResponse>.parseJSON(data)
+      let result = NetworkResponseParser<ForecastResponse>.parseJSON(data)
       
       switch result {
       case .success(let data):
         return data
         
-      default:
-        return nil
+      case .failure(let error):
+        debugPrint(error.localizedDescription)
       }
       
     } catch {
-      return nil
+      debugPrint(error.localizedDescription)
     }
+    
+    return nil
   }
+  
 }

@@ -329,7 +329,8 @@ extension ForecastContentViewController: UITableViewDataSource {
     let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
     
     let dailyData = dailyItems[indexPath.row]
-    cell.configure(by: DefaultDailyForecastCellViewModel(dailyData: dailyData))
+    let viewModel = DefaultDailyForecastCellViewModel(dailyData: dailyData)
+    cell.configure(by: viewModel)
     return cell
   }
   

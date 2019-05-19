@@ -13,11 +13,13 @@ final class WebServiceManager {
 // MARK: - Fetch data
 extension WebServiceManager {
   
-  func fetch<M: Decodable>(_ typeOf: M.Type, with request: WebServiceRequest, completionHandler: @escaping (Result<M, WebServiceError>) -> ()) {
+  func fetch<M: Decodable>(_ typeOf: M.Type,
+                           with request: WebServiceRequest,
+                           completionHandler: @escaping (Result<M, WebServiceError>) -> ()) {
     let urlRequest = request.urlRequest
     let encodedURLRequest = urlRequest.encode(with: request.parameters)
     
-    sessionShared.dataTask(with: encodedURLRequest) { (data, response, error) in
+    sessionShared.dataTask(with: encodedURLRequest) { data, response, error in
       guard error == nil else {
         completionHandler(.failure(.requestFailed))
         return
@@ -28,7 +30,7 @@ extension WebServiceManager {
         return
       }
       
-      completionHandler(Parser<M>.parseJSON(data, with: CoreDataStackHelper.shared.managedContext))
+      completionHandler(NetworkResponseParser<M>.parseJSON(data, with: CoreDataStackHelper.shared.managedContext))
       }.resume()
   }
   

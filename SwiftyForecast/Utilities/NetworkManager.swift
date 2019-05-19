@@ -26,13 +26,12 @@ private extension NetworkManager {
   
   func registerObserver() {
     NotificationAdapter.add(observer: self,
-                                  selector: #selector(networkStatusChanged),
-                                  for: .reachabilityChanged,
-                                  object: reachability)
+                            selector: #selector(networkStatusChanged),
+                            for: .reachabilityChanged,
+                            object: reachability)
   }
   
 }
-
 
 // MARK: - Private - Network status changed
 private extension NetworkManager {
@@ -55,13 +54,11 @@ private extension NetworkManager {
     }
   }
   
-  
   func stopNotifier() -> () {
     reachability.stopNotifier()
   }
 
 }
-
 
 // MARK: - Network status checkers
 extension NetworkManager {
@@ -97,4 +94,5 @@ extension NetworkManager {
   func whenUnreachable(completionHandler: @escaping (_ networkReachable: Reachability) -> ()) {
     reachability.whenUnreachable = completionHandler
   }
+  
 }

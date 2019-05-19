@@ -145,7 +145,11 @@ private extension SegmentedControl {
     let selectedLabel = labels[selectedIndex]
     selectedLabel.textColor = selectedLabelColor
     
-    UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.8, options: [], animations: {
+    UIView.animate(withDuration: 0.5,
+                   delay: 0.0,
+                   usingSpringWithDamping: 0.5,
+                   initialSpringVelocity: 0.8,
+                   options: [], animations: {
       self.thumbView.frame = selectedLabel.frame
     })
   }

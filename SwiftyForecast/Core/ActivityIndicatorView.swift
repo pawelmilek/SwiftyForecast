@@ -36,7 +36,6 @@ final class ActivityIndicatorView {
   private init() {}
 }
 
-
 // MARK: - Start/Stop indicator
 extension ActivityIndicatorView {
   
@@ -46,7 +45,6 @@ extension ActivityIndicatorView {
       self.activityIndicator.startAnimating()
     }
   }
-  
   
   func stopAnimating() {
     DispatchQueue.main.async {

@@ -7,7 +7,6 @@ struct DailyData: Forecast {
   let moonPhase: MoonPhase
   let temperature: Double = 0
   let apparentTemperature: Double = 0
-  let precipType: String?
   let temperatureMin: Double
   let temperatureMinTime: ForecastDate
   let temperatureMax: Double
@@ -31,17 +30,17 @@ extension DailyData {
   
   var temperatureMinFormatted: String {
     if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMin.roundedToString + "\u{00B0}"
+      return temperatureInCelsiusMin.roundedToString + Style.degreeSign
     } else {
-      return temperatureMin.roundedToString + "\u{00B0}"
+      return temperatureMin.roundedToString + Style.degreeSign
     }
   }
   
   var temperatureMaxFormatted: String {
     if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMax.roundedToString + "\u{00B0}"
+      return temperatureInCelsiusMax.roundedToString + Style.degreeSign
     } else {
-      return temperatureMax.roundedToString + "\u{00B0}"
+      return temperatureMax.roundedToString + Style.degreeSign
     }
   }
   
@@ -55,7 +54,6 @@ extension DailyData: Decodable {
     case icon
     case sunriseTime
     case sunsetTime
-    case precipType
     case temperatureMin
     case temperatureMinTime
     case temperatureMax
@@ -78,8 +76,7 @@ extension DailyData: Decodable {
     self.sunriseTime = ForecastDate(timestamp: sunriseTimestamp)
     self.sunsetTime = ForecastDate(timestamp: sunsetTimestamp)
     self.moonPhase = try MoonPhase(from: decoder)
-    self.precipType = try container.decodeIfPresent(String.self, forKey: .precipType)
-    
+  
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)
     let temperatureMaxTimestamp = try container.decode(Int.self, forKey: .temperatureMaxTime)
     self.temperatureMin = try container.decode(Double.self, forKey: .temperatureMin)

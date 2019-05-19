@@ -1,6 +1,10 @@
 import UIKit
 
 struct Style {
+  static let degreeSign = "\u{00B0}"
+  static let fahrenheitDegree = "\(Style.degreeSign)F"
+  static let celsiusDegree = "\(Style.degreeSign)C"
+  
   // MARK: - NavigationBar
   struct NavigationBar {
     static let barButtonItemColor = UIColor.blackShade
@@ -152,6 +156,8 @@ struct Style {
     static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 13)
     static let temperatureLabelTextColor = UIColor.white
     static let temperatureLabelTextAlignment = NSTextAlignment.center
+    
+    static let conditionIconSize: CGFloat = 25
   }
   
   // MARK: - ForecastCityListTableViewController

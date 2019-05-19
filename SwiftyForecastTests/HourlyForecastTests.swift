@@ -12,6 +12,7 @@ class HourlyForecastTests: BaseSwiftyForecastTests {
   override func tearDown() {
     super.tearDown()
     
+    MeasuringSystem.selected = .imperial
     hourlyForecast = nil
   }
   
@@ -33,16 +34,34 @@ class HourlyForecastTests: BaseSwiftyForecastTests {
     XCTAssertEqual(hours, expectedValue, "Forecast's number of hourly is incorrect.")
   }
   
-  func testHourlyForecast() {
+  func testHourlyForecastCellTimeAndConditionIcon() {
     let data = hourlyForecast.data.first!
-    let hourlyDataViewModel = DefaultHourlyDataViewModel(hourlyData: data)
+    let hourlyDataViewModel = DefaultHourlyForecastCellViewModel(hourlyData: data)
+    
+    XCTAssertEqual(hourlyDataViewModel.time, "3:00 PM")
+    XCTAssertEqual(hourlyDataViewModel.conditionIcon!, ConditionFontIcon.make(icon: "sleet", font: 25)!.attributedIcon)
+    
+  }
+  
+  func testHourlyCellTemperatureInCelsius() {
+    let data = hourlyForecast.data.first!
+    let hourlyDataViewModel = DefaultHourlyForecastCellViewModel(hourlyData: data)
+    
+    MeasuringSystem.selected = .metric
+    XCTAssertEqual(hourlyDataViewModel.temperature, "1°")
+  }
+  
+  func testHourlyCellTemperatureInFahrenheit() {
+    let data = hourlyForecast.data.first!
+    let hourlyDataViewModel = DefaultHourlyForecastCellViewModel(hourlyData: data)
+    
+    MeasuringSystem.selected = .imperial
+    XCTAssertEqual(hourlyDataViewModel.temperature, "34°")
   }
   
   func testTemperatureRoundedToString() {
     let belowZero = -0.4
-    let newValue = belowZero.roundedToString
-    let expectedValue = "-1"
-    XCTAssertEqual(newValue, expectedValue, "String temperature should be \(expectedValue)")
+    XCTAssertEqual(belowZero.roundedToString, "-1")
   }
   
   // TODO: Implement Unit Testing

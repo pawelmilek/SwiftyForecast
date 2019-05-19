@@ -102,6 +102,7 @@ private extension TodayViewController {
 // MARK: - Configure current forecast
 private extension TodayViewController {
 
+  // DefaultForecastService 
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?)->()) {
     guard let currentCity = SharedGroupContainer.getSharedCity() else { return }
     
@@ -219,11 +220,15 @@ extension TodayViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier, for: indexPath) as? HourlyForecastCollectionViewCell else { return UICollectionViewCell() }
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier,
+                                                        for: indexPath) as? HourlyForecastCollectionViewCell else {
+                                                          return UICollectionViewCell()
+    }
     
     guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
     
-    cell.configure(by: DefaultHourlyForecastCellViewModel(hourlyData: item))
+    let viewModel = DefaultHourlyForecastCellViewModel(hourlyData: item)
+    cell.configure(by: viewModel)
     return cell
   }
 }

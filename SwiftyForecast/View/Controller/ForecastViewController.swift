@@ -12,7 +12,7 @@ class ForecastViewController: UIViewController {
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
-    segmentedControl.items = [SegmentedControlItemType.fahrenheit, SegmentedControlItemType.celsius]
+    segmentedControl.items = [SegmentedControlItem.fahrenheit, SegmentedControlItem.celsius]
     segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
     segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
     segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor

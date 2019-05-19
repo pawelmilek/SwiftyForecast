@@ -20,9 +20,9 @@ extension CurrentForecast {
   
   var temperatureFormatted: String {
     if MeasuringSystem.selected == .metric {
-      return temperatureInCelsius.roundedToString + "\u{00B0}"
+      return temperatureInCelsius.roundedToString + Style.degreeSign
     } else {
-      return temperature.roundedToString + "\u{00B0}"
+      return temperature.roundedToString + Style.degreeSign
     }
   }
   

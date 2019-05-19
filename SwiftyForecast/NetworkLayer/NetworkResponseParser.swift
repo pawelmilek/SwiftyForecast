@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-struct Parser<M> where M: Decodable {
+struct NetworkResponseParser<M> where M: Decodable {
   
   static func parseJSON(_ data: Data) -> Result<M, WebServiceError> {
     do {
@@ -30,16 +30,20 @@ struct Parser<M> where M: Decodable {
       return .failure(.decoderFailed)
     }
   }
+}
+
+// MARK: For testing
+private extension NetworkResponseParser {
   
-  // TODO: REmove!!
-  fileprivate static func prettyJSONPrint(_ data: Data) {
-    let dictonary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-    let json = stringify(json: dictonary!, prettyPrinted: true)
-    print(json)
+  static func printPrettyJSON(from data: Data) {
+    guard let dictonary = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+    guard let prettyJSON = stringify(json: dictonary) else { return }
+    print(prettyJSON)
   }
   
-  static func stringify(json: [String: Any], prettyPrinted: Bool = false) -> String {
+  private static func stringify(json: [String: Any], prettyPrinted: Bool = true) -> String? {
     var options: JSONSerialization.WritingOptions = []
+    
     if prettyPrinted {
       options = JSONSerialization.WritingOptions.prettyPrinted
     }
@@ -53,7 +57,6 @@ struct Parser<M> where M: Decodable {
       print(error)
     }
     
-    return ""
+    return nil
   }
-
 }
