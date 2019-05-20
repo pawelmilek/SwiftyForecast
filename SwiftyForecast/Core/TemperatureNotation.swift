@@ -1,4 +1,4 @@
-enum TemperatureNotation {
+enum TemperatureNotation: CaseIterable {
   case fahrenheit
   case celsius
 }

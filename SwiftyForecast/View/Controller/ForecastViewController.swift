@@ -5,14 +5,14 @@ import SafariServices
 class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
-  typealias ForecastMainStyle = Style.ForecastMainVC
-  
   private let network = NetworkManager.shared
   private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
   
   private lazy var measuringSystemSegmentedControl: SegmentedControl = {
+    typealias ForecastMainStyle = Style.ForecastMainVC
+    
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
-    segmentedControl.items = [SegmentedControlItem.fahrenheit, SegmentedControlItem.celsius]
+    segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
     segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
     segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
     segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
@@ -43,7 +43,10 @@ class ForecastViewController: UIViewController {
     let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalization", ascending: false)
     request.sortDescriptors = [currentLocalizedSort]
     
-    let cities = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+    let cities = NSFetchedResultsController(fetchRequest: request,
+                                            managedObjectContext: context,
+                                            sectionNameKeyPath: nil,
+                                            cacheName: nil)
     return cities
   }()
   
@@ -90,7 +93,7 @@ extension ForecastViewController: ViewSetupable {
     fetchCitiesAndSetLastUpdate()
     fetchCities()
     initializePageViewController()
-    setMetricSystemSegmentedControl()
+    setMeasuringSystemSegmentedControl()
     addNotificationCenterObserver()
     setNetworkManagerWhenInternetIsNotAvailable()
     setPageControl()
@@ -138,7 +141,7 @@ private extension ForecastViewController {
 // MARK: - Private - Set metric system segmented control
 private extension ForecastViewController {
   
-  func setMetricSystemSegmentedControl() {
+  func setMeasuringSystemSegmentedControl() {
     navigationItem.titleView = measuringSystemSegmentedControl
   }
   
@@ -176,15 +179,13 @@ private extension ForecastViewController {
       let offlineViewController = OfflineViewController()
       self.navigationController?.pushViewController(offlineViewController, animated: false)
     }
-    
-    // Will run only once when app is launching
+
     network.isUnreachable { _ in
-      whenNetworkIsNotAvailable()
+      whenNetworkIsNotAvailable() // Will run only once when app is launching
     }
     
-    // Network listener to pick up network changes in real-time
     network.whenUnreachable { _ in
-      whenNetworkIsNotAvailable()
+      whenNetworkIsNotAvailable() // Network listener to pick up network changes in real-time
     }
   }
   

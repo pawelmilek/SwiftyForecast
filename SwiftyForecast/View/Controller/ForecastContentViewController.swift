@@ -15,13 +15,13 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var isFeatchingForecast = false
-//  private var viewModel: DailyDataViewModel?
+  //  private var viewModel: DailyDataViewModel?
   
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast,
-            let currentDayDetails = weatherForecast.daily.currentDayData else { return }
+        let currentDayDetails = weatherForecast.daily.currentDayData else { return }
       currentForecastView.configure(current: weatherForecast.currently,
                                     currentDayDetails: currentDayDetails,
                                     at: weatherForecast.city)
@@ -125,7 +125,7 @@ private extension ForecastContentViewController {
     
     if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled {
       fetchWeatherForecastForCurrentLocation()
-  
+      
     } else if let currentCityForecast = currentCityForecast {
       fetchWeatherForecast(for: currentCityForecast)
     }
@@ -148,7 +148,7 @@ private extension ForecastContentViewController {
       if let place = place {
         let latitude = place.coordinate.latitude
         let longitude = place.coordinate.longitude
-
+        
         let request = ForecastRequest.make(by: (latitude, longitude))
         WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
@@ -189,7 +189,6 @@ private extension ForecastContentViewController {
     }
   }
   
-  
   func fetchWeatherForecast(for city: City) {
     sharedActivityIndicator.startAnimating(at: view)
     isFeatchingForecast = true
@@ -217,7 +216,6 @@ private extension ForecastContentViewController {
   
 }
 
-
 // MARK: - Private - Check and decide when to fetch new forecast
 private extension ForecastContentViewController {
   
@@ -239,7 +237,6 @@ private extension ForecastContentViewController {
   
 }
 
-
 // MARK: - Private - Reload pages
 private extension ForecastContentViewController {
   
@@ -252,7 +249,6 @@ private extension ForecastContentViewController {
   }
   
 }
-
 
 // MARK: - CurrentForecastViewDelegate protocol
 extension ForecastContentViewController: CurrentForecastViewDelegate {
@@ -271,8 +267,8 @@ extension ForecastContentViewController: CurrentForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseOut,
                    animations: {
-      self.currentForecastView.animateLabelsScaling()
-      self.view.layoutIfNeeded()
+                    self.currentForecastView.animateLabelsScaling()
+                    self.view.layoutIfNeeded()
     })
   }
   
@@ -290,13 +286,12 @@ extension ForecastContentViewController: CurrentForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseIn,
                    animations: {
-      self.currentForecastView.animateLabelsIdentity()
-      self.view.layoutIfNeeded()
+                    self.currentForecastView.animateLabelsIdentity()
+                    self.view.layoutIfNeeded()
     })
   }
   
 }
-
 
 // MARK: - Private - Animate bouncing effect
 private extension ForecastContentViewController {
@@ -310,7 +305,7 @@ private extension ForecastContentViewController {
                    initialSpringVelocity: 6.0,
                    options: .allowUserInteraction,
                    animations: {
-      self.currentForecastView.transform = .identity
+                    self.currentForecastView.transform = .identity
     })
   }
   
@@ -336,7 +331,6 @@ extension ForecastContentViewController: UITableViewDataSource {
   
 }
 
-
 // MARK: - UITableViewDelegate protocol
 extension ForecastContentViewController: UITableViewDelegate {
   
@@ -346,14 +340,12 @@ extension ForecastContentViewController: UITableViewDelegate {
   
 }
 
-
 // MARK: - Actions
 extension ForecastContentViewController {
   
   @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
     fetchWeatherForecastForCurrentLocation()
   }
-  
   
   @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
@@ -363,18 +355,17 @@ extension ForecastContentViewController {
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
     fetchWeatherForecast() // TODO: Change it after implementing CoreData for WeatherForecast!
-//    guard sharedLocationProvider.isLocationServicesEnabled else { return }
-//    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
-//
-//    sharedLocationProvider.requestLocation { [weak self] newLocation in
-//      let minDistanceInMeters = 500.00
-//      let didUserChangeHisLocation = previousLocation.distance(from: newLocation) >= minDistanceInMeters
-//      if didUserChangeHisLocation {
-//        self?.fetchWeatherForecast()
-//      }
-//    }
+    //    guard sharedLocationProvider.isLocationServicesEnabled else { return }
+    //    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
+    //
+    //    sharedLocationProvider.requestLocation { [weak self] newLocation in
+    //      let minDistanceInMeters = 500.00
+    //      let didUserChangeHisLocation = previousLocation.distance(from: newLocation) >= minDistanceInMeters
+    //      if didUserChangeHisLocation {
+    //        self?.fetchWeatherForecast()
+    //      }
+    //    }
   }
-  
   
   private func reloadForecast() {
     guard let previousWeatherForecast = weatherForecast else { return }

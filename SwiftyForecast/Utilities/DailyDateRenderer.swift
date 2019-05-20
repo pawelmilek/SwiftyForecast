@@ -1,9 +1,19 @@
-//
-//  DailyDateRenderer.swift
-//  Swifty Forecast
-//
-//  Created by Pawel Milek on 19/05/2019.
-//  Copyright © 2019 Pawel Milek. All rights reserved.
-//
-
 import Foundation
+
+struct DailyDateRenderer {
+  
+  static func render(weekday: String, month: String) -> NSAttributedString {
+    let fullDate = ("\(weekday)\r\n\(month)") as NSString
+    let weekdayRange = fullDate.range(of: weekday)
+    let monthRange = fullDate.range(of: month)
+    
+    let attributedString = NSMutableAttributedString(string: fullDate as String)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.weekdayLabelFont],
+                                   range: weekdayRange)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.monthLabelFont],
+                                   range: monthRange)
+    return attributedString
+  }
+  
+}
+

@@ -3,6 +3,17 @@ import GooglePlaces
 import CoreData
 
 final class City: NSManagedObject, Codable {
+  @NSManaged var name: String
+  @NSManaged var country: String
+  @NSManaged var state: String?
+  @NSManaged var postalCode: String
+  @NSManaged var isCurrentLocalization: Bool
+  @NSManaged var latitude: Double
+  @NSManaged var longitude: Double
+  @NSManaged var timeZone: TimeZone?
+  @NSManaged var lastUpdate: Date?
+  @NSManaged var coordinate: Coordinate?
+  
   private enum CodingKeys: String, CodingKey {
     case name
     case country
@@ -15,23 +26,10 @@ final class City: NSManagedObject, Codable {
     case lastUpdate
   }
   
-  @NSManaged var name: String
-  @NSManaged var country: String
-  @NSManaged var state: String?
-  @NSManaged var postalCode: String
-  @NSManaged var isCurrentLocalization: Bool
-  @NSManaged var latitude: Double
-  @NSManaged var longitude: Double
-  @NSManaged var timeZone: TimeZone?
-  @NSManaged var lastUpdate: Date?
-  @NSManaged var coordinate: Coordinate?
-  
-  
   override func awakeFromInsert() {
     super.awakeFromInsert()
     lastUpdate = Date()
   }
-  
   
   required convenience init(from decoder: Decoder) throws {
     var entityDescription: NSEntityDescription?
@@ -71,7 +69,6 @@ final class City: NSManagedObject, Codable {
     try container.encodeIfPresent(lastUpdate, forKey: .lastUpdate)
   }
 
-  
   convenience init(place: GMSPlace, isCurrentLocalization: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
@@ -86,7 +83,6 @@ final class City: NSManagedObject, Codable {
     self.longitude = place.coordinate.longitude
   }
   
-  
   convenience init(unassociatedObject: City, isCurrentLocalization: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
@@ -98,7 +94,6 @@ final class City: NSManagedObject, Codable {
     self.latitude = unassociatedObject.latitude
     self.longitude = unassociatedObject.longitude
   }
-  
   
   convenience init(place: GMSPlace) {
     let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.managedContext)!
@@ -116,7 +111,6 @@ final class City: NSManagedObject, Codable {
   }
 }
 
-
 // MARK: - Local time
 extension City {
   
@@ -133,7 +127,6 @@ extension City {
   
 }
 
-
 // MARK: - Create fetch request
 extension City {
   
@@ -142,7 +135,6 @@ extension City {
   }
   
 }
-
 
 // MARK: - Is city exists in Core Data
 extension City {

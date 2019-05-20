@@ -1,22 +1,17 @@
 import XCTest
 
 class BaseSwiftyForecastTests: XCTestCase {
-//  var weatherForecast: WeatherForecast!
-  var timezone: String!
+  //  var weatherForecast: WeatherForecast!
   
   override func setUp() {
     super.setUp()
+    //    weatherForecast = ForecastGenerator.generateWeatherForecast()
     
-//    weatherForecast = ForecastGenerator.generateWeatherForecast()
-    timezone = ForecastGenerator.generateTimezone()
   }
   
   override func tearDown() {
     super.tearDown()
     
-//    weatherForecast = nil
-    timezone = nil
+    //    weatherForecast = nil
   }
-  
-  // TODO: Implement Unit Testing
 }

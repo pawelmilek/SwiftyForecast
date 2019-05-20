@@ -1,8 +1,6 @@
 import Foundation
 
 struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
-  typealias DailyStyle = Style.DailyForecastCell
-  
   var attributedDate: NSAttributedString
   var conditionIcon: NSAttributedString?
   var temperatureMax: String
@@ -10,18 +8,10 @@ struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
   init(dailyData: DailyData) {
     let weekday = dailyData.date.weekday.uppercased()
     let month = dailyData.date.longDayMonth.uppercased()
-    
-    let fullDate = ("\(weekday)\r\n\(month)") as NSString
-    let weekdayRange = fullDate.range(of: weekday)
-    let monthRange = fullDate.range(of: month)
-    
-    let attributedString = NSMutableAttributedString(string: fullDate as String)
-    attributedString.addAttributes([.font: DailyStyle.weekdayLabelFont], range: weekdayRange)
-    attributedString.addAttributes([.font: DailyStyle.monthLabelFont], range: monthRange)
-    
-    attributedDate = attributedString
+
+    attributedDate = DailyDateRenderer.render(weekday: weekday, month: month)
     conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
-                                           font: DailyStyle.conditionIconSize)?.attributedIcon
+                                           font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
     temperatureMax = dailyData.temperatureMaxFormatted
   }
 }
