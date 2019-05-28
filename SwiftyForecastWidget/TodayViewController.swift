@@ -10,8 +10,6 @@ class TodayViewController: UIViewController {
   @IBOutlet private weak var temperatureMaxMinLabel: UILabel!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   
-  typealias WidgetStyle = Style.WeatherWidget
-  
   private var forecast: WeatherForecast?
   private var currentForecast: CurrentForecast?
   private var currentDayDetails: DailyData?
@@ -51,32 +49,32 @@ extension TodayViewController: ViewSetupable {
   }
   
   func setUpStyle() {
-    iconLabel.textColor = WidgetStyle.iconLabelTextColor
+    iconLabel.textColor = Style.WeatherWidget.iconLabelTextColor
     
-    cityNameLabel.font = WidgetStyle.cityNameLabelFont
-    cityNameLabel.textColor = WidgetStyle.cityNameLabelTextColor
-    cityNameLabel.textAlignment = WidgetStyle.cityNameLabelTextAlignment
-    cityNameLabel.numberOfLines = WidgetStyle.cityNameLabelNumberOfLines
+    cityNameLabel.font = Style.WeatherWidget.cityNameLabelFont
+    cityNameLabel.textColor = Style.WeatherWidget.cityNameLabelTextColor
+    cityNameLabel.textAlignment = Style.WeatherWidget.cityNameLabelTextAlignment
+    cityNameLabel.numberOfLines = Style.WeatherWidget.cityNameLabelNumberOfLines
     
-    conditionSummaryLabel.font = WidgetStyle.conditionSummaryLabelFont
-    conditionSummaryLabel.textColor = WidgetStyle.conditionSummaryLabelTextColor
-    conditionSummaryLabel.textAlignment = WidgetStyle.conditionSummaryLabelTextAlignment
-    conditionSummaryLabel.numberOfLines = WidgetStyle.conditionSummaryLabelNumberOfLines
+    conditionSummaryLabel.font = Style.WeatherWidget.conditionSummaryLabelFont
+    conditionSummaryLabel.textColor = Style.WeatherWidget.conditionSummaryLabelTextColor
+    conditionSummaryLabel.textAlignment = Style.WeatherWidget.conditionSummaryLabelTextAlignment
+    conditionSummaryLabel.numberOfLines = Style.WeatherWidget.conditionSummaryLabelNumberOfLines
     
-    humidityLabel.font = WidgetStyle.humidityLabelFont
-    humidityLabel.textColor = WidgetStyle.humidityLabelTextColor
-    humidityLabel.textAlignment = WidgetStyle.humidityLabelTextAlignment
-    humidityLabel.numberOfLines = WidgetStyle.humidityLabelNumberOfLines
+    humidityLabel.font = Style.WeatherWidget.humidityLabelFont
+    humidityLabel.textColor = Style.WeatherWidget.humidityLabelTextColor
+    humidityLabel.textAlignment = Style.WeatherWidget.humidityLabelTextAlignment
+    humidityLabel.numberOfLines = Style.WeatherWidget.humidityLabelNumberOfLines
     
-    temperatureLabel.font = WidgetStyle.temperatureLabelFont
-    temperatureLabel.textColor = WidgetStyle.temperatureLabelTextColor
-    temperatureLabel.textAlignment = WidgetStyle.temperatureLabelTextAlignment
-    temperatureLabel.numberOfLines = WidgetStyle.temperatureLabelNumberOfLines
+    temperatureLabel.font = Style.WeatherWidget.temperatureLabelFont
+    temperatureLabel.textColor = Style.WeatherWidget.temperatureLabelTextColor
+    temperatureLabel.textAlignment = Style.WeatherWidget.temperatureLabelTextAlignment
+    temperatureLabel.numberOfLines = Style.WeatherWidget.temperatureLabelNumberOfLines
     
-    temperatureMaxMinLabel.font = WidgetStyle.temperatureMaxMinLabelFont
-    temperatureMaxMinLabel.textColor = WidgetStyle.temperatureMaxMinLabelTextColor
-    temperatureMaxMinLabel.textAlignment = WidgetStyle.temperatureMaxMinLabelTextAlignment
-    temperatureMaxMinLabel.numberOfLines = WidgetStyle.temperatureMaxMinLabelNumberOfLines
+    temperatureMaxMinLabel.font = Style.WeatherWidget.temperatureMaxMinLabelFont
+    temperatureMaxMinLabel.textColor = Style.WeatherWidget.temperatureMaxMinLabelTextColor
+    temperatureMaxMinLabel.textAlignment = Style.WeatherWidget.temperatureMaxMinLabelTextAlignment
+    temperatureMaxMinLabel.numberOfLines = Style.WeatherWidget.temperatureMaxMinLabelNumberOfLines
     
     hideLabels()
   }
@@ -87,7 +85,7 @@ extension TodayViewController: ViewSetupable {
 private extension TodayViewController {
   
   func setCollectionView() {
-    hourlyCollectionView.register(cellClass: HourlyForecastCollectionViewCell.self)
+    hourlyCollectionView.register(cellClass: HourlyCollectionViewCell.self)
     hourlyCollectionView.dataSource = self
     hourlyCollectionView.delegate = self
     hourlyCollectionView.alwaysBounceHorizontal = false
@@ -102,7 +100,7 @@ private extension TodayViewController {
 // MARK: - Configure current forecast
 private extension TodayViewController {
 
-  // DefaultForecastService 
+  // TODO: Implement DefaultForecastService
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?)->()) {
     guard let currentCity = SharedGroupContainer.getSharedCity() else { return }
     
@@ -127,11 +125,11 @@ private extension TodayViewController {
     })
   }
   
-  func configure() {
+  func configure() { // TODO: Implement ViewModel
     if let forecast = forecast, let details = currentDayDetails  {
       hourlyForecast = forecast.hourly
       
-      let fontSize = WidgetStyle.iconLabelFontSize
+      let fontSize = Style.WeatherWidget.iconLabelFontSize
       let icon = ConditionFontIcon.make(icon: forecast.currently.icon, font: fontSize)
       iconLabel.attributedText = icon?.attributedIcon
       cityNameLabel.text = forecast.city.name
@@ -220,11 +218,8 @@ extension TodayViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseIdentifier,
-                                                        for: indexPath) as? HourlyForecastCollectionViewCell else {
-                                                          return UICollectionViewCell()
-    }
-    
+    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier,
+                                                        for: indexPath) as? HourlyCollectionViewCell else { return UICollectionViewCell() }
     guard let item = hourlyForecast?.data[indexPath.item] else { return UICollectionViewCell() }
     
     let viewModel = DefaultHourlyForecastCellViewModel(hourlyData: item)

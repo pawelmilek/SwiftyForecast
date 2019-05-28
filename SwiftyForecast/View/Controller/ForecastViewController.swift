@@ -75,7 +75,7 @@ class ForecastViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
-    guard let cityListVC = segue.destination as? ForecastCityTableViewController else { return }
+    guard let cityListVC = segue.destination as? CityTableViewController else { return }
     
     cityListVC.delegate = self
     cityListVC.managedObjectContext = stack.managedContext
@@ -245,9 +245,9 @@ extension ForecastViewController {
 }
 
 // MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastViewController: CityListTableViewControllerDelegate {
+extension ForecastViewController: CityTableViewControllerDelegate {
   
-  func cityListController(_ cityListTableViewController: ForecastCityTableViewController, didSelect city: City) {
+  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: City) {
     guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
   
     moveToPage(at: newPageIndex) {

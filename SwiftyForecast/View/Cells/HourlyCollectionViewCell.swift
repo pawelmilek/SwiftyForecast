@@ -1,6 +1,6 @@
 import UIKit
 
-class HourlyForecastCollectionViewCell: UICollectionViewCell {
+class HourlyCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
@@ -17,7 +17,7 @@ class HourlyForecastCollectionViewCell: UICollectionViewCell {
 }
 
 // MARK: - ViewSetupable
-extension HourlyForecastCollectionViewCell: ViewSetupable {
+extension HourlyCollectionViewCell: ViewSetupable {
   
   func setUp() {
     backgroundColor = Style.HourlyForecastCell.backgroundColor
@@ -37,7 +37,7 @@ extension HourlyForecastCollectionViewCell: ViewSetupable {
 }
 
 // MARK: - Configure
-extension HourlyForecastCollectionViewCell {
+extension HourlyCollectionViewCell {
   
   func configure(by hourly: HourlyForecastCellViewModel?) {
     if let hourly = hourly {

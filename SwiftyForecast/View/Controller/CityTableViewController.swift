@@ -36,7 +36,7 @@ class CityTableViewController: UITableViewController, UsesCoreDataObjects {
   
   private var cities: [City] = []
   private var citiesTimeZone: [String: TimeZone] = [:]
-  weak var delegate: CityListTableViewControllerDelegate?
+  weak var delegate: CityTableViewControllerDelegate?
   var managedObjectContext: NSManagedObjectContext?
 //  var viewModel: ForecastCityViewModel?
   
@@ -204,7 +204,7 @@ extension CityTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCity = cities[indexPath.row]
-    delegate?.cityListTableViewController(self, didSelect: selectedCity)
+    delegate?.cityTableViewController(self, didSelect: selectedCity)
     backButtonTapped(.none)
   }
   

@@ -16,16 +16,15 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var isFeatchingForecast = false
   //  private var viewModel: DailyDataViewModel?
+  private var currentViewModel: CurrentForecastViewModel?
   
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
-      guard let weatherForecast = weatherForecast,
-        let currentDayDetails = weatherForecast.daily.currentDayData else { return }
-      currentForecastView.configure(current: weatherForecast.currently,
-                                    currentDayDetails: currentDayDetails,
-                                    at: weatherForecast.city)
-      currentForecastView.configure(hourly: weatherForecast.hourly)
+      guard let weatherForecast = weatherForecast else { return }
+      
+      currentViewModel = DefaultCurrentForecastViewModel(weatherForecast: weatherForecast)
+      currentForecastView.configure(by: currentViewModel)
       dailyForecastTableView.reloadData()
     }
   }
@@ -75,7 +74,8 @@ private extension ForecastContentViewController {
     currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
     currentForecastViewStackViewBottomToMoreDetailsBottomConstraint = currentForecastView.stackViewBottomToMoreDetailsTopConstraint
     currentForecastViewStackViewBottomToSafeAreaBottomConstraint = currentForecastView.stackViewBottomToSafeAreaBottomConstraint
-    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor, constant: 0)
+    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: self.dailyForecastTableView.bottomAnchor,
+                                                                                         constant: 0)
   }
   
 }
@@ -102,9 +102,15 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
-    NotificationAdapter.add(observer: self, selector: #selector(measuringSystemDidSwitch), for: .measuringSystemDidSwitch)
-    NotificationAdapter.add(observer: self, selector: #selector(locationServiceDidBecomeEnable), for: .locationServiceDidBecomeEnable)
-    NotificationAdapter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
+    NotificationAdapter.add(observer: self,
+                            selector: #selector(measuringSystemDidSwitch),
+                            for: .measuringSystemDidSwitch)
+    NotificationAdapter.add(observer: self,
+                            selector: #selector(locationServiceDidBecomeEnable),
+                            for: .locationServiceDidBecomeEnable)
+    NotificationAdapter.add(observer: self,
+                            selector: #selector(applicationDidBecomeActive),
+                            for: .applicationDidBecomeActive)
   }
   
   func removeNotificationCenterObservers() {
@@ -354,17 +360,7 @@ extension ForecastContentViewController {
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    fetchWeatherForecast() // TODO: Change it after implementing CoreData for WeatherForecast!
-    //    guard sharedLocationProvider.isLocationServicesEnabled else { return }
-    //    guard let previousLocation = sharedLocationProvider.currentLocation else { return }
-    //
-    //    sharedLocationProvider.requestLocation { [weak self] newLocation in
-    //      let minDistanceInMeters = 500.00
-    //      let didUserChangeHisLocation = previousLocation.distance(from: newLocation) >= minDistanceInMeters
-    //      if didUserChangeHisLocation {
-    //        self?.fetchWeatherForecast()
-    //      }
-    //    }
+    fetchWeatherForecast()
   }
   
   private func reloadForecast() {

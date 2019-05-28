@@ -54,7 +54,7 @@
         <!-- -->
         <scene sceneID="a6q-Ke-vaD">
             <objects>
-                <tableViewController storyboardIdentifier="ForecastCityListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ydj-fi-6FQ" customClass="ForecastCityTableViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ForecastCityListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ydj-fi-6FQ" customClass="CityTableViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qv6-0V-ehs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

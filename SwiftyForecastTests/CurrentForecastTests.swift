@@ -2,14 +2,17 @@ import XCTest
 
 class CurrentForecastTests: XCTestCase {
   private var currentForecast: CurrentForecast!
+  private var viewModel: CurrentForecastViewModel!
   
   override func setUp() {
     super.setUp()
     currentForecast = ForecastGenerator.generateCurrentForecast()
+//    viewModel = DefaultCurrentForecastViewModelinit(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
   }
   
   override func tearDown() {
     currentForecast = nil
+    viewModel = nil
     super.tearDown()
   }
   

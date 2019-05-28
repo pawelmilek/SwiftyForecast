@@ -1,6 +1,6 @@
 import XCTest
 
-class DailyForecastTests: BaseSwiftyForecastTests {
+class DailyForecastTests: XCTestCase {
   private var dailyForecast: DailyForecast!
   private var viewModel: DailyForecastCellViewModel!
   
