@@ -124,6 +124,8 @@
 		E2435BDF22AD93C4007589CE /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2435BDE22AD93C4007589CE /* MoonPhase.swift */; };
 		E2435BE022AD93C9007589CE /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2435BDE22AD93C4007589CE /* MoonPhase.swift */; };
 		E2435BE122AD93CA007589CE /* MoonPhase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2435BDE22AD93C4007589CE /* MoonPhase.swift */; };
+		E2435BE322ADDBB7007589CE /* HourlyForecastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyForecastCellViewModel.swift */; };
+		E2435BE422ADDBB8007589CE /* HourlyForecastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyForecastCellViewModel.swift */; };
 		E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
 		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
@@ -1388,6 +1390,7 @@
 				E2435BCC22AD5668007589CE /* MeasuringSystem.swift in Sources */,
 				E200103C216A951C008E6090 /* CoreDataError.swift in Sources */,
 				E2001036216A949F008E6090 /* City.swift in Sources */,
+				E2435BE322ADDBB7007589CE /* HourlyForecastCellViewModel.swift in Sources */,
 				E200104D216A9625008E6090 /* URLRequest+Parameters.swift in Sources */,
 				E200103B216A9501008E6090 /* NSManagedObject+EntityName.swift in Sources */,
 				E2854FF42290E7EE00CD7554 /* Style.swift in Sources */,
@@ -1604,6 +1607,7 @@
 				E2CF4DB52275077C00062E36 /* ErrorHandleable.swift in Sources */,
 				E2CF4DA92275014E00062E36 /* JSONFileLoader.swift in Sources */,
 				E2CF4DC02275089800062E36 /* FontWeatherIconError.swift in Sources */,
+				E2435BE422ADDBB8007589CE /* HourlyForecastCellViewModel.swift in Sources */,
 				E2CF4D8A2273C39700062E36 /* HourlyForecastTests.swift in Sources */,
 				E28550002290F24800CD7554 /* TemperatureNotation.swift in Sources */,
 				E285500B2292303C00CD7554 /* DailyDateRenderer.swift in Sources */,
