@@ -32,7 +32,7 @@ class OfflineViewController: UIViewController {
   
   override func loadView() {
     super.loadView()
-    setupLayout()
+    setUpLayout()
   }
   
   override func viewDidLoad() {
@@ -62,7 +62,7 @@ extension OfflineViewController: ViewSetupable {
     }
   }
   
-  func setupLayout() {
+  func setUpLayout() {
     offLineImageView.translatesAutoresizingMaskIntoConstraints = false
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     

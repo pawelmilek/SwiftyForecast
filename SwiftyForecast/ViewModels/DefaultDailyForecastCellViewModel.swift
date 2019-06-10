@@ -1,9 +1,9 @@
 import Foundation
 
 struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
-  var attributedDate: NSAttributedString
-  var conditionIcon: NSAttributedString?
-  var temperatureMax: String
+  let attributedDate: NSAttributedString
+  let conditionIcon: NSAttributedString?
+  let temperatureMax: String
   
   init(dailyData: DailyData) {
     let weekday = dailyData.date.weekday.uppercased()

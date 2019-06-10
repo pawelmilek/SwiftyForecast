@@ -1,4 +1,4 @@
-enum TemperatureNotation: CaseIterable {
+enum TemperatureNotation: Int, CaseIterable {
   case fahrenheit
   case celsius
 }

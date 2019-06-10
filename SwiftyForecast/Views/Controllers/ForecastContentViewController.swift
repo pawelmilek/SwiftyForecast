@@ -16,14 +16,13 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var isFeatchingForecast = false
   //  private var viewModel: DailyDataViewModel?
-  private var currentViewModel: CurrentForecastViewModel?
   
   var currentCityForecast: City?
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
       
-      currentViewModel = DefaultCurrentForecastViewModel(weatherForecast: weatherForecast)
+      let currentViewModel = DefaultCurrentForecastViewModel(weatherForecast: weatherForecast)
       currentForecastView.configure(by: currentViewModel)
       dailyForecastTableView.reloadData()
     }
@@ -103,8 +102,8 @@ private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
     NotificationAdapter.add(observer: self,
-                            selector: #selector(measuringSystemDidSwitch),
-                            for: .measuringSystemDidSwitch)
+                            selector: #selector(unitNotationDidChange),
+                            for: .unitNotationDidChange)
     NotificationAdapter.add(observer: self,
                             selector: #selector(locationServiceDidBecomeEnable),
                             for: .locationServiceDidBecomeEnable)
@@ -164,15 +163,15 @@ private extension ForecastContentViewController {
               strongSelf.weatherForecast = WeatherForecast(city: unassociatedCity, forecastResponse: forecast)
               
               if unassociatedCity.isExists() == false {
-                LocalizedCityManager.deleteCurrentLocalizedCity()
-                LocalizedCityManager.insertCurrentLocalized(city: unassociatedCity)
+                LocalizedCityManager.deleteCurrentCity()
+                LocalizedCityManager.insertCurrent(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
                 strongSelf.reloadAndInitializeMainPageViewController()
                 strongSelf.sharedStack.saveContext()
                 
               } else {
-                LocalizedCityManager.fetchAndResetLocalizedCities()
-                LocalizedCityManager.updateCurrentLocalized(city: unassociatedCity)
+                LocalizedCityManager.fetchAndResetCities()
+                LocalizedCityManager.updateCurrent(city: unassociatedCity)
                 strongSelf.reloadDataInMainPageViewController()
               }
               
@@ -259,7 +258,7 @@ private extension ForecastContentViewController {
 // MARK: - CurrentForecastViewDelegate protocol
 extension ForecastContentViewController: CurrentForecastViewDelegate {
   
-  func currentForecastDidExpandAnimation() {
+  func currentForecastDidExpand() {
     animateBouncingEffect()
     
     currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
@@ -278,7 +277,7 @@ extension ForecastContentViewController: CurrentForecastViewDelegate {
     })
   }
   
-  func currentForecastDidCollapseAnimation() {
+  func currentForecastDidCollapse() {
     let height = currentForecastView.frame.size.height
     
     currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
@@ -353,9 +352,11 @@ extension ForecastContentViewController {
     fetchWeatherForecastForCurrentLocation()
   }
   
-  @objc func measuringSystemDidSwitch(_ notification: NSNotification) {
+  @objc func unitNotationDidChange(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
+    
     MeasuringSystem.selected = (segmentedControl.selectedIndex == 0 ? .imperial : .metric)
+    
     reloadForecast()
   }
   

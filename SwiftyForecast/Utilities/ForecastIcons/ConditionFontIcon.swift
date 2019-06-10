@@ -27,10 +27,9 @@ struct ConditionFontIcon {
   }
 }
 
-
 // MARK: - WeatherFontIcon protocol
 extension ConditionFontIcon: FontWeatherIcon {
-
+  
   static func make(icon: String, font size: CGFloat) -> ConditionFontIcon? {
     guard let condition = ConditionType(rawValue: icon) else { return nil }
     

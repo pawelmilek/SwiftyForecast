@@ -3,8 +3,7 @@ import Foundation
 final class LocalizedCityManager {
   static private let sharedStack = CoreDataStackHelper.shared
   
-  
-  static func deleteCurrentLocalizedCity() {
+  static func deleteCurrentCity() {
     let request = City.createFetchRequest()
     let predicate = NSPredicate(format: "isCurrentLocalization == %@", NSNumber(value: true))
     request.predicate = predicate
@@ -18,13 +17,11 @@ final class LocalizedCityManager {
     }
   }
   
-  
-  static func insertCurrentLocalized(city: City) {
+  static func insertCurrent(city: City) {
     let _ = City(unassociatedObject: city, isCurrentLocalization: true, managedObjectContext: sharedStack.managedContext)
   }
   
-  
-  static func fetchAndResetLocalizedCities() {
+  static func fetchAndResetCities() {
     let fetchRequest = City.createFetchRequest()
     if let cities = try? sharedStack.managedContext.fetch(fetchRequest) {
       cities.forEach {
@@ -34,8 +31,7 @@ final class LocalizedCityManager {
     }
   }
   
-  
-  static func updateCurrentLocalized(city: City) {
+  static func updateCurrent(city: City) {
     let request = City.createFetchRequest()
     let predicate = NSPredicate(format: "name == %@ && country == %@", city.name, city.country)
     request.predicate = predicate
@@ -50,7 +46,6 @@ final class LocalizedCityManager {
     sharedStack.saveContext()
   }
   
-  
   static func fetchCurrentCity() -> City? {
     let request = City.createFetchRequest()
     let predicate = NSPredicate(format: "isCurrentLocalization == %@", NSNumber(value: true))
@@ -62,7 +57,6 @@ final class LocalizedCityManager {
     
     return nil
   }
-  
   
   static func setCitiesLastUpdateDateAfterCoreDataMigration() {
     let fetchRequest = City.createFetchRequest()

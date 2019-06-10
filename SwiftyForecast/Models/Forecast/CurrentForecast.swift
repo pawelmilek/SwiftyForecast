@@ -15,7 +15,7 @@ struct CurrentForecast: Forecast {
 extension CurrentForecast {
   
   private var temperatureInCelsius: Double {
-    return (temperature - 32) * Double(5.0 / 9.0)
+    return temperature.ToCelsius()
   }
   
   var temperatureFormatted: String {

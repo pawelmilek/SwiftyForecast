@@ -65,7 +65,7 @@ class ForecastViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
-    setupLayout()
+    setUpLayout()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +99,7 @@ extension ForecastViewController: ViewSetupable {
     setPageControl()
   }
   
-  func setupLayout() {
+  func setUpLayout() {
     view.bringSubviewToFront(pageControl)
   }
   
@@ -232,7 +232,7 @@ extension ForecastViewController {
   }
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    NotificationAdapter.post(.measuringSystemDidSwitch, object: nil, userInfo: ["SegmentedControl": sender])
+    NotificationAdapter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControl": sender])
   }
   
   @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {

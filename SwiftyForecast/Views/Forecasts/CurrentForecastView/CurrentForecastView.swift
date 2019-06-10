@@ -40,6 +40,7 @@ final class CurrentForecastView: UIView {
   required init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
     setUp()
+    setUpLayout()
     setUpStyle()
   }
 }
@@ -48,13 +49,23 @@ final class CurrentForecastView: UIView {
 extension CurrentForecastView: ViewSetupable {
   
   func setUp() {
-    loadAndAddSubviews()
+    createContentView()
     setShadowForBaseView()
     setRoundedCornersForContentView()
     setCollectionView()
     addTapGestureRecognizer()
-    
-    configure(by: .none)
+  }
+  
+  func setUpLayout() {
+    temperatureLabel.alpha = 0
+    iconLabel.alpha = 0
+    dateLabel.alpha = 0
+    cityNameLabel.alpha = 0
+    windView.alpha = 0
+    humidityView.alpha = 0
+    sunriseView.alpha = 0
+    sunsetView.alpha = 0
+    moreDetailsView.alpha = 0
   }
   
   func setUpStyle() {
@@ -82,7 +93,7 @@ extension CurrentForecastView: ViewSetupable {
 // MARK: - Set bottom shadow
 private extension CurrentForecastView {
   
-  func loadAndAddSubviews() {
+  func createContentView() {
     let nibName = CurrentForecastView.nibName
     Bundle.main.loadNibNamed(nibName, owner: self, options: [:])
     
@@ -131,7 +142,8 @@ private extension CurrentForecastView {
 private extension CurrentForecastView {
   
   func addTapGestureRecognizer() {
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureHandler(_:)))
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                      action: #selector(tapGestureHandler))
     tapGestureRecognizer.numberOfTapsRequired = 1
     tapGestureRecognizer.numberOfTouchesRequired = 1
     
@@ -143,25 +155,8 @@ private extension CurrentForecastView {
 
 // MARK: - Configure current forecast
 extension CurrentForecastView {
-  
+
   func configure(by viewModel: CurrentForecastViewModel) {
-    
-  }
-  
-  func configure(by viewModel: CurrentForecastViewModel?) {
-    guard let viewModel = viewModel else {
-      temperatureLabel.alpha = 0
-      iconLabel.alpha = 0
-      dateLabel.alpha = 0
-      cityNameLabel.alpha = 0
-      windView.alpha = 0
-      humidityView.alpha = 0
-      sunriseView.alpha = 0
-      sunsetView.alpha = 0
-      moreDetailsView.alpha = 0
-      return
-    }
-    
     iconLabel.attributedText = viewModel.icon
     dateLabel.text = viewModel.weekdayMonthDay
     cityNameLabel.text = viewModel.cityName
@@ -224,16 +219,18 @@ extension CurrentForecastView {
 // MARK: - UICollectionViewDataSource protocol
 extension CurrentForecastView: UICollectionViewDataSource {
   
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
     return hourly?.data.count ?? 0
   }
   
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.reuseIdentifier,
                                                         for: indexPath) as? HourlyCollectionViewCell,
           let item = hourly?.data[indexPath.item] else { return UICollectionViewCell()
-            
     }
+    
     let viewModel = DefaultHourlyForecastCellViewModel(hourlyData: item)
     cell.configure(by: viewModel)
     return cell
@@ -259,10 +256,10 @@ extension CurrentForecastView {
     viewDidExpand = !viewDidExpand
     
     if viewDidExpand {
-      delegate?.currentForecastDidExpandAnimation()
+      delegate?.currentForecastDidExpand()
       
     } else {
-      delegate?.currentForecastDidCollapseAnimation()
+      delegate?.currentForecastDidCollapse()
     }
   }
   

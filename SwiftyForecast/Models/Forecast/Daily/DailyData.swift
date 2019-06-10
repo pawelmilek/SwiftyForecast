@@ -21,11 +21,11 @@ struct DailyData: Forecast {
 extension DailyData {
   
   private var temperatureInCelsiusMin: Double {
-    return (temperatureMin - 32) * Double(5.0 / 9.0)
+    return temperatureMin.ToCelsius()
   }
   
   private var temperatureInCelsiusMax: Double {
-    return (temperatureMax - 32) * Double(5.0 / 9.0)
+    return temperatureMax.ToCelsius()
   }
   
   var temperatureMinFormatted: String {

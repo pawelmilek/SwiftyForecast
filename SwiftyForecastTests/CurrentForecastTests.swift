@@ -7,7 +7,7 @@ class CurrentForecastTests: XCTestCase {
   override func setUp() {
     super.setUp()
     currentForecast = ForecastGenerator.generateCurrentForecast()
-//    viewModel = DefaultCurrentForecastViewModelinit(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
+//    viewModel = DefaultCurrentForecastViewModel(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
   }
   
   override func tearDown() {
