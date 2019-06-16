@@ -167,7 +167,7 @@ private extension TodayViewController {
     guard let hostApplicationUrl = URL(string: "host-screen:") else { return }
     extensionContext?.open(hostApplicationUrl) { success in
       if (!success) {
-        print("error: failed to open host app from Today Extension")
+        debugPrint("error: failed to open host app from Today Extension")
       }
     }
   }

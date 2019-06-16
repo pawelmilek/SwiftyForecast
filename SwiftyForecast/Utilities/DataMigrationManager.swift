@@ -46,7 +46,7 @@ class DataMigrationManager {
       metadata = try NSPersistentStoreCoordinator.metadataForPersistentStore(ofType: NSSQLiteStoreType, at: storeURL, options: nil)
     } catch {
       metadata = [:]
-      print("Error retrieving metadata for store at URL:\(storeURL): \(error)")
+      debugPrint("Error retrieving metadata for store at URL:\(storeURL): \(error)")
     }
     return metadata
   }
@@ -92,10 +92,10 @@ class DataMigrationManager {
     let targetURL = storeURL.deletingLastPathComponent()
     let destinationName = storeURL.lastPathComponent + "~1"
     let destinationURL = targetURL.appendingPathComponent(destinationName)
-    print("From Model: \(from.entityVersionHashesByName)")
-    print("To Model: \(to.entityVersionHashesByName)")
-    print("Migrating store \(storeURL) to \(destinationURL)")
-    print("Mapping model: \(String(describing: mappingModel))")
+    debugPrint("From Model: \(from.entityVersionHashesByName)")
+    debugPrint("To Model: \(to.entityVersionHashesByName)")
+    debugPrint("Migrating store \(storeURL) to \(destinationURL)")
+    debugPrint("Mapping model: \(String(describing: mappingModel))")
     // 4
     let success: Bool
     do {
@@ -104,17 +104,17 @@ class DataMigrationManager {
       success = true
     } catch {
       success = false
-      print("Migration failed: \(error)")
+      debugPrint("Migration failed: \(error)")
     }
     // 5
     if success {
-      print("Migration Completed Successfully")
+      debugPrint("Migration Completed Successfully")
       let fileManager = FileManager.default
       do {
         try fileManager.removeItem(at: storeURL)
         try fileManager.moveItem(at: destinationURL, to: storeURL)
       } catch {
-        print("Error migrating \(error)")
+        debugPrint("Error migrating \(error)")
       }
     }
   }

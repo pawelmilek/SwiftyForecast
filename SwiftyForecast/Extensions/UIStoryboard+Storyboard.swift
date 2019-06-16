@@ -10,11 +10,9 @@ extension UIStoryboard {
     }
   }
   
-  
   convenience init(storyboard: Storyboard, bundle: Bundle? = nil) {
     self.init(name: storyboard.fileName, bundle: bundle)
   }
-  
   
   func instantiateViewController<T: UIViewController>(_ vc: T.Type) -> T {
     guard let viewController = self.instantiateViewController(withIdentifier: vc.storyboardIdentifier) as? T else {
@@ -25,4 +23,3 @@ extension UIStoryboard {
   }
   
 }
-

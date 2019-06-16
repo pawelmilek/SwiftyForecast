@@ -222,7 +222,6 @@ enum FontWeatherIconType: String {
   case time12 = "\u{f089}"
 }
 
-
 // MARK: - String from the given CSS icon code. https://erikflowers.github.io/weather-icons/
 extension FontWeatherIconType {
   
@@ -231,16 +230,14 @@ extension FontWeatherIconType {
     return icon
   }
   
-  
   func attributedString(font size: CGFloat) -> NSAttributedString {
     let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.fontWeather(size: size)]
     let attributedString = NSAttributedString(string: self.iconCode, attributes: attributes)
     
     return attributedString
   }
-
+  
 }
-
 
 // MARK: - CSS icon code
 extension FontWeatherIconType {
@@ -250,7 +247,6 @@ extension FontWeatherIconType {
   }
   
 }
-
 
 // MARK: - Private - An array of FontWeather icon codes.
 extension FontWeatherIconType {
@@ -480,4 +476,3 @@ extension FontWeatherIconType {
   }
   
 }
-

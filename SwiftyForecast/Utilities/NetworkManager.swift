@@ -38,19 +38,19 @@ private extension NetworkManager {
   
   @objc func networkStatusChanged(_ notification: Notification) {
     guard let reachability = notification.object as? Reachability else {
-      print("Network status changed: Reachability not available!")
+      debugPrint("Network status changed: Reachability not available!")
       return
     }
     
     switch reachability.connection {
     case .wifi:
-      print("Reachable via WiFi")
+      debugPrint("Reachable via WiFi")
       
     case .cellular:
-      print("Reachable via Cellular")
+      debugPrint("Reachable via Cellular")
       
     case .none:
-      print("Network not reachable")
+      debugPrint("Network not reachable")
     }
   }
   

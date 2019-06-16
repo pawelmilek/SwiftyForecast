@@ -730,24 +730,24 @@
 		E23997DD20E84158007D8CE4 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */,
+				E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */,
 				E27E2F911DA04C8C00B3EABF /* Double+RoundedToString.swift */,
-				E2435BCE22AD611B007589CE /* Double+ToKPH.swift */,
 				E2435BD422AD7332007589CE /* Double+ToCelsius.swift */,
 				E2435BD622AD736C007589CE /* Double+ToFahrenheit.swift */,
+				E2435BCE22AD611B007589CE /* Double+ToKPH.swift */,
 				E23FA39D21095C1500F4EABB /* GMSAutocompleteViewController+SearchBarStyle.swift */,
+				E20793F22176B6A500F3AF10 /* Int+ToHoursMinutesSeconds.swift */,
+				E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */,
+				E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */,
+				E23CD76220ED9A3500F0F72A /* UICollectionView+Registrable.swift */,
 				E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */,
+				E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */,
+				E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */,
 				E27E2FAE1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift */,
 				E27E2FAF1DA04D1D00B3EABF /* UITableView+Registrable.swift */,
-				E23CD76220ED9A3500F0F72A /* UICollectionView+Registrable.swift */,
-				E27E2FB11DA04D1D00B3EABF /* UIView+ReusableView.swift */,
 				E27E2FB01DA04D1D00B3EABF /* UIView+NibLoadableView.swift */,
-				E221C22720FFBBF400CBB8F2 /* NSManagedObject+EntityName.swift */,
-				E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */,
+				E27E2FB11DA04D1D00B3EABF /* UIView+ReusableView.swift */,
 				E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */,
-				E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */,
-				E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */,
-				E20793F22176B6A500F3AF10 /* Int+ToHoursMinutesSeconds.swift */,
 			);
 			name = Extensions;
 			path = ../Extensions;
@@ -971,13 +971,13 @@
 		E2A45E0F2290D86E00B04A67 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E23997F120E84389007D8CE4 /* AlertView */,
-				E2854FCB2290E00800CD7554 /* Style */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
 				E2435BCA22AD563D007589CE /* MeasuringSystem.swift */,
+				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
+				E23997F120E84389007D8CE4 /* AlertView */,
+				E2854FCB2290E00800CD7554 /* Style */,
 				E2435BD222AD627B007589CE /* UserDefaults */,
 				E2435BD322AD6293007589CE /* Notations */,
-				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
 				E2A42DE6214DEE5E00F9A79A /* NVActivityIndicatorView */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DF20E84371007D8CE4 /* NetworkLayer */,

@@ -230,7 +230,7 @@ private extension ForecastContentViewController {
     
     let differenceInSeconds = Int(currentDate.timeIntervalSince(cityLastUpdate))
     let (hours, minutes, seconds) = differenceInSeconds.convertToHoursMinutesSeconds
-    print((hours, minutes, seconds))
+    debugPrint((hours, minutes, seconds))
     
     if hours > 0 || minutes > 30 {
       return true

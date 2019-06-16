@@ -9,7 +9,6 @@ class FontLoader {
       throw FontWeatherIconError.fileNotFound(name: name)
     }
     
-    
     let fontURL = URL(fileURLWithPath: path)
     var error: Unmanaged<CFError>?
     

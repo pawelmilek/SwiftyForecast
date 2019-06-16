@@ -9,7 +9,8 @@ extension UIFont {
       let name = "FontWeather"
       try? FontLoader.shared.loadFont(with: name)
     }
-
+    
     return UIFont(name: fontName, size: size)!
   }
+  
 }

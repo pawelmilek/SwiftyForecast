@@ -22,7 +22,6 @@ struct MoonPhaseFontIcon {
   }
 }
 
-
 // MARK: - WeatherFontIcon protocol
 extension MoonPhaseFontIcon: FontWeatherIcon {
   

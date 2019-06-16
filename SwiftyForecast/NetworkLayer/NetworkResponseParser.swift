@@ -9,7 +9,7 @@ struct NetworkResponseParser<M> where M: Decodable {
       return .success(decodedModel)
       
     } catch let error {
-      print(error)
+      debugPrint(error)
       return .failure(.decoderFailed)
     }
   }
@@ -26,7 +26,7 @@ struct NetworkResponseParser<M> where M: Decodable {
       return .success(decodedModel)
       
     } catch let error {
-      print(error)
+      debugPrint(error)
       return .failure(.decoderFailed)
     }
   }
@@ -38,7 +38,7 @@ private extension NetworkResponseParser {
   static func printPrettyJSON(from data: Data) {
     guard let dictonary = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
     guard let prettyJSON = stringify(json: dictonary) else { return }
-    print(prettyJSON)
+    debugPrint(prettyJSON)
   }
   
   private static func stringify(json: [String: Any], prettyPrinted: Bool = true) -> String? {
@@ -54,7 +54,7 @@ private extension NetworkResponseParser {
         return string
       }
     } catch {
-      print(error)
+      debugPrint(error)
     }
     
     return nil

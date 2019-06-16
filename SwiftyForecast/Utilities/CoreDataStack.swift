@@ -26,7 +26,7 @@ class CoreDataStack {
     do {
       try fileManager.createDirectory(atPath: storePath as String, withIntermediateDirectories: true, attributes: nil)
     } catch {
-      print("Error creating storePath \(storePath): \(error)")
+      debugPrint("Error creating storePath \(storePath): \(error)")
     }
     
     let sqliteFilePath = storePath.appendingPathComponent(storeName + ".sqlite")
