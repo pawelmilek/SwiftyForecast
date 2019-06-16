@@ -14,7 +14,7 @@ struct DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   var windSpeed: String {
     let speed = weatherForecast.currently.windSpeed
     
-    switch ForecastUserDefaults.unitNotation {
+    switch UserDefaultsAdapter.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
       

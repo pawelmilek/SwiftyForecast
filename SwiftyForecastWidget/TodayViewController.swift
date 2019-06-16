@@ -7,12 +7,12 @@ class TodayViewController: UIViewController {
   @IBOutlet private weak var conditionSummaryLabel: UILabel!
   @IBOutlet private weak var humidityLabel: UILabel!
   @IBOutlet private weak var temperatureLabel: UILabel!
-  @IBOutlet private weak var temperatureMaxMinLabel: UILabel!
+  @IBOutlet private weak var temperatureMinMaxLabel: UILabel!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   
   private var forecast: WeatherForecast?
   private var currentForecast: CurrentForecast?
-  private var currentDayDetails: DailyData?
+  private var todayViewModel: TodayForecastViewModel?
   private var hourlyForecast: HourlyForecast?
 
   private lazy var tapGesture: UITapGestureRecognizer = {
@@ -71,10 +71,10 @@ extension TodayViewController: ViewSetupable {
     temperatureLabel.textAlignment = Style.WeatherWidget.temperatureLabelTextAlignment
     temperatureLabel.numberOfLines = Style.WeatherWidget.temperatureLabelNumberOfLines
     
-    temperatureMaxMinLabel.font = Style.WeatherWidget.temperatureMaxMinLabelFont
-    temperatureMaxMinLabel.textColor = Style.WeatherWidget.temperatureMaxMinLabelTextColor
-    temperatureMaxMinLabel.textAlignment = Style.WeatherWidget.temperatureMaxMinLabelTextAlignment
-    temperatureMaxMinLabel.numberOfLines = Style.WeatherWidget.temperatureMaxMinLabelNumberOfLines
+    temperatureMinMaxLabel.font = Style.WeatherWidget.temperatureMaxMinLabelFont
+    temperatureMinMaxLabel.textColor = Style.WeatherWidget.temperatureMaxMinLabelTextColor
+    temperatureMinMaxLabel.textAlignment = Style.WeatherWidget.temperatureMaxMinLabelTextAlignment
+    temperatureMinMaxLabel.numberOfLines = Style.WeatherWidget.temperatureMaxMinLabelNumberOfLines
     
     hideLabels()
   }
@@ -113,7 +113,7 @@ private extension TodayViewController {
         DispatchQueue.main.async {
           let weatherForecast = WeatherForecast(city: currentCity, forecastResponse: forecast)
           strongSelf.forecast = weatherForecast
-          strongSelf.currentDayDetails = weatherForecast.daily.currentDayData
+          strongSelf.todayViewModel = DefaultTodayForecastViewModel(dailyData: weatherForecast.daily.currentDayData!)
           completionHandler(nil)
         }
         
@@ -126,24 +126,23 @@ private extension TodayViewController {
   }
   
   func configure() { // TODO: Implement ViewModel
-    if let forecast = forecast, let details = currentDayDetails  {
+    if let forecast = forecast, let todayViewModel = todayViewModel  {
       hourlyForecast = forecast.hourly
       
-      let fontSize = Style.WeatherWidget.iconLabelFontSize
-      let icon = ConditionFontIcon.make(icon: forecast.currently.icon, font: fontSize)
-      iconLabel.attributedText = icon?.attributedIcon
       cityNameLabel.text = forecast.city.name
       temperatureLabel.text = forecast.currently.temperatureFormatted
-      conditionSummaryLabel.text = details.summary
-      humidityLabel.text = "Humidity: \(Int(details.humidity * 100)) %"
-      temperatureMaxMinLabel.text = "\(details.temperatureMinFormatted) / \(details.temperatureMaxFormatted)"
+      
+      iconLabel.attributedText = todayViewModel.icon
+      conditionSummaryLabel.text = todayViewModel.summary
+      humidityLabel.text = todayViewModel.humidity
+      temperatureMinMaxLabel.text = todayViewModel.temperatureMinMax
       
       iconLabel.alpha = 1
       cityNameLabel.alpha = 1
       conditionSummaryLabel.alpha = 1
       humidityLabel.alpha = 1
       temperatureLabel.alpha = 1
-      temperatureMaxMinLabel.alpha = 1
+      temperatureMinMaxLabel.alpha = 1
 
     } else {
       hideLabels()
@@ -156,7 +155,7 @@ private extension TodayViewController {
     conditionSummaryLabel.alpha = 0
     humidityLabel.alpha = 0
     temperatureLabel.alpha = 0
-    temperatureMaxMinLabel.alpha = 0
+    temperatureMinMaxLabel.alpha = 0
   }
 }
 

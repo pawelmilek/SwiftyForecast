@@ -7,5 +7,4 @@ protocol Forecast {
   var humidity: Double { get }
   var pressure: Double { get }
   var windSpeed: Double { get }
-  var uvIndex: Int { get }
 }

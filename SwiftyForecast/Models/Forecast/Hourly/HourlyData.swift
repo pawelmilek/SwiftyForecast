@@ -13,7 +13,6 @@ struct HourlyData: Forecast {
   let windGust: Double
   let windBearing: Double
   let cloudCover: Double
-  let uvIndex: Int
   let visibility: Double
   let ozone: Double
 }
@@ -35,7 +34,6 @@ extension HourlyData: Decodable {
     case windGust
     case windBearing
     case cloudCover
-    case uvIndex
     case visibility
     case ozone
   }
@@ -57,7 +55,6 @@ extension HourlyData: Decodable {
     self.windGust = try container.decode(Double.self, forKey: .windGust)
     self.windBearing = try container.decode(Double.self, forKey: .windBearing)
     self.cloudCover = try container.decode(Double.self, forKey: .cloudCover)
-    self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
     self.visibility = try container.decode(Double.self, forKey: .visibility)
     self.ozone = try container.decode(Double.self, forKey: .ozone)
   }

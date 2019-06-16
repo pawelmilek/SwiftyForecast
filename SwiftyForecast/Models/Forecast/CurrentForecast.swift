@@ -7,19 +7,14 @@ struct CurrentForecast: Forecast {
   let humidity: Double
   let pressure: Double
   let windSpeed: Double
-  let cloudCover: Double
-  let uvIndex: Int
 }
 
 // MARK: - Temperature in Celsius
 extension CurrentForecast {
   
-  private var temperatureInCelsius: Double {
-    return temperature.ToCelsius()
-  }
-  
   var temperatureFormatted: String {
-    if MeasuringSystem.selected == .metric {
+    if NotationSystem.selectedUnitNotation == .metric {
+      let temperatureInCelsius = temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign
     } else {
       return temperature.roundedToString + Style.degreeSign
@@ -39,8 +34,6 @@ extension CurrentForecast: Decodable {
     case humidity
     case pressure
     case windSpeed
-    case cloudCover
-    case uvIndex
   }
   
   init(from decoder: Decoder) throws {
@@ -54,7 +47,5 @@ extension CurrentForecast: Decodable {
     self.humidity = try container.decode(Double.self, forKey: .humidity)
     self.pressure = try container.decode(Double.self, forKey: .pressure)
     self.windSpeed = try container.decode(Double.self, forKey: .windSpeed)
-    self.cloudCover = try container.decode(Double.self, forKey: .cloudCover)
-    self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
   }
 }

@@ -355,7 +355,7 @@ extension ForecastContentViewController {
   @objc func unitNotationDidChange(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?["SegmentedControl"] as? SegmentedControl else { return }
     
-    MeasuringSystem.selected = (segmentedControl.selectedIndex == 0 ? .imperial : .metric)
+    NotationSystem.selectedUnitNotation = (segmentedControl.selectedIndex == 0 ? .imperial : .metric)
     
     reloadForecast()
   }

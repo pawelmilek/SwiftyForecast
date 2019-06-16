@@ -18,18 +18,7 @@ struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
 extension DefaultHourlyForecastCellViewModel {
   
   var temperature: String {
-//    let hourlyTemperature = hourlyData.temperature
-//    
-//    switch ForecastUserDefaults.unitsNotation() {
-//    case .imperial:
-//      return hourlyTemperature.roundedToString + Style.degreeSign
-//      
-//    case .metric:
-//      let temperatureInCelsius = hourlyTemperature.ToCelsius()
-//      return temperatureInCelsius.roundedToString + Style.degreeSign
-//    }
-    
-    switch MeasuringSystem.selected {
+    switch NotationSystem.selectedUnitNotation {
     case .metric:
       let temperatureInCelsius = hourlyData.temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign

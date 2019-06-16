@@ -40,14 +40,4 @@ class DailyForecastTests: XCTestCase {
   func testDailySevenDaysForecast() {
     XCTAssertEqual(dailyForecast.sevenDaysData.count, 7)
   }
-  
-  func testDailyTemperatureMaxInCelsius() {
-    MeasuringSystem.selected = .metric
-    XCTAssertEqual(viewModel.temperatureMax, "48°")
-  }
-  
-  func testDailyTemperatureMaxInFahrenheit() {
-    MeasuringSystem.selected = .imperial
-    XCTAssertEqual(viewModel.temperatureMax, "9°")
-  }
 }

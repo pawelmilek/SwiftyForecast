@@ -3,12 +3,10 @@ import Foundation
 struct ForecastDate {
   private let date: Date
   private let formatter: DateFormatter
-  private let timestamp: Int
   
   init(timestamp: Int) {
-    self.timestamp = timestamp
-    self.date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-    self.formatter = DateFormatter()
+    date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+    formatter = DateFormatter()
   }
 }
 
@@ -32,7 +30,7 @@ extension ForecastDate {
     let weekday = formatter.string(from: date)
     return weekday
   }
-
+  
 }
 
 // MARK: - Various time formats

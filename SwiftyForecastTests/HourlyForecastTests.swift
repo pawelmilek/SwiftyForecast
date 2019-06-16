@@ -39,19 +39,4 @@ class HourlyForecastTests: XCTestCase {
     XCTAssertEqual(viewModel.conditionIcon!, expectedValue)
     
   }
-  
-  func testHourlyCellTemperatureInCelsius() {
-    MeasuringSystem.selected = .metric
-    XCTAssertEqual(viewModel.temperature, "1°")
-  }
-  
-  func testHourlyCellTemperatureInFahrenheit() {
-    MeasuringSystem.selected = .imperial
-    XCTAssertEqual(viewModel.temperature, "34°")
-  }
-  
-  func testTemperatureRoundedToString() {
-    let belowZero = -0.4
-    XCTAssertEqual(belowZero.roundedToString, "-1")
-  }
 }

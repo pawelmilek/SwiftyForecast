@@ -13,36 +13,6 @@ struct DailyData: Forecast {
   let humidity: Double
   let pressure: Double
   let windSpeed: Double
-  let uvIndex: Int
-}
-
-// MARK: - isMetricMeasuringSystem
-extension DailyData {
-  
-  private var temperatureInCelsiusMin: Double {
-    return temperatureMin.ToCelsius()
-  }
-  
-  private var temperatureInCelsiusMax: Double {
-    return temperatureMax.ToCelsius()
-  }
-  
-  var temperatureMinFormatted: String {
-    if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMin.roundedToString + Style.degreeSign
-    } else {
-      return temperatureMin.roundedToString + Style.degreeSign
-    }
-  }
-  
-  var temperatureMaxFormatted: String {
-    if MeasuringSystem.selected == .metric {
-      return temperatureInCelsiusMax.roundedToString + Style.degreeSign
-    } else {
-      return temperatureMax.roundedToString + Style.degreeSign
-    }
-  }
-  
 }
 
 // MARK: - Decodable protocol
@@ -60,7 +30,6 @@ extension DailyData: Decodable {
     case humidity
     case pressure
     case windSpeed
-    case uvIndex
   }
   
   init(from decoder: Decoder) throws {
@@ -84,6 +53,5 @@ extension DailyData: Decodable {
     self.humidity = try container.decode(Double.self, forKey: .humidity)
     self.pressure = try container.decode(Double.self, forKey: .pressure)
     self.windSpeed = try container.decode(Double.self, forKey: .windSpeed)
-    self.uvIndex = try container.decode(Int.self, forKey: .uvIndex)
   }
 }

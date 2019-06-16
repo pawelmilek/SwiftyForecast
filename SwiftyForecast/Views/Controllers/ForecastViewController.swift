@@ -8,7 +8,7 @@ class ForecastViewController: UIViewController {
   private let network = NetworkManager.shared
   private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
   
-  private lazy var measuringSystemSegmentedControl: SegmentedControl = {
+  private lazy var notationSystemSegmentedControl: SegmentedControl = {
     typealias ForecastMainStyle = Style.ForecastMainVC
     
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
@@ -20,7 +20,7 @@ class ForecastViewController: UIViewController {
     segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
     segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
     segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
-    segmentedControl.selectedIndex = 0
+    segmentedControl.selectedIndex = UserDefaultsAdapter.unitNotation.rawValue
     
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
@@ -93,7 +93,7 @@ extension ForecastViewController: ViewSetupable {
     fetchCitiesAndSetLastUpdate()
     fetchCities()
     initializePageViewController()
-    setMeasuringSystemSegmentedControl()
+    setNotationSystemSegmentedControl()
     addNotificationCenterObserver()
     setNetworkManagerWhenInternetIsNotAvailable()
     setPageControl()
@@ -141,8 +141,8 @@ private extension ForecastViewController {
 // MARK: - Private - Set metric system segmented control
 private extension ForecastViewController {
   
-  func setMeasuringSystemSegmentedControl() {
-    navigationItem.titleView = measuringSystemSegmentedControl
+  func setNotationSystemSegmentedControl() {
+    navigationItem.titleView = notationSystemSegmentedControl
   }
   
 }
