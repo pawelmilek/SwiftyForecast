@@ -4,7 +4,6 @@ struct DailyData: Forecast {
   let icon: String
   let sunriseTime: ForecastDate
   let sunsetTime: ForecastDate
-  let moonPhase: MoonPhase
   let temperature: Double = 0
   let apparentTemperature: Double = 0
   let temperatureMin: Double
@@ -75,7 +74,6 @@ extension DailyData: Decodable {
     let sunsetTimestamp = try container.decode(Int.self, forKey: .sunsetTime)
     self.sunriseTime = ForecastDate(timestamp: sunriseTimestamp)
     self.sunsetTime = ForecastDate(timestamp: sunsetTimestamp)
-    self.moonPhase = try MoonPhase(from: decoder)
   
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)
     let temperatureMaxTimestamp = try container.decode(Int.self, forKey: .temperatureMaxTime)
