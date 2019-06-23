@@ -1,33 +1,31 @@
 import UIKit
 
 final class AlertViewPresenter {
-  static let shared = AlertViewPresenter()
-  typealias SubmitCompletionHandler = (String) -> ()
-  
-  private init() {}
 }
 
 // MARK: - Present submit Alert
 extension AlertViewPresenter {
   
-  func presentSubmitAlert(in viewController: UIViewController,
-                          title: String,
-                          message: String,
-                          textFieldConfiguration: ((UITextField) -> ())? = nil,
-                          submitCompletionHandler: @escaping SubmitCompletionHandler) {
+  static func presentSubmitAlert(in viewController: UIViewController,
+                                 title: String,
+                                 message: String,
+                                 textFieldConfiguration: ((UITextField) -> ())? = nil,
+                                 submitCompletionHandler: @escaping ((String) -> ())) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     alert.addTextField(configurationHandler: textFieldConfiguration)
     
-    let submitAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
-      guard let textField = alert.textFields?.first, let text = textField.text else { return }
-      submitCompletionHandler(text)
+    let submitAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""),
+                                     style: .default, handler: { action in
+                                      guard let textField = alert.textFields?.first, let text = textField.text else { return }
+                                      submitCompletionHandler(text)
     })
     
-    let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive, handler: nil)
+    let cancel = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""),
+                               style: .destructive)
     
     alert.addAction(submitAction)
     alert.addAction(cancel)
-    viewController.present(alert, animated: true, completion: nil)
+    viewController.present(alert, animated: true)
   }
   
 }
@@ -35,7 +33,7 @@ extension AlertViewPresenter {
 // MARK: - Present Error Alert
 extension AlertViewPresenter {
   
-  func presentError(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
+  static func presentError(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
     let alertWindow = UIWindow(frame: UIScreen.main.bounds)
     alertWindow.rootViewController = UIViewController()
     alertWindow.windowLevel = UIWindow.Level.alert + 1
@@ -53,11 +51,11 @@ extension AlertViewPresenter {
 // MARK: - Present Popup Alert
 extension AlertViewPresenter {
   
-  func presentPopupAlert(in viewController: UIViewController,
-                         title: String?,
-                         message: String?,
-                         actionTitles: [String] = ["OK"],
-                         actions: [((UIAlertAction) -> ())?] = [nil]) {
+  static func presentPopupAlert(in viewController: UIViewController,
+                                title: String?,
+                                message: String?,
+                                actionTitles: [String] = ["OK"],
+                                actions: [((UIAlertAction) -> ())?] = [nil]) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
     
     for (index, title) in actionTitles.enumerated() {

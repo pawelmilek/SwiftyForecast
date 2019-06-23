@@ -17,7 +17,6 @@ final class LocationProvider: NSObject {
     }
   }
   
-  
   private override init() {
     super.init()
     
@@ -30,7 +29,6 @@ final class LocationProvider: NSObject {
   
 }
 
-
 // MARK: - Request authorization
 extension LocationProvider {
   
@@ -40,7 +38,6 @@ extension LocationProvider {
   }
   
 }
-
 
 // MARK: - Private - Check if location service in enabled
 extension LocationProvider {
@@ -57,14 +54,12 @@ extension LocationProvider {
   
 }
 
-
 // MARK: - Get current location
 extension LocationProvider {
   
   func requestLocation() {
     locationManager.requestLocation()
   }
-  
   
   func requestLocation(completionHandler: @escaping CompletionHandler) {
     guard isLocationServicesEnabled else {
@@ -79,7 +74,6 @@ extension LocationProvider {
   
 }
 
-
 // MARK: - CLLocationManagerDelegate protocl
 extension LocationProvider: CLLocationManagerDelegate {
   
@@ -93,7 +87,6 @@ extension LocationProvider: CLLocationManagerDelegate {
       self.locationManager.stopUpdatingLocation()
     }
   }
-  
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
     switch status {
@@ -115,14 +108,12 @@ extension LocationProvider: CLLocationManagerDelegate {
     }
   }
   
-  
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     locationManager.stopUpdatingLocation()
-    AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
+    AlertViewPresenter.presentError(withMessage: error.localizedDescription)
   }
   
 }
-
 
 // MARK: - Show settings alert view
 extension LocationProvider {
@@ -140,7 +131,7 @@ extension LocationProvider {
     let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
     
     let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-    AlertViewPresenter.shared.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
+    AlertViewPresenter.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   
 }

@@ -14,14 +14,14 @@ class TodayViewController: UIViewController {
   private var currentForecast: CurrentForecast?
   private var todayViewModel: TodayForecastViewModel?
   private var hourlyForecast: HourlyForecast?
-
+  
   private lazy var tapGesture: UITapGestureRecognizer = {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(launchHostingApp))
     gestureRecognizer.numberOfTouchesRequired = 1
     gestureRecognizer.numberOfTapsRequired = 1
     return gestureRecognizer
   }()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
@@ -99,13 +99,13 @@ private extension TodayViewController {
 
 // MARK: - Configure current forecast
 private extension TodayViewController {
-
+  
   // TODO: Implement DefaultForecastService
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?)->()) {
     guard let currentCity = SharedGroupContainer.getSharedCity() else { return }
     
     let request = ForecastRequest.make(by: (currentCity.latitude, currentCity.longitude))
-    WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {
@@ -143,7 +143,7 @@ private extension TodayViewController {
       humidityLabel.alpha = 1
       temperatureLabel.alpha = 1
       temperatureMinMaxLabel.alpha = 1
-
+      
     } else {
       hideLabels()
     }
@@ -170,7 +170,7 @@ private extension TodayViewController {
       }
     }
   }
-
+  
   func updateHourlyForecast() {
     hourlyCollectionView.reloadData()
   }

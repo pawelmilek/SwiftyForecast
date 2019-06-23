@@ -1,28 +1,29 @@
 import XCTest
 
-class TemperatureNotationTests: XCTestCase {
-  private var dailyForecast: DailyForecast!
-  private var hourlyForecast: HourlyForecast!
+class UnitNotationTests: XCTestCase {
   private var viewModelDaily: DailyForecastCellViewModel!
   private var viewModelHourly: HourlyForecastCellViewModel!
+  private var viewModelCurrent: CurrentForecastViewModel!
   
   override func setUp() {
     super.setUp()
     
-    dailyForecast = ForecastGenerator.generateDailyForecast()
+    let dailyForecast = ForecastGenerator.generateDailyForecast()
     viewModelDaily = DefaultDailyForecastCellViewModel(dailyData: dailyForecast.sevenDaysData.first!)
     
-    hourlyForecast = ForecastGenerator.generateHourlyForecast()
+    let hourlyForecast = ForecastGenerator.generateHourlyForecast()
     viewModelHourly = DefaultHourlyForecastCellViewModel(hourlyData: hourlyForecast.data.first!)
+    
+    let currentForecast = ForecastGenerator.generateCurrentForecast()
+    //    viewModel = DefaultCurrentForecastViewModel(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
   }
   
   override func tearDown() {
     super.tearDown()
     
-    dailyForecast = nil
     viewModelDaily = nil
-    hourlyForecast = nil
     viewModelHourly = nil
+    viewModelCurrent = nil
     UserDefaultsAdapter.resetNotation()
   }
   
@@ -51,4 +52,13 @@ class TemperatureNotationTests: XCTestCase {
     XCTAssertEqual(viewModelDaily.temperatureMax, "48°")
   }
   
+  func testDailyWindSpeedMPH() {
+    NotationSystem.selectedUnitNotation = .imperial
+//    XCTAssertEqual(viewModelCurrent.windSpeed, "5 MPH")
+  }
+  
+  func testDailyWindSpeedKPH() {
+    NotationSystem.selectedUnitNotation = .metric
+//    XCTAssertEqual(viewModelCurrent.windSpeed, "8 KPH")
+  }
 }

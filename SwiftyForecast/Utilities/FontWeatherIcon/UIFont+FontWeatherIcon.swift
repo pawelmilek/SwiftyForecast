@@ -7,7 +7,7 @@ extension UIFont {
     
     if UIFont.fontNames(forFamilyName: fontName).isEmpty {
       let name = "FontWeather"
-      try? FontLoader.shared.loadFont(with: name)
+      try? FontLoader.loadFont(with: name)
     }
     
     return UIFont(name: fontName, size: size)!

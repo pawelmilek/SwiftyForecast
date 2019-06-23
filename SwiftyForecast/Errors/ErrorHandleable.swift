@@ -7,7 +7,7 @@ extension ErrorHandleable {
   
   func handle() {
     DispatchQueue.main.async {
-      AlertViewPresenter.shared.presentError(withMessage: self.description)
+      AlertViewPresenter.presentError(withMessage: self.description)
     }
   }
   

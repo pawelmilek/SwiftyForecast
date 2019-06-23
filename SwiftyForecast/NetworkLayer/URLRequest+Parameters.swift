@@ -3,20 +3,16 @@ import Foundation
 extension URLRequest {
   
   func encode(with parameters: Parameters?) -> URLRequest {
-    guard let parameters = parameters else {
-      return self
-    }
+    guard let parameters = parameters, !parameters.isEmpty else { return self }
     
-    var encodedURLRequest = self
-    
-    if let url = self.url, let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), !parameters.isEmpty {
-      var newUrlComponents = urlComponents
+    if let URL = url, var components = URLComponents(url: URL, resolvingAgainstBaseURL: false) {
       let queryItems = parameters.map { key, value in
         URLQueryItem(name: key, value: value)
       }
       
-      newUrlComponents.queryItems = queryItems
-      encodedURLRequest.url = newUrlComponents.url
+      var encodedURLRequest = self
+      components.queryItems = queryItems
+      encodedURLRequest.url = components.url
       return encodedURLRequest
       
     } else {

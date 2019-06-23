@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 class DataMigrationManager {
   private lazy var currentModel: NSManagedObjectModel = .model(named: self.modelName)
   
@@ -76,7 +75,6 @@ class DataMigrationManager {
     }
   }
   
-  
   private func migrateStoreAt(URL storeURL: URL, fromModel from: NSManagedObjectModel, toModel to: NSManagedObjectModel, mappingModel: NSMappingModel? = nil) {
     // 1
     let migrationManager = NSMigrationManager(sourceModel: from, destinationModel: to)
@@ -120,7 +118,6 @@ class DataMigrationManager {
   }
 }
 
-
 extension NSManagedObjectModel {
   
   private class func modelURLs(in modelFolder: String) -> [URL] {
@@ -162,13 +159,11 @@ extension NSManagedObjectModel {
     return self == type(of: self).version3
   }
   
-  
   class func model(named modelName: String, in bundle: Bundle = .main) -> NSManagedObjectModel {
     return bundle.url(forResource: modelName, withExtension: "momd").flatMap(NSManagedObjectModel.init) ?? NSManagedObjectModel()
   }
   
 }
-
 
 func == (firstModel: NSManagedObjectModel, otherModel: NSManagedObjectModel) -> Bool {
   return firstModel.entitiesByName == otherModel.entitiesByName

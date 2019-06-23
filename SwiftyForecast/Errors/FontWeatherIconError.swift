@@ -2,7 +2,7 @@ enum FontWeatherIconError: ErrorHandleable {
   case fileNotFound(name: String)
   case unknownFontURL(urlString: String)
   case fontDataFailed
-  case fontRegistrationFailed(description: String)
+  case fontRegistrationFailed
 }
 
 // MARK: - ErrorHandleable protocol
@@ -19,8 +19,8 @@ extension FontWeatherIconError {
     case .fontDataFailed:
       return "An error occurred while creating font data."
       
-    case .fontRegistrationFailed(let desc):
-      return desc
+    case .fontRegistrationFailed:
+      return "Font registration failed."
     }
   }
   

@@ -147,7 +147,7 @@ private extension CityTableViewController {
 private extension CityTableViewController {
   
   func reloadAndInitializeMainPageViewController() {
-    NotificationAdapter.post(.reloadPages)
+    ForecastNotificationCenter.post(.reloadPages)
   }
   
 }
@@ -239,7 +239,7 @@ extension CityTableViewController: GMSAutocompleteViewControllerDelegate {
   }
   
   func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    AlertViewPresenter.shared.presentError(withMessage: "Error: \(error.localizedDescription)")
+    AlertViewPresenter.presentError(withMessage: "Error: \(error.localizedDescription)")
   }
   
   func wasCancelled(_ viewController: GMSAutocompleteViewController) {

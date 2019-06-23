@@ -5,7 +5,6 @@ enum GeocoderError: ErrorHandleable {
   case timezoneNotFound
 }
 
-
 // MARK: - ErrorHandleable protocol
 extension GeocoderError {
   

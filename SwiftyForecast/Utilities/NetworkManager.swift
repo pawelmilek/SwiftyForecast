@@ -16,7 +16,7 @@ final class NetworkManager {
       error?.handle()
       
     } catch let error {
-      AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
+      AlertViewPresenter.presentError(withMessage: error.localizedDescription)
     }
   }
 }
@@ -25,7 +25,7 @@ final class NetworkManager {
 private extension NetworkManager {
   
   func registerObserver() {
-    NotificationAdapter.add(observer: self,
+    ForecastNotificationCenter.add(observer: self,
                             selector: #selector(networkStatusChanged),
                             for: .reachabilityChanged,
                             object: reachability)

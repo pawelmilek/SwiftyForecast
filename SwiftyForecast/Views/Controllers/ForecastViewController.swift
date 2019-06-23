@@ -151,12 +151,12 @@ private extension ForecastViewController {
 private extension ForecastViewController {
   
   func addNotificationCenterObserver() {
-    NotificationAdapter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
-    NotificationAdapter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
+    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
+    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
   }
   
   func removeNotificationCenterObserver() {
-    NotificationAdapter.remove(observer: self)
+    ForecastNotificationCenter.remove(observer: self)
   }
   
 }
@@ -232,7 +232,7 @@ extension ForecastViewController {
   }
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    NotificationAdapter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControl": sender])
+    ForecastNotificationCenter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControl": sender])
   }
   
   @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {

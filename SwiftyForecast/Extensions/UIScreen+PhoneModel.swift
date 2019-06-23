@@ -3,7 +3,7 @@ import UIKit
 extension UIScreen {
 
   struct PhoneModel {
-    private static let size = UIScreen.main.bounds.size
+    private static let screenSize = UIScreen.main.bounds.size
     private static let iPhoneX = CGSize(width: 375, height: 812)
     private static let iPhone8Plus = CGSize(width: 414, height: 736)
     private static let iPhone8 = CGSize(width: 375, height: 667)
@@ -13,31 +13,31 @@ extension UIScreen {
     private static let iPhoneSE = CGSize(width: 320, height: 568)
     
     static var isPhoneX: Bool {
-      return size == iPhoneX
+      return screenSize == iPhoneX
     }
     
     static var isPhone8Plus: Bool {
-      return size == iPhone8Plus
+      return screenSize == iPhone8Plus
     }
     
     static var isPhone8: Bool {
-      return size == iPhone8
+      return screenSize == iPhone8
     }
     
     static var isPhone7Plus: Bool {
-      return size == iPhone7Plus
+      return screenSize == iPhone7Plus
     }
     
     static var isPhone6Plus: Bool {
-      return size == iPhone6Plus
+      return screenSize == iPhone6Plus
     }
     
     static var isPhone6: Bool {
-      return size == iPhone6
+      return screenSize == iPhone6
     }
     
     static var isPhoneSE: Bool {
-      return size == iPhoneSE
+      return screenSize == iPhoneSE
     }
   }
   

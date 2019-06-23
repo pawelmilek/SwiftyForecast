@@ -31,32 +31,3 @@ struct NetworkResponseParser<M> where M: Decodable {
     }
   }
 }
-
-// MARK: For testing
-private extension NetworkResponseParser {
-  
-  static func printPrettyJSON(from data: Data) {
-    guard let dictonary = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
-    guard let prettyJSON = stringify(json: dictonary) else { return }
-    debugPrint(prettyJSON)
-  }
-  
-  private static func stringify(json: [String: Any], prettyPrinted: Bool = true) -> String? {
-    var options: JSONSerialization.WritingOptions = []
-    
-    if prettyPrinted {
-      options = JSONSerialization.WritingOptions.prettyPrinted
-    }
-    
-    do {
-      let data = try JSONSerialization.data(withJSONObject: json, options: options)
-      if let string = String(data: data, encoding: .utf8) {
-        return string
-      }
-    } catch {
-      debugPrint(error)
-    }
-    
-    return nil
-  }
-}

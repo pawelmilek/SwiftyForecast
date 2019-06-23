@@ -2,7 +2,6 @@ import Foundation
 import CoreLocation
 
 final class GeocoderHelper {
-  
   class func findCoordinate(by address: String, completionHandler: @escaping (_ coordinate: CLLocationCoordinate2D?, _ error: GeocoderError?) -> ()) {
     let geocoder = CLGeocoder()
     
@@ -19,7 +18,6 @@ final class GeocoderHelper {
     })
   }
   
-  
   class func findPlace(at coordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ placemark: CLPlacemark?, _ error: GeocoderError?) -> ()) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude), longitude: CLLocationDegrees(coordinate.longitude))
     let geocoder = CLGeocoder()
@@ -33,7 +31,6 @@ final class GeocoderHelper {
       completionHandler(placemark, nil)
     })
   }
-  
   
   class func findTimeZone(at coordinate: CLLocationCoordinate2D, completionHandler: @escaping (TimeZone?, GeocoderError?) -> ()) {
     let location = CLLocation(latitude: CLLocationDegrees(coordinate.latitude), longitude: CLLocationDegrees(coordinate.longitude))

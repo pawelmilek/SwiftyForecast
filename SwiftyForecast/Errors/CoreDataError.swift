@@ -21,7 +21,6 @@ extension CoreDataError {
       
     case .notAssociatedWithManagedObjectContext(let entityName):
       return "Provided \(entityName) managed object is not associated with a managed object context."
-      
     }
   }
   

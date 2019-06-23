@@ -1,7 +1,6 @@
 enum WebServiceError: ErrorHandleable {
   case unknownURL(url: String)
   case requestFailed
-  case dataNotAvailable
   case decoderFailed
   case failedToRetrieveContext
 }
@@ -15,10 +14,7 @@ extension WebServiceError {
       return url
       
     case .requestFailed:
-      return "An error occurred while fetching JSON data."
-      
-    case .dataNotAvailable:
-      return "Data not available."
+      return "An error occurred while fetching data."
       
     case .decoderFailed:
       return "An error occurred while decoding data."

@@ -101,19 +101,19 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func addNotificationCenterObservers() {
-    NotificationAdapter.add(observer: self,
-                            selector: #selector(unitNotationDidChange),
-                            for: .unitNotationDidChange)
-    NotificationAdapter.add(observer: self,
-                            selector: #selector(locationServiceDidBecomeEnable),
-                            for: .locationServiceDidBecomeEnable)
-    NotificationAdapter.add(observer: self,
-                            selector: #selector(applicationDidBecomeActive),
-                            for: .applicationDidBecomeActive)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(unitNotationDidChange),
+                                   for: .unitNotationDidChange)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(locationServiceDidBecomeEnable),
+                                   for: .locationServiceDidBecomeEnable)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(applicationDidBecomeActive),
+                                   for: .applicationDidBecomeActive)
   }
   
   func removeNotificationCenterObservers() {
-    NotificationAdapter.remove(observer: self)
+    ForecastNotificationCenter.remove(observer: self)
   }
   
 }
@@ -155,7 +155,7 @@ private extension ForecastContentViewController {
         let longitude = place.coordinate.longitude
         
         let request = ForecastRequest.make(by: (latitude, longitude))
-        WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+        WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
@@ -199,7 +199,7 @@ private extension ForecastContentViewController {
     isFeatchingForecast = true
     
     let request = ForecastRequest.make(by: (city.latitude, city.longitude))
-    WebServiceManager.shared.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
       guard let strongSelf = self else { return }
       strongSelf.isFeatchingForecast = false
       
@@ -246,11 +246,11 @@ private extension ForecastContentViewController {
 private extension ForecastContentViewController {
   
   func reloadAndInitializeMainPageViewController() {
-    NotificationAdapter.post(.reloadPages)
+    ForecastNotificationCenter.post(.reloadPages)
   }
   
   func reloadDataInMainPageViewController() {
-    NotificationAdapter.post(.reloadPagesData)
+    ForecastNotificationCenter.post(.reloadPagesData)
   }
   
 }

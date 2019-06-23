@@ -4,11 +4,10 @@ struct DailyForecast {
   private let data: [DailyData]
 }
 
-// MARK: - Number of days (exclude current day)
 extension DailyForecast {
-  
   var numberOfDays: Int {
-    return data.count - 1
+    let currentDay = 1
+    return data.count - currentDay
   }
   
   var sevenDaysData: [DailyData] {
@@ -21,15 +20,14 @@ extension DailyForecast {
   }
 }
 
-
 // MARK: - Decodable protocol
 extension DailyForecast: Decodable {
+  
   enum CodingKeys: String, CodingKey {
     case summary
     case icon
     case data
   }
-  
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)

@@ -12,7 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
       } else {
         LocationProvider.shared.requestLocation()
-        NotificationAdapter.post(.locationServiceDidBecomeEnable)
+        ForecastNotificationCenter.post(.locationServiceDidBecomeEnable)
       }
     }
     
@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func applicationDidBecomeActive(_ application: UIApplication) {
-    NotificationAdapter.post(.applicationDidBecomeActive)
+    ForecastNotificationCenter.post(.applicationDidBecomeActive)
   }
 }
 
