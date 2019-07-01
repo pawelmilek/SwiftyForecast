@@ -96,7 +96,7 @@ private extension CityTableViewController {
     do {
       cities = try managedObjectContext.fetch(fetchRequest)
     } catch {
-      CoreDataError.couldNotFetch.handle()
+      CoreDataError.couldNotFetch.handler()
     }
   }
   
@@ -115,7 +115,7 @@ private extension CityTableViewController {
       try managedObjectContext.save()
       cities.append(newCity)
     } catch {
-      CoreDataError.couldNotSave.handle()
+      CoreDataError.couldNotSave.handler()
     }
   }
   
@@ -136,7 +136,7 @@ private extension CityTableViewController {
       do {
         try managedObjectContext.save()
       } catch {
-        CoreDataError.couldNotSave.handle()
+        CoreDataError.couldNotSave.handler()
       }
     }
   }
@@ -185,7 +185,7 @@ extension CityTableViewController {
               try self.managedObjectContext?.save()
             
             } catch {
-              CoreDataError.couldNotSave.handle()
+              CoreDataError.couldNotSave.handler()
             }
             
             cell.configure(by: city)

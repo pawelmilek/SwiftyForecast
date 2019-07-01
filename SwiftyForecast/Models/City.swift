@@ -152,7 +152,7 @@ extension City {
         return false
       }
     } catch {
-      CoreDataError.couldNotFetch.handle()
+      CoreDataError.couldNotFetch.handler()
       return false
     }
   }

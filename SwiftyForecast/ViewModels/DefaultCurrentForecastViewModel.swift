@@ -1,5 +1,9 @@
 import Foundation
 
+protocol CurrentForecastViewModelDelegate: class {
+  func currentForecastViewModelDidFetchData(_ currentForecastViewModel: CurrentForecastViewModel)
+}
+
 struct DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   let hourly: HourlyForecast?
   let icon: NSAttributedString?
@@ -14,7 +18,7 @@ struct DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   var windSpeed: String {
     let speed = weatherForecast.currently.windSpeed
     
-    switch UserDefaultsAdapter.unitNotation {
+    switch ForecastUserDefaults.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
       
@@ -23,10 +27,15 @@ struct DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     }
   }
   
+  var city: City?
+  weak var delegate: CurrentForecastViewModelDelegate?
+  
+  private let service: ForecastService
   private let weatherForecast: WeatherForecast
   
-  init(weatherForecast: WeatherForecast) {
+  init(weatherForecast: WeatherForecast, service: ForecastService) {
     self.weatherForecast = weatherForecast
+    self.service = service
     
     let city = weatherForecast.city
     let current = weatherForecast.currently
@@ -40,5 +49,8 @@ struct DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     humidity = "\(Int(current.humidity * 100))"
     sunriseTime = city.timeZone != nil ? details.sunriseTime.time(by: city.timeZone) : details.sunriseTime.time
     sunsetTime = city.timeZone != nil ? details.sunsetTime.time(by: city.timeZone) : details.sunsetTime.time
+    
+    // TODO: Implement forecast fetching via service
+    delegate?.currentForecastViewModelDidFetchData(self)
   }
 }

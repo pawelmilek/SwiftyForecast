@@ -1,12 +1,12 @@
 enum NotationSystem {
   static var selectedUnitNotation: UnitNotation {
     get {
-      return UserDefaultsAdapter.unitNotation
+      return ForecastUserDefaults.unitNotation
     }
     
     set {
       if selectedUnitNotation != newValue {
-        UserDefaultsAdapter.set(notation: newValue)
+        ForecastUserDefaults.set(notation: newValue)
       }
     }
   }

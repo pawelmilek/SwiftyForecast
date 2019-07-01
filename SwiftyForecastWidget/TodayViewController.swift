@@ -100,12 +100,12 @@ private extension TodayViewController {
 // MARK: - Configure current forecast
 private extension TodayViewController {
   
-  // TODO: Implement DefaultForecastService
-  func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?)->()) {
+  func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?) -> ()) {
     guard let currentCity = SharedGroupContainer.getSharedCity() else { return }
     
-    let request = ForecastRequest.make(by: (currentCity.latitude, currentCity.longitude))
-    WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    let coordinate = Coordinate(latitude: currentCity.latitude, longitude: currentCity.longitude)
+    let service = DefaultForecastService()
+    service.getForecast(by: coordinate) { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {
@@ -122,7 +122,7 @@ private extension TodayViewController {
           completionHandler(error)
         }
       }
-    })
+    }
   }
   
   func configure() { // TODO: Implement ViewModel

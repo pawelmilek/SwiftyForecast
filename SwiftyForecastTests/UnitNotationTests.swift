@@ -14,7 +14,7 @@ class UnitNotationTests: XCTestCase {
     let hourlyForecast = ForecastGenerator.generateHourlyForecast()
     viewModelHourly = DefaultHourlyForecastCellViewModel(hourlyData: hourlyForecast.data.first!)
     
-    let currentForecast = ForecastGenerator.generateCurrentForecast()
+//    let currentForecast = ForecastGenerator.generateCurrentForecast()
     //    viewModel = DefaultCurrentForecastViewModel(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
   }
   
@@ -24,7 +24,7 @@ class UnitNotationTests: XCTestCase {
     viewModelDaily = nil
     viewModelHourly = nil
     viewModelCurrent = nil
-    UserDefaultsAdapter.resetNotation()
+    ForecastUserDefaults.resetNotation()
   }
   
   func testHourlyCellTemperatureInCelsius() {

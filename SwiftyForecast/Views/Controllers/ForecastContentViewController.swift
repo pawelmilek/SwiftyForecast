@@ -5,24 +5,22 @@ class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var dailyForecastTableView: UITableView!
   
-  typealias ForecastContentStyle = Style.ForecastContentVC
-  private let sharedStack = CoreDataStackHelper.shared
-  private let sharedActivityIndicator = ActivityIndicatorView.shared
-  private let sharedLocationProvider = LocationProvider.shared
-  
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var isFeatchingForecast = false
-  //  private var viewModel: DailyDataViewModel?
   
+  private var viewModel: CurrentForecastViewModel?
+  
+  // TODO: The View/ViewController doesn't know about the Model. It intercacts with Model layer trough one or more ViewMdoels.
   var currentCityForecast: City?
+  
   var weatherForecast: WeatherForecast? {
     didSet {
       guard let weatherForecast = weatherForecast else { return }
       
-      let currentViewModel = DefaultCurrentForecastViewModel(weatherForecast: weatherForecast)
+      let currentViewModel = DefaultCurrentForecastViewModel(weatherForecast: weatherForecast, service: DefaultForecastService())
       currentForecastView.configure(by: currentViewModel)
       dailyForecastTableView.reloadData()
     }
@@ -90,8 +88,8 @@ private extension ForecastContentViewController {
     dailyForecastTableView.allowsSelection = false
     dailyForecastTableView.rowHeight = UITableView.automaticDimension
     dailyForecastTableView.estimatedRowHeight = 85
-    dailyForecastTableView.backgroundColor = ForecastContentStyle.tableViewBackgroundColor
-    dailyForecastTableView.separatorStyle = ForecastContentStyle.tableViewSeparatorStyle
+    dailyForecastTableView.backgroundColor = Style.ForecastContentVC.tableViewBackgroundColor
+    dailyForecastTableView.separatorStyle = Style.ForecastContentVC.tableViewSeparatorStyle
     dailyForecastTableView.tableFooterView = UIView()
   }
   
@@ -128,7 +126,7 @@ private extension ForecastContentViewController {
       return pageIndex == 0
     }
     
-    if isCurrentLocationPage && sharedLocationProvider.isLocationServicesEnabled {
+    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
       fetchWeatherForecastForCurrentLocation()
       
     } else if let currentCityForecast = currentCityForecast {
@@ -137,7 +135,7 @@ private extension ForecastContentViewController {
   }
   
   func fetchWeatherForecastForCurrentLocation() {
-    sharedActivityIndicator.startAnimating(at: view)
+    ActivityIndicatorView.shared.startAnimating(at: view)
     isFeatchingForecast = true
     
     GooglePlacesHelper.getCurrentPlace() { [weak self] place, error in
@@ -145,17 +143,15 @@ private extension ForecastContentViewController {
       strongSelf.isFeatchingForecast = false
       
       if let error = error {
-        strongSelf.sharedActivityIndicator.stopAnimating()
-        error == .locationDisabled ? strongSelf.sharedLocationProvider.presentLocationServicesSettingsPopupAlert() : error.handle()
+        ActivityIndicatorView.shared.stopAnimating()
+        error == .locationDisabled ? LocationProvider.shared.presentLocationServicesSettingsPopupAlert() : error.handler()
         return
       }
       
       if let place = place {
-        let latitude = place.coordinate.latitude
-        let longitude = place.coordinate.longitude
-        
-        let request = ForecastRequest.make(by: (latitude, longitude))
-        WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { response in
+        let coordinate = Coordinate(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        let service = DefaultForecastService()
+        service.getForecast(by: coordinate) { response in
           switch response {
           case .success(let forecast):
             DispatchQueue.main.async {
@@ -167,7 +163,7 @@ private extension ForecastContentViewController {
                 LocalizedCityManager.insertCurrent(city: unassociatedCity)
                 strongSelf.currentCityForecast = unassociatedCity
                 strongSelf.reloadAndInitializeMainPageViewController()
-                strongSelf.sharedStack.saveContext()
+                CoreDataStackHelper.shared.saveContext()
                 
               } else {
                 LocalizedCityManager.fetchAndResetCities()
@@ -176,30 +172,32 @@ private extension ForecastContentViewController {
               }
               
               SharedGroupContainer.setShared(city: unassociatedCity)
-              strongSelf.sharedActivityIndicator.stopAnimating()
+              ActivityIndicatorView.shared.stopAnimating()
             }
             
           case .failure(let error):
             DispatchQueue.main.async {
-              strongSelf.sharedActivityIndicator.stopAnimating()
-              error.handle()
+              ActivityIndicatorView.shared.stopAnimating()
+              error.handler()
             }
           }
-        })
+        }
         
       } else {
-        strongSelf.sharedActivityIndicator.stopAnimating()
-        GooglePlacesError.placeNotFound.handle()
+        ActivityIndicatorView.shared.stopAnimating()
+        GooglePlacesError.placeNotFound.handler()
       }
     }
   }
   
   func fetchWeatherForecast(for city: City) {
-    sharedActivityIndicator.startAnimating(at: view)
+    ActivityIndicatorView.shared.startAnimating(at: view)
     isFeatchingForecast = true
     
-    let request = ForecastRequest.make(by: (city.latitude, city.longitude))
-    WebServiceRequest.fetch(ForecastResponse.self, with: request, completionHandler: { [weak self] response in
+    let coordinate = Coordinate(latitude: city.latitude, longitude: city.longitude)
+    let service = DefaultForecastService()
+    
+    service.getForecast(by: coordinate) { [weak self] response in
       guard let strongSelf = self else { return }
       strongSelf.isFeatchingForecast = false
       
@@ -207,36 +205,15 @@ private extension ForecastContentViewController {
       case .success(let forecast):
         DispatchQueue.main.async {
           strongSelf.weatherForecast = WeatherForecast(city: city, forecastResponse: forecast)
-          strongSelf.sharedActivityIndicator.stopAnimating()
+          ActivityIndicatorView.shared.stopAnimating()
         }
         
       case .failure(let error):
         DispatchQueue.main.async {
-          strongSelf.sharedActivityIndicator.stopAnimating()
-          error.handle()
+          ActivityIndicatorView.shared.stopAnimating()
+          error.handler()
         }
       }
-    })
-  }
-  
-}
-
-// MARK: - Private - Check and decide when to fetch new forecast
-private extension ForecastContentViewController {
-  
-  func checkAndDecideWhenToFetchNewForecast() -> Bool {
-    let currentDate = Date()
-    let cityLastUpdate = currentCityForecast?.lastUpdate ?? Date()
-    
-    let differenceInSeconds = Int(currentDate.timeIntervalSince(cityLastUpdate))
-    let (hours, minutes, seconds) = differenceInSeconds.convertToHoursMinutesSeconds
-    debugPrint((hours, minutes, seconds))
-    
-    if hours > 0 || minutes > 30 {
-      return true
-      
-    } else {
-      return false
     }
   }
   
@@ -326,10 +303,9 @@ extension ForecastContentViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let dailyItems = weatherForecast?.daily.sevenDaysData else { return UITableViewCell() }
     
-    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
-    
     let dailyData = dailyItems[indexPath.row]
     let viewModel = DefaultDailyForecastCellViewModel(dailyData: dailyData)
+    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
     cell.configure(by: viewModel)
     return cell
   }
@@ -367,6 +343,15 @@ extension ForecastContentViewController {
   private func reloadForecast() {
     guard let previousWeatherForecast = weatherForecast else { return }
     weatherForecast = previousWeatherForecast
+  }
+  
+}
+
+// MARK: - CurrentForecastViewModelDelegate protocol
+extension ForecastContentViewController: CurrentForecastViewModelDelegate {
+  
+  func currentForecastViewModelDidFetchData(_ currentForecastViewModel: CurrentForecastViewModel) {
+    
   }
   
 }

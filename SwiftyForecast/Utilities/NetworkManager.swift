@@ -13,7 +13,7 @@ final class NetworkManager {
       try reachability.startNotifier()
     } catch let error where error is ReachabilityError {
       let error = error as? ReachabilityError
-      error?.handle()
+      error?.handler()
       
     } catch let error {
       AlertViewPresenter.presentError(withMessage: error.localizedDescription)

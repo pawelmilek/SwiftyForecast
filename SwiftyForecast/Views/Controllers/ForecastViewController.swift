@@ -5,9 +5,6 @@ import SafariServices
 class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
-  private let network = NetworkManager.shared
-  private lazy var stack: CoreDataStackHelper = CoreDataStackHelper.shared
-  
   private lazy var notationSystemSegmentedControl: SegmentedControl = {
     typealias ForecastMainStyle = Style.ForecastMainVC
     
@@ -20,7 +17,7 @@ class ForecastViewController: UIViewController {
     segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
     segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
     segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
-    segmentedControl.selectedIndex = UserDefaultsAdapter.unitNotation.rawValue
+    segmentedControl.selectedIndex = ForecastUserDefaults.unitNotation.rawValue
     
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
@@ -78,7 +75,7 @@ class ForecastViewController: UIViewController {
     guard let cityListVC = segue.destination as? CityTableViewController else { return }
     
     cityListVC.delegate = self
-    cityListVC.managedObjectContext = stack.managedContext
+    cityListVC.managedObjectContext = CoreDataStackHelper.shared.managedContext
   }
   
   deinit {
@@ -121,7 +118,7 @@ private extension ForecastViewController {
       try cities.performFetch()
 
     } catch {
-      CoreDataError.couldNotFetch.handle()
+      CoreDataError.couldNotFetch.handler()
     }
   }
   
@@ -180,11 +177,11 @@ private extension ForecastViewController {
       self.navigationController?.pushViewController(offlineViewController, animated: false)
     }
 
-    network.isUnreachable { _ in
+    NetworkManager.shared.isUnreachable { _ in
       whenNetworkIsNotAvailable() // Will run only once when app is launching
     }
     
-    network.whenUnreachable { _ in
+    NetworkManager.shared.whenUnreachable { _ in
       whenNetworkIsNotAvailable() // Network listener to pick up network changes in real-time
     }
   }

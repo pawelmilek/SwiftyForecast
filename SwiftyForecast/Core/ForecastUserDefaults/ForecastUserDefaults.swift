@@ -1,6 +1,6 @@
 import Foundation
 
-struct UserDefaultsAdapter {
+struct ForecastUserDefaults {
   
   static var unitNotation: UnitNotation {
     let storedValue = UserDefaults.standard.integer(forKey: UserDefaultsKeys.unitsNotation.rawValue)
@@ -30,7 +30,7 @@ struct UserDefaultsAdapter {
 }
 
 // MARK: - Private - Set unit and temerature notation
-private extension UserDefaultsAdapter {
+private extension ForecastUserDefaults {
 
   static func setUnit(notation: UnitNotation) {
     UserDefaults.standard.set(notation.rawValue, forKey: UserDefaultsKeys.unitsNotation.rawValue)

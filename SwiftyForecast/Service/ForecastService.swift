@@ -1,5 +1,6 @@
 import Foundation
 
 protocol ForecastService {
-  func fetchForecast(completion: @escaping (_ error: Error?) -> ())
+  func getForecast(by coordinate: Coordinate,
+                   completionHandler: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) -> Void
 }
