@@ -45,15 +45,15 @@ final class City: NSManagedObject, Codable {
     self.init(entity: entityDescription!, insertInto: nil)
     
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.name = try container.decode(String.self, forKey: .name)
-    self.country = try container.decode(String.self, forKey: .country)
-    self.state = try container.decodeIfPresent(String.self, forKey: .state)
-    self.postalCode = try container.decode(String.self, forKey: .postalCode)
-    self.isCurrentLocalization = try container.decode(Bool.self, forKey: .isCurrentLocalization)
-    self.latitude = try container.decode(Double.self, forKey: .latitude)
-    self.longitude = try container.decode(Double.self, forKey: .longitude)
-    self.timeZone = try container.decodeIfPresent(TimeZone.self, forKey: .timeZone)
-    self.lastUpdate = try container.decodeIfPresent(Date.self, forKey: .lastUpdate)
+    name = try container.decode(String.self, forKey: .name)
+    country = try container.decode(String.self, forKey: .country)
+    state = try container.decodeIfPresent(String.self, forKey: .state)
+    postalCode = try container.decode(String.self, forKey: .postalCode)
+    isCurrentLocalization = try container.decode(Bool.self, forKey: .isCurrentLocalization)
+    latitude = try container.decode(Double.self, forKey: .latitude)
+    longitude = try container.decode(Double.self, forKey: .longitude)
+    timeZone = try container.decodeIfPresent(TimeZone.self, forKey: .timeZone)
+    lastUpdate = try container.decodeIfPresent(Date.self, forKey: .lastUpdate)
   }
   
   func encode(to encoder: Encoder) throws {
@@ -74,25 +74,25 @@ final class City: NSManagedObject, Codable {
     
     let addressComponents = place.addressComponents
     
-    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
-    self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
-    self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
-    self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
+    name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
+    country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
+    state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name ?? "N/A"
+    postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
     self.isCurrentLocalization = isCurrentLocalization
-    self.latitude = place.coordinate.latitude
-    self.longitude = place.coordinate.longitude
+    latitude = place.coordinate.latitude
+    longitude = place.coordinate.longitude
   }
   
   convenience init(unassociatedObject: City, isCurrentLocalization: Bool, managedObjectContext: NSManagedObjectContext) {
     self.init(context: managedObjectContext)
     
-    self.name = unassociatedObject.name
-    self.country = unassociatedObject.country
-    self.state = unassociatedObject.state
-    self.postalCode = unassociatedObject.postalCode
+    name = unassociatedObject.name
+    country = unassociatedObject.country
+    state = unassociatedObject.state
+    postalCode = unassociatedObject.postalCode
     self.isCurrentLocalization = isCurrentLocalization
-    self.latitude = unassociatedObject.latitude
-    self.longitude = unassociatedObject.longitude
+    latitude = unassociatedObject.latitude
+    longitude = unassociatedObject.longitude
   }
   
   convenience init(place: GMSPlace) {
@@ -101,13 +101,13 @@ final class City: NSManagedObject, Codable {
     
     let addressComponents = place.addressComponents
     
-    self.name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
-    self.country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
-    self.state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
-    self.postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
-    self.isCurrentLocalization = false
-    self.latitude = place.coordinate.latitude
-    self.longitude = place.coordinate.longitude
+    name = addressComponents?.first(where: {$0.type == "locality"})?.name ?? place.name
+    country = addressComponents?.first(where: {$0.type == "country"})?.name ?? "N/A"
+    state = addressComponents?.first(where: {$0.type == "administrative_area_level_1"})?.name
+    postalCode = addressComponents?.first(where: {$0.type == "postal_code"})?.name ?? "N/A"
+    isCurrentLocalization = false
+    latitude = place.coordinate.latitude
+    longitude = place.coordinate.longitude
   }
 }
 
@@ -115,7 +115,7 @@ final class City: NSManagedObject, Codable {
 extension City {
   
   var localTime: String {
-    guard let timezone = self.timeZone else { return "N/A" }
+    guard let timezone = timeZone else { return "N/A" }
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .none
@@ -141,7 +141,7 @@ extension City {
   
   func isExists() -> Bool {
     let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ && country == %@", self.name, self.country)
+    let predicate = NSPredicate(format: "name == %@ && country == %@", name, country)
     request.predicate = predicate
     
     do {

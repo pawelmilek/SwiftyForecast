@@ -305,16 +305,16 @@ private extension ForecastViewController {
     if cityCount > 0 {
       let indexPath = IndexPath(row: index, section: 0)
       let city = cities.object(at: indexPath)
-      forecastVC.currentCityForecast = city
+      forecastVC.currentCity = city
     } else {
-      forecastVC.currentCityForecast = nil
+      forecastVC.currentCity = nil
     }
 
     return forecastVC
   }
   
   func index(of forecastContentViewController: ForecastContentViewController) -> Int {
-    guard let city = forecastContentViewController.currentCityForecast else { return NSNotFound }
+    guard let city = forecastContentViewController.currentCity else { return NSNotFound }
     return cities.indexPath(forObject: city)?.row ?? NSNotFound
   }
   

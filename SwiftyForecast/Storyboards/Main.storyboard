@@ -44,7 +44,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="currentForecastView" destination="5AL-Fh-OWB" id="43J-Lk-4Qs"/>
-                        <outlet property="dailyForecastTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
+                        <outlet property="weekTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

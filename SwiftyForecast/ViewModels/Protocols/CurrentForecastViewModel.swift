@@ -12,5 +12,6 @@ protocol CurrentForecastViewModel {
 //  var sunsetIcon: NSAttributedString { get }
   var sunriseTime: String { get }
   var sunsetTime: String { get }
-  var city: City? { get }
+  var numberOfDays: Int { get }
+  var sevenDaysData: [DailyData] { get }
 }
