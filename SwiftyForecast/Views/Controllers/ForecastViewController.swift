@@ -162,8 +162,12 @@ private extension ForecastViewController {
 private extension ForecastViewController {
   
   func setPageControl() {
-    pageControl.currentPage = currentIndex
-    pageControl.numberOfPages = cityCount
+    DispatchQueue.main.async { [weak self] in
+      guard let strongSelf = self else { return }
+      strongSelf.pageControl.currentPage = strongSelf.currentIndex
+      strongSelf.pageControl.numberOfPages = strongSelf.cityCount
+    }
+    
   }
   
 }
@@ -305,16 +309,16 @@ private extension ForecastViewController {
     if cityCount > 0 {
       let indexPath = IndexPath(row: index, section: 0)
       let city = cities.object(at: indexPath)
-      forecastVC.currentCity = city
+      forecastVC.currentCityFetchedFromPlaces = city
     } else {
-      forecastVC.currentCity = nil
+      forecastVC.currentCityFetchedFromPlaces = nil
     }
 
     return forecastVC
   }
   
   func index(of forecastContentViewController: ForecastContentViewController) -> Int {
-    guard let city = forecastContentViewController.currentCity else { return NSNotFound }
+    guard let city = forecastContentViewController.currentCityFetchedFromPlaces else { return NSNotFound }
     return cities.indexPath(forObject: city)?.row ?? NSNotFound
   }
   

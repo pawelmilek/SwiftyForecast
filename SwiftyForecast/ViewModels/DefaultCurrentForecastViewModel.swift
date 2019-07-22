@@ -1,8 +1,8 @@
 import Foundation
 
 protocol CurrentForecastViewModelDelegate: class {
-  func currentForecastViewModelDidFetchDataSuccess(_ currentForecastViewModel: CurrentForecastViewModel)
-  func currentForecastViewModelDidFetchDataFailure(_ currentForecastViewModel: CurrentForecastViewModel, error: WebServiceError)
+  func currentForecastViewModelDidFetchData(_ viewModel: CurrentForecastViewModel,
+                                            error: WebServiceError?)
 }
 
 final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
@@ -75,25 +75,29 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     self.service = service
     self.delegate = delegate
     self.coordinate = Coordinate(latitude: city.latitude, longitude: city.longitude)
-    fetchForecastData()
+    fetchForecast()
   }
 }
 
-// MARK: - Private -
+// MARK: - Private - Fetch Forecast Data
 private extension DefaultCurrentForecastViewModel {
   
-  func fetchForecastData() {
+  func fetchForecast() {
     service.getForecast(by: coordinate) { response in
       switch response {
       case .success(let data):
         self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
-        self.delegate?.currentForecastViewModelDidFetchDataSuccess(self)
+        self.delegate?.currentForecastViewModelDidFetchData(self, error: nil)
         
       case .failure(let error):
         self.weatherForecast = nil
-        self.delegate?.currentForecastViewModelDidFetchDataFailure(self, error: error)
+        self.delegate?.currentForecastViewModelDidFetchData(self, error: error)
       }
     }
+  }
+  
+  func fetchForecast(for city: City) {
+    
   }
   
 }

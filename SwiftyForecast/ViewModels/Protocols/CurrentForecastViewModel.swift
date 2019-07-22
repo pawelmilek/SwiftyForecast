@@ -1,6 +1,7 @@
 import Foundation
 
 protocol CurrentForecastViewModel {
+  //  var city: City? { get } TODO: Modify City class by removing it from CoreData
   var hourly: HourlyForecast? { get }
   var icon: NSAttributedString? { get }
   var weekdayMonthDay: String { get }

@@ -276,11 +276,12 @@ private extension CityTableViewController {
 private extension CityTableViewController {
   
   func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
-    GeocoderHelper.findTimeZone(at: locationCoordinate) { timezone, error in
-      if let timezone = timezone {
-        completionHandler(timezone)
+    GeocoderHelper.timeZone(for: locationCoordinate) { result in
+      switch result {
+      case .success(let data):
+        completionHandler(data)
         
-      } else {
+      case .failure:
         completionHandler(nil)
       }
     }

@@ -109,6 +109,20 @@ final class City: NSManagedObject, Codable {
     latitude = place.coordinate.latitude
     longitude = place.coordinate.longitude
   }
+  
+  convenience init(place: CLPlacemark) {
+    let entity = NSEntityDescription.entity(forEntityName: City.entityName, in: CoreDataStackHelper.shared.managedContext)!
+    self.init(entity: entity, insertInto: nil)
+
+    name = place.locality ?? "N/A"
+    country = place.country ?? "N/A"
+    state = place.administrativeArea ?? "N/A"
+    postalCode = place.postalCode ?? "N/A"
+    latitude = place.location?.coordinate.latitude ?? 0.0
+    longitude = place.location?.coordinate.longitude ?? 0.0
+    
+    isCurrentLocalization = false
+  }
 }
 
 // MARK: - Local time

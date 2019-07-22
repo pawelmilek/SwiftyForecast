@@ -5,7 +5,7 @@ class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var weekTableView: UITableView!
   
-  var currentCity: City?
+  var currentCityFetchedFromPlaces: City?
   var pageIndex = 0
   
   private let service = DefaultForecastService()
@@ -113,32 +113,29 @@ private extension ForecastContentViewController {
     if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
       fetchForecastForCurrentLocation()
       
-    } else if let currentCity = currentCity {
+    } else if let currentCity = currentCityFetchedFromPlaces {
       fetchWeatherForecast(for: currentCity)
     }
   }
   
   func fetchForecastForCurrentLocation() {
     ActivityIndicatorView.shared.startAnimating(at: view)
-    
-    GooglePlacesHelper.getCurrentPlace() { [weak self] place, error in
+    GeocoderHelper.currentPlace() { [weak self] result in
       guard let strongSelf = self else { return }
       
-      if let error = error {
-        ActivityIndicatorView.shared.stopAnimating()
-        error == .locationDisabled ? LocationProvider.shared.presentLocationServicesSettingsPopupAlert() : error.handler()
-        return
-      }
-      
-      if let place = place {
-        let city = City(place: place)
-        strongSelf.currentCity = city
+      switch result {
+      case .success(let data):
+        let city = City(place: data)
+        strongSelf.currentCityFetchedFromPlaces = city
         strongSelf.viewModel = DefaultCurrentForecastViewModel(city: city, service: strongSelf.service, delegate: self)
         
-      } else {
+      case .failure(let error):
         ActivityIndicatorView.shared.stopAnimating()
-        GooglePlacesError.placeNotFound.handler()
+        error == .locationDisabled
+          ? LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+          : error.handler()
       }
+      
     }
   }
   
@@ -271,9 +268,9 @@ extension ForecastContentViewController {
   private func reloadForecast() {
     guard let viewModel = viewModel else { return }
     
-    DispatchQueue.main.async {
-      self.currentForecastView.configure(by: viewModel)
-      self.weekTableView.reloadData()
+    DispatchQueue.main.async { [weak self] in
+      self?.currentForecastView.configure(by: viewModel)
+      self?.weekTableView.reloadData()
     }
   }
   
@@ -282,8 +279,16 @@ extension ForecastContentViewController {
 // MARK: - CurrentForecastViewModelDelegate protocol
 extension ForecastContentViewController: CurrentForecastViewModelDelegate {
   
-  func currentForecastViewModelDidFetchDataSuccess(_ currentForecastViewModel: CurrentForecastViewModel) {
-    if let city = currentCity, isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
+  func currentForecastViewModelDidFetchData(_ viewModel: CurrentForecastViewModel, error: WebServiceError?) {
+    guard error == nil else {
+      DispatchQueue.main.async {
+        ActivityIndicatorView.shared.stopAnimating()
+        error?.handler()
+      }
+      return
+    }
+    
+    if let city = currentCityFetchedFromPlaces, isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
       // COREDATA!!
       if city.isExists() == false {
         LocalizedCityManager.deleteCurrentCity()
@@ -305,13 +310,6 @@ extension ForecastContentViewController: CurrentForecastViewModelDelegate {
       ActivityIndicatorView.shared.stopAnimating()
     }
     reloadForecast()
-  }
-  
-  func currentForecastViewModelDidFetchDataFailure(_ currentForecastViewModel: CurrentForecastViewModel, error: WebServiceError) {
-    DispatchQueue.main.async {
-      ActivityIndicatorView.shared.stopAnimating()
-      error.handler()
-    }
   }
   
 }
