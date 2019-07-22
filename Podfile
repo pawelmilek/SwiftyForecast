@@ -4,6 +4,7 @@ use_frameworks!
 def shared_pods
   pod 'GooglePlaces', '~> 2.7'
   pod 'ReachabilitySwift', '~> 4.3'
+  pod 'RealmSwift', '~> 3.1'
 end
 
 # Pods for App

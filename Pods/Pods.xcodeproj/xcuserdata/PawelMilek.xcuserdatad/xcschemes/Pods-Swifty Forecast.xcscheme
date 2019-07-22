@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1257E866D4BB0ED7A927ADC78106A3BC"
+               BlueprintIdentifier = "12026FF9E0DE2DB81AA1A0328A407729"
                BuildableName = "Pods_Swifty_Forecast.framework"
                BlueprintName = "Pods-Swifty Forecast"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1257E866D4BB0ED7A927ADC78106A3BC"
+            BlueprintIdentifier = "12026FF9E0DE2DB81AA1A0328A407729"
             BuildableName = "Pods_Swifty_Forecast.framework"
             BlueprintName = "Pods-Swifty Forecast"
             ReferencedContainer = "container:Pods.xcodeproj">
