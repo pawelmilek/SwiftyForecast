@@ -28,7 +28,15 @@ class DailyForecastTests: XCTestCase {
   }
   
   func testDailyAttributedDate() {
-    let expectedValue = DailyDateRenderer.render(weekday: "SUNDAY", month: "APRIL 28")
+    var timeInterval: TimeInterval {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MM/dd/yyyy"
+      let date = formatter.date(from: "04/28/2019")
+      return date?.timeIntervalSince1970 ?? 0
+    }
+    
+    let forecastDate = ForecastDate(timeInterval: timeInterval) // SUNDAY APRIL 28
+    let expectedValue = DailyDateRenderer.render(forecastDate)
     XCTAssertEqual(viewModel.attributedDate, expectedValue)
   }
   

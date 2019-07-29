@@ -4,23 +4,20 @@ final class SharedGroupContainer {
   private static let groupSuiteName = "group.com.pawelmilek.Swifty-Forecast"
   private static let defaults = UserDefaults(suiteName: SharedGroupContainer.groupSuiteName)
   
-  
-  static func setShared(city: City) {
-    if let defaults = SharedGroupContainer.defaults, let encodedCity = try? JSONEncoder().encode(city) {
+  static var sharedCity: City? {
+    get {
+      guard let defaults = SharedGroupContainer.defaults else { return nil }
+      guard let currentCityData = defaults.data(forKey: "currentCity") else { return nil }
+      guard let currentCity = try? JSONDecoder().decode(City.self, from: currentCityData) else { return nil }
+      
+      return currentCity
+    }
+    
+    set {
+      guard let defaults = SharedGroupContainer.defaults, let encodedCity = try? JSONEncoder().encode(newValue) else { return }
       defaults.set(encodedCity, forKey: "currentCity")
       defaults.synchronize()
     }
-  }
-  
-  static func getSharedCity() -> City? {
-    guard let defaults = SharedGroupContainer.defaults else { return nil }
-
-    if let cityData = defaults.data(forKey: "currentCity"), let city = try? JSONDecoder().decode(City.self, from: cityData) {
-      return city
-    } else {
-      return nil
-    }
-    
   }
   
 }

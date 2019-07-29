@@ -101,7 +101,7 @@ private extension TodayViewController {
 private extension TodayViewController {
   
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?) -> ()) {
-    guard let currentCity = SharedGroupContainer.getSharedCity() else { return }
+    guard let currentCity = SharedGroupContainer.sharedCity else { return }
     
     let coordinate = Coordinate(latitude: currentCity.latitude, longitude: currentCity.longitude)
     let service = DefaultForecastService()

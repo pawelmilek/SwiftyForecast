@@ -303,7 +303,7 @@ extension ForecastContentViewController: CurrentForecastViewModelDelegate {
         self.reloadDataInMainPageViewController()
       }
       
-      SharedGroupContainer.setShared(city: city)
+      SharedGroupContainer.sharedCity = city
     }
     
     DispatchQueue.main.async {

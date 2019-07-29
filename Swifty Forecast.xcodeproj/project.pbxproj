@@ -110,8 +110,6 @@
 		E22441B32162F8DE009D409F /* CurrentForecastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E206E1CD20EC5E7C00AC72EA /* CurrentForecastView.xib */; };
 		E22441BE2162FCE7009D409F /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
 		E23420FC216C0F1C007BB8F0 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23420FB216C0F1C007BB8F0 /* Coordinate.swift */; };
-		E2342100216C18A3007BB8F0 /* DataMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23420FF216C18A3007BB8F0 /* DataMigrationManager.swift */; };
-		E2342101216C1944007BB8F0 /* DataMigrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23420FF216C18A3007BB8F0 /* DataMigrationManager.swift */; };
 		E2342102216C2F57007BB8F0 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23420FB216C0F1C007BB8F0 /* Coordinate.swift */; };
 		E2342104216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2342103216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel */; };
 		E2342105216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = E2342103216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel */; };
@@ -398,7 +396,6 @@
 		E224417D2161909E009D409F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		E224417F2161909E009D409F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E23420FB216C0F1C007BB8F0 /* Coordinate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
-		E23420FF216C18A3007BB8F0 /* DataMigrationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMigrationManager.swift; sourceTree = "<group>"; };
 		E2342103216C301C007BB8F0 /* SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = SwiftyForecastMappingModel_v2_to_v3.xcmappingmodel; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E220E84371007D8CE4 /* WebServiceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceRequest.swift; sourceTree = "<group>"; };
@@ -520,9 +517,6 @@
 		E2CF4DA52275014E00062E36 /* JSONFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
 		E2CF4DA62275014E00062E36 /* FileLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoadable.swift; sourceTree = "<group>"; };
 		E2CF4DAB227501B000062E36 /* FileLoaderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoaderError.swift; sourceTree = "<group>"; };
-		E2CF4DC9227687AB00062E36 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2CF4DCB2276883000062E36 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2CF4DCD227688A500062E36 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2CF4DD322768A9D00062E36 /* DailyForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastTests.swift; sourceTree = "<group>"; };
 		E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultForecastService.swift; sourceTree = "<group>"; };
 		E2CF4DDC227E313400062E36 /* ForecastNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastNotificationCenter.swift; sourceTree = "<group>"; };
@@ -622,10 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				E2E0761D20F5124C008A5B63 /* FontWeatherIcon */,
-				E23CD76A20EDBCE400F0F72A /* ForecastIcons */,
+				E27A9BE522EE67E9008A62CE /* GeocodeLocation */,
 				E20DA45A214348AD0047491B /* NetworkManager.swift */,
-				E2D960802120F34800AE0B6E /* GeocoderHelper.swift */,
-				E254B5CF2102C45000B34E8F /* LocationProvider.swift */,
 				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E27E2FDC1DA0649000B3EABF /* NotificationCenterKey.swift */,
@@ -633,7 +625,6 @@
 				E200103321697A00008E6090 /* CoreDataStack.swift */,
 				E2DCC9CA2146FA49003528F3 /* LocalizedCityManager.swift */,
 				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
-				E23420FF216C18A3007BB8F0 /* DataMigrationManager.swift */,
 				E2CF4DDC227E313400062E36 /* ForecastNotificationCenter.swift */,
 			);
 			path = Utilities;
@@ -829,14 +820,6 @@
 			path = ConditionView;
 			sourceTree = "<group>";
 		};
-		E23CD76A20EDBCE400F0F72A /* ForecastIcons */ = {
-			isa = PBXGroup;
-			children = (
-				E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */,
-			);
-			path = ForecastIcons;
-			sourceTree = "<group>";
-		};
 		E2435BD222AD627B007589CE /* ForecastUserDefaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,6 +848,15 @@
 				E216C3B722B6DEA400C18A3D /* TodayForecastViewModel.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		E27A9BE522EE67E9008A62CE /* GeocodeLocation */ = {
+			isa = PBXGroup;
+			children = (
+				E2D960802120F34800AE0B6E /* GeocoderHelper.swift */,
+				E254B5CF2102C45000B34E8F /* LocationProvider.swift */,
+			);
+			path = GeocodeLocation;
 			sourceTree = "<group>";
 		};
 		E2854FCB2290E00800CD7554 /* Style */ = {
@@ -903,10 +895,10 @@
 				E23997DC20E84129007D8CE4 /* Application */,
 				E2A45E0F2290D86E00B04A67 /* Core */,
 				E21A0B9420EE88F5006AC409 /* Utilities */,
-				E2CF4DD722768B5200062E36 /* Service */,
 				E23997DA20E84104007D8CE4 /* Models */,
 				E23997D420E84058007D8CE4 /* Views */,
 				E2CF4D70226E75AD00062E36 /* ViewModels */,
+				E2CF4DD722768B5200062E36 /* Service */,
 				E23997D720E84094007D8CE4 /* Storyboards */,
 				E23997D820E840C1007D8CE4 /* Resources */,
 				E200101A2167C191008E6090 /* Swifty Forecast.entitlements */,
@@ -1072,6 +1064,7 @@
 		E2E0761D20F5124C008A5B63 /* FontWeatherIcon */ = {
 			isa = PBXGroup;
 			children = (
+				E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */,
 				E2E0762420F5165E008A5B63 /* FontLoader.swift */,
 				E23CD76620EDBC6900F0F72A /* FontWeatherIcon.swift */,
 				E2E0761E20F51274008A5B63 /* FontWeatherIconType.swift */,
@@ -1378,7 +1371,6 @@
 				E20010232167D7CE008E6090 /* Registrable.swift in Sources */,
 				E20010262167D806008E6090 /* ReusableView.swift in Sources */,
 				E200103A216A94EA008E6090 /* CodingUserInfoKey+ ManagedObjectContext.swift in Sources */,
-				E2342101216C1944007BB8F0 /* DataMigrationManager.swift in Sources */,
 				E2854FD12290E43D00CD7554 /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				E2854FDA2290E45A00CD7554 /* NVActivityIndicatorAnimationBallZigZagDeflect.swift in Sources */,
 				E2854FE42290E45A00CD7554 /* NVActivityIndicatorAnimationCircleStrokeSpin.swift in Sources */,
@@ -1525,7 +1517,6 @@
 				E2A42E14214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallRotate.swift in Sources */,
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* NetworkResponseParser.swift in Sources */,
-				E2342100216C18A3007BB8F0 /* DataMigrationManager.swift in Sources */,
 				E2A42E23214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallRotateChase.swift in Sources */,
 				E206E1D020EC5E8900AC72EA /* CurrentForecastView.swift in Sources */,
 				E2A42E15214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallGridPulse.swift in Sources */,

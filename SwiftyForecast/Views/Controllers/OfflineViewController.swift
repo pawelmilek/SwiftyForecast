@@ -2,7 +2,6 @@ import UIKit
 
 class OfflineViewController: UIViewController {
   private let network = NetworkManager.shared
-  typealias OfflineStyle = Style.OfflineVC
   
   private var offLineImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
@@ -14,9 +13,9 @@ class OfflineViewController: UIViewController {
   private var descriptionLabel: UILabel = {
     let label = UILabel(frame: .zero)
     label.text = NSLocalizedString("You are offline, connect to the internet.", comment: "")
-    label.font = OfflineStyle.descriptionLabelFont
-    label.textColor = OfflineStyle.descriptionLabelTextColor
-    label.textAlignment = OfflineStyle.descriptionLabelTextAlignment
+    label.font = Style.OfflineVC.descriptionLabelFont
+    label.textColor = Style.OfflineVC.descriptionLabelTextColor
+    label.textAlignment = Style.OfflineVC.descriptionLabelTextAlignment
     label.numberOfLines = 1
     return label
   }()
@@ -57,8 +56,7 @@ extension OfflineViewController: ViewSetupable {
   
   func setUp() {
     network.whenReachable { [weak self] _ in
-      guard let strongSelf = self else { return }
-      strongSelf.showMainViewController()
+      self?.showMainViewController()
     }
   }
   
@@ -82,7 +80,7 @@ extension OfflineViewController: ViewSetupable {
   }
   
   func setUpStyle() {
-    view.backgroundColor = OfflineStyle.backgroundColor
+    view.backgroundColor = Style.OfflineVC.backgroundColor
   }
   
 }
@@ -90,7 +88,7 @@ extension OfflineViewController: ViewSetupable {
 // MARK: - Private - Show Main ViewController
 extension OfflineViewController {
   
-  private func showMainViewController() -> () {
+  private func showMainViewController() {
     DispatchQueue.main.async {
       self.navigationController?.popViewController(animated: false)
     }

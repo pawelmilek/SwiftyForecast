@@ -9,7 +9,7 @@ final class LocationProvider: NSObject {
   private let locationManager = CLLocationManager()
   private var didUpdateLocationsFlag = false
   private var locationFound: CompletionHandler?
-  var authorizationCompletionBlock: ((_ isAuthorized: Bool)->())? = { _ in }
+  var authorizationCompletionBlock: ((_ isAuthorized: Bool) -> ())? = { _ in }
   var currentLocation: CLLocation? {
     didSet {
       guard let currentLocation = currentLocation else { return }

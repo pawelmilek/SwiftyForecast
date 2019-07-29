@@ -4,8 +4,8 @@ struct ForecastDate {
   private let date: Date
   private let formatter: DateFormatter
   
-  init(timestamp: Int) {
-    date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+  init(timeInterval: TimeInterval) {
+    date = Date(timeIntervalSince1970: timeInterval)
     formatter = DateFormatter()
   }
 }
@@ -66,14 +66,16 @@ extension ForecastDate: CustomStringConvertible {
 
 // MARK: - Decodable protocol
 extension ForecastDate: Decodable {
+  
   private enum CodingKeys: String, CodingKey {
     case time
   }
   
   init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    let timestamp = try container.decode(Int.self, forKey: .time)
+    let timeInterval = try container.decode(Int.self, forKey: .time)
     
-    self.init(timestamp: timestamp)
+    self.init(timeInterval: TimeInterval(timeInterval))
   }
+  
 }

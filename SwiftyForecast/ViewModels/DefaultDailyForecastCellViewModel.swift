@@ -25,11 +25,7 @@ struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
   
   init(dailyData: DailyData) {
     self.dailyData = dailyData
-    
-    let weekday = self.dailyData.date.weekday.uppercased()
-    let month = self.dailyData.date.longDayMonth.uppercased()
-    
-    attributedDate = DailyDateRenderer.render(weekday: weekday, month: month)
+    attributedDate = DailyDateRenderer.render(dailyData.date)
     conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
                                            font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
   }

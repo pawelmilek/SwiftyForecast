@@ -1,3 +1,5 @@
+import Foundation
+
 struct DailyData: Forecast {
   let date: ForecastDate
   let summary: String
@@ -41,15 +43,15 @@ extension DailyData: Decodable {
     
     let sunriseTimestamp = try container.decode(Int.self, forKey: .sunriseTime)
     let sunsetTimestamp = try container.decode(Int.self, forKey: .sunsetTime)
-    self.sunriseTime = ForecastDate(timestamp: sunriseTimestamp)
-    self.sunsetTime = ForecastDate(timestamp: sunsetTimestamp)
+    self.sunriseTime = ForecastDate(timeInterval: TimeInterval(sunriseTimestamp))
+    self.sunsetTime = ForecastDate(timeInterval: TimeInterval(sunsetTimestamp))
   
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)
     let temperatureMaxTimestamp = try container.decode(Int.self, forKey: .temperatureMaxTime)
     self.temperatureMin = try container.decode(Double.self, forKey: .temperatureMin)
-    self.temperatureMinTime = ForecastDate(timestamp: temperatureMinTimestamp)
+    self.temperatureMinTime = ForecastDate(timeInterval: TimeInterval(temperatureMinTimestamp))
     self.temperatureMax = try container.decode(Double.self, forKey: .temperatureMax)
-    self.temperatureMaxTime = ForecastDate(timestamp: temperatureMaxTimestamp)
+    self.temperatureMaxTime = ForecastDate(timeInterval: TimeInterval(temperatureMaxTimestamp))
     self.humidity = try container.decode(Double.self, forKey: .humidity)
     self.pressure = try container.decode(Double.self, forKey: .pressure)
     self.windSpeed = try container.decode(Double.self, forKey: .windSpeed)
