@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1030"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E29911F51D456EAC0083B484"
-               BuildableName = "Swifty Forecast.app"
-               BlueprintName = "Swifty Forecast"
-               ReferencedContainer = "container:Swifty Forecast.xcodeproj">
+               BuildableName = "SwiftyForecast.app"
+               BlueprintName = "SwiftyForecast"
+               ReferencedContainer = "container:SwiftyForecast.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,28 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E2CF4D862273C39700062E36"
-               BuildableName = "SwiftyForecastTests.xctest"
-               BlueprintName = "SwiftyForecastTests"
-               ReferencedContainer = "container:Swifty Forecast.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E29911F51D456EAC0083B484"
-            BuildableName = "Swifty Forecast.app"
-            BlueprintName = "Swifty Forecast"
-            ReferencedContainer = "container:Swifty Forecast.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -66,23 +45,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29911F51D456EAC0083B484"
-            BuildableName = "Swifty Forecast.app"
-            BlueprintName = "Swifty Forecast"
-            ReferencedContainer = "container:Swifty Forecast.xcodeproj">
+            BuildableName = "SwiftyForecast.app"
+            BlueprintName = "SwiftyForecast"
+            ReferencedContainer = "container:SwiftyForecast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.SQLDebug 3"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.Logging.stderr 1 "
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -95,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29911F51D456EAC0083B484"
-            BuildableName = "Swifty Forecast.app"
-            BlueprintName = "Swifty Forecast"
-            ReferencedContainer = "container:Swifty Forecast.xcodeproj">
+            BuildableName = "SwiftyForecast.app"
+            BlueprintName = "SwiftyForecast"
+            ReferencedContainer = "container:SwiftyForecast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

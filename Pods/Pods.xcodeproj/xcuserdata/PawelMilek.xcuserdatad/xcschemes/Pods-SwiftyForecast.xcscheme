@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1030"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "307A99302CAA9BEFA9F4BDF00E04A81C"
-               BuildableName = "Pods_Swifty_Forecast_Widget.framework"
-               BlueprintName = "Pods-Swifty Forecast Widget"
+               BlueprintIdentifier = "0DE454E1734A6D471143C3F15FF69BE8"
+               BuildableName = "Pods_SwiftyForecast.framework"
+               BlueprintName = "Pods-SwiftyForecast"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,8 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -42,17 +40,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "307A99302CAA9BEFA9F4BDF00E04A81C"
-            BuildableName = "Pods_Swifty_Forecast_Widget.framework"
-            BlueprintName = "Pods-Swifty Forecast Widget"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

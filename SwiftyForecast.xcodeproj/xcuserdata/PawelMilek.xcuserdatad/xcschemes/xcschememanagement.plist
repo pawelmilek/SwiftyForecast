@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>Swifty Forecast.xcscheme</key>
+		<key>SwiftyForecast Widget.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>8</integer>
+		</dict>
+		<key>SwiftyForecast.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>SwiftyForecastTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>WeatherForecastWidget.xcscheme</key>
 		<dict>
@@ -27,7 +37,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E22441762161909E009D409F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E29911F51D456EAC0083B484</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2CF4D862273C39700062E36</key>
 		<dict>
 			<key>primary</key>
 			<true/>

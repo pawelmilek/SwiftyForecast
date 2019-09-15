@@ -44,9 +44,11 @@ extension HourlyCollectionViewCell {
       timeLabel.text = hourly.time
       iconLabel.attributedText = hourly.conditionIcon
       temperatureLabel.text = hourly.temperature
+
       timeLabel.alpha = 1
       iconLabel.alpha = 1
       temperatureLabel.alpha = 1
+
     } else {
       timeLabel.alpha = 0
       iconLabel.alpha = 0

@@ -42,12 +42,13 @@ extension DailyForecastTableViewCell {
   func configure(by item: DailyForecastCellViewModel?) {
     if let daily = item {
       dateLabel.attributedText = daily.attributedDate
-      dateLabel.alpha = 1
       iconLabel.attributedText = daily.conditionIcon
-      iconLabel.alpha = 1
-      
       temperatureLabel.text = daily.temperatureMax
+
+      dateLabel.alpha = 1
+      iconLabel.alpha = 1
       temperatureLabel.alpha = 1
+
     } else {
       dateLabel.alpha = 0
       iconLabel.alpha = 0

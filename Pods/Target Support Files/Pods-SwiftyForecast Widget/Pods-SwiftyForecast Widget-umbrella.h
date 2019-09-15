@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_Swifty_Forecast_WidgetVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_Swifty_Forecast_WidgetVersionString[];
+FOUNDATION_EXPORT double Pods_SwiftyForecast_WidgetVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_SwiftyForecast_WidgetVersionString[];
 

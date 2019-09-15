@@ -8,11 +8,11 @@ def shared_pods
 end
 
 # Pods for App
-target 'Swifty Forecast' do
+target 'SwiftyForecast' do
   shared_pods
 end
 
 # Pods for App's extension
-target 'Swifty Forecast Widget' do
+target 'SwiftyForecast Widget' do
   shared_pods
 end

@@ -6,7 +6,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private let googlePlacesAPIKey = "AIzaSyBRU9w0-Tlx3HWnQg13QnlXyngHHJoakkU"
   var window: UIWindow?
   
-  internal func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+  internal func application(_ application: UIApplication,
+                            didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if !isAuthorized {
         LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
@@ -39,19 +40,19 @@ extension AppDelegate {
 private extension AppDelegate {
   
   func setNavigationBarStyle() {
-    func setTransparentBackground() {
+    let setTransparentBackground = {
       UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
       UINavigationBar.appearance().shadowImage = UIImage()
       UINavigationBar.appearance().isTranslucent = true
       UINavigationBar.appearance().clipsToBounds = false
     }
     
-    func setTitleTextColor() {
+    let setTitleTextColor = {
       let textAttributes = [NSAttributedString.Key.foregroundColor: Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
     
-    func setBarButtonItemColor() {
+    let setBarButtonItemColor = {
       UINavigationBar.appearance().tintColor = Style.NavigationBar.barButtonItemColor
     }
     

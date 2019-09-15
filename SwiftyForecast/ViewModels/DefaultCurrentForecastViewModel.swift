@@ -97,7 +97,6 @@ private extension DefaultCurrentForecastViewModel {
   }
   
   func fetchForecast(for city: City) {
-    
   }
   
 }

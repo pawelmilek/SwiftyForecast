@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		48ADA41306E08160F99F46E5 /* Pods_Swifty_Forecast_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 044231DABBAE27CB24BA2437 /* Pods_Swifty_Forecast_Widget.framework */; };
-		7F781B37030785DBDDA2CFF0 /* Pods_Swifty_Forecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C2BEB65835CB7ABA4F7B97 /* Pods_Swifty_Forecast.framework */; };
+		0B7923EBB28EC458A52942BF /* Pods_SwiftyForecast_Widget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441EF34550C16AC5E8127413 /* Pods_SwiftyForecast_Widget.framework */; };
+		875D9F65A606AB9B5168171E /* Pods_SwiftyForecast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74271A946E2D865FF82F24A /* Pods_SwiftyForecast.framework */; };
 		E200101C2167D76E008E6090 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD75E20ED950500F0F72A /* HourlyCollectionViewCell.swift */; };
 		E200101D2167D76E008E6090 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23CD75F20ED950500F0F72A /* HourlyCollectionViewCell.xib */; };
 		E200101E2167D77B008E6090 /* HourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1C420E968A300AC72EA /* HourlyData.swift */; };
@@ -94,7 +94,7 @@
 		E22441782161909E009D409F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E224416321618EA4009D409F /* NotificationCenter.framework */; };
 		E224417B2161909E009D409F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224417A2161909E009D409F /* TodayViewController.swift */; };
 		E224417E2161909E009D409F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E224417C2161909E009D409F /* MainInterface.storyboard */; };
-		E22441822161909E009D409F /* Swifty Forecast Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E22441772161909E009D409F /* Swifty Forecast Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E22441822161909E009D409F /* SwiftyForecast Widget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E22441772161909E009D409F /* SwiftyForecast Widget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E2244186216198D0009D409F /* ViewSetupable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F9B1DA04D1D00B3EABF /* ViewSetupable.swift */; };
 		E2244187216199B6009D409F /* ConditionFontIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD76820EDBCDB00F0F72A /* ConditionFontIcon.swift */; };
 		E224418821619A15009D409F /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
@@ -353,7 +353,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E22441822161909E009D409F /* Swifty Forecast Widget.appex in Embed App Extensions */,
+				E22441822161909E009D409F /* SwiftyForecast Widget.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,12 +361,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		044231DABBAE27CB24BA2437 /* Pods_Swifty_Forecast_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0FA80B7D31EDB3A5B3AF1FC1 /* Pods-Swifty Forecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Forecast.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.release.xcconfig"; sourceTree = "<group>"; };
-		15C2BEB65835CB7ABA4F7B97 /* Pods_Swifty_Forecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Swifty_Forecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		632DF2EB7D876C556981C41B /* Pods-Swifty Forecast Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Forecast Widget.release.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget.release.xcconfig"; sourceTree = "<group>"; };
-		7BC2C1393075DFA7561601E9 /* Pods-Swifty Forecast Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Forecast Widget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget.debug.xcconfig"; sourceTree = "<group>"; };
-		7FE4503777BA51B560026510 /* Pods-Swifty Forecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Swifty Forecast.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast.debug.xcconfig"; sourceTree = "<group>"; };
+		1CAC3594316930DBC7463EA6 /* Pods-SwiftyForecast Widget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyForecast Widget.release.xcconfig"; path = "Target Support Files/Pods-SwiftyForecast Widget/Pods-SwiftyForecast Widget.release.xcconfig"; sourceTree = "<group>"; };
+		441EF34550C16AC5E8127413 /* Pods_SwiftyForecast_Widget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyForecast_Widget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56D452077F83F1B4F7F60172 /* Pods-SwiftyForecast.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyForecast.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast.debug.xcconfig"; sourceTree = "<group>"; };
+		9D3064B0C4299FC80CB263F6 /* Pods-SwiftyForecast.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyForecast.release.xcconfig"; path = "Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast.release.xcconfig"; sourceTree = "<group>"; };
+		C7C9B5117A44F66C3095AD2C /* Pods-SwiftyForecast Widget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyForecast Widget.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyForecast Widget/Pods-SwiftyForecast Widget.debug.xcconfig"; sourceTree = "<group>"; };
 		E200101A2167C191008E6090 /* Swifty Forecast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swifty Forecast.entitlements"; sourceTree = "<group>"; };
 		E200101B2167C1F7008E6090 /* Swifty Forecast Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swifty Forecast Widget.entitlements"; sourceTree = "<group>"; };
 		E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedGroupContainer.swift; sourceTree = "<group>"; };
@@ -391,7 +390,7 @@
 		E221C22D20FFC71E00CBB8F2 /* CodingUserInfoKey+ ManagedObjectContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+ ManagedObjectContext.swift"; sourceTree = "<group>"; };
 		E221C22F20FFCBBF00CBB8F2 /* CoreDataStackHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackHelper.swift; sourceTree = "<group>"; };
 		E224416321618EA4009D409F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
-		E22441772161909E009D409F /* Swifty Forecast Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swifty Forecast Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E22441772161909E009D409F /* SwiftyForecast Widget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SwiftyForecast Widget.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E224417A2161909E009D409F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		E224417D2161909E009D409F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		E224417F2161909E009D409F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -457,7 +456,7 @@
 		E28550012290F26E00CD7554 /* UnitNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitNotation.swift; sourceTree = "<group>"; };
 		E285500522922AB700CD7554 /* CurrentForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrentForecastTests.swift; path = SwiftyForecastTests/CurrentForecastTests.swift; sourceTree = SOURCE_ROOT; };
 		E28550092292303C00CD7554 /* DailyDateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDateRenderer.swift; sourceTree = "<group>"; };
-		E29911F61D456EAC0083B484 /* Swifty Forecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swifty Forecast.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29911F61D456EAC0083B484 /* SwiftyForecast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyForecast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2A42DE7214DEE5E00F9A79A /* NVActivityIndicatorAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorAnimationDelegate.swift; sourceTree = "<group>"; };
 		E2A42DE9214DEE5E00F9A79A /* NVActivityIndicatorPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorPresenter.swift; sourceTree = "<group>"; };
 		E2A42DEA214DEE5E00F9A79A /* NVActivityIndicatorViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorViewable.swift; sourceTree = "<group>"; };
@@ -534,6 +533,7 @@
 		E2EC1D131D919C0A00FD1F95 /* UIColor+Flat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Flat.swift"; sourceTree = "<group>"; };
 		E2F17C2B20F4097C00068BD2 /* DailyForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastTableViewCell.swift; sourceTree = "<group>"; };
 		E2F17C2C20F4097C00068BD2 /* DailyForecastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyForecastTableViewCell.xib; sourceTree = "<group>"; };
+		F74271A946E2D865FF82F24A /* Pods_SwiftyForecast.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyForecast.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -542,7 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E22441782161909E009D409F /* NotificationCenter.framework in Frameworks */,
-				48ADA41306E08160F99F46E5 /* Pods_Swifty_Forecast_Widget.framework in Frameworks */,
+				0B7923EBB28EC458A52942BF /* Pods_SwiftyForecast_Widget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +550,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F781B37030785DBDDA2CFF0 /* Pods_Swifty_Forecast.framework in Frameworks */,
+				875D9F65A606AB9B5168171E /* Pods_SwiftyForecast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,22 +567,11 @@
 		14FF84B878F0E000118ED0A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				15C2BEB65835CB7ABA4F7B97 /* Pods_Swifty_Forecast.framework */,
 				E224416321618EA4009D409F /* NotificationCenter.framework */,
-				044231DABBAE27CB24BA2437 /* Pods_Swifty_Forecast_Widget.framework */,
+				F74271A946E2D865FF82F24A /* Pods_SwiftyForecast.framework */,
+				441EF34550C16AC5E8127413 /* Pods_SwiftyForecast_Widget.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D6B0B3BE392A2E020DFDE116 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7FE4503777BA51B560026510 /* Pods-Swifty Forecast.debug.xcconfig */,
-				0FA80B7D31EDB3A5B3AF1FC1 /* Pods-Swifty Forecast.release.xcconfig */,
-				7BC2C1393075DFA7561601E9 /* Pods-Swifty Forecast Widget.debug.xcconfig */,
-				632DF2EB7D876C556981C41B /* Pods-Swifty Forecast Widget.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		E206E1C620E9692800AC72EA /* Hourly */ = {
@@ -874,16 +863,16 @@
 				E29911F81D456EAD0083B484 /* SwiftyForecast */,
 				E22441792161909E009D409F /* SwiftyForecastWidget */,
 				E29911F71D456EAC0083B484 /* Products */,
-				D6B0B3BE392A2E020DFDE116 /* Pods */,
 				14FF84B878F0E000118ED0A2 /* Frameworks */,
+				FD424CFD13003D72EFAB1219 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
 		E29911F71D456EAC0083B484 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E29911F61D456EAC0083B484 /* Swifty Forecast.app */,
-				E22441772161909E009D409F /* Swifty Forecast Widget.appex */,
+				E29911F61D456EAC0083B484 /* SwiftyForecast.app */,
+				E22441772161909E009D409F /* SwiftyForecast Widget.appex */,
 				E2CF4D872273C39700062E36 /* SwiftyForecastTests.xctest */,
 			);
 			name = Products;
@@ -1073,48 +1062,59 @@
 			path = FontWeatherIcon;
 			sourceTree = "<group>";
 		};
+		FD424CFD13003D72EFAB1219 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				56D452077F83F1B4F7F60172 /* Pods-SwiftyForecast.debug.xcconfig */,
+				9D3064B0C4299FC80CB263F6 /* Pods-SwiftyForecast.release.xcconfig */,
+				C7C9B5117A44F66C3095AD2C /* Pods-SwiftyForecast Widget.debug.xcconfig */,
+				1CAC3594316930DBC7463EA6 /* Pods-SwiftyForecast Widget.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E22441762161909E009D409F /* Swifty Forecast Widget */ = {
+		E22441762161909E009D409F /* SwiftyForecast Widget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "Swifty Forecast Widget" */;
+			buildConfigurationList = E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "SwiftyForecast Widget" */;
 			buildPhases = (
-				969FF7F61C7C3011085A273B /* [CP] Check Pods Manifest.lock */,
+				E434DF7BD8DAAB9BAF074997 /* [CP] Check Pods Manifest.lock */,
 				E22441732161909E009D409F /* Sources */,
 				E22441742161909E009D409F /* Frameworks */,
 				E22441752161909E009D409F /* Resources */,
-				D8AB6A228A3C5D1AC1E48141 /* [CP] Copy Pods Resources */,
+				3BE4CDB22676FE61EC82A8FC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Swifty Forecast Widget";
+			name = "SwiftyForecast Widget";
 			productName = "Swifty Forecast Widget";
-			productReference = E22441772161909E009D409F /* Swifty Forecast Widget.appex */;
+			productReference = E22441772161909E009D409F /* SwiftyForecast Widget.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		E29911F51D456EAC0083B484 /* Swifty Forecast */ = {
+		E29911F51D456EAC0083B484 /* SwiftyForecast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */;
+			buildConfigurationList = E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "SwiftyForecast" */;
 			buildPhases = (
-				D329D146135669A02AEBFC83 /* [CP] Check Pods Manifest.lock */,
+				A8FDD4E104EA2FB3039D94C6 /* [CP] Check Pods Manifest.lock */,
 				E29911F21D456EAC0083B484 /* Sources */,
 				E29911F31D456EAC0083B484 /* Frameworks */,
 				E29911F41D456EAC0083B484 /* Resources */,
-				00C345CACB0055681DAAED4B /* [CP] Embed Pods Frameworks */,
-				3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */,
 				E224417221618EA4009D409F /* Embed App Extensions */,
+				317172F6911C20098EFAAFCD /* [CP] Embed Pods Frameworks */,
+				C0F9FC611A0990866CBFD07A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				E22441812161909E009D409F /* PBXTargetDependency */,
 			);
-			name = "Swifty Forecast";
+			name = SwiftyForecast;
 			productName = "Swifty Forecast";
-			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
+			productReference = E29911F61D456EAC0083B484 /* SwiftyForecast.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E2CF4D862273C39700062E36 /* SwiftyForecastTests */ = {
@@ -1178,7 +1178,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "Swifty Forecast" */;
+			buildConfigurationList = E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "SwiftyForecast" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1191,8 +1191,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E29911F51D456EAC0083B484 /* Swifty Forecast */,
-				E22441762161909E009D409F /* Swifty Forecast Widget */,
+				E29911F51D456EAC0083B484 /* SwiftyForecast */,
+				E22441762161909E009D409F /* SwiftyForecast Widget */,
 				E2CF4D862273C39700062E36 /* SwiftyForecastTests */,
 			);
 		};
@@ -1239,13 +1239,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00C345CACB0055681DAAED4B /* [CP] Embed Pods Frameworks */ = {
+		317172F6911C20098EFAAFCD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -1258,16 +1258,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3932B834BE0A0AF18DBFD115 /* [CP] Copy Pods Resources */ = {
+		3BE4CDB22676FE61EC82A8FC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast Widget/Pods-SwiftyForecast Widget-resources.sh",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1276,52 +1276,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast/Pods-Swifty Forecast-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast Widget/Pods-SwiftyForecast Widget-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		969FF7F61C7C3011085A273B /* [CP] Check Pods Manifest.lock */ = {
+		A8FDD4E104EA2FB3039D94C6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Swifty Forecast Widget-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SwiftyForecast-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D329D146135669A02AEBFC83 /* [CP] Check Pods Manifest.lock */ = {
+		C0F9FC611A0990866CBFD07A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Swifty Forecast-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8AB6A228A3C5D1AC1E48141 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast-resources.sh",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -1330,7 +1316,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Swifty Forecast Widget/Pods-Swifty Forecast Widget-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyForecast/Pods-SwiftyForecast-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E434DF7BD8DAAB9BAF074997 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SwiftyForecast Widget-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1662,12 +1670,12 @@
 /* Begin PBXTargetDependency section */
 		E22441812161909E009D409F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E22441762161909E009D409F /* Swifty Forecast Widget */;
+			target = E22441762161909E009D409F /* SwiftyForecast Widget */;
 			targetProxy = E22441802161909E009D409F /* PBXContainerItemProxy */;
 		};
 		E2CF4D8D2273C39700062E36 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E29911F51D456EAC0083B484 /* Swifty Forecast */;
+			target = E29911F51D456EAC0083B484 /* SwiftyForecast */;
 			targetProxy = E2CF4D8C2273C39700062E36 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1686,7 +1694,7 @@
 /* Begin XCBuildConfiguration section */
 		E22441842161909E009D409F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7BC2C1393075DFA7561601E9 /* Pods-Swifty Forecast Widget.debug.xcconfig */;
+			baseConfigurationReference = C7C9B5117A44F66C3095AD2C /* Pods-SwiftyForecast Widget.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1715,7 +1723,7 @@
 		};
 		E22441852161909E009D409F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 632DF2EB7D876C556981C41B /* Pods-Swifty Forecast Widget.release.xcconfig */;
+			baseConfigurationReference = 1CAC3594316930DBC7463EA6 /* Pods-SwiftyForecast Widget.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1850,7 +1858,7 @@
 		};
 		E29912091D456EAD0083B484 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7FE4503777BA51B560026510 /* Pods-Swifty Forecast.debug.xcconfig */;
+			baseConfigurationReference = 56D452077F83F1B4F7F60172 /* Pods-SwiftyForecast.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1870,7 +1878,7 @@
 		};
 		E299120A1D456EAD0083B484 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0FA80B7D31EDB3A5B3AF1FC1 /* Pods-Swifty Forecast.release.xcconfig */;
+			baseConfigurationReference = 9D3064B0C4299FC80CB263F6 /* Pods-SwiftyForecast.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1911,7 +1919,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swifty Forecast.app/Swifty Forecast";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftyForecast.app/SwiftyForecast";
 			};
 			name = Debug;
 		};
@@ -1936,14 +1944,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Swifty Forecast.app/Swifty Forecast";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftyForecast.app/SwiftyForecast";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "Swifty Forecast Widget" */ = {
+		E22441832161909E009D409F /* Build configuration list for PBXNativeTarget "SwiftyForecast Widget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E22441842161909E009D409F /* Debug */,
@@ -1952,7 +1960,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "Swifty Forecast" */ = {
+		E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "SwiftyForecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29912061D456EAD0083B484 /* Debug */,
@@ -1961,7 +1969,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */ = {
+		E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "SwiftyForecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E29912091D456EAD0083B484 /* Debug */,
