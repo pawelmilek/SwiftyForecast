@@ -3,14 +3,15 @@ import Reachability
 
 final class NetworkManager {
   static let shared = NetworkManager()
-  private let reachability: Reachability
+  private let reachability: Reachability?
   
   private init() {
-    self.reachability = Reachability()!
-    registerObserver()
-    
+    reachability = try? Reachability()
     do {
-      try reachability.startNotifier()
+      
+      registerObserver()
+      try reachability?.startNotifier()
+
     } catch let error where error is ReachabilityError {
       let error = error as? ReachabilityError
       error?.handler()
@@ -49,13 +50,13 @@ private extension NetworkManager {
     case .cellular:
       debugPrint("Reachable via Cellular")
       
-    case .none:
+    case .unavailable, .none:
       debugPrint("Network not reachable")
     }
   }
   
-  func stopNotifier() -> () {
-    reachability.stopNotifier()
+  func stopNotifier() {
+    reachability?.stopNotifier()
   }
 
 }
@@ -64,35 +65,35 @@ private extension NetworkManager {
 extension NetworkManager {
   
   func isReachable(completionHandler: @escaping (_ networkManager: NetworkManager) -> ()) {
-    if reachability.connection != .none {
+    if let reachability = reachability, reachability.connection != .unavailable {
       completionHandler(NetworkManager.shared)
     }
   }
   
   func isUnreachable(completionHandler: @escaping (_ networkManager: NetworkManager) -> ()) {
-    if reachability.connection == .none {
+    if let reachability = reachability, reachability.connection == .unavailable {
       completionHandler(NetworkManager.shared)
     }
   }
   
   func isReachableViaWWANCellular(completionHandler: @escaping (_ networkManager: NetworkManager) -> ()) {
-    if reachability.connection == .cellular {
+    if let reachability = reachability, reachability.connection == .cellular {
       completionHandler(NetworkManager.shared)
     }
   }
   
   func isReachableViaWiFi(completionHandler: @escaping (_ networkManager: NetworkManager) -> ()) {
-    if reachability.connection == .wifi {
+    if let reachability = reachability, reachability.connection == .wifi {
       completionHandler(NetworkManager.shared)
     }
   }
   
   func whenReachable(completionHandler: @escaping (_ networkReachable: Reachability) -> ()) {
-    reachability.whenReachable = completionHandler
+    reachability?.whenReachable = completionHandler
   }
   
   func whenUnreachable(completionHandler: @escaping (_ networkReachable: Reachability) -> ()) {
-    reachability.whenUnreachable = completionHandler
+    reachability?.whenUnreachable = completionHandler
   }
   
 }

@@ -8,11 +8,12 @@ class CityTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     setUp()
+    setUpStyle()
   }
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    configure(by: .none)
+    setUp()
   }
 }
 
@@ -20,6 +21,13 @@ class CityTableViewCell: UITableViewCell {
 extension CityTableViewCell: ViewSetupable {
   
   func setUp() {
+    currentTimeLabel.text = ""
+    currentTimeLabel.alpha = 0
+    cityNameLabel.text = ""
+    cityNameLabel.alpha = 0
+  }
+  
+  func setUpStyle() {
     backgroundColor = Style.CityCell.backgroundColor
     selectionStyle = .none
     
@@ -31,7 +39,6 @@ extension CityTableViewCell: ViewSetupable {
     cityNameLabel.textColor = Style.CityCell.cityNameLabelTextColor
     cityNameLabel.textAlignment = Style.CityCell.cityNameLabelTextAlignment
     separatorView.backgroundColor = Style.CityCell.separatorColor
-    configure(by: .none)
   }
   
 }
@@ -39,25 +46,11 @@ extension CityTableViewCell: ViewSetupable {
 // MARK: - Configure by city
 extension CityTableViewCell {
   
-  func configure(by city: City?, localTime: String? = nil) { // TODO: Implement ViewModel
-    if let city = city, let localTime = localTime {
-      currentTimeLabel.text = localTime
-      currentTimeLabel.alpha = 1
-      cityNameLabel.text = city.name + ", " + city.country
-      cityNameLabel.alpha = 1
-      
-    } else if let city = city {
-      currentTimeLabel.text = city.localTime
-      currentTimeLabel.alpha = 1
-      cityNameLabel.text = city.name + ", " + city.country
-      cityNameLabel.alpha = 1
-      
-    } else {
-      currentTimeLabel.text = ""
-      currentTimeLabel.alpha = 0
-      cityNameLabel.text = ""
-      cityNameLabel.alpha = 0
-    }
+  func configure(by name: String, time localTime: String) { // TODO: Implement CityViewModel
+    currentTimeLabel.text = localTime
+    cityNameLabel.text = name
+    currentTimeLabel.alpha = 1
+    cityNameLabel.alpha = 1
   }
   
 }

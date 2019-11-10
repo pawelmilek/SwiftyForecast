@@ -1,12 +1,8 @@
 import UIKit
-import CoreData
 
 class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var weekTableView: UITableView!
-  
-  var currentCityFetchedFromPlaces: City?
-  var pageIndex = 0
   
   private let service = DefaultForecastService()
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
@@ -14,9 +10,13 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var viewModel: CurrentForecastViewModel?
+  private var isFetchingData: Bool = false
   private var isCurrentLocationPage: Bool {
     return pageIndex == 0
   }
+  
+  var city: CityRealm?
+  var pageIndex = 0
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,11 +25,11 @@ class ForecastContentViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    fetchWeatherForecast()
+    fetchForecast()
   }
   
   deinit {
-    removeNotificationCenterObservers()
+    removeNotificationObservers()
   }
 }
 
@@ -37,10 +37,10 @@ class ForecastContentViewController: UIViewController {
 extension ForecastContentViewController: ViewSetupable {
   
   func setUp() {
+    setWeekTableView()
+    arrangeConstraints()
     setCurrentForecastViewDelegate()
-    setSupportingCurrentForecastViewConstraints()
-    setDailyForecastTableView()
-    addNotificationCenterObservers()
+    addNotificationObservers()
   }
   
 }
@@ -54,10 +54,10 @@ private extension ForecastContentViewController {
   
 }
 
-// MARK: - Private - Set currentForecastView constraints
+// MARK: - Private - Arrange constraints
 private extension ForecastContentViewController {
   
-  func setSupportingCurrentForecastViewConstraints() {
+  func arrangeConstraints() {
     currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
     currentForecastViewStackViewBottomToMoreDetailsBottomConstraint = currentForecastView.stackViewBottomToMoreDetailsTopConstraint
     currentForecastViewStackViewBottomToSafeAreaBottomConstraint = currentForecastView.stackViewBottomToSafeAreaBottomConstraint
@@ -70,7 +70,7 @@ private extension ForecastContentViewController {
 // MARK: - Private - Set daily Forecast TableView
 private extension ForecastContentViewController {
   
-  func setDailyForecastTableView() {
+  func setWeekTableView() {
     weekTableView.register(cellClass: DailyForecastTableViewCell.self)
     weekTableView.dataSource = self
     weekTableView.delegate = self
@@ -88,7 +88,7 @@ private extension ForecastContentViewController {
 // MARK: - Private - Add notification center
 private extension ForecastContentViewController {
   
-  func addNotificationCenterObservers() {
+  func addNotificationObservers() {
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(unitNotationDidChange),
                                    for: .unitNotationDidChange)
@@ -100,7 +100,7 @@ private extension ForecastContentViewController {
                                    for: .applicationDidBecomeActive)
   }
   
-  func removeNotificationCenterObservers() {
+  func removeNotificationObservers() {
     ForecastNotificationCenter.remove(observer: self)
   }
   
@@ -109,25 +109,29 @@ private extension ForecastContentViewController {
 // MAKR: - Private - Fetch weather forecast
 private extension ForecastContentViewController {
   
-  func fetchWeatherForecast() {
+  func fetchForecast() {
+    guard !isFetchingData else { return }
+    
+    isFetchingData = true
     if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
-      fetchForecastForCurrentLocation()
+      fetchCurrentLocationForecast()
       
-    } else if let currentCity = currentCityFetchedFromPlaces {
-      fetchWeatherForecast(for: currentCity)
+    } else if let city = city {
+      fetchWeatherForecast(for: city)
     }
   }
   
-  func fetchForecastForCurrentLocation() {
+  func fetchCurrentLocationForecast() {
     ActivityIndicatorView.shared.startAnimating(at: view)
-    GeocoderHelper.currentPlace() { [weak self] result in
-      guard let strongSelf = self else { return }
+    
+    GeocoderHelper.currentLocation { [weak self] result in
+      guard let self = self else { return }
       
       switch result {
-      case .success(let data):
-        let city = City(place: data)
-        strongSelf.currentCityFetchedFromPlaces = city
-        strongSelf.viewModel = DefaultCurrentForecastViewModel(city: city, service: strongSelf.service, delegate: self)
+      case .success(let placemark):
+        guard let currentCity = try? CityRealm.add(from: placemark) else { return }
+        self.city = currentCity
+        self.viewModel = DefaultCurrentForecastViewModel(city: currentCity, service: self.service, delegate: self)
         
       case .failure(let error):
         ActivityIndicatorView.shared.stopAnimating()
@@ -135,11 +139,10 @@ private extension ForecastContentViewController {
           ? LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
           : error.handler()
       }
-      
     }
   }
   
-  func fetchWeatherForecast(for city: City) {
+  func fetchWeatherForecast(for city: CityRealm) {
     ActivityIndicatorView.shared.startAnimating(at: view)
     viewModel = DefaultCurrentForecastViewModel(city: city, service: service, delegate: self)
   }
@@ -228,9 +231,9 @@ extension ForecastContentViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let dailyItems = viewModel?.sevenDaysData else { return UITableViewCell() }
+    guard let dailyItems = viewModel?.sevenDaysData,
+      let item = dailyItems[safe: indexPath.row] else { return UITableViewCell() }
     
-    let item = dailyItems[indexPath.row]
     let viewModel = DefaultDailyForecastCellViewModel(dailyData: item)
     let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
     cell.configure(by: viewModel)
@@ -258,11 +261,11 @@ extension ForecastContentViewController {
   }
   
   @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
-    fetchForecastForCurrentLocation()
+    fetchCurrentLocationForecast()
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    fetchWeatherForecast()
+    fetchForecast()
   }
   
   private func reloadForecast() {
@@ -280,6 +283,8 @@ extension ForecastContentViewController {
 extension ForecastContentViewController: CurrentForecastViewModelDelegate {
   
   func currentForecastViewModelDidFetchData(_ viewModel: CurrentForecastViewModel, error: WebServiceError?) {
+    isFetchingData = false
+    
     guard error == nil else {
       DispatchQueue.main.async {
         ActivityIndicatorView.shared.stopAnimating()
@@ -287,29 +292,14 @@ extension ForecastContentViewController: CurrentForecastViewModelDelegate {
       }
       return
     }
-    
-    if let city = currentCityFetchedFromPlaces, isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
-      // COREDATA!!
-      if city.isExists() == false {
-        LocalizedCityManager.deleteCurrentCity()
-        LocalizedCityManager.insertCurrent(city: city)
-        
-        self.reloadAndInitializeMainPageViewController()
-        CoreDataStackHelper.shared.saveContext()
-        
-      } else {
-        LocalizedCityManager.fetchAndResetCities()
-        LocalizedCityManager.updateCurrent(city: city)
-        self.reloadDataInMainPageViewController()
-      }
-      
-      SharedGroupContainer.sharedCity = city
-    }
+    // TODO: Share Realm between app and widget extension
+//    SharedGroupContainer.sharedCity = viewModel.city
     
     DispatchQueue.main.async {
       ActivityIndicatorView.shared.stopAnimating()
+      self.reloadDataInMainPageViewController()
+      self.reloadForecast()
     }
-    reloadForecast()
   }
   
 }

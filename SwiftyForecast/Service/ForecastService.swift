@@ -1,6 +1,6 @@
-import Foundation
+import CoreLocation
 
 protocol ForecastService {
-  func getForecast(by coordinate: Coordinate,
-                   completionHandler: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) -> Void
+  func getForecast(by location: CLLocation,
+                   completion: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) -> Void
 }

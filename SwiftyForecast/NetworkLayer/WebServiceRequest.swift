@@ -13,7 +13,7 @@ final class WebServiceRequest {
         return
       }
       
-      completionHandler(NetworkResponseParser<M>.parseJSON(data, with: CoreDataStackHelper.shared.managedContext))
+      completionHandler(NetworkResponseParser<M>.parseJSON(data))
       }.resume()
   }
 }

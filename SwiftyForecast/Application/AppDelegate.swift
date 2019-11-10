@@ -1,5 +1,6 @@
 import UIKit
 import GooglePlaces
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setUpStyle()
+    
+    // MARK: - Get Realm path
+    print(RealmProvider.cities.configuration.fileURL!)
+    try! CityRealm.deleteAll()
+    
     return true
   }
   
@@ -51,14 +57,14 @@ private extension AppDelegate {
       let textAttributes = [NSAttributedString.Key.foregroundColor: Style.NavigationBar.titleTextColor]
       UINavigationBar.appearance().titleTextAttributes = textAttributes
     }
-    
+
     let setBarButtonItemColor = {
       UINavigationBar.appearance().tintColor = Style.NavigationBar.barButtonItemColor
     }
-    
+
     setTransparentBackground()
     setTitleTextColor()
     setBarButtonItemColor()
   }
-  
+
 }

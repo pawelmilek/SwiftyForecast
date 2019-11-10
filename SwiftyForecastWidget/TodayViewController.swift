@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 import NotificationCenter
 
 class TodayViewController: UIViewController {
@@ -101,11 +102,11 @@ private extension TodayViewController {
 private extension TodayViewController {
   
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?) -> ()) {
-    guard let currentCity = SharedGroupContainer.sharedCity else { return }
+    guard let currentCity = SharedGroupContainer.sharedCity,
+      let location = currentCity.location else { return }
     
-    let coordinate = Coordinate(latitude: currentCity.latitude, longitude: currentCity.longitude)
     let service = DefaultForecastService()
-    service.getForecast(by: coordinate) { [weak self] response in
+    service.getForecast(by: location) { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {

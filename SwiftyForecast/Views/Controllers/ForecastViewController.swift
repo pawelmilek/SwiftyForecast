@@ -1,5 +1,5 @@
 import UIKit
-import CoreData
+import RealmSwift
 import SafariServices
 
 class ForecastViewController: UIViewController {
@@ -25,30 +25,22 @@ class ForecastViewController: UIViewController {
   
   private lazy var pageViewController: UIPageViewController = {
     let storyboard = UIStoryboard(storyboard: .main)
-    let pageVC = storyboard.instantiateViewController(UIPageViewController.self)
-    pageVC.dataSource = self
-    pageVC.delegate = self
+    let viewController = storyboard.instantiateViewController(UIPageViewController.self)
+    viewController.dataSource = self
+    viewController.delegate = self
     
-    let forecastContentVC = forecastContentViewController(at: 0)!
-    pageVC.setViewControllers([forecastContentVC], direction: .forward, animated: true)
-    return pageVC
+    if let forecastContentVC = forecastContentViewController(at: 0) {
+      viewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
+    }
+    return viewController
   }()
   
-  private lazy var cities: NSFetchedResultsController<City> = {
-    let context = CoreDataStackHelper.shared.managedContext
-    let request = City.createFetchRequest()
-    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalization", ascending: false)
-    request.sortDescriptors = [currentLocalizedSort]
-    
-    let cities = NSFetchedResultsController(fetchRequest: request,
-                                            managedObjectContext: context,
-                                            sectionNameKeyPath: nil,
-                                            cacheName: nil)
-    return cities
-  }()
+  private var cities: Results<CityRealm> {
+    return try! CityRealm.fetchAll()
+  }
   
   private var cityCount: Int {
-    return cities.fetchedObjects?.count ?? 0
+    return cities.count
   }
   
   private var contentViewiewControllers: [ForecastContentViewController] = []
@@ -75,11 +67,11 @@ class ForecastViewController: UIViewController {
     guard let cityListVC = segue.destination as? CityTableViewController else { return }
     
     cityListVC.delegate = self
-    cityListVC.managedObjectContext = CoreDataStackHelper.shared.managedContext
+//    cityListVC.managedObjectContext = CoreDataStackHelper.shared.managedContext
   }
   
   deinit {
-    removeNotificationCenterObserver()
+    removeNotificationObservers()
   }
 }
 
@@ -88,10 +80,9 @@ extension ForecastViewController: ViewSetupable {
   
   func setUp() {
     fetchCitiesAndSetLastUpdate()
-    fetchCities()
     initializePageViewController()
     setNotationSystemSegmentedControl()
-    addNotificationCenterObserver()
+    addNotificationObservers()
     setNetworkManagerWhenInternetIsNotAvailable()
     setPageControl()
   }
@@ -106,22 +97,8 @@ extension ForecastViewController: ViewSetupable {
 private extension ForecastViewController {
   
   func fetchCitiesAndSetLastUpdate() {
-    LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
+//    LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
   }
-}
-
-// MARK: - Private - fetch cities
-private extension ForecastViewController {
-  
-  func fetchCities() {
-    do {
-      try cities.performFetch()
-
-    } catch {
-      CoreDataError.couldNotFetch.handler()
-    }
-  }
-  
 }
 
 // MARK: - Private - Initialize PageViewController
@@ -147,12 +124,12 @@ private extension ForecastViewController {
 // MARK: - Private - NotificationCenter
 private extension ForecastViewController {
   
-  func addNotificationCenterObserver() {
+  func addNotificationObservers() {
     ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
     ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
   }
   
-  func removeNotificationCenterObserver() {
+  func removeNotificationObservers() {
     ForecastNotificationCenter.remove(observer: self)
   }
   
@@ -163,9 +140,9 @@ private extension ForecastViewController {
   
   func setPageControl() {
     DispatchQueue.main.async { [weak self] in
-      guard let strongSelf = self else { return }
-      strongSelf.pageControl.currentPage = strongSelf.currentIndex
-      strongSelf.pageControl.numberOfPages = strongSelf.cityCount
+      guard let self = self else { return }
+      self.pageControl.currentPage = self.currentIndex
+      self.pageControl.numberOfPages = self.cityCount
     }
     
   }
@@ -222,13 +199,11 @@ private extension ForecastViewController {
 extension ForecastViewController {
   
   @objc func reloadPages(_ notification: NSNotification) {
-    fetchCities()
     setInitialViewController()
     setPageControl()
   }
   
   @objc func reloadPagesData(_ notification: NSNotification) {
-    fetchCities()
     setPageControl()
   }
   
@@ -248,13 +223,13 @@ extension ForecastViewController {
 // MARK: - CityListTableViewControllerDelegate protocol
 extension ForecastViewController: CityTableViewControllerDelegate {
   
-  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: City) {
-    guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
-  
-    moveToPage(at: newPageIndex) {
-      self.currentIndex = newPageIndex
-      self.pendingIndex = nil
-    }
+  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: CityRealm) {
+//    guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
+//
+//    moveToPage(at: newPageIndex) {
+//      self.currentIndex = newPageIndex
+//      self.pendingIndex = nil
+//    }
   }
   
 }
@@ -307,19 +282,18 @@ private extension ForecastViewController {
     forecastVC.pageIndex = index
     
     if cityCount > 0 {
-      let indexPath = IndexPath(row: index, section: 0)
-      let city = cities.object(at: indexPath)
-      forecastVC.currentCityFetchedFromPlaces = city
+      let city = cities[index] //object(at: indexPath)
+//      forecastVC.currentCity = city
     } else {
-      forecastVC.currentCityFetchedFromPlaces = nil
+//      forecastVC.currentCity = nil
     }
 
     return forecastVC
   }
   
   func index(of forecastContentViewController: ForecastContentViewController) -> Int {
-    guard let city = forecastContentViewController.currentCityFetchedFromPlaces else { return NSNotFound }
-    return cities.indexPath(forObject: city)?.row ?? NSNotFound
+    guard let city = forecastContentViewController.city else { return NSNotFound }
+    return cities.index(of: city) ?? NSNotFound
   }
   
 }

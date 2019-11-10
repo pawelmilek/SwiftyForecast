@@ -3,9 +3,9 @@ import CoreLocation
 
 final class GeocoderHelper {
   
-  class func currentPlace(completionHandler: @escaping (Result<CLPlacemark, GeocoderError>) -> ()) {
+  class func currentLocation(completion: @escaping (Result<CLPlacemark, GeocoderError>) -> ()) {
     guard LocationProvider.shared.isLocationServicesEnabled else {
-      completionHandler(.failure(.locationDisabled))
+      completion(.failure(.locationDisabled))
       return
     }
     
@@ -13,10 +13,10 @@ final class GeocoderHelper {
       GeocoderHelper.place(at: location.coordinate) { result in
         switch result {
         case .success(let data):
-          completionHandler(.success(data))
+          completion(.success(data))
           
         case .failure(let error):
-          completionHandler(.failure(error))
+          completion(.failure(error))
         }
       }
     }

@@ -1,10 +1,11 @@
-platform :ios, '11.0'
+platform :ios, '12.0'
 use_frameworks!
 
 def shared_pods
   pod 'GooglePlaces', '~> 2.7'
-  pod 'ReachabilitySwift', '~> 4.3'
-  pod 'RealmSwift', '~> 3.1'
+  pod 'ReachabilitySwift'
+  pod 'RealmSwift'
+  pod 'SearchTextField', '1.2.4'
 end
 
 # Pods for App

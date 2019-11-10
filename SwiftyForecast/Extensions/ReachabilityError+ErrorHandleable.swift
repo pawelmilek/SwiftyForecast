@@ -4,19 +4,19 @@ extension ReachabilityError: ErrorHandleable {
   
   public var description: String {
     switch self {
-    case .FailedToCreateWithAddress(let cockaddrIn):
+    case .failedToCreateWithAddress(let cockaddrIn):
       return "Failed to create with address \(cockaddrIn)."
       
-    case .FailedToCreateWithHostname(let hostname):
+    case .failedToCreateWithHostname(let hostname):
       return "Failed to create with hostname \(hostname)."
       
-    case .UnableToSetCallback:
+    case .unableToSetCallback:
       return "Unable to set callback."
       
-    case .UnableToSetDispatchQueue:
+    case .unableToSetDispatchQueue:
       return "Unable to set Dispatch Queue."
       
-    case .UnableToGetInitialFlags:
+    case .unableToGetFlags:
       return "Unable to get initial flags."
     }
   }

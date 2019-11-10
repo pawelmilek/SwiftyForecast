@@ -1,9 +1,5 @@
 import Foundation
-
-protocol CurrentForecastViewModelDelegate: class {
-  func currentForecastViewModelDidFetchData(_ viewModel: CurrentForecastViewModel,
-                                            error: WebServiceError?)
-}
+import CoreLocation
 
 final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   var hourly: HourlyForecast? {
@@ -32,17 +28,15 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     guard let current = weatherForecast?.currently else { return "" }
     return "\(Int(current.humidity * 100))"
   }
-  
-//  var sunriseIcon: NSAttributedString
-//  var sunsetIcon: NSAttributedString
+
   var sunriseTime: String {
     guard let details = weatherForecast?.daily.currentDayData else { return "" }
-    return city.timeZone != nil ? details.sunriseTime.time(by: city.timeZone) : details.sunriseTime.time
+    return details.sunriseTime.time
   }
   
   var sunsetTime: String {
     guard let details = weatherForecast?.daily.currentDayData else { return "" }
-    return city.timeZone != nil ? details.sunsetTime.time(by: city.timeZone) : details.sunsetTime.time
+    return details.sunsetTime.time
   }
   
   var windSpeed: String {
@@ -65,16 +59,16 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   }
   
   weak var delegate: CurrentForecastViewModelDelegate?
-  private let city: City
-  private let coordinate: Coordinate
+  let city: CityRealm
+  private let location: CLLocation
   private let service: ForecastService
   private var weatherForecast: WeatherForecast?
   
-  init(city: City, service: ForecastService, delegate: CurrentForecastViewModelDelegate?) {
+  init(city: CityRealm, service: ForecastService, delegate: CurrentForecastViewModelDelegate?) {
     self.city = city
     self.service = service
     self.delegate = delegate
-    self.coordinate = Coordinate(latitude: city.latitude, longitude: city.longitude)
+    self.location = city.location!
     fetchForecast()
   }
 }
@@ -83,20 +77,19 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
 private extension DefaultCurrentForecastViewModel {
   
   func fetchForecast() {
-    service.getForecast(by: coordinate) { response in
+    service.getForecast(by: location) { [weak self] response in
+      guard let self = self else { return }
+      
       switch response {
       case .success(let data):
         self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
         self.delegate?.currentForecastViewModelDidFetchData(self, error: nil)
-        
+
       case .failure(let error):
         self.weatherForecast = nil
         self.delegate?.currentForecastViewModelDidFetchData(self, error: error)
       }
     }
-  }
-  
-  func fetchForecast(for city: City) {
   }
   
 }

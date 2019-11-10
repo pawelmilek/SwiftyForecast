@@ -1,7 +1,6 @@
 protocol CityViewModel {
   var name: String { get }
-  var currentTime: String { get }
-  var service: ForecastService { get }
+  var localTime: String { get }
   
-  init(city: City, service: ForecastService)
+  init(city: CityRealm, service: ForecastService, delegate: CityViewModelDelegate?)
 }

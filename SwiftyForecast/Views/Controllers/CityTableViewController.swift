@@ -1,8 +1,8 @@
 import UIKit
-import CoreData
 import GooglePlaces
+import RealmSwift
 
-class CityTableViewController: UITableViewController, UsesCoreDataObjects {
+class CityTableViewController: UITableViewController {
   typealias ForecastCityStyle = Style.ForecastCityListVC
   
   private lazy var autocompleteController: GMSAutocompleteViewController = {
@@ -34,10 +34,9 @@ class CityTableViewController: UITableViewController, UsesCoreDataObjects {
     return view
   }()
   
-  private var cities: [City] = []
+  private var cities: Results<CityRealm>!
   private var citiesTimeZone: [String: TimeZone] = [:]
   weak var delegate: CityTableViewControllerDelegate?
-  var managedObjectContext: NSManagedObjectContext?
 //  var viewModel: ForecastCityViewModel?
   
   override func viewDidLoad() {
@@ -88,15 +87,10 @@ private extension CityTableViewController {
 private extension CityTableViewController {
   
   func fetchCities() {
-    guard let managedObjectContext = managedObjectContext else { return }
-    let fetchRequest = City.createFetchRequest()
-    let currentLocalizedSort = NSSortDescriptor(key: "isCurrentLocalization", ascending: false)
-    fetchRequest.sortDescriptors = [currentLocalizedSort]
-    
     do {
-      cities = try managedObjectContext.fetch(fetchRequest)
+      cities = try CityRealm.fetchAll()
     } catch {
-      CoreDataError.couldNotFetch.handler()
+      RealmError.couldNotFetch.handler()
     }
   }
   
@@ -105,40 +99,40 @@ private extension CityTableViewController {
 // MARK: - Private - Insert/Delete city
 private extension CityTableViewController {
   
-  func insert(city: City) {
-    guard city.isExists() == false else { return }
-    guard let managedObjectContext = managedObjectContext else { return }
+  func insert(city: CityRealm) {
+//    guard city.isExists() == false else { return }
+//    guard let managedObjectContext = managedObjectContext else { return }
     
-    let newCity = City(unassociatedObject: city, isCurrentLocalization: false, managedObjectContext: managedObjectContext)
+//    let newCity = City(unassociatedObject: city, isCurrentLocalization: false, managedObjectContext: managedObjectContext)
     
-    do {
-      try managedObjectContext.save()
-      cities.append(newCity)
-    } catch {
-      CoreDataError.couldNotSave.handler()
-    }
+//    do {
+//      try managedObjectContext.save()
+//      cities.append(newCity)
+//    } catch {
+//      CoreDataError.couldNotSave.handler()
+//    }
   }
   
   func deleteCity(at indexPath: IndexPath) {
-    guard let managedObjectContext = managedObjectContext else { return }
-    
-    let removed = cities.remove(at: indexPath.row)
-    let request = City.createFetchRequest()
-    let predicate = NSPredicate(format: "name == %@ AND country == %@", removed.name, removed.country)
-    request.predicate = predicate
-    
-    
-    if let result = try? managedObjectContext.fetch(request) {
-      result.forEach {
-        managedObjectContext.delete($0)
-      }
-      
-      do {
-        try managedObjectContext.save()
-      } catch {
-        CoreDataError.couldNotSave.handler()
-      }
-    }
+//    guard let managedObjectContext = managedObjectContext else { return }
+//    
+//    let removed = cities.remove(at: indexPath.row)
+//    let request = City.createFetchRequest()
+//    let predicate = NSPredicate(format: "name == %@ AND country == %@", removed.name, removed.country)
+//    request.predicate = predicate
+//    
+//    
+//    if let result = try? managedObjectContext.fetch(request) {
+//      result.forEach {
+//        managedObjectContext.delete($0)
+//      }
+//      
+//      do {
+//        try managedObjectContext.save()
+//      } catch {
+//        CoreDataError.couldNotSave.handler()
+//      }
+//    }
   }
   
 }
@@ -164,35 +158,38 @@ extension CityTableViewController {
     let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
     let row = indexPath.row
     let city = cities[row]
-    
+    let cityName = city.name + ", " + city.country
+    let localTime = city.localTime
     cell.tag = row
     
-    if let _ = city.timeZone {
-      cell.configure(by: city)
+//    if let _ = city.timeZone {
+      cell.configure(by: cityName, time: localTime)
       
-    } else {
-      if let timeZone = citiesTimeZone["\(row)"] {
-        city.timeZone = timeZone
-        cell.configure(by: city)
-        
-      } else {
-        let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
-        fetchTimeZone(from: coordinate) { timeZone in
-          self.citiesTimeZone["\(row)"] = timeZone
-          if cell.tag == row {
-            city.timeZone = timeZone
-            do {
-              try self.managedObjectContext?.save()
-            
-            } catch {
-              CoreDataError.couldNotSave.handler()
-            }
-            
-            cell.configure(by: city)
-          }
-        }
-      }
-    }
+//    } else {
+//      if let timeZone = citiesTimeZone["\(row)"] {
+//        city.timeZone = timeZone
+//        cell.configure(by: cityName, time: localTime)
+//
+//      } else {
+//        let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
+//        fetchTimeZone(from: coordinate) { timeZone in
+//          self.citiesTimeZone["\(row)"] = timeZone
+//          if cell.tag == row {
+//            city.timeZone = timeZone
+//
+//            do {
+//              // TODO: Replace with Realm
+//              try self.managedObjectContext?.save()
+//
+//            } catch {
+//              CoreDataError.couldNotSave.handler()
+//            }
+//
+//            cell.configure(by: cityName, time: localTime)
+//          }
+//        }
+//      }
+//    }
     
     return cell
   }
@@ -230,9 +227,9 @@ extension CityTableViewController {
 extension CityTableViewController: GMSAutocompleteViewControllerDelegate {
   
   func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
-    let selectedCity = City(place: place)
-    
-    self.insert(city: selectedCity)
+//    let selectedCity = City(place: place)
+//
+//    self.insert(city: selectedCity)
     self.tableView.reloadData()
     self.reloadAndInitializeMainPageViewController()
     self.dismiss(animated: true, completion: nil)

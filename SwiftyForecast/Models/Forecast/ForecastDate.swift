@@ -43,14 +43,14 @@ extension ForecastDate {
     return time
   }
   
-  func time(by timeZone: TimeZone?) -> String {
-    guard let timeZone = timeZone else { return "N/A" }
-    formatter.timeStyle = .short
-    formatter.dateStyle = .none
-    formatter.timeZone = timeZone
-    let time = formatter.string(from: date)
-    return time
-  }
+//  func time(by timeZone: TimeZone?) -> String {
+//    guard let timeZone = timeZone else { return "N/A" }
+//    formatter.timeStyle = .short
+//    formatter.dateStyle = .none
+//    formatter.timeZone = timeZone
+//    let time = formatter.string(from: date)
+//    return time
+//  }
   
 }
 

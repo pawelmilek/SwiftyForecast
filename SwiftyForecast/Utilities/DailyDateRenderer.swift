@@ -8,10 +8,8 @@ struct DailyDateRenderer {
     let monthRange = fullDate.range(of: month)
     
     let attributedString = NSMutableAttributedString(string: fullDate as String)
-    attributedString.addAttributes([.font: Style.DailyForecastCell.weekdayLabelFont],
-                                   range: weekdayRange)
-    attributedString.addAttributes([.font: Style.DailyForecastCell.monthLabelFont],
-                                   range: monthRange)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.weekdayLabelFont], range: weekdayRange)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.monthLabelFont], range: monthRange)
     return attributedString
   }
   
@@ -23,10 +21,8 @@ struct DailyDateRenderer {
     let monthRange = fullDate.range(of: month)
     
     let attributedString = NSMutableAttributedString(string: fullDate as String)
-    attributedString.addAttributes([.font: Style.DailyForecastCell.weekdayLabelFont],
-                                   range: weekdayRange)
-    attributedString.addAttributes([.font: Style.DailyForecastCell.monthLabelFont],
-                                   range: monthRange)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.weekdayLabelFont], range: weekdayRange)
+    attributedString.addAttributes([.font: Style.DailyForecastCell.monthLabelFont], range: monthRange)
     return attributedString
   }
   

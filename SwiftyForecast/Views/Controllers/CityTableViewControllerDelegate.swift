@@ -1,3 +1,3 @@
 protocol CityTableViewControllerDelegate: AnyObject {
-  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: City)
+  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: CityRealm)
 }
