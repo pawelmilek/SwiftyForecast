@@ -1,7 +1,6 @@
 import UIKit
 
-final class AlertViewPresenter {
-}
+final class AlertViewPresenter { }
 
 // MARK: - Present submit Alert
 extension AlertViewPresenter {

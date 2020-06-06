@@ -1,6 +1,6 @@
 import Foundation
 
-final class Path {
+final class PathFinder {
   static let groupIdentifier = "group.com.pawelmilek.Swifty-Forecast"
   
   static func inLibrary(_ name: String) throws -> URL {
@@ -23,8 +23,8 @@ final class Path {
   }
   
   static func inSharedContainer(_ name: String) throws -> URL {
-    guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Path.groupIdentifier) else {
-      throw PathError.containerNotFound(identifier: Path.groupIdentifier)
+    guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: PathFinder.groupIdentifier) else {
+      throw PathError.containerNotFound(identifier: PathFinder.groupIdentifier)
     }
     return url.appendingPathComponent(name)
   }

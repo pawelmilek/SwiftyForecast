@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "FloatingPanel",
+        "repositoryURL": "https://github.com/SCENEE/FloatingPanel.git",
+        "state": {
+          "branch": null,
+          "revision": "f909cd41016ec28e06965dd270814f412d46312e",
+          "version": "1.7.4"
+        }
+      },
+      {
         "package": "Reachability",
         "repositoryURL": "https://github.com/ashleymills/Reachability.swift",
         "state": {
@@ -12,11 +21,11 @@
       },
       {
         "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-cocoa",
+        "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": null,
-          "revision": "9743cb4afcb16f7297460f633ee939fc1a52355b",
-          "version": "4.3.1"
+          "revision": "91dc97e014134ecddef28d2bab7c74648e8937f3",
+          "version": "5.0.0"
         }
       },
       {
@@ -24,8 +33,17 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "35662ff940e340bf630ad1d1d88acfc7af18bee6",
-          "version": "5.23.8"
+          "revision": "3735ee940583f3d62f73076034505ff4e6207d91",
+          "version": "6.0.4"
+        }
+      },
+      {
+        "package": "SPPermissions",
+        "repositoryURL": "https://github.com/ivanvorobei/SPPermissions",
+        "state": {
+          "branch": null,
+          "revision": "b62dcaed6c99894feb1244fba6f7b19be7cd60ec",
+          "version": "5.3.2"
         }
       }
     ]

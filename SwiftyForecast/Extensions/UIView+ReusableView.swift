@@ -1,3 +1,3 @@
 import UIKit
 
-extension UIView: ReusableView {}
+extension UIView: ReusableView { }

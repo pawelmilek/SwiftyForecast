@@ -1,8 +1,9 @@
 extension Double {
   
   func toKPH() -> Double {
-    let oneMileEqualKilometerPerHour = 1.609344
-    return self * oneMileEqualKilometerPerHour
+    let measurement = DistanceMeasurement(value: self, unit: .miles)
+    let result = measurement.converted(to: .kilometers)
+    return result
   }
   
 }

@@ -1,3 +1,3 @@
 import UIKit
 
-extension UITableView: Registrable {}
+extension UITableView: Registrable { }

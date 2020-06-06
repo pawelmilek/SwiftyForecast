@@ -1,21 +1,22 @@
 import UIKit
-import GooglePlaces
+import CoreLocation
 import RealmSwift
 
 class CityTableViewController: UITableViewController {
   typealias ForecastCityStyle = Style.ForecastCityListVC
   
-  private lazy var autocompleteController: GMSAutocompleteViewController = {
-    let autocompleteVC = GMSAutocompleteViewController()
-    autocompleteVC.delegate = self
-    autocompleteVC.primaryTextColor = ForecastCityStyle.autocompleteVCPrimaryTextColor
-    autocompleteVC.primaryTextHighlightColor = ForecastCityStyle.autocompleteVCPrimaryTextHighlightColor
-    autocompleteVC.secondaryTextColor = ForecastCityStyle.autocompleteVCSecondaryTextColor
-    autocompleteVC.tableCellSeparatorColor = ForecastCityStyle.autocompleteVCTableCellSeparatorColor
-    autocompleteVC.setSearchTextInSearchBar(color: ForecastCityStyle.autocompleteVCSSearchTextColorInSearchBar, andFont: ForecastCityStyle.autocompleteVCSSearchTextFontInSearchBar)
-    autocompleteVC.setSearchTextFieldPlaceholder(color: ForecastCityStyle.autocompleteVCSearchTextFieldColorPlaceholder, andFont: ForecastCityStyle.autocompleteVCSearchTextFieldFontPlaceholder)
-    autocompleteVC.setSearchBarCancelButton(color: ForecastCityStyle.autocompleteVCSearchBarCancelButtonColor, andFont: ForecastCityStyle.autocompleteVCSearchBarCancelButtonFont)
-    return autocompleteVC
+  private lazy var autocompleteController: UIViewController = {
+//    let autocompleteVC = GMSAutocompleteViewController()
+//    autocompleteVC.delegate = self
+//    autocompleteVC.primaryTextColor = ForecastCityStyle.autocompleteVCPrimaryTextColor
+//    autocompleteVC.primaryTextHighlightColor = ForecastCityStyle.autocompleteVCPrimaryTextHighlightColor
+//    autocompleteVC.secondaryTextColor = ForecastCityStyle.autocompleteVCSecondaryTextColor
+//    autocompleteVC.tableCellSeparatorColor = ForecastCityStyle.autocompleteVCTableCellSeparatorColor
+//    autocompleteVC.setSearchTextInSearchBar(color: ForecastCityStyle.autocompleteVCSSearchTextColorInSearchBar, andFont: ForecastCityStyle.autocompleteVCSSearchTextFontInSearchBar)
+//    autocompleteVC.setSearchTextFieldPlaceholder(color: ForecastCityStyle.autocompleteVCSearchTextFieldColorPlaceholder, andFont: ForecastCityStyle.autocompleteVCSearchTextFieldFontPlaceholder)
+//    autocompleteVC.setSearchBarCancelButton(color: ForecastCityStyle.autocompleteVCSearchBarCancelButtonColor, andFont: ForecastCityStyle.autocompleteVCSearchBarCancelButtonFont)
+//    return autocompleteVC
+    return UIViewController()
   }()
   
   private lazy var footerView: UIView = {
@@ -224,34 +225,34 @@ extension CityTableViewController {
 }
 
 // MARK: GMSAutocompleteViewControllerDelegate protocol
-extension CityTableViewController: GMSAutocompleteViewControllerDelegate {
-  
-  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {    
-//    let selectedCity = City(place: place)
+//extension CityTableViewController: GMSAutocompleteViewControllerDelegate {
 //
-//    self.insert(city: selectedCity)
-    self.tableView.reloadData()
-    self.reloadAndInitializeMainPageViewController()
-    self.dismiss(animated: true, completion: nil)
-  }
+//  func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+////    let selectedCity = City(place: place)
+////
+////    self.insert(city: selectedCity)
+//    self.tableView.reloadData()
+//    self.reloadAndInitializeMainPageViewController()
+//    self.dismiss(animated: true, completion: nil)
+//  }
   
-  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
-    AlertViewPresenter.presentError(withMessage: "Error: \(error.localizedDescription)")
-  }
+//  func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+//    AlertViewPresenter.presentError(withMessage: "Error: \(error.localizedDescription)")
+//  }
+//
+//  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+//    dismiss(animated: true, completion: nil)
+//  }
+//
+//  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+//    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//  }
+//
+//  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+//    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//  }
   
-  func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-    dismiss(animated: true, completion: nil)
-  }
-  
-  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-  }
-  
-  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-  }
-  
-}
+//}
 
 // MARK: - Private - Actions
 private extension CityTableViewController {

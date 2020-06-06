@@ -1,7 +1,7 @@
 import Foundation
 
 final class SharedGroupContainer {
-  private static let defaults = UserDefaults(suiteName: Path.groupIdentifier)
+  private static let defaults = UserDefaults(suiteName: PathFinder.groupIdentifier)
   
   static var sharedCity: CityRealm? {
     get {

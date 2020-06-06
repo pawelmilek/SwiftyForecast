@@ -1,3 +1,3 @@
 import UIKit
 
-extension UITableView: DequeuableCell {}
+extension UITableView: DequeuableCell { }

@@ -1,6 +1,6 @@
 import UIKit
 
-class ForecastContentViewController: UIViewController {
+final class ForecastContentViewController: UIViewController {
   @IBOutlet private weak var currentForecastView: CurrentForecastView!
   @IBOutlet private weak var weekTableView: UITableView!
   
@@ -10,7 +10,7 @@ class ForecastContentViewController: UIViewController {
   private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   private var viewModel: CurrentForecastViewModel?
-  private var isFetchingData: Bool = false
+  private var isFetchingData = false
   private var isCurrentLocationPage: Bool {
     return pageIndex == 0
   }

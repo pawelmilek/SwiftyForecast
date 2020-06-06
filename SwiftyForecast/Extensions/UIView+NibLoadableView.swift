@@ -1,3 +1,3 @@
 import UIKit
 
-extension UIView: NibLoadableView {}
+extension UIView: NibLoadableView { }

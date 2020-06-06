@@ -1,10 +1,8 @@
 import UIKit
-import GooglePlaces
 import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  private let googlePlacesAPIKey = "AIzaSyBRU9w0-Tlx3HWnQg13QnlXyngHHJoakkU"
   var window: UIWindow?
   
   internal func application(_ application: UIApplication,
@@ -18,11 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
     }
     
-    GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
     setUpStyle()
     
     // MARK: - Get Realm path
-    print(RealmProvider.cities.configuration.fileURL!)
+    debugPrint(RealmProvider.cities.configuration.fileURL!)
     try! CityRealm.deleteAll()
     
     return true

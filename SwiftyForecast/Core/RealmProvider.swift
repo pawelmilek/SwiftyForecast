@@ -6,7 +6,7 @@ struct RealmProvider {
     return RealmProvider(config: citiesConfig)
   }()
   
-  private static let citiesConfig = Realm.Configuration(fileURL: try! Path.inLibrary("cities.realm"),
+  private static let citiesConfig = Realm.Configuration(fileURL: try! PathFinder.inLibrary("cities.realm"),
                                                         schemaVersion: 1,
                                                         deleteRealmIfMigrationNeeded: true)
   

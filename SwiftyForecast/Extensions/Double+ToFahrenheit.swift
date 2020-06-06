@@ -1,7 +1,9 @@
 extension Double {
   
   func ToFahrenheit() -> Double {
-    return (self * Double(9 / 5)) + 32
+    let measurement = TemperatureMeasurement(value: self, unit: .celsius)
+    let result = measurement.converted(to: .fahrenheit)
+    return result
   }
   
 }
