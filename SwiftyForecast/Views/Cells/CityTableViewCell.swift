@@ -46,7 +46,7 @@ extension CityTableViewCell: ViewSetupable {
 // MARK: - Configure by city
 extension CityTableViewCell {
   
-  func configure(by name: String, time localTime: String) { // TODO: Implement CityViewModel
+  func configure(by name: String, time localTime: String) {
     currentTimeLabel.text = localTime
     cityNameLabel.text = name
     currentTimeLabel.alpha = 1

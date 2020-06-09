@@ -2,7 +2,7 @@ import UIKit
 import CoreLocation
 import RealmSwift
 
-class CityTableViewController: UITableViewController {
+final class CitySelectionTableViewController: UITableViewController {
   typealias ForecastCityStyle = Style.ForecastCityListVC
   
   private lazy var autocompleteController: UIViewController = {
@@ -35,9 +35,9 @@ class CityTableViewController: UITableViewController {
     return view
   }()
   
-  private var cities: Results<CityRealm>!
+  private var cities: Results<City>!
   private var citiesTimeZone: [String: TimeZone] = [:]
-  weak var delegate: CityTableViewControllerDelegate?
+  weak var delegate: CitySelectionTableViewControllerDelegate?
 //  var viewModel: ForecastCityViewModel?
   
   override func viewDidLoad() {
@@ -47,7 +47,7 @@ class CityTableViewController: UITableViewController {
 }
 
 // MARK: - ViewSetupable protocol
-extension CityTableViewController: ViewSetupable {
+extension CitySelectionTableViewController: ViewSetupable {
   
   func setUp() {
     setTableView()
@@ -57,7 +57,7 @@ extension CityTableViewController: ViewSetupable {
 }
 
 // MARK: - Private - Set tableview
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   func setTableView() {
     tableView.register(cellClass: CityTableViewCell.self)
@@ -71,7 +71,7 @@ private extension CityTableViewController {
 }
 
 // MARK: - Private - Set transparent background of TableView
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   func setTransparentTableViewBackground() {
     let backgroundImage = UIImage(named: "swifty_background")
@@ -85,11 +85,11 @@ private extension CityTableViewController {
 }
 
 // MARK: - Private - Fetch cities and local time
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   func fetchCities() {
     do {
-      cities = try CityRealm.fetchAll()
+      cities = try City.fetchAll()
     } catch {
       RealmError.couldNotFetch.handler()
     }
@@ -98,9 +98,9 @@ private extension CityTableViewController {
 }
 
 // MARK: - Private - Insert/Delete city
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
-  func insert(city: CityRealm) {
+  func insert(city: City) {
 //    guard city.isExists() == false else { return }
 //    guard let managedObjectContext = managedObjectContext else { return }
     
@@ -139,7 +139,7 @@ private extension CityTableViewController {
 }
 
 // MARK: - Private - Reload pages
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   func reloadAndInitializeMainPageViewController() {
     ForecastNotificationCenter.post(.reloadPages)
@@ -148,7 +148,7 @@ private extension CityTableViewController {
 }
 
 // MARK: - UITableViewDataSource protocol
-extension CityTableViewController {
+extension CitySelectionTableViewController {
   
   // TODO: Implement ForecastCityViewModel
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -198,11 +198,11 @@ extension CityTableViewController {
 }
 
 // MARK: - UITableViewDelegate protocol
-extension CityTableViewController {
+extension CitySelectionTableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let selectedCity = cities[indexPath.row]
-    delegate?.cityTableViewController(self, didSelect: selectedCity)
+    delegate?.citySelection(self, didSelect: selectedCity)
     backButtonTapped(.none)
   }
   
@@ -255,7 +255,7 @@ extension CityTableViewController {
 //}
 
 // MARK: - Private - Actions
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   @objc func backButtonTapped(_ sender: UIButton?) {
     guard let _ = navigationController?.popViewController(animated: true) else {
@@ -271,7 +271,7 @@ private extension CityTableViewController {
 }
 
 // MARK: - Private - Fetch local time
-private extension CityTableViewController {
+private extension CitySelectionTableViewController {
   
   func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
     GeocoderHelper.timeZone(for: locationCoordinate) { result in

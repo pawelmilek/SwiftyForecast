@@ -1,4 +1,4 @@
-enum CityRealmProperty: String {
+enum CityProperty: String {
   case cityId
   case name
   case country

@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 import RealmSwift
 
-@objcMembers final class CityRealm: Object, Codable {
+@objcMembers final class City: Object, Codable {
   dynamic var cityId = NSUUID().uuidString
   dynamic var name = ""
   dynamic var country = ""
@@ -83,17 +83,17 @@ import RealmSwift
   }
 
   override static func primaryKey() -> String? {
-    return CityRealmProperty.cityId.rawValue
+    return CityProperty.cityId.rawValue
   }
   
   convenience init(placemark: CLPlacemark) {
     self.init()
 
-    name = placemark.locality ?? "N/A"
-    country = placemark.country ?? "N/A"
-    state = placemark.administrativeArea ?? "N/A"
-    postalCode = placemark.postalCode ?? "N/A"
-    timeZoneName = placemark.timeZone?.identifier ?? "N/A"
+    name = placemark.locality ?? InvalidReference.notApplicable
+    country = placemark.country ?? InvalidReference.notApplicable
+    state = placemark.administrativeArea ?? InvalidReference.notApplicable
+    postalCode = placemark.postalCode ?? InvalidReference.notApplicable
+    timeZoneName = placemark.timeZone?.identifier ?? InvalidReference.notApplicable
     isCurrentLocalization = true
     location = CLLocation(latitude: placemark.location?.coordinate.latitude ?? 0.0,
                           longitude: placemark.location?.coordinate.longitude ?? 0.0)
@@ -101,7 +101,7 @@ import RealmSwift
 }
 
 // MARK: - Local time
-extension CityRealm {
+extension City {
   
   var localTime: String {
     return DateFormatter.shortLocalTime(from: timeZoneName)
@@ -110,29 +110,29 @@ extension CityRealm {
 }
 
 // MARK: - CRUD methods
-extension CityRealm {
+extension City {
   
-  static func fetchAll(in realm: Realm? = RealmProvider.cities.realm) throws -> Results<CityRealm> {
+  static func fetchAll(in realm: Realm? = RealmProvider.cities.realm) throws -> Results<City> {
     guard let realm = realm else {
       throw RealmError.initializationFailed
     }
-    return realm.objects(CityRealm.self).sorted(byKeyPath: CityRealmProperty.isCurrentLocalization.rawValue)
+    return realm.objects(City.self).sorted(byKeyPath: CityProperty.isCurrentLocalization.rawValue)
   }
   
-  static func fetchCurrent(in realm: Realm? = RealmProvider.cities.realm) throws -> CityRealm? {
+  static func fetchCurrent(in realm: Realm? = RealmProvider.cities.realm) throws -> City? {
     guard let realm = realm else {
       throw RealmError.initializationFailed
     }
-    return realm.objects(CityRealm.self).sorted(byKeyPath: CityRealmProperty.isCurrentLocalization.rawValue).first
+    return realm.objects(City.self).sorted(byKeyPath: CityProperty.isCurrentLocalization.rawValue).first
   }
   
   @discardableResult
-  static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.cities.realm) throws -> CityRealm {
+  static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.cities.realm) throws -> City {
     guard let realm = realm else {
       throw RealmError.initializationFailed
     }
     
-    let newCity = CityRealm(placemark: placemark)
+    let newCity = City(placemark: placemark)
     do {
       try realm.write {
         realm.add(newCity)
@@ -175,10 +175,10 @@ extension CityRealm {
 }
 
 // MARK: - Is city exists in Core Data
-extension CityRealm {
+extension City {
   
   func isExists() -> Bool {
-    guard let cities = try? CityRealm.fetchAll() else { return false }
+    guard let cities = try? City.fetchAll() else { return false }
     
     let predicate = NSPredicate(format: "name == %@ && country == %@", name, country)
     let searchResults = cities.filter(predicate)

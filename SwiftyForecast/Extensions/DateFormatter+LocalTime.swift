@@ -3,7 +3,7 @@ import Foundation
 extension DateFormatter {
   
   static func shortLocalTime(from timeZoneName: String) -> String {
-    guard let timezone = NSTimeZone(name: timeZoneName) else { return "N/A" }
+    guard let timezone = NSTimeZone(name: timeZoneName) else { return InvalidReference.notApplicable }
     let formatter = DateFormatter()
     formatter.timeStyle = .short
     formatter.dateStyle = .none

@@ -35,15 +35,15 @@ class ForecastViewController: UIViewController {
     return viewController
   }()
   
-  private var cities: Results<CityRealm> {
-    return try! CityRealm.fetchAll()
+  private var cities: Results<City> {
+    return try! City.fetchAll()
   }
   
   private var cityCount: Int {
     return cities.count
   }
   
-  private var contentViewiewControllers: [ForecastContentViewController] = []
+  private var contentViewiewControllers: [ContentViewController] = []
   private var pendingIndex: Int?
   private var currentIndex = 0 {
     didSet {
@@ -64,7 +64,7 @@ class ForecastViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
-    guard let cityListVC = segue.destination as? CityTableViewController else { return }
+    guard let cityListVC = segue.destination as? CitySelectionTableViewController else { return }
     
     cityListVC.delegate = self
 //    cityListVC.managedObjectContext = CoreDataStackHelper.shared.managedContext
@@ -208,7 +208,7 @@ extension ForecastViewController {
   }
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    ForecastNotificationCenter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControl": sender])
+    ForecastNotificationCenter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControlChange": sender])
   }
   
   @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {
@@ -221,9 +221,9 @@ extension ForecastViewController {
 }
 
 // MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastViewController: CityTableViewControllerDelegate {
+extension ForecastViewController: CitySelectionTableViewControllerDelegate {
   
-  func cityTableViewController(_ cityTableViewController: CityTableViewController, didSelect city: CityRealm) {
+  func citySelection(_ view: CitySelectionTableViewController, didSelect city: City) {
 //    guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
 //
 //    moveToPage(at: newPageIndex) {
@@ -268,14 +268,14 @@ private extension ForecastViewController {
 // MARK: - Private - Get ForecastPageViewController
 private extension ForecastViewController {
   
-  func forecastContentViewController(at index: Int) -> ForecastContentViewController? {
-    var forecastVC: ForecastContentViewController!
+  func forecastContentViewController(at index: Int) -> ContentViewController? {
+    var forecastVC: ContentViewController!
     
     if !contentViewiewControllers.isEmpty && index <= contentViewiewControllers.count - 1 {
       forecastVC = contentViewiewControllers[index]
     } else {
       let storyboard = UIStoryboard(storyboard: .main)
-      forecastVC = storyboard.instantiateViewController(ForecastContentViewController.self)
+      forecastVC = storyboard.instantiateViewController(ContentViewController.self)
       contentViewiewControllers.append(forecastVC)
     }
     
@@ -291,7 +291,7 @@ private extension ForecastViewController {
     return forecastVC
   }
   
-  func index(of forecastContentViewController: ForecastContentViewController) -> Int {
+  func index(of forecastContentViewController: ContentViewController) -> Int {
     guard let city = forecastContentViewController.city else { return NSNotFound }
     return cities.index(of: city) ?? NSNotFound
   }
@@ -303,7 +303,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           viewControllerBefore viewController: UIViewController) -> UIViewController? {
-    guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
+    guard let forecastPageContentViewController = viewController as? ContentViewController else { return nil }
     
     let indexOfViewController = index(of: forecastPageContentViewController)
     if indexOfViewController == NSNotFound || indexOfViewController == 0 {
@@ -316,7 +316,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           viewControllerAfter viewController: UIViewController) -> UIViewController? {
-    guard let forecastPageContentViewController = viewController as? ForecastContentViewController else { return nil }
+    guard let forecastPageContentViewController = viewController as? ContentViewController else { return nil }
     
     let indexOfViewController = index(of: forecastPageContentViewController)
     if indexOfViewController == NSNotFound || (indexOfViewController + 1) == cityCount {
@@ -333,7 +333,7 @@ extension ForecastViewController: UIPageViewControllerDelegate {
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           willTransitionTo pendingViewControllers: [UIViewController]) {
-    guard let forecastContentViewController = pendingViewControllers.first as? ForecastContentViewController else { return }
+    guard let forecastContentViewController = pendingViewControllers.first as? ContentViewController else { return }
     pendingIndex = forecastContentViewController.pageIndex
   }
   

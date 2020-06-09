@@ -1,5 +1,5 @@
 struct WeatherForecast {
-  let city: CityRealm
+  let city: City
   let currently: CurrentForecast
   let hourly: HourlyForecast
   let daily: DailyForecast
@@ -7,7 +7,7 @@ struct WeatherForecast {
 
 extension WeatherForecast {
   
-  init(city: CityRealm, forecastResponse: ForecastResponse) {
+  init(city: City, forecastResponse: ForecastResponse) {
     self.city = city
     self.currently = forecastResponse.currently
     self.hourly = forecastResponse.hourly    

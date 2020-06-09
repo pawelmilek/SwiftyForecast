@@ -28,7 +28,7 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     guard let current = weatherForecast?.currently else { return "" }
     return "\(Int(current.humidity * 100))"
   }
-
+  
   var sunriseTime: String {
     guard let details = weatherForecast?.daily.currentDayData else { return "" }
     return details.sunriseTime.time
@@ -58,37 +58,100 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
     return weatherForecast?.daily.sevenDaysData ?? []
   }
   
-  weak var delegate: CurrentForecastViewModelDelegate?
-  let city: CityRealm
-  private let location: CLLocation
+  var location: CLLocation? {
+    return city?.location
+  }
+  
+  let userInfoSegmentedControlChangeKey = "SegmentedControlChange"
+  
+  var onSuccess: (() -> Void)?
+  var onFailure: ((Error) -> Void)?
+  var onLoadingStatus: ((Bool) -> Void)?
+  var pageIndex = 0
+  
+  private var city: City? {
+    didSet {
+      onSuccess?()
+    }
+  }
+  
+  private var isCurrentLocationPage: Bool {
+    return pageIndex == 0
+  }
+  
+  private var isLoadingData = false {
+    didSet {
+      onLoadingStatus?(isLoadingData)
+    }
+  }
+
   private let service: ForecastService
   private var weatherForecast: WeatherForecast?
   
-  init(city: CityRealm, service: ForecastService, delegate: CurrentForecastViewModelDelegate?) {
-    self.city = city
+  init(service: ForecastService) {
     self.service = service
-    self.delegate = delegate
-    self.location = city.location!
-    fetchForecast()
   }
+  
+  func city(at index: Int) -> City? {
+    return nil
+  }
+  
+  func loadData() {
+    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
+      fetchCurrentLocationForecast()
+      
+    } else if let city = city {
+      fetchWeatherForecast(for: city)
+    }
+  }
+  
+  func fetchCurrentLocationForecast() {
+    onLoadingStatus?(true)
+    
+    GeocoderHelper.currentLocation { [weak self] result in
+      guard let self = self else { return }
+      
+      switch result {
+      case .success(let placemark):
+        guard let currentCity = try? City.add(from: placemark) else { return }
+        self.city = currentCity
+        
+      case .failure(let error):
+        self.onFailure?(error)
+      }
+      
+      self.onLoadingStatus?(false)
+    }
+  }
+  
+  func fetchWeatherForecast(for city: City) {
+  //    ActivityIndicatorView.shared.startAnimating(at: view)
+  //    viewModel = DefaultCurrentForecastViewModel(city: city, service: service, delegate: self)
+    }
 }
 
 // MARK: - Private - Fetch Forecast Data
 private extension DefaultCurrentForecastViewModel {
   
   func fetchForecast() {
+    guard !isLoadingData else { return }
+    guard let location = location else { return }
+    
+    isLoadingData = true
     service.getForecast(by: location) { [weak self] response in
       guard let self = self else { return }
+      guard let city = self.city else { return }
       
       switch response {
       case .success(let data):
-        self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
-        self.delegate?.currentForecastViewModelDidFetchData(self, error: nil)
-
+        self.weatherForecast = WeatherForecast(city: city, forecastResponse: data)
+        
       case .failure(let error):
         self.weatherForecast = nil
-        self.delegate?.currentForecastViewModelDidFetchData(self, error: error)
+        self.onFailure?(error)
       }
+      
+      self.isLoadingData = false
     }
   }
   

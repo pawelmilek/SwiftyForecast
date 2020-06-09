@@ -1,7 +1,7 @@
 import Foundation
+import CoreLocation
 
 protocol CurrentForecastViewModel {
-  var city: CityRealm { get }
   var hourly: HourlyForecast? { get }
   var icon: NSAttributedString? { get }
   var weekdayMonthDay: String { get }
@@ -13,6 +13,17 @@ protocol CurrentForecastViewModel {
   var sunsetTime: String { get }
   var numberOfDays: Int { get }
   var sevenDaysData: [DailyData] { get }
+  var location: CLLocation? { get }
+  var userInfoSegmentedControlChangeKey: String { get }
+  var pageIndex: Int { get set }
+  
+  var onSuccess: (() -> Void)? { get set }
+  var onFailure: ((Error) -> Void)? { get set }
+  var onLoadingStatus: ((Bool) -> Void)? { get set }
+  
+  init(service: ForecastService)
 
-  init(city: CityRealm, service: ForecastService, delegate: CurrentForecastViewModelDelegate?)
+  func city(at index: Int) -> City?
+  func loadData()
+  func fetchCurrentLocationForecast()
 }

@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Get Realm path
     debugPrint(RealmProvider.cities.configuration.fileURL!)
-    try! CityRealm.deleteAll()
+    try! City.deleteAll()
     
     return true
   }

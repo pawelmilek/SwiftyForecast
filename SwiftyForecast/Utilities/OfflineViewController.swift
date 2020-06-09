@@ -1,6 +1,6 @@
 import UIKit
 
-class OfflineViewController: UIViewController {
+final class OfflineViewController: UIViewController {
   private let network = NetworkManager.shared
   
   private var offLineImageView: UIImageView = {

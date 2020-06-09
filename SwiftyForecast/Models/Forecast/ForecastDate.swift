@@ -44,7 +44,7 @@ extension ForecastDate {
   }
   
 //  func time(by timeZone: TimeZone?) -> String {
-//    guard let timeZone = timeZone else { return "N/A" }
+//    guard let timeZone = timeZone else { return InvalidReference.notApplicable }
 //    formatter.timeStyle = .short
 //    formatter.dateStyle = .none
 //    formatter.timeZone = timeZone
