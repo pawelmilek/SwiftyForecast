@@ -8,7 +8,9 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   
   var icon: NSAttributedString? {
     guard let current = weatherForecast?.currently else { return nil }
-    return ConditionFontIcon.make(icon: current.icon, font: Style.CurrentForecast.conditionFontIconSize)?.attributedIcon
+    let font = Style.CurrentForecast.conditionFontIconSize
+    let attributedIcon = ConditionFontIcon.make(icon: current.icon, font: font)?.attributedIcon
+    return attributedIcon
   }
   
   var weekdayMonthDay: String {
@@ -69,12 +71,7 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
   var onLoadingStatus: ((Bool) -> Void)?
   var pageIndex = 0
   
-  private var city: City? {
-    didSet {
-      onSuccess?()
-    }
-  }
-  
+  private var city: City?
   private var isCurrentLocationPage: Bool {
     return pageIndex == 0
   }
@@ -101,33 +98,25 @@ final class DefaultCurrentForecastViewModel: CurrentForecastViewModel {
       fetchCurrentLocationForecast()
       
     } else if let city = city {
-      fetchWeatherForecast(for: city)
+      // TODO:
     }
   }
   
   func fetchCurrentLocationForecast() {
-    onLoadingStatus?(true)
-    
     GeocoderHelper.currentLocation { [weak self] result in
       guard let self = self else { return }
       
       switch result {
       case .success(let placemark):
-        guard let currentCity = try? City.add(from: placemark) else { return }
+        let currentCity = try? City.add(from: placemark)
         self.city = currentCity
+        self.fetchForecast()
         
       case .failure(let error):
         self.onFailure?(error)
       }
-      
-      self.onLoadingStatus?(false)
     }
   }
-  
-  func fetchWeatherForecast(for city: City) {
-  //    ActivityIndicatorView.shared.startAnimating(at: view)
-  //    viewModel = DefaultCurrentForecastViewModel(city: city, service: service, delegate: self)
-    }
 }
 
 // MARK: - Private - Fetch Forecast Data
@@ -145,6 +134,7 @@ private extension DefaultCurrentForecastViewModel {
       switch response {
       case .success(let data):
         self.weatherForecast = WeatherForecast(city: city, forecastResponse: data)
+        self.onSuccess?()
         
       case .failure(let error):
         self.weatherForecast = nil

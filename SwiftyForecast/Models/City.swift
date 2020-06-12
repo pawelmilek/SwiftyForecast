@@ -174,7 +174,7 @@ extension City {
 
 }
 
-// MARK: - Is city exists in Core Data
+// MARK: - Is city exists
 extension City {
   
   func isExists() -> Bool {

@@ -1,6 +1,6 @@
 import UIKit
 
-final class CurrentForecastView: UIView {
+final class ForecastView: UIView {
   @IBOutlet private var contentView: UIView!
   @IBOutlet private weak var iconLabel: UILabel!
   @IBOutlet private weak var dateLabel: UILabel!
@@ -31,7 +31,7 @@ final class CurrentForecastView: UIView {
     return viewModels?.count ?? 0
   }
   
-  weak var delegate: CurrentForecastViewDelegate?
+  weak var delegate: ForecastViewDelegate?
   
   typealias ForecastStyle = Style.CurrentForecast
   
@@ -50,7 +50,7 @@ final class CurrentForecastView: UIView {
 }
 
 // MARK: ViewSetupable protocol
-extension CurrentForecastView: ViewSetupable {
+extension ForecastView: ViewSetupable {
   
   func setUp() {
     createContentView()
@@ -95,10 +95,10 @@ extension CurrentForecastView: ViewSetupable {
 }
 
 // MARK: - Set bottom shadow
-private extension CurrentForecastView {
+private extension ForecastView {
   
   func createContentView() {
-    let nibName = CurrentForecastView.nibName
+    let nibName = ForecastView.nibName
     Bundle.main.loadNibNamed(nibName, owner: self, options: [:])
     
     addSubview(contentView)
@@ -112,7 +112,7 @@ private extension CurrentForecastView {
 }
 
 // MARK: - Set bottom shadow
-private extension CurrentForecastView {
+private extension ForecastView {
   
   func setShadowForBaseView() {
     backgroundColor = ForecastStyle.backgroundColor
@@ -130,7 +130,7 @@ private extension CurrentForecastView {
 }
 
 // MARK: - Set collection view
-private extension CurrentForecastView {
+private extension ForecastView {
   
   func setCollectionView() {
     hourlyCollectionView.register(cellClass: HourlyCollectionViewCell.self)
@@ -143,7 +143,7 @@ private extension CurrentForecastView {
 }
 
 // MARK: - Private - Add tap gesture recognizer
-private extension CurrentForecastView {
+private extension ForecastView {
   
   func addTapGestureRecognizer() {
     let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureHandler))
@@ -154,7 +154,7 @@ private extension CurrentForecastView {
 }
 
 // MARK: - Configure current forecast
-extension CurrentForecastView {
+extension ForecastView {
 
   func configure(by viewModel: CurrentForecastViewModel) {
     iconLabel.attributedText = viewModel.icon
@@ -184,7 +184,7 @@ extension CurrentForecastView {
 }
 
 // MARK: - Animate labels
-extension CurrentForecastView {
+extension ForecastView {
   
   func animateLabelsScaling() {
     if UIScreen.PhoneModel.isPhoneSE {
@@ -217,7 +217,7 @@ extension CurrentForecastView {
 }
 
 // MARK: - UICollectionViewDataSource protocol
-extension CurrentForecastView: UICollectionViewDataSource {
+extension ForecastView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return hourlyCount
@@ -237,7 +237,7 @@ extension CurrentForecastView: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegateFlowLayout protocol
-extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
+extension ForecastView: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
@@ -248,7 +248,7 @@ extension CurrentForecastView: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - Action
-extension CurrentForecastView {
+extension ForecastView {
   
   @objc func tapGestureHandler(_ sender: UITapGestureRecognizer) {
     viewDidExpand = !viewDidExpand

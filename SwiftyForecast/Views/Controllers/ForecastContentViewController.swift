@@ -1,7 +1,7 @@
 import UIKit
 
 final class ContentViewController: UIViewController {
-  @IBOutlet private weak var currentForecastView: CurrentForecastView!
+  @IBOutlet private weak var currentForecastView: ForecastView!
   @IBOutlet private weak var weekTableView: UITableView!
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
@@ -150,7 +150,7 @@ private extension ContentViewController {
 }
 
 // MARK: - CurrentForecastViewDelegate protocol
-extension ContentViewController: CurrentForecastViewDelegate {
+extension ContentViewController: ForecastViewDelegate {
   
   func currentForecastDidExpand() {
     animateBouncingEffect()

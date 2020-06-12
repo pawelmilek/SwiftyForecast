@@ -2,7 +2,7 @@ import UIKit
 import RealmSwift
 import SafariServices
 
-class ForecastViewController: UIViewController {
+final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
   private lazy var notationSystemSegmentedControl: SegmentedControl = {
@@ -29,9 +29,8 @@ class ForecastViewController: UIViewController {
     viewController.dataSource = self
     viewController.delegate = self
     
-    if let forecastContentVC = forecastContentViewController(at: 0) {
-      viewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
-    }
+    let forecastContentVC = forecastContentViewController(at: 0)
+    viewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
     return viewController
   }()
   
@@ -238,16 +237,16 @@ extension ForecastViewController: CitySelectionTableViewControllerDelegate {
 private extension ForecastViewController {
   
   func moveToPage(at index: Int, completion: (() -> ())? = nil) {
-    guard let vc = forecastContentViewController(at: index) else { return }
     guard index < cityCount else { return }
-    
+
+    let contentViewController = forecastContentViewController(at: index)
     if index > currentIndex {
-      pageViewController.setViewControllers([vc], direction: .forward, animated: false) { complete in
+      pageViewController.setViewControllers([contentViewController], direction: .forward, animated: false) { complete in
         completion?()
       }
       
     } else if index < currentIndex {
-      pageViewController.setViewControllers([vc], direction: .reverse, animated: false) { complete in
+      pageViewController.setViewControllers([contentViewController], direction: .reverse, animated: false) { complete in
         completion?()
       }
     }
@@ -259,7 +258,7 @@ private extension ForecastViewController {
 private extension ForecastViewController {
 
   func setInitialViewController(at index: Int = 0) {
-    guard let forecastContentVC = forecastContentViewController(at: index) else { return }
+    let forecastContentVC = forecastContentViewController(at: index)
     pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: false)
   }
 
@@ -268,18 +267,18 @@ private extension ForecastViewController {
 // MARK: - Private - Get ForecastPageViewController
 private extension ForecastViewController {
   
-  func forecastContentViewController(at index: Int) -> ContentViewController? {
-    var forecastVC: ContentViewController!
-    
-    if !contentViewiewControllers.isEmpty && index <= contentViewiewControllers.count - 1 {
-      forecastVC = contentViewiewControllers[index]
-    } else {
-      let storyboard = UIStoryboard(storyboard: .main)
-      forecastVC = storyboard.instantiateViewController(ContentViewController.self)
-      contentViewiewControllers.append(forecastVC)
+  func forecastContentViewController(at index: Int) -> ContentViewController {
+    var contentViewController: ContentViewController {
+      if !contentViewiewControllers.isEmpty && index <= contentViewiewControllers.count - 1 {
+        return contentViewiewControllers[index]
+      } else {
+        let viewModel = DefaultCurrentForecastViewModel(service: DefaultForecastService())
+        return ContentViewController.make(viewModel: viewModel)
+      }
     }
     
-    forecastVC.pageIndex = index
+    contentViewController.pageIndex = index
+    contentViewiewControllers.append(contentViewController)
     
     if cityCount > 0 {
       let city = cities[index] //object(at: indexPath)
@@ -288,7 +287,7 @@ private extension ForecastViewController {
 //      forecastVC.currentCity = nil
     }
 
-    return forecastVC
+    return contentViewController
   }
   
   func index(of forecastContentViewController: ContentViewController) -> Int {

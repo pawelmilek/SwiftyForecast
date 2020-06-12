@@ -20,7 +20,7 @@
                                 <rect key="frame" x="24" y="406.5" width="366" height="418.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="CurrentForecastView" customModule="SwiftyForecast" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="ForecastView" customModule="SwiftyForecast" customModuleProvider="target">
                                 <rect key="frame" x="24" y="52" width="366" height="342.5"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -45,7 +45,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="currentForecastView" destination="5AL-Fh-OWB" id="43J-Lk-4Qs"/>
+                        <outlet property="forecastView" destination="5AL-Fh-OWB" id="Zu3-HH-MrS"/>
                         <outlet property="weekTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
                     </connections>
                 </viewController>

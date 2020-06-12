@@ -1,13 +1,13 @@
 import UIKit
 
 final class ContentViewController: UIViewController {
-  @IBOutlet private weak var currentForecastView: CurrentForecastView!
+  @IBOutlet private weak var forecastView: ForecastView!
   @IBOutlet private weak var weekTableView: UITableView!
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
-  private var currentForecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
-  private var currentForecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
-  private var currentForecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
+  private var forecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
+  private var forecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
+  private var forecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   
   var city: City?
   
@@ -21,7 +21,7 @@ final class ContentViewController: UIViewController {
     }
   }
   
-  var viewModel: CurrentForecastViewModel? = DefaultCurrentForecastViewModel(service: DefaultForecastService())
+  var viewModel: CurrentForecastViewModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -54,10 +54,10 @@ extension ContentViewController: ViewSetupable {
 private extension ContentViewController {
   
   func arrangeConstraints() {
-    currentForecastViewMoreDetailsViewBottomConstraint = currentForecastView.moreDetailsViewBottomConstraint
-    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint = currentForecastView.stackViewBottomToMoreDetailsTopConstraint
-    currentForecastViewStackViewBottomToSafeAreaBottomConstraint = currentForecastView.stackViewBottomToSafeAreaBottomConstraint
-    dailyForecastTableViewBottomConstraint = currentForecastView.bottomAnchor.constraint(equalTo: weekTableView.bottomAnchor,
+    forecastViewMoreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
+    forecastViewStackViewBottomToMoreDetailsBottomConstraint = forecastView.stackViewBottomToMoreDetailsTopConstraint
+    forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
+    dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekTableView.bottomAnchor,
                                                                                          constant: 0)
   }
   
@@ -102,8 +102,9 @@ private extension ContentViewController {
   func setViewModelClosureCallbacks() {
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
+        self?.reloadAndInitializeMainPageViewController()
         self?.reloadDataInMainPageViewController()
-        self?.reloadForecast()
+        self?.reloadData()
       }
     }
     
@@ -149,16 +150,16 @@ private extension ContentViewController {
   
 }
 
-// MARK: - CurrentForecastViewDelegate protocol
-extension ContentViewController: CurrentForecastViewDelegate {
+// MARK: - ForecastViewDelegate protocol
+extension ContentViewController: ForecastViewDelegate {
   
   func currentForecastDidExpand() {
     animateBouncingEffect()
     
-    currentForecastViewMoreDetailsViewBottomConstraint?.constant = 0
+    forecastViewMoreDetailsViewBottomConstraint?.constant = 0
     dailyForecastTableViewBottomConstraint?.isActive = true
-    currentForecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = false
-    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = true
+    forecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = false
+    forecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = true
     
     UIView.animate(withDuration: 0.5,
                    delay: 0.1,
@@ -166,18 +167,18 @@ extension ContentViewController: CurrentForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseOut,
                    animations: {
-                    self.currentForecastView.animateLabelsScaling()
+                    self.forecastView.animateLabelsScaling()
                     self.view.layoutIfNeeded()
     })
   }
   
   func currentForecastDidCollapse() {
-    let height = currentForecastView.frame.size.height
+    let height = forecastView.frame.size.height
     
-    currentForecastViewMoreDetailsViewBottomConstraint?.constant = height
+    forecastViewMoreDetailsViewBottomConstraint?.constant = height
     dailyForecastTableViewBottomConstraint?.isActive = false
-    currentForecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = true
-    currentForecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = false
+    forecastViewStackViewBottomToSafeAreaBottomConstraint?.isActive = true
+    forecastViewStackViewBottomToMoreDetailsBottomConstraint?.isActive = false
     
     UIView.animate(withDuration: 0.5,
                    delay: 0.1,
@@ -185,7 +186,7 @@ extension ContentViewController: CurrentForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseIn,
                    animations: {
-                    self.currentForecastView.animateLabelsIdentity()
+                    self.forecastView.animateLabelsIdentity()
                     self.view.layoutIfNeeded()
     })
   }
@@ -196,15 +197,14 @@ extension ContentViewController: CurrentForecastViewDelegate {
 private extension ContentViewController {
   
   func animateBouncingEffect() {
-    currentForecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+    forecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
     
     UIView.animate(withDuration: 1.8,
-                   delay: 0,
-                   usingSpringWithDamping: 0.2,
+                   delay: 0, usingSpringWithDamping: 0.2,
                    initialSpringVelocity: 6.0,
                    options: .allowUserInteraction,
                    animations: {
-                    self.currentForecastView.transform = .identity
+                    self.forecastView.transform = .identity
     })
   }
   
@@ -247,7 +247,7 @@ extension ContentViewController {
     guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
 
     NotationSystem.selectedUnitNotation = unitNotation
-    reloadForecast()
+    reloadData()
   }
   
   @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
@@ -258,11 +258,11 @@ extension ContentViewController {
     fetchForecast()
   }
   
-  private func reloadForecast() {
+  private func reloadData() {
     guard let viewModel = viewModel else { return }
     
     DispatchQueue.main.async { [weak self] in
-      self?.currentForecastView.configure(by: viewModel)
+      self?.forecastView.configure(by: viewModel)
       self?.weekTableView.reloadData()
     }
   }

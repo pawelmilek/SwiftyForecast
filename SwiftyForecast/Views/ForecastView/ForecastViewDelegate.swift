@@ -1,4 +1,4 @@
-protocol CurrentForecastViewDelegate: AnyObject {
+protocol ForecastViewDelegate: AnyObject {
   func currentForecastDidExpand()
   func currentForecastDidCollapse()
 }
