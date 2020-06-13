@@ -9,8 +9,6 @@ final class ContentViewController: UIViewController {
   private var forecastViewStackViewBottomToMoreDetailsBottomConstraint: NSLayoutConstraint?
   private var forecastViewStackViewBottomToSafeAreaBottomConstraint: NSLayoutConstraint?
   
-  var city: City?
-  
   var pageIndex: Int {
     get {
       return viewModel?.pageIndex ?? 0
@@ -21,7 +19,7 @@ final class ContentViewController: UIViewController {
     }
   }
   
-  var viewModel: CurrentForecastViewModel?
+  var viewModel: ContentViewModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -86,8 +84,6 @@ private extension ContentViewController {
   
   func addNotificationObservers() {
     ForecastNotificationCenter.add(observer: self, selector: #selector(unitNotationDidChange), for: .unitNotationDidChange)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(locationServiceDidBecomeEnable), for: .locationServiceDidBecomeEnable)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
   }
   
   func removeNotificationObservers() {
@@ -102,8 +98,8 @@ private extension ContentViewController {
   func setViewModelClosureCallbacks() {
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
-        self?.reloadAndInitializeMainPageViewController()
-        self?.reloadDataInMainPageViewController()
+//        self?.reloadDataInMainPageViewController()
+//        self?.reloadDataInMainPageViewController()
         self?.reloadData()
       }
     }
@@ -140,13 +136,13 @@ private extension ContentViewController {
 // MARK: - Private - Reload pages
 private extension ContentViewController {
   
-  func reloadAndInitializeMainPageViewController() {
-    ForecastNotificationCenter.post(.reloadPages)
-  }
-  
-  func reloadDataInMainPageViewController() {
-    ForecastNotificationCenter.post(.reloadPagesData)
-  }
+//  func reloadAndInitializeMainPageViewController() {
+//    ForecastNotificationCenter.post(.reloadPages)
+//  }
+//  
+//  func reloadDataInMainPageViewController() {
+//    ForecastNotificationCenter.post(.reloadPagesData)
+//  }
   
 }
 
@@ -242,20 +238,11 @@ extension ContentViewController: UITableViewDelegate {
 extension ContentViewController {
   
   @objc func unitNotationDidChange(_ notification: NSNotification) {
-    guard let userInfoKey = viewModel?.userInfoSegmentedControlChangeKey else { return }
-    guard let segmentedControl = notification.userInfo?[userInfoKey] as? SegmentedControl else { return }
+    guard let segmentedControl = notification.userInfo?[NotificationCenterUserInfo.segmentedControlChanged.key] as? SegmentedControl else { return }
     guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
 
     NotationSystem.selectedUnitNotation = unitNotation
     reloadData()
-  }
-  
-  @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
-    viewModel?.fetchCurrentLocationForecast()
-  }
-  
-  @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    fetchForecast()
   }
   
   private func reloadData() {
@@ -272,7 +259,7 @@ extension ContentViewController {
 // MARK: - Factory method
 extension ContentViewController {
   
-  static func make(viewModel: CurrentForecastViewModel) -> ContentViewController {
+  static func make(viewModel: ContentViewModel) -> ContentViewController {
     let viewController = StoryboardViewControllerFactory.make(ContentViewController.self)
     viewController.viewModel = viewModel
     return viewController

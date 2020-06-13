@@ -142,7 +142,7 @@ private extension CitySelectionTableViewController {
 private extension CitySelectionTableViewController {
   
   func reloadAndInitializeMainPageViewController() {
-    ForecastNotificationCenter.post(.reloadPages)
+//    ForecastNotificationCenter.post(.reloadPages)
   }
   
 }

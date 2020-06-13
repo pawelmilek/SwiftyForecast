@@ -156,7 +156,7 @@ private extension ForecastView {
 // MARK: - Configure current forecast
 extension ForecastView {
 
-  func configure(by viewModel: CurrentForecastViewModel) {
+  func configure(by viewModel: ContentViewModel) {
     iconLabel.attributedText = viewModel.icon
     dateLabel.text = viewModel.weekdayMonthDay
     cityNameLabel.text = viewModel.cityName

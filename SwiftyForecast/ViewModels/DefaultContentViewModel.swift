@@ -61,7 +61,7 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var location: CLLocation? {
-    return city?.location
+    return city.location
   }
   
   var onSuccess: (() -> Void)?
@@ -69,7 +69,7 @@ final class DefaultContentViewModel: ContentViewModel {
   var onLoadingStatus: ((Bool) -> Void)?
   var pageIndex = 0
   
-  private var city: City?
+  
   private var isCurrentLocationPage: Bool {
     return pageIndex == 0
   }
@@ -80,58 +80,30 @@ final class DefaultContentViewModel: ContentViewModel {
     }
   }
 
+  private let city: City
   private let service: ForecastService
   private var weatherForecast: WeatherForecast?
   
-  init(service: ForecastService) {
+  init(city: City, service: ForecastService) {
+    self.city = city
     self.service = service
-  }
-  
-  func city(at index: Int) -> City? {
-    return nil
-  }
-  
-  func loadData() {
-    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
-      fetchCurrentLocationForecast()
-      
-    } else if let city = city {
-      // TODO:
-    }
-  }
-  
-  func fetchCurrentLocationForecast() {
-    GeocoderHelper.currentLocation { [weak self] result in
-      guard let self = self else { return }
-      
-      switch result {
-      case .success(let placemark):
-        let currentCity = try? City.add(from: placemark)
-        self.city = currentCity
-        self.fetchForecast()
-        
-      case .failure(let error):
-        self.onFailure?(error)
-      }
-    }
   }
 }
 
 // MARK: - Private - Fetch Forecast Data
-private extension DefaultContentViewModel {
+extension DefaultContentViewModel {
   
-  func fetchForecast() {
+  func loadData() {
     guard !isLoadingData else { return }
     guard let location = location else { return }
     
     isLoadingData = true
     service.getForecast(by: location) { [weak self] response in
       guard let self = self else { return }
-      guard let city = self.city else { return }
       
       switch response {
       case .success(let data):
-        self.weatherForecast = WeatherForecast(city: city, forecastResponse: data)
+        self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
         self.onSuccess?()
         
       case .failure(let error):

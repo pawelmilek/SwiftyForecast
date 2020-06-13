@@ -1,6 +1,5 @@
 import UIKit
 import RealmSwift
-import SafariServices
 
 final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
@@ -18,47 +17,55 @@ final class ForecastViewController: UIViewController {
     segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
     segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = ForecastUserDefaults.unitNotation.rawValue
-    
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
   }()
   
   private lazy var pageViewController: UIPageViewController = {
+    var viewControllers: [UIViewController] {
+      guard let contentViewModels = viewModel?.contentViewModels else { return [] }
+      
+      var controllers: [UIViewController] = []
+      for (index, _) in contentViewModels.enumerated() {
+        if let viewController = forecastContentViewController(at: index) {
+          controllers.append(viewController)
+        }
+      }
+      
+      return controllers
+    }
+    
     let storyboard = UIStoryboard(storyboard: .main)
     let viewController = storyboard.instantiateViewController(UIPageViewController.self)
     viewController.dataSource = self
     viewController.delegate = self
-    
-    let forecastContentVC = forecastContentViewController(at: 0)
-    viewController.setViewControllers([forecastContentVC], direction: .forward, animated: true)
+    viewController.setViewControllers(viewControllers, direction: .forward, animated: true)
     return viewController
   }()
   
-  private var cities: Results<City> {
-    return try! City.fetchAll()
+  private var pendingIndex: Int? {
+    viewModel?.pendingIndex
   }
   
+  private var currentIndex: Int {
+    return viewModel?.currentIndex ?? 0
+  }
   private var cityCount: Int {
-    return cities.count
+    return viewModel?.numberOfCities ?? 0
   }
   
   private var contentViewiewControllers: [ContentViewController] = []
-  private var pendingIndex: Int?
-  private var currentIndex = 0 {
-    didSet {
-      pageControl.currentPage = currentIndex
-    }
-  }
+  var viewModel: ForecastViewModel? = DefaultForecastViewModel(service: DefaultForecastService())
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
-    setUpLayout()
   }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    showOrHideEnableLocationServicesPrompt()
+    showOrHideLocationServicesPrompt()
+    loadData()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +73,6 @@ final class ForecastViewController: UIViewController {
     guard let cityListVC = segue.destination as? CitySelectionTableViewController else { return }
     
     cityListVC.delegate = self
-//    cityListVC.managedObjectContext = CoreDataStackHelper.shared.managedContext
   }
   
   deinit {
@@ -78,54 +84,53 @@ final class ForecastViewController: UIViewController {
 extension ForecastViewController: ViewSetupable {
   
   func setUp() {
-    fetchCitiesAndSetLastUpdate()
-    initializePageViewController()
-    setNotationSystemSegmentedControl()
+    setViewModelClosureCallbacks()
     addNotificationObservers()
-    setNetworkManagerWhenInternetIsNotAvailable()
-    setPageControl()
+    setupNetworkReachabilityManager()
   }
   
-  func setUpLayout() {
-    view.bringSubviewToFront(pageControl)
+  func setViewModelCallback() {
+    viewModel?.onIndexUpdate = { [weak self] currentIndex in
+      self?.pageControl.currentPage = currentIndex
+    }
   }
   
-}
-
-// MARK: - Private - Fetch cities and set new CoreData attribute lastUpdate if not exists.
-private extension ForecastViewController {
-  
-  func fetchCitiesAndSetLastUpdate() {
-//    LocalizedCityManager.setCitiesLastUpdateDateAfterCoreDataMigration()
+  func addChildPageViewController() {
+    add(pageViewController)
   }
-}
-
-// MARK: - Private - Initialize PageViewController
-private extension ForecastViewController {
-  
-  func initializePageViewController() {
-    addChild(pageViewController)
-    view.addSubview(pageViewController.view)
-    pageViewController.didMove(toParent: self)
-  }
-  
-}
-
-// MARK: - Private - Set metric system segmented control
-private extension ForecastViewController {
   
   func setNotationSystemSegmentedControl() {
     navigationItem.titleView = notationSystemSegmentedControl
   }
   
+  func setupPageControl() {
+    DispatchQueue.main.async { [weak self] in
+      guard let self = self else { return }
+      self.pageControl.currentPage = self.currentIndex
+      self.pageControl.numberOfPages = self.cityCount
+      self.view.bringSubviewToFront(self.pageControl)
+    }
+  }
+  
 }
 
-// MARK: - Private - NotificationCenter
+// MARK: - Private - Reload data
+private extension ForecastViewController {
+  
+  func loadData() {
+    viewModel?.loadData()
+  }
+
+}
+
+// MARK: - Private - Setup notification center
 private extension ForecastViewController {
   
   func addNotificationObservers() {
-    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
+//    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
+//    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
+    ForecastNotificationCenter.add(observer: self, selector: #selector(locationServiceDidBecomeEnable), for: .locationServiceDidBecomeEnable)
+    ForecastNotificationCenter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
   }
   
   func removeNotificationObservers() {
@@ -134,34 +139,20 @@ private extension ForecastViewController {
   
 }
 
-// MARK: - Private - Set page control
+// MARK: - Private - Set NetworkReachabilityManager when internet is not available
 private extension ForecastViewController {
   
-  func setPageControl() {
-    DispatchQueue.main.async { [weak self] in
-      guard let self = self else { return }
-      self.pageControl.currentPage = self.currentIndex
-      self.pageControl.numberOfPages = self.cityCount
-    }
-    
-  }
-  
-}
-
-// MARK: - Private - Set NetworkManager when internet is not available
-private extension ForecastViewController {
-  
-  func setNetworkManagerWhenInternetIsNotAvailable() {
-    let whenNetworkIsNotAvailable: () -> () = {
+  func setupNetworkReachabilityManager() {
+    let whenNetworkIsNotAvailable = {
       let offlineViewController = OfflineViewController()
       self.navigationController?.pushViewController(offlineViewController, animated: false)
     }
-
-    NetworkManager.shared.isUnreachable { _ in
+    
+    NetworkReachabilityManager.shared.isUnreachable { _ in
       whenNetworkIsNotAvailable() // Will run only once when app is launching
     }
     
-    NetworkManager.shared.whenUnreachable { _ in
+    NetworkReachabilityManager.shared.whenUnreachable { _ in
       whenNetworkIsNotAvailable() // Network listener to pick up network changes in real-time
     }
   }
@@ -171,8 +162,8 @@ private extension ForecastViewController {
 // MARK: - Private - Show or hide navigation prompt
 private extension ForecastViewController {
   
-  func showOrHideEnableLocationServicesPrompt() {
-    let delayInSeconds = 2.0
+  func showOrHideLocationServicesPrompt() {
+    let delayInSeconds = 1.0
     DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) { [weak self] in
       guard let strongSelf = self else { return }
       
@@ -197,24 +188,29 @@ private extension ForecastViewController {
 // MARK: - Actions
 extension ForecastViewController {
   
-  @objc func reloadPages(_ notification: NSNotification) {
-    setInitialViewController()
-    setPageControl()
-  }
-  
-  @objc func reloadPagesData(_ notification: NSNotification) {
-    setPageControl()
-  }
+//  @objc func reloadPages(_ notification: NSNotification) {
+//    setInitialViewController()
+//    setupPageControl()
+//  }
+//
+//  @objc func reloadPagesData(_ notification: NSNotification) {
+//    setupPageControl()
+//  }
   
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    ForecastNotificationCenter.post(.unitNotationDidChange, object: nil, userInfo: ["SegmentedControlChange": sender])
+    viewModel?.measuringSystemSwitched(sender)
   }
   
   @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {
-    if let url = URL(string: "https://darksky.net/poweredby/") {
-      let safariViewController = SFSafariViewController(url: url)
-      present(safariViewController, animated: true)
-    }
+    viewModel?.presentPoweredBy(at: self)
+  }
+  
+  @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
+    loadData()
+  }
+  
+  @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+    loadData()
   }
   
 }
@@ -223,12 +219,12 @@ extension ForecastViewController {
 extension ForecastViewController: CitySelectionTableViewControllerDelegate {
   
   func citySelection(_ view: CitySelectionTableViewController, didSelect city: City) {
-//    guard let newPageIndex = cities.indexPath(forObject: city)?.row else { return }
-//
-//    moveToPage(at: newPageIndex) {
-//      self.currentIndex = newPageIndex
-//      self.pendingIndex = nil
-//    }
+    guard let index = viewModel?.index(of: city) else { return }
+    
+    moveToPage(at: index) { [weak self] _ in
+      self?.viewModel?.currentIndex = index
+      self?.viewModel?.pendingIndex = nil
+    }
   }
   
 }
@@ -236,19 +232,21 @@ extension ForecastViewController: CitySelectionTableViewControllerDelegate {
 // MARK: - Private - Move to page at index
 private extension ForecastViewController {
   
-  func moveToPage(at index: Int, completion: (() -> ())? = nil) {
+  func moveToPage(at index: Int, completion: @escaping (Bool) -> Void) {
     guard index < cityCount else { return }
-
-    let contentViewController = forecastContentViewController(at: index)
+    guard let contentViewController = forecastContentViewController(at: index) else { return }
+    
     if index > currentIndex {
-      pageViewController.setViewControllers([contentViewController], direction: .forward, animated: false) { complete in
-        completion?()
-      }
+      pageViewController.setViewControllers([contentViewController],
+                                            direction: .forward,
+                                            animated: false,
+                                            completion: completion)
       
     } else if index < currentIndex {
-      pageViewController.setViewControllers([contentViewController], direction: .reverse, animated: false) { complete in
-        completion?()
-      }
+      pageViewController.setViewControllers([contentViewController],
+                                            direction: .reverse,
+                                            animated: false,
+                                            completion: completion)
     }
   }
   
@@ -256,43 +254,28 @@ private extension ForecastViewController {
 
 // MARK: - Private - Set dataSource and first ViewController
 private extension ForecastViewController {
-
-  func setInitialViewController(at index: Int = 0) {
-    let forecastContentVC = forecastContentViewController(at: index)
-    pageViewController.setViewControllers([forecastContentVC], direction: .forward, animated: false)
+  
+  func setInitialViewController() {
+    guard let viewController = forecastContentViewController(at: 0) else { return }
+    pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
   }
-
+  
 }
 
 // MARK: - Private - Get ForecastPageViewController
 private extension ForecastViewController {
   
-  func forecastContentViewController(at index: Int) -> ContentViewController {
-    var contentViewController: ContentViewController {
-      if !contentViewiewControllers.isEmpty && index <= contentViewiewControllers.count - 1 {
-        return contentViewiewControllers[index]
-      } else {
-        let viewModel = DefaultCurrentForecastViewModel(service: DefaultForecastService())
-        return ContentViewController.make(viewModel: viewModel)
-      }
+  func forecastContentViewController(at index: Int) -> ContentViewController? {
+    guard let contentViewController = viewModel?.contentViewController(at: index) else {
+      return nil
     }
     
-    contentViewController.pageIndex = index
-    contentViewiewControllers.append(contentViewController)
-    
-    if cityCount > 0 {
-      let city = cities[index] //object(at: indexPath)
-//      forecastVC.currentCity = city
+    if contentViewiewControllers.contains(contentViewController) {
+      return contentViewiewControllers[safe: index]
     } else {
-//      forecastVC.currentCity = nil
+      contentViewiewControllers.append(contentViewController)
+      return contentViewController
     }
-
-    return contentViewController
-  }
-  
-  func index(of forecastContentViewController: ContentViewController) -> Int {
-    guard let city = forecastContentViewController.city else { return NSNotFound }
-    return cities.index(of: city) ?? NSNotFound
   }
   
 }
@@ -302,27 +285,27 @@ extension ForecastViewController: UIPageViewControllerDataSource {
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           viewControllerBefore viewController: UIViewController) -> UIViewController? {
-    guard let forecastPageContentViewController = viewController as? ContentViewController else { return nil }
+    guard let pageContentViewController = viewController as? ContentViewController else { return nil }
     
-    let indexOfViewController = index(of: forecastPageContentViewController)
-    if indexOfViewController == NSNotFound || indexOfViewController == 0 {
+    let viewControllerIndex = pageContentViewController.pageIndex
+    if viewControllerIndex == NSNotFound || viewControllerIndex == 0 {
       return nil
     }
-
-    return forecastContentViewController(at: indexOfViewController - 1)
+    
+    return forecastContentViewController(at: viewControllerIndex - 1)
     
   }
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           viewControllerAfter viewController: UIViewController) -> UIViewController? {
-    guard let forecastPageContentViewController = viewController as? ContentViewController else { return nil }
+    guard let pageContentViewController = viewController as? ContentViewController else { return nil }
     
-    let indexOfViewController = index(of: forecastPageContentViewController)
-    if indexOfViewController == NSNotFound || (indexOfViewController + 1) == cityCount {
+    let viewControllerIndex = pageContentViewController.pageIndex
+    if viewControllerIndex == NSNotFound || (viewControllerIndex + 1) == cityCount {
       return nil
     }
-
-    return forecastContentViewController(at: indexOfViewController + 1)
+    
+    return forecastContentViewController(at: viewControllerIndex + 1)
   }
   
 }
@@ -330,20 +313,50 @@ extension ForecastViewController: UIPageViewControllerDataSource {
 // MARK: - UIPageViewControllerDelegate protocol
 extension ForecastViewController: UIPageViewControllerDelegate {
   
-  func pageViewController(_ pageViewController: UIPageViewController,
-                          willTransitionTo pendingViewControllers: [UIViewController]) {
-    guard let forecastContentViewController = pendingViewControllers.first as? ContentViewController else { return }
-    pendingIndex = forecastContentViewController.pageIndex
+  func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+    guard let viewController = pendingViewControllers.first as? ContentViewController else { return }
+    viewModel?.pendingIndex = viewController.pageIndex
   }
   
   func pageViewController(_ pageViewController: UIPageViewController,
                           didFinishAnimating finished: Bool,
                           previousViewControllers: [UIViewController],
                           transitionCompleted completed: Bool) {
-    guard completed else { return }
+    guard completed, let currentPageIndex = pendingIndex else { return }
+    viewModel?.currentIndex = currentPageIndex
+  }
+  
+}
+
+// MAKR: - Private - Set view models closures
+private extension ForecastViewController {
+  
+  func setViewModelClosureCallbacks() {
+    viewModel?.onSuccess = {
+      DispatchQueue.main.async { [weak self] in
+        self?.addChildPageViewController()
+        self?.setupPageControl()
+        self?.setNotationSystemSegmentedControl()
+      }
+    }
     
-    if let currentPageIndex = pendingIndex {
-      currentIndex = currentPageIndex
+    viewModel?.onFailure = { error in
+      DispatchQueue.main.async {
+        if case GeocoderError.locationDisabled = error {
+          LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+        } else {
+          (error as? ErrorHandleable)?.handler()
+        }
+      }
+    }
+    
+    viewModel?.onLoadingStatus = { [weak self] isLoading in
+      guard let self = self else { return }
+      if isLoading {
+        ActivityIndicatorView.shared.startAnimating(at: self.view)
+      } else {
+        ActivityIndicatorView.shared.stopAnimating()
+      }
     }
   }
   

@@ -1,5 +1,5 @@
 enum CityProperty: String {
-  case cityId
+  case index
   case name
   case country
   case state
@@ -8,4 +8,8 @@ enum CityProperty: String {
   case isCurrentLocalization
   case latitude
   case longitude
+  
+  var key: String {
+    return self.rawValue
+  }
 }

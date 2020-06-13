@@ -2,13 +2,13 @@ import Foundation
 import RealmSwift
 
 struct RealmProvider {
-  static var cities: RealmProvider = {
-    return RealmProvider(config: citiesConfig)
+  static var core: RealmProvider = {
+    return RealmProvider(config: config)
   }()
   
-  private static let citiesConfig = Realm.Configuration(fileURL: try! PathFinder.inLibrary("cities.realm"),
-                                                        schemaVersion: 1,
-                                                        deleteRealmIfMigrationNeeded: true)
+  private static let config = Realm.Configuration(fileURL: try! PathFinder.inLibrary("core.realm"),
+                                                  schemaVersion: 1,
+                                                  deleteRealmIfMigrationNeeded: true)
   
   let configuration: Realm.Configuration
   var realm: Realm {
