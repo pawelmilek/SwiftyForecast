@@ -1,4 +1,4 @@
 enum SegueIdentifierType: String {
   case addCitySegue = "AddCityIdentifierSegue"
-  case showCityListSegue = "ShowCityListIdentifierSegue"
+  case showCitySelectionSegue = "ShowCitySelectionIdentifierSegue"
 }

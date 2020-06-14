@@ -1,48 +1,48 @@
-final class DefaultCitySelectionViewModel: CitySelectionViewModel {
-  let name: String
-  let localTime: String
-  
-  var onError: ((Error) -> Void)?
-  var onUpdateLoadingStatus: ((Bool) -> Void)?
-  
-  private let city: City
-  private let service: ForecastService
-  private weak var delegate: CityViewModelDelegate?
-  
-  init(city: City, service: ForecastService, delegate: CityViewModelDelegate?) {
-    name = city.name + ", " + city.country
-    localTime = city.localTime
+import RealmSwift
 
-    self.city = city
-    self.service = service
+protocol CitySelectionViewModelDelegate: class {
+  func didSelect(_ viewModel: CitySelectionViewModel, city: City)
+}
+
+final class DefaultCitySelectionViewModel: CitySelectionViewModel {
+  var numberOfCities: Int {
+    return cityViewModels.count
+  }
+  
+  var onSuccess: (() -> Void)?
+  var onFailure: ((Error) -> Void)?
+  var onLoadingStatus: ((Bool) -> Void)?
+  
+  private var cities: Results<City> {
+    let allCities = try! City.fetchAll()
+    return allCities.sorted(byKeyPath: "index", ascending: true)
+  }
+  
+  private lazy var cityViewModels: [CityViewModel] = {
+    return cities.map { DefaultCityViewModel(city: $0) }
+  }()
+
+  weak var delegate: CitySelectionViewModelDelegate?
+  
+  init(delegate: CitySelectionViewModelDelegate) {
     self.delegate = delegate
-    fetchCites()
+  }
+  
+  func name(at index: Int) -> String {
+    return cityViewModels[safe: index]?.name ?? InvalidReference.notApplicable
+  }
+  
+  func localTime(at index: Int) -> String {
+    return cityViewModels[safe: index]?.localTime ?? InvalidReference.notApplicable
+  }
+  
+  func select(at index: Int) {
+    let selectedCity = cities.filter("index = %@", index).first!
+    delegate?.didSelect(self, city: selectedCity)
   }
 }
 
-// MARK: - Private - Fetch cities
+// MARK: - Private -
 private extension DefaultCitySelectionViewModel {
-  
-  func fetchCites() {
-    onUpdateLoadingStatus?(true)
-    
-    guard let location = city.location else {
-      onError?(WebServiceError.requestFailed)
-      return
-    }
-    
-    service.getForecast(by: location) { [weak self] result in
-      guard let self = self else { return }
-
-      switch result {
-      case .success(let data):
-          self.delegate?.dataDidLoad("\(data)")
-        
-      case .failure:
-        self.onError?(WebServiceError.requestFailed)
-      }
-      self.onUpdateLoadingStatus?(false)
-    }
-  }
 
 }

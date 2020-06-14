@@ -53,37 +53,6 @@
             </objects>
             <point key="canvasLocation" x="3372" y="-587.4384236453202"/>
         </scene>
-        <!-- -->
-        <scene sceneID="a6q-Ke-vaD">
-            <objects>
-                <tableViewController storyboardIdentifier="ForecastCityListTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ydj-fi-6FQ" customClass="CityTableViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qv6-0V-ehs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idCityCell" id="v3c-5O-4Ua">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v3c-5O-4Ua" id="o96-WA-PmU">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="ydj-fi-6FQ" id="ft2-lO-TbX"/>
-                            <outlet property="delegate" destination="ydj-fi-6FQ" id="SWU-Pu-s1k"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title=" " id="oqD-Tk-QaE">
-                        <barButtonItem key="backBarButtonItem" title=" " id="HqZ-3t-oBN"/>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HVY-yt-HAl" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2010" y="-587"/>
-        </scene>
         <!--Page View Controller-->
         <scene sceneID="F9U-19-li5">
             <objects>
@@ -126,7 +95,7 @@
                         <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
                             <connections>
-                                <segue destination="ydj-fi-6FQ" kind="showDetail" identifier="ShowCityListIdentifierSegue" id="f4r-fu-BcF"/>
+                                <segue destination="vzL-M9-vWQ" kind="presentation" identifier="ShowCitySelectionIdentifierSegue" id="M2z-E8-B2r"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -137,6 +106,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jE-SH-6eG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1210" y="-587"/>
+        </scene>
+        <!--City Selection View Controller-->
+        <scene sceneID="Rf1-T1-hTj">
+            <objects>
+                <viewController storyboardIdentifier="CitySelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vzL-M9-vWQ" customClass="CitySelectionViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xs8-Ui-cHP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-ED-jNd">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="TRN-ED-jNd" firstAttribute="top" secondItem="8uK-0j-UNz" secondAttribute="top" id="Cuz-TV-VSC"/>
+                            <constraint firstItem="8uK-0j-UNz" firstAttribute="trailing" secondItem="TRN-ED-jNd" secondAttribute="trailing" id="LuK-Ml-ygP"/>
+                            <constraint firstItem="TRN-ED-jNd" firstAttribute="leading" secondItem="8uK-0j-UNz" secondAttribute="leading" id="Qfg-Eb-dXT"/>
+                            <constraint firstItem="8uK-0j-UNz" firstAttribute="bottom" secondItem="TRN-ED-jNd" secondAttribute="bottom" id="zoy-Mk-k3f"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8uK-0j-UNz"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="TRN-ED-jNd" id="7B6-Ey-yIF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NFK-EB-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1958" y="-588"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RmZ-oY-crz">

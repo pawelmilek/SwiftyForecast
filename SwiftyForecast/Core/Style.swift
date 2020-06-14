@@ -220,6 +220,6 @@ struct Style {
   
   // MARK: ActivityIndicatorView
   struct ActivityIndicator {
-    static let indicatorColor = UIColor.orange.withAlphaComponent(0.6)
+    static let indicatorColor = UIColor.white
   }
 }

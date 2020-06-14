@@ -1,6 +1,6 @@
 import UIKit
 
-class DailyForecastTableViewCell: UITableViewCell {
+final class DailyForecastTableViewCell: UITableViewCell {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!

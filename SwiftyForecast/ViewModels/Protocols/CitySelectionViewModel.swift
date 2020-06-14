@@ -1,9 +1,13 @@
 protocol CitySelectionViewModel {
-  var name: String { get }
-  var localTime: String { get }
+  var numberOfCities: Int { get }
   
-  var onError: ((Error) -> Void)? { get set }
-  var onUpdateLoadingStatus: ((Bool) -> Void)? { get set }
+  var onSuccess: (() -> Void)? { get set }
+  var onFailure: ((Error) -> Void)? { get set }
+  var onLoadingStatus: ((Bool) -> Void)? { get set }
+
+  init(delegate: CitySelectionViewModelDelegate)
   
-  init(city: City, service: ForecastService, delegate: CityViewModelDelegate?)
+  func name(at index: Int) -> String
+  func localTime(at index: Int) -> String
+  func select(at index: Int)
 }

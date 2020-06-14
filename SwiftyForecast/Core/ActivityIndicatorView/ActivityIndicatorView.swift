@@ -2,21 +2,26 @@ import UIKit
 
 final class ActivityIndicatorView {
   static let shared = ActivityIndicatorView()
-
+  
+  private let indicatorFrame = CGRect(x: 0, y: 0, width: 55, height: 55)
   private lazy var activityIndicator: NVActivityIndicatorView = {
-    let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-    let indicator = NVActivityIndicatorView(frame: frame,
-                                            type: .ballScaleRippleMultiple,
+    let indicator = NVActivityIndicatorView(frame: indicatorFrame,
+                                            type: .ballRotateChase,
                                             color: Style.ActivityIndicator.indicatorColor)
     return indicator
   }()
   
-  private var containerView = UIView()
+  private lazy var containerView: UIView = {
+    let view = UIView()
+    view.backgroundColor = .clear
+    view.addBlurEffectView(style: .systemUltraThinMaterialLight)
+    view.addSubview(activityIndicator)
+    return view
+  }()
+  
   private var view: UIView? {
     didSet {
       guard let view = view else { return }
-      containerView.backgroundColor = .clear
-      containerView.addSubview(activityIndicator)
       view.addSubview(containerView)
       
       containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +33,8 @@ final class ActivityIndicatorView {
       activityIndicator.translatesAutoresizingMaskIntoConstraints = false
       activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
       activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
-      activityIndicator.widthAnchor.constraint(equalToConstant: 40).isActive = true
-      activityIndicator.heightAnchor.constraint(equalToConstant: 40).isActive = true
+      activityIndicator.widthAnchor.constraint(equalToConstant: indicatorFrame.size.width).isActive = true
+      activityIndicator.heightAnchor.constraint(equalToConstant: indicatorFrame.size.height).isActive = true
     }
   }
   
@@ -39,9 +44,9 @@ final class ActivityIndicatorView {
 // MARK: - Start/Stop indicator
 extension ActivityIndicatorView {
   
-  func startAnimating(at view: UIView) {
+  func startAnimating() {
     DispatchQueue.main.async {
-      self.view = view
+      self.view = UIApplication.topViewController?.view
       self.activityIndicator.startAnimating()
     }
   }

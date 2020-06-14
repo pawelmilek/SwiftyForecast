@@ -1,6 +1,6 @@
 import UIKit
 
-class ConditionView: UIView {
+final class ConditionView: UIView {
   @IBOutlet private var contentView: UIView!
   @IBOutlet private weak var conditionLabel: UILabel!
   @IBOutlet private weak var valueLabel: UILabel!

@@ -14,30 +14,30 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var weekdayMonthDay: String {
-    guard let current = weatherForecast?.currently else { return "" }
+    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
     return "\(current.date.weekday), \(current.date.longDayMonth)".uppercased()
   }
   
   var cityName: String {
-    return weatherForecast?.city.name ?? ""
+    return weatherForecast?.city.name ?? InvalidReference.notApplicable
   }
   
   var temperature: String {
-    return weatherForecast?.currently.temperatureFormatted ?? ""
+    return weatherForecast?.currently.temperatureFormatted ?? InvalidReference.notApplicable
   }
   
   var humidity: String {
-    guard let current = weatherForecast?.currently else { return "" }
+    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
     return "\(Int(current.humidity * 100))"
   }
   
   var sunriseTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return "" }
+    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
     return details.sunriseTime.time
   }
   
   var sunsetTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return "" }
+    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
     return details.sunsetTime.time
   }
   

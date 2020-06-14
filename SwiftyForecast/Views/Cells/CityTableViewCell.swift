@@ -1,6 +1,6 @@
 import UIKit
 
-class CityTableViewCell: UITableViewCell {
+final class CityTableViewCell: UITableViewCell {
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
   @IBOutlet private weak var separatorView: UIView!
@@ -29,7 +29,7 @@ extension CityTableViewCell: ViewSetupable {
   
   func setUpStyle() {
     backgroundColor = Style.CityCell.backgroundColor
-    selectionStyle = .none
+//    selectionStyle = .none
     
     currentTimeLabel.font = Style.CityCell.currentTimeLabelFont
     currentTimeLabel.textColor = Style.CityCell.currentTimeLabelTextColor

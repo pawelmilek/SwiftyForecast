@@ -1,6 +1,6 @@
 import UIKit
 
-class HourlyCollectionViewCell: UICollectionViewCell {
+final class HourlyCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var timeLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!

@@ -69,10 +69,12 @@ final class ForecastViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCityListSegue.rawValue else { return }
-    guard let cityListVC = segue.destination as? CitySelectionTableViewController else { return }
+    guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCitySelectionSegue.rawValue else { return }
+    guard let viewController = segue.destination as? CitySelectionViewController else { return }
     
-    cityListVC.delegate = self
+    viewController.viewModel = DefaultCitySelectionViewModel(delegate: viewController)
+    viewController.delegate = self
+    viewController.isModalInPresentation = true
   }
   
   deinit {
@@ -216,9 +218,9 @@ extension ForecastViewController {
 }
 
 // MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastViewController: CitySelectionTableViewControllerDelegate {
+extension ForecastViewController: CitySelectionViewControllerDelegate {
   
-  func citySelection(_ view: CitySelectionTableViewController, didSelect city: City) {
+  func citySelection(_ view: CitySelectionViewController, didSelect city: City) {
     guard let index = viewModel?.index(of: city) else { return }
     
     moveToPage(at: index) { [weak self] _ in
@@ -350,12 +352,13 @@ private extension ForecastViewController {
       }
     }
     
-    viewModel?.onLoadingStatus = { [weak self] isLoading in
-      guard let self = self else { return }
-      if isLoading {
-        ActivityIndicatorView.shared.startAnimating(at: self.view)
-      } else {
-        ActivityIndicatorView.shared.stopAnimating()
+    viewModel?.onLoadingStatus = { isLoading in
+      DispatchQueue.main.async {
+        if isLoading {
+          ActivityIndicatorView.shared.startAnimating()
+        } else {
+          ActivityIndicatorView.shared.stopAnimating()
+        }
       }
     }
   }

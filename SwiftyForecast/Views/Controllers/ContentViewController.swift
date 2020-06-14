@@ -40,6 +40,7 @@ final class ContentViewController: UIViewController {
 extension ContentViewController: ViewSetupable {
   
   func setUp() {
+    setForecastViewDelegate()
     setWeekTableView()
     arrangeConstraints()
     setViewModelClosureCallbacks()
@@ -48,21 +49,12 @@ extension ContentViewController: ViewSetupable {
   
 }
 
-// MARK: - Private - Arrange constraints
+// MARK: - Private - Setups
 private extension ContentViewController {
   
-  func arrangeConstraints() {
-    forecastViewMoreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
-    forecastViewStackViewBottomToMoreDetailsBottomConstraint = forecastView.stackViewBottomToMoreDetailsTopConstraint
-    forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
-    dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekTableView.bottomAnchor,
-                                                                                         constant: 0)
+  func setForecastViewDelegate() {
+    forecastView.delegate = self
   }
-  
-}
-
-// MARK: - Private - Set daily Forecast TableView
-private extension ContentViewController {
   
   func setWeekTableView() {
     weekTableView.register(cellClass: DailyForecastTableViewCell.self)
@@ -75,6 +67,14 @@ private extension ContentViewController {
     weekTableView.backgroundColor = Style.ForecastContentVC.tableViewBackgroundColor
     weekTableView.separatorStyle = Style.ForecastContentVC.tableViewSeparatorStyle
     weekTableView.tableFooterView = UIView()
+  }
+  
+  func arrangeConstraints() {
+    forecastViewMoreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
+    forecastViewStackViewBottomToMoreDetailsBottomConstraint = forecastView.stackViewBottomToMoreDetailsTopConstraint
+    forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
+    dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekTableView.bottomAnchor,
+                                                                                  constant: 0)
   }
   
 }
@@ -114,11 +114,12 @@ private extension ContentViewController {
       }
     }
     
-    viewModel?.onLoadingStatus = { [weak self] isLoading in
-      guard let self = self else { return }
-      isLoading
-        ? ActivityIndicatorView.shared.startAnimating(at: self.view)
-        : ActivityIndicatorView.shared.stopAnimating()
+    viewModel?.onLoadingStatus = { isLoading in
+      if isLoading {
+        ActivityIndicatorView.shared.startAnimating()
+      } else {
+        ActivityIndicatorView.shared.stopAnimating()
+      }
     }
   }
   
@@ -139,7 +140,7 @@ private extension ContentViewController {
 //  func reloadAndInitializeMainPageViewController() {
 //    ForecastNotificationCenter.post(.reloadPages)
 //  }
-//  
+//
 //  func reloadDataInMainPageViewController() {
 //    ForecastNotificationCenter.post(.reloadPagesData)
 //  }
@@ -182,8 +183,8 @@ extension ContentViewController: ForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseIn,
                    animations: {
-                    self.forecastView.animateLabelsIdentity()
-                    self.view.layoutIfNeeded()
+      self.forecastView.animateLabelsIdentity()
+      self.view.layoutIfNeeded()
     })
   }
   
@@ -194,13 +195,13 @@ private extension ContentViewController {
   
   func animateBouncingEffect() {
     forecastView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-    
     UIView.animate(withDuration: 1.8,
-                   delay: 0, usingSpringWithDamping: 0.2,
+                   delay: 0,
+                   usingSpringWithDamping: 0.2,
                    initialSpringVelocity: 6.0,
                    options: .allowUserInteraction,
                    animations: {
-                    self.forecastView.transform = .identity
+      self.forecastView.transform = .identity
     })
   }
   

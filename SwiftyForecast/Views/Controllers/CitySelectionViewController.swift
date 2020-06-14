@@ -2,10 +2,12 @@ import UIKit
 import CoreLocation
 import RealmSwift
 
-final class CitySelectionViewController: UITableViewController {
+final class CitySelectionViewController: UIViewController {
   typealias ForecastCityStyle = Style.ForecastCityListVC
   
-  private lazy var autocompleteController: UIViewController = {
+  @IBOutlet private weak var tableView: UITableView!
+  
+  private lazy var autocompleteController: SearchLocationViewController = {
 //    let autocompleteVC = GMSAutocompleteViewController()
 //    autocompleteVC.delegate = self
 //    autocompleteVC.primaryTextColor = ForecastCityStyle.autocompleteVCPrimaryTextColor
@@ -16,7 +18,8 @@ final class CitySelectionViewController: UITableViewController {
 //    autocompleteVC.setSearchTextFieldPlaceholder(color: ForecastCityStyle.autocompleteVCSearchTextFieldColorPlaceholder, andFont: ForecastCityStyle.autocompleteVCSearchTextFieldFontPlaceholder)
 //    autocompleteVC.setSearchBarCancelButton(color: ForecastCityStyle.autocompleteVCSearchBarCancelButtonColor, andFont: ForecastCityStyle.autocompleteVCSearchBarCancelButtonFont)
 //    return autocompleteVC
-    return UIViewController()
+    let viewController = SearchLocationViewController.make()
+    return viewController
   }()
   
   private lazy var footerView: UIView = {
@@ -36,7 +39,7 @@ final class CitySelectionViewController: UITableViewController {
   }()
   
   private var citiesTimeZone: [String: TimeZone] = [:]
-  weak var delegate: CitySelectionTableViewControllerDelegate?
+  weak var delegate: CitySelectionViewControllerDelegate?
   var viewModel: CitySelectionViewModel?
   
   override func viewDidLoad() {
@@ -70,7 +73,7 @@ private extension CitySelectionViewController {
     tableView.tableFooterView = footerView
     setTransparentTableViewBackground()
   }
-  
+
 }
 
 // MARK: - Private - Set transparent background of TableView
@@ -110,13 +113,13 @@ private extension CitySelectionViewController {
 }
 
 // MARK: - UITableViewDataSource protocol
-extension CitySelectionViewController {
+extension CitySelectionViewController: UITableViewDataSource {
   
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel?.numberOfCities ?? 0
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let viewModel = viewModel else { return UITableViewCell() }
     let cell = tableView.dequeueCell(CityTableViewCell.self, for: indexPath)
     let row = indexPath.row
@@ -159,35 +162,30 @@ extension CitySelectionViewController {
 }
 
 // MARK: - UITableViewDelegate protocol
-extension CitySelectionViewController {
+extension CitySelectionViewController: UITableViewDelegate {
   
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    viewModel?.select(at: indexPath.row)
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    viewModel?.select(at: indexPath.row)
     self.dismiss(animated: true)
   }
   
-//  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-//    return indexPath.row == 0 ? false : true
-//  }
-//
-//  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//    if editingStyle == .delete {
-//      deleteCity(at: indexPath)
-//      tableView.deleteRows(at: [indexPath], with: .fade)
-////      reloadAndInitializeMainPageViewController()
-//    }
-//  }
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    return indexPath.row == 0 ? false : true
+  }
+
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == .delete {
+      deleteCity(at: indexPath)
+      tableView.deleteRows(at: [indexPath], with: .fade)
+//      reloadAndInitializeMainPageViewController()
+    }
+  }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
   }
   
 }
-
-//// MARK: - UIAdaptivePresentationControllerDelegate protocol
-//extension CitySelectionTableViewController: UIAdaptivePresentationControllerDelegate {
-//
-//}
 
 // MARK: - CitySelectionViewModelDelegate protocol
 extension CitySelectionViewController: CitySelectionViewModelDelegate {

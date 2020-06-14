@@ -75,7 +75,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
   private func geocodeCurrentLocation() {
     GeocoderHelper.currentLocation { [weak self] result in
       guard let self = self else { return }
-      self.isLoadingData = true
+//      self.isLoadingData = true
       
       switch result {
       case .success(let placemark):
@@ -89,7 +89,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
         self.onFailure?(error)
       }
       
-      self.isLoadingData = false
+//      self.isLoadingData = false
     }
   }
   
