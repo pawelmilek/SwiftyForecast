@@ -272,7 +272,6 @@
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
 		E2B1D65C211FB26C00F0002A /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* ForecastViewController.swift */; };
 		E2C208A02482AFC3006C772E /* SPPermissions in Frameworks */ = {isa = PBXBuildFile; productRef = E2C2089F2482AFC3006C772E /* SPPermissions */; };
-		E2C208A32482B171006C772E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = E2C208A22482B171006C772E /* FloatingPanel */; };
 		E2C208A524848010006C772E /* TemperatureMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A424848010006C772E /* TemperatureMeasurement.swift */; };
 		E2C208A6248480F7006C772E /* TemperatureMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A424848010006C772E /* TemperatureMeasurement.swift */; };
 		E2C208A824848DF3006C772E /* DistanceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A724848DF3006C772E /* DistanceMeasurement.swift */; };
@@ -609,7 +608,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C208A02482AFC3006C772E /* SPPermissions in Frameworks */,
-				E2C208A32482B171006C772E /* FloatingPanel in Frameworks */,
 				E22CDFE1247C250700C9EACD /* RealmSwift in Frameworks */,
 				E22CDFDF247C250700C9EACD /* Realm in Frameworks */,
 				E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */,
@@ -1205,7 +1203,6 @@
 				E22CDFDE247C250700C9EACD /* Realm */,
 				E22CDFE0247C250700C9EACD /* RealmSwift */,
 				E2C2089F2482AFC3006C772E /* SPPermissions */,
-				E2C208A22482B171006C772E /* FloatingPanel */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* SwiftyForecast.app */;
@@ -1285,7 +1282,6 @@
 				E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */,
 				E22CDFDD247C250700C9EACD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				E2C2089E2482AFC3006C772E /* XCRemoteSwiftPackageReference "SPPermissions" */,
-				E2C208A12482B171006C772E /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -2213,14 +2209,6 @@
 				minimumVersion = 5.3.2;
 			};
 		};
-		E2C208A12482B171006C772E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SCENEE/FloatingPanel.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2253,11 +2241,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2C2089E2482AFC3006C772E /* XCRemoteSwiftPackageReference "SPPermissions" */;
 			productName = SPPermissions;
-		};
-		E2C208A22482B171006C772E /* FloatingPanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2C208A12482B171006C772E /* XCRemoteSwiftPackageReference "FloatingPanel" */;
-			productName = FloatingPanel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
