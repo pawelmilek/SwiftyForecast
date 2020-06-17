@@ -219,6 +219,7 @@
 		E293695424985CDA0055FB2E /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293695224985CD90055FB2E /* SearchLocationViewController.swift */; };
 		E293695524985CDA0055FB2E /* SearchLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E293695324985CD90055FB2E /* SearchLocationViewController.xib */; };
 		E293695B249867740055FB2E /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293695A249867740055FB2E /* UIApplication+TopViewController.swift */; };
+		E293695D2499C3170055FB2E /* DistanceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A724848DF3006C772E /* DistanceMeasurement.swift */; };
 		E293C5E7234AC2B6003BBE0B /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293C5E6234AC2B6003BBE0B /* Collection+SafeSubscript.swift */; };
 		E293C5E8234AC2B6003BBE0B /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293C5E6234AC2B6003BBE0B /* Collection+SafeSubscript.swift */; };
 		E293C5E9234AC2B6003BBE0B /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293C5E6234AC2B6003BBE0B /* Collection+SafeSubscript.swift */; };
@@ -854,13 +855,16 @@
 			path = ConditionView;
 			sourceTree = "<group>";
 		};
-		E2435BD322AD6293007589CE /* Notations */ = {
+		E2435BD322AD6293007589CE /* Measurement */ = {
 			isa = PBXGroup;
 			children = (
-				E28550012290F26E00CD7554 /* UnitNotation.swift */,
+				E2C208A724848DF3006C772E /* DistanceMeasurement.swift */,
+				E2435BCA22AD563D007589CE /* NotationSystem.swift */,
+				E2C208A424848010006C772E /* TemperatureMeasurement.swift */,
 				E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */,
+				E28550012290F26E00CD7554 /* UnitNotation.swift */,
 			);
-			path = Notations;
+			path = Measurement;
 			sourceTree = "<group>";
 		};
 		E2435BE222AD98FA007589CE /* Protocols */ = {
@@ -1024,14 +1028,12 @@
 				E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */,
 				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
 				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
-				E2C208A724848DF3006C772E /* DistanceMeasurement.swift */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E2854FF92290F0DB00CD7554 /* ForecastUserDefaults.swift */,
 				E27A9BE522EE67E9008A62CE /* GeocodeLocation */,
 				E23997DF20E84371007D8CE4 /* Networking */,
-				E2435BD322AD6293007589CE /* Notations */,
-				E2435BCA22AD563D007589CE /* NotationSystem.swift */,
+				E2435BD322AD6293007589CE /* Measurement */,
 				E2988D1123369A3D00B53D71 /* NotificationCenter */,
 				E23997D320E84038007D8CE4 /* Protocols */,
 				E28AFC742374FCC100D1D5ED /* RealmProvider.swift */,
@@ -1040,7 +1042,6 @@
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
-				E2C208A424848010006C772E /* TemperatureMeasurement.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1683,6 +1684,7 @@
 				E2CF4DB02275039E00062E36 /* WebServiceError.swift in Sources */,
 				E2854FF62290E96700CD7554 /* Style.swift in Sources */,
 				E2CF4D9A2274F6E700062E36 /* FontWeatherIcon.swift in Sources */,
+				E293695D2499C3170055FB2E /* DistanceMeasurement.swift in Sources */,
 				E2435BDD22AD73DF007589CE /* Double+ToFahrenheit.swift in Sources */,
 				E285500622922AB700CD7554 /* CurrentForecastTests.swift in Sources */,
 				E2CF4D9E2274F85400062E36 /* ForecastGenerator.swift in Sources */,

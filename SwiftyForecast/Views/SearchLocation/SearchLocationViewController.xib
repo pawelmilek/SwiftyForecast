@@ -11,7 +11,7 @@
             <connections>
                 <outlet property="instructionLabel" destination="qbU-Du-oD2" id="P2G-Y1-TLL"/>
                 <outlet property="scrollView" destination="bTk-NL-vov" id="Hgr-ZW-nmm"/>
-                <outlet property="searchLocationTextField" destination="Fg2-nE-OQ8" id="Ob0-s4-oCu"/>
+                <outlet property="searchLocationTextField" destination="Fg2-nE-OQ8" id="c08-QL-TKv"/>
                 <outlet property="updateSettingsButton" destination="1FJ-M1-Vg8" id="TDw-ca-ic0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,24 +25,23 @@
                     <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1FJ-M1-Vg8">
-                            <rect key="frame" x="87.666666666666686" y="570" width="200" height="50"/>
+                            <rect key="frame" x="25" y="570" width="325" height="50"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="ENc-it-Sfe"/>
-                                <constraint firstAttribute="width" constant="200" id="cA7-Co-OuJ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="Add City">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="updateSettingsButtonTapped:" destination="-1" eventType="touchUpInside" id="flU-TT-lXp"/>
+                                <action selector="addCityButtonTapped:" destination="-1" eventType="touchUpInside" id="P8l-ii-EcY"/>
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wKz-cZ-BbS">
                             <rect key="frame" x="10" y="235.33333333333331" width="355" height="45"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Fg2-nE-OQ8" customClass="SearchTextField" customModule="SearchTextField">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Fg2-nE-OQ8" customClass="SearchTextField" customModule="SwiftyForecast" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="355" height="45"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -60,14 +59,15 @@
                         </label>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="1FJ-M1-Vg8" firstAttribute="leading" secondItem="pRE-fL-pFy" secondAttribute="leading" constant="25" id="8aF-Ot-RUr"/>
                         <constraint firstItem="qbU-Du-oD2" firstAttribute="leading" secondItem="wKz-cZ-BbS" secondAttribute="leading" constant="40" id="AlN-Qi-epj"/>
                         <constraint firstItem="wKz-cZ-BbS" firstAttribute="top" secondItem="bTk-NL-vov" secondAttribute="top" constant="235.33333333333331" id="Gf4-fa-CY9"/>
                         <constraint firstItem="qbU-Du-oD2" firstAttribute="trailing" secondItem="wKz-cZ-BbS" secondAttribute="trailing" constant="-40" id="P68-xR-Mlh"/>
                         <constraint firstAttribute="bottom" secondItem="1FJ-M1-Vg8" secondAttribute="bottom" constant="114" id="R7u-Eh-kAj"/>
                         <constraint firstItem="1FJ-M1-Vg8" firstAttribute="centerX" secondItem="bTk-NL-vov" secondAttribute="centerX" id="SAu-nc-aYm"/>
                         <constraint firstItem="200-QW-MA9" firstAttribute="bottom" secondItem="1FJ-M1-Vg8" secondAttribute="bottom" constant="114" id="b2g-xw-t3E"/>
-                        <constraint firstAttribute="trailing" secondItem="1FJ-M1-Vg8" secondAttribute="trailing" constant="87.333333333333314" id="kIQ-2e-FJv"/>
                         <constraint firstItem="wKz-cZ-BbS" firstAttribute="top" secondItem="qbU-Du-oD2" secondAttribute="bottom" constant="15" id="vht-4X-SJt"/>
+                        <constraint firstItem="pRE-fL-pFy" firstAttribute="trailing" secondItem="1FJ-M1-Vg8" secondAttribute="trailing" constant="25" id="zHT-IY-tpl"/>
                     </constraints>
                     <viewLayoutGuide key="contentLayoutGuide" id="pRE-fL-pFy"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="200-QW-MA9"/>

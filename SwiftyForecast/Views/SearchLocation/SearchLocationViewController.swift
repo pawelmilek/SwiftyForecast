@@ -30,7 +30,7 @@ final class SearchLocationViewController: UIViewController {
     super.viewDidLoad()
     setUp()
   }
-  
+    
   deinit {
     keyboardObserver.stopObserving()
     debugPrint("deinit SearchLocationViewController")
@@ -71,7 +71,7 @@ private extension SearchLocationViewController {
   }
   
   func setupInstructionLabel() {
-    instructionLabel.text = "Enter address or click marker to set current location"
+    instructionLabel.text = "Enter city or address"
     instructionLabel.numberOfLines = 2
     instructionLabel.textAlignment = .center
     instructionLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -80,19 +80,19 @@ private extension SearchLocationViewController {
   func setupSearchTextField() {
     searchLocationTextField.placeholder = "Search location"
     searchLocationTextField.font = UIFont.systemFont(ofSize: 13, weight: .light)
-    searchLocationTextField.backgroundColor = UIColor.red.withAlphaComponent(0.7)
+    searchLocationTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
     searchLocationTextField.layer.cornerRadius = 10
     searchLocationTextField.delegate = self
     
     searchLocationTextField.addTarget(self, action:#selector(searchLocationTextFieldDidChange), for: .editingChanged)
-//    searchLocationTextField.theme = SearchTextFieldTheme.lightTheme()
-//    searchLocationTextField.theme.font = UIFont.systemFont(ofSize: 13, weight: .light)
-//    searchLocationTextField.theme.bgColor = UIColor.red.withAlphaComponent(0.7)
-//    searchLocationTextField.theme.borderColor = .clear
-//    searchLocationTextField.theme.separatorColor = .gray
-//    searchLocationTextField.comparisonOptions = [.caseInsensitive]
-//    searchLocationTextField.theme.cellHeight = 50
-//    searchLocationTextField.maxNumberOfResults = 4
+    searchLocationTextField.theme = SearchTextFieldTheme.lightTheme()
+    searchLocationTextField.theme.font = UIFont.systemFont(ofSize: 13, weight: .light)
+    searchLocationTextField.theme.bgColor = UIColor.gray.withAlphaComponent(0.7)
+    searchLocationTextField.theme.borderColor = .clear
+    searchLocationTextField.theme.separatorColor = .gray
+    searchLocationTextField.comparisonOptions = [.caseInsensitive]
+    searchLocationTextField.theme.cellHeight = 50
+    searchLocationTextField.maxNumberOfResults = 4
   }
   
   func setupScrollView() {
@@ -105,64 +105,59 @@ private extension SearchLocationViewController {
 
 // MARK: - Start Keyboard observer
 private extension SearchLocationViewController {
-
+  
   private func startKeyboardObserver() {
     keyboardObserver.startObserving()
   }
-
+  
 }
 
 // MARK: - Private - Actions
 private extension SearchLocationViewController {
   
-  @IBAction func currentLocationButtonTapped(_ sender: UIButton) {
-//    if let currentLocation = try? User.all().first?.currentLocation {
-//      searchLocationTextField.text = currentLocation.formattedAddress
-//    }
-  }
-  
-  @IBAction func updateSettingsButtonTapped(_ sender: UIButton) {
-    debugPrint("updateSettingsButtonTapped")
+  @IBAction func addCityButtonTapped(_ sender: UIButton) {
+    searchLocationTextField.text = "currentLocationButtonTapped"
+    self.dismiss(animated: true)
   }
   
   @objc func searchLocationTextFieldDidChange() {
     guard let searchedAddress = searchLocationTextField.text, searchedAddress.count > 0 else { return }
     var addressResult: [String?] = []
     
-//    let options = ForwardGeocodeOptions(query: searchedAddress)
-//    options.allowedScopes = [.address, .pointOfInterest]
+    //    let options = ForwardGeocodeOptions(query: searchedAddress)
+    //    options.allowedScopes = [.address, .pointOfInterest]
     
     
-//    Geocoder.shared.geocode(options) { [weak self] placemarks, attribution, error in
-//      guard let self = self else { return }
-//      guard let placemarks = placemarks else { return }
-//
-//      placemarks.forEach {
-//        let coordinate = $0.location?.coordinate
-//        debugPrint("coordinate: \(coordinate)")
-//        addressResult.append($0.qualifiedName)
-//      }
-//
-//      self.searchLocationTextField.filterStrings(addressResult.compactMap { $0 })
-//      self.searchLocationTextField.maxNumberOfResults = 5
-//
-//      self.searchLocationTextField.itemSelectionHandler = { filteredResults, itemPosition in
-//        let item = filteredResults[itemPosition]
-//        self.searchLocationTextField.text = item.title
-//
-//        let geoCoder = CLGeocoder()
-//        geoCoder.geocodeAddressString(item.title) { placemarks, error in
-//          guard let placemarks = placemarks,
-//            let location = placemarks.first?.location,
-//            let placeMark = placemarks.first else {
-//              return
-//          }
-//
-//          // TODO: Save new current locoation in Realm
-//          debugPrint("placemarks: \(placemarks)")
-//        }
-//      }
-//    }
+    //    Geocoder.shared.geocode(options) { [weak self] placemarks, attribution, error in
+    //      guard let self = self else { return }
+    //      guard let placemarks = placemarks else { return }
+    //
+    //      placemarks.forEach {
+    //        let coordinate = $0.location?.coordinate
+    //        debugPrint("coordinate: \(coordinate)")
+    //        addressResult.append($0.qualifiedName)
+    //      }
+    //
+    //      self.searchLocationTextField.filterStrings(addressResult.compactMap { $0 })
+    //      self.searchLocationTextField.maxNumberOfResults = 5
+    //
+    //      self.searchLocationTextField.itemSelectionHandler = { filteredResults, itemPosition in
+    //        let item = filteredResults[itemPosition]
+    //        self.searchLocationTextField.text = item.title
+    //
+    //        let geoCoder = CLGeocoder()
+    //        geoCoder.geocodeAddressString(item.title) { placemarks, error in
+    //          guard let placemarks = placemarks,
+    //            let location = placemarks.first?.location,
+    //            let placeMark = placemarks.first else {
+    //              return
+    //          }
+    //
+    //          // TODO: Save new current locoation in Realm
+    //          debugPrint("placemarks: \(placemarks)")
+    //        }
+    //      }
+    //    }
   }
   
 }
@@ -176,7 +171,7 @@ extension SearchLocationViewController: UISearchResultsUpdating {
   
   func updateSearchResults(for searchController: UISearchController) {
     guard let searchText = searchController.searchBar.text else { return }
-
+    
   }
   
 }
