@@ -88,7 +88,6 @@ extension ForecastViewController: ViewSetupable {
   func setUp() {
     setViewModelClosureCallbacks()
     addNotificationObservers()
-    setupNetworkReachabilityManager()
   }
   
   func setViewModelCallback() {
@@ -131,32 +130,12 @@ private extension ForecastViewController {
   func addNotificationObservers() {
 //    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
 //    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(locationServiceDidBecomeEnable), for: .locationServiceDidBecomeEnable)
+    ForecastNotificationCenter.add(observer: self, selector: #selector(locationServiceDidRequestLocation), for: .locationServiceDidRequestLocation)
     ForecastNotificationCenter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
   }
   
   func removeNotificationObservers() {
     ForecastNotificationCenter.remove(observer: self)
-  }
-  
-}
-
-// MARK: - Private - Set NetworkReachabilityManager when internet is not available
-private extension ForecastViewController {
-  
-  func setupNetworkReachabilityManager() {
-    let whenNetworkIsNotAvailable = {
-      let offlineViewController = OfflineViewController()
-      self.navigationController?.pushViewController(offlineViewController, animated: false)
-    }
-    
-    NetworkReachabilityManager.shared.isUnreachable { _ in
-      whenNetworkIsNotAvailable() // Will run only once when app is launching
-    }
-    
-    NetworkReachabilityManager.shared.whenUnreachable { _ in
-      whenNetworkIsNotAvailable() // Network listener to pick up network changes in real-time
-    }
   }
   
 }
@@ -207,7 +186,7 @@ extension ForecastViewController {
     viewModel?.presentPoweredBy(at: self)
   }
   
-  @objc func locationServiceDidBecomeEnable(_ notification: NSNotification) {
+  @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
     loadData()
   }
   

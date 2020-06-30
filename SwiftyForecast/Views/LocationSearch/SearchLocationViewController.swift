@@ -124,6 +124,7 @@ private extension SearchLocationViewController {
     guard let searchedAddress = searchLocationTextField.text, searchedAddress.count > 0 else { return }
     var addressResult: [String?] = []
     
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line)") 
     //    let options = ForwardGeocodeOptions(query: searchedAddress)
     //    options.allowedScopes = [.address, .pointOfInterest]
     

@@ -1,7 +1,7 @@
 import UIKit
 
 final class OfflineViewController: UIViewController {
-  private let network = NetworkReachabilityManager.shared
+  static let identifier = 0xDEADBEEF
   
   private var offLineImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
@@ -37,7 +37,6 @@ final class OfflineViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
-    setUpStyle()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -55,9 +54,8 @@ final class OfflineViewController: UIViewController {
 extension OfflineViewController: ViewSetupable {
   
   func setUp() {
-    network.whenReachable { [weak self] _ in
-      self?.showMainViewController()
-    }
+    self.view.tag = OfflineViewController.identifier
+    setUpStyle()
   }
   
   func setUpLayout() {
@@ -81,17 +79,6 @@ extension OfflineViewController: ViewSetupable {
   
   func setUpStyle() {
     view.backgroundColor = Style.OfflineVC.backgroundColor
-  }
-  
-}
-
-// MARK: - Private - Show Main ViewController
-extension OfflineViewController {
-  
-  private func showMainViewController() {
-    DispatchQueue.main.async {
-      self.navigationController?.popViewController(animated: false)
-    }
   }
   
 }
