@@ -4,30 +4,16 @@ import RealmSwift
 
 final class CitySelectionViewController: UIViewController {
   typealias ForecastCityStyle = Style.ForecastCityListVC
-  
+
   @IBOutlet private weak var tableView: UITableView!
-  
-  private lazy var autocompleteController: SearchLocationViewController = {
-//    let autocompleteVC = GMSAutocompleteViewController()
-//    autocompleteVC.delegate = self
-//    autocompleteVC.primaryTextColor = ForecastCityStyle.autocompleteVCPrimaryTextColor
-//    autocompleteVC.primaryTextHighlightColor = ForecastCityStyle.autocompleteVCPrimaryTextHighlightColor
-//    autocompleteVC.secondaryTextColor = ForecastCityStyle.autocompleteVCSecondaryTextColor
-//    autocompleteVC.tableCellSeparatorColor = ForecastCityStyle.autocompleteVCTableCellSeparatorColor
-//    autocompleteVC.setSearchTextInSearchBar(color: ForecastCityStyle.autocompleteVCSSearchTextColorInSearchBar, andFont: ForecastCityStyle.autocompleteVCSSearchTextFontInSearchBar)
-//    autocompleteVC.setSearchTextFieldPlaceholder(color: ForecastCityStyle.autocompleteVCSearchTextFieldColorPlaceholder, andFont: ForecastCityStyle.autocompleteVCSearchTextFieldFontPlaceholder)
-//    autocompleteVC.setSearchBarCancelButton(color: ForecastCityStyle.autocompleteVCSearchBarCancelButtonColor, andFont: ForecastCityStyle.autocompleteVCSearchBarCancelButtonFont)
-//    return autocompleteVC
-    let viewController = SearchLocationViewController.make()
-    return viewController
-  }()
-  
+  private lazy var searchLocationViewController = SearchLocationViewController.make()
   private lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
     let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.setBackgroundImage(UIImage(named: "ic_add"), for: .normal)
+    addButton.setBackgroundImage(UIImage(named: "ic_menu"), for: .highlighted)
     addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(addButton)
@@ -213,7 +199,7 @@ extension CitySelectionViewController: CitySelectionViewModelDelegate {
 private extension CitySelectionViewController {
   
   @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    present(autocompleteController, animated: true)
+    present(searchLocationViewController, animated: true)
   }
   
 }

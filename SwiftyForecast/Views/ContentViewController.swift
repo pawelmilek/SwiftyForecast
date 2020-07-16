@@ -261,7 +261,7 @@ extension ContentViewController {
 extension ContentViewController {
   
   static func make(viewModel: ContentViewModel) -> ContentViewController {
-    let viewController = StoryboardViewControllerFactory.make(ContentViewController.self)
+    let viewController = StoryboardViewControllerFactory.make(ContentViewController.self, from: .main)
     viewController.viewModel = viewModel
     return viewController
   }

@@ -1,15 +1,18 @@
 import UIKit
+import MapKit
 import CoreLocation
 
 final class SearchLocationViewController: UIViewController {
-  @IBOutlet private weak var instructionLabel: UILabel!
+  @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var searchLocationTextField: SearchTextField!
-  @IBOutlet private weak var updateSettingsButton: UIButton!
-  @IBOutlet private weak var scrollView: UIScrollView!
   
   private lazy var searchController: UISearchController = {
-    let searchController = UISearchController(searchResultsController: nil)
-    searchController.searchResultsUpdater = self
+    let locationSearchTableViewController = LocationSearchTableViewController.loadFromNib()
+    locationSearchTableViewController.mapView = mapView
+    locationSearchTableViewController.handleMapSearchDelegate = self
+
+    let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
+    searchController.searchResultsUpdater = locationSearchTableViewController
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.searchBar.placeholder = "Search City"
     searchController.searchBar.delegate = self
@@ -17,22 +20,20 @@ final class SearchLocationViewController: UIViewController {
     searchController.searchBar.barTintColor = .red
     searchController.searchBar.backgroundColor = .gray
     searchController.searchBar.searchTextField.backgroundColor = .white
+    searchController.hidesNavigationBarDuringPresentation = false
+    
+    
     return searchController
   }()
   
-  private lazy var keyboardObserver: KeyboardObserver = {
-    let observer = KeyboardObserver()
-    observer.eventResponder = self
-    return observer
-  }()
+  private var selectedPin: MKPlacemark? = nil
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
   }
-    
+  
   deinit {
-    keyboardObserver.stopObserving()
     debugPrint("deinit SearchLocationViewController")
   }
 }
@@ -41,19 +42,19 @@ final class SearchLocationViewController: UIViewController {
 private extension SearchLocationViewController {
   
   func setUp() {
-    setTitle()
+    mapView.showsUserLocation = true
     setupSearchController()
-    setupInstructionLabel()
-    setupSearchTextField()
-    setupScrollView()
-    startKeyboardObserver()
-    addKeyboardDismissGestureRecognizer()
   }
   
   func setupSearchController() {
+//    let searchBar = searchController.searchBar
+//    searchBar.sizeToFit()
+//    searchBar.placeholder = "Search for places"
+    
+//    navigationItem.titleView = searchController.searchBar
+    
     navigationItem.searchController = searchController
-    navigationItem.hidesSearchBarWhenScrolling = false
-    definesPresentationContext = true
+//    definesPresentationContext = true
   }
   
   func resetSearchController() {
@@ -68,13 +69,6 @@ private extension SearchLocationViewController {
   
   func setTitle() {
     title = "Location"
-  }
-  
-  func setupInstructionLabel() {
-    instructionLabel.text = "Enter city or address"
-    instructionLabel.numberOfLines = 2
-    instructionLabel.textAlignment = .center
-    instructionLabel.font = UIFont.systemFont(ofSize: 12, weight: .regular)
   }
   
   func setupSearchTextField() {
@@ -95,30 +89,10 @@ private extension SearchLocationViewController {
     searchLocationTextField.maxNumberOfResults = 4
   }
   
-  func setupScrollView() {
-    scrollView.showsVerticalScrollIndicator = false
-    scrollView.showsHorizontalScrollIndicator = false
-    scrollView.contentInsetAdjustmentBehavior = .never
-  }
-  
-}
-
-// MARK: - Start Keyboard observer
-private extension SearchLocationViewController {
-  
-  private func startKeyboardObserver() {
-    keyboardObserver.startObserving()
-  }
-  
 }
 
 // MARK: - Private - Actions
 private extension SearchLocationViewController {
-  
-  @IBAction func addCityButtonTapped(_ sender: UIButton) {
-    searchLocationTextField.text = "currentLocationButtonTapped"
-    self.dismiss(animated: true)
-  }
   
   @objc func searchLocationTextFieldDidChange() {
     guard let searchedAddress = searchLocationTextField.text, searchedAddress.count > 0 else { return }
@@ -190,31 +164,37 @@ extension SearchLocationViewController: UITextFieldDelegate {
   
 }
 
-// MARK: - KeyboardObserverEventResponder protocol
-extension SearchLocationViewController: KeyboardObserverEventResponder {
+// MARK: - HandleMapSearch delegate
+extension SearchLocationViewController: HandleMapSearch {
   
-  func keyboardWillShow(_ userInfo: KeyboardUserInfo) {
-    let keyboardSize = userInfo.endFrame as NSValue
-    let keyboardFrame = keyboardSize.cgRectValue
-    let keyboardViewEndFrame = view.convert(keyboardFrame, from: nil)
-    
-    var contentInset: UIEdgeInsets = self.scrollView.contentInset
-    contentInset.bottom = keyboardViewEndFrame.size.height - view.safeAreaInsets.bottom + CGFloat(150)
-    scrollView.contentInset = contentInset
+  func dropPinZoomIn(placemark:MKPlacemark) {
+    // cache the pin
+    selectedPin = placemark
+    // clear existing pins
+    mapView.removeAnnotations(mapView.annotations)
+    let annotation = MKPointAnnotation()
+    annotation.coordinate = placemark.coordinate
+    annotation.title = placemark.name
+    if let city = placemark.locality, let state = placemark.administrativeArea {
+      annotation.subtitle = "\(city) \(state)"
+    }
+
+    mapView.addAnnotation(annotation)
+//    let span = MKCoordinateSpanMake(0.05, 0.05)
+//    let region = MKCoordinateRegionMake(placemark.coordinate, span)
+//    mapView.setRegion(region, animated: true)
   }
-  
-  func keyboardWillHide(_ userInfo: KeyboardUserInfo) {
-    self.scrollView.contentInset = .zero
-    self.scrollView.contentOffset = .zero
-  }
-  
+
 }
+
 
 // MARK: - Factory method
 extension SearchLocationViewController {
   
   static func make() -> SearchLocationViewController {
-    return SearchLocationViewController.loadFromNib()
+    let viewController = StoryboardViewControllerFactory.make(SearchLocationViewController.self, from: .locationSearch)
+    viewController.isModalInPresentation = true
+    return viewController
   }
   
 }

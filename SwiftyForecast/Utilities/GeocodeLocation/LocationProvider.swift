@@ -130,7 +130,7 @@ extension LocationProvider {
     let message = NSLocalizedString("Please enable Location Services. We will keep your data private.", comment: "")
     let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
     
-    let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+    let rootViewController = UIApplication.topViewController
     AlertViewPresenter.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
   }
   

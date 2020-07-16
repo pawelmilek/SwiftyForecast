@@ -128,11 +128,11 @@
 		E2435BE422ADDBB8007589CE /* HourlyForecastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyForecastCellViewModel.swift */; };
 		E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
 		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
+		E253B40124BFEE70007AD187 /* LocationSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E253B40024BFEE70007AD187 /* LocationSearch.storyboard */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
 		E274DAF124A0604F001F8655 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */; };
-		E274DAF224A0604F001F8655 /* LocationSearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E274DAF024A0604F001F8655 /* LocationSearchTableViewController.xib */; };
 		E27E2F831DA0482C00B3EABF /* CitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */; };
 		E27E2F861DA0482C00B3EABF /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F821DA0482C00B3EABF /* ContentViewController.swift */; };
 		E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F871DA0487600B3EABF /* Main.storyboard */; };
@@ -219,7 +219,6 @@
 		E28AFC7F2374FF5D00D1D5ED /* PathError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC7C2374FF5D00D1D5ED /* PathError.swift */; };
 		E293694D24966D900055FB2E /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293694C24966D900055FB2E /* CityViewModel.swift */; };
 		E293695424985CDA0055FB2E /* SearchLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293695224985CD90055FB2E /* SearchLocationViewController.swift */; };
-		E293695524985CDA0055FB2E /* SearchLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E293695324985CD90055FB2E /* SearchLocationViewController.xib */; };
 		E293695B249867740055FB2E /* UIApplication+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293695A249867740055FB2E /* UIApplication+TopViewController.swift */; };
 		E293695D2499C3170055FB2E /* DistanceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A724848DF3006C772E /* DistanceMeasurement.swift */; };
 		E293C5E7234AC2B6003BBE0B /* Collection+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293C5E6234AC2B6003BBE0B /* Collection+SafeSubscript.swift */; };
@@ -451,11 +450,11 @@
 		E2435BD622AD736C007589CE /* Double+ToFahrenheit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToFahrenheit.swift"; sourceTree = "<group>"; };
 		E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+PhoneModel.swift"; sourceTree = "<group>"; };
 		E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		E253B40024BFEE70007AD187 /* LocationSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationSearch.storyboard; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
 		E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
-		E274DAF024A0604F001F8655 /* LocationSearchTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchTableViewController.xib; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySelectionViewController.swift; sourceTree = "<group>"; };
 		E27E2F821DA0482C00B3EABF /* ContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		E27E2F871DA0487600B3EABF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -489,7 +488,6 @@
 		E28AFC7C2374FF5D00D1D5ED /* PathError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathError.swift; sourceTree = "<group>"; };
 		E293694C24966D900055FB2E /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CityViewModel.swift; path = SwiftyForecast/ViewModels/CityViewModel.swift; sourceTree = SOURCE_ROOT; };
 		E293695224985CD90055FB2E /* SearchLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocationViewController.swift; sourceTree = "<group>"; };
-		E293695324985CD90055FB2E /* SearchLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLocationViewController.xib; sourceTree = "<group>"; };
 		E293695A249867740055FB2E /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
 		E293C5E6234AC2B6003BBE0B /* Collection+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+SafeSubscript.swift"; sourceTree = "<group>"; };
 		E293C5EE234AC924003BBE0B /* CollectionSafeSubscriptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectionSafeSubscriptTests.swift; path = SwiftyForecastTests/CollectionSafeSubscriptTests.swift; sourceTree = SOURCE_ROOT; };
@@ -876,10 +874,9 @@
 		E293695624985DEA0055FB2E /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
+				E253B40024BFEE70007AD187 /* LocationSearch.storyboard */,
 				E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */,
-				E274DAF024A0604F001F8655 /* LocationSearchTableViewController.xib */,
 				E293695224985CD90055FB2E /* SearchLocationViewController.swift */,
-				E293695324985CD90055FB2E /* SearchLocationViewController.xib */,
 			);
 			path = LocationSearch;
 			sourceTree = "<group>";
@@ -1308,9 +1305,8 @@
 				E23CD76120ED950500F0F72A /* HourlyCollectionViewCell.xib in Resources */,
 				E23CD75B20ED59F200F0F72A /* ConditionView.xib in Resources */,
 				E2F17C2E20F4097C00068BD2 /* DailyForecastTableViewCell.xib in Resources */,
-				E293695524985CDA0055FB2E /* SearchLocationViewController.xib in Resources */,
 				E2E0762120F51506008A5B63 /* FontWeather.ttf in Resources */,
-				E274DAF224A0604F001F8655 /* LocationSearchTableViewController.xib in Resources */,
+				E253B40124BFEE70007AD187 /* LocationSearch.storyboard in Resources */,
 				E206E1CE20EC5E7C00AC72EA /* ForecastView.xib in Resources */,
 				E27E2FB51DA04D1D00B3EABF /* CityTableViewCell.xib in Resources */,
 				E2EC1CF91D918F4A00FD1F95 /* Assets.xcassets in Resources */,
