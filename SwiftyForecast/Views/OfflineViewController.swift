@@ -12,7 +12,7 @@ final class OfflineViewController: UIViewController {
   
   private var descriptionLabel: UILabel = {
     let label = UILabel(frame: .zero)
-    label.text = NSLocalizedString("You are offline, connect to the internet.", comment: "")
+    label.text = NSLocalizedString("You are offline", comment: "")
     label.font = Style.OfflineVC.descriptionLabelFont
     label.textColor = Style.OfflineVC.descriptionLabelTextColor
     label.textAlignment = Style.OfflineVC.descriptionLabelTextAlignment
@@ -62,8 +62,8 @@ extension OfflineViewController: ViewSetupable {
     offLineImageView.translatesAutoresizingMaskIntoConstraints = false
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     
-    offLineImageView.widthAnchor.constraint(equalToConstant: 240).isActive = true
-    offLineImageView.heightAnchor.constraint(equalToConstant: 240).isActive = true
+    offLineImageView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    offLineImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     descriptionLabel.widthAnchor.constraint(equalToConstant: 240).isActive = true
     descriptionLabel.heightAnchor.constraint(equalToConstant: 21).isActive = true
     

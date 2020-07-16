@@ -131,6 +131,7 @@
 		E253B40124BFEE70007AD187 /* LocationSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E253B40024BFEE70007AD187 /* LocationSearch.storyboard */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
+		E270891724CD07E2003F7587 /* SwiftyForecastCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891624CD07E2003F7587 /* SwiftyForecastCoordinator.swift */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
 		E274DAF124A0604F001F8655 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */; };
 		E27E2F831DA0482C00B3EABF /* CitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */; };
@@ -453,6 +454,7 @@
 		E253B40024BFEE70007AD187 /* LocationSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationSearch.storyboard; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		E270891624CD07E2003F7587 /* SwiftyForecastCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyForecastCoordinator.swift; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
 		E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySelectionViewController.swift; sourceTree = "<group>"; };
@@ -1003,26 +1005,27 @@
 		E2A45E0F2290D86E00B04A67 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E2DC147D248F230600D1A329 /* KeyboardObserver */,
-				E294AD3323771FD800B44AE8 /* ActivityIndicatorView */,
 				E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */,
-				E2DC148E248F25A700D1A329 /* Observer.swift */,
-				E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */,
+				E270891624CD07E2003F7587 /* SwiftyForecastCoordinator.swift */,
 				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
-				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
-				E23997E520E84371007D8CE4 /* Errors */,
-				E23997DD20E84158007D8CE4 /* Extensions */,
 				E2854FF92290F0DB00CD7554 /* ForecastUserDefaults.swift */,
-				E23997DF20E84371007D8CE4 /* Networking */,
-				E2435BD322AD6293007589CE /* Measurement */,
-				E2988D1123369A3D00B53D71 /* NotificationCenter */,
-				E23997D320E84038007D8CE4 /* Protocols */,
+				E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */,
+				E2DC148E248F25A700D1A329 /* Observer.swift */,
 				E28AFC742374FCC100D1D5ED /* RealmProvider.swift */,
 				E233AC1823DE80B400DC0EF5 /* SearchTextField.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
 				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
+				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
+				E294AD3323771FD800B44AE8 /* ActivityIndicatorView */,
+				E23997E520E84371007D8CE4 /* Errors */,
+				E23997DD20E84158007D8CE4 /* Extensions */,
+				E2DC147D248F230600D1A329 /* KeyboardObserver */,
+				E2435BD322AD6293007589CE /* Measurement */,
+				E23997DF20E84371007D8CE4 /* Networking */,
+				E2988D1123369A3D00B53D71 /* NotificationCenter */,
+				E23997D320E84038007D8CE4 /* Protocols */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1520,6 +1523,7 @@
 				E2A42E32214DEE5E00F9A79A /* NVActivityIndicatorAnimationLineScalePulseOutRapid.swift in Sources */,
 				E2DC1497249560E000D1A329 /* NotificationCenterUserInfo.swift in Sources */,
 				E2A42E16214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallClipRotate.swift in Sources */,
+				E270891724CD07E2003F7587 /* SwiftyForecastCoordinator.swift in Sources */,
 				E2CF4DD822768C3F00062E36 /* DefaultForecastService.swift in Sources */,
 				E285500A2292303C00CD7554 /* DailyDateRenderer.swift in Sources */,
 				E27E2FDD1DA0649000B3EABF /* NotificationCenterKey.swift in Sources */,

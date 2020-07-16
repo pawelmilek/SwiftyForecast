@@ -83,7 +83,9 @@ private extension ContentViewController {
 private extension ContentViewController {
   
   func addNotificationObservers() {
-    ForecastNotificationCenter.add(observer: self, selector: #selector(unitNotationDidChange), for: .unitNotationDidChange)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(unitNotationDidChange),
+                                   for: .unitNotationDidChange)
   }
   
   func removeNotificationObservers() {

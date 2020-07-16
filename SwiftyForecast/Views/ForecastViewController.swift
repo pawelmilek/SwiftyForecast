@@ -4,6 +4,9 @@ import RealmSwift
 final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
+  weak var delegate: ForecastViewControllerDelegate?
+  var viewModel: ForecastViewModel? = DefaultForecastViewModel(service: DefaultForecastService())
+  
   private lazy var notationSystemSegmentedControl: SegmentedControl = {
     typealias ForecastMainStyle = Style.ForecastMainVC
     
@@ -43,19 +46,9 @@ final class ForecastViewController: UIViewController {
     return viewController
   }()
   
-  private var pendingIndex: Int? {
-    viewModel?.pendingIndex
-  }
-  
-  private var currentIndex: Int {
-    return viewModel?.currentIndex ?? 0
-  }
-  private var cityCount: Int {
-    return viewModel?.numberOfCities ?? 0
-  }
-  
+  private var coordinator: SwiftyForecastCoordinator?
   private var contentViewiewControllers: [ContentViewController] = []
-  var viewModel: ForecastViewModel? = DefaultForecastViewModel(service: DefaultForecastService())
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,15 +61,6 @@ final class ForecastViewController: UIViewController {
     loadData()
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let identifier = segue.identifier, identifier == SegueIdentifierType.showCitySelectionSegue.rawValue else { return }
-    guard let viewController = segue.destination as? CitySelectionViewController else { return }
-    
-    viewController.viewModel = DefaultCitySelectionViewModel(delegate: viewController)
-    viewController.delegate = self
-    viewController.isModalInPresentation = true
-  }
-  
   deinit {
     removeNotificationObservers()
   }
@@ -86,8 +70,15 @@ final class ForecastViewController: UIViewController {
 extension ForecastViewController: ViewSetupable {
   
   func setUp() {
+    setCoordinator()
     setViewModelClosureCallbacks()
     addNotificationObservers()
+  }
+  
+  func setCoordinator() {
+    guard let navigationController = self.navigationController else { return }
+    coordinator = SwiftyForecastCoordinator(navigationController: navigationController)
+    delegate = coordinator
   }
   
   func setViewModelCallback() {
@@ -107,8 +98,8 @@ extension ForecastViewController: ViewSetupable {
   func setupPageControl() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
-      self.pageControl.currentPage = self.currentIndex
-      self.pageControl.numberOfPages = self.cityCount
+      self.pageControl.currentPage = self.viewModel?.currentIndex ?? 0
+      self.pageControl.numberOfPages = self.viewModel?.numberOfCities ?? 0
       self.view.bringSubviewToFront(self.pageControl)
     }
   }
@@ -130,8 +121,12 @@ private extension ForecastViewController {
   func addNotificationObservers() {
 //    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
 //    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(locationServiceDidRequestLocation), for: .locationServiceDidRequestLocation)
-    ForecastNotificationCenter.add(observer: self, selector: #selector(applicationDidBecomeActive), for: .applicationDidBecomeActive)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(locationServiceDidRequestLocation),
+                                   for: .locationServiceDidRequestLocation)
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(applicationDidBecomeActive),
+                                   for: .applicationDidBecomeActive)
   }
   
   func removeNotificationObservers() {
@@ -182,8 +177,12 @@ extension ForecastViewController {
     viewModel?.measuringSystemSwitched(sender)
   }
   
-  @IBAction func poweredByButtonTapped(_ sender: UIBarButtonItem) {
-    viewModel?.presentPoweredBy(at: self)
+  @IBAction func citySelectionBarButtonTapped(_ sender: UIBarButtonItem) {
+    delegate?.forecastViewController(self, didTapSelectionBarButton: sender)
+  }
+  
+  @IBAction func poweredByBarButtonTapped(_ sender: UIBarButtonItem) {
+    delegate?.forecastViewController(self, didTapPoweredByBarButton: sender)
   }
   
   @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
@@ -214,7 +213,8 @@ extension ForecastViewController: CitySelectionViewControllerDelegate {
 private extension ForecastViewController {
   
   func moveToPage(at index: Int, completion: @escaping (Bool) -> Void) {
-    guard index < cityCount else { return }
+    guard let cityCount = viewModel?.numberOfCities, index < cityCount else { return }
+    guard let currentIndex = viewModel?.currentIndex else { return }
     guard let contentViewController = forecastContentViewController(at: index) else { return }
     
     if index > currentIndex {
@@ -282,6 +282,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
     guard let pageContentViewController = viewController as? ContentViewController else { return nil }
     
     let viewControllerIndex = pageContentViewController.pageIndex
+    let cityCount = viewModel?.numberOfCities ?? 0
     if viewControllerIndex == NSNotFound || (viewControllerIndex + 1) == cityCount {
       return nil
     }
@@ -303,7 +304,7 @@ extension ForecastViewController: UIPageViewControllerDelegate {
                           didFinishAnimating finished: Bool,
                           previousViewControllers: [UIViewController],
                           transitionCompleted completed: Bool) {
-    guard completed, let currentPageIndex = pendingIndex else { return }
+    guard completed, let currentPageIndex = viewModel?.pendingIndex else { return }
     viewModel?.currentIndex = currentPageIndex
   }
   

@@ -199,7 +199,8 @@ extension CitySelectionViewController: CitySelectionViewModelDelegate {
 private extension CitySelectionViewController {
   
   @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    present(searchLocationViewController, animated: true)
+    let navigationController = UINavigationController(rootViewController: searchLocationViewController)
+    present(navigationController, animated: true)
   }
   
 }
@@ -219,4 +220,14 @@ private extension CitySelectionViewController {
     }
   }
   
+}
+
+// MARK: - Factory method
+extension CitySelectionViewController {
+  
+  static func make() -> CitySelectionViewController {
+    let storyboard = UIStoryboard(storyboard: .main)
+    return storyboard.instantiateViewController(CitySelectionViewController.self)
+  }
+
 }

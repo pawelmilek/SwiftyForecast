@@ -13,16 +13,17 @@ final class SearchLocationViewController: UIViewController {
 
     let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
     searchController.searchResultsUpdater = locationSearchTableViewController
+    
+//    searchController.searchBar.placeholder = "Search City"
+//    searchController.searchBar.delegate = self
+//    searchController.searchBar.tintColor = .red
+//    searchController.searchBar.barTintColor = .red
+//    searchController.searchBar.backgroundColor = .gray
+//    searchController.searchBar.searchTextField.backgroundColor = .white
     searchController.obscuresBackgroundDuringPresentation = false
-    searchController.searchBar.placeholder = "Search City"
-    searchController.searchBar.delegate = self
-    searchController.searchBar.tintColor = .red
-    searchController.searchBar.barTintColor = .red
-    searchController.searchBar.backgroundColor = .gray
-    searchController.searchBar.searchTextField.backgroundColor = .white
     searchController.hidesNavigationBarDuringPresentation = false
-    
-    
+    definesPresentationContext = true
+
     return searchController
   }()
   
@@ -42,18 +43,17 @@ final class SearchLocationViewController: UIViewController {
 private extension SearchLocationViewController {
   
   func setUp() {
+    mapView.delegate = self
     mapView.showsUserLocation = true
     setupSearchController()
   }
   
   func setupSearchController() {
-//    let searchBar = searchController.searchBar
-//    searchBar.sizeToFit()
-//    searchBar.placeholder = "Search for places"
-    
-//    navigationItem.titleView = searchController.searchBar
-    
-    navigationItem.searchController = searchController
+    let searchBar = searchController.searchBar
+    searchBar.sizeToFit()
+    searchBar.placeholder = "Search for places"
+    navigationItem.titleView = searchController.searchBar
+//    navigationItem.searchController = searchController
 //    definesPresentationContext = true
   }
   
@@ -71,23 +71,23 @@ private extension SearchLocationViewController {
     title = "Location"
   }
   
-  func setupSearchTextField() {
-    searchLocationTextField.placeholder = "Search location"
-    searchLocationTextField.font = UIFont.systemFont(ofSize: 13, weight: .light)
-    searchLocationTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-    searchLocationTextField.layer.cornerRadius = 10
-    searchLocationTextField.delegate = self
-    
-    searchLocationTextField.addTarget(self, action:#selector(searchLocationTextFieldDidChange), for: .editingChanged)
-    searchLocationTextField.theme = SearchTextFieldTheme.lightTheme()
-    searchLocationTextField.theme.font = UIFont.systemFont(ofSize: 13, weight: .light)
-    searchLocationTextField.theme.bgColor = UIColor.gray.withAlphaComponent(0.7)
-    searchLocationTextField.theme.borderColor = .clear
-    searchLocationTextField.theme.separatorColor = .gray
-    searchLocationTextField.comparisonOptions = [.caseInsensitive]
-    searchLocationTextField.theme.cellHeight = 50
-    searchLocationTextField.maxNumberOfResults = 4
-  }
+//  func setupSearchTextField() {
+//    searchLocationTextField.placeholder = "Search location"
+//    searchLocationTextField.font = UIFont.systemFont(ofSize: 13, weight: .light)
+//    searchLocationTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+//    searchLocationTextField.layer.cornerRadius = 10
+//    searchLocationTextField.delegate = self
+//
+//    searchLocationTextField.addTarget(self, action:#selector(searchLocationTextFieldDidChange), for: .editingChanged)
+//    searchLocationTextField.theme = SearchTextFieldTheme.lightTheme()
+//    searchLocationTextField.theme.font = UIFont.systemFont(ofSize: 13, weight: .light)
+//    searchLocationTextField.theme.bgColor = UIColor.gray.withAlphaComponent(0.7)
+//    searchLocationTextField.theme.borderColor = .clear
+//    searchLocationTextField.theme.separatorColor = .gray
+//    searchLocationTextField.comparisonOptions = [.caseInsensitive]
+//    searchLocationTextField.theme.cellHeight = 50
+//    searchLocationTextField.maxNumberOfResults = 4
+//  }
   
 }
 
@@ -134,6 +134,13 @@ private extension SearchLocationViewController {
     //      }
     //    }
   }
+  
+}
+
+// MARK: - MKMapViewDelegate delegate
+extension SearchLocationViewController: MKMapViewDelegate {
+  
+  
   
 }
 

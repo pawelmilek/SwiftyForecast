@@ -99,11 +99,4 @@ final class DefaultForecastViewModel: ForecastViewModel {
                                     userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
   }
   
-  func presentPoweredBy(at viewController: UIViewController?) {
-    if let url = URL(string: "https://darksky.net/poweredby/") {
-      let safariViewController = SFSafariViewController(url: url)
-      viewController?.present(safariViewController, animated: true)
-    }
-  }
-  
 }

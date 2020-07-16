@@ -15,9 +15,7 @@ protocol ForecastViewModel {
   func index(of city: City) -> Int?
   func contentViewModel(at index: Int) -> ContentViewModel?
   func contentViewController(at index: Int) -> ContentViewController?
-  
   func measuringSystemSwitched(_ sender: SegmentedControl)
-  func presentPoweredBy(at viewController: UIViewController?)
   
   func loadData()
   

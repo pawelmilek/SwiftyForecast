@@ -197,9 +197,9 @@ struct Style {
   // MARK: - OfflineViewController
   struct OfflineVC {
     static let backgroundColor = UIColor.white
-    static let descriptionLabelFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static let descriptionLabelFont = UIFont.systemFont(ofSize: 18, weight: .bold)
     static let descriptionLabelTextColor = UIColor.blackShade
-    static let descriptionLabelTextAlignment = NSTextAlignment.left
+    static let descriptionLabelTextAlignment = NSTextAlignment.center
   }
   
   // MARK: - CitySearchBar
