@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -65,7 +65,7 @@
         <!--Main View Controller-->
         <scene sceneID="An9-LC-vHt">
             <objects>
-                <viewController storyboardIdentifier="ForecastMainViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForecastViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHi-4T-aQk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

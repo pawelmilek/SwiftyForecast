@@ -3,17 +3,18 @@ import CoreLocation
 import RealmSwift
 
 final class CitySelectionViewController: UIViewController {
-  typealias ForecastCityStyle = Style.ForecastCityListVC
-
   @IBOutlet private weak var tableView: UITableView!
-  private lazy var searchLocationViewController = SearchLocationViewController.make()
+  
+  weak var coordinator: MainCoordinator?
+  weak var delegate: CitySelectionViewControllerDelegate?
+  var viewModel: CitySelectionViewModel?
+  
   private lazy var footerView: UIView = {
     let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
     let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.setBackgroundImage(UIImage(named: "ic_add"), for: .normal)
-    addButton.setBackgroundImage(UIImage(named: "ic_menu"), for: .highlighted)
     addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(addButton)
@@ -25,12 +26,20 @@ final class CitySelectionViewController: UIViewController {
   }()
   
   private var citiesTimeZone: [String: TimeZone] = [:]
-  weak var delegate: CitySelectionViewControllerDelegate?
-  var viewModel: CitySelectionViewModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+      super.viewWillDisappear(animated)
+      navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
   deinit {
@@ -71,7 +80,7 @@ private extension CitySelectionViewController {
     imageView.contentMode = .scaleAspectFill
     
     tableView.backgroundView = imageView
-    tableView.backgroundColor = ForecastCityStyle.tableViewBackgroundColor
+    tableView.backgroundColor = Style.ForecastCityListVC.tableViewBackgroundColor
   }
   
 }
@@ -152,7 +161,7 @@ extension CitySelectionViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     viewModel?.select(at: indexPath.row)
-    self.dismiss(animated: true)
+    coordinator?.onSelectCityFromAvailableCollection()
   }
   
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -182,25 +191,11 @@ extension CitySelectionViewController: CitySelectionViewModelDelegate {
 
 }
 
-// MARK: GMSAutocompleteViewControllerDelegate protocol
-//extension CityTableViewController: GMSAutocompleteViewControllerDelegate {
-
-//  func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = true
-//  }
-//
-//  func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
-//    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-//  }
-  
-//}
-
 // MARK: - Private - Actions
 private extension CitySelectionViewController {
   
   @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    let navigationController = UINavigationController(rootViewController: searchLocationViewController)
-    present(navigationController, animated: true)
+    coordinator?.onAddNewCity()
   }
   
 }
@@ -226,8 +221,7 @@ private extension CitySelectionViewController {
 extension CitySelectionViewController {
   
   static func make() -> CitySelectionViewController {
-    let storyboard = UIStoryboard(storyboard: .main)
-    return storyboard.instantiateViewController(CitySelectionViewController.self)
+    return StoryboardViewControllerFactory.make(CitySelectionViewController.self, from: .main)
   }
 
 }

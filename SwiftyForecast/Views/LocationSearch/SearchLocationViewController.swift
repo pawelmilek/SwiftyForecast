@@ -28,6 +28,7 @@ final class SearchLocationViewController: UIViewController {
   }()
   
   private var selectedPin: MKPlacemark? = nil
+  weak var coordinator: MainCoordinator?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,6 +46,8 @@ private extension SearchLocationViewController {
   func setUp() {
     mapView.delegate = self
     mapView.showsUserLocation = true
+    navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
     setupSearchController()
   }
   
@@ -53,8 +56,6 @@ private extension SearchLocationViewController {
     searchBar.sizeToFit()
     searchBar.placeholder = "Search for places"
     navigationItem.titleView = searchController.searchBar
-//    navigationItem.searchController = searchController
-//    definesPresentationContext = true
   }
   
   func resetSearchController() {
@@ -140,26 +141,27 @@ private extension SearchLocationViewController {
 // MARK: - MKMapViewDelegate delegate
 extension SearchLocationViewController: MKMapViewDelegate {
   
-  
-  
 }
 
 
 // MARK: - UISearchBarDelegate protocol
-extension SearchLocationViewController: UISearchBarDelegate { }
+extension SearchLocationViewController: UISearchBarDelegate {
+  
+}
 
 // MARK: - UISearchResultsUpdating protocol
 extension SearchLocationViewController: UISearchResultsUpdating {
   
   func updateSearchResults(for searchController: UISearchController) {
     guard let searchText = searchController.searchBar.text else { return }
-    
   }
   
 }
 
 // MARK: - UITextViewDelegate protocol
-extension SearchLocationViewController: UITextViewDelegate { }
+extension SearchLocationViewController: UITextViewDelegate {
+  
+}
 
 // MARK: - UITextFieldDelegate protocol
 extension SearchLocationViewController: UITextFieldDelegate {

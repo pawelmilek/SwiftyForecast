@@ -37,7 +37,7 @@ final class DefaultCitySelectionViewModel: CitySelectionViewModel {
   }
   
   func select(at index: Int) {
-    let selectedCity = cities.filter("index = %@", index).first!
+    guard let selectedCity = cities.filter("index = %@", index).first else { return }
     delegate?.didSelect(self, city: selectedCity)
   }
 }

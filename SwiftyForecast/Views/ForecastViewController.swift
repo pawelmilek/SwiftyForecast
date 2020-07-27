@@ -4,8 +4,8 @@ import RealmSwift
 final class ForecastViewController: UIViewController {
   @IBOutlet private weak var pageControl: UIPageControl!
   
-  weak var delegate: ForecastViewControllerDelegate?
-  var viewModel: ForecastViewModel? = DefaultForecastViewModel(service: DefaultForecastService())
+  weak var coordinator: MainCoordinator?
+  var viewModel: ForecastViewModel?
   
   private lazy var notationSystemSegmentedControl: SegmentedControl = {
     typealias ForecastMainStyle = Style.ForecastMainVC
@@ -38,17 +38,14 @@ final class ForecastViewController: UIViewController {
       return controllers
     }
     
-    let storyboard = UIStoryboard(storyboard: .main)
-    let viewController = storyboard.instantiateViewController(UIPageViewController.self)
+    let viewController = StoryboardViewControllerFactory.make(UIPageViewController.self, from: .main)
     viewController.dataSource = self
     viewController.delegate = self
     viewController.setViewControllers(viewControllers, direction: .forward, animated: true)
     return viewController
   }()
   
-  private var coordinator: SwiftyForecastCoordinator?
   private var contentViewiewControllers: [ContentViewController] = []
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -70,15 +67,8 @@ final class ForecastViewController: UIViewController {
 extension ForecastViewController: ViewSetupable {
   
   func setUp() {
-    setCoordinator()
     setViewModelClosureCallbacks()
     addNotificationObservers()
-  }
-  
-  func setCoordinator() {
-    guard let navigationController = self.navigationController else { return }
-    coordinator = SwiftyForecastCoordinator(navigationController: navigationController)
-    delegate = coordinator
   }
   
   func setViewModelCallback() {
@@ -173,18 +163,20 @@ extension ForecastViewController {
 //    setupPageControl()
 //  }
   
-  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
-    viewModel?.measuringSystemSwitched(sender)
-  }
+  
   
   @IBAction func citySelectionBarButtonTapped(_ sender: UIBarButtonItem) {
-    delegate?.forecastViewController(self, didTapSelectionBarButton: sender)
+    coordinator?.onTapCitySelectionBarButton()
   }
   
   @IBAction func poweredByBarButtonTapped(_ sender: UIBarButtonItem) {
-    delegate?.forecastViewController(self, didTapPoweredByBarButton: sender)
+    coordinator?.onTapPoweredByBarButton()
   }
-  
+
+  @objc func measuringSystemSwitched(_ sender: SegmentedControl) {
+    viewModel?.measuringSystemSwitched(sender)
+  }
+
   @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
     loadData()
   }
@@ -343,4 +335,13 @@ private extension ForecastViewController {
     }
   }
   
+}
+
+// MARK: - Factory method
+extension ForecastViewController {
+  
+  static func make() -> ForecastViewController {
+    return StoryboardViewControllerFactory.make(ForecastViewController.self, from: .main)
+  }
+
 }

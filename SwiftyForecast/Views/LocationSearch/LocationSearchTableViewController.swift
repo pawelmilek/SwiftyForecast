@@ -44,7 +44,7 @@ final class LocationSearchTableViewController: UITableViewController {
 private extension LocationSearchTableViewController {
   
   func setUp() {
-    
+
   }
   
 }

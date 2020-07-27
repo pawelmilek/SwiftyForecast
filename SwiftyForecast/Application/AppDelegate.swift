@@ -4,12 +4,14 @@ import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
+  private var coordinator: MainCoordinator?
   
   internal func application(_ application: UIApplication,
                             didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    setupCoordinator()
     setupLocationProvider()
     setupNetworkReachabilityHandling()
-    setUpStyle()
+    setNavigationBarStyle()
     
     // MARK: - Get Realm path
     debugPrint("File: \(#file), \(RealmProvider.core.configuration.fileURL!)")
@@ -23,8 +25,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 }
 
-// MARK: - Private - Setup style
+// MARK: - Private - Setups
 private extension AppDelegate {
+  
+  func setupCoordinator() {
+    let navigationController = UINavigationController()
+    coordinator = MainCoordinator(navigationController: navigationController)
+    coordinator?.start()
+    
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = navigationController
+    window?.makeKeyAndVisible()
+  }
   
   func setupLocationProvider() {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
@@ -71,11 +83,7 @@ private extension AppDelegate {
       onNetworkAvailable()
     }
   }
-  
-  func setUpStyle() {
-    setNavigationBarStyle()
-  }
-  
+
 }
 
 // MARK: - Set UINAvigationBar Attributes
