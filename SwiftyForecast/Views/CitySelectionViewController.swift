@@ -80,7 +80,7 @@ private extension CitySelectionViewController {
     imageView.contentMode = .scaleAspectFill
     
     tableView.backgroundView = imageView
-    tableView.backgroundColor = Style.ForecastCityListVC.tableViewBackgroundColor
+    tableView.backgroundColor = Style.CitySelection.backgroundColor
   }
   
 }

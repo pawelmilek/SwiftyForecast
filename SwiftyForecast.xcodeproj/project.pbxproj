@@ -127,6 +127,9 @@
 		E2435BE322ADDBB7007589CE /* HourlyForecastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyForecastCellViewModel.swift */; };
 		E2435BE422ADDBB8007589CE /* HourlyForecastCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7B226E831900062E36 /* HourlyForecastCellViewModel.swift */; };
 		E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */; };
+		E24C8C4B24CFBC7A004E3A2C /* LocationSearchTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C8C4A24CFBC7A004E3A2C /* LocationSearchTableViewControllerDelegate.swift */; };
+		E24C8C4E24CFC891004E3A2C /* LocationSearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C8C4D24CFC891004E3A2C /* LocationSearchTableViewModel.swift */; };
+		E24C8C5024CFC8AD004E3A2C /* DefaultLocationSearchTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C8C4F24CFC8AD004E3A2C /* DefaultLocationSearchTableViewModel.swift */; };
 		E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */; };
 		E253B40124BFEE70007AD187 /* LocationSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E253B40024BFEE70007AD187 /* LocationSearch.storyboard */; };
 		E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E254B5CF2102C45000B34E8F /* LocationProvider.swift */; };
@@ -451,6 +454,9 @@
 		E2435BD422AD7332007589CE /* Double+ToCelsius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToCelsius.swift"; sourceTree = "<group>"; };
 		E2435BD622AD736C007589CE /* Double+ToFahrenheit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+ToFahrenheit.swift"; sourceTree = "<group>"; };
 		E24ADB7F2123B63C0089C460 /* UIScreen+PhoneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+PhoneModel.swift"; sourceTree = "<group>"; };
+		E24C8C4A24CFBC7A004E3A2C /* LocationSearchTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		E24C8C4D24CFC891004E3A2C /* LocationSearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewModel.swift; sourceTree = "<group>"; };
+		E24C8C4F24CFC8AD004E3A2C /* DefaultLocationSearchTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultLocationSearchTableViewModel.swift; sourceTree = "<group>"; };
 		E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		E253B40024BFEE70007AD187 /* LocationSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationSearch.storyboard; sourceTree = "<group>"; };
 		E254B5CF2102C45000B34E8F /* LocationProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
@@ -866,6 +872,15 @@
 			path = Measurement;
 			sourceTree = "<group>";
 		};
+		E24C8C4C24CFC887004E3A2C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E24C8C4D24CFC891004E3A2C /* LocationSearchTableViewModel.swift */,
+				E24C8C4F24CFC8AD004E3A2C /* DefaultLocationSearchTableViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		E270891824CE5904003F7587 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -887,7 +902,9 @@
 		E293695624985DEA0055FB2E /* LocationSearch */ = {
 			isa = PBXGroup;
 			children = (
+				E24C8C4C24CFC887004E3A2C /* ViewModel */,
 				E253B40024BFEE70007AD187 /* LocationSearch.storyboard */,
+				E24C8C4A24CFBC7A004E3A2C /* LocationSearchTableViewControllerDelegate.swift */,
 				E274DAEF24A0604F001F8655 /* LocationSearchTableViewController.swift */,
 				E293695224985CD90055FB2E /* SearchLocationViewController.swift */,
 			);
@@ -1474,6 +1491,7 @@
 				E2A42E25214DEE5E00F9A79A /* NVActivityIndicatorAnimationBlank.swift in Sources */,
 				E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2FD3756232EFFC40083B383 /* City.swift in Sources */,
+				E24C8C4E24CFC891004E3A2C /* LocationSearchTableViewModel.swift in Sources */,
 				E2C208A824848DF3006C772E /* DistanceMeasurement.swift in Sources */,
 				E2CF4DE62288E46100062E36 /* DefaultContentViewModel.swift in Sources */,
 				E27E2FCD1DA04D1D00B3EABF /* ReusableView.swift in Sources */,
@@ -1515,6 +1533,7 @@
 				E216C3BC22B6DEC400C18A3D /* DefaultTodayForecastViewModel.swift in Sources */,
 				E2A42E2A214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallScaleMultiple.swift in Sources */,
 				E2DC149524955C8D00D1A329 /* DefaultForecastViewModel.swift in Sources */,
+				E24C8C4B24CFBC7A004E3A2C /* LocationSearchTableViewControllerDelegate.swift in Sources */,
 				E2CF4D7A226E7B6000062E36 /* DefaultDailyForecastCellViewModel.swift in Sources */,
 				E233AC1923DE80B400DC0EF5 /* SearchTextField.swift in Sources */,
 				E2A42E1D214DEE5E00F9A79A /* NVActivityIndicatorAnimationBallZigZag.swift in Sources */,
@@ -1560,6 +1579,7 @@
 				E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */,
 				E294AD3523778AAC00B44AE8 /* DateFormatter+LocalTime.swift in Sources */,
 				E27E2F831DA0482C00B3EABF /* CitySelectionViewController.swift in Sources */,
+				E24C8C5024CFC8AD004E3A2C /* DefaultLocationSearchTableViewModel.swift in Sources */,
 				E27E2FB61DA04D1D00B3EABF /* CitySelectionViewControllerDelegate.swift in Sources */,
 				E27E2FBC1DA04D1D00B3EABF /* ViewSetupable.swift in Sources */,
 				E2A42E12214DEE5E00F9A79A /* NVActivityIndicatorShape.swift in Sources */,

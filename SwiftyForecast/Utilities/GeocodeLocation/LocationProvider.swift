@@ -4,11 +4,6 @@ import CoreLocation
 final class LocationProvider: NSObject {
   static let shared = LocationProvider()
   
-  typealias CompletionHandler = (CLLocation) -> ()
-  
-  private let locationManager = CLLocationManager()
-  private var didUpdateLocationsFlag = false
-  private var locationFound: CompletionHandler?
   var authorizationCompletionBlock: ((_ isAuthorized: Bool) -> ())? = { _ in }
   var currentLocation: CLLocation? {
     didSet {
@@ -16,6 +11,10 @@ final class LocationProvider: NSObject {
       self.locationFound?(currentLocation)
     }
   }
+  
+  private let locationManager = CLLocationManager()
+  private var didUpdateLocationsFlag = false
+  private var locationFound: ((CLLocation) -> Void)?
   
   private override init() {
     super.init()
@@ -61,14 +60,14 @@ extension LocationProvider {
     locationManager.requestLocation()
   }
   
-  func requestLocation(completionHandler: @escaping CompletionHandler) {
+  func requestLocation(completion: @escaping (CLLocation) -> ()) {
     guard isLocationServicesEnabled else {
       presentLocationServicesSettingsPopupAlert()
       return
     }
     
     didUpdateLocationsFlag = false
-    locationFound = completionHandler
+    locationFound = completion
     locationManager.startUpdatingLocation()
   }
   
@@ -81,10 +80,10 @@ extension LocationProvider: CLLocationManagerDelegate {
     guard !didUpdateLocationsFlag else { return }
     guard let location = locations.first else { return }
     
-    didUpdateLocationsFlag = true
-    DispatchQueue.main.async {
-      self.currentLocation = location
-      self.locationManager.stopUpdatingLocation()
+    DispatchQueue.main.async { [weak self] in
+      self?.didUpdateLocationsFlag = true
+      self?.currentLocation = location
+      self?.locationManager.stopUpdatingLocation()
     }
   }
   

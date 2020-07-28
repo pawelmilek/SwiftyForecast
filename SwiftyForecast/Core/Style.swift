@@ -160,20 +160,26 @@ struct Style {
     static let conditionIconSize: CGFloat = 25
   }
   
-  // MARK: - ForecastCityListTableViewController
-  struct ForecastCityListVC {
-    static let autocompleteVCPrimaryTextColor = UIColor.orange
-    static let autocompleteVCPrimaryTextHighlightColor = UIColor.orange.withAlphaComponent(0.6)
-    static let autocompleteVCSecondaryTextColor = UIColor.blackShade
-    static let autocompleteVCTableCellSeparatorColor = UIColor.blackShade.withAlphaComponent(0.7)
-    static let autocompleteVCSSearchTextColorInSearchBar = UIColor.orange
-    static let autocompleteVCSSearchTextFontInSearchBar = UIFont.systemFont(ofSize: 14, weight: .light)
-    static let autocompleteVCSearchTextFieldColorPlaceholder = UIColor.blackShade.withAlphaComponent(0.6)
-    static let autocompleteVCSearchTextFieldFontPlaceholder = UIFont.systemFont(ofSize: 14, weight: .regular)
-    static let autocompleteVCSearchBarCancelButtonColor = UIColor.orange
-    static let autocompleteVCSearchBarCancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+  // MARK: - CitySelection
+  struct CitySelection {
+    static let backgroundColor = UIColor.clear
+  }
+  
+  // MARK: - LocationSearch
+  struct LocationSearch {
+    static let primaryTextColor = UIColor.orange
+    static let primaryTextHighlightColor = UIColor.orange.withAlphaComponent(0.6)
+    static let secondaryTextColor = UIColor.blackShade
 
-    static let tableViewBackgroundColor = UIColor.clear
+    static let searchTextColorInSearchBar = UIColor.orange
+    static let searchTextFontInSearchBar = UIFont.systemFont(ofSize: 14, weight: .light)
+    static let searchTextFieldColorPlaceholder = UIColor.blackShade.withAlphaComponent(0.6)
+    static let searchTextFieldFontPlaceholder = UIFont.systemFont(ofSize: 14, weight: .regular)
+    static let searchBarCancelButtonColor = UIColor.orange
+    static let searchBarCancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .regular)
+
+    static let separatorColor = UIColor.blackShade.withAlphaComponent(0.7)
+    static let backgroundColor = UIColor.clear
   }
   
   // MARK: - ForecastContentViewController

@@ -6,33 +6,36 @@ final class SearchLocationViewController: UIViewController {
   @IBOutlet private weak var mapView: MKMapView!
   @IBOutlet private weak var searchLocationTextField: SearchTextField!
   
+  weak var coordinator: MainCoordinator?
+  
   private lazy var searchController: UISearchController = {
-    let locationSearchTableViewController = LocationSearchTableViewController.loadFromNib()
-    locationSearchTableViewController.mapView = mapView
-    locationSearchTableViewController.handleMapSearchDelegate = self
-
-    let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
-    searchController.searchResultsUpdater = locationSearchTableViewController
+    let viewController = LocationSearchTableViewController.make(with: mapView)
+    viewController.locationSearchDelegate = self
     
-//    searchController.searchBar.placeholder = "Search City"
-//    searchController.searchBar.delegate = self
-//    searchController.searchBar.tintColor = .red
-//    searchController.searchBar.barTintColor = .red
-//    searchController.searchBar.backgroundColor = .gray
-//    searchController.searchBar.searchTextField.backgroundColor = .white
+    let searchController = UISearchController(searchResultsController: viewController)
+    searchController.searchResultsUpdater = viewController
+    searchController.searchBar.tintColor = Style.LocationSearch.searchTextColorInSearchBar
+    searchController.searchBar.barTintColor = Style.LocationSearch.searchBarCancelButtonColor
+    searchController.searchBar.backgroundColor = .white
+    searchController.searchBar.sizeToFit()
+    searchController.searchBar.placeholder = "Search places"
     searchController.obscuresBackgroundDuringPresentation = false
     searchController.hidesNavigationBarDuringPresentation = false
     definesPresentationContext = true
-
     return searchController
   }()
   
   private var selectedPin: MKPlacemark? = nil
-  weak var coordinator: MainCoordinator?
+  private let sharedLocationProvider = LocationProvider.shared
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    requrestLocation()
   }
   
   deinit {
@@ -44,17 +47,22 @@ final class SearchLocationViewController: UIViewController {
 private extension SearchLocationViewController {
   
   func setUp() {
-    mapView.delegate = self
-    mapView.showsUserLocation = true
-    navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+    setMapView()
+    removeBackButtonTitle()
     setupSearchController()
   }
   
+  func setMapView() {
+    mapView.delegate = self
+    mapView.showsUserLocation = true
+  }
+  
+  func removeBackButtonTitle() {
+    let button = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    navigationController?.navigationBar.topItem?.backBarButtonItem = button
+  }
+  
   func setupSearchController() {
-    let searchBar = searchController.searchBar
-    searchBar.sizeToFit()
-    searchBar.placeholder = "Search for places"
     navigationItem.titleView = searchController.searchBar
   }
   
@@ -63,33 +71,22 @@ private extension SearchLocationViewController {
     searchController.searchBar.text = nil
     searchController.searchBar.resignFirstResponder()
   }
+
 }
 
-// MARK: - Private - SetUps helpers
+// MARK: - Private - Requrest location
 private extension SearchLocationViewController {
   
-  func setTitle() {
-    title = "Location"
+  func requrestLocation() {
+    sharedLocationProvider.requestLocation { location in
+      DispatchQueue.main.async { [weak self] in
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        self?.mapView.setRegion(region, animated: true)
+      }
+    }
   }
-  
-//  func setupSearchTextField() {
-//    searchLocationTextField.placeholder = "Search location"
-//    searchLocationTextField.font = UIFont.systemFont(ofSize: 13, weight: .light)
-//    searchLocationTextField.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-//    searchLocationTextField.layer.cornerRadius = 10
-//    searchLocationTextField.delegate = self
-//
-//    searchLocationTextField.addTarget(self, action:#selector(searchLocationTextFieldDidChange), for: .editingChanged)
-//    searchLocationTextField.theme = SearchTextFieldTheme.lightTheme()
-//    searchLocationTextField.theme.font = UIFont.systemFont(ofSize: 13, weight: .light)
-//    searchLocationTextField.theme.bgColor = UIColor.gray.withAlphaComponent(0.7)
-//    searchLocationTextField.theme.borderColor = .clear
-//    searchLocationTextField.theme.separatorColor = .gray
-//    searchLocationTextField.comparisonOptions = [.caseInsensitive]
-//    searchLocationTextField.theme.cellHeight = 50
-//    searchLocationTextField.maxNumberOfResults = 4
-//  }
-  
+
 }
 
 // MARK: - Private - Actions
@@ -140,60 +137,29 @@ private extension SearchLocationViewController {
 
 // MARK: - MKMapViewDelegate delegate
 extension SearchLocationViewController: MKMapViewDelegate {
-  
+
 }
 
-
-// MARK: - UISearchBarDelegate protocol
-extension SearchLocationViewController: UISearchBarDelegate {
+// MARK: - LocationSearchTableViewControllerDelegate delegate
+extension SearchLocationViewController: LocationSearchTableViewControllerDelegate {
   
-}
-
-// MARK: - UISearchResultsUpdating protocol
-extension SearchLocationViewController: UISearchResultsUpdating {
-  
-  func updateSearchResults(for searchController: UISearchController) {
-    guard let searchText = searchController.searchBar.text else { return }
-  }
-  
-}
-
-// MARK: - UITextViewDelegate protocol
-extension SearchLocationViewController: UITextViewDelegate {
-  
-}
-
-// MARK: - UITextFieldDelegate protocol
-extension SearchLocationViewController: UITextFieldDelegate {
-  
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
-  }
-  
-}
-
-// MARK: - HandleMapSearch delegate
-extension SearchLocationViewController: HandleMapSearch {
-  
-  func dropPinZoomIn(placemark:MKPlacemark) {
-    // cache the pin
+  func locationSearch(_ view: LocationSearchTableViewController, willDropPinZoomIn placemark: MKPlacemark) {
     selectedPin = placemark
-    // clear existing pins
     mapView.removeAnnotations(mapView.annotations)
+    
     let annotation = MKPointAnnotation()
     annotation.coordinate = placemark.coordinate
     annotation.title = placemark.name
     if let city = placemark.locality, let state = placemark.administrativeArea {
       annotation.subtitle = "\(city) \(state)"
     }
-
+    
     mapView.addAnnotation(annotation)
-//    let span = MKCoordinateSpanMake(0.05, 0.05)
-//    let region = MKCoordinateRegionMake(placemark.coordinate, span)
-//    mapView.setRegion(region, animated: true)
+    let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+    let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+    mapView.setRegion(region, animated: true)
   }
-
+  
 }
 
 
