@@ -66,23 +66,10 @@ private extension CitySelectionViewController {
     tableView.separatorStyle = .none
     tableView.isUserInteractionEnabled = true
     tableView.tableFooterView = footerView
-    setTransparentTableViewBackground()
-  }
-
-}
-
-// MARK: - Private - Set transparent background of TableView
-private extension CitySelectionViewController {
-  
-  func setTransparentTableViewBackground() {
-    let backgroundImage = UIImage(named: "swifty_background")
-    let imageView = UIImageView(image: backgroundImage)
-    imageView.contentMode = .scaleAspectFill
-    
-    tableView.backgroundView = imageView
     tableView.backgroundColor = Style.CitySelection.backgroundColor
+    tableView.separatorColor = Style.CitySelection.separatorColor
   }
-  
+
 }
 
 // MARK: - Private - Insert/Delete city
@@ -120,10 +107,11 @@ extension CitySelectionViewController: UITableViewDataSource {
     let row = indexPath.row
     let cityName = viewModel.name(at: row)
     let localTime = viewModel.localTime(at: row)
+    let map = viewModel.map(at: row)
     cell.tag = row
     
 //    if let _ = city.timeZone {
-      cell.configure(by: cityName, time: localTime)
+    cell.configure(by: cityName, time: localTime, annotation: map?.annotation, region: map?.region)
       
 //    } else {
 //      if let timeZone = citiesTimeZone["\(row)"] {
@@ -177,7 +165,7 @@ extension CitySelectionViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 60
+    return CityTableViewCell.defaultHeight
   }
   
 }

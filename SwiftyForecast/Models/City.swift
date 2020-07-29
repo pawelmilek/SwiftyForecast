@@ -1,6 +1,9 @@
 import Foundation
 import CoreLocation
 import RealmSwift
+import MapKit
+import Intents
+import Contacts
 
 @objcMembers final class City: Object, Codable {
   dynamic var index = 0
@@ -13,6 +16,12 @@ import RealmSwift
   dynamic var isCurrentLocalization = false
   private var latitude = RealmOptional<Double>()
   private var longitude = RealmOptional<Double>()
+  
+  var placemark: CLPlacemark? {
+    guard let location = location else { return nil }
+    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
+    return placemark
+  }
   
   var location: CLLocation? {
     get {
@@ -83,7 +92,7 @@ import RealmSwift
   
   convenience init(placemark: CLPlacemark) {
     self.init()
-    
+
     name = placemark.locality ?? InvalidReference.notApplicable
     country = placemark.country ?? InvalidReference.notApplicable
     state = placemark.administrativeArea ?? InvalidReference.notApplicable
@@ -122,7 +131,9 @@ extension City {
   }
   
   @discardableResult
-  static func add(from placemark: CLPlacemark, at index: Int? = nil, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(from placemark: CLPlacemark,
+                  at index: Int? = nil,
+                  in realm: Realm? = RealmProvider.core.realm) throws -> City {
     guard let realm = realm else { throw RealmError.initializationFailed }
     
     let newCity = City(placemark: placemark)

@@ -112,11 +112,11 @@ struct Style {
   struct CityCell {
     static let backgroundColor = UIColor.clear
     static let currentTimeLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
-    static let currentTimeLabelTextColor = UIColor.blackShade
+    static let currentTimeLabelTextColor = UIColor.orange.withAlphaComponent(0.8)
     static let currentTimeLabelTextAlignment = NSTextAlignment.left
     
-    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 20)
-    static let cityNameLabelTextColor = UIColor.white
+    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 19)
+    static let cityNameLabelTextColor = UIColor.blackShade
     static let cityNameLabelTextAlignment = NSTextAlignment.left
     
     static let separatorColor = UIColor.white.withAlphaComponent(0.8)
@@ -163,6 +163,7 @@ struct Style {
   // MARK: - CitySelection
   struct CitySelection {
     static let backgroundColor = UIColor.clear
+    static let separatorColor = UIColor.blackShade
   }
   
   // MARK: - LocationSearch

@@ -1,9 +1,13 @@
 import UIKit
+import MapKit
 
 final class CityTableViewCell: UITableViewCell {
+  static let defaultHeight = CGFloat(130)
+
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
   @IBOutlet private weak var separatorView: UIView!
+  @IBOutlet private weak var mapView: MKMapView!
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -25,6 +29,10 @@ extension CityTableViewCell: ViewSetupable {
     currentTimeLabel.alpha = 0
     cityNameLabel.text = ""
     cityNameLabel.alpha = 0
+    mapView.removeAnnotations(mapView.annotations)
+    mapView.isUserInteractionEnabled = false
+    mapView.showsUserLocation = false
+    mapView.layer.cornerRadius = 15
   }
   
   func setUpStyle() {
@@ -45,12 +53,20 @@ extension CityTableViewCell: ViewSetupable {
 
 // MARK: - Configure by city
 extension CityTableViewCell {
-  
-  func configure(by name: String, time localTime: String) {
+
+  func configure(by name: String,
+                 time localTime: String,
+                 annotation: MKPointAnnotation?,
+                 region: MKCoordinateRegion?) {
     currentTimeLabel.text = localTime
     cityNameLabel.text = name
     currentTimeLabel.alpha = 1
     cityNameLabel.alpha = 1
+
+    if let annotation = annotation, let region = region {
+        mapView.addAnnotation(annotation)
+        mapView.setRegion(region, animated: false)
+    }
   }
-  
+
 }
