@@ -14,14 +14,17 @@ final class CitySelectionViewController: UIViewController {
     let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
-    addButton.setBackgroundImage(UIImage(named: "ic_add"), for: .normal)
-    addButton.addTarget(self, action: #selector(addNewCityButtonTapped(_:)), for: .touchUpInside)
+    addButton.layer.cornerRadius = 15
+    addButton.clipsToBounds = true
+    addButton.setTitle("Search Location", for: .normal)
+    addButton.backgroundColor = Style.CitySelection.addButtonBackgroundColor
+    addButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(addButton)
-    addButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-    addButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-    view.centerXAnchor.constraint(equalTo: addButton.centerXAnchor).isActive = true
-    view.centerYAnchor.constraint(equalTo: addButton.centerYAnchor).isActive = true
+    addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
+    addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
+    addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+    addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
     return view
   }()
   
@@ -65,6 +68,7 @@ private extension CitySelectionViewController {
     tableView.delegate = self
     tableView.separatorStyle = .none
     tableView.isUserInteractionEnabled = true
+    tableView.allowsMultipleSelectionDuringEditing = false
     tableView.tableFooterView = footerView
     tableView.backgroundColor = Style.CitySelection.backgroundColor
     tableView.separatorColor = Style.CitySelection.separatorColor
@@ -109,36 +113,8 @@ extension CitySelectionViewController: UITableViewDataSource {
     let localTime = viewModel.localTime(at: row)
     let map = viewModel.map(at: row)
     cell.tag = row
-    
-//    if let _ = city.timeZone {
     cell.configure(by: cityName, time: localTime, annotation: map?.annotation, region: map?.region)
-      
-//    } else {
-//      if let timeZone = citiesTimeZone["\(row)"] {
-//        city.timeZone = timeZone
-//        cell.configure(by: cityName, time: localTime)
-//
-//      } else {
-//        let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
-//        fetchTimeZone(from: coordinate) { timeZone in
-//          self.citiesTimeZone["\(row)"] = timeZone
-//          if cell.tag == row {
-//            city.timeZone = timeZone
-//
-//            do {
-//              // TODO: Replace with Realm
-//              try self.managedObjectContext?.save()
-//
-//            } catch {
-//              CoreDataError.couldNotSave.handler()
-//            }
-//
-//            cell.configure(by: cityName, time: localTime)
-//          }
-//        }
-//      }
-//    }
-    
+
     return cell
   }
   
@@ -157,11 +133,10 @@ extension CitySelectionViewController: UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      deleteCity(at: indexPath)
-      tableView.deleteRows(at: [indexPath], with: .fade)
+    guard editingStyle == .delete else { return }
+    deleteCity(at: indexPath)
+    tableView.deleteRows(at: [indexPath], with: .fade)
 //      reloadAndInitializeMainPageViewController()
-    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -182,28 +157,28 @@ extension CitySelectionViewController: CitySelectionViewModelDelegate {
 // MARK: - Private - Actions
 private extension CitySelectionViewController {
   
-  @objc func addNewCityButtonTapped(_ sender: UIButton) {
-    coordinator?.onAddNewCity()
+  @objc func searchLocationButtonTapped(_ sender: UIButton) {
+    coordinator?.onSearchLocation()
   }
   
 }
 
-// MARK: - Private - Fetch local time
-private extension CitySelectionViewController {
-  
-  func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
-    GeocoderHelper.timeZone(for: locationCoordinate) { result in
-      switch result {
-      case .success(let data):
-        completionHandler(data)
-        
-      case .failure:
-        completionHandler(nil)
-      }
-    }
-  }
-  
-}
+//// MARK: - Private - Fetch local time
+//private extension CitySelectionViewController {
+//
+//  func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
+//    GeocoderHelper.timeZone(for: locationCoordinate) { result in
+//      switch result {
+//      case .success(let data):
+//        completionHandler(data)
+//
+//      case .failure:
+//        completionHandler(nil)
+//      }
+//    }
+//  }
+//
+//}
 
 // MARK: - Factory method
 extension CitySelectionViewController {

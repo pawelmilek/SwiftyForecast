@@ -1,4 +1,5 @@
 import UIKit
+import MapKit
 
 struct Style {
   static let degreeSign = "\u{00B0}"
@@ -112,7 +113,7 @@ struct Style {
   struct CityCell {
     static let backgroundColor = UIColor.clear
     static let currentTimeLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
-    static let currentTimeLabelTextColor = UIColor.orange.withAlphaComponent(0.8)
+    static let currentTimeLabelTextColor = UIColor.lightOrange
     static let currentTimeLabelTextAlignment = NSTextAlignment.left
     
     static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 19)
@@ -162,6 +163,7 @@ struct Style {
   
   // MARK: - CitySelection
   struct CitySelection {
+    static let addButtonBackgroundColor = MKPinAnnotationView.redPinColor()
     static let backgroundColor = UIColor.clear
     static let separatorColor = UIColor.blackShade
   }
@@ -169,7 +171,7 @@ struct Style {
   // MARK: - LocationSearch
   struct LocationSearch {
     static let primaryTextColor = UIColor.orange
-    static let primaryTextHighlightColor = UIColor.orange.withAlphaComponent(0.6)
+    static let primaryTextHighlightColor = UIColor.lightOrange
     static let secondaryTextColor = UIColor.blackShade
 
     static let searchTextColorInSearchBar = UIColor.orange
@@ -228,5 +230,21 @@ struct Style {
   // MARK: ActivityIndicatorView
   struct ActivityIndicator {
     static let indicatorColor = UIColor.white
+  }
+  
+  // MARK: CityCalloutView
+  struct CityCallout {
+      static let defaultBackgroundColor = UIColor.white
+      
+      static let nameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
+      static let nameLabelTextColor = UIColor.lightOrange
+      static let nameLabelAlignment = NSTextAlignment.left
+      static let nameLabelNumberOfLines = 1
+      
+      static let streetLabelFont = UIFont(name: "AvenirNext-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .regular)
+      static let streetLabelTextColor = UIColor.black
+      static let streetLabelAlignment = NSTextAlignment.left
+      static let streetLabelNumberOfLines = 1
+      
   }
 }

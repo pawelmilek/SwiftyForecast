@@ -4,11 +4,9 @@ final class ActivityIndicatorView {
   static let shared = ActivityIndicatorView()
   
   private let indicatorFrame = CGRect(x: 0, y: 0, width: 55, height: 55)
-  private lazy var activityIndicator: NVActivityIndicatorView = {
-    let indicator = NVActivityIndicatorView(frame: indicatorFrame,
-                                            type: .ballRotateChase,
-                                            color: Style.ActivityIndicator.indicatorColor)
-    return indicator
+  private lazy var activityIndicator: UIActivityIndicatorView = {
+    var spinner = UIActivityIndicatorView(style: .large)
+    return spinner
   }()
   
   private lazy var containerView: UIView = {

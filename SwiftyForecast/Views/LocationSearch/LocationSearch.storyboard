@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search Location View Controller-->
+        <!--Location Search View Controller-->
         <scene sceneID="Q0h-zc-SQk">
             <objects>
-                <viewController storyboardIdentifier="SearchLocationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gfF-5G-3dr" customClass="SearchLocationViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationSearchViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gfF-5G-3dr" customClass="LocationSearchViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ajy-kd-PL7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="455.07246376811599" y="-76.339285714285708"/>
         </scene>
-        <!--Location Search Table View Controller-->
+        <!--Location Search Results Table View Controller-->
         <scene sceneID="GbY-Gi-e66">
             <objects>
-                <tableViewController storyboardIdentifier="LocationSearchTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dFg-cP-r2E" customClass="LocationSearchTableViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="LocationSearchResultsTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dFg-cP-r2E" customClass="LocationSearchResultsTableViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ISd-d9-LSc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

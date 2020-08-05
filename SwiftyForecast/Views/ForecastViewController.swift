@@ -170,7 +170,8 @@ extension ForecastViewController {
   }
   
   @IBAction func poweredByBarButtonTapped(_ sender: UIBarButtonItem) {
-    coordinator?.onTapPoweredByBarButton()
+    let powerByURL = viewModel?.powerByURL
+    coordinator?.onTapPoweredByBarButton(url: powerByURL)
   }
 
   @objc func measuringSystemSwitched(_ sender: SegmentedControl) {

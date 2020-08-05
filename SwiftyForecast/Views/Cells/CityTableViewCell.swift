@@ -2,7 +2,7 @@ import UIKit
 import MapKit
 
 final class CityTableViewCell: UITableViewCell {
-  static let defaultHeight = CGFloat(130)
+  static let defaultHeight = CGFloat(160)
 
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
@@ -37,7 +37,7 @@ extension CityTableViewCell: ViewSetupable {
   
   func setUpStyle() {
     backgroundColor = Style.CityCell.backgroundColor
-//    selectionStyle = .none
+    selectionStyle = .none
     
     currentTimeLabel.font = Style.CityCell.currentTimeLabelFont
     currentTimeLabel.textColor = Style.CityCell.currentTimeLabelTextColor

@@ -43,8 +43,3 @@ final class DefaultCitySelectionViewModel: CitySelectionViewModel {
   }
 
 }
-
-// MARK: - Private -
-private extension DefaultCitySelectionViewModel {
-
-}

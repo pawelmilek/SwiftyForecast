@@ -8,24 +8,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="wMT-az-3p6" customClass="CityTableViewCell" customModule="SwiftyForecast" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="160" id="wMT-az-3p6" customClass="CityTableViewCell" customModule="SwiftyForecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMT-az-3p6" id="rHv-BN-8ye">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BNf-Rt-nrD">
-                        <rect key="frame" x="10" y="26" width="260.5" height="47"/>
+                        <rect key="frame" x="8" y="11" width="359" height="47"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:45 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-mV-Gx2">
-                                <rect key="frame" x="0.0" y="0.0" width="260.5" height="18"/>
+                                <rect key="frame" x="0.0" y="0.0" width="359" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicago, United States" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WN-FJ-OgU">
-                                <rect key="frame" x="0.0" y="23" width="260.5" height="24"/>
+                                <rect key="frame" x="0.0" y="23" width="359" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -33,29 +33,27 @@
                         </subviews>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DAB-fM-sPY" userLabel="Separator View">
-                        <rect key="frame" x="16" y="99.5" width="343" height="0.5"/>
+                        <rect key="frame" x="16" y="159.5" width="343" height="0.5"/>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.69999999999999996" id="5kq-dX-Daf"/>
                         </constraints>
                     </view>
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Yzq-XY-93U">
-                        <rect key="frame" x="275.5" y="5" width="89.5" height="89.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Yzq-XY-93U" secondAttribute="height" multiplier="1:1" id="Hji-lb-LP2"/>
-                        </constraints>
+                        <rect key="frame" x="8" y="63" width="359" height="92"/>
                     </mapView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="DAB-fM-sPY" secondAttribute="bottom" id="0n6-NW-I1z"/>
-                    <constraint firstItem="BNf-Rt-nrD" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leading" constant="10" id="GT5-dU-cr3"/>
+                    <constraint firstAttribute="trailing" secondItem="Yzq-XY-93U" secondAttribute="trailing" constant="8" id="FVG-78-XkA"/>
+                    <constraint firstAttribute="bottom" secondItem="Yzq-XY-93U" secondAttribute="bottom" constant="5" id="Hov-Cd-cnr"/>
                     <constraint firstItem="DAB-fM-sPY" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leading" constant="16" id="V61-r3-wpb"/>
-                    <constraint firstItem="Yzq-XY-93U" firstAttribute="top" secondItem="rHv-BN-8ye" secondAttribute="top" constant="5" id="cCG-dM-esK"/>
-                    <constraint firstAttribute="trailing" secondItem="Yzq-XY-93U" secondAttribute="trailing" constant="10" id="mJv-r9-hSH"/>
+                    <constraint firstItem="BNf-Rt-nrD" firstAttribute="top" secondItem="rHv-BN-8ye" secondAttribute="topMargin" id="VvF-M2-zmk"/>
+                    <constraint firstItem="BNf-Rt-nrD" firstAttribute="trailing" secondItem="Yzq-XY-93U" secondAttribute="trailing" id="ajn-iR-p0x"/>
+                    <constraint firstItem="BNf-Rt-nrD" firstAttribute="leading" secondItem="Yzq-XY-93U" secondAttribute="leading" id="bKG-oc-a64"/>
+                    <constraint firstItem="Yzq-XY-93U" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leading" constant="8" id="jFy-4X-1G5"/>
                     <constraint firstAttribute="trailing" secondItem="DAB-fM-sPY" secondAttribute="trailing" constant="16" id="mXP-Wv-Gm8"/>
-                    <constraint firstItem="DAB-fM-sPY" firstAttribute="top" secondItem="Yzq-XY-93U" secondAttribute="bottom" constant="5" id="rBd-0t-pTR"/>
-                    <constraint firstItem="Yzq-XY-93U" firstAttribute="leading" secondItem="BNf-Rt-nrD" secondAttribute="trailing" constant="5" id="sTB-nl-qJv"/>
-                    <constraint firstItem="BNf-Rt-nrD" firstAttribute="centerY" secondItem="Yzq-XY-93U" secondAttribute="centerY" id="ydJ-Ge-O0O"/>
+                    <constraint firstItem="Yzq-XY-93U" firstAttribute="top" secondItem="BNf-Rt-nrD" secondAttribute="bottom" constant="5" id="tnx-x8-MAH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -64,7 +62,7 @@
                 <outlet property="mapView" destination="Yzq-XY-93U" id="1g0-rc-Szf"/>
                 <outlet property="separatorView" destination="DAB-fM-sPY" id="h2i-50-1ZS"/>
             </connections>
-            <point key="canvasLocation" x="128.80000000000001" y="-143.92803598200899"/>
+            <point key="canvasLocation" x="128.80000000000001" y="-116.94152923538232"/>
         </tableViewCell>
     </objects>
 </document>

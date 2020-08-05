@@ -5,6 +5,7 @@ import SafariServices
 final class DefaultForecastViewModel: ForecastViewModel {
   var contentViewModels: [ContentViewModel] = []
   var pendingIndex: Int?
+
   var currentIndex: Int = 0 {
     didSet {
       onIndexUpdate?(currentIndex)
@@ -15,6 +16,10 @@ final class DefaultForecastViewModel: ForecastViewModel {
     cities.count
   }
   
+  var powerByURL: URL? {
+    return URL(string: "https://darksky.net/poweredby/")
+  }
+
   var onIndexUpdate: ((Int) -> Void)?
   var onLoadingStatus: ((Bool) -> Void)?
   var onSuccess: (() -> Void)?

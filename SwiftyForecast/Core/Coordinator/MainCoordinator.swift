@@ -16,8 +16,8 @@ final class MainCoordinator: Coordinator {
     navigationController.pushViewController(viewController, animated: false)
   }
   
-  func onTapPoweredByBarButton() {
-    if let url = URL(string: "https://darksky.net/poweredby/") {
+  func onTapPoweredByBarButton(url: URL?) {
+    if let url = url {
       let safariViewController = SFSafariViewController(url: url)
       navigationController.present(safariViewController, animated: true)
     }
@@ -31,18 +31,18 @@ final class MainCoordinator: Coordinator {
     if let forecastViewController = navigationController.viewControllers.first(where: { $0 is CitySelectionViewControllerDelegate }) {
       viewController.delegate = forecastViewController as? CitySelectionViewControllerDelegate
     }
-    
-    navigationController.pushViewController(viewController, animated: true)
+
+    navigationController.push(viewController: viewController, transitionType: .moveIn, transitionSubtype: .fromTop)
   }
   
   func onSelectCityFromAvailableCollection() {
-    navigationController.popViewController(animated: true)
+    navigationController.pop(transitionType: .reveal, transitionSubtype: .fromBottom)
   }
   
-  func onAddNewCity() {
-    let viewController = SearchLocationViewController.make()
+  func onSearchLocation() {
+    let viewController = LocationSearchViewController.make()
     viewController.coordinator = self
-
+    
     navigationController.pushViewController(viewController, animated: true)
   }
 }

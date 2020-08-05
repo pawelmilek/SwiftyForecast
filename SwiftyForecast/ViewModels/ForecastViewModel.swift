@@ -5,6 +5,7 @@ protocol ForecastViewModel {
   var pendingIndex: Int? { get set }
   var currentIndex: Int { get set }
   var numberOfCities: Int { get }
+  var powerByURL: URL? { get }
   
   var onIndexUpdate: ((Int) -> Void)? { get set }
   var onLoadingStatus: ((Bool) -> Void)? { get set }
