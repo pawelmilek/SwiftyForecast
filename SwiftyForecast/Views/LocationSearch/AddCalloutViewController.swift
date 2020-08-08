@@ -16,6 +16,14 @@ final class AddCalloutViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
+    setUpStyle()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      self.preferredContentSize = self.view.systemLayoutSizeFitting(
+          UIView.layoutFittingCompressedSize
+      )
   }
 }
 
@@ -52,6 +60,16 @@ private extension AddCalloutViewController {
     subtitleLabel.textColor = DetailMapViewStyle.streetLabelTextColor
     subtitleLabel.textAlignment = DetailMapViewStyle.streetLabelAlignment
     subtitleLabel.numberOfLines = DetailMapViewStyle.streetLabelNumberOfLines
+    
+    let origImage = UIImage(named: "ic_add")
+    let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
+    addButton.setBackgroundImage(tintedImage, for: .normal)
+    addButton.tintColor = .orange
+    
+    view.layer.borderColor = UIColor.orange.cgColor
+    view.layer.masksToBounds = true
+    view.layer.borderWidth = 1
+    view.layer.cornerRadius = 15
   }
 
 }

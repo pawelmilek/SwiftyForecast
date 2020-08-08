@@ -16,16 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hUa-Hr-4Jb">
-                                <rect key="frame" x="10" y="44" width="334" height="41"/>
+                                <rect key="frame" x="10" y="54" width="329" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaf-WQ-hV4" userLabel="Title Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="329" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubtitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSd-CO-gUM" userLabel="Subtitle Label">
-                                        <rect key="frame" x="0.0" y="20.5" width="334" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="18" width="329" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -33,10 +33,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhr-Vl-uQP" userLabel="Add Button">
-                                <rect key="frame" x="354" y="39.5" width="50" height="50"/>
+                                <rect key="frame" x="359" y="49.5" width="45" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="ayp-bD-tlY"/>
-                                    <constraint firstAttribute="height" constant="50" id="v6k-wn-hSj"/>
+                                    <constraint firstAttribute="width" constant="45" id="ayp-bD-tlY"/>
+                                    <constraint firstAttribute="height" constant="45" id="v6k-wn-hSj"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" backgroundImage="ic_add"/>
@@ -44,11 +44,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="9eV-5z-btA" firstAttribute="bottom" secondItem="hUa-Hr-4Jb" secondAttribute="bottom" constant="10" id="YsD-Wv-5JY"/>
                             <constraint firstItem="Nhr-Vl-uQP" firstAttribute="centerY" secondItem="hUa-Hr-4Jb" secondAttribute="centerY" id="beB-yX-NTE"/>
                             <constraint firstItem="9eV-5z-btA" firstAttribute="trailing" secondItem="Nhr-Vl-uQP" secondAttribute="trailing" constant="10" id="g5z-mj-3tf"/>
                             <constraint firstItem="hUa-Hr-4Jb" firstAttribute="leading" secondItem="9eV-5z-btA" secondAttribute="leading" constant="10" id="hTp-e6-tsk"/>
-                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="leading" secondItem="hUa-Hr-4Jb" secondAttribute="trailing" constant="10" id="rVG-fr-jMG"/>
-                            <constraint firstItem="hUa-Hr-4Jb" firstAttribute="top" secondItem="9eV-5z-btA" secondAttribute="top" id="vAO-z7-DNI"/>
+                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="leading" secondItem="hUa-Hr-4Jb" secondAttribute="trailing" constant="20" id="rVG-fr-jMG"/>
+                            <constraint firstItem="hUa-Hr-4Jb" firstAttribute="top" secondItem="9eV-5z-btA" secondAttribute="top" constant="10" id="vAO-z7-DNI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9eV-5z-btA"/>
                     </view>

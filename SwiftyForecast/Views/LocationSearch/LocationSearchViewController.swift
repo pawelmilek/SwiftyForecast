@@ -87,18 +87,6 @@ private extension LocationSearchViewController {
   
 }
 
-// MARK: - MKMapViewDelegate delegate
-extension LocationSearchViewController: MKMapViewDelegate {
-  
-  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    guard let selectedPin = selectedPin else { return }
-    
-    mapView.deselectAnnotation(view.annotation, animated: true)
-    showPopover(base: view, for: selectedPin)
-  }
-  
-}
-
 // MARK: - LocationSearchTableViewControllerDelegate delegate
 extension LocationSearchViewController: LocationSearchResultsTableViewControllerDelegate {
   
@@ -130,22 +118,52 @@ extension LocationSearchViewController: AddCalloutViewControllerDelegate {
   
 }
 
+// MARK: - MKMapViewDelegate delegate
+extension LocationSearchViewController: MKMapViewDelegate {
+  
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    guard let selectedPin = selectedPin else { return }
+    
+    mapView.deselectAnnotation(view.annotation, animated: true)
+    showPopover(base: view, for: selectedPin)
+  }
+  
+}
+
 // MARK: - Show add callout view controller as popover
 extension LocationSearchViewController {
   
   func showPopover(base: UIView, for selectedPin: MKPlacemark) {
     let viewController = StoryboardViewControllerFactory.make(AddCalloutViewController.self, from: .locationSearch)
     viewController.configure(placemark: selectedPin, delegate: self)
-    let navigationController = UINavigationController(rootViewController: viewController)
-    navigationController.modalPresentationStyle = .popover
-    
-    if let popoverPresentationController = navigationController.popoverPresentationController {
+    viewController.modalPresentationStyle = .popover
+
+    if let popoverPresentationController = viewController.popoverPresentationController {
+      popoverPresentationController.permittedArrowDirections = .up
       popoverPresentationController.sourceView = base
       popoverPresentationController.sourceRect = base.bounds
-      self.present(navigationController, animated: true)
+      popoverPresentationController.delegate = self
+      self.present(viewController, animated: true)
     }
   }
+  
+}
 
+// MARK: - UIPopoverPresentationControllerDelegate delegate
+extension LocationSearchViewController: UIPopoverPresentationControllerDelegate {
+  
+  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+    return .none
+  }
+  
+  func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) popoverPresentationController")
+  }
+  
+  func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+    return true
+  }
+  
 }
 
 // MARK: - Factory method

@@ -236,12 +236,12 @@ struct Style {
   struct CityCallout {
       static let defaultBackgroundColor = UIColor.white
       
-      static let nameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .bold)
+      static let nameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
       static let nameLabelTextColor = UIColor.lightOrange
       static let nameLabelAlignment = NSTextAlignment.left
       static let nameLabelNumberOfLines = 1
       
-      static let streetLabelFont = UIFont(name: "AvenirNext-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12, weight: .regular)
+      static let streetLabelFont = UIFont(name: "AvenirNext-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
       static let streetLabelTextColor = UIColor.black
       static let streetLabelAlignment = NSTextAlignment.left
       static let streetLabelNumberOfLines = 1
