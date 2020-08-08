@@ -138,12 +138,8 @@
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
 		E2741B1224D1158500C0FA8E /* CitySelectionViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1124D1158500C0FA8E /* CitySelectionViewModelDelegate.swift */; };
 		E2741B1424D1160E00C0FA8E /* DefaultCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */; };
-		E2741B2524D5EC8000C0FA8E /* CityAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2024D5EC8000C0FA8E /* CityAnnotationView.swift */; };
-		E2741B2624D5EC8000C0FA8E /* CityCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2124D5EC8000C0FA8E /* CityCalloutView.swift */; };
-		E2741B2724D5EC8000C0FA8E /* CityCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2741B2224D5EC8000C0FA8E /* CityCalloutView.xib */; };
-		E2741B2824D5EC8000C0FA8E /* CityAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2324D5EC8000C0FA8E /* CityAnnotation.swift */; };
-		E2741B2924D5EC8000C0FA8E /* CityCalloutViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2424D5EC8000C0FA8E /* CityCalloutViewDelegate.swift */; };
 		E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */; };
+		E2741B2D24DE36F200C0FA8E /* AddCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
 		E274DAF124A0604F001F8655 /* LocationSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */; };
 		E27E2F831DA0482C00B3EABF /* CitySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */; };
@@ -399,12 +395,8 @@
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E2741B1124D1158500C0FA8E /* CitySelectionViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectionViewModelDelegate.swift; sourceTree = "<group>"; };
 		E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityViewModel.swift; sourceTree = "<group>"; };
-		E2741B2024D5EC8000C0FA8E /* CityAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityAnnotationView.swift; sourceTree = "<group>"; };
-		E2741B2124D5EC8000C0FA8E /* CityCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCalloutView.swift; sourceTree = "<group>"; };
-		E2741B2224D5EC8000C0FA8E /* CityCalloutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CityCalloutView.xib; sourceTree = "<group>"; };
-		E2741B2324D5EC8000C0FA8E /* CityAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityAnnotation.swift; sourceTree = "<group>"; };
-		E2741B2424D5EC8000C0FA8E /* CityCalloutViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCalloutViewDelegate.swift; sourceTree = "<group>"; };
 		E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+CustomTransition.swift"; sourceTree = "<group>"; };
+		E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalloutViewController.swift; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
 		E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* CitySelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySelectionViewController.swift; sourceTree = "<group>"; };
@@ -608,7 +600,6 @@
 		E23997D420E84058007D8CE4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E2741B1524D5E98800C0FA8E /* CityAnnotationView */,
 				E293695624985DEA0055FB2E /* LocationSearch */,
 				E23997D920E840E4007D8CE4 /* Cells */,
 				E23CD76420EDAFEE00F0F72A /* ForecastView */,
@@ -796,18 +787,6 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		E2741B1524D5E98800C0FA8E /* CityAnnotationView */ = {
-			isa = PBXGroup;
-			children = (
-				E2741B2324D5EC8000C0FA8E /* CityAnnotation.swift */,
-				E2741B2024D5EC8000C0FA8E /* CityAnnotationView.swift */,
-				E2741B2124D5EC8000C0FA8E /* CityCalloutView.swift */,
-				E2741B2224D5EC8000C0FA8E /* CityCalloutView.xib */,
-				E2741B2424D5EC8000C0FA8E /* CityCalloutViewDelegate.swift */,
-			);
-			path = CityAnnotationView;
-			sourceTree = "<group>";
-		};
 		E27A9BE522EE67E9008A62CE /* GeocodeLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -825,16 +804,9 @@
 				E24C8C4A24CFBC7A004E3A2C /* LocationSearchResultsTableViewControllerDelegate.swift */,
 				E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */,
 				E293695224985CD90055FB2E /* LocationSearchViewController.swift */,
+				E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */,
 			);
 			path = LocationSearch;
-			sourceTree = "<group>";
-		};
-		E294AD3323771FD800B44AE8 /* ActivityIndicatorView */ = {
-			isa = PBXGroup;
-			children = (
-				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
-			);
-			path = ActivityIndicatorView;
 			sourceTree = "<group>";
 		};
 		E2988D1123369A3D00B53D71 /* NotificationCenter */ = {
@@ -889,8 +861,8 @@
 		E2A45E0F2290D86E00B04A67 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E24FEB7620F684E1003E7861 /* ActivityIndicatorView.swift */,
 				E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */,
-				E270891824CE5904003F7587 /* Coordinator */,
 				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
 				E2854FF92290F0DB00CD7554 /* ForecastUserDefaults.swift */,
 				E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */,
@@ -902,7 +874,7 @@
 				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
 				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
-				E294AD3323771FD800B44AE8 /* ActivityIndicatorView */,
+				E270891824CE5904003F7587 /* Coordinator */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E2DC147D248F230600D1A329 /* KeyboardObserver */,
@@ -1196,7 +1168,6 @@
 				E2F17C2E20F4097C00068BD2 /* DailyForecastTableViewCell.xib in Resources */,
 				E2E0762120F51506008A5B63 /* FontWeather.ttf in Resources */,
 				E253B40124BFEE70007AD187 /* LocationSearch.storyboard in Resources */,
-				E2741B2724D5EC8000C0FA8E /* CityCalloutView.xib in Resources */,
 				E206E1CE20EC5E7C00AC72EA /* ForecastView.xib in Resources */,
 				E27E2FB51DA04D1D00B3EABF /* CityTableViewCell.xib in Resources */,
 				E2EC1CF91D918F4A00FD1F95 /* Assets.xcassets in Resources */,
@@ -1334,12 +1305,10 @@
 				E206E1C920E9C2E500AC72EA /* WeatherForecast.swift in Sources */,
 				E28AFC792374FF2400D1D5ED /* PathFinder.swift in Sources */,
 				E24FEB7720F684E1003E7861 /* ActivityIndicatorView.swift in Sources */,
-				E2741B2624D5EC8000C0FA8E /* CityCalloutView.swift in Sources */,
 				E293C5E7234AC2B6003BBE0B /* Collection+SafeSubscript.swift in Sources */,
 				E27E2F921DA04C8C00B3EABF /* Double+RoundedToString.swift in Sources */,
 				E293694D24966D900055FB2E /* CityViewModel.swift in Sources */,
 				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
-				E2741B2824D5EC8000C0FA8E /* CityAnnotation.swift in Sources */,
 				E2E0762320F51577008A5B63 /* UIFont+FontWeatherIcon.swift in Sources */,
 				E206E1D220EC76E100AC72EA /* ForecastViewDelegate.swift in Sources */,
 				E20793F32176B6A500F3AF10 /* Int+ToHoursMinutesSeconds.swift in Sources */,
@@ -1393,6 +1362,7 @@
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
 				E27E2FCB1DA04D1D00B3EABF /* NibLoadableView.swift in Sources */,
 				E2CF4D82226E86B200062E36 /* ContentViewModel.swift in Sources */,
+				E2741B2D24DE36F200C0FA8E /* AddCalloutViewController.swift in Sources */,
 				E27E2FCC1DA04D1D00B3EABF /* Registrable.swift in Sources */,
 				E27E2F861DA0482C00B3EABF /* ContentViewController.swift in Sources */,
 				E2CF4DDD227E313400062E36 /* ForecastNotificationCenter.swift in Sources */,
@@ -1413,12 +1383,10 @@
 				E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */,
 				E2CF4D72226E78CF00062E36 /* CitySelectionViewModel.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
-				E2741B2924D5EC8000C0FA8E /* CityCalloutViewDelegate.swift in Sources */,
 				E206E1C120E9673A00AC72EA /* HourlyForecast.swift in Sources */,
 				E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */,
 				E23997EC20E84371007D8CE4 /* WebService.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
-				E2741B2524D5EC8000C0FA8E /* CityAnnotationView.swift in Sources */,
 				E2741B1224D1158500C0FA8E /* CitySelectionViewModelDelegate.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
 				E2DC1483248F230600D1A329 /* KeyboardUserInfo.swift in Sources */,

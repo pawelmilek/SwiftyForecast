@@ -180,17 +180,8 @@ extension City {
   
 }
 
-// MARK: - Is city exists
+// MARK: - ID interator
 extension City {
-  
-  var isExists: Bool {
-    guard let cities = try? City.fetchAll() else { return false }
-    
-    let predicate = NSPredicate(format: "name == %@ && country == %@", name, country)
-    let searchResults = cities.filter(predicate)
-    
-    return searchResults.count > 0 ? true : false
-  }
   
   private static func nextId(in realm: Realm? = RealmProvider.core.realm) -> Int {
     return (realm?.objects(City.self).map{ $0.index }.max() ?? 0) + 1

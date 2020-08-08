@@ -69,7 +69,7 @@ private extension LocationSearchViewController {
     searchController.searchBar.text = nil
     searchController.searchBar.resignFirstResponder()
   }
-
+  
 }
 
 // MARK: - Private - Requrest location
@@ -84,25 +84,19 @@ private extension LocationSearchViewController {
       }
     }
   }
-
+  
 }
 
 // MARK: - MKMapViewDelegate delegate
 extension LocationSearchViewController: MKMapViewDelegate {
   
-  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    debugPrint("File: \(#file), Function: \(#function), line: \(#line) calloutAccessoryControlTapped")
-  }
-  
-//  func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//    debugPrint("File: \(#file), Function: \(#function), line: \(#line) annotation")
-//    return nil
-//  }
-  
   func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-    debugPrint("File: \(#file), Function: \(#function), line: \(#line) didSelect")
+    guard let selectedPin = selectedPin else { return }
+    
+    mapView.deselectAnnotation(view.annotation, animated: true)
+    showPopover(base: view, for: selectedPin)
   }
-
+  
 }
 
 // MARK: - LocationSearchTableViewControllerDelegate delegate
@@ -127,6 +121,32 @@ extension LocationSearchViewController: LocationSearchResultsTableViewController
   
 }
 
+// MARK: - CityCalloutViewDelegate delegate
+extension LocationSearchViewController: AddCalloutViewControllerDelegate {
+  
+  func addCalloutViewController(_ view: AddCalloutViewController, didPressAdd button: UIButton) {
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) didPressAdd")
+  }
+  
+}
+
+// MARK: - Show add callout view controller as popover
+extension LocationSearchViewController {
+  
+  func showPopover(base: UIView, for selectedPin: MKPlacemark) {
+    let viewController = StoryboardViewControllerFactory.make(AddCalloutViewController.self, from: .locationSearch)
+    viewController.configure(placemark: selectedPin, delegate: self)
+    let navigationController = UINavigationController(rootViewController: viewController)
+    navigationController.modalPresentationStyle = .popover
+    
+    if let popoverPresentationController = navigationController.popoverPresentationController {
+      popoverPresentationController.sourceView = base
+      popoverPresentationController.sourceRect = base.bounds
+      self.present(navigationController, animated: true)
+    }
+  }
+
+}
 
 // MARK: - Factory method
 extension LocationSearchViewController {

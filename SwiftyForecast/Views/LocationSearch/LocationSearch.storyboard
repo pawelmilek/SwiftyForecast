@@ -7,6 +7,65 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Add Callout View Controller-->
+        <scene sceneID="srD-dg-0S1">
+            <objects>
+                <viewController storyboardIdentifier="AddCalloutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RYj-hZ-6wl" customClass="AddCalloutViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U3V-yD-BsN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hUa-Hr-4Jb">
+                                <rect key="frame" x="10" y="44" width="334" height="41"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaf-WQ-hV4" userLabel="Title Label">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubtitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSd-CO-gUM" userLabel="Subtitle Label">
+                                        <rect key="frame" x="0.0" y="20.5" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhr-Vl-uQP" userLabel="Add Button">
+                                <rect key="frame" x="354" y="39.5" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="ayp-bD-tlY"/>
+                                    <constraint firstAttribute="height" constant="50" id="v6k-wn-hSj"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" backgroundImage="ic_add"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="centerY" secondItem="hUa-Hr-4Jb" secondAttribute="centerY" id="beB-yX-NTE"/>
+                            <constraint firstItem="9eV-5z-btA" firstAttribute="trailing" secondItem="Nhr-Vl-uQP" secondAttribute="trailing" constant="10" id="g5z-mj-3tf"/>
+                            <constraint firstItem="hUa-Hr-4Jb" firstAttribute="leading" secondItem="9eV-5z-btA" secondAttribute="leading" constant="10" id="hTp-e6-tsk"/>
+                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="leading" secondItem="hUa-Hr-4Jb" secondAttribute="trailing" constant="10" id="rVG-fr-jMG"/>
+                            <constraint firstItem="hUa-Hr-4Jb" firstAttribute="top" secondItem="9eV-5z-btA" secondAttribute="top" id="vAO-z7-DNI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9eV-5z-btA"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="414" height="100"/>
+                    <connections>
+                        <outlet property="addButton" destination="Nhr-Vl-uQP" id="oku-Kt-yzU"/>
+                        <outlet property="subtitleLabel" destination="fSd-CO-gUM" id="JUe-x7-kXZ"/>
+                        <outlet property="titleLabel" destination="iaf-WQ-hV4" id="HKM-wd-IX0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HrQ-Dw-PPS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1825" y="-247"/>
+        </scene>
         <!--Location Search View Controller-->
         <scene sceneID="Q0h-zc-SQk">
             <objects>
@@ -82,4 +141,7 @@
             <point key="canvasLocation" x="1139.1304347826087" y="-76.339285714285708"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_add" width="50" height="50"/>
+    </resources>
 </document>

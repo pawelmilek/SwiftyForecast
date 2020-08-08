@@ -1,18 +1,16 @@
 import UIKit
 
-final class CityCalloutView: UIView {
-  @IBOutlet weak var contentButton: UIButton!
-  @IBOutlet weak var openMapDirectionButton: UIButton!
-  @IBOutlet weak var showDetailsButton: UIButton!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var streetLabel: UILabel!
+final class CustomCalloutView: UIView {
+  @IBOutlet weak var addButton: UIButton!
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var subtitleLabel: UILabel!
   
   weak var delegate: CityCalloutViewDelegate?
   var city: City? {
     didSet {
-//      guard let restaurant = restaurant else { return }
-//      nameLabel.text = restaurant.name
-//      streetLabel.text = restaurant.location.street
+      //      guard let restaurant = restaurant else { return }
+      //      nameLabel.text = restaurant.name
+      //      streetLabel.text = restaurant.location.street
     }
   }
   
@@ -29,7 +27,7 @@ final class CityCalloutView: UIView {
       return result
     }
     
-    if let result = showDetailsButton.hitTest(convert(point, to: showDetailsButton), with: event) {
+    if let result = addButton.hitTest(convert(point, to: addButton), with: event) {
       return result
     }
     
@@ -40,7 +38,7 @@ final class CityCalloutView: UIView {
 
 
 // MARK: - ViewSetupable protocol
-extension CityCalloutView: ViewSetupable {
+extension CustomCalloutView: ViewSetupable {
   
   func setUp() {
     self.layer.cornerRadius = 10
@@ -50,22 +48,22 @@ extension CityCalloutView: ViewSetupable {
     typealias DetailMapViewStyle = Style.CityCallout
     backgroundColor = DetailMapViewStyle.defaultBackgroundColor
     
-    nameLabel.font = DetailMapViewStyle.nameLabelFont
-    nameLabel.textColor = DetailMapViewStyle.nameLabelTextColor
-    nameLabel.textAlignment = DetailMapViewStyle.nameLabelAlignment
-    nameLabel.numberOfLines = DetailMapViewStyle.nameLabelNumberOfLines
+    titleLabel.font = DetailMapViewStyle.nameLabelFont
+    titleLabel.textColor = DetailMapViewStyle.nameLabelTextColor
+    titleLabel.textAlignment = DetailMapViewStyle.nameLabelAlignment
+    titleLabel.numberOfLines = DetailMapViewStyle.nameLabelNumberOfLines
     
-    streetLabel.font = DetailMapViewStyle.streetLabelFont
-    streetLabel.textColor = DetailMapViewStyle.streetLabelTextColor
-    streetLabel.textAlignment = DetailMapViewStyle.streetLabelAlignment
-    streetLabel.numberOfLines = DetailMapViewStyle.streetLabelNumberOfLines
+    subtitleLabel.font = DetailMapViewStyle.streetLabelFont
+    subtitleLabel.textColor = DetailMapViewStyle.streetLabelTextColor
+    subtitleLabel.textAlignment = DetailMapViewStyle.streetLabelAlignment
+    subtitleLabel.numberOfLines = DetailMapViewStyle.streetLabelNumberOfLines
   }
   
 }
 
 
 // MARK: Configure
-extension CityCalloutView {
+extension CustomCalloutView {
   
   func configure(by city: City) {
     self.city = city
@@ -75,14 +73,10 @@ extension CityCalloutView {
 
 
 // MARK: - Actions
-extension CityCalloutView {
+extension CustomCalloutView {
   
-  @IBAction func showDetailsButtonPressed(_ sender: UIButton) {
-    
-  }
-  
-  @IBAction func openMapsButtonPressed(_ sender: UIButton) {
-    delegate?.cityCalloutView(self, didPressOpenMpasDirection: sender)
+  @IBAction func addCityButtonTapped(_ sender: UIButton) {
+    delegate?.cityCalloutView(self, didPressAdd: sender)
   }
   
 }
