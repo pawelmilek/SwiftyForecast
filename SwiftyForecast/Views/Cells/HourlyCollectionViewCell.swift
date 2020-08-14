@@ -16,8 +16,8 @@ final class HourlyCollectionViewCell: UICollectionViewCell {
   }
 }
 
-// MARK: - ViewSetupable
-extension HourlyCollectionViewCell: ViewSetupable {
+// MARK: - Private - SetUps
+private extension HourlyCollectionViewCell {
   
   func setUp() {
     backgroundColor = Style.HourlyForecastCell.backgroundColor

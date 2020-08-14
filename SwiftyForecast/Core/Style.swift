@@ -161,11 +161,12 @@ struct Style {
     static let conditionIconSize: CGFloat = 25
   }
   
-  // MARK: - CitySelection
-  struct CitySelection {
+  // MARK: - CityListSelection
+  struct CityListSelection {
     static let addButtonBackgroundColor = MKPinAnnotationView.redPinColor()
     static let backgroundColor = UIColor.clear
     static let separatorColor = UIColor.blackShade
+    static let separatorStyle = UITableViewCell.SeparatorStyle.none
   }
   
   // MARK: - LocationSearch
@@ -173,14 +174,14 @@ struct Style {
     static let primaryTextColor = UIColor.orange
     static let primaryTextHighlightColor = UIColor.lightOrange
     static let secondaryTextColor = UIColor.blackShade
-
+    
     static let searchTextColorInSearchBar = UIColor.orange
     static let searchTextFontInSearchBar = UIFont.systemFont(ofSize: 14, weight: .light)
     static let searchTextFieldColorPlaceholder = UIColor.blackShade.withAlphaComponent(0.6)
     static let searchTextFieldFontPlaceholder = UIFont.systemFont(ofSize: 14, weight: .regular)
     static let searchBarCancelButtonColor = UIColor.orange
     static let searchBarCancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .regular)
-
+    
     static let separatorColor = UIColor.blackShade.withAlphaComponent(0.7)
     static let backgroundColor = UIColor.clear
   }
@@ -214,12 +215,12 @@ struct Style {
   // MARK: - CitySearchBar
   struct CitySearchBar {
     static let backgroundColor = UIColor.ecstasy
-    static let cancelButtonFont = UIFont(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
+    static let cancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .light)
     static let cancelButtonColor = UIColor.white
     static let cancelButtonBackgroundColor = UIColor.white
     
     static let searchTextFieldBackgroundColor = UIColor.white
-    static let searchTextFieldFont = UIFont(name: "AvenirNext-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .light)
+    static let searchTextFieldFont = UIFont.systemFont(ofSize: 14, weight: .light)
     static let searchTextFieldColor = UIColor.black
     static let searchTextFieldPlaceholder = UIColor.gray
     static var searchTextFieldTintColor = UIColor.ecstasy
@@ -232,19 +233,22 @@ struct Style {
     static let indicatorColor = UIColor.white
   }
   
-  // MARK: CityCalloutView
-  struct CityCallout {
-      static let defaultBackgroundColor = UIColor.white
-      
-      static let nameLabelFont = UIFont(name: "AvenirNext-DemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16, weight: .bold)
-      static let nameLabelTextColor = UIColor.lightOrange
-      static let nameLabelAlignment = NSTextAlignment.left
-      static let nameLabelNumberOfLines = 1
-      
-      static let streetLabelFont = UIFont(name: "AvenirNext-Regular", size: 13) ?? UIFont.systemFont(ofSize: 13, weight: .regular)
-      static let streetLabelTextColor = UIColor.black
-      static let streetLabelAlignment = NSTextAlignment.left
-      static let streetLabelNumberOfLines = 1
-      
+  // MARK: AddCalloutView
+  struct AddCalloutView {
+    static let defaultBackgroundColor = UIColor.white
+    static let cornerRadius = CGFloat(15)
+    static let titleLabelFont = UIFont.systemFont(ofSize: 16, weight: .bold)
+    static let titleLabelTextColor = UIColor.lightOrange
+    static let titleLabelAlignment = NSTextAlignment.left
+    static let titleLabelNumberOfLines = 1
+    
+    static let subtitleLabelFont = UIFont.systemFont(ofSize: 13, weight: .regular)
+    static let subtitleLabelTextColor = UIColor.black
+    static let subtitleLabelAlignment = NSTextAlignment.left
+    static let subtitleLabelNumberOfLines = 1
+    
+    static let addButtonIconName = "ic_add"
+    static let addButtonTintColor = UIColor.orange
+    
   }
 }

@@ -21,8 +21,8 @@ final class CityTableViewCell: UITableViewCell {
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension CityTableViewCell: ViewSetupable {
+// MARK: - Private - SetUps
+private extension CityTableViewCell {
   
   func setUp() {
     currentTimeLabel.text = ""

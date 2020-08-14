@@ -40,8 +40,8 @@ class TodayViewController: UIViewController {
   }
 }
 
-// MARK: - NCWidgetProviding protocol
-extension TodayViewController: ViewSetupable {
+// MARK: - Private - SetUps
+private extension TodayViewController {
   
   func setUp() {
     setCollectionView()

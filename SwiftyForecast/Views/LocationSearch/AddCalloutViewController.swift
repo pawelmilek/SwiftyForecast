@@ -1,17 +1,13 @@
 import UIKit
 import MapKit
 
-protocol AddCalloutViewControllerDelegate: class {
-  func addCalloutViewController(_ view: AddCalloutViewController, didPressAdd button: UIButton)
-}
-
-final class AddCalloutViewController: UIViewController {
+final class AddCalloutViewController: UIViewController, ErrorHandleable {
   @IBOutlet private weak var addButton: UIButton!
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var subtitleLabel: UILabel!
   
+  private var viewModel: AddCalloutViewModel?
   private weak var delegate: AddCalloutViewControllerDelegate?
-  private var city: City?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,17 +17,21 @@ final class AddCalloutViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      self.preferredContentSize = self.view.systemLayoutSizeFitting(
+      self.preferredContentSize = self.view.systemLayoutSizeFitting (
           UIView.layoutFittingCompressedSize
       )
+  }
+  
+  deinit {
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) deinit AddCalloutViewController")
   }
 }
 
 // MARK: Configure
 extension AddCalloutViewController {
   
-  func configure(placemark: MKPlacemark, delegate: AddCalloutViewControllerDelegate) {
-    self.city = City(placemark: placemark)
+  func configure(viewModel: AddCalloutViewModel, delegate: AddCalloutViewControllerDelegate) {
+    self.viewModel = viewModel
     self.delegate = delegate
   }
   
@@ -41,44 +41,63 @@ extension AddCalloutViewController {
 private extension AddCalloutViewController {
   
   func setUp() {
-    titleLabel.text = city?.name
-    subtitleLabel.text = city?.country
-    
+    setLabels()
+    setButton()
+  }
+  
+  func setLabels() {
+    titleLabel.text = viewModel?.cityName
+    subtitleLabel.text = viewModel?.country
+  }
+  
+  func setButton() {
     addButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
   }
   
   func setUpStyle() {
-    typealias DetailMapViewStyle = Style.CityCallout
-    view.backgroundColor = DetailMapViewStyle.defaultBackgroundColor
+    view.backgroundColor = Style.AddCalloutView.defaultBackgroundColor
+    view.layer.cornerRadius = Style.AddCalloutView.cornerRadius
     
-    titleLabel.font = DetailMapViewStyle.nameLabelFont
-    titleLabel.textColor = DetailMapViewStyle.nameLabelTextColor
-    titleLabel.textAlignment = DetailMapViewStyle.nameLabelAlignment
-    titleLabel.numberOfLines = DetailMapViewStyle.nameLabelNumberOfLines
+    titleLabel.font = Style.AddCalloutView.titleLabelFont
+    titleLabel.textColor = Style.AddCalloutView.titleLabelTextColor
+    titleLabel.textAlignment = Style.AddCalloutView.titleLabelAlignment
+    titleLabel.numberOfLines = Style.AddCalloutView.titleLabelNumberOfLines
     
-    subtitleLabel.font = DetailMapViewStyle.streetLabelFont
-    subtitleLabel.textColor = DetailMapViewStyle.streetLabelTextColor
-    subtitleLabel.textAlignment = DetailMapViewStyle.streetLabelAlignment
-    subtitleLabel.numberOfLines = DetailMapViewStyle.streetLabelNumberOfLines
+    subtitleLabel.font = Style.AddCalloutView.subtitleLabelFont
+    subtitleLabel.textColor = Style.AddCalloutView.subtitleLabelTextColor
+    subtitleLabel.textAlignment = Style.AddCalloutView.subtitleLabelAlignment
+    subtitleLabel.numberOfLines = Style.AddCalloutView.subtitleLabelNumberOfLines
     
-    let origImage = UIImage(named: "ic_add")
-    let tintedImage = origImage?.withRenderingMode(.alwaysTemplate)
-    addButton.setBackgroundImage(tintedImage, for: .normal)
-    addButton.tintColor = .orange
-    
-    view.layer.borderColor = UIColor.orange.cgColor
-    view.layer.masksToBounds = true
-    view.layer.borderWidth = 1
-    view.layer.cornerRadius = 15
+    let image = UIImage.makeAlwaysTemplate(named: Style.AddCalloutView.addButtonIconName)
+    addButton.setBackgroundImage(image, for: .normal)
+    addButton.tintColor = Style.AddCalloutView.addButtonTintColor
   }
 
 }
 
 // MARK: - Actions
 private extension AddCalloutViewController {
-  
+
   @objc func addButtonTapped(_ sender: UIButton) {
-    delegate?.addCalloutViewController(self, didPressAdd: sender)
+    viewModel?.add { result in
+      switch result {
+      case .success:
+        delegate?.addCalloutViewController(self, didPressAdd: sender)
+        
+      case .failure(let error):
+        error.handler()
+      }
+    }
   }
   
+}
+
+// MARK: - Factory method
+extension AddCalloutViewController {
+  
+  static func make(viewModel: AddCalloutViewModel, delegate: AddCalloutViewControllerDelegate) -> AddCalloutViewController {
+    let viewController = StoryboardViewControllerFactory.make(AddCalloutViewController.self, from: .locationSearch)
+    viewController.configure(viewModel: viewModel, delegate: delegate)
+    return viewController
+  }
 }

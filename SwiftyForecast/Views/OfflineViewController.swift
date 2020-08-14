@@ -50,8 +50,8 @@ final class OfflineViewController: UIViewController {
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension OfflineViewController: ViewSetupable {
+// MARK: - Private - SetUps
+private extension OfflineViewController {
   
   func setUp() {
     self.view.tag = OfflineViewController.identifier

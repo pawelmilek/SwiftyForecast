@@ -1,14 +1,10 @@
 import RealmSwift
 import MapKit
 
-final class DefaultCitySelectionViewModel: CitySelectionViewModel {
+final class DefaultCityListViewModel: CityListViewModel {
   var numberOfCities: Int {
     return cityViewModels.count
   }
-  
-  var onSuccess: (() -> Void)?
-  var onFailure: ((Error) -> Void)?
-  var onLoadingStatus: ((Bool) -> Void)?
   
   private var cities: Results<City> {
     let allCities = try! City.fetchAll()
@@ -19,10 +15,14 @@ final class DefaultCitySelectionViewModel: CitySelectionViewModel {
     return cities.map { DefaultCityViewModel(city: $0) }
   }()
 
-  weak var delegate: CitySelectionViewModelDelegate?
+  weak var delegate: CityListViewModelDelegate?
   
-  init(delegate: CitySelectionViewModelDelegate) {
+  init(delegate: CityListViewModelDelegate) {
     self.delegate = delegate
+  }
+  
+  func delete(at indexPath: IndexPath) {
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) delete city")
   }
 
   func select(at index: Int) {

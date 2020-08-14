@@ -7,7 +7,7 @@ final class LocationSearchViewController: UIViewController {
   
   weak var coordinator: MainCoordinator?
   private let sharedLocationProvider = LocationProvider.shared
-  private lazy var searchController: UISearchController = {
+  private lazy var searchController: UISearchController? = {
     let viewController = LocationSearchResultsTableViewController.make(with: mapView)
     viewController.locationSearchDelegate = self
     
@@ -61,13 +61,13 @@ private extension LocationSearchViewController {
   }
   
   func setupSearchController() {
-    navigationItem.titleView = searchController.searchBar
+    navigationItem.titleView = searchController?.searchBar
   }
   
   func resetSearchController() {
-    searchController.isActive = false
-    searchController.searchBar.text = nil
-    searchController.searchBar.resignFirstResponder()
+    searchController?.isActive = false
+    searchController?.searchBar.text = nil
+    searchController?.searchBar.resignFirstResponder()
   }
   
 }
@@ -113,7 +113,10 @@ extension LocationSearchViewController: LocationSearchResultsTableViewController
 extension LocationSearchViewController: AddCalloutViewControllerDelegate {
   
   func addCalloutViewController(_ view: AddCalloutViewController, didPressAdd button: UIButton) {
-    debugPrint("File: \(#file), Function: \(#function), line: \(#line) didPressAdd")
+    view.dismiss(animated: true) { [weak self] in
+      self?.searchController = nil
+      self?.coordinator?.onAddCityFromCalloutViewController()
+    }
   }
   
 }
@@ -134,12 +137,12 @@ extension LocationSearchViewController: MKMapViewDelegate {
 extension LocationSearchViewController {
   
   func showPopover(base: UIView, for selectedPin: MKPlacemark) {
-    let viewController = StoryboardViewControllerFactory.make(AddCalloutViewController.self, from: .locationSearch)
-    viewController.configure(placemark: selectedPin, delegate: self)
+    let viewModel = DefaultAddCalloutViewModel(placemark: selectedPin)
+    let viewController = AddCalloutViewController.make(viewModel: viewModel, delegate: self)
     viewController.modalPresentationStyle = .popover
 
     if let popoverPresentationController = viewController.popoverPresentationController {
-      popoverPresentationController.permittedArrowDirections = .up
+      popoverPresentationController.permittedArrowDirections = .down
       popoverPresentationController.sourceView = base
       popoverPresentationController.sourceRect = base.bounds
       popoverPresentationController.delegate = self
@@ -154,10 +157,6 @@ extension LocationSearchViewController: UIPopoverPresentationControllerDelegate 
   
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
-  }
-  
-  func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
-    debugPrint("File: \(#file), Function: \(#function), line: \(#line) popoverPresentationController")
   }
   
   func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {

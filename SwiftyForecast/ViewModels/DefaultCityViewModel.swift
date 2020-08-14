@@ -6,7 +6,18 @@ struct DefaultCityViewModel: CityViewModel {
   }
 
   var localTime: String {
-    return city.localTime
+    guard city.localTime == InvalidReference.notApplicable else {
+      return city.localTime
+    }
+    
+    if let coordinate = city.location?.coordinate {
+      fetchTimeZone(for: coordinate) { timeZone in
+        return timeZone?.identifier ?? "dafd"
+      }
+    }
+    
+    return InvalidReference.notApplicable
+    
   }
   
   var map: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
@@ -30,4 +41,21 @@ struct DefaultCityViewModel: CityViewModel {
   init(city: City) {
     self.city = city
   }
+}
+
+// MARK: - Private - Fetch local time
+private extension DefaultCityViewModel {
+
+  func fetchTimeZone(for location: CLLocationCoordinate2D, completion: @escaping (_ timeZone: TimeZone?) -> ()) {
+    GeocoderHelper.timeZone(for: location) { result in
+      switch result {
+      case .success(let data):
+        completion(data)
+
+      case .failure:
+        completion(nil)
+      }
+    }
+  }
+
 }

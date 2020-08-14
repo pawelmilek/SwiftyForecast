@@ -102,8 +102,8 @@ import UIKit
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension SegmentedControl: ViewSetupable {
+// MARK: - Private - SetUps
+private extension SegmentedControl {
   
   func setUp() {
     layer.cornerRadius = frame.height / 2

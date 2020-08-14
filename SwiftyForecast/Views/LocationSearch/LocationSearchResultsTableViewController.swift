@@ -23,8 +23,8 @@ private extension LocationSearchResultsTableViewController {
     tableView.separatorColor = Style.LocationSearch.separatorColor
     tableView.backgroundColor = Style.LocationSearch.backgroundColor
     
-    viewModel?.onUpdateSearchResults = {
-      self.tableView.reloadData()
+    viewModel?.onUpdateSearchResults = { [weak self] in
+      self?.tableView.reloadData()
     }
   }
   

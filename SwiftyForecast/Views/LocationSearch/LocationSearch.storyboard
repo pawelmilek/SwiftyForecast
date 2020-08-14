@@ -16,16 +16,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hUa-Hr-4Jb">
-                                <rect key="frame" x="10" y="54" width="329" height="36"/>
+                                <rect key="frame" x="10" y="54" width="319" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaf-WQ-hV4" userLabel="Title Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="329" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="319" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubtitleLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSd-CO-gUM" userLabel="Subtitle Label">
-                                        <rect key="frame" x="0.0" y="18" width="329" height="18"/>
+                                        <rect key="frame" x="0.0" y="18" width="319" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -33,10 +33,10 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhr-Vl-uQP" userLabel="Add Button">
-                                <rect key="frame" x="359" y="49.5" width="45" height="45"/>
+                                <rect key="frame" x="364" y="52" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="45" id="ayp-bD-tlY"/>
-                                    <constraint firstAttribute="height" constant="45" id="v6k-wn-hSj"/>
+                                    <constraint firstAttribute="width" constant="40" id="ayp-bD-tlY"/>
+                                    <constraint firstAttribute="height" constant="40" id="v6k-wn-hSj"/>
                                 </constraints>
                                 <inset key="imageEdgeInsets" minX="12" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" backgroundImage="ic_add"/>
@@ -48,7 +48,7 @@
                             <constraint firstItem="Nhr-Vl-uQP" firstAttribute="centerY" secondItem="hUa-Hr-4Jb" secondAttribute="centerY" id="beB-yX-NTE"/>
                             <constraint firstItem="9eV-5z-btA" firstAttribute="trailing" secondItem="Nhr-Vl-uQP" secondAttribute="trailing" constant="10" id="g5z-mj-3tf"/>
                             <constraint firstItem="hUa-Hr-4Jb" firstAttribute="leading" secondItem="9eV-5z-btA" secondAttribute="leading" constant="10" id="hTp-e6-tsk"/>
-                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="leading" secondItem="hUa-Hr-4Jb" secondAttribute="trailing" constant="20" id="rVG-fr-jMG"/>
+                            <constraint firstItem="Nhr-Vl-uQP" firstAttribute="leading" secondItem="hUa-Hr-4Jb" secondAttribute="trailing" constant="35" id="rVG-fr-jMG"/>
                             <constraint firstItem="hUa-Hr-4Jb" firstAttribute="top" secondItem="9eV-5z-btA" secondAttribute="top" constant="10" id="vAO-z7-DNI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9eV-5z-btA"/>
@@ -143,6 +143,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_add" width="50" height="50"/>
+        <image name="ic_add" width="33" height="33"/>
     </resources>
 </document>

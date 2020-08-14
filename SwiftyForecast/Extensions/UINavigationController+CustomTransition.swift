@@ -5,16 +5,20 @@ extension UINavigationController {
   func pop(transitionType type: CATransitionType,
            transitionSubtype subtype: CATransitionSubtype,
            duration: CFTimeInterval = 0.3) {
-    self.addTransition(transitionType: type, transitionSubtype: subtype, duration: duration)
-    self.popViewController(animated: false)
+    DispatchQueue.main.async {
+      self.addTransition(transitionType: type, transitionSubtype: subtype, duration: duration)
+      self.popViewController(animated: false)
+    }
   }
 
   func push(viewController vc: UIViewController,
             transitionType type: CATransitionType,
             transitionSubtype subtype: CATransitionSubtype,
             duration: CFTimeInterval = 0.3) {
-    self.addTransition(transitionType: type, transitionSubtype: subtype, duration: duration)
-    self.pushViewController(vc, animated: false)
+    DispatchQueue.main.async {
+      self.addTransition(transitionType: type, transitionSubtype: subtype, duration: duration)
+      self.pushViewController(vc, animated: false)
+    }
   }
   
   private func addTransition(transitionType type: CATransitionType,

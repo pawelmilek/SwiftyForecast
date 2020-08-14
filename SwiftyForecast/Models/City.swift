@@ -154,6 +154,29 @@ extension City {
     return newCity
   }
   
+  @discardableResult
+  static func add(_ city: City,
+                  at index: Int? = nil,
+                  in realm: Realm? = RealmProvider.core.realm) throws -> City {
+    guard let realm = realm else { throw RealmError.initializationFailed }
+    
+    if let index = index {
+      city.index = index
+    } else {
+      city.index = nextId(in: realm)
+    }
+    
+    do {
+      try realm.write {
+        realm.add(city, update: .all)
+      }
+    } catch {
+      throw RealmError.transactionFailed(description: "Adding new city")
+    }
+    
+    return city
+  }
+  
   func delete() throws {
     guard let realm = realm else { throw RealmError.initializationFailed }
     

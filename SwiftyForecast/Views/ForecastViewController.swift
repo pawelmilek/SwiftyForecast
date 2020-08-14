@@ -63,8 +63,8 @@ final class ForecastViewController: UIViewController {
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension ForecastViewController: ViewSetupable {
+// MARK: - Private - SetUps
+private extension ForecastViewController {
   
   func setUp() {
     setViewModelClosureCallbacks()
@@ -165,8 +165,8 @@ extension ForecastViewController {
   
   
   
-  @IBAction func citySelectionBarButtonTapped(_ sender: UIBarButtonItem) {
-    coordinator?.onTapCitySelectionBarButton()
+  @IBAction func cityListSelectionBarButtonTapped(_ sender: UIBarButtonItem) {
+    coordinator?.onTapCityListSelectionBarButton()
   }
   
   @IBAction func poweredByBarButtonTapped(_ sender: UIBarButtonItem) {
@@ -189,9 +189,9 @@ extension ForecastViewController {
 }
 
 // MARK: - CityListTableViewControllerDelegate protocol
-extension ForecastViewController: CitySelectionViewControllerDelegate {
+extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
-  func citySelection(_ view: CitySelectionViewController, didSelect city: City) {
+  func citySelection(_ view: CityListSelectionViewController, didSelect city: City) {
     guard let index = viewModel?.index(of: city) else { return }
     
     moveToPage(at: index) { [weak self] _ in
@@ -288,7 +288,8 @@ extension ForecastViewController: UIPageViewControllerDataSource {
 // MARK: - UIPageViewControllerDelegate protocol
 extension ForecastViewController: UIPageViewControllerDelegate {
   
-  func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+  func pageViewController(_ pageViewController: UIPageViewController,
+                          willTransitionTo pendingViewControllers: [UIViewController]) {
     guard let viewController = pendingViewControllers.first as? ContentViewController else { return }
     viewModel?.pendingIndex = viewController.pageIndex
   }

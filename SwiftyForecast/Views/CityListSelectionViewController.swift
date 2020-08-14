@@ -2,22 +2,22 @@ import UIKit
 import CoreLocation
 import RealmSwift
 
-final class CitySelectionViewController: UIViewController {
+final class CityListSelectionViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView!
   
   weak var coordinator: MainCoordinator?
-  weak var delegate: CitySelectionViewControllerDelegate?
-  var viewModel: CitySelectionViewModel?
+  weak var delegate: CityListSelectionViewControllerDelegate?
+  var viewModel: CityListViewModel?
   
   private lazy var footerView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
+    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 55))
     let addButton = UIButton(frame: .zero)
     
     addButton.translatesAutoresizingMaskIntoConstraints = false
     addButton.layer.cornerRadius = 15
     addButton.clipsToBounds = true
     addButton.setTitle("Search Location", for: .normal)
-    addButton.backgroundColor = Style.CitySelection.addButtonBackgroundColor
+    addButton.backgroundColor = Style.CityListSelection.addButtonBackgroundColor
     addButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
     
     view.addSubview(addButton)
@@ -36,70 +36,62 @@ final class CitySelectionViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
-      navigationController?.setNavigationBarHidden(true, animated: animated)
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+    relaodData()
   }
-
+  
   override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      navigationController?.setNavigationBarHidden(false, animated: animated)
+    super.viewWillDisappear(animated)
+    navigationController?.setNavigationBarHidden(false, animated: animated)
   }
   
   deinit {
-    debugPrint("deinit CitySelectionTableViewController")
+    debugPrint("deinit CityListSelectionTableViewController")
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension CitySelectionViewController: ViewSetupable {
+// MARK: - Private - SetUps
+private extension CityListSelectionViewController {
   
   func setUp() {
     setTableView()
   }
   
+  func relaodData() {
+    tableView.reloadData()
+  }
+  
 }
 
 // MARK: - Private - Set tableview
-private extension CitySelectionViewController {
+private extension CityListSelectionViewController {
   
   func setTableView() {
     tableView.register(cellClass: CityTableViewCell.self)
     tableView.dataSource = self
     tableView.delegate = self
-    tableView.separatorStyle = .none
     tableView.isUserInteractionEnabled = true
     tableView.allowsMultipleSelectionDuringEditing = false
     tableView.tableFooterView = footerView
-    tableView.backgroundColor = Style.CitySelection.backgroundColor
-    tableView.separatorColor = Style.CitySelection.separatorColor
-  }
-
-}
-
-// MARK: - Private - Insert/Delete city
-private extension CitySelectionViewController {
-  
-  func insert(city: City) {
-//    guard city.isExists() == false else { return }
-  }
-  
-  func deleteCity(at indexPath: IndexPath) {
-    
+    tableView.backgroundColor = Style.CityListSelection.backgroundColor
+    tableView.separatorStyle = Style.CityListSelection.separatorStyle
+    tableView.separatorColor = Style.CityListSelection.separatorColor
   }
   
 }
 
 // MARK: - Private - Reload pages
-private extension CitySelectionViewController {
+private extension CityListSelectionViewController {
   
   func reloadAndInitializeMainPageViewController() {
-//    ForecastNotificationCenter.post(.reloadPages)
+    //    ForecastNotificationCenter.post(.reloadPages)
   }
   
 }
 
 // MARK: - UITableViewDataSource protocol
-extension CitySelectionViewController: UITableViewDataSource {
+extension CityListSelectionViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel?.numberOfCities ?? 0
@@ -114,14 +106,14 @@ extension CitySelectionViewController: UITableViewDataSource {
     let map = viewModel.map(at: row)
     cell.tag = row
     cell.configure(by: cityName, time: localTime, annotation: map?.annotation, region: map?.region)
-
+    
     return cell
   }
   
 }
 
 // MARK: - UITableViewDelegate protocol
-extension CitySelectionViewController: UITableViewDelegate {
+extension CityListSelectionViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     viewModel?.select(at: indexPath.row)
@@ -131,12 +123,12 @@ extension CitySelectionViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
     return indexPath.row == 0 ? false : true
   }
-
+  
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     guard editingStyle == .delete else { return }
-    deleteCity(at: indexPath)
+    viewModel?.delete(at: indexPath)
     tableView.deleteRows(at: [indexPath], with: .fade)
-//      reloadAndInitializeMainPageViewController()
+    //      reloadAndInitializeMainPageViewController()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -145,17 +137,17 @@ extension CitySelectionViewController: UITableViewDelegate {
   
 }
 
-// MARK: - CitySelectionViewModelDelegate protocol
-extension CitySelectionViewController: CitySelectionViewModelDelegate {
+// MARK: - CityListSelectionViewModelDelegate protocol
+extension CityListSelectionViewController: CityListViewModelDelegate {
   
-  func didSelect(_ viewModel: CitySelectionViewModel, city: City) {
+  func didSelect(_ viewModel: CityListViewModel, city: City) {
     delegate?.citySelection(self, didSelect: city)
   }
-
+  
 }
 
 // MARK: - Private - Actions
-private extension CitySelectionViewController {
+private extension CityListSelectionViewController {
   
   @objc func searchLocationButtonTapped(_ sender: UIButton) {
     coordinator?.onSearchLocation()
@@ -163,28 +155,11 @@ private extension CitySelectionViewController {
   
 }
 
-//// MARK: - Private - Fetch local time
-//private extension CitySelectionViewController {
-//
-//  func fetchTimeZone(from locationCoordinate: CLLocationCoordinate2D, completionHandler: @escaping (_ timeZone: TimeZone?) -> ()) {
-//    GeocoderHelper.timeZone(for: locationCoordinate) { result in
-//      switch result {
-//      case .success(let data):
-//        completionHandler(data)
-//
-//      case .failure:
-//        completionHandler(nil)
-//      }
-//    }
-//  }
-//
-//}
-
 // MARK: - Factory method
-extension CitySelectionViewController {
+extension CityListSelectionViewController {
   
-  static func make() -> CitySelectionViewController {
-    return StoryboardViewControllerFactory.make(CitySelectionViewController.self, from: .main)
+  static func make() -> CityListSelectionViewController {
+    return StoryboardViewControllerFactory.make(CityListSelectionViewController.self, from: .main)
   }
-
+  
 }

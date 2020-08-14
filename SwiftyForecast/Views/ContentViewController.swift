@@ -36,8 +36,8 @@ final class ContentViewController: UIViewController {
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension ContentViewController: ViewSetupable {
+// MARK: - Private - SetUps
+private extension ContentViewController {
   
   func setUp() {
     setForecastViewDelegate()

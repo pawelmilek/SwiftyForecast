@@ -23,13 +23,13 @@ final class MainCoordinator: Coordinator {
     }
   }
   
-  func onTapCitySelectionBarButton() {
-    let viewController = CitySelectionViewController.make()
+  func onTapCityListSelectionBarButton() {
+    let viewController = CityListSelectionViewController.make()
     viewController.coordinator = self
-    viewController.viewModel = DefaultCitySelectionViewModel(delegate: viewController)
+    viewController.viewModel = DefaultCityListViewModel(delegate: viewController)
     
-    if let forecastViewController = navigationController.viewControllers.first(where: { $0 is CitySelectionViewControllerDelegate }) {
-      viewController.delegate = forecastViewController as? CitySelectionViewControllerDelegate
+    if let forecastViewController = navigationController.viewControllers.first(where: { $0 is CityListSelectionViewControllerDelegate }) {
+      viewController.delegate = forecastViewController as? CityListSelectionViewControllerDelegate
     }
 
     navigationController.push(viewController: viewController, transitionType: .moveIn, transitionSubtype: .fromTop)
@@ -44,5 +44,9 @@ final class MainCoordinator: Coordinator {
     viewController.coordinator = self
     
     navigationController.pushViewController(viewController, animated: true)
+  }
+  
+  func onAddCityFromCalloutViewController() {
+    navigationController.popViewController(animated: true)
   }
 }

@@ -4,11 +4,11 @@ extension ReachabilityError: ErrorHandleable {
   
   public var description: String {
     switch self {
-    case .failedToCreateWithAddress(let cockaddrIn):
-      return "Failed to create with address \(cockaddrIn)."
+    case .failedToCreateWithAddress(let cockAddressIn, _):
+      return "Failed to create with address \(cockAddressIn)."
       
-    case .failedToCreateWithHostname(let hostname):
-      return "Failed to create with hostname \(hostname)."
+    case .failedToCreateWithHostname(let hostName, _):
+      return "Failed to create with hostname \(hostName)."
       
     case .unableToSetCallback:
       return "Unable to set callback."
