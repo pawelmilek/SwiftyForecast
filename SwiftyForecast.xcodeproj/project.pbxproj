@@ -135,7 +135,6 @@
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
-		E2741B1224D1158500C0FA8E /* CityListViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1124D1158500C0FA8E /* CityListViewModelDelegate.swift */; };
 		E2741B1424D1160E00C0FA8E /* DefaultCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */; };
 		E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */; };
 		E2741B2D24DE36F200C0FA8E /* AddCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */; };
@@ -396,7 +395,6 @@
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		E2741B1124D1158500C0FA8E /* CityListViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListViewModelDelegate.swift; sourceTree = "<group>"; };
 		E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityViewModel.swift; sourceTree = "<group>"; };
 		E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+CustomTransition.swift"; sourceTree = "<group>"; };
 		E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalloutViewController.swift; sourceTree = "<group>"; };
@@ -901,7 +899,6 @@
 			isa = PBXGroup;
 			children = (
 				E2CF4D71226E78CF00062E36 /* CityListViewModel.swift */,
-				E2741B1124D1158500C0FA8E /* CityListViewModelDelegate.swift */,
 				E293694C24966D900055FB2E /* CityViewModel.swift */,
 				E2CF4D81226E86B200062E36 /* ContentViewModel.swift */,
 				E2CF4D77226E7B4600062E36 /* DailyForecastCellViewModel.swift */,
@@ -1400,7 +1397,6 @@
 				E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */,
 				E23997EC20E84371007D8CE4 /* WebService.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
-				E2741B1224D1158500C0FA8E /* CityListViewModelDelegate.swift in Sources */,
 				E27E2FC21DA04D1D00B3EABF /* ForecastDate.swift in Sources */,
 				E2DC1483248F230600D1A329 /* KeyboardUserInfo.swift in Sources */,
 				E2435BD722AD736C007589CE /* Double+ToFahrenheit.swift in Sources */,

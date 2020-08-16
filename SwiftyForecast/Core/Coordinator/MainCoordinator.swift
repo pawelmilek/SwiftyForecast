@@ -26,7 +26,7 @@ final class MainCoordinator: Coordinator {
   func onTapCityListSelectionBarButton() {
     let viewController = CityListSelectionViewController.make()
     viewController.coordinator = self
-    viewController.viewModel = DefaultCityListViewModel(delegate: viewController)
+    viewController.viewModel = DefaultCityListViewModel()
     
     if let forecastViewController = navigationController.viewControllers.first(where: { $0 is CityListSelectionViewControllerDelegate }) {
       viewController.delegate = forecastViewController as? CityListSelectionViewControllerDelegate

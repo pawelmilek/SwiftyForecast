@@ -2,8 +2,7 @@ import MapKit
 
 protocol CityListViewModel {
   var numberOfCities: Int { get }
-
-  init(delegate: CityListViewModelDelegate)
+  var onCitySelected: ((City) -> Void)? { get set }
   
   func delete(at indexPath: IndexPath)
   func select(at index: Int)

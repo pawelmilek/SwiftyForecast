@@ -38,6 +38,11 @@ private extension CityListSelectionViewController {
   func setUp() {
     setTableView()
     setSearchLocationButton()
+    
+    viewModel?.onCitySelected = { [weak self] city in
+      guard let self = self else { return }
+      self.delegate?.citySelection(self, didSelect: city)
+    }
   }
   
   func relaodData() {
@@ -127,15 +132,6 @@ extension CityListSelectionViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return CityTableViewCell.defaultHeight
-  }
-  
-}
-
-// MARK: - CityListSelectionViewModelDelegate protocol
-extension CityListSelectionViewController: CityListViewModelDelegate {
-  
-  func didSelect(_ viewModel: CityListViewModel, city: City) {
-    delegate?.citySelection(self, didSelect: city)
   }
   
 }

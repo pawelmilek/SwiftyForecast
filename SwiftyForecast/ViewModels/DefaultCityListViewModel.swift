@@ -6,18 +6,14 @@ final class DefaultCityListViewModel: CityListViewModel {
     return cityViewModels.count
   }
   
+  var onCitySelected: ((City) -> Void)?
+  
   private var cities: Results<City>?
   private var citiesToken: NotificationToken?
 
   private var cityViewModels: [CityViewModel] {
     guard let cities = cities else { return [] }
     return cities.map { DefaultCityViewModel(city: $0) }
-  }
-
-  weak var delegate: CityListViewModelDelegate?
-
-  init(delegate: CityListViewModelDelegate) {
-    self.delegate = delegate
   }
   
   func delete(at indexPath: IndexPath) {
@@ -34,7 +30,7 @@ final class DefaultCityListViewModel: CityListViewModel {
 
   func select(at index: Int) {
     guard let selectedCity = cities?.filter("index = %@", index).first else { return }
-    delegate?.didSelect(self, city: selectedCity)
+    onCitySelected?(selectedCity)
   }
   
   func name(at index: Int) -> String {
