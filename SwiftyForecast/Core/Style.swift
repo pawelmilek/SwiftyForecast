@@ -26,9 +26,9 @@ struct Style {
     
     static var cityNameLabelFont: UIFont? {
       if UIScreen.PhoneModel.isPhoneSE {
-        return UIFont(name:  "HelveticaNeue-Light", size: 15)
+        return UIFont.systemFont(ofSize: 15, weight: .light)
       } else {
-        return UIFont(name:  "HelveticaNeue-Light", size: 20)
+        return UIFont.systemFont(ofSize: 20, weight: .light)
       }
     }
     
@@ -38,9 +38,9 @@ struct Style {
     
     static var conditionSummaryLabelFont: UIFont? {
       if UIScreen.PhoneModel.isPhoneSE {
-        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+        return UIFont.systemFont(ofSize: 11, weight: .medium)
       } else {
-        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+        return UIFont.systemFont(ofSize: 13, weight: .medium)
       }
     }
     
@@ -50,9 +50,9 @@ struct Style {
     
     static var humidityLabelFont: UIFont? {
       if UIScreen.PhoneModel.isPhoneSE {
-        return UIFont(name:  "HelveticaNeue-Medium", size: 11)
+        return UIFont.systemFont(ofSize: 11, weight: .medium)
       } else {
-        return UIFont(name:  "HelveticaNeue-Medium", size: 13)
+        return UIFont.systemFont(ofSize: 13, weight: .medium)
       }
     }
     
@@ -60,12 +60,12 @@ struct Style {
     static let humidityLabelTextAlignment = NSTextAlignment.left
     static let humidityLabelNumberOfLines = 1
     
-    static let temperatureLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 57)
+    static let temperatureLabelFont = UIFont.systemFont(ofSize: 57, weight: .light)
     static let temperatureLabelTextColor = UIColor.blackShade
     static let temperatureLabelTextAlignment = NSTextAlignment.left
     static let temperatureLabelNumberOfLines = 1
     
-    static let temperatureMaxMinLabelFont = UIFont(name:  "HelveticaNeue-Light", size: 20)
+    static let temperatureMaxMinLabelFont = UIFont.systemFont(ofSize: 20, weight: .light)
     static let temperatureMaxMinLabelTextColor = UIColor.blackShade
     static let temperatureMaxMinLabelTextAlignment = NSTextAlignment.left
     static let temperatureMaxMinLabelNumberOfLines = 1
@@ -94,16 +94,16 @@ struct Style {
     
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
-    static let dateLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
-    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 12)
-    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Light", size: 90)
+    static let dateLabelFont = UIFont.systemFont(ofSize: 15, weight: .medium)
+    static let cityNameLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
+    static let temperatureLabelFont = UIFont.systemFont(ofSize: 90, weight: .light)
   }
   
   // MARK: - ConditionView
   struct Condition {
     static let backgroundColor = UIColor.white.withAlphaComponent(0.3)
     static let cornerRadius: CGFloat = 5.0
-    static let valueLabelFont = UIFont(name: "HelveticaNeue", size: 11)
+    static let valueLabelFont = UIFont.systemFont(ofSize: 11, weight: .regular)
     static let textColor = UIColor.white
     static let textAlignment = NSTextAlignment.center
     static let conditionFontSize = CGFloat(20)
@@ -112,11 +112,11 @@ struct Style {
   // MARK: - CityTableViewCell
   struct CityCell {
     static let backgroundColor = UIColor.clear
-    static let currentTimeLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 15)
+    static let currentTimeLabelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     static let currentTimeLabelTextColor = UIColor.lightOrange
     static let currentTimeLabelTextAlignment = NSTextAlignment.left
     
-    static let cityNameLabelFont = UIFont(name: "HelveticaNeue-Light", size: 19)
+    static let cityNameLabelFont = UIFont.systemFont(ofSize: 22, weight: .regular)
     static let cityNameLabelTextColor = UIColor.blackShade
     static let cityNameLabelTextAlignment = NSTextAlignment.left
     
@@ -133,12 +133,12 @@ struct Style {
     static let iconLabelTextColor = UIColor.blackShade
     static let iconLabelTextAlignment = NSTextAlignment.center
     
-    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Light", size: 17)
+    static let temperatureLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
     static let temperatureLabelTextColor = UIColor.blackShade
     static let temperatureLabelTextAlignment = NSTextAlignment.center
     
-    static let weekdayLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 11)!
-    static let monthLabelFont = UIFont(name: "HelveticaNeue-Light", size: 10)!
+    static let weekdayLabelFont = UIFont.systemFont(ofSize: 11, weight: .medium)
+    static let monthLabelFont = UIFont.systemFont(ofSize: 10, weight: .light)
     
     static let conditionIconSize: CGFloat = 22
   }
@@ -147,26 +147,27 @@ struct Style {
   struct HourlyForecastCell {
     static let backgroundColor = UIColor.clear
     
-    static let timeLabelFont = UIFont(name: "HelveticaNeue-Light", size: 11)
+    static let timeLabelFont = UIFont.systemFont(ofSize: 11, weight: .light)
     static let timeLabelTextColor = UIColor.white
     static let timeLabelTextAlignment = NSTextAlignment.center
     
     static let iconLabelTextColor = UIColor.white
     static let iconLabelTextAlignment = NSTextAlignment.center
     
-    static let temperatureLabelFont = UIFont(name: "HelveticaNeue-Medium", size: 13)
+    static let temperatureLabelFont = UIFont.systemFont(ofSize: 13, weight: .medium)
     static let temperatureLabelTextColor = UIColor.white
     static let temperatureLabelTextAlignment = NSTextAlignment.center
     
     static let conditionIconSize: CGFloat = 25
   }
   
-  // MARK: - CityListSelection
-  struct CityListSelection {
+  // MARK: - CityList
+  struct CityList {
     static let addButtonBackgroundColor = MKPinAnnotationView.redPinColor()
     static let backgroundColor = UIColor.clear
-    static let separatorColor = UIColor.blackShade
-    static let separatorStyle = UITableViewCell.SeparatorStyle.none
+    static let separatorColor = UIColor.lightGray
+    static let separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+    static let separatorInset = UIEdgeInsets(top: 0, left: 13, bottom: 0, right: 13)
   }
   
   // MARK: - LocationSearch
@@ -187,14 +188,14 @@ struct Style {
   }
   
   // MARK: - ForecastContentViewController
-  struct ForecastContentVC {
+  struct ContentForecast {
     static let tableViewBackgroundColor = UIColor.white
     static let tableViewSeparatorStyle = UITableViewCell.SeparatorStyle.none
   }
   
   // MARK: - ForecastMainViewController
-  struct ForecastMainVC {
-    static let measuringSystemSegmentedControlFont = UIFont(name: "HelveticaNeue-Medium", size: 14)
+  struct MainForecast {
+    static let measuringSystemSegmentedControlFont = UIFont.systemFont(ofSize: 14, weight: .bold)
     static let measuringSystemSegmentedControlBorderWidth: CGFloat = 1.0
     static let measuringSystemSegmentedControlSelectedLabelColor = UIColor.white
     

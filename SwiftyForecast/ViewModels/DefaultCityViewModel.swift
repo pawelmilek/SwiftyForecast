@@ -6,18 +6,7 @@ struct DefaultCityViewModel: CityViewModel {
   }
 
   var localTime: String {
-    guard city.localTime == InvalidReference.notApplicable else {
-      return city.localTime
-    }
-    
-    if let coordinate = city.location?.coordinate {
-      fetchTimeZone(for: coordinate) { timeZone in
-        return timeZone?.identifier ?? "dafd"
-      }
-    }
-    
-    return InvalidReference.notApplicable
-    
+    return city.localTime
   }
   
   var map: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
@@ -40,20 +29,28 @@ struct DefaultCityViewModel: CityViewModel {
   
   init(city: City) {
     self.city = city
+    fetchTimeZone(for: city)
   }
 }
 
 // MARK: - Private - Fetch local time
 private extension DefaultCityViewModel {
 
-  func fetchTimeZone(for location: CLLocationCoordinate2D, completion: @escaping (_ timeZone: TimeZone?) -> ()) {
-    GeocoderHelper.timeZone(for: location) { result in
+  func fetchTimeZone(for city: City) {
+    guard city.timeZoneName == InvalidReference.notApplicable else { return }
+    guard let coordinate = city.location?.coordinate else { return }
+    
+    GeocoderHelper.timeZone(for: coordinate) { result in
       switch result {
       case .success(let data):
-        completion(data)
+        let realm = RealmProvider.core.realm
+        
+        try! realm.write {
+          city.timeZoneName = data.identifier
+        }
 
       case .failure:
-        completion(nil)
+        break
       }
     }
   }

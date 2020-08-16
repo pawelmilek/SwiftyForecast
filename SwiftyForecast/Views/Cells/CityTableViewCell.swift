@@ -47,6 +47,9 @@ private extension CityTableViewCell {
     cityNameLabel.textColor = Style.CityCell.cityNameLabelTextColor
     cityNameLabel.textAlignment = Style.CityCell.cityNameLabelTextAlignment
     separatorView.backgroundColor = Style.CityCell.separatorColor
+    
+    mapView.layer.borderColor = UIColor.lightOrange.cgColor
+    mapView.layer.borderWidth = 0.5
   }
   
 }

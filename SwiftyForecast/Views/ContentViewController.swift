@@ -64,8 +64,8 @@ private extension ContentViewController {
     weekTableView.allowsSelection = false
     weekTableView.rowHeight = UITableView.automaticDimension
     weekTableView.estimatedRowHeight = 85
-    weekTableView.backgroundColor = Style.ForecastContentVC.tableViewBackgroundColor
-    weekTableView.separatorStyle = Style.ForecastContentVC.tableViewSeparatorStyle
+    weekTableView.backgroundColor = Style.ContentForecast.tableViewBackgroundColor
+    weekTableView.separatorStyle = Style.ContentForecast.tableViewSeparatorStyle
     weekTableView.tableFooterView = UIView()
   }
   

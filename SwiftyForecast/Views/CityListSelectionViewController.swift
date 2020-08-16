@@ -4,31 +4,11 @@ import RealmSwift
 
 final class CityListSelectionViewController: UIViewController {
   @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet private weak var searchLocationButton: UIButton!
   
   weak var coordinator: MainCoordinator?
   weak var delegate: CityListSelectionViewControllerDelegate?
   var viewModel: CityListViewModel?
-  
-  private lazy var footerView: UIView = {
-    let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 55))
-    let addButton = UIButton(frame: .zero)
-    
-    addButton.translatesAutoresizingMaskIntoConstraints = false
-    addButton.layer.cornerRadius = 15
-    addButton.clipsToBounds = true
-    addButton.setTitle("Search Location", for: .normal)
-    addButton.backgroundColor = Style.CityListSelection.addButtonBackgroundColor
-    addButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
-    
-    view.addSubview(addButton)
-    addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8).isActive = true
-    addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
-    addButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
-    addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 10).isActive = true
-    return view
-  }()
-  
-  private var citiesTimeZone: [String: TimeZone] = [:]
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -44,10 +24,11 @@ final class CityListSelectionViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     navigationController?.setNavigationBarHidden(false, animated: animated)
+    viewModel?.onViewWillDisappear()
   }
   
   deinit {
-    debugPrint("deinit CityListSelectionTableViewController")
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) deinit CityListSelectionTableViewController")
   }
 }
 
@@ -56,15 +37,21 @@ private extension CityListSelectionViewController {
   
   func setUp() {
     setTableView()
+    setSearchLocationButton()
   }
   
   func relaodData() {
-    tableView.reloadData()
+    viewModel?.relaodData(initialUpdate: { [weak self] in
+      self?.tableView.reloadData()
+      
+    }, applyChanges: { [weak self] deletions, insertions, updates in
+      self?.tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
+    })
   }
   
 }
 
-// MARK: - Private - Set tableview
+// MARK: - Private - Setters
 private extension CityListSelectionViewController {
   
   func setTableView() {
@@ -73,10 +60,19 @@ private extension CityListSelectionViewController {
     tableView.delegate = self
     tableView.isUserInteractionEnabled = true
     tableView.allowsMultipleSelectionDuringEditing = false
-    tableView.tableFooterView = footerView
-    tableView.backgroundColor = Style.CityListSelection.backgroundColor
-    tableView.separatorStyle = Style.CityListSelection.separatorStyle
-    tableView.separatorColor = Style.CityListSelection.separatorColor
+    tableView.tableFooterView = UIView()
+    tableView.backgroundColor = Style.CityList.backgroundColor
+    tableView.separatorStyle = Style.CityList.separatorStyle
+    tableView.separatorColor = Style.CityList.separatorColor
+    tableView.separatorInset = Style.CityList.separatorInset
+  }
+  
+  func setSearchLocationButton() {
+    searchLocationButton.layer.cornerRadius = 15
+    searchLocationButton.clipsToBounds = true
+    searchLocationButton.setTitle("Search Location", for: .normal)
+    searchLocationButton.backgroundColor = Style.CityList.addButtonBackgroundColor
+    searchLocationButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
   }
   
 }
@@ -127,8 +123,6 @@ extension CityListSelectionViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     guard editingStyle == .delete else { return }
     viewModel?.delete(at: indexPath)
-    tableView.deleteRows(at: [indexPath], with: .fade)
-    //      reloadAndInitializeMainPageViewController()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

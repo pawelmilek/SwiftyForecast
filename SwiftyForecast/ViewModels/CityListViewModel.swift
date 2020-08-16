@@ -10,4 +10,7 @@ protocol CityListViewModel {
   func name(at index: Int) -> String
   func localTime(at index: Int) -> String
   func map(at index: Int) -> (annotation: MKPointAnnotation, region: MKCoordinateRegion)?
+  
+  func relaodData(initialUpdate: @escaping () -> Void, applyChanges: @escaping (_ deletions: [Int], _ insertions: [Int], _ updates: [Int]) -> Void)
+  func onViewWillDisappear()
 }

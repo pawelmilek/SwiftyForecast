@@ -57,6 +57,7 @@ final class GeocoderHelper {
           return
       }
       
+      debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(timezone)")
       completionHandler(.success(timezone))
     }
   }

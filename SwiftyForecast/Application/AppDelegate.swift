@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setNavigationBarStyle()
     
     // MARK: - Get Realm path
-    debugPrint("File: \(#file), \(RealmProvider.core.configuration.fileURL!)")
-    try! City.deleteAll()
-    
+    debugPrint("File: \(#file), \(RealmProvider.core.configuration.fileURL!)")    
     return true
   }
   

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,15 +12,15 @@
             <objects>
                 <viewController storyboardIdentifier="ContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ContentViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-1W-q0r">
-                                <rect key="frame" x="24" y="536.5" width="552" height="26.5"/>
+                                <rect key="frame" x="24" y="406.5" width="366" height="418.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="ForecastView" customModule="SwiftyForecast" customModuleProvider="target">
-                                <rect key="frame" x="24" y="8" width="552" height="516.5"/>
+                                <rect key="frame" x="24" y="52" width="366" height="342.5"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5AL-Fh-OWB" secondAttribute="height" multiplier="109:102" id="Rg1-6Q-rrt"/>
@@ -66,11 +67,11 @@
             <objects>
                 <viewController storyboardIdentifier="ForecastViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHi-4T-aQk">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Rs-QIh">
-                                <rect key="frame" x="288.5" y="563" width="23" height="37"/>
+                                <rect key="frame" x="195.5" y="825" width="23" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -110,30 +111,51 @@
             <objects>
                 <viewController storyboardIdentifier="CityListSelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vzL-M9-vWQ" customClass="CityListSelectionViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xs8-Ui-cHP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-ED-jNd">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="753"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6r-MP-xuk">
+                                <rect key="frame" x="0.0" y="797" width="414" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-vW-PMx">
+                                        <rect key="frame" x="13" y="5" width="388" height="55"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="9gj-vW-PMx" firstAttribute="top" secondItem="a6r-MP-xuk" secondAttribute="top" constant="5" id="EQk-uy-03l"/>
+                                    <constraint firstAttribute="height" constant="65" id="HlE-pz-3lw"/>
+                                    <constraint firstItem="9gj-vW-PMx" firstAttribute="leading" secondItem="a6r-MP-xuk" secondAttribute="leading" constant="13" id="SXX-rl-bwa"/>
+                                    <constraint firstAttribute="bottom" secondItem="9gj-vW-PMx" secondAttribute="bottom" constant="5" id="dOW-c2-lP9"/>
+                                    <constraint firstAttribute="trailing" secondItem="9gj-vW-PMx" secondAttribute="trailing" constant="13" id="dPM-O5-dve"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="TRN-ED-jNd" firstAttribute="top" secondItem="8uK-0j-UNz" secondAttribute="top" id="Cuz-TV-VSC"/>
                             <constraint firstItem="8uK-0j-UNz" firstAttribute="trailing" secondItem="TRN-ED-jNd" secondAttribute="trailing" id="LuK-Ml-ygP"/>
+                            <constraint firstItem="8uK-0j-UNz" firstAttribute="bottom" secondItem="a6r-MP-xuk" secondAttribute="bottom" id="PyT-Ik-ran"/>
                             <constraint firstItem="TRN-ED-jNd" firstAttribute="leading" secondItem="8uK-0j-UNz" secondAttribute="leading" id="Qfg-Eb-dXT"/>
-                            <constraint firstItem="8uK-0j-UNz" firstAttribute="bottom" secondItem="TRN-ED-jNd" secondAttribute="bottom" id="zoy-Mk-k3f"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="top" secondItem="TRN-ED-jNd" secondAttribute="bottom" id="Qj1-Gd-3aQ"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="leading" secondItem="8uK-0j-UNz" secondAttribute="leading" id="U52-3w-hfc"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="trailing" secondItem="8uK-0j-UNz" secondAttribute="trailing" id="dAu-9u-97c"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8uK-0j-UNz"/>
                     </view>
                     <connections>
+                        <outlet property="searchLocationButton" destination="9gj-vW-PMx" id="Inp-LJ-1AZ"/>
                         <outlet property="tableView" destination="TRN-ED-jNd" id="7B6-Ey-yIF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFK-EB-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3246" y="-587"/>
+            <point key="canvasLocation" x="3244.9275362318845" y="-587.27678571428567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RmZ-oY-crz">

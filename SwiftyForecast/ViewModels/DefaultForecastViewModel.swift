@@ -85,7 +85,9 @@ final class DefaultForecastViewModel: ForecastViewModel {
       switch result {
       case .success(let placemark):
         let city = try! City.add(from: placemark, at: self.currentIndex)
-        debugPrint("GeocodeCurrentLocation: \(city)")
+
+        debugPrint("File: \(#file), Function: \(#function), line: \(#line) GeocodeCurrentLocation: \(city)")
+
         let currentLocationViewModel = DefaultContentViewModel(city: city, service: self.service)
         self.contentViewModels.append(currentLocationViewModel)
         self.onSuccess?()

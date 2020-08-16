@@ -8,7 +8,7 @@ final class ForecastViewController: UIViewController {
   var viewModel: ForecastViewModel?
   
   private lazy var notationSystemSegmentedControl: SegmentedControl = {
-    typealias ForecastMainStyle = Style.ForecastMainVC
+    typealias ForecastMainStyle = Style.MainForecast
     
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
@@ -25,28 +25,30 @@ final class ForecastViewController: UIViewController {
   }()
   
   private lazy var pageViewController: UIPageViewController = {
-    var viewControllers: [UIViewController] {
+    var visibleViewControllers: [UIViewController] {
       guard let contentViewModels = viewModel?.contentViewModels else { return [] }
       
-      var controllers: [UIViewController] = []
+      var allViewControllers: [UIViewController] = []
       for (index, _) in contentViewModels.enumerated() {
         if let viewController = forecastContentViewController(at: index) {
-          controllers.append(viewController)
+          allViewControllers.append(viewController)
         }
       }
       
-      return controllers
+      if let firstViewController = allViewControllers.first {
+        return [firstViewController]
+      } else {
+        return []
+      }
     }
     
     let viewController = StoryboardViewControllerFactory.make(UIPageViewController.self, from: .main)
     viewController.dataSource = self
     viewController.delegate = self
-    viewController.setViewControllers(viewControllers, direction: .forward, animated: true)
+    viewController.setViewControllers(visibleViewControllers, direction: .forward, animated: true)
     return viewController
   }()
-  
-  private var contentViewiewControllers: [ContentViewController] = []
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     setUp()
@@ -243,13 +245,8 @@ private extension ForecastViewController {
     guard let contentViewController = viewModel?.contentViewController(at: index) else {
       return nil
     }
-    
-    if contentViewiewControllers.contains(contentViewController) {
-      return contentViewiewControllers[safe: index]
-    } else {
-      contentViewiewControllers.append(contentViewController)
-      return contentViewController
-    }
+
+    return contentViewController
   }
   
 }

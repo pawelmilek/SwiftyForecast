@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="BNf-Rt-nrD">
-                        <rect key="frame" x="8" y="11" width="359" height="47"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="BNf-Rt-nrD">
+                        <rect key="frame" x="8" y="11" width="359" height="42"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:45 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-mV-Gx2">
                                 <rect key="frame" x="0.0" y="0.0" width="359" height="18"/>
@@ -25,7 +25,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chicago, United States" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WN-FJ-OgU">
-                                <rect key="frame" x="0.0" y="23" width="359" height="24"/>
+                                <rect key="frame" x="0.0" y="18" width="359" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -40,13 +40,13 @@
                         </constraints>
                     </view>
                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Yzq-XY-93U">
-                        <rect key="frame" x="8" y="63" width="359" height="92"/>
+                        <rect key="frame" x="8" y="58" width="359" height="87"/>
                     </mapView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="DAB-fM-sPY" secondAttribute="bottom" id="0n6-NW-I1z"/>
                     <constraint firstAttribute="trailing" secondItem="Yzq-XY-93U" secondAttribute="trailing" constant="8" id="FVG-78-XkA"/>
-                    <constraint firstAttribute="bottom" secondItem="Yzq-XY-93U" secondAttribute="bottom" constant="5" id="Hov-Cd-cnr"/>
+                    <constraint firstAttribute="bottom" secondItem="Yzq-XY-93U" secondAttribute="bottom" constant="15" id="Hov-Cd-cnr"/>
                     <constraint firstItem="DAB-fM-sPY" firstAttribute="leading" secondItem="rHv-BN-8ye" secondAttribute="leading" constant="16" id="V61-r3-wpb"/>
                     <constraint firstItem="BNf-Rt-nrD" firstAttribute="top" secondItem="rHv-BN-8ye" secondAttribute="topMargin" id="VvF-M2-zmk"/>
                     <constraint firstItem="BNf-Rt-nrD" firstAttribute="trailing" secondItem="Yzq-XY-93U" secondAttribute="trailing" id="ajn-iR-p0x"/>
