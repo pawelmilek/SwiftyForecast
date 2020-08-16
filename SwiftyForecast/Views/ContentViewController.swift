@@ -168,6 +168,7 @@ extension ContentViewController: ForecastViewDelegate {
                    animations: {
                     self.forecastView.animateLabelsScaling()
                     self.view.layoutIfNeeded()
+                    self.impactFeedback(style: .medium)
     })
   }
   
@@ -185,14 +186,15 @@ extension ContentViewController: ForecastViewDelegate {
                    initialSpringVelocity: 1,
                    options: .curveEaseIn,
                    animations: {
-      self.forecastView.animateLabelsIdentity()
-      self.view.layoutIfNeeded()
+                    self.forecastView.animateLabelsIdentity()
+                    self.view.layoutIfNeeded()
+                    self.impactFeedback(style: .soft)
     })
   }
   
 }
 
-// MARK: - Private - Animate bouncing effect
+// MARK: - Private - Animate bouncing effect and haptic feedback
 private extension ContentViewController {
   
   func animateBouncingEffect() {
@@ -207,6 +209,17 @@ private extension ContentViewController {
     })
   }
   
+  func impactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+    let generator = UIImpactFeedbackGenerator(style: style)
+    generator.prepare()
+    generator.impactOccurred()
+  }
+  
+  func selectionFeedback() {
+    let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+    selectionFeedbackGenerator.selectionChanged()
+  }
+
 }
 
 // MARK: - UITableViewDataSource protcol
@@ -245,6 +258,7 @@ extension ContentViewController {
     guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
 
     NotationSystem.selectedUnitNotation = unitNotation
+    selectionFeedback()
     reloadData()
   }
   
