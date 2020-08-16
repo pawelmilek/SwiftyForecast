@@ -558,8 +558,8 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "setInitialViewController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -567,55 +567,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FA7F9C6C-86AB-4CAD-A47D-B831B2EDB85D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
-            landmarkName = "citySelection(_:didSelect:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "75E4AAA6-7836-41A2-A40A-8BA3676959E5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "citySelection(_:didSelect:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "9564D076-4D79-41A9-960F-69921B1DE1FC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "moveToPage(at:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A55B2B7B-974F-4A83-B5A0-08E6816337AA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -631,6 +583,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "A55B2B7B-974F-4A83-B5A0-08E6816337AA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
+            landmarkName = "moveToPage(at:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "3B0AA18D-000D-41AC-A264-B169AB167B75"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -638,8 +606,8 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "setInitialViewController()"
             landmarkType = "7">
          </BreakpointContent>
@@ -654,8 +622,8 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "pageViewController(_:viewControllerBefore:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -670,8 +638,8 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "pageViewController(_:viewControllerAfter:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -686,41 +654,9 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "pageViewController(_:willTransitionTo:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3ED49E17-CE2B-41D2-BFE4-4F1E3E9D0D37"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "272"
-            endingLineNumber = "272"
-            landmarkName = "pageViewController(_:viewControllerAfter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C388AED6-0A4D-49AA-A112-FAD2FF20C5EB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
-            landmarkName = "pageViewController(_:viewControllerBefore:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -743,22 +679,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "10F9CEBB-BC7D-45D0-B010-DC974C575CAD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
-            landmarkName = "citySelection(_:didSelect:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2511D924-EFCA-44BF-9BAB-1BA5B52ABCA7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -766,25 +686,9 @@
             filePath = "SwiftyForecast/Views/ForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "moveToPage(at:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2C0189FB-8436-4515-A758-CC2359987B75"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -865,6 +769,70 @@
             startingLineNumber = "44"
             endingLineNumber = "44"
             landmarkName = "setUp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "13A97CF4-4871-4805-8313-7E27FA8A8DC8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "citySelection(_:didSelect:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "13A97CF4-4871-4805-8313-7E27FA8A8DC8 - 2766584f15fe1f51"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftyForecast.ForecastViewController.citySelection(_: SwiftyForecast.CityListSelectionViewController, didSelect: SwiftyForecast.City) -&gt; ()"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/Views/ForecastViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "472">
+               </Location>
+               <Location
+                  uuid = "13A97CF4-4871-4805-8313-7E27FA8A8DC8 - 24c2e53b631c913c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in SwiftyForecast.ForecastViewController.citySelection(_: SwiftyForecast.CityListSelectionViewController, didSelect: SwiftyForecast.City) -&gt; ()"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/Views/ForecastViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "199"
+                  endingLineNumber = "199"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36FB22B1-E34D-417D-BBF0-83C7EBA4FE39"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftyForecast/Views/ForecastViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "citySelection(_:didSelect:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

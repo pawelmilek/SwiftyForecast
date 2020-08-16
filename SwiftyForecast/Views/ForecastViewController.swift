@@ -96,6 +96,12 @@ private extension ForecastViewController {
     }
   }
   
+  func pageTransitionImpactFeedback() {
+    let generator = UIImpactFeedbackGenerator(style: .light)
+    generator.prepare()
+    generator.impactOccurred()
+  }
+  
 }
 
 // MARK: - Private - Reload data
@@ -201,7 +207,7 @@ extension ForecastViewController: CityListSelectionViewControllerDelegate {
       self?.viewModel?.pendingIndex = nil
     }
   }
-  
+
 }
 
 // MARK: - Private - Move to page at index
@@ -297,6 +303,10 @@ extension ForecastViewController: UIPageViewControllerDelegate {
                           transitionCompleted completed: Bool) {
     guard completed, let currentPageIndex = viewModel?.pendingIndex else { return }
     viewModel?.currentIndex = currentPageIndex
+    
+    if completed {
+      pageTransitionImpactFeedback()
+    }
   }
   
 }
