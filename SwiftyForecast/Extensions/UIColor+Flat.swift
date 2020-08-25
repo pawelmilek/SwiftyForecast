@@ -14,6 +14,10 @@ extension UIColor {
     return UIColor.colorRGB(component: (r: 249, g: 105, b: 14))
   }
   
+  static var lightOrange: UIColor {
+    return UIColor.orange.withAlphaComponent(0.8)
+  }
+  
 }
 
 // MARK: - ColorRGB component

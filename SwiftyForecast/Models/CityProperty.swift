@@ -1,11 +1,11 @@
 enum CityProperty: String {
-  case index
+  case id
   case name
   case country
   case state
   case postalCode
   case timeZoneName
-  case isCurrentLocalization
+  case isUserLocation
   case latitude
   case longitude
   

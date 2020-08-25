@@ -1,7 +1,7 @@
 enum RealmError: ErrorHandleable {
   case initializationFailed
   case transactionFailed(description: String)
-  case couldNotFetch
+  case fetchFailed
   case unknown
 }
 
@@ -16,7 +16,7 @@ extension RealmError {
     case .transactionFailed(let description):
       return "Realm transaction \(description) failed."
       
-    case .couldNotFetch:
+    case .fetchFailed:
       return "Could not fetch from Realm."
       
     case .unknown:

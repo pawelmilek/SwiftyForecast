@@ -18,8 +18,8 @@ final class ConditionView: UIView {
   }
 }
 
-// MARK: ViewSetupable protocol
-extension ConditionView: ViewSetupable {
+// MARK: - Private - SetUps
+private extension ConditionView {
   
   func setUp() {
     let nibName = ConditionView.nibName

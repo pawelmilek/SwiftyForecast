@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -51,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3372" y="-587.4384236453202"/>
+            <point key="canvasLocation" x="2557" y="-587"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="F9U-19-li5">
@@ -61,12 +60,12 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwd-eb-MpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2702" y="-587"/>
+            <point key="canvasLocation" x="1887" y="-587"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="An9-LC-vHt">
             <objects>
-                <viewController storyboardIdentifier="ForecastMainViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForecastViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHi-4T-aQk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,13 +88,13 @@
                             <inset key="imageInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="largeContentSizeImageInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
                             <connections>
-                                <action selector="poweredByButtonTapped:" destination="BiV-X8-6kw" id="2Ox-Pl-Am2"/>
+                                <action selector="poweredByBarButtonTapped:" destination="BiV-X8-6kw" id="2Ox-Pl-Am2"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="ic_menu" id="HIE-A6-hH8">
+                        <barButtonItem key="rightBarButtonItem" image="ic_map_marker" id="HIE-A6-hH8">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="9" maxY="0.0"/>
                             <connections>
-                                <segue destination="vzL-M9-vWQ" kind="presentation" identifier="ShowCitySelectionIdentifierSegue" id="M2z-E8-B2r"/>
+                                <action selector="cityListSelectionBarButtonTapped:" destination="BiV-X8-6kw" id="JTR-sv-ggN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -107,35 +106,56 @@
             </objects>
             <point key="canvasLocation" x="1210" y="-587"/>
         </scene>
-        <!--City Selection View Controller-->
+        <!--City List Selection View Controller-->
         <scene sceneID="Rf1-T1-hTj">
             <objects>
-                <viewController storyboardIdentifier="CitySelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vzL-M9-vWQ" customClass="CitySelectionViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CityListSelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vzL-M9-vWQ" customClass="CityListSelectionViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xs8-Ui-cHP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-ED-jNd">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="753"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6r-MP-xuk">
+                                <rect key="frame" x="0.0" y="797" width="414" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-vW-PMx">
+                                        <rect key="frame" x="13" y="5" width="388" height="55"/>
+                                        <state key="normal" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="9gj-vW-PMx" firstAttribute="top" secondItem="a6r-MP-xuk" secondAttribute="top" constant="5" id="EQk-uy-03l"/>
+                                    <constraint firstAttribute="height" constant="65" id="HlE-pz-3lw"/>
+                                    <constraint firstItem="9gj-vW-PMx" firstAttribute="leading" secondItem="a6r-MP-xuk" secondAttribute="leading" constant="13" id="SXX-rl-bwa"/>
+                                    <constraint firstAttribute="bottom" secondItem="9gj-vW-PMx" secondAttribute="bottom" constant="5" id="dOW-c2-lP9"/>
+                                    <constraint firstAttribute="trailing" secondItem="9gj-vW-PMx" secondAttribute="trailing" constant="13" id="dPM-O5-dve"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="TRN-ED-jNd" firstAttribute="top" secondItem="8uK-0j-UNz" secondAttribute="top" id="Cuz-TV-VSC"/>
                             <constraint firstItem="8uK-0j-UNz" firstAttribute="trailing" secondItem="TRN-ED-jNd" secondAttribute="trailing" id="LuK-Ml-ygP"/>
+                            <constraint firstItem="8uK-0j-UNz" firstAttribute="bottom" secondItem="a6r-MP-xuk" secondAttribute="bottom" id="PyT-Ik-ran"/>
                             <constraint firstItem="TRN-ED-jNd" firstAttribute="leading" secondItem="8uK-0j-UNz" secondAttribute="leading" id="Qfg-Eb-dXT"/>
-                            <constraint firstItem="8uK-0j-UNz" firstAttribute="bottom" secondItem="TRN-ED-jNd" secondAttribute="bottom" id="zoy-Mk-k3f"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="top" secondItem="TRN-ED-jNd" secondAttribute="bottom" id="Qj1-Gd-3aQ"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="leading" secondItem="8uK-0j-UNz" secondAttribute="leading" id="U52-3w-hfc"/>
+                            <constraint firstItem="a6r-MP-xuk" firstAttribute="trailing" secondItem="8uK-0j-UNz" secondAttribute="trailing" id="dAu-9u-97c"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8uK-0j-UNz"/>
                     </view>
                     <connections>
+                        <outlet property="searchLocationButton" destination="9gj-vW-PMx" id="Inp-LJ-1AZ"/>
                         <outlet property="tableView" destination="TRN-ED-jNd" id="7B6-Ey-yIF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFK-EB-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="-588"/>
+            <point key="canvasLocation" x="3244.9275362318845" y="-587.27678571428567"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RmZ-oY-crz">
@@ -157,7 +177,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ic_menu" width="24" height="24"/>
+        <image name="ic_map_marker" width="27" height="27"/>
         <image name="ic_poweredby_small" width="60" height="24"/>
     </resources>
 </document>

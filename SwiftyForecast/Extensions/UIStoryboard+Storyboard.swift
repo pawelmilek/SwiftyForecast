@@ -3,10 +3,11 @@ import UIKit
 extension UIStoryboard {
   
   enum Storyboard: String {
-    case main
+    case main = "Main"
+    case locationSearch = "LocationSearch"
     
     var fileName: String {
-      return rawValue.capitalized
+      return rawValue
     }
   }
   

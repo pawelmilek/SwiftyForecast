@@ -16,8 +16,8 @@ final class DailyForecastTableViewCell: UITableViewCell {
   }
 }
 
-// MARK: - ViewSetupable protocol
-extension DailyForecastTableViewCell: ViewSetupable {
+// MARK: - Private - SetUps
+private extension DailyForecastTableViewCell {
   
   func setUp() {
     backgroundColor = Style.DailyForecastCell.backgroundColor

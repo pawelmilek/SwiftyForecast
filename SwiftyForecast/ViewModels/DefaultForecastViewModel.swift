@@ -15,6 +15,10 @@ final class DefaultForecastViewModel: ForecastViewModel {
     cities.count
   }
   
+  var powerByURL: URL? {
+    return URL(string: "https://darksky.net/poweredby/")
+  }
+
   var onIndexUpdate: ((Int) -> Void)?
   var onLoadingStatus: ((Bool) -> Void)?
   var onSuccess: (() -> Void)?
@@ -27,10 +31,10 @@ final class DefaultForecastViewModel: ForecastViewModel {
    }
   
   private var cities: Results<City> {
-    try! City.fetchAll()
+    try! City.fetchAllOrdered()
   }
 
-  private var isCurrentLocationPage: Bool {
+  private var isUserLocationPage: Bool {
     return currentIndex == 0
   }
   
@@ -41,13 +45,13 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   func city(at index: Int) -> City? {
-    let city = cities.filter("index = %@", index).first
+    let city = Array(cities)[safe: index]
     return city
   }
   
   func index(of city: City) -> Int? {
-    let city = cities.filter("index = %@", city.index).first
-    return city?.index
+    let index = cities.index(of: city)
+    return index
   }
   
   func contentViewController(at index: Int) -> ContentViewController? {
@@ -65,45 +69,46 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   func loadData() {
-    if isCurrentLocationPage && LocationProvider.shared.isLocationServicesEnabled {
-      geocodeCurrentLocation()
-    } else {
-      
-    }
+    contentViewModels = []
+    insertUserLocationIntoFirstPosition()
+    appendOtherLocations()
   }
   
-  private func geocodeCurrentLocation() {
+  private func insertUserLocationIntoFirstPosition() {
+    guard !isLoadingData else { return }
+    isLoadingData = true
+    
     GeocoderHelper.currentLocation { [weak self] result in
       guard let self = self else { return }
-//      self.isLoadingData = true
+      self.isLoadingData = false
       
       switch result {
       case .success(let placemark):
-        let city = try! City.add(from: placemark, at: self.currentIndex)
-        debugPrint("GeocodeCurrentLocation: \(city)")
+        let city = try! City.add(from: placemark, withId: 0)
+        debugPrint("File: \(#file), Function: \(#function), line: \(#line) GeocodeCurrentLocation: \(city)")
+        
         let currentLocationViewModel = DefaultContentViewModel(city: city, service: self.service)
-        self.contentViewModels.append(currentLocationViewModel)
+        self.contentViewModels.insert(currentLocationViewModel, at: 0)
+        self.appendOtherLocations()
+        
         self.onSuccess?()
         
       case .failure(let error):
         self.onFailure?(error)
       }
-      
-//      self.isLoadingData = false
     }
+  }
+  
+  private func appendOtherLocations() {
+    let cityArray = Array(cities.filter({ $0.isUserLocation == false }))
+    let viewModels = cityArray.map { DefaultContentViewModel(city: $0, service: self.service) }
+    contentViewModels.append(contentsOf: viewModels)
   }
   
   func measuringSystemSwitched(_ sender: SegmentedControl) {
     ForecastNotificationCenter.post(.unitNotationDidChange,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
-  }
-  
-  func presentPoweredBy(at viewController: UIViewController?) {
-    if let url = URL(string: "https://darksky.net/poweredby/") {
-      let safariViewController = SFSafariViewController(url: url)
-      viewController?.present(safariViewController, animated: true)
-    }
   }
   
 }

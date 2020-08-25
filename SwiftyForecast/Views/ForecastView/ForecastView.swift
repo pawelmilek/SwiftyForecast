@@ -49,8 +49,8 @@ final class ForecastView: UIView {
   }
 }
 
-// MARK: ViewSetupable protocol
-extension ForecastView: ViewSetupable {
+// MARK: - Private - SetUps
+private extension ForecastView {
   
   func setUp() {
     createContentView()
