@@ -23,8 +23,7 @@ struct RealmUtility {
   }
   
   private static func createBundledRealm() {
-    let configuration = Realm.Configuration(fileURL: try! PathFinder.inDocuments("tooling-bundledSets.realm"),
-                                            objectTypes: [CitySet.self, City.self])
+    let configuration = Realm.Configuration(fileURL: try! PathFinder.inDocuments("tooling-bundledSets.realm"), objectTypes: [City.self])
     let newBundledSetsRealm = try! Realm(configuration: configuration)
     //
     //    let set1Cards = downloadableSets["Numbers"]!

@@ -29,7 +29,8 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
 
   func select(at index: Int) {
-    guard let selectedCity = cities?.filter("index = %@", index).first else { return }
+    guard let cities = cities else { return }
+    guard let selectedCity = Array(cities)[safe: index] else { return }
     onCitySelected?(selectedCity)
   }
   
@@ -47,7 +48,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   
   func relaodData(initialUpdate: @escaping () -> Void,
                   applyChanges: @escaping (_ deletions: [Int], _ insertions: [Int], _ updates: [Int]) -> Void) {
-    cities = try! City.fetchAll().sorted(byKeyPath: CityProperty.index.key, ascending: true)
+    cities = try! City.fetchAllOrdered()
     citiesToken = cities?.observe { changes in
       switch changes {
       case .initial:

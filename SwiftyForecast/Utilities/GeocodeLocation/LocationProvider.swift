@@ -7,6 +7,7 @@ final class LocationProvider: NSObject {
   var authorizationCompletionBlock: ((_ isAuthorized: Bool) -> ())? = { _ in }
   var currentLocation: CLLocation? {
     didSet {
+      guard oldValue == nil else { return }
       guard let currentLocation = currentLocation else { return }
       self.locationFound?(currentLocation)
     }

@@ -101,7 +101,6 @@ private extension ContentViewController {
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
 //        self?.reloadDataInMainPageViewController()
-//        self?.reloadDataInMainPageViewController()
         self?.reloadData()
       }
     }
@@ -139,13 +138,13 @@ private extension ContentViewController {
 // MARK: - Private - Reload pages
 private extension ContentViewController {
   
-//  func reloadAndInitializeMainPageViewController() {
-//    ForecastNotificationCenter.post(.reloadPages)
-//  }
-//
-//  func reloadDataInMainPageViewController() {
-//    ForecastNotificationCenter.post(.reloadPagesData)
-//  }
+  func reloadAndInitializeMainPageViewController() {
+    ForecastNotificationCenter.post(.reloadPages)
+  }
+
+  func reloadDataInMainPageViewController() {
+    ForecastNotificationCenter.post(.reloadPagesData)
+  }
   
 }
 

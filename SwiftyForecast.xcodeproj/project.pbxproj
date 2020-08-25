@@ -210,7 +210,6 @@
 		E2B1D658211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D657211E564800F0002A /* UIViewController+StoryboardIdentifiable.swift */; };
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
 		E2B1D65C211FB26C00F0002A /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* ForecastViewController.swift */; };
-		E2C208A02482AFC3006C772E /* SPPermissions in Frameworks */ = {isa = PBXBuildFile; productRef = E2C2089F2482AFC3006C772E /* SPPermissions */; };
 		E2C208A524848010006C772E /* TemperatureMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A424848010006C772E /* TemperatureMeasurement.swift */; };
 		E2C208A6248480F7006C772E /* TemperatureMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A424848010006C772E /* TemperatureMeasurement.swift */; };
 		E2C208A824848DF3006C772E /* DistanceMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C208A724848DF3006C772E /* DistanceMeasurement.swift */; };
@@ -264,8 +263,6 @@
 		E2DC145B248D33B400D1A329 /* RealmUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145A248D33B400D1A329 /* RealmUtility.swift */; };
 		E2DC145F248D3CAF00D1A329 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */; };
 		E2DC1460248D3E0700D1A329 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */; };
-		E2DC1462248D489E00D1A329 /* CitySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1461248D489E00D1A329 /* CitySet.swift */; };
-		E2DC1463248D489E00D1A329 /* CitySet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1461248D489E00D1A329 /* CitySet.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
 		E2DC1467248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
 		E2DC1469248D494C00D1A329 /* FileLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1468248D494C00D1A329 /* FileLoadable.swift */; };
@@ -476,7 +473,6 @@
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC145A248D33B400D1A329 /* RealmUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUtility.swift; sourceTree = "<group>"; };
 		E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
-		E2DC1461248D489E00D1A329 /* CitySet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySet.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
 		E2DC1468248D494C00D1A329 /* FileLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoadable.swift; sourceTree = "<group>"; };
 		E2DC146B248D496900D1A329 /* FileLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoaderError.swift; sourceTree = "<group>"; };
@@ -521,7 +517,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2C208A02482AFC3006C772E /* SPPermissions in Frameworks */,
 				E22CDFE1247C250700C9EACD /* RealmSwift in Frameworks */,
 				E22CDFDF247C250700C9EACD /* Realm in Frameworks */,
 				E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */,
@@ -654,7 +649,6 @@
 			children = (
 				E23997FD20E85627007D8CE4 /* Forecast */,
 				E2FD3755232EFFC40083B383 /* City.swift */,
-				E2DC1461248D489E00D1A329 /* CitySet.swift */,
 				E2E59B36235CDE4E00F24C3E /* CityProperty.swift */,
 				E2DC1457248D2F8700D1A329 /* InvalidReference.swift */,
 			);
@@ -1059,7 +1053,6 @@
 				E233AC1123DE7D9000DC0EF5 /* Reachability */,
 				E22CDFDE247C250700C9EACD /* Realm */,
 				E22CDFE0247C250700C9EACD /* RealmSwift */,
-				E2C2089F2482AFC3006C772E /* SPPermissions */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* SwiftyForecast.app */;
@@ -1138,7 +1131,6 @@
 			packageReferences = (
 				E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */,
 				E22CDFDD247C250700C9EACD /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				E2C2089E2482AFC3006C772E /* XCRemoteSwiftPackageReference "SPPermissions" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -1234,7 +1226,6 @@
 				E224418921619A15009D409F /* FontWeatherIcon.swift in Sources */,
 				E20010222167D7BA008E6090 /* Double+RoundedToString.swift in Sources */,
 				E200102C2167DA2C008E6090 /* SharedGroupContainer.swift in Sources */,
-				E2DC1463248D489E00D1A329 /* CitySet.swift in Sources */,
 				E224418A21619A15009D409F /* FontWeatherIconType.swift in Sources */,
 				E233AC1A23DE827B00DC0EF5 /* City.swift in Sources */,
 				E20010252167D800008E6090 /* NibLoadableView.swift in Sources */,
@@ -1353,7 +1344,6 @@
 				E2DC14912495282400D1A329 /* ForecastViewModel.swift in Sources */,
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* NetworkResponseParser.swift in Sources */,
-				E2DC1462248D489E00D1A329 /* CitySet.swift in Sources */,
 				E206E1D020EC5E8900AC72EA /* ForecastView.swift in Sources */,
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
 				E23CD75D20ED59FC00F0F72A /* ConditionView.swift in Sources */,
@@ -1997,14 +1987,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		E2C2089E2482AFC3006C772E /* XCRemoteSwiftPackageReference "SPPermissions" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ivanvorobei/SPPermissions";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2032,11 +2014,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */;
 			productName = Reachability;
-		};
-		E2C2089F2482AFC3006C772E /* SPPermissions */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2C2089E2482AFC3006C772E /* XCRemoteSwiftPackageReference "SPPermissions" */;
-			productName = SPPermissions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

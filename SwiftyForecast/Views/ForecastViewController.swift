@@ -30,7 +30,7 @@ final class ForecastViewController: UIViewController {
       
       var allViewControllers: [UIViewController] = []
       for (index, _) in contentViewModels.enumerated() {
-        if let viewController = forecastContentViewController(at: index) {
+        if let viewController = contentViewController(at: index) {
           allViewControllers.append(viewController)
         }
       }
@@ -57,7 +57,6 @@ final class ForecastViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     showOrHideLocationServicesPrompt()
-    loadData()
   }
   
   deinit {
@@ -71,12 +70,7 @@ private extension ForecastViewController {
   func setUp() {
     setViewModelClosureCallbacks()
     addNotificationObservers()
-  }
-  
-  func setViewModelCallback() {
-    viewModel?.onIndexUpdate = { [weak self] currentIndex in
-      self?.pageControl.currentPage = currentIndex
-    }
+    loadData()
   }
   
   func addChildPageViewController() {
@@ -130,7 +124,7 @@ private extension ForecastViewController {
   func removeNotificationObservers() {
     ForecastNotificationCenter.remove(observer: self)
   }
-  
+
 }
 
 // MARK: - Private - Show or hide navigation prompt
@@ -162,14 +156,14 @@ private extension ForecastViewController {
 // MARK: - Actions
 extension ForecastViewController {
   
-//  @objc func reloadPages(_ notification: NSNotification) {
+  @objc func reloadPages(_ notification: NSNotification) {
 //    setInitialViewController()
 //    setupPageControl()
-//  }
-//
-//  @objc func reloadPagesData(_ notification: NSNotification) {
+  }
+
+  @objc func reloadPagesData(_ notification: NSNotification) {
 //    setupPageControl()
-//  }
+  }
   
   
   
@@ -214,9 +208,8 @@ extension ForecastViewController: CityListSelectionViewControllerDelegate {
 private extension ForecastViewController {
   
   func moveToPage(at index: Int, completion: @escaping (Bool) -> Void) {
-    guard let cityCount = viewModel?.numberOfCities, index < cityCount else { return }
     guard let currentIndex = viewModel?.currentIndex else { return }
-    guard let contentViewController = forecastContentViewController(at: index) else { return }
+    guard let contentViewController = contentViewController(at: index) else { return }
     
     if index > currentIndex {
       pageViewController.setViewControllers([contentViewController],
@@ -238,21 +231,8 @@ private extension ForecastViewController {
 private extension ForecastViewController {
   
   func setInitialViewController() {
-    guard let viewController = forecastContentViewController(at: 0) else { return }
+    guard let viewController = contentViewController(at: 0) else { return }
     pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-  }
-  
-}
-
-// MARK: - Private - Get ForecastPageViewController
-private extension ForecastViewController {
-  
-  func forecastContentViewController(at index: Int) -> ContentViewController? {
-    guard let contentViewController = viewModel?.contentViewController(at: index) else {
-      return nil
-    }
-
-    return contentViewController
   }
   
 }
@@ -269,7 +249,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
       return nil
     }
     
-    return forecastContentViewController(at: viewControllerIndex - 1)
+    return contentViewController(at: viewControllerIndex - 1)
     
   }
   
@@ -283,7 +263,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
       return nil
     }
     
-    return forecastContentViewController(at: viewControllerIndex + 1)
+    return contentViewController(at: viewControllerIndex + 1)
   }
   
 }
@@ -311,10 +291,28 @@ extension ForecastViewController: UIPageViewControllerDelegate {
   
 }
 
+// MARK: - Private - Get content view controller
+private extension ForecastViewController {
+  
+  func contentViewController(at index: Int) -> ContentViewController? {
+    guard let contentViewController = viewModel?.contentViewController(at: index) else {
+      return nil
+    }
+
+    return contentViewController
+  }
+  
+}
+
 // MAKR: - Private - Set view models closures
 private extension ForecastViewController {
   
   func setViewModelClosureCallbacks() {
+    viewModel?.onIndexUpdate = { [weak self] currentIndex in
+      self?.pageControl.currentPage = currentIndex
+      self?.setupPageControl()
+    }
+    
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
         self?.addChildPageViewController()

@@ -69,11 +69,6 @@ final class DefaultContentViewModel: ContentViewModel {
   var onLoadingStatus: ((Bool) -> Void)?
   var pageIndex = 0
   
-  
-  private var isCurrentLocationPage: Bool {
-    return pageIndex == 0
-  }
-  
   private var isLoadingData = false {
     didSet {
       onLoadingStatus?(isLoadingData)

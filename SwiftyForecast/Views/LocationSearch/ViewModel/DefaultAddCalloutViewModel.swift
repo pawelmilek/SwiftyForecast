@@ -9,7 +9,7 @@ struct DefaultAddCalloutViewModel: AddCalloutViewModel {
 
   init(placemark: MKPlacemark) {
     city = City(placemark: placemark)
-    city.isCurrentLocalization = false
+    city.isUserLocation = false
   }
   
   func add(completion: (Result<City, RealmError>) -> Void) {
