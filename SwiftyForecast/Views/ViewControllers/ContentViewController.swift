@@ -167,7 +167,7 @@ extension ContentViewController: ForecastViewDelegate {
                    animations: {
                     self.forecastView.animateLabelsScaling()
                     self.view.layoutIfNeeded()
-                    self.impactFeedback(style: .medium)
+                    self.impactFeedback(style: .soft)
     })
   }
   

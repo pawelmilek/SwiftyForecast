@@ -20,7 +20,7 @@ protocol ContentViewModel: class {
   var onFailure: ((Error) -> Void)? { get set }
   var onLoadingStatus: ((Bool) -> Void)? { get set }
   
-  init(city: City, service: ForecastService)
+  init(city: City, repository: Repository)
 
   func loadData()
 }

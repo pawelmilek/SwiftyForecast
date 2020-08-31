@@ -6,7 +6,7 @@ final class DefaultCityListViewModel: CityListViewModel {
     return cityViewModels.count
   }
   
-  var onCitySelected: ((City) -> Void)?
+  var onCitySelected: ((Int) -> Void)?
   
   private var cities: Results<City>?
   private var citiesToken: NotificationToken?
@@ -30,8 +30,8 @@ final class DefaultCityListViewModel: CityListViewModel {
 
   func select(at index: Int) {
     guard let cities = cities else { return }
-    guard let selectedCity = Array(cities)[safe: index] else { return }
-    onCitySelected?(selectedCity)
+    guard let _ = Array(cities)[safe: index] else { return }
+    onCitySelected?(index)
   }
   
   func name(at index: Int) -> String {

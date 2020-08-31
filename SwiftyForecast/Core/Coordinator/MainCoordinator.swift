@@ -11,7 +11,7 @@ final class MainCoordinator: Coordinator {
   
   func start() {
     let viewController = ForecastViewController.make()
-    viewController.viewModel = DefaultForecastViewModel(service: DefaultForecastService())
+    viewController.viewModel = DefaultForecastViewModel(repository: ForecastRepository(service: DefaultForecastService()))
     viewController.coordinator = self
     navigationController.pushViewController(viewController, animated: false)
   }

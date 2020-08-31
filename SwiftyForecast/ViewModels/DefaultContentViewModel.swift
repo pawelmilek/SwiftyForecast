@@ -19,7 +19,7 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var cityName: String {
-    return weatherForecast?.city.name ?? InvalidReference.notApplicable
+    return weatherForecast?.city.name ?? city.name
   }
   
   var temperature: String {
@@ -76,12 +76,12 @@ final class DefaultContentViewModel: ContentViewModel {
   }
 
   private let city: City
-  private let service: ForecastService
+  private let repository: Repository
   private var weatherForecast: WeatherForecast?
   
-  init(city: City, service: ForecastService) {
+  init(city: City, repository: Repository) {
     self.city = city
-    self.service = service
+    self.repository = repository
   }
 }
 
@@ -93,7 +93,7 @@ extension DefaultContentViewModel {
     guard let location = location else { return }
     
     isLoadingData = true
-    service.getForecast(by: location) { [weak self] response in
+    repository.getForecast(by: location) { [weak self] response in
       guard let self = self else { return }
       
       switch response {

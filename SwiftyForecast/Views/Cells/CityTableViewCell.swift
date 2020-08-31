@@ -3,7 +3,7 @@ import MapKit
 
 final class CityTableViewCell: UITableViewCell {
   static let defaultHeight = CGFloat(160)
-
+  
   @IBOutlet private weak var currentTimeLabel: UILabel!
   @IBOutlet private weak var cityNameLabel: UILabel!
   @IBOutlet private weak var separatorView: UIView!
@@ -56,7 +56,7 @@ private extension CityTableViewCell {
 
 // MARK: - Configure by city
 extension CityTableViewCell {
-
+  
   func configure(by name: String,
                  time localTime: String,
                  annotation: MKPointAnnotation?,
@@ -65,11 +65,12 @@ extension CityTableViewCell {
     cityNameLabel.text = name
     currentTimeLabel.alpha = 1
     cityNameLabel.alpha = 1
-
+    
     if let annotation = annotation, let region = region {
-        mapView.addAnnotation(annotation)
-        mapView.setRegion(region, animated: false)
+      mapView.addAnnotation(annotation)
+      mapView.setRegion(region, animated: false)
+      mapView.layoutIfNeeded()
     }
   }
-
+  
 }

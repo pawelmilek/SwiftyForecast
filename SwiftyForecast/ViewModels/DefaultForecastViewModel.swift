@@ -3,7 +3,6 @@ import RealmSwift
 import SafariServices
 
 final class DefaultForecastViewModel: ForecastViewModel {
-  var contentViewModels: [ContentViewModel] = []
   var pendingIndex: Int?
   var currentIndex: Int = 0 {
     didSet {
@@ -16,9 +15,14 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   var powerByURL: URL? {
-    return URL(string: "https://darksky.net/poweredby/")
+    URL(string: "https://darksky.net/poweredby/")
   }
 
+  var currentVisibleViewControllers: [UIViewController] {
+    guard let visibleViewController = contentViewController(at: currentIndex) else { return [] }
+    return [visibleViewController]
+  }
+  
   var onIndexUpdate: ((Int) -> Void)?
   var onLoadingStatus: ((Bool) -> Void)?
   var onSuccess: (() -> Void)?
@@ -37,11 +41,12 @@ final class DefaultForecastViewModel: ForecastViewModel {
   private var isUserLocationPage: Bool {
     return currentIndex == 0
   }
-  
-  private let service: ForecastService
 
-  init(service: ForecastService) {
-    self.service = service
+  private var contentViewModels: [ContentViewModel] = []
+  private let repository: Repository
+
+  init(repository: Repository) {
+    self.repository = repository
   }
   
   func city(at index: Int) -> City? {
@@ -55,7 +60,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   func contentViewController(at index: Int) -> ContentViewController? {
-    guard let contentViewModel = contentViewModel(at: index) else {
+    guard let contentViewModel = contentViewModels[safe: index] else {
       return nil
     }
     
@@ -64,17 +69,14 @@ final class DefaultForecastViewModel: ForecastViewModel {
     return contentViewController
   }
   
-  func contentViewModel(at index: Int) -> ContentViewModel? {
-    return contentViewModels[safe: index]
-  }
-  
   func loadData() {
-    contentViewModels = []
-    insertUserLocationIntoFirstPosition()
-    appendOtherLocations()
+    loadUserLocationData {
+      self.appendOtherLocations()
+      self.onSuccess?()
+    }
   }
   
-  private func insertUserLocationIntoFirstPosition() {
+  private func loadUserLocationData(completion: @escaping () -> Void) {
     guard !isLoadingData else { return }
     isLoadingData = true
     
@@ -84,14 +86,12 @@ final class DefaultForecastViewModel: ForecastViewModel {
       
       switch result {
       case .success(let placemark):
-        let city = try! City.add(from: placemark, withId: 0)
+        let city = try! City.add(from: placemark, withId: 1)
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) GeocodeCurrentLocation: \(city)")
         
-        let currentLocationViewModel = DefaultContentViewModel(city: city, service: self.service)
-        self.contentViewModels.insert(currentLocationViewModel, at: 0)
-        self.appendOtherLocations()
-        
-        self.onSuccess?()
+        let viewModel = DefaultContentViewModel(city: city, repository: self.repository)
+        self.contentViewModels.insert(viewModel, at: 0)
+        completion()
         
       case .failure(let error):
         self.onFailure?(error)
@@ -100,9 +100,20 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   private func appendOtherLocations() {
-    let cityArray = Array(cities.filter({ $0.isUserLocation == false }))
-    let viewModels = cityArray.map { DefaultContentViewModel(city: $0, service: self.service) }
-    contentViewModels.append(contentsOf: viewModels)
+    let cityArray = Array(cities.filter { $0.isUserLocation == false })
+    let viewModels = cityArray.map { DefaultContentViewModel(city: $0, repository: self.repository) }
+    
+    debugPrint("\(cityArray)")
+    
+    for viewModel in viewModels {
+      if contentViewModels.contains(where: {
+        debugPrint("contentViewModels: \($0.cityName)")
+        debugPrint("viewModel: \(viewModel.cityName)")
+        return $0.cityName == viewModel.cityName
+      }) == false {
+        contentViewModels.append(contentsOf: viewModels)
+      }
+    }
   }
   
   func measuringSystemSwitched(_ sender: SegmentedControl) {

@@ -39,9 +39,9 @@ private extension CityListSelectionViewController {
     setTableView()
     setSearchLocationButton()
     
-    viewModel?.onCitySelected = { [weak self] city in
+    viewModel?.onCitySelected = { [weak self] index in
       guard let self = self else { return }
-      self.delegate?.citySelection(self, didSelect: city)
+      self.delegate?.citySelection(self, at: index)
     }
   }
   
@@ -88,7 +88,7 @@ private extension CityListSelectionViewController {
   func reloadAndInitializeMainPageViewController() {
     //    ForecastNotificationCenter.post(.reloadPages)
   }
-  
+
 }
 
 // MARK: - UITableViewDataSource protocol
