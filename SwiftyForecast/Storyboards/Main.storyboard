@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,15 +11,15 @@
             <objects>
                 <viewController storyboardIdentifier="ContentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ContentViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-1W-q0r">
-                                <rect key="frame" x="24" y="406.5" width="366" height="418.5"/>
+                                <rect key="frame" x="24" y="536.5" width="552" height="26.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5AL-Fh-OWB" customClass="ForecastView" customModule="SwiftyForecast" customModuleProvider="target">
-                                <rect key="frame" x="24" y="52" width="366" height="342.5"/>
+                                <rect key="frame" x="24" y="8" width="552" height="516.5"/>
                                 <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="5AL-Fh-OWB" secondAttribute="height" multiplier="109:102" id="Rg1-6Q-rrt"/>
@@ -45,7 +44,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="forecastView" destination="5AL-Fh-OWB" id="Zu3-HH-MrS"/>
-                        <outlet property="weekTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
+                        <outlet property="weekdaysTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -67,11 +66,11 @@
             <objects>
                 <viewController storyboardIdentifier="ForecastViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="ForecastViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHi-4T-aQk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="IR2-Rs-QIh">
-                                <rect key="frame" x="195.5" y="825" width="23" height="37"/>
+                                <rect key="frame" x="288.5" y="563" width="23" height="37"/>
                                 <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="currentPageIndicatorTintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
@@ -111,18 +110,18 @@
             <objects>
                 <viewController storyboardIdentifier="CityListSelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vzL-M9-vWQ" customClass="CityListSelectionViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xs8-Ui-cHP">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TRN-ED-jNd">
-                                <rect key="frame" x="0.0" y="44" width="414" height="753"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="535"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a6r-MP-xuk">
-                                <rect key="frame" x="0.0" y="797" width="414" height="65"/>
+                                <rect key="frame" x="0.0" y="535" width="600" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9gj-vW-PMx">
-                                        <rect key="frame" x="13" y="5" width="388" height="55"/>
+                                        <rect key="frame" x="13" y="5" width="574" height="55"/>
                                         <state key="normal" title="Button"/>
                                     </button>
                                 </subviews>

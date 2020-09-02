@@ -2,7 +2,7 @@ import UIKit
 
 final class ContentViewController: UIViewController {
   @IBOutlet private weak var forecastView: ForecastView!
-  @IBOutlet private weak var weekTableView: UITableView!
+  @IBOutlet private weak var weekdaysTableView: UITableView!
   
   private var dailyForecastTableViewBottomConstraint: NSLayoutConstraint?
   private var forecastViewMoreDetailsViewBottomConstraint: NSLayoutConstraint?
@@ -57,23 +57,23 @@ private extension ContentViewController {
   }
   
   func setWeekTableView() {
-    weekTableView.register(cellClass: DailyForecastTableViewCell.self)
-    weekTableView.dataSource = self
-    weekTableView.delegate = self
-    weekTableView.showsVerticalScrollIndicator = false
-    weekTableView.allowsSelection = false
-    weekTableView.rowHeight = UITableView.automaticDimension
-    weekTableView.estimatedRowHeight = 85
-    weekTableView.backgroundColor = Style.ContentForecast.tableViewBackgroundColor
-    weekTableView.separatorStyle = Style.ContentForecast.tableViewSeparatorStyle
-    weekTableView.tableFooterView = UIView()
+    weekdaysTableView.register(cellClass: DailyForecastTableViewCell.self)
+    weekdaysTableView.dataSource = self
+    weekdaysTableView.delegate = self
+    weekdaysTableView.showsVerticalScrollIndicator = false
+    weekdaysTableView.allowsSelection = false
+    weekdaysTableView.rowHeight = UITableView.automaticDimension
+    weekdaysTableView.estimatedRowHeight = 85
+    weekdaysTableView.backgroundColor = Style.ContentForecast.tableViewBackgroundColor
+    weekdaysTableView.separatorStyle = Style.ContentForecast.tableViewSeparatorStyle
+    weekdaysTableView.tableFooterView = UIView()
   }
   
   func arrangeConstraints() {
     forecastViewMoreDetailsViewBottomConstraint = forecastView.moreDetailsViewBottomConstraint
     forecastViewStackViewBottomToMoreDetailsBottomConstraint = forecastView.stackViewBottomToMoreDetailsTopConstraint
     forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
-    dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekTableView.bottomAnchor,
+    dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekdaysTableView.bottomAnchor,
                                                                                   constant: 0)
   }
   
@@ -98,11 +98,8 @@ private extension ContentViewController {
 private extension ContentViewController {
   
   func setViewModelClosureCallbacks() {
-    viewModel?.onSuccess = {
-      DispatchQueue.main.async { [weak self] in
-//        self?.reloadDataInMainPageViewController()
-        self?.reloadData()
-      }
+    viewModel?.onSuccess = { [weak self] in
+      self?.reloadData()
     }
     
     viewModel?.onFailure = { error in
@@ -131,19 +128,6 @@ private extension ContentViewController {
   
   func fetchForecast() {
     viewModel?.loadData()
-  }
-  
-}
-
-// MARK: - Private - Reload pages
-private extension ContentViewController {
-  
-  func reloadAndInitializeMainPageViewController() {
-    ForecastNotificationCenter.post(.reloadPages)
-  }
-
-  func reloadDataInMainPageViewController() {
-    ForecastNotificationCenter.post(.reloadPagesData)
   }
   
 }
@@ -266,7 +250,7 @@ extension ContentViewController {
     
     DispatchQueue.main.async { [weak self] in
       self?.forecastView.configure(by: viewModel)
-      self?.weekTableView.reloadData()
+      self?.weekdaysTableView.reloadData()
     }
   }
   

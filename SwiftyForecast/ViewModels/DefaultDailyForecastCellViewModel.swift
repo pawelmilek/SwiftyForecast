@@ -25,7 +25,7 @@ struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
   
   init(dailyData: DailyData) {
     self.dailyData = dailyData
-    attributedDate = DailyDateRenderer.render(dailyData.date)
+    attributedDate = DailyDateRenderer.render(dailyData.date ?? ForecastDate())
     conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
                                            font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
   }

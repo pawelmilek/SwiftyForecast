@@ -1,17 +1,44 @@
 import Foundation
+import RealmSwift
 
-struct ForecastDate {
-  private let date: Date
-  private let formatter: DateFormatter
+@objcMembers final class ForecastDate: Object {
+  dynamic var date = Date()
+  private let formatter = DateFormatter()
+
+  private enum CodingKeys: String, CodingKey {
+    case time
+  }
   
-  init(timeInterval: TimeInterval) {
+  var textualRepresentation: String {
+    return "\(self.longDayMonth), \(self.weekday) \(self.time)"
+  }
+  
+  convenience init(timeInterval: TimeInterval) {
+    self.init()
     date = Date(timeIntervalSince1970: timeInterval)
-    formatter = DateFormatter()
+  }
+  
+  required convenience init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let timeInterval = try container.decode(Int.self, forKey: .time)
+    
+    self.init(timeInterval: TimeInterval(timeInterval))
+  }
+  
+  required init() {
+    super.init()
   }
 }
 
 // MARK: - Various date formats
 extension ForecastDate {
+  
+  var time: String {
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
+    let time = formatter.string(from: date)
+    return time
+  }
   
   var longDayMonth: String { // June 1
     formatter.dateFormat = "MMMM d"
@@ -29,53 +56,6 @@ extension ForecastDate {
     formatter.dateFormat = "EEEE"
     let weekday = formatter.string(from: date)
     return weekday
-  }
-  
-}
-
-// MARK: - Various time formats
-extension ForecastDate {
-  
-  var time: String {
-    formatter.timeStyle = .short
-    formatter.dateStyle = .none
-    let time = formatter.string(from: date)
-    return time
-  }
-  
-//  func time(by timeZone: TimeZone?) -> String {
-//    guard let timeZone = timeZone else { return InvalidReference.notApplicable }
-//    formatter.timeStyle = .short
-//    formatter.dateStyle = .none
-//    formatter.timeZone = timeZone
-//    let time = formatter.string(from: date)
-//    return time
-//  }
-  
-}
-
-// MARK: - CustomStringConvertible
-extension ForecastDate: CustomStringConvertible {
-  
-  var description: String {
-    let textualRepresentation = "\(self.longDayMonth), \(self.weekday) \(self.time)"
-    return textualRepresentation
-  }
-  
-}
-
-// MARK: - Decodable protocol
-extension ForecastDate: Decodable {
-  
-  private enum CodingKeys: String, CodingKey {
-    case time
-  }
-  
-  init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    let timeInterval = try container.decode(Int.self, forKey: .time)
-    
-    self.init(timeInterval: TimeInterval(timeInterval))
   }
   
 }

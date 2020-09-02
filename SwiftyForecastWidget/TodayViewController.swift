@@ -11,7 +11,7 @@ class TodayViewController: UIViewController {
   @IBOutlet private weak var temperatureMinMaxLabel: UILabel!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   
-  private var forecast: WeatherForecast?
+  private var forecast: ForecastResponse?
   private var currentForecast: CurrentForecast?
   private var todayViewModel: TodayForecastViewModel?
   private var hourlyForecast: HourlyForecast?
@@ -112,9 +112,9 @@ private extension TodayViewController {
       switch response {
       case .success(let forecast):
         DispatchQueue.main.async {
-          let weatherForecast = WeatherForecast(city: currentCity, forecastResponse: forecast)
-          strongSelf.forecast = weatherForecast
-          strongSelf.todayViewModel = DefaultTodayForecastViewModel(dailyData: weatherForecast.daily.currentDayData!)
+//          let weatherForecast = WeatherForecast(city: currentCity, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+//          strongSelf.forecast = weatherForecast
+//          strongSelf.todayViewModel = DefaultTodayForecastViewModel(dailyData: weatherForecast.daily.currentDayData!)
           completionHandler(nil)
         }
         
@@ -130,7 +130,7 @@ private extension TodayViewController {
     if let forecast = forecast, let todayViewModel = todayViewModel  {
       hourlyForecast = forecast.hourly
       
-      cityNameLabel.text = forecast.city.name
+//      cityNameLabel.text = forecast.city.name
       temperatureLabel.text = forecast.currently.temperatureFormatted
       
       iconLabel.attributedText = todayViewModel.icon

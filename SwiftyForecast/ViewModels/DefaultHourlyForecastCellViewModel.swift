@@ -7,7 +7,7 @@ struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
   
   init(hourlyData: HourlyData) {
     self.hourlyData = hourlyData
-    self.time = hourlyData.date.time
+    self.time = hourlyData.date?.time ?? InvalidReference.undefined
     
     let iconSize = Style.HourlyForecastCell.conditionIconSize
     self.conditionIcon = ConditionFontIcon.make(icon: hourlyData.icon, font: iconSize)?.attributedIcon

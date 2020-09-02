@@ -1,48 +1,49 @@
 import Foundation
 import CoreLocation
+import RealmSwift
 
 final class DefaultContentViewModel: ContentViewModel {
   var hourly: HourlyForecast? {
-    return weatherForecast?.hourly
+    return forecastResponse?.hourly
   }
   
   var icon: NSAttributedString? {
-    guard let current = weatherForecast?.currently else { return nil }
+    guard let icon = forecastResponse?.currently.icon else { return nil }
     let font = Style.CurrentForecast.conditionFontIconSize
-    let attributedIcon = ConditionFontIcon.make(icon: current.icon, font: font)?.attributedIcon
+    let attributedIcon = ConditionFontIcon.make(icon: icon, font: font)?.attributedIcon
     return attributedIcon
   }
   
   var weekdayMonthDay: String {
-    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
-    return "\(current.date.weekday), \(current.date.longDayMonth)".uppercased()
+    guard let date = forecastResponse?.currently?.date else { return InvalidReference.notApplicable }
+    return "\(date.weekday), \(date.longDayMonth)".uppercased()
   }
   
   var cityName: String {
-    return weatherForecast?.city.name ?? city.name
+    return city.name
   }
   
   var temperature: String {
-    return weatherForecast?.currently.temperatureFormatted ?? InvalidReference.notApplicable
+    return forecastResponse?.currently.temperatureFormatted ?? InvalidReference.notApplicable
   }
   
   var humidity: String {
-    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
+    guard let current = forecastResponse?.currently else { return InvalidReference.notApplicable }
     return "\(Int(current.humidity * 100))"
   }
   
   var sunriseTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
-    return details.sunriseTime.time
+    guard let sunriseTime = forecastResponse?.daily.currentDayData?.sunriseTime else { return InvalidReference.notApplicable }
+    return sunriseTime.time
   }
   
   var sunsetTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
-    return details.sunsetTime.time
+    guard let sunsetTime = forecastResponse?.daily.currentDayData?.sunsetTime else { return InvalidReference.notApplicable }
+    return sunsetTime.time
   }
   
   var windSpeed: String {
-    let speed = weatherForecast?.currently.windSpeed ?? 0
+    let speed = forecastResponse?.currently.windSpeed ?? 0
     switch ForecastUserDefaults.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
@@ -53,11 +54,11 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var numberOfDays: Int {
-    return weatherForecast?.daily.numberOfDays ?? 0
+    return forecastResponse?.daily.numberOfDays ?? 0
   }
   
   var sevenDaysData: [DailyData] {
-    return weatherForecast?.daily.sevenDaysData ?? []
+    return forecastResponse?.daily.sevenDaysData ?? []
   }
   
   var location: CLLocation? {
@@ -74,10 +75,10 @@ final class DefaultContentViewModel: ContentViewModel {
       onLoadingStatus?(isLoadingData)
     }
   }
-
+  
   private let city: City
   private let repository: Repository
-  private var weatherForecast: WeatherForecast?
+  private var forecastResponse: ForecastResponse?
   
   init(city: City, repository: Repository) {
     self.city = city
@@ -98,11 +99,11 @@ extension DefaultContentViewModel {
       
       switch response {
       case .success(let data):
-        self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
+        self.forecastResponse = data
         self.onSuccess?()
         
       case .failure(let error):
-        self.weatherForecast = nil
+        self.forecastResponse = nil
         self.onFailure?(error)
       }
       
