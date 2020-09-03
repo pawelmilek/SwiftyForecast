@@ -11,10 +11,12 @@ class TodayViewController: UIViewController {
   @IBOutlet private weak var temperatureMinMaxLabel: UILabel!
   @IBOutlet private weak var hourlyCollectionView: UICollectionView!
   
-  private var forecast: ForecastResponse?
+  // TODO: - Refactoring is required!!!
+  
+  private var forecast: ForecastDTO?
   private var currentForecast: CurrentForecast?
   private var todayViewModel: TodayForecastViewModel?
-  private var hourlyForecast: HourlyForecast?
+  private var hourlyForecast: HourlyForecastDTO?
   
   private lazy var tapGesture: UITapGestureRecognizer = {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(launchHostingApp))
@@ -106,7 +108,7 @@ private extension TodayViewController {
       let location = currentCity.location else { return }
     
     let service = DefaultForecastService()
-    service.getForecast(by: location) { [weak self] response in
+    service.getForecast(latitude: 0.0, longitude: 0.0) { [weak self] response in
       guard let strongSelf = self else { return }
       
       switch response {
@@ -131,7 +133,7 @@ private extension TodayViewController {
       hourlyForecast = forecast.hourly
       
 //      cityNameLabel.text = forecast.city.name
-      temperatureLabel.text = forecast.currently.temperatureFormatted
+//      temperatureLabel.text = forecast.currently.temperatureFormatted
       
       iconLabel.attributedText = todayViewModel.icon
       conditionSummaryLabel.text = todayViewModel.summary

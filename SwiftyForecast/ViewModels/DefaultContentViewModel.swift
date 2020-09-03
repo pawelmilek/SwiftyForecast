@@ -3,47 +3,47 @@ import CoreLocation
 import RealmSwift
 
 final class DefaultContentViewModel: ContentViewModel {
-  var hourly: HourlyForecast? {
-    return forecastResponse?.hourly
+  var hourly: HourlyForecastDTO? {
+    return forecast?.hourly
   }
   
   var icon: NSAttributedString? {
-    guard let icon = forecastResponse?.currently.icon else { return nil }
+    guard let icon = forecast?.currently.icon else { return nil }
     let font = Style.CurrentForecast.conditionFontIconSize
     let attributedIcon = ConditionFontIcon.make(icon: icon, font: font)?.attributedIcon
     return attributedIcon
   }
   
   var weekdayMonthDay: String {
-    guard let date = forecastResponse?.currently?.date else { return InvalidReference.notApplicable }
+    guard let date = forecast?.currently.date else { return InvalidReference.notApplicable }
     return "\(date.weekday), \(date.longDayMonth)".uppercased()
   }
   
   var cityName: String {
-    return city.name
+    return city?.name ?? InvalidReference.notApplicable
   }
   
   var temperature: String {
-    return forecastResponse?.currently.temperatureFormatted ?? InvalidReference.notApplicable
+    return forecast?.currently.temperatureFormatted ?? InvalidReference.notApplicable
   }
   
   var humidity: String {
-    guard let current = forecastResponse?.currently else { return InvalidReference.notApplicable }
+    guard let current = forecast?.currently else { return InvalidReference.notApplicable }
     return "\(Int(current.humidity * 100))"
   }
   
   var sunriseTime: String {
-    guard let sunriseTime = forecastResponse?.daily.currentDayData?.sunriseTime else { return InvalidReference.notApplicable }
+    guard let sunriseTime = forecast?.daily.currentDayData.sunriseTime else { return InvalidReference.notApplicable }
     return sunriseTime.time
   }
   
   var sunsetTime: String {
-    guard let sunsetTime = forecastResponse?.daily.currentDayData?.sunsetTime else { return InvalidReference.notApplicable }
+    guard let sunsetTime = forecast?.daily.currentDayData.sunsetTime else { return InvalidReference.notApplicable }
     return sunsetTime.time
   }
   
   var windSpeed: String {
-    let speed = forecastResponse?.currently.windSpeed ?? 0
+    let speed = forecast?.currently.windSpeed ?? 0
     switch ForecastUserDefaults.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
@@ -54,15 +54,15 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var numberOfDays: Int {
-    return forecastResponse?.daily.numberOfDays ?? 0
+    return forecast?.daily.numberOfDays ?? 0
   }
   
-  var sevenDaysData: [DailyData] {
-    return forecastResponse?.daily.sevenDaysData ?? []
+  var sevenDaysData: [DailyDataDTO] {
+    return forecast?.daily.sevenDaysData ?? []
   }
   
-  var location: CLLocation? {
-    return city.location
+  var location: LocationDTO? {
+    return city?.location
   }
   
   var onSuccess: (() -> Void)?
@@ -76,12 +76,12 @@ final class DefaultContentViewModel: ContentViewModel {
     }
   }
   
-  private let city: City
+  private let city: CityDTO?
   private let repository: Repository
-  private var forecastResponse: ForecastResponse?
+  private var forecast: ForecastDTO?
   
   init(city: City, repository: Repository) {
-    self.city = city
+    self.city = ModelTranslator().translate(city)
     self.repository = repository
   }
 }
@@ -94,16 +94,16 @@ extension DefaultContentViewModel {
     guard let location = location else { return }
     
     isLoadingData = true
-    repository.getForecast(by: location) { [weak self] response in
+    repository.getForecast(latitude: location.latitude, longitude: location.latitude) { [weak self] response in
       guard let self = self else { return }
       
       switch response {
       case .success(let data):
-        self.forecastResponse = data
+        self.forecast = data
         self.onSuccess?()
         
       case .failure(let error):
-        self.forecastResponse = nil
+        self.forecast = nil
         self.onFailure?(error)
       }
       

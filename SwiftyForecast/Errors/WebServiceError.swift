@@ -2,7 +2,6 @@ enum WebServiceError: ErrorHandleable {
   case unknownURL(url: String)
   case requestFailed
   case decoderFailed
-  case failedToRetrieveContext
 }
 
 // MARK: - ErrorHandleable protocol
@@ -18,9 +17,6 @@ extension WebServiceError {
       
     case .decoderFailed:
       return "An error occurred while decoding data."
-      
-    case .failedToRetrieveContext:
-      return "Failed to retrieve context."
     }
   }
   

@@ -6,9 +6,9 @@ import CoreLocation
   dynamic var timezone = ""
   dynamic var longitude = 0.0
   dynamic var latitude = 0.0
-  dynamic var currently: CurrentForecast!
-  dynamic var hourly: HourlyForecast!
-  dynamic var daily: DailyForecast!
+  dynamic var currently: CurrentForecast?
+  dynamic var hourly: HourlyForecast?
+  dynamic var daily: DailyForecast?
   dynamic var lastUpdate = Date()
   
   private enum CodingKeys: String, CodingKey {

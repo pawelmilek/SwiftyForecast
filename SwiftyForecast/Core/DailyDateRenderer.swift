@@ -13,7 +13,7 @@ struct DailyDateRenderer {
     return attributedString
   }
   
-  static func render(_ date: ForecastDate) -> NSAttributedString {
+  static func render(_ date: ForecastDateDTO) -> NSAttributedString {
     let weekday = date.weekday.uppercased()
     let month = date.longDayMonth.uppercased()
     let fullDate = ("\(weekday)\r\n\(month)") as NSString

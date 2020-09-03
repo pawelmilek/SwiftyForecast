@@ -4,46 +4,48 @@ import CoreLocation
 
 struct ForecastRepository: Repository {
   private let service: ForecastService
-  private var forecastDAO: ForecastDAO
+  private var storage: DataStorage
   
-  init(service: ForecastService, forecastDAO: ForecastDAO = ForecastDAO()) {
+  init(service: ForecastService, storage: DataStorage = ForecastDataStorage()) {
     self.service = service
-    self.forecastDAO = forecastDAO
+    self.storage = storage
   }
   
-  func getForecast(by location: CLLocation, completion: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) {
-    if forecastDAO.hasValidData(interval: 1000),
-      let data = forecastDAO.get(for: location) { // RateLimiter.canFetch()
-      completion(.success(data))
-
+  func getForecast(latitude: Double,
+                   longitude: Double,
+                   completion: @escaping (Result<ForecastDTO, WebServiceError>) -> ()) {
+    if RateLimiter.canFetch(interval: 1000) {
+      let data = storage.get(latitude: latitude, longitude: longitude)
+      if let forecastDTO = ModelTranslator().translate(forecast: data) {
+        completion(.success(forecastDTO))
+        
+      } else {
+        completion(.failure(.requestFailed))
+      }
     } else {
-      refreshForecastData(by: location) { result in
+      refreshForecastData(latitude: latitude, longitude: latitude) { result in
         switch result {
         case .success(let data):
-//          let freshData = self.forecastDAO.get(for: location)
-//          
-//          let dataRef = ThreadSafeReference(to: data)
-//          DispatchQueue(label: "com.example.myApp.bg").async {
-//            let realm = RealmProvider.core.realm
-//            guard let forecastResponse = realm.resolve(dataRef) else { return }
-//            
-//            self.forecastDAO.put(data: forecastResponse)
-//            
-//          }
+          self.storage.put(data: data)
           
-        completion(.success(data))
-          
+          if let forecastDTO = ModelTranslator().translate(forecast: data) {
+            completion(.success(forecastDTO))
+            
+          } else {
+            completion(.failure(.requestFailed))
+          }
           
         case .failure(let error):
           completion(.failure(error))
         }
-        
       }
     }
   }
   
-  private func refreshForecastData(by location: CLLocation, completion: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) {
-    service.getForecast(by: location) { result in
+  private func refreshForecastData(latitude: Double,
+                                   longitude: Double,
+                                   completion: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) {
+    service.getForecast(latitude: latitude, longitude: longitude) { result in
       switch result {
       case .success(let data):
         completion(.success(data))
@@ -55,11 +57,3 @@ struct ForecastRepository: Repository {
   }
 }
 
-
-struct RateLimiter {
-  private static let freshTimeoutInterval: TimeInterval = 1000
-  
-  func canFetch() {
-    
-  }
-}

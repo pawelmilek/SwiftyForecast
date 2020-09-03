@@ -21,11 +21,11 @@ struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
     }
   }
   
-  private let dailyData: DailyData
+  private let dailyData: DailyDataDTO
   
-  init(dailyData: DailyData) {
+  init(dailyData: DailyDataDTO) {
     self.dailyData = dailyData
-    attributedDate = DailyDateRenderer.render(dailyData.date ?? ForecastDate())
+    attributedDate = DailyDateRenderer.render(dailyData.date)
     conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
                                            font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
   }

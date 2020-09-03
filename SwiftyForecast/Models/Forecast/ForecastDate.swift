@@ -13,26 +13,6 @@ import RealmSwift
     return "\(self.longDayMonth), \(self.weekday) \(self.time)"
   }
   
-  convenience init(timeInterval: TimeInterval) {
-    self.init()
-    date = Date(timeIntervalSince1970: timeInterval)
-  }
-  
-  required convenience init(from decoder: Decoder) throws {
-    let container = try decoder.container(keyedBy: CodingKeys.self)
-    let timeInterval = try container.decode(Int.self, forKey: .time)
-    
-    self.init(timeInterval: TimeInterval(timeInterval))
-  }
-  
-  required init() {
-    super.init()
-  }
-}
-
-// MARK: - Various date formats
-extension ForecastDate {
-  
   var time: String {
     formatter.timeStyle = .short
     formatter.dateStyle = .none
@@ -58,4 +38,19 @@ extension ForecastDate {
     return weekday
   }
   
+  convenience init(timeInterval: TimeInterval) {
+    self.init()
+    date = Date(timeIntervalSince1970: timeInterval)
+  }
+  
+  required convenience init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let timeInterval = try container.decode(Int.self, forKey: .time)
+    
+    self.init(timeInterval: TimeInterval(timeInterval))
+  }
+  
+  required init() {
+    super.init()
+  }
 }

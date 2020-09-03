@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 
 protocol ContentViewModel: class {
-  var hourly: HourlyForecast? { get }
+  var hourly: HourlyForecastDTO? { get }
   var icon: NSAttributedString? { get }
   var weekdayMonthDay: String { get }
   var cityName: String { get }
@@ -12,8 +12,8 @@ protocol ContentViewModel: class {
   var sunriseTime: String { get }
   var sunsetTime: String { get }
   var numberOfDays: Int { get }
-  var sevenDaysData: [DailyData] { get }
-  var location: CLLocation? { get }
+  var sevenDaysData: [DailyDataDTO] { get }
+  var location: LocationDTO? { get }
   var pageIndex: Int { get set }
   
   var onSuccess: (() -> Void)? { get set }
