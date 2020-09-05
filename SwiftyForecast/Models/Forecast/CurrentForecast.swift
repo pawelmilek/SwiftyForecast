@@ -60,17 +60,3 @@ import RealmSwift
     super.init()
   }
 }
-
-// MARK: - Temperature in Celsius
-extension CurrentForecast {
-  
-  var temperatureFormatted: String {
-    if NotationSystem.selectedUnitNotation == .metric {
-      let temperatureInCelsius = temperature.ToCelsius()
-      return temperatureInCelsius.roundedToString + Style.degreeSign
-    } else {
-      return temperature.roundedToString + Style.degreeSign
-    }
-  }
-  
-}

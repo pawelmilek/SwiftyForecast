@@ -1,7 +1,7 @@
 protocol Repository {
-  init(service: ForecastService, storage: DataStorage)
+  init(service: ForecastService, storage: ForecastDAO)
   
   func getForecast(latitude: Double,
                    longitude: Double,
-                   completion: @escaping (Result<ForecastDTO, WebServiceError>) -> ()) -> Void
+                   completion: @escaping (Result<ForecastDTO?, WebServiceError>) -> ()) -> Void
 }

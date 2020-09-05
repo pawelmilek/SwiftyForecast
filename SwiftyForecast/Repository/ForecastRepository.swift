@@ -4,37 +4,28 @@ import CoreLocation
 
 struct ForecastRepository: Repository {
   private let service: ForecastService
-  private var storage: DataStorage
+  private var forecastDAO: ForecastDAO
   
-  init(service: ForecastService, storage: DataStorage = ForecastDataStorage()) {
+  init(service: ForecastService, storage: ForecastDAO = DefaultForecastDAO()) {
     self.service = service
-    self.storage = storage
+    self.forecastDAO = storage
   }
   
   func getForecast(latitude: Double,
                    longitude: Double,
-                   completion: @escaping (Result<ForecastDTO, WebServiceError>) -> ()) {
-    if RateLimiter.canFetch(interval: 1000) {
-      let data = storage.get(latitude: latitude, longitude: longitude)
-      if let forecastDTO = ModelTranslator().translate(forecast: data) {
-        completion(.success(forecastDTO))
-        
-      } else {
-        completion(.failure(.requestFailed))
-      }
+                   completion: @escaping (Result<ForecastDTO?, WebServiceError>) -> ()) {
+    if let data = forecastDAO.get(latitude: latitude, longitude: longitude), !RateLimiter.shouldFetch(by: data.lastUpdate) {
+      let forecastDTO = ModelTranslator().translate(forecast: data)
+      completion(.success(forecastDTO))
+      
     } else {
       refreshForecastData(latitude: latitude, longitude: latitude) { result in
         switch result {
         case .success(let data):
-          self.storage.put(data: data)
-          
-          if let forecastDTO = ModelTranslator().translate(forecast: data) {
-            completion(.success(forecastDTO))
-            
-          } else {
-            completion(.failure(.requestFailed))
-          }
-          
+          self.forecastDAO.put(data: data)
+          let forecastDTO = ModelTranslator().translate(forecast: data)
+          completion(.success(forecastDTO))
+
         case .failure(let error):
           completion(.failure(error))
         }

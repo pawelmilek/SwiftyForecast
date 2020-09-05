@@ -5,6 +5,20 @@ import RealmSwift
   dynamic var icon = ""
   dynamic var data = List<DailyData>()
   
+  var numberOfDays: Int {
+    let currentDay = 1
+    return data.count - currentDay
+  }
+  
+  var sevenDaysData: [DailyData] {
+    let sevenDaysData = Array(data.dropFirst())
+    return sevenDaysData
+  }
+  
+  var currentDayData: DailyData? {
+    return data.first
+  }
+  
   private enum CodingKeys: String, CodingKey {
     case summary
     case icon
@@ -34,22 +48,4 @@ import RealmSwift
   required init() {
     super.init()
   }
-}
-
-extension DailyForecast {
-  
-  var numberOfDays: Int {
-    let currentDay = 1
-    return data.count - currentDay
-  }
-  
-  var sevenDaysData: [DailyData] {
-    let sevenDaysData = Array(data.dropFirst())
-    return sevenDaysData
-  }
-  
-  var currentDayData: DailyData? {
-    return data.first
-  }
-
 }

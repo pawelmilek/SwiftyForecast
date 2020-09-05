@@ -1,6 +1,6 @@
 struct CurrentForecastDTO {
   let date: ForecastDateDTO
-  let temperatureFormatted: String
+  let temperature: Double
   let summary: String
   let icon: String
   let humidity: Double

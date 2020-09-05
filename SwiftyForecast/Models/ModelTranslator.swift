@@ -36,7 +36,7 @@ struct ModelTranslator {
     guard let date = translate(currentForecast.date) else { return nil }
     
     let currentForecastDTO = CurrentForecastDTO(date: date,
-                                                temperatureFormatted: currentForecast.temperatureFormatted,
+                                                temperature: currentForecast.temperature,
                                                 summary: currentForecast.summary,
                                                 icon: currentForecast.icon,
                                                 humidity: currentForecast.humidity,

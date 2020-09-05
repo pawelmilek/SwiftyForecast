@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct ForecastDataStorage: DataStorage {
+struct DefaultForecastDAO: ForecastDAO {
   func get(latitude: Double, longitude: Double) -> ForecastResponse? {
     let forecast = try? ForecastResponse.fetchAll().filter("longitude = %@ AND latitude = %@", longitude, latitude).first
     return forecast
@@ -9,5 +9,13 @@ struct ForecastDataStorage: DataStorage {
   
   func put(data: ForecastResponse) {
     try! ForecastResponse.add(data)
+  }
+  
+  func delete(forecast: ForecastResponse) {
+    try! forecast.delete()
+  }
+  
+  func deleteAll() {
+    try! ForecastResponse.deleteAll()
   }
 }

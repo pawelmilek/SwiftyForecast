@@ -98,4 +98,28 @@ extension ForecastResponse {
     }
   }
   
+  func delete() throws {
+    guard let realm = realm else { throw RealmError.initializationFailed }
+    
+    do {
+      try realm.write {
+        realm.delete(self)
+      }
+    } catch {
+      throw RealmError.transactionFailed(description: "Deleting forecast response")
+    }
+  }
+  
+  static func deleteAll(in realm: Realm? = RealmProvider.core.realm) throws {
+    guard let realm = realm else { throw RealmError.initializationFailed }
+    
+    do {
+      try realm.write {
+        realm.deleteAll()
+      }
+    } catch {
+      throw RealmError.transactionFailed(description: "Deleting all forecast resposnes")
+    }
+  }
+  
 }

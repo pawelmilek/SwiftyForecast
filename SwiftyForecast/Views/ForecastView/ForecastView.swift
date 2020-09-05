@@ -18,7 +18,7 @@ final class ForecastView: UIView {
   
   private lazy var backgroundImageView: UIImageView = {
     let imageView = UIImageView(frame: .zero)
-    imageView.image = UIImage(named: "swifty_background")
+    imageView.image = UIImage(named: "background")
     imageView.layer.masksToBounds = true
     imageView.frame = contentView.bounds
     imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

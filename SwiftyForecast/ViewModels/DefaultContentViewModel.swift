@@ -24,7 +24,15 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var temperature: String {
-    return forecast?.currently.temperatureFormatted ?? InvalidReference.notApplicable
+    guard let currently = forecast?.currently else { return InvalidReference.notApplicable }
+    switch ForecastUserDefaults.unitNotation {
+    case .imperial:
+      return currently.temperature.roundedToString + Style.degreeSign
+      
+    case .metric:
+      let temperatureInCelsius = currently.temperature.ToCelsius()
+      return temperatureInCelsius.roundedToString + Style.degreeSign
+    }
   }
   
   var humidity: String {
