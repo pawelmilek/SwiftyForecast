@@ -1,5 +1,7 @@
+import Foundation
+
 struct CurrentForecastDTO {
-  let date: ForecastDateDTO
+  let date: Date
   let temperature: Double
   let summary: String
   let icon: String

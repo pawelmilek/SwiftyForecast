@@ -82,15 +82,6 @@ private extension CityListSelectionViewController {
   
 }
 
-// MARK: - Private - Reload pages
-private extension CityListSelectionViewController {
-  
-  func reloadAndInitializeMainPageViewController() {
-    //    ForecastNotificationCenter.post(.reloadPages)
-  }
-
-}
-
 // MARK: - UITableViewDataSource protocol
 extension CityListSelectionViewController: UITableViewDataSource {
   

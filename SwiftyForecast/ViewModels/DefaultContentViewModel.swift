@@ -16,7 +16,15 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var weekdayMonthDay: String {
     guard let date = forecast?.currently.date else { return InvalidReference.notApplicable }
-    return "\(date.weekday), \(date.longDayMonth)".uppercased()
+    let formatter = DateFormatter()
+    
+    formatter.dateFormat = "MMMM d"
+    let longDayMonth = formatter.string(from: date)
+    
+    formatter.dateFormat = "EEEE"
+    let weekday = formatter.string(from: date)
+
+    return "\(weekday), \(longDayMonth)".uppercased()
   }
   
   var cityName: String {
@@ -42,12 +50,12 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var sunriseTime: String {
     guard let sunriseTime = forecast?.daily.currentDayData.sunriseTime else { return InvalidReference.notApplicable }
-    return sunriseTime.time
+    return sunriseTime.getTime()
   }
   
   var sunsetTime: String {
     guard let sunsetTime = forecast?.daily.currentDayData.sunsetTime else { return InvalidReference.notApplicable }
-    return sunsetTime.time
+    return sunsetTime.getTime()
   }
   
   var windSpeed: String {
@@ -88,13 +96,13 @@ final class DefaultContentViewModel: ContentViewModel {
   private let repository: Repository
   private var forecast: ForecastDTO?
   
-  init(city: City, repository: Repository) {
-    self.city = ModelTranslator().translate(city)
+  init(city: CityDTO, repository: Repository) {
+    self.city = city
     self.repository = repository
   }
 }
 
-// MARK: - Private - Fetch Forecast Data
+// MARK: - Fetch Forecast Data
 extension DefaultContentViewModel {
   
   func loadData() {
@@ -102,7 +110,7 @@ extension DefaultContentViewModel {
     guard let location = location else { return }
     
     isLoadingData = true
-    repository.getForecast(latitude: location.latitude, longitude: location.latitude) { [weak self] response in
+    repository.getForecast(latitude: location.latitude, longitude: location.longitude) { [weak self] response in
       guard let self = self else { return }
       
       switch response {

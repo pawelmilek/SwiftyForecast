@@ -166,6 +166,7 @@ extension ForecastViewController {
 extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
   func citySelection(_ view: CityListSelectionViewController, at index: Int) {
+    viewModel?.add(at: index)
     moveToPage(at: index) { [weak self] _ in
       self?.viewModel?.currentIndex = index
       self?.viewModel?.pendingIndex = nil

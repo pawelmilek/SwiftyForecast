@@ -19,10 +19,10 @@ struct ForecastRepository: Repository {
       completion(.success(forecastDTO))
       
     } else {
-      refreshForecastData(latitude: latitude, longitude: latitude) { result in
+      refreshForecastData(latitude: latitude, longitude: longitude) { result in
         switch result {
         case .success(let data):
-          self.forecastDAO.put(data: data)
+          self.forecastDAO.put(data)
           let forecastDTO = ModelTranslator().translate(forecast: data)
           completion(.success(forecastDTO))
 

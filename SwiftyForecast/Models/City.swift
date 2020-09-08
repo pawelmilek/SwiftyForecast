@@ -134,6 +134,22 @@ extension City {
   }
   
   @discardableResult
+  static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+    guard let realm = realm else { throw RealmError.initializationFailed }
+    do {
+      city.id = nextId(in: realm)
+      
+      try realm.write {
+        realm.add(city, update: .all)
+      }
+    } catch {
+      throw RealmError.transactionFailed(description: "Adding new city")
+    }
+    
+    return city
+  }
+  
+  @discardableResult
   static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.core.realm) throws -> City {
     guard let realm = realm else { throw RealmError.initializationFailed }
 
@@ -151,26 +167,10 @@ extension City {
   }
   
   @discardableResult
-  static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws -> City {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-    do {
-      city.id = nextId(in: realm)
-      
-      try realm.write {
-        realm.add(city, update: .all)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Adding new city")
-    }
-    
-    return city
-  }
-  
-  @discardableResult
-  static func add(from placemark: CLPlacemark, withId id: Int, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(_ city: City, withId id: Int, in realm: Realm? = RealmProvider.core.realm) throws -> City {
     guard let realm = realm else { throw RealmError.initializationFailed }
 
-    let newCity = City(placemark: placemark)
+    let newCity = city
     do {
       newCity.id = id
       try realm.write {

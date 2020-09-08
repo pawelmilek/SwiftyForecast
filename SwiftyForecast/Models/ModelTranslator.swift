@@ -33,9 +33,8 @@ struct ModelTranslator {
   
   func translate(_ currentForecast: CurrentForecast?) -> CurrentForecastDTO? {
     guard let currentForecast = currentForecast else { return nil }
-    guard let date = translate(currentForecast.date) else { return nil }
     
-    let currentForecastDTO = CurrentForecastDTO(date: date,
+    let currentForecastDTO = CurrentForecastDTO(date: currentForecast.date,
                                                 temperature: currentForecast.temperature,
                                                 summary: currentForecast.summary,
                                                 icon: currentForecast.icon,
@@ -55,9 +54,8 @@ struct ModelTranslator {
   
   func translate(_ hourlyData: HourlyData?) -> HourlyDataDTO? {
     guard let hourlyData = hourlyData else { return nil }
-    guard let date = translate(hourlyData.date) else { return nil }
     
-    let hourlyDataDTO = HourlyDataDTO(date: date,
+    let hourlyDataDTO = HourlyDataDTO(date: hourlyData.date,
                                       summary: hourlyData.summary,
                                       icon: hourlyData.icon,
                                       temperature: hourlyData.temperature)
@@ -66,15 +64,12 @@ struct ModelTranslator {
   
   func translate(_ dailyData: DailyData?) -> DailyDataDTO? {
     guard let dailyData = dailyData else { return nil }
-    guard let date = translate(dailyData.date) else { return nil }
-    guard let sunriseTime = translate(dailyData.sunriseTime) else { return nil }
-    guard let sunsetTime = translate(dailyData.sunsetTime) else { return nil }
     
-    let dailyDataDTO = DailyDataDTO(date: date,
+    let dailyDataDTO = DailyDataDTO(date: dailyData.date,
                                     summary: dailyData.summary,
                                     icon: dailyData.icon,
-                                    sunriseTime: sunriseTime,
-                                    sunsetTime: sunsetTime,
+                                    sunriseTime: dailyData.sunriseTime,
+                                    sunsetTime: dailyData.sunsetTime,
                                     temperatureMin: dailyData.temperatureMin,
                                     temperatureMax: dailyData.temperatureMax)
     return dailyDataDTO
@@ -91,17 +86,6 @@ struct ModelTranslator {
                                             currentDayData: currentDayData,
                                             sevenDaysData: sevenDaysData)
     return dailyForecastDTO
-  }
-  
-  func translate(_ forecastDate: ForecastDate?) -> ForecastDateDTO? {
-    guard let forecastDate = forecastDate else { return nil }
-    
-    let forecastDateDTO = ForecastDateDTO(longDayMonth: forecastDate.longDayMonth,
-                                          mediumDayMonth: forecastDate.mediumDayMonth,
-                                          weekday: forecastDate.weekday,
-                                          time: forecastDate.time,
-                                          textualRepresentation: forecastDate.textualRepresentation)
-    return forecastDateDTO
   }
   
   func translate(_ location: CLLocation?) -> LocationDTO? {

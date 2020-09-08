@@ -1,21 +1,21 @@
 import Foundation
 import RealmSwift
 
-struct DefaultForecastDAO: ForecastDAO {
+struct DefaultForecastDAO: ForecastDAO {  
   func get(latitude: Double, longitude: Double) -> ForecastResponse? {
     let forecast = try? ForecastResponse.fetchAll().filter("longitude = %@ AND latitude = %@", longitude, latitude).first
     return forecast
   }
   
-  func put(data: ForecastResponse) {
-    try! ForecastResponse.add(data)
+  func put(_ forecast: ForecastResponse) {
+    try! ForecastResponse.add(forecast)
   }
   
-  func delete(forecast: ForecastResponse) {
-    try! forecast.delete()
+  func delete(_ forecast: ForecastResponse) throws {
+    try forecast.delete()
   }
   
-  func deleteAll() {
-    try! ForecastResponse.deleteAll()
+  func deleteAll() throws {
+    try ForecastResponse.deleteAll()
   }
 }

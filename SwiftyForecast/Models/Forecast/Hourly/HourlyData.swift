@@ -1,7 +1,8 @@
+import Foundation
 import RealmSwift
 
 @objcMembers final class HourlyData: Object, Decodable {
-  dynamic var date: ForecastDate?
+  dynamic var date = Date()
   dynamic var summary = ""
   dynamic var icon = ""
   dynamic var precipIntensity = 0.0
@@ -34,9 +35,10 @@ import RealmSwift
     case cloudCover
     case visibility
     case ozone
+    case time
   }
   
-  convenience init(date: ForecastDate,
+  convenience init(date: Date,
                    summary: String,
                    icon: String,
                    precipIntensity: Double,
@@ -74,7 +76,8 @@ import RealmSwift
   required convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    let date = try ForecastDate(from: decoder)
+    let timeInterval = try container.decode(Int.self, forKey: .time)
+    let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
     let summary = try container.decode(String.self, forKey: .summary)
     let icon = try container.decode(String.self, forKey: .icon)
     let precipIntensity = try container.decode(Double.self, forKey: .precipIntensity)

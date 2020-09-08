@@ -3,7 +3,7 @@ import Foundation
 struct RateLimiter {
   private static let limitIntervalInMinutes = 10
   
-  static func shouldFetch(by date: Date) -> Bool { // TODO: or if location changed!!
+  static func shouldFetch(by date: Date) -> Bool {
     let nowString = Date().toString()
     let nowFormatted = nowString.toDate() ?? Date()
     

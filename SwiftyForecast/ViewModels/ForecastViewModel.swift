@@ -12,10 +12,11 @@ protocol ForecastViewModel {
   var onSuccess: (() -> Void)? { get set }
   var onFailure: ((Error) -> Void)? { get set }
   
-  init(repository: Repository)
+  init(repository: Repository, dataAccessObject: CityDAO, modelTranslator: ModelTranslator)
   
-  func city(at index: Int) -> City?
-  func index(of city: City) -> Int?
+  func add(at index: Int)
+  func city(at index: Int) -> CityDTO?
+  func index(of city: CityDTO) -> Int?
   func contentViewController(at index: Int) -> ContentViewController?
   func measuringSystemSwitched(_ sender: SegmentedControl)
   func loadData()

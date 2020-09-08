@@ -4,8 +4,8 @@ import CoreLocation
 @objcMembers final class ForecastResponse: Object, Decodable {
   dynamic var compoundKey = "0|0"
   dynamic var timezone = ""
-  dynamic var longitude = 0.0
   dynamic var latitude = 0.0
+  dynamic var longitude = 0.0
   dynamic var currently: CurrentForecast?
   dynamic var hourly: HourlyForecast?
   dynamic var daily: DailyForecast?
@@ -13,8 +13,8 @@ import CoreLocation
   
   private enum CodingKeys: String, CodingKey {
     case timezone
-    case longitude
     case latitude
+    case longitude
     case currently
     case hourly
     case daily
@@ -36,15 +36,15 @@ import CoreLocation
   }
   
   convenience init(timezone: String,
-                   longitude: Double,
                    latitude: Double,
+                   longitude: Double,
                    currently: CurrentForecast,
                    hourly: HourlyForecast,
                    daily: DailyForecast) {
     self.init()
     self.timezone = timezone
-    self.longitude = longitude
     self.latitude = latitude
+    self.longitude = longitude
     self.currently = currently
     self.hourly = hourly
     self.daily = daily
@@ -55,15 +55,15 @@ import CoreLocation
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
     let timezone = try container.decode(String.self, forKey: .timezone)
-    let longitude = try container.decode(Double.self, forKey: .longitude)
     let latitude = try container.decode(Double.self, forKey: .latitude)
+    let longitude = try container.decode(Double.self, forKey: .longitude)
     let currently = try container.decode(CurrentForecast.self, forKey: .currently)
     let hourly = try container.decode(HourlyForecast.self, forKey: .hourly)
     let daily = try container.decode(DailyForecast.self, forKey: .daily)
     
     self.init(timezone: timezone,
-              longitude: longitude,
               latitude: latitude,
+              longitude: longitude,
               currently: currently,
               hourly: hourly,
               daily: daily)

@@ -7,7 +7,7 @@ struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
   
   init(hourlyData: HourlyDataDTO) {
     self.hourlyData = hourlyData
-    self.time = hourlyData.date.time
+    self.time = hourlyData.date.getTime()
     
     let iconSize = Style.HourlyForecastCell.conditionIconSize
     self.conditionIcon = ConditionFontIcon.make(icon: hourlyData.icon, font: iconSize)?.attributedIcon

@@ -2,15 +2,15 @@ import Foundation
 import RealmSwift
 
 @objcMembers final class DailyData: Object, Decodable {
-  dynamic var date: ForecastDate?
+  dynamic var date = Date()
   dynamic var summary = ""
   dynamic var icon = ""
-  dynamic var sunriseTime: ForecastDate?
-  dynamic var sunsetTime: ForecastDate?
+  dynamic var sunriseTime = Date()
+  dynamic var sunsetTime = Date()
   dynamic var temperatureMin = 0.0
-  dynamic var temperatureMinTime: ForecastDate?
+  dynamic var temperatureMinTime = Date()
   dynamic var temperatureMax = 0.0
-  dynamic var temperatureMaxTime: ForecastDate?
+  dynamic var temperatureMaxTime = Date()
   dynamic var humidity = 0.0
   dynamic var pressure = 0.0
   dynamic var windSpeed = 0.0
@@ -27,17 +27,18 @@ import RealmSwift
     case humidity
     case pressure
     case windSpeed
+    case time
   }
   
-  convenience init(date: ForecastDate,
+  convenience init(date: Date,
                    summary: String,
                    icon: String,
-                   sunriseTime: ForecastDate,
-                   sunsetTime: ForecastDate,
+                   sunriseTime: Date,
+                   sunsetTime: Date,
                    temperatureMin: Double,
-                   temperatureMinTime: ForecastDate,
+                   temperatureMinTime: Date,
                    temperatureMax: Double,
-                   temperatureMaxTime: ForecastDate,
+                   temperatureMaxTime: Date,
                    humidity: Double,
                    pressure: Double,
                    windSpeed: Double) {
@@ -60,21 +61,22 @@ import RealmSwift
   required convenience init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     
-    let date = try ForecastDate(from: decoder)
+    let timeInterval = try container.decode(Int.self, forKey: .time)
+    let date = Date(timeIntervalSince1970: TimeInterval(timeInterval))
     let summary = try container.decode(String.self, forKey: .summary)
     let icon = try container.decode(String.self, forKey: .icon)
     
     let sunriseTimestamp = try container.decode(Int.self, forKey: .sunriseTime)
     let sunsetTimestamp = try container.decode(Int.self, forKey: .sunsetTime)
-    let sunriseTime = ForecastDate(timeInterval: TimeInterval(sunriseTimestamp))
-    let sunsetTime = ForecastDate(timeInterval: TimeInterval(sunsetTimestamp))
+    let sunriseTime = Date(timeIntervalSince1970: TimeInterval(sunriseTimestamp))
+    let sunsetTime = Date(timeIntervalSince1970: TimeInterval(sunsetTimestamp))
     
     let temperatureMinTimestamp = try container.decode(Int.self, forKey: .temperatureMinTime)
     let temperatureMaxTimestamp = try container.decode(Int.self, forKey: .temperatureMaxTime)
     let temperatureMin = try container.decode(Double.self, forKey: .temperatureMin)
-    let temperatureMinTime = ForecastDate(timeInterval: TimeInterval(temperatureMinTimestamp))
+    let temperatureMinTime = Date(timeIntervalSince1970: TimeInterval(temperatureMinTimestamp))
     let temperatureMax = try container.decode(Double.self, forKey: .temperatureMax)
-    let temperatureMaxTime = ForecastDate(timeInterval: TimeInterval(temperatureMaxTimestamp))
+    let temperatureMaxTime = Date(timeIntervalSince1970: TimeInterval(temperatureMaxTimestamp))
     let humidity = try container.decode(Double.self, forKey: .humidity)
     let pressure = try container.decode(Double.self, forKey: .pressure)
     let windSpeed = try container.decode(Double.self, forKey: .windSpeed)

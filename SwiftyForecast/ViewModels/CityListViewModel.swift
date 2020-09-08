@@ -4,6 +4,8 @@ protocol CityListViewModel {
   var numberOfCities: Int { get }
   var onCitySelected: ((Int) -> Void)? { get set }
   
+  init(cityDAO: CityDAO, forecastDAO: ForecastDAO)
+  
   func delete(at indexPath: IndexPath)
   func select(at index: Int)
   func name(at index: Int) -> String

@@ -15,4 +15,12 @@ extension Date {
     return dateString
   }
   
+  func getTime() -> String {
+    let formatter = DateFormatter()
+    formatter.timeStyle = .short
+    formatter.dateStyle = .none
+    let time = formatter.string(from: self)
+    return time
+  }
+  
 }
