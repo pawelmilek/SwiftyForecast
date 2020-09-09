@@ -6,18 +6,26 @@ struct DefaultAddCalloutViewModel: AddCalloutViewModel {
   var country: String { city.country }
   
   private let city: City
-
-  init(placemark: MKPlacemark) {
-    city = City(placemark: placemark)
-    city.isUserLocation = false
+  private let dataAccessObject: CityDAO
+  private let modelTranslator: ModelTranslator
+  
+  init(placemark: MKPlacemark,
+       dataAccessObject: CityDAO = DefaultCityDAO(),
+       modelTranslator: ModelTranslator = ModelTranslator()) {
+    self.city = City(placemark: placemark, isUserLocation: false)
+    self.dataAccessObject = dataAccessObject
+    self.modelTranslator = modelTranslator
+    self.city.isUserLocation = false
   }
   
-  func add(completion: (Result<City, RealmError>) -> Void) {
+  func add(completion: (Result<CityDTO, RealmError>) -> Void) {
     do {
-      let addedCity = try City.add(city)
+      try dataAccessObject.put(city)
+      let addedCity = modelTranslator.translate(city)!
       completion(.success(addedCity))
+      
     } catch {
-      completion(.failure(.transactionFailed(description: "Faild to write \(city)")))
+      completion(.failure(.transactionFailed(description: "Faild to translate to DTO \(city)")))
     }
   }
 }

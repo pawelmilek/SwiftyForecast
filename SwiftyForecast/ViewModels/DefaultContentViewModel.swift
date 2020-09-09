@@ -1,48 +1,65 @@
 import Foundation
 import CoreLocation
+import RealmSwift
 
 final class DefaultContentViewModel: ContentViewModel {
-  var hourly: HourlyForecast? {
-    return weatherForecast?.hourly
+  var hourly: HourlyForecastDTO? {
+    return forecast?.hourly
   }
   
   var icon: NSAttributedString? {
-    guard let current = weatherForecast?.currently else { return nil }
+    guard let icon = forecast?.currently.icon else { return nil }
     let font = Style.CurrentForecast.conditionFontIconSize
-    let attributedIcon = ConditionFontIcon.make(icon: current.icon, font: font)?.attributedIcon
+    let attributedIcon = ConditionFontIcon.make(icon: icon, font: font)?.attributedIcon
     return attributedIcon
   }
   
   var weekdayMonthDay: String {
-    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
-    return "\(current.date.weekday), \(current.date.longDayMonth)".uppercased()
+    guard let date = forecast?.currently.date else { return InvalidReference.notApplicable }
+    let formatter = DateFormatter()
+    
+    formatter.dateFormat = "MMMM d"
+    let longDayMonth = formatter.string(from: date)
+    
+    formatter.dateFormat = "EEEE"
+    let weekday = formatter.string(from: date)
+
+    return "\(weekday), \(longDayMonth)".uppercased()
   }
   
   var cityName: String {
-    return weatherForecast?.city.name ?? InvalidReference.notApplicable
+    return city?.name ?? InvalidReference.notApplicable
   }
   
   var temperature: String {
-    return weatherForecast?.currently.temperatureFormatted ?? InvalidReference.notApplicable
+    guard let currently = forecast?.currently else { return InvalidReference.notApplicable }
+    switch ForecastUserDefaults.unitNotation {
+    case .imperial:
+      return currently.temperature.roundedToString + Style.degreeSign
+      
+    case .metric:
+      let temperatureInCelsius = currently.temperature.ToCelsius()
+      return temperatureInCelsius.roundedToString + Style.degreeSign
+    }
   }
   
   var humidity: String {
-    guard let current = weatherForecast?.currently else { return InvalidReference.notApplicable }
+    guard let current = forecast?.currently else { return InvalidReference.notApplicable }
     return "\(Int(current.humidity * 100))"
   }
   
   var sunriseTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
-    return details.sunriseTime.time
+    guard let sunriseTime = forecast?.daily.currentDayData.sunriseTime else { return InvalidReference.notApplicable }
+    return sunriseTime.getTime()
   }
   
   var sunsetTime: String {
-    guard let details = weatherForecast?.daily.currentDayData else { return InvalidReference.notApplicable }
-    return details.sunsetTime.time
+    guard let sunsetTime = forecast?.daily.currentDayData.sunsetTime else { return InvalidReference.notApplicable }
+    return sunsetTime.getTime()
   }
   
   var windSpeed: String {
-    let speed = weatherForecast?.currently.windSpeed ?? 0
+    let speed = forecast?.currently.windSpeed ?? 0
     switch ForecastUserDefaults.unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
@@ -53,15 +70,15 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var numberOfDays: Int {
-    return weatherForecast?.daily.numberOfDays ?? 0
+    return forecast?.daily.numberOfDays ?? 0
   }
   
-  var sevenDaysData: [DailyData] {
-    return weatherForecast?.daily.sevenDaysData ?? []
+  var sevenDaysData: [DailyDataDTO] {
+    return forecast?.daily.sevenDaysData ?? []
   }
   
-  var location: CLLocation? {
-    return city.location
+  var location: LocationDTO? {
+    return city?.location
   }
   
   var onSuccess: (() -> Void)?
@@ -74,18 +91,18 @@ final class DefaultContentViewModel: ContentViewModel {
       onLoadingStatus?(isLoadingData)
     }
   }
-
-  private let city: City
-  private let service: ForecastService
-  private var weatherForecast: WeatherForecast?
   
-  init(city: City, service: ForecastService) {
+  private let city: CityDTO?
+  private let repository: Repository
+  private var forecast: ForecastDTO?
+  
+  init(city: CityDTO, repository: Repository) {
     self.city = city
-    self.service = service
+    self.repository = repository
   }
 }
 
-// MARK: - Private - Fetch Forecast Data
+// MARK: - Fetch Forecast Data
 extension DefaultContentViewModel {
   
   func loadData() {
@@ -93,16 +110,16 @@ extension DefaultContentViewModel {
     guard let location = location else { return }
     
     isLoadingData = true
-    service.getForecast(by: location) { [weak self] response in
+    repository.getForecast(latitude: location.latitude, longitude: location.longitude) { [weak self] response in
       guard let self = self else { return }
       
       switch response {
       case .success(let data):
-        self.weatherForecast = WeatherForecast(city: self.city, forecastResponse: data)
+        self.forecast = data
         self.onSuccess?()
         
       case .failure(let error):
-        self.weatherForecast = nil
+        self.forecast = nil
         self.onFailure?(error)
       }
       

@@ -92,7 +92,7 @@ import Contacts
   
   override static func primaryKey() -> String? { CityProperty.id.key }
   
-  convenience init(placemark: CLPlacemark) {
+  convenience init(placemark: CLPlacemark, isUserLocation: Bool) {
     self.init()
 
     name = placemark.locality ?? InvalidReference.notApplicable
@@ -100,7 +100,7 @@ import Contacts
     state = placemark.administrativeArea ?? InvalidReference.notApplicable
     postalCode = placemark.postalCode ?? InvalidReference.notApplicable
     timeZoneName = placemark.timeZone?.identifier ?? InvalidReference.notApplicable
-    isUserLocation = true
+    self.isUserLocation = isUserLocation
     location = CLLocation(latitude: placemark.location?.coordinate.latitude ?? 0.0,
                           longitude: placemark.location?.coordinate.longitude ?? 0.0)
   }
@@ -134,23 +134,6 @@ extension City {
   }
   
   @discardableResult
-  static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.core.realm) throws -> City {
-    guard let realm = realm else { throw RealmError.initializationFailed }
-
-    let newCity = City(placemark: placemark)
-    do {
-      newCity.id = nextId(in: realm)
-      try realm.write {
-        realm.add(newCity, update: .all)
-      }
-    } catch {
-      throw RealmError.transactionFailed(description: "Adding new city")
-    }
-    
-    return newCity
-  }
-  
-  @discardableResult
   static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws -> City {
     guard let realm = realm else { throw RealmError.initializationFailed }
     do {
@@ -167,10 +150,27 @@ extension City {
   }
   
   @discardableResult
-  static func add(from placemark: CLPlacemark, withId id: Int, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.core.realm) throws -> City {
     guard let realm = realm else { throw RealmError.initializationFailed }
 
-    let newCity = City(placemark: placemark)
+    let newCity = City(placemark: placemark, isUserLocation: true)
+    do {
+      newCity.id = nextId(in: realm)
+      try realm.write {
+        realm.add(newCity, update: .all)
+      }
+    } catch {
+      throw RealmError.transactionFailed(description: "Adding new city")
+    }
+    
+    return newCity
+  }
+  
+  @discardableResult
+  static func add(_ city: City, withId id: Int, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+    guard let realm = realm else { throw RealmError.initializationFailed }
+
+    let newCity = city
     do {
       newCity.id = id
       try realm.write {

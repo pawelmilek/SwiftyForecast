@@ -39,9 +39,9 @@ private extension CityListSelectionViewController {
     setTableView()
     setSearchLocationButton()
     
-    viewModel?.onCitySelected = { [weak self] city in
+    viewModel?.onCitySelected = { [weak self] index in
       guard let self = self else { return }
-      self.delegate?.citySelection(self, didSelect: city)
+      self.delegate?.citySelection(self, at: index)
     }
   }
   
@@ -78,15 +78,6 @@ private extension CityListSelectionViewController {
     searchLocationButton.setTitle("Search Location", for: .normal)
     searchLocationButton.backgroundColor = Style.CityList.addButtonBackgroundColor
     searchLocationButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
-  }
-  
-}
-
-// MARK: - Private - Reload pages
-private extension CityListSelectionViewController {
-  
-  func reloadAndInitializeMainPageViewController() {
-    //    ForecastNotificationCenter.post(.reloadPages)
   }
   
 }

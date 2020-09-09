@@ -2,6 +2,7 @@ import UIKit
 import RealmSwift
 
 final class ForecastViewController: UIViewController {
+
   @IBOutlet private weak var pageControl: UIPageControl!
   
   weak var coordinator: MainCoordinator?
@@ -23,29 +24,11 @@ final class ForecastViewController: UIViewController {
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
   }()
-  
-  private lazy var pageViewController: UIPageViewController = {
-    var visibleViewControllers: [UIViewController] {
-      guard let contentViewModels = viewModel?.contentViewModels else { return [] }
-      
-      var allViewControllers: [UIViewController] = []
-      for (index, _) in contentViewModels.enumerated() {
-        if let viewController = contentViewController(at: index) {
-          allViewControllers.append(viewController)
-        }
-      }
-      
-      if let firstViewController = allViewControllers.first {
-        return [firstViewController]
-      } else {
-        return []
-      }
-    }
     
+  private lazy var pageViewController: UIPageViewController = {
     let viewController = StoryboardViewControllerFactory.make(UIPageViewController.self, from: .main)
     viewController.dataSource = self
     viewController.delegate = self
-    viewController.setViewControllers(visibleViewControllers, direction: .forward, animated: true)
     return viewController
   }()
     
@@ -68,12 +51,15 @@ final class ForecastViewController: UIViewController {
 private extension ForecastViewController {
   
   func setUp() {
+    setNotationSystemSegmentedControl()
     setViewModelClosureCallbacks()
     addNotificationObservers()
-    loadData()
+    loadAllData()
   }
   
-  func addChildPageViewController() {
+  func setPageViewController() {
+    let viewControllers = viewModel?.currentVisibleViewControllers ?? []
+    pageViewController.setViewControllers(viewControllers, direction: .forward, animated: false)
     add(pageViewController)
   }
   
@@ -84,8 +70,8 @@ private extension ForecastViewController {
   func setupPageControl() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
-      self.pageControl.currentPage = self.viewModel?.currentIndex ?? 0
       self.pageControl.numberOfPages = self.viewModel?.numberOfCities ?? 0
+      self.pageControl.currentPage = self.viewModel?.currentIndex ?? 0
       self.view.bringSubviewToFront(self.pageControl)
     }
   }
@@ -101,18 +87,23 @@ private extension ForecastViewController {
 // MARK: - Private - Reload data
 private extension ForecastViewController {
   
-  func loadData() {
-    viewModel?.loadData()
+  func loadAllData() {
+    viewModel?.loadAllData()
+  }
+  
+  func loadData(at index: Int) {
+    viewModel?.loadData(at: index)
   }
 
+  func loadUserLocationData() {
+    viewModel?.loadData(at: 0)
+  }
 }
 
 // MARK: - Private - Setup notification center
 private extension ForecastViewController {
   
   func addNotificationObservers() {
-//    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPages), for: .reloadPages)
-//    ForecastNotificationCenter.add(observer: self, selector: #selector(reloadPagesData), for: .reloadPagesData)
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationServiceDidRequestLocation),
                                    for: .locationServiceDidRequestLocation)
@@ -155,18 +146,7 @@ private extension ForecastViewController {
 
 // MARK: - Actions
 extension ForecastViewController {
-  
-  @objc func reloadPages(_ notification: NSNotification) {
-//    setInitialViewController()
-//    setupPageControl()
-  }
 
-  @objc func reloadPagesData(_ notification: NSNotification) {
-//    setupPageControl()
-  }
-  
-  
-  
   @IBAction func cityListSelectionBarButtonTapped(_ sender: UIBarButtonItem) {
     coordinator?.onTapCityListSelectionBarButton()
   }
@@ -181,11 +161,11 @@ extension ForecastViewController {
   }
 
   @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
-    loadData()
+    loadUserLocationData()
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    loadData()
+    loadData(at: pageControl.currentPage)
   }
   
 }
@@ -193,9 +173,8 @@ extension ForecastViewController {
 // MARK: - CityListTableViewControllerDelegate protocol
 extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
-  func citySelection(_ view: CityListSelectionViewController, didSelect city: City) {
-    guard let index = viewModel?.index(of: city) else { return }
-    
+  func citySelection(_ view: CityListSelectionViewController, at index: Int) {
+    loadData(at: index)
     moveToPage(at: index) { [weak self] _ in
       self?.viewModel?.currentIndex = index
       self?.viewModel?.pendingIndex = nil
@@ -209,7 +188,7 @@ private extension ForecastViewController {
   
   func moveToPage(at index: Int, completion: @escaping (Bool) -> Void) {
     guard let currentIndex = viewModel?.currentIndex else { return }
-    guard let contentViewController = contentViewController(at: index) else { return }
+    guard let contentViewController = viewModel?.contentViewController(at: index) else { return }
     
     if index > currentIndex {
       pageViewController.setViewControllers([contentViewController],
@@ -227,16 +206,6 @@ private extension ForecastViewController {
   
 }
 
-// MARK: - Private - Set dataSource and first ViewController
-private extension ForecastViewController {
-  
-  func setInitialViewController() {
-    guard let viewController = contentViewController(at: 0) else { return }
-    pageViewController.setViewControllers([viewController], direction: .forward, animated: false)
-  }
-  
-}
-
 // MARK: - UIPageViewControllerDataSource protocol
 extension ForecastViewController: UIPageViewControllerDataSource {
   
@@ -249,7 +218,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
       return nil
     }
     
-    return contentViewController(at: viewControllerIndex - 1)
+    return viewModel?.contentViewController(at: viewControllerIndex - 1)
     
   }
   
@@ -263,7 +232,7 @@ extension ForecastViewController: UIPageViewControllerDataSource {
       return nil
     }
     
-    return contentViewController(at: viewControllerIndex + 1)
+    return viewModel?.contentViewController(at: viewControllerIndex + 1)
   }
   
 }
@@ -291,33 +260,18 @@ extension ForecastViewController: UIPageViewControllerDelegate {
   
 }
 
-// MARK: - Private - Get content view controller
-private extension ForecastViewController {
-  
-  func contentViewController(at index: Int) -> ContentViewController? {
-    guard let contentViewController = viewModel?.contentViewController(at: index) else {
-      return nil
-    }
-
-    return contentViewController
-  }
-  
-}
-
 // MAKR: - Private - Set view models closures
 private extension ForecastViewController {
   
   func setViewModelClosureCallbacks() {
-    viewModel?.onIndexUpdate = { [weak self] currentIndex in
-      self?.pageControl.currentPage = currentIndex
+    viewModel?.onIndexUpdate = { [weak self] _ in
       self?.setupPageControl()
     }
     
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
-        self?.addChildPageViewController()
+        self?.setPageViewController()
         self?.setupPageControl()
-        self?.setNotationSystemSegmentedControl()
       }
     }
     

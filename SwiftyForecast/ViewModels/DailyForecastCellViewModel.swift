@@ -6,5 +6,5 @@ protocol DailyForecastCellViewModel {
   var temperatureMin: String { get }
   var temperatureMax: String { get }
   
-  init(dailyData: DailyData)
+  init(dailyData: DailyDataDTO)
 }

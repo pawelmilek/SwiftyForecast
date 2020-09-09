@@ -3,11 +3,11 @@ import Foundation
 struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
   let time: String
   let conditionIcon: NSAttributedString?
-  private var hourlyData: HourlyData
+  private var hourlyData: HourlyDataDTO
   
-  init(hourlyData: HourlyData) {
+  init(hourlyData: HourlyDataDTO) {
     self.hourlyData = hourlyData
-    self.time = hourlyData.date.time
+    self.time = hourlyData.date.getTime()
     
     let iconSize = Style.HourlyForecastCell.conditionIconSize
     self.conditionIcon = ConditionFontIcon.make(icon: hourlyData.icon, font: iconSize)?.attributedIcon

@@ -13,9 +13,15 @@ struct DailyDateRenderer {
     return attributedString
   }
   
-  static func render(_ date: ForecastDate) -> NSAttributedString {
-    let weekday = date.weekday.uppercased()
-    let month = date.longDayMonth.uppercased()
+  static func render(_ date: Date) -> NSAttributedString {
+    let formatter = DateFormatter()
+    
+    formatter.dateFormat = "MMMM d"
+    let month = formatter.string(from: date).uppercased()
+    
+    formatter.dateFormat = "EEEE"
+    let weekday = formatter.string(from: date).uppercased()
+
     let fullDate = ("\(weekday)\r\n\(month)") as NSString
     let weekdayRange = fullDate.range(of: weekday)
     let monthRange = fullDate.range(of: month)

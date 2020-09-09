@@ -75,13 +75,23 @@ struct RealmUtility {
 // MARK: - Private - Load cities
 private extension RealmUtility {
   
+  static func loadForecast(completion: (Result<ForecastResponse, WebServiceError>) -> Void) {
+    do {
+      let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub")
+      let result = NetworkResponseParser<ForecastResponse>.parseJSON(data)
+      completion(result)
+    } catch {
+      debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
+    }
+  }
+  
   static func loadCities(completion: (Result<[City], WebServiceError>) -> Void) {
         do {
           let data = try JSONFileLoader.loadFile(with: "cities")
           let result = NetworkResponseParser<[City]>.parseJSON(data)
           completion(result)
         } catch {
-          debugPrint(error.localizedDescription)
+          debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
         }
   }
   

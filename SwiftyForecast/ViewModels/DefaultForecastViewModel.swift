@@ -3,7 +3,10 @@ import RealmSwift
 import SafariServices
 
 final class DefaultForecastViewModel: ForecastViewModel {
-  var contentViewModels: [ContentViewModel] = []
+  private static let userLocationPageControlIndex = 0
+  private static let userLocationIdentifier = 1
+  private let dispatchGroup = DispatchGroup()
+  
   var pendingIndex: Int?
   var currentIndex: Int = 0 {
     didSet {
@@ -12,13 +15,18 @@ final class DefaultForecastViewModel: ForecastViewModel {
   }
   
   var numberOfCities: Int {
-    cities.count
+    allCities.count
   }
   
   var powerByURL: URL? {
-    return URL(string: "https://darksky.net/poweredby/")
+    URL(string: "https://darksky.net/poweredby/")
   }
 
+  var currentVisibleViewControllers: [UIViewController] {
+    guard let visibleViewController = contentViewController(at: currentIndex) else { return [] }
+    return [visibleViewController]
+  }
+  
   var onIndexUpdate: ((Int) -> Void)?
   var onLoadingStatus: ((Bool) -> Void)?
   var onSuccess: (() -> Void)?
@@ -30,51 +38,88 @@ final class DefaultForecastViewModel: ForecastViewModel {
      }
    }
   
-  private var cities: Results<City> {
-    try! City.fetchAllOrdered()
+  private var allCities: [CityDTO] {
+    return dataAccessObject.getAll().compactMap { modelTranslator.translate($0) }
   }
 
   private var isUserLocationPage: Bool {
     return currentIndex == 0
   }
-  
-  private let service: ForecastService
 
-  init(service: ForecastService) {
-    self.service = service
+  private var contentViewModels: [ContentViewModel] = []
+  private let repository: Repository
+  private let dataAccessObject: CityDAO
+  private let modelTranslator: ModelTranslator
+
+  init(repository: Repository,
+       dataAccessObject: CityDAO = DefaultCityDAO(),
+       modelTranslator: ModelTranslator = ModelTranslator()) {
+    self.repository = repository
+    self.dataAccessObject = dataAccessObject
+    self.modelTranslator = modelTranslator
   }
   
-  func city(at index: Int) -> City? {
-    let city = Array(cities)[safe: index]
+  func add(at index: Int) {
+    addContentViewModel(at: index)
+  }
+  
+  func city(at index: Int) -> CityDTO? {
+    let city = allCities[safe: index]
     return city
   }
   
-  func index(of city: City) -> Int? {
-    let index = cities.index(of: city)
+  func index(of city: CityDTO) -> Int? {
+    let index = allCities.firstIndex(where: { $0.id == city.id })
     return index
   }
   
   func contentViewController(at index: Int) -> ContentViewController? {
-    guard let contentViewModel = contentViewModel(at: index) else {
+    guard let contentViewModel = contentViewModels[safe: index] else {
       return nil
     }
     
-    let contentViewController = ContentViewController.make(viewModel: contentViewModel)
-    contentViewController.pageIndex = index
-    return contentViewController
+    let viewController = ContentViewController.make(viewModel: contentViewModel)
+    viewController.pageIndex = index
+    return viewController
   }
   
-  func contentViewModel(at index: Int) -> ContentViewModel? {
-    return contentViewModels[safe: index]
+  func loadAllData() {
+    isLoadingData = true
+
+    for (index, _) in allCities.enumerated() {
+      if index == DefaultForecastViewModel.userLocationPageControlIndex {
+        loadUserLocationDataAsync(dispatchGroup: dispatchGroup)
+      } else {
+        addContentViewModelAsync(dispatchGroup: dispatchGroup, at: index)
+      }
+    }
+    
+    dispatchGroup.notify(queue: .main) { [weak self] in
+      self?.isLoadingData = false
+      self?.onSuccess?()
+    }
   }
   
-  func loadData() {
-    contentViewModels = []
-    insertUserLocationIntoFirstPosition()
-    appendOtherLocations()
+  func loadData(at index: Int) {
+    if index == DefaultForecastViewModel.userLocationPageControlIndex {
+      loadUserLocationData()
+    } else {
+      addContentViewModel(at: index)
+    }
   }
   
-  private func insertUserLocationIntoFirstPosition() {
+  func measuringSystemSwitched(_ sender: SegmentedControl) {
+    ForecastNotificationCenter.post(.unitNotationDidChange,
+                                    object: nil,
+                                    userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
+  }
+  
+}
+
+// MARK: - Private - Load data
+private extension DefaultForecastViewModel {
+  
+  func loadUserLocationData() {
     guard !isLoadingData else { return }
     isLoadingData = true
     
@@ -84,13 +129,11 @@ final class DefaultForecastViewModel: ForecastViewModel {
       
       switch result {
       case .success(let placemark):
-        let city = try! City.add(from: placemark, withId: 0)
+        let city = City(placemark: placemark, isUserLocation: true)
+        self.insertIntoDatabase(city: city)
+        self.makeContentViewModel(by: city)
+
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) GeocodeCurrentLocation: \(city)")
-        
-        let currentLocationViewModel = DefaultContentViewModel(city: city, service: self.service)
-        self.contentViewModels.insert(currentLocationViewModel, at: 0)
-        self.appendOtherLocations()
-        
         self.onSuccess?()
         
       case .failure(let error):
@@ -99,16 +142,81 @@ final class DefaultForecastViewModel: ForecastViewModel {
     }
   }
   
-  private func appendOtherLocations() {
-    let cityArray = Array(cities.filter({ $0.isUserLocation == false }))
-    let viewModels = cityArray.map { DefaultContentViewModel(city: $0, service: self.service) }
-    contentViewModels.append(contentsOf: viewModels)
+  func addContentViewModel(at index: Int) {
+    guard let city = city(at: index) else { return }
+    let viewModel = DefaultContentViewModel(city: city, repository: self.repository)
+    
+    if !checkIfExists(viewModel) {
+      contentViewModels.append(viewModel)
+    }
   }
   
-  func measuringSystemSwitched(_ sender: SegmentedControl) {
-    ForecastNotificationCenter.post(.unitNotationDidChange,
-                                    object: nil,
-                                    userInfo: [NotificationCenterUserInfo.segmentedControlChanged.key: sender])
+}
+
+// MARK: - Private - Load data async
+private extension DefaultForecastViewModel {
+  
+  func loadUserLocationDataAsync(dispatchGroup: DispatchGroup) {
+    dispatchGroup.enter()
+    var successCounterToPreventMultipleExecution = 0
+    
+    GeocoderHelper.currentLocation { [weak self] result in
+      guard let self = self else { return }
+
+      defer {
+        if successCounterToPreventMultipleExecution <= 1 {
+          dispatchGroup.leave()
+        }
+      }
+      
+      switch result {
+      case .success(let placemark):
+        let city = City(placemark: placemark, isUserLocation: true)
+        self.insertIntoDatabase(city: city)
+        self.makeContentViewModel(by: city)
+        successCounterToPreventMultipleExecution = successCounterToPreventMultipleExecution + 1
+        
+      case .failure(let error):
+        self.onFailure?(error)
+        successCounterToPreventMultipleExecution = 0
+      }
+    }
+  }
+  
+  func addContentViewModelAsync(dispatchGroup: DispatchGroup, at index: Int) {
+    dispatchGroup.enter()
+    defer { dispatchGroup.leave() }
+    
+    guard let city = city(at: index) else { return }
+    let viewModel = DefaultContentViewModel(city: city, repository: self.repository)
+    
+    if !checkIfExists(viewModel) {
+      contentViewModels.append(viewModel)
+    }
+  }
+  
+}
+
+// MARK: - Private -
+private extension DefaultForecastViewModel {
+  
+  func insertIntoDatabase(city: City) {
+    try! dataAccessObject.put(city, id: DefaultForecastViewModel.userLocationIdentifier)
+  }
+  
+  func makeContentViewModel(by city: City) {
+    guard let cityDTO = modelTranslator.translate(city) else { return }
+    let contentViewModel = DefaultContentViewModel(city: cityDTO, repository: repository)
+    addContentViewModelAtUserLocationPage(viewModel: contentViewModel)
+  }
+  
+  func addContentViewModelAtUserLocationPage(viewModel: ContentViewModel) {
+    guard !self.checkIfExists(viewModel) else { return }
+    contentViewModels.insert(viewModel, at: DefaultForecastViewModel.userLocationPageControlIndex)
+  }
+  
+  func checkIfExists(_ contentViewModel: ContentViewModel) -> Bool {
+    return contentViewModels.contains(where: { return $0.cityName == contentViewModel.cityName })
   }
   
 }
