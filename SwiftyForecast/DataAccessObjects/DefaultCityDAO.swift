@@ -16,19 +16,19 @@ struct DefaultCityDAO: CityDAO {
     return city
   }
   
-  func put(_ city: City, id: Int) {
-    try! City.add(city, withId: id)
+  func put(_ city: City, id: Int) throws {
+    try City.add(city, withId: id)
   }
   
-  func put(_ city: City) {
-    try! City.add(city)
+  func put(_ city: City) throws {
+    try City.add(city)
   }
   
   func delete(_ city: City) throws {
     try city.delete()
   }
   
-  func deleteAll() {
+  func deleteAll() throws {
     try! City.deleteAll()
   }
 }

@@ -2,6 +2,7 @@ import UIKit
 import RealmSwift
 
 final class ForecastViewController: UIViewController {
+
   @IBOutlet private weak var pageControl: UIPageControl!
   
   weak var coordinator: MainCoordinator?
@@ -53,12 +54,12 @@ private extension ForecastViewController {
     setNotationSystemSegmentedControl()
     setViewModelClosureCallbacks()
     addNotificationObservers()
-    loadData()
+    loadAllData()
   }
   
   func setPageViewController() {
     let viewControllers = viewModel?.currentVisibleViewControllers ?? []
-    pageViewController.setViewControllers(viewControllers, direction: .forward, animated: true)
+    pageViewController.setViewControllers(viewControllers, direction: .forward, animated: false)
     add(pageViewController)
   }
   
@@ -69,8 +70,8 @@ private extension ForecastViewController {
   func setupPageControl() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
-      self.pageControl.currentPage = self.viewModel?.currentIndex ?? 0
       self.pageControl.numberOfPages = self.viewModel?.numberOfCities ?? 0
+      self.pageControl.currentPage = self.viewModel?.currentIndex ?? 0
       self.view.bringSubviewToFront(self.pageControl)
     }
   }
@@ -86,10 +87,17 @@ private extension ForecastViewController {
 // MARK: - Private - Reload data
 private extension ForecastViewController {
   
-  func loadData() {
-    viewModel?.loadData()
+  func loadAllData() {
+    viewModel?.loadAllData()
+  }
+  
+  func loadData(at index: Int) {
+    viewModel?.loadData(at: index)
   }
 
+  func loadUserLocationData() {
+    viewModel?.loadData(at: 0)
+  }
 }
 
 // MARK: - Private - Setup notification center
@@ -153,11 +161,11 @@ extension ForecastViewController {
   }
 
   @objc func locationServiceDidRequestLocation(_ notification: NSNotification) {
-    loadData()
+    loadUserLocationData()
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-    loadData()
+    loadData(at: pageControl.currentPage)
   }
   
 }
@@ -166,7 +174,7 @@ extension ForecastViewController {
 extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
   func citySelection(_ view: CityListSelectionViewController, at index: Int) {
-    viewModel?.add(at: index)
+    loadData(at: index)
     moveToPage(at: index) { [weak self] _ in
       self?.viewModel?.currentIndex = index
       self?.viewModel?.pendingIndex = nil
