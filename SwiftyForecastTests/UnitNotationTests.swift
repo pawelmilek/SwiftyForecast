@@ -1,9 +1,10 @@
 import XCTest
+@testable import SwiftyForecast
 
 class UnitNotationTests: XCTestCase {
   private var viewModelDaily: DailyForecastCellViewModel!
   private var viewModelHourly: HourlyForecastCellViewModel!
-  private var viewModelCurrent: CurrentForecastViewModel!
+//  private var viewModelCurrent: CurrentForecastViewModel!
   
   override func setUp() {
     super.setUp()
@@ -23,7 +24,7 @@ class UnitNotationTests: XCTestCase {
     
     viewModelDaily = nil
     viewModelHourly = nil
-    viewModelCurrent = nil
+//    viewModelCurrent = nil
     ForecastUserDefaults.resetNotation()
   }
   

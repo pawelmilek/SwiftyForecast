@@ -21,14 +21,14 @@ struct ForecastUserDefaults {
   }
   
   static func set(notation: UnitNotation) {
-    UserDefaults.standard.set(notation.rawValue, forKey: ForecastUserDefaults.Key.unitsNotation.value)
+    setUnit(notation)
     
     switch notation {
     case .imperial:
-      setTemperature(notation: .fahrenheit)
+      setTemperature(.fahrenheit)
       
     case .metric:
-      setTemperature(notation: .celsius)
+      setTemperature(.celsius)
     }
   }
   
@@ -40,11 +40,11 @@ struct ForecastUserDefaults {
 // MARK: - Private - Set unit and temerature notation
 private extension ForecastUserDefaults {
 
-  static func setUnit(notation: UnitNotation) {
+  static func setUnit(_ notation: UnitNotation) {
     UserDefaults.standard.set(notation.rawValue, forKey: ForecastUserDefaults.Key.unitsNotation.value)
   }
   
-  static func setTemperature(notation: TemperatureNotation) {
+  static func setTemperature(_ notation: TemperatureNotation) {
     UserDefaults.standard.set(notation.rawValue, forKey: ForecastUserDefaults.Key.temperatureNotation.value)
   }
   

@@ -77,7 +77,7 @@ struct ModelTranslator {
   
   func translate(_ dailyForecast: DailyForecast?) -> DailyForecastDTO? {
     guard let dailyForecast = dailyForecast else { return nil }
-    guard let currentDayData = translate(dailyForecast.data.first) else { return nil }
+    guard let currentDayData = translate(dailyForecast.currentDayData) else { return nil }
     
     let sevenDaysData = Array(dailyForecast.sevenDaysData).compactMap({ self.translate($0) })
     let dailyForecastDTO = DailyForecastDTO(summary: dailyForecast.summary,

@@ -13,13 +13,19 @@ class CollectionSafeSubscriptTests: XCTestCase {
     collection = nil
   }
   
-  func testCollectionSubscriptWithDefaultValue() {
+  func testCollectionWithDefaultValue() {
     let value = collection[safe: -1, default: 99]
     let expectedValue = 99
     XCTAssertEqual(value, expectedValue)
   }
   
-  func testCollectionSubscript() {
+  func testCollectionWithDefaultValueIfNeeded() {
+    let value = collection[safe: 5, default: 0]
+    let expectedValue = 6
+    XCTAssertEqual(value, expectedValue)
+  }
+  
+  func testCollectionValue() {
     let value = collection[safe: 0]
     let expectedValue = 1
     XCTAssertEqual(value, expectedValue)
@@ -30,4 +36,5 @@ class CollectionSafeSubscriptTests: XCTestCase {
     let expectedValue = -100
     XCTAssertEqual(value, expectedValue)
   }
+  
 }

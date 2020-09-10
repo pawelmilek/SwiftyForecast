@@ -104,28 +104,28 @@ private extension TodayViewController {
 private extension TodayViewController {
   
   func fetchWeatherForecast(completionHandler: @escaping (_ error: Error?) -> ()) {
-    guard let currentCity = SharedGroupContainer.sharedCity,
-      let location = currentCity.location else { return }
-    
-    let service = DefaultForecastService()
-    service.getForecast(latitude: 0.0, longitude: 0.0) { [weak self] response in
-      guard let strongSelf = self else { return }
-      
-      switch response {
-      case .success(let forecast):
-        DispatchQueue.main.async {
-//          let weatherForecast = WeatherForecast(city: currentCity, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
-//          strongSelf.forecast = weatherForecast
-//          strongSelf.todayViewModel = DefaultTodayForecastViewModel(dailyData: weatherForecast.daily.currentDayData!)
-          completionHandler(nil)
-        }
-        
-      case .failure(let error):
-        DispatchQueue.main.async {
-          completionHandler(error)
-        }
-      }
-    }
+//    guard let currentCity = SharedGroupContainer.sharedCity,
+//      let location = currentCity.location else { return }
+//    
+//    let service = DefaultForecastService(httpClient: HttpClient(), request: ForecastRequest())
+//    service.getForecast(latitude: 0.0, longitude: 0.0) { [weak self] response in
+//      guard let strongSelf = self else { return }
+//      
+//      switch response {
+//      case .success(let forecast):
+//        DispatchQueue.main.async {
+////          let weatherForecast = WeatherForecast(city: currentCity, currently: forecast.currently, hourly: forecast.hourly, daily: forecast.daily)
+////          strongSelf.forecast = weatherForecast
+////          strongSelf.todayViewModel = DefaultTodayForecastViewModel(dailyData: weatherForecast.daily.currentDayData!)
+//          completionHandler(nil)
+//        }
+//        
+//      case .failure(let error):
+//        DispatchQueue.main.async {
+//          completionHandler(error)
+//        }
+//      }
+//    }
   }
   
   func configure() { // TODO: Implement ViewModel

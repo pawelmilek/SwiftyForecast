@@ -1,8 +1,9 @@
 import XCTest
+@testable import SwiftyForecast
 
 class CurrentForecastTests: XCTestCase {
-  private var currentForecast: CurrentForecast!
-  private var viewModel: CurrentForecastViewModel!
+  private var currentForecast: CurrentForecastDTO!
+//  private var viewModel: CurrentForecastViewModel!
   
   override func setUp() {
     super.setUp()
@@ -12,7 +13,7 @@ class CurrentForecastTests: XCTestCase {
   
   override func tearDown() {
     currentForecast = nil
-    viewModel = nil
+//    viewModel = nil
     super.tearDown()
   }
   

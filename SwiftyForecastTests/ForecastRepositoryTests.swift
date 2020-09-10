@@ -1,7 +1,7 @@
 import XCTest
+@testable import SwiftyForecast
 
-class NotificationAdapterTests: XCTestCase {
-  
+class ForecastRepositoryTests: XCTestCase {
   override func setUp() {
     super.setUp()
   }
@@ -11,7 +11,7 @@ class NotificationAdapterTests: XCTestCase {
   }
   
   func testExample() {
-    // TODO: Implement testing
+    
   }
   
 }
