@@ -6,7 +6,9 @@ class ForecastRequestTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    request = ForecastRequest.make(latitude: 12.999, longitude: -12.999)
+    request = ForecastRequest()
+    request.latitude = 12.999
+    request.longitude = -12.999
   }
   
   override func tearDown() {
