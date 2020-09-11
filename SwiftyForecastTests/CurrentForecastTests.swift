@@ -21,9 +21,4 @@ class CurrentForecastTests: XCTestCase {
     let timezone = ForecastGenerator.generateTimezone()
     XCTAssertEqual(timezone, "America/Chicago", "Forecast invalid timezone.")
   }
-  
-  func testExample() {
-
-  }
-  
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct ForecastRequest: ForecastWebService {
+struct DefaultForecastWebRequest: ForecastWebRequest {
   var urlRequest: URLRequest {
     return URLRequest(url: baseURL.appendingPathComponent(path))
   }

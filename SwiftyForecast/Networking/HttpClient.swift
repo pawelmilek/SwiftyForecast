@@ -1,15 +1,15 @@
 import Foundation
 
 final class HttpClient<Model: Decodable> {
-  typealias Completion = ((Result<Model, WebServiceError>) -> Void)
+  typealias NetworkResult = ((Result<Model, WebServiceError>) -> Void)
   
   private let session: URLSession
   
-  init(session: URLSession = URLSession.shared) {
+  init(session: URLSession = .shared) {
     self.session = session
   }
   
-  func get(by request: WebService, completionHandler: @escaping Completion) {
+  func get(by request: WebRequest, completionHandler: @escaping NetworkResult) {
     let urlRequest = request.urlRequest
     let encodedURLRequest = urlRequest.encode(with: request.parameters)
     

@@ -3,9 +3,9 @@ import CoreLocation
 
 final class DefaultForecastService: ForecastService {
   private let httpClient: HttpClient<ForecastResponse>
-  private var request: ForecastWebService
+  private var request: ForecastWebRequest
   
-  init(httpClient: HttpClient<ForecastResponse>, request: ForecastWebService) {
+  init(httpClient: HttpClient<ForecastResponse>, request: ForecastWebRequest) {
     self.httpClient = httpClient
     self.request = request
   }

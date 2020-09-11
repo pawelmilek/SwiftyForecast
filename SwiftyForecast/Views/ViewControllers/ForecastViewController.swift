@@ -58,7 +58,8 @@ private extension ForecastViewController {
   }
   
   func setPageViewController() {
-    let viewControllers = viewModel?.currentVisibleViewControllers ?? []
+    guard let viewControllers = viewModel?.currentVisibleViewControllers, !viewControllers.isEmpty else { return }
+    
     pageViewController.setViewControllers(viewControllers, direction: .forward, animated: false)
     add(pageViewController)
   }

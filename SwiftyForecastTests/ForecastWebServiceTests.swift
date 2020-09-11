@@ -2,11 +2,11 @@ import XCTest
 @testable import SwiftyForecast
 
 class ForecastWebServiceTests: XCTestCase {
-  private var request: DefaultForecastWebService!
+  private var request: DefaultForecastWebRequest!
   
   override func setUp() {
     super.setUp()
-    request = DefaultForecastWebService()
+    request = DefaultForecastWebRequest()
     request.latitude = 12.999
     request.longitude = -12.999
   }
