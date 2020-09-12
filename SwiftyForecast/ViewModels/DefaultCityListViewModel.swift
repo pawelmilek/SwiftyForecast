@@ -7,9 +7,14 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   var onCitySelected: ((Int) -> Void)?
+  var onInitialDataLoad: (() -> Void)?
+  var onApplyListChanges: ((_ deletions: [Int], _ insertions: [Int], _ updates: [Int]) -> Void)?
   
-  private var cities: Results<City>?
   private var citiesToken: NotificationToken?
+
+  private var cities: Results<City>? {
+    return cityDAO.getAll()
+  }
 
   private var cityViewModels: [CityViewModel] {
     guard let cities = cities else { return [] }
@@ -22,6 +27,22 @@ final class DefaultCityListViewModel: CityListViewModel {
   init(cityDAO: CityDAO = DefaultCityDAO(), forecastDAO: ForecastDAO = DefaultForecastDAO()) {
     self.cityDAO = cityDAO
     self.forecastDAO = forecastDAO
+    
+    citiesToken = cities?.observe { changes in
+      switch changes {
+      case .initial:
+        self.onInitialDataLoad?()
+        
+      case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
+        self.onApplyListChanges?(deletions, insertions, modifications)
+        debugPrint("deletions: \(deletions)")
+        debugPrint("insertions: \(insertions)")
+         debugPrint("modifications: \(modifications)")
+        
+      case .error(let error):
+        debugPrint(error)
+      }
+    }
   }
   
   func name(at index: Int) -> String {
@@ -38,25 +59,10 @@ final class DefaultCityListViewModel: CityListViewModel {
   
   func relaodData(initialUpdate: @escaping () -> Void,
                   applyChanges: @escaping (_ deletions: [Int], _ insertions: [Int], _ updates: [Int]) -> Void) {
-    cities = cityDAO.getAll()
-    citiesToken = cities?.observe { changes in
-      switch changes {
-      case .initial:
-        initialUpdate()
-        
-      case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-        applyChanges(deletions, insertions, modifications)
-        debugPrint("deletions: \(deletions)")
-        debugPrint("insertions: \(insertions)")
-        debugPrint("modifications: \(modifications)")
-        
-      case .error(let error):
-        debugPrint(error)
-      }
-    }
+
   }
   
-  func onViewWillDisappear() {
+  func onViewDeinit() {
     citiesToken?.invalidate()
   }
 

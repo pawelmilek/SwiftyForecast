@@ -111,6 +111,10 @@ private extension ForecastViewController {
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(applicationDidBecomeActive),
                                    for: .applicationDidBecomeActive)
+    
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(contentDataDidChange),
+                                   for: .reloadContentPageData)
   }
   
   func removeNotificationObservers() {
@@ -167,6 +171,14 @@ extension ForecastViewController {
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
     loadData(at: pageControl.currentPage)
+  }
+  
+  @objc func contentDataDidChange(_ notification: NSNotification) {
+    guard let value = notification.userInfo?[NotificationCenterUserInfo.cityListUpdated.key],
+      let index = value as? Int else { return }
+    
+    loadData(at: index)
+    setupPageControl()
   }
   
 }
@@ -251,8 +263,8 @@ extension ForecastViewController: UIPageViewControllerDelegate {
                           didFinishAnimating finished: Bool,
                           previousViewControllers: [UIViewController],
                           transitionCompleted completed: Bool) {
-    guard completed, let currentPageIndex = viewModel?.pendingIndex else { return }
-    viewModel?.currentIndex = currentPageIndex
+    guard completed, let pendingIndex = viewModel?.pendingIndex else { return }
+    viewModel?.currentIndex = pendingIndex
     
     if completed {
       pageTransitionImpactFeedback()
@@ -265,8 +277,10 @@ extension ForecastViewController: UIPageViewControllerDelegate {
 private extension ForecastViewController {
   
   func setViewModelClosureCallbacks() {
-    viewModel?.onIndexUpdate = { [weak self] _ in
-      self?.setupPageControl()
+    DispatchQueue.main.async { [weak self] in
+      self?.viewModel?.onIndexUpdate = { [weak self] _ in
+        self?.setupPageControl()
+      }
     }
     
     viewModel?.onSuccess = {
@@ -279,7 +293,7 @@ private extension ForecastViewController {
     viewModel?.onFailure = { error in
       DispatchQueue.main.async {
         if case GeocoderError.locationDisabled = error {
-          LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+          LocationProvider.shared.presentLocationServicesSettingsPopupAlert() // TODO: Fix handling!
         } else {
           (error as? ErrorHandleable)?.handler()
         }

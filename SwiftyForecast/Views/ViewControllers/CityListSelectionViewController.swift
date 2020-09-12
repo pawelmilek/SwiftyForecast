@@ -15,20 +15,14 @@ final class CityListSelectionViewController: UIViewController {
     setUp()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setNavigationBarHidden(true, animated: animated)
-    relaodData()
-  }
-  
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     navigationController?.setNavigationBarHidden(false, animated: animated)
-    viewModel?.onViewWillDisappear()
   }
   
   deinit {
     debugPrint("File: \(#file), Function: \(#function), line: \(#line) deinit CityListSelectionTableViewController")
+    viewModel?.onViewDeinit()
   }
 }
 
@@ -38,20 +32,30 @@ private extension CityListSelectionViewController {
   func setUp() {
     setTableView()
     setSearchLocationButton()
+    relaodData()
     
     viewModel?.onCitySelected = { [weak self] index in
       guard let self = self else { return }
       self.delegate?.citySelection(self, at: index)
     }
+    
+    viewModel?.onInitialDataLoad = { [weak self] in
+      self?.tableView.reloadData()
+    }
+    
+    viewModel?.onApplyListChanges = { [weak self] deletions, insertions, updates in
+      self?.tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
+      
+      if let updatedIndex = updates.first, updatedIndex > 0 {
+        ForecastNotificationCenter.post(.reloadContentPageData,
+                                        object: nil,
+                                        userInfo: [NotificationCenterUserInfo.cityListUpdated.key: updatedIndex])
+      }
+    }
   }
   
-  func relaodData() {
-    viewModel?.relaodData(initialUpdate: { [weak self] in
-      self?.tableView.reloadData()
-      
-    }, applyChanges: { [weak self] deletions, insertions, updates in
-      self?.tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
-    })
+  private func relaodData() {
+    tableView.reloadData()
   }
   
 }
@@ -82,6 +86,7 @@ private extension CityListSelectionViewController {
   
 }
 
+
 // MARK: - UITableViewDataSource protocol
 extension CityListSelectionViewController: UITableViewDataSource {
   
@@ -98,7 +103,6 @@ extension CityListSelectionViewController: UITableViewDataSource {
     let map = viewModel.map(at: row)
     cell.tag = row
     cell.configure(by: cityName, time: localTime, annotation: map?.annotation, region: map?.region)
-    
     return cell
   }
   

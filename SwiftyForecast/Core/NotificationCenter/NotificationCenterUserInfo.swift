@@ -1,10 +1,8 @@
-enum NotificationCenterUserInfo {
+enum NotificationCenterUserInfo: String {
   case segmentedControlChanged
+  case cityListUpdated
   
   var key: String {
-    switch self {
-    case .segmentedControlChanged:
-      return "SegmentedControlChange"
-    }
+    return self.rawValue
   }
 }
