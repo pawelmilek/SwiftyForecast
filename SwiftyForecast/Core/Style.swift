@@ -8,8 +8,8 @@ struct Style {
   
   // MARK: - NavigationBar
   struct NavigationBar {
-    static let barButtonItemColor = UIColor.blackShade
-    static let titleTextColor = UIColor.blackShade
+    static let barButtonItemColor = UIColor.primaryThree
+    static let titleTextColor = UIColor.primaryThree
   }
   
   // MARK: - WeatherForecastWidget
@@ -22,7 +22,7 @@ struct Style {
       }
     }
     
-    static let iconLabelTextColor = UIColor.white
+    static let iconLabelTextColor = UIColor.primaryTwo
     
     static var cityNameLabelFont: UIFont? {
       if UIScreen.PhoneModel.isPhoneSE {
@@ -32,7 +32,7 @@ struct Style {
       }
     }
     
-    static let cityNameLabelTextColor = UIColor.blackShade
+    static let cityNameLabelTextColor = UIColor.primaryThree
     static let cityNameLabelTextAlignment = NSTextAlignment.left
     static let cityNameLabelNumberOfLines = 1
     
@@ -44,7 +44,7 @@ struct Style {
       }
     }
     
-    static let conditionSummaryLabelTextColor = UIColor.blackShade
+    static let conditionSummaryLabelTextColor = UIColor.primaryThree
     static let conditionSummaryLabelTextAlignment = NSTextAlignment.left
     static let conditionSummaryLabelNumberOfLines = 2
     
@@ -56,17 +56,17 @@ struct Style {
       }
     }
     
-    static let humidityLabelTextColor = UIColor.blackShade
+    static let humidityLabelTextColor = UIColor.primaryThree
     static let humidityLabelTextAlignment = NSTextAlignment.left
     static let humidityLabelNumberOfLines = 1
     
     static let temperatureLabelFont = UIFont.systemFont(ofSize: 57, weight: .light)
-    static let temperatureLabelTextColor = UIColor.blackShade
+    static let temperatureLabelTextColor = UIColor.primaryThree
     static let temperatureLabelTextAlignment = NSTextAlignment.left
     static let temperatureLabelNumberOfLines = 1
     
     static let temperatureMaxMinLabelFont = UIFont.systemFont(ofSize: 20, weight: .light)
-    static let temperatureMaxMinLabelTextColor = UIColor.blackShade
+    static let temperatureMaxMinLabelTextColor = UIColor.primaryThree
     static let temperatureMaxMinLabelTextAlignment = NSTextAlignment.left
     static let temperatureMaxMinLabelNumberOfLines = 1
   }
@@ -74,7 +74,7 @@ struct Style {
   // MARK: - CurrentForecastView
   struct CurrentForecast {
     static let backgroundColor = UIColor.clear
-    static let shadowColor = UIColor.red.cgColor
+    static let shadowColor = UIColor.systemRed.cgColor
     static let shadowOffset = CGSize(width: 0, height: 5)
     static let shadowOpacity: Float = 0.5
     static let shadowRadius: CGFloat = 10.0
@@ -92,7 +92,7 @@ struct Style {
       }
     }
     
-    static let textColor = UIColor.white
+    static let textColor = UIColor.primaryTwo
     static let textAlignment = NSTextAlignment.center
     static let dateLabelFont = UIFont.systemFont(ofSize: 15, weight: .medium)
     static let cityNameLabelFont = UIFont.systemFont(ofSize: 12, weight: .light)
@@ -101,10 +101,10 @@ struct Style {
   
   // MARK: - ConditionView
   struct Condition {
-    static let backgroundColor = UIColor.white.withAlphaComponent(0.3)
+    static let backgroundColor = UIColor.systemBackground.withAlphaComponent(0.3)
     static let cornerRadius: CGFloat = 5.0
     static let valueLabelFont = UIFont.systemFont(ofSize: 11, weight: .regular)
-    static let textColor = UIColor.white
+    static let textColor = UIColor.primaryTwo
     static let textAlignment = NSTextAlignment.center
     static let conditionFontSize = CGFloat(20)
   }
@@ -113,28 +113,28 @@ struct Style {
   struct CityCell {
     static let backgroundColor = UIColor.clear
     static let currentTimeLabelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
-    static let currentTimeLabelTextColor = UIColor.lightOrange
+    static let currentTimeLabelTextColor = UIColor.primaryOne
     static let currentTimeLabelTextAlignment = NSTextAlignment.left
     
     static let cityNameLabelFont = UIFont.systemFont(ofSize: 22, weight: .regular)
-    static let cityNameLabelTextColor = UIColor.blackShade
+    static let cityNameLabelTextColor = UIColor.primaryThree
     static let cityNameLabelTextAlignment = NSTextAlignment.left
     
-    static let separatorColor = UIColor.white.withAlphaComponent(0.8)
+    static let separatorColor = UIColor.primaryTwo.withAlphaComponent(0.8)
   }
   
   // MARK: - DailyForecastTableViewCell
   struct DailyForecastCell {
     static let backgroundColor = UIColor.clear
     
-    static let dateLabelTextColor = UIColor.blackShade
+    static let dateLabelTextColor = UIColor.primaryThree
     static let dateLabelTextAlignment = NSTextAlignment.left
     
-    static let iconLabelTextColor = UIColor.blackShade
+    static let iconLabelTextColor = UIColor.primaryThree
     static let iconLabelTextAlignment = NSTextAlignment.center
     
     static let temperatureLabelFont = UIFont.systemFont(ofSize: 17, weight: .light)
-    static let temperatureLabelTextColor = UIColor.blackShade
+    static let temperatureLabelTextColor = UIColor.primaryThree
     static let temperatureLabelTextAlignment = NSTextAlignment.center
     
     static let weekdayLabelFont = UIFont.systemFont(ofSize: 11, weight: .medium)
@@ -148,14 +148,14 @@ struct Style {
     static let backgroundColor = UIColor.clear
     
     static let timeLabelFont = UIFont.systemFont(ofSize: 11, weight: .light)
-    static let timeLabelTextColor = UIColor.white
+    static let timeLabelTextColor = UIColor.primaryTwo
     static let timeLabelTextAlignment = NSTextAlignment.center
     
-    static let iconLabelTextColor = UIColor.white
+    static let iconLabelTextColor = UIColor.primaryTwo
     static let iconLabelTextAlignment = NSTextAlignment.center
     
     static let temperatureLabelFont = UIFont.systemFont(ofSize: 13, weight: .medium)
-    static let temperatureLabelTextColor = UIColor.white
+    static let temperatureLabelTextColor = UIColor.primaryTwo
     static let temperatureLabelTextAlignment = NSTextAlignment.center
     
     static let conditionIconSize: CGFloat = 25
@@ -163,7 +163,7 @@ struct Style {
   
   // MARK: - CityList
   struct CityList {
-    static let addButtonBackgroundColor = MKPinAnnotationView.redPinColor()
+    static let searchLocationButtonBackgroundColor = UIColor.primaryOne
     static let backgroundColor = UIColor.clear
     static let separatorColor = UIColor.lightGray
     static let separatorStyle = UITableViewCell.SeparatorStyle.singleLine
@@ -172,84 +172,83 @@ struct Style {
   
   // MARK: - LocationSearch
   struct LocationSearch {
-    static let primaryTextColor = UIColor.orange
-    static let primaryTextHighlightColor = UIColor.lightOrange
-    static let secondaryTextColor = UIColor.blackShade
+    static let primaryTextColor = UIColor.primaryOne
+    static let primaryTextHighlightColor = UIColor.primaryOne
+    static let secondaryTextColor = UIColor.primaryThree
     
-    static let searchTextColorInSearchBar = UIColor.orange
+    static let searchTextColorInSearchBar = UIColor.primaryOne
     static let searchTextFontInSearchBar = UIFont.systemFont(ofSize: 14, weight: .light)
-    static let searchTextFieldColorPlaceholder = UIColor.blackShade.withAlphaComponent(0.6)
+    static let searchTextFieldColorPlaceholder = UIColor.primaryThree.withAlphaComponent(0.6)
     static let searchTextFieldFontPlaceholder = UIFont.systemFont(ofSize: 14, weight: .regular)
-    static let searchBarCancelButtonColor = UIColor.orange
+    static let searchBarCancelButtonColor = UIColor.primaryOne
     static let searchBarCancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .regular)
     
-    static let separatorColor = UIColor.blackShade.withAlphaComponent(0.7)
-    static let backgroundColor = UIColor.clear
+    static let separatorColor = UIColor.primaryThree.withAlphaComponent(0.7)
+    static let backgroundColor = UIColor.secondarySystemBackground
   }
   
   // MARK: - ForecastContentViewController
   struct ContentForecast {
-    static let tableViewBackgroundColor = UIColor.white
+    static let tableViewBackgroundColor = UIColor.clear
     static let tableViewSeparatorStyle = UITableViewCell.SeparatorStyle.none
+    static let backgroundColor = UIColor.systemBackground
   }
   
   // MARK: - ForecastMainViewController
   struct MainForecast {
-    static let measuringSystemSegmentedControlFont = UIFont.systemFont(ofSize: 14, weight: .bold)
-    static let measuringSystemSegmentedControlBorderWidth: CGFloat = 1.0
-    static let measuringSystemSegmentedControlSelectedLabelColor = UIColor.white
+    static let segmentedControlFont = UIFont.systemFont(ofSize: 14, weight: .bold)
+    static let segmentedControlBorderWidth: CGFloat = 1.0
+    static let segmentedControlSelectedLabelColor = UIColor.primaryTwo
     
-    static let measuringSystemSegmentedControlUnselectedLabelColor = UIColor.blackShade
-    static let measuringSystemSegmentedControlBorderColor = UIColor.blackShade
-    static let measuringSystemSegmentedControlThumbColor = UIColor.blackShade
-    static let measuringSystemSegmentedControlBackgroundColor = UIColor.clear
+    static let segmentedControlUnselectedLabelColor = UIColor.primaryThree
+    static let segmentedControlBorderColor = UIColor.primaryThree
+    static let segmentedControlThumbColor = UIColor.primaryThree
+    static let segmentedControlBackgroundColor = UIColor.clear
+    
+    static let currentPageIndicatorColor = UIColor.primaryOne
+    static let backgroundColor = UIColor.systemBackground
   }
   
   // MARK: - OfflineViewController
   struct OfflineVC {
-    static let backgroundColor = UIColor.white
+    static let backgroundColor = UIColor.systemBackground
     static let descriptionLabelFont = UIFont.systemFont(ofSize: 18, weight: .bold)
-    static let descriptionLabelTextColor = UIColor.blackShade
+    static let descriptionLabelTextColor = UIColor.primaryThree
     static let descriptionLabelTextAlignment = NSTextAlignment.center
   }
   
   // MARK: - CitySearchBar
   struct CitySearchBar {
-    static let backgroundColor = UIColor.ecstasy
-    static let cancelButtonFont = UIFont.systemFont(ofSize: 14, weight: .light)
-    static let cancelButtonColor = UIColor.white
-    static let cancelButtonBackgroundColor = UIColor.white
-    
-    static let searchTextFieldBackgroundColor = UIColor.white
+    static let backgroundColor = UIColor.systemGray
+    static let searchTextFieldBackgroundColor = UIColor.systemBackground
     static let searchTextFieldFont = UIFont.systemFont(ofSize: 14, weight: .light)
-    static let searchTextFieldColor = UIColor.black
-    static let searchTextFieldPlaceholder = UIColor.gray
-    static var searchTextFieldTintColor = UIColor.ecstasy
-    static let textFieldClearButtonColor = UIColor.gray
-    static let glassIconColor = UIColor.gray
+    static let searchTextFieldColor = UIColor.secondaryLabel
+    static let searchTextFieldPlaceholder = UIColor.systemGray
+    static var searchTextFieldTintColor = UIColor.systemGray
+    static let textFieldClearButtonColor = UIColor.systemGray
+    static let glassIconColor = UIColor.systemGray
   }
   
   // MARK: ActivityIndicatorView
   struct ActivityIndicator {
-    static let indicatorColor = UIColor.white
+    static let indicatorColor = UIColor.primaryTwo
   }
   
   // MARK: AddCalloutView
   struct AddCalloutView {
-    static let defaultBackgroundColor = UIColor.white
+    static let defaultBackgroundColor = UIColor.secondarySystemBackground
     static let cornerRadius = CGFloat(15)
     static let titleLabelFont = UIFont.systemFont(ofSize: 16, weight: .bold)
-    static let titleLabelTextColor = UIColor.lightOrange
+    static let titleLabelTextColor = UIColor.primaryOne
     static let titleLabelAlignment = NSTextAlignment.left
     static let titleLabelNumberOfLines = 1
     
     static let subtitleLabelFont = UIFont.systemFont(ofSize: 13, weight: .regular)
-    static let subtitleLabelTextColor = UIColor.black
+    static let subtitleLabelTextColor = UIColor.secondaryLabel
     static let subtitleLabelAlignment = NSTextAlignment.left
     static let subtitleLabelNumberOfLines = 1
     
     static let addButtonIconName = "ic_add"
-    static let addButtonTintColor = UIColor.orange
-    
+    static let addButtonTintColor = UIColor.primaryOne
   }
 }

@@ -15,6 +15,11 @@ final class CityListSelectionViewController: UIViewController {
     setUp()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    navigationController?.setNavigationBarHidden(true, animated: animated)
+  }
+  
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -80,7 +85,7 @@ private extension CityListSelectionViewController {
     searchLocationButton.layer.cornerRadius = 15
     searchLocationButton.clipsToBounds = true
     searchLocationButton.setTitle("Search Location", for: .normal)
-    searchLocationButton.backgroundColor = Style.CityList.addButtonBackgroundColor
+    searchLocationButton.backgroundColor = Style.CityList.searchLocationButtonBackgroundColor
     searchLocationButton.addTarget(self, action: #selector(searchLocationButtonTapped(_:)), for: .touchUpInside)
   }
   

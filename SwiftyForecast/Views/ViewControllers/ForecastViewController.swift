@@ -2,24 +2,14 @@ import UIKit
 import RealmSwift
 
 final class ForecastViewController: UIViewController {
-
   @IBOutlet private weak var pageControl: UIPageControl!
   
   weak var coordinator: MainCoordinator?
   var viewModel: ForecastViewModel?
   
-  private lazy var notationSystemSegmentedControl: SegmentedControl = {
-    typealias ForecastMainStyle = Style.MainForecast
-    
+  private lazy var notationSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
-    segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
-    segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
-    segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
-    segmentedControl.unselectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlUnselectedLabelColor
-    segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
-    segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
-    segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = ForecastUserDefaults.unitNotation.rawValue
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
@@ -51,6 +41,7 @@ final class ForecastViewController: UIViewController {
 private extension ForecastViewController {
   
   func setUp() {
+    setupAppearance()
     setNotationSystemSegmentedControl()
     setViewModelClosureCallbacks()
     addNotificationObservers()
@@ -65,7 +56,7 @@ private extension ForecastViewController {
   }
   
   func setNotationSystemSegmentedControl() {
-    navigationItem.titleView = notationSystemSegmentedControl
+    navigationItem.titleView = notationSegmentedControl
   }
   
   func setupPageControl() {
@@ -81,6 +72,19 @@ private extension ForecastViewController {
     let generator = UIImpactFeedbackGenerator(style: .light)
     generator.prepare()
     generator.impactOccurred()
+  }
+  
+  func setupAppearance() {
+    notationSegmentedControl.font = Style.MainForecast.segmentedControlFont
+    notationSegmentedControl.borderWidth = Style.MainForecast.segmentedControlBorderWidth
+    notationSegmentedControl.selectedLabelColor = Style.MainForecast.segmentedControlSelectedLabelColor
+    notationSegmentedControl.unselectedLabelColor = Style.MainForecast.segmentedControlUnselectedLabelColor
+    notationSegmentedControl.borderColor = Style.MainForecast.segmentedControlBorderColor
+    notationSegmentedControl.thumbColor = Style.MainForecast.segmentedControlThumbColor
+    notationSegmentedControl.backgroundColor = Style.MainForecast.segmentedControlBackgroundColor
+    
+    pageControl.currentPageIndicatorTintColor = Style.MainForecast.currentPageIndicatorColor
+    view.backgroundColor = Style.MainForecast.backgroundColor
   }
   
 }

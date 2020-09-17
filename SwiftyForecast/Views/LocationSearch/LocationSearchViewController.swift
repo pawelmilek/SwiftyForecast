@@ -15,7 +15,7 @@ final class LocationSearchViewController: UIViewController {
     searchController.searchResultsUpdater = viewController
     searchController.searchBar.tintColor = Style.LocationSearch.searchTextColorInSearchBar
     searchController.searchBar.barTintColor = Style.LocationSearch.searchBarCancelButtonColor
-    searchController.searchBar.backgroundColor = .white
+    searchController.searchBar.backgroundColor = Style.LocationSearch.backgroundColor
     searchController.searchBar.sizeToFit()
     searchController.searchBar.placeholder = "Search place"
     searchController.obscuresBackgroundDuringPresentation = false
