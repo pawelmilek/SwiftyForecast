@@ -2,24 +2,14 @@ import UIKit
 import RealmSwift
 
 final class ForecastViewController: UIViewController {
-
   @IBOutlet private weak var pageControl: UIPageControl!
   
   weak var coordinator: MainCoordinator?
   var viewModel: ForecastViewModel?
   
-  private lazy var notationSystemSegmentedControl: SegmentedControl = {
-    typealias ForecastMainStyle = Style.MainForecast
-    
+  private lazy var notationSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
-    segmentedControl.font = ForecastMainStyle.measuringSystemSegmentedControlFont
-    segmentedControl.borderWidth = ForecastMainStyle.measuringSystemSegmentedControlBorderWidth
-    segmentedControl.selectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlSelectedLabelColor
-    segmentedControl.unselectedLabelColor = ForecastMainStyle.measuringSystemSegmentedControlUnselectedLabelColor
-    segmentedControl.borderColor = ForecastMainStyle.measuringSystemSegmentedControlBorderColor
-    segmentedControl.thumbColor = ForecastMainStyle.measuringSystemSegmentedControlThumbColor
-    segmentedControl.backgroundColor = ForecastMainStyle.measuringSystemSegmentedControlBackgroundColor
     segmentedControl.selectedIndex = ForecastUserDefaults.unitNotation.rawValue
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
@@ -51,6 +41,7 @@ final class ForecastViewController: UIViewController {
 private extension ForecastViewController {
   
   func setUp() {
+    setupAppearance()
     setNotationSystemSegmentedControl()
     setViewModelClosureCallbacks()
     addNotificationObservers()
@@ -58,13 +49,14 @@ private extension ForecastViewController {
   }
   
   func setPageViewController() {
-    let viewControllers = viewModel?.currentVisibleViewControllers ?? []
+    guard let viewControllers = viewModel?.currentVisibleViewControllers, !viewControllers.isEmpty else { return }
+    
     pageViewController.setViewControllers(viewControllers, direction: .forward, animated: false)
     add(pageViewController)
   }
   
   func setNotationSystemSegmentedControl() {
-    navigationItem.titleView = notationSystemSegmentedControl
+    navigationItem.titleView = notationSegmentedControl
   }
   
   func setupPageControl() {
@@ -80,6 +72,19 @@ private extension ForecastViewController {
     let generator = UIImpactFeedbackGenerator(style: .light)
     generator.prepare()
     generator.impactOccurred()
+  }
+  
+  func setupAppearance() {
+    notationSegmentedControl.font = Style.MainForecast.segmentedControlFont
+    notationSegmentedControl.borderWidth = Style.MainForecast.segmentedControlBorderWidth
+    notationSegmentedControl.selectedLabelColor = Style.MainForecast.segmentedControlSelectedLabelColor
+    notationSegmentedControl.unselectedLabelColor = Style.MainForecast.segmentedControlUnselectedLabelColor
+    notationSegmentedControl.borderColor = Style.MainForecast.segmentedControlBorderColor
+    notationSegmentedControl.thumbColor = Style.MainForecast.segmentedControlThumbColor
+    notationSegmentedControl.backgroundColor = Style.MainForecast.segmentedControlBackgroundColor
+    
+    pageControl.currentPageIndicatorTintColor = Style.MainForecast.currentPageIndicatorColor
+    view.backgroundColor = Style.MainForecast.backgroundColor
   }
   
 }
@@ -110,6 +115,10 @@ private extension ForecastViewController {
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(applicationDidBecomeActive),
                                    for: .applicationDidBecomeActive)
+    
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(contentDataDidChange),
+                                   for: .reloadContentPageData)
   }
   
   func removeNotificationObservers() {
@@ -166,6 +175,14 @@ extension ForecastViewController {
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
     loadData(at: pageControl.currentPage)
+  }
+  
+  @objc func contentDataDidChange(_ notification: NSNotification) {
+    guard let value = notification.userInfo?[NotificationCenterUserInfo.cityListUpdated.key],
+      let index = value as? Int else { return }
+    
+    loadData(at: index)
+    setupPageControl()
   }
   
 }
@@ -250,8 +267,8 @@ extension ForecastViewController: UIPageViewControllerDelegate {
                           didFinishAnimating finished: Bool,
                           previousViewControllers: [UIViewController],
                           transitionCompleted completed: Bool) {
-    guard completed, let currentPageIndex = viewModel?.pendingIndex else { return }
-    viewModel?.currentIndex = currentPageIndex
+    guard completed, let pendingIndex = viewModel?.pendingIndex else { return }
+    viewModel?.currentIndex = pendingIndex
     
     if completed {
       pageTransitionImpactFeedback()
@@ -264,8 +281,10 @@ extension ForecastViewController: UIPageViewControllerDelegate {
 private extension ForecastViewController {
   
   func setViewModelClosureCallbacks() {
-    viewModel?.onIndexUpdate = { [weak self] _ in
-      self?.setupPageControl()
+    DispatchQueue.main.async { [weak self] in
+      self?.viewModel?.onIndexUpdate = { [weak self] _ in
+        self?.setupPageControl()
+      }
     }
     
     viewModel?.onSuccess = {
@@ -278,7 +297,7 @@ private extension ForecastViewController {
     viewModel?.onFailure = { error in
       DispatchQueue.main.async {
         if case GeocoderError.locationDisabled = error {
-          LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+          LocationProvider.shared.presentLocationServicesSettingsPopupAlert() // TODO: Fix handling!
         } else {
           (error as? ErrorHandleable)?.handler()
         }

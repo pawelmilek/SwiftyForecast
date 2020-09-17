@@ -94,7 +94,7 @@ extension LocationProvider: CLLocationManagerDelegate {
         authorizationCompletionBlock(true)
       }
       
-    case .denied:
+    case .denied, .restricted:
       if let authorizationCompletionBlock = authorizationCompletionBlock {
         authorizationCompletionBlock(false)
       }

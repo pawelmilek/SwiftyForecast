@@ -1,7 +1,8 @@
 import XCTest
+@testable import SwiftyForecast
 
 class HourlyForecastTests: XCTestCase {
-  private var hourlyForecast: HourlyForecast!
+  private var hourlyForecast: HourlyForecastDTO!
   private var viewModel: HourlyForecastCellViewModel!
   
   override func setUp() {

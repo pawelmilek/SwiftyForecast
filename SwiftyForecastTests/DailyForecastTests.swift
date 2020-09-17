@@ -1,7 +1,8 @@
 import XCTest
+@testable import SwiftyForecast
 
 class DailyForecastTests: XCTestCase {
-  private var dailyForecast: DailyForecast!
+  private var dailyForecast: DailyForecastDTO!
   private var viewModel: DailyForecastCellViewModel!
   
   override func setUp() {
@@ -35,7 +36,7 @@ class DailyForecastTests: XCTestCase {
       return date?.timeIntervalSince1970 ?? 0
     }
     
-    let forecastDate = ForecastDate(timeInterval: timeInterval) // SUNDAY APRIL 28
+    let forecastDate = Date(timeIntervalSince1970: timeInterval) // SUNDAY APRIL 28
     let expectedValue = DailyDateRenderer.render(forecastDate)
     XCTAssertEqual(viewModel.attributedDate, expectedValue)
   }

@@ -2,7 +2,7 @@ import Foundation
 
 typealias Parameters = [String: String]
 
-protocol WebService {
+protocol WebRequest {
   var baseURL: URL { get }
   var path: String { get }
   var urlRequest: URLRequest { get }

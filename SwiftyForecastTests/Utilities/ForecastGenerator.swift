@@ -1,30 +1,11 @@
-struct ForecastGenerator {
-  
-  static func generateTimezone() -> String {
-    return forecastResponse.timezone
-  }
-  
-  static func generateCurrentForecast() -> CurrentForecast {
-    return forecastResponse.currently
-  }
-  
-  static func generateHourlyForecast() -> HourlyForecast {
-    return forecastResponse.hourly
-  }
-  
-  static func generateDailyForecast() -> DailyForecast {
-    return forecastResponse.daily
-  }
-}
+@testable import SwiftyForecast
 
-// MARK: - Private - Generate forecast response from a stub
-extension ForecastGenerator {
+struct ForecastGenerator {
+  private static var forecastResponse: ForecastDTO = {
+    return ModelTranslator().translate(forecast: ForecastGenerator.generateForecast()!)!
+  }()
   
-  private static var forecastResponse: ForecastResponse {
-    return ForecastGenerator.generateForecast()!
-  }
-  
-  private static func generateForecast() -> ForecastResponse? {
+  static func generateForecast() -> ForecastResponse? {
     do {
       let data = try JSONFileLoader.loadFile(with: "forecastChicagoStub")
       let result = NetworkResponseParser<ForecastResponse>.parseJSON(data)
@@ -44,4 +25,22 @@ extension ForecastGenerator {
     return nil
   }
   
+  static func generateTimezone() -> String {
+    return forecastResponse.timezone
+  }
+  
+  static func generateCurrentForecast() -> CurrentForecastDTO {
+    return forecastResponse.currently
+  }
+  
+  static func generateHourlyForecast() -> HourlyForecastDTO {
+    return forecastResponse.hourly
+  }
+  
+  static func generateDailyForecast() -> DailyForecastDTO {
+    return forecastResponse.daily
+  }
+  
+  
 }
+

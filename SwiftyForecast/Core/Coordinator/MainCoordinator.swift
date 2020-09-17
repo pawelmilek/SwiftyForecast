@@ -11,7 +11,8 @@ final class MainCoordinator: Coordinator {
   
   func start() {
     let viewController = ForecastViewController.make()
-    viewController.viewModel = DefaultForecastViewModel(repository: ForecastRepository(service: DefaultForecastService()))
+    let service = DefaultForecastService(httpClient: HttpClient(), request: DefaultForecastWebRequest())
+    viewController.viewModel = DefaultForecastViewModel(repository: ForecastRepository(service: service))
     viewController.coordinator = self
     navigationController.pushViewController(viewController, animated: false)
   }

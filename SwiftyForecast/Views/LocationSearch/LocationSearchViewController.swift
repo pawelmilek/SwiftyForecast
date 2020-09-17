@@ -15,7 +15,7 @@ final class LocationSearchViewController: UIViewController {
     searchController.searchResultsUpdater = viewController
     searchController.searchBar.tintColor = Style.LocationSearch.searchTextColorInSearchBar
     searchController.searchBar.barTintColor = Style.LocationSearch.searchBarCancelButtonColor
-    searchController.searchBar.backgroundColor = .white
+    searchController.searchBar.backgroundColor = Style.LocationSearch.backgroundColor
     searchController.searchBar.sizeToFit()
     searchController.searchBar.placeholder = "Search place"
     searchController.obscuresBackgroundDuringPresentation = false
@@ -105,6 +105,7 @@ extension LocationSearchViewController: LocationSearchResultsTableViewController
     let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
     mapView.setRegion(region, animated: true)
+    mapView.selectAnnotation(annotation, animated: true)
   }
   
 }
@@ -114,6 +115,7 @@ extension LocationSearchViewController: AddCalloutViewControllerDelegate {
   
   func addCalloutViewController(_ view: AddCalloutViewController, didPressAdd button: UIButton) {
     view.dismiss(animated: true) { [weak self] in
+      ForecastNotificationCenter.post(.addCityFromCallout)
       self?.searchController = nil
       self?.coordinator?.onAddCityFromCalloutViewController()
     }

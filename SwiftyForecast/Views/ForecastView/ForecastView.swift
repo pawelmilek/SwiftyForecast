@@ -33,8 +33,6 @@ final class ForecastView: UIView {
   
   weak var delegate: ForecastViewDelegate?
   
-  typealias ForecastStyle = Style.CurrentForecast
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setUp()
@@ -73,23 +71,23 @@ private extension ForecastView {
   }
   
   func setUpStyle() {
-    iconLabel.textColor = ForecastStyle.textColor
-    iconLabel.textAlignment = ForecastStyle.textAlignment
+    iconLabel.textColor = Style.CurrentForecast.textColor
+    iconLabel.textAlignment = Style.CurrentForecast.textAlignment
     
-    dateLabel.font = ForecastStyle.dateLabelFont
-    dateLabel.textColor = ForecastStyle.textColor
-    dateLabel.textAlignment = ForecastStyle.textAlignment
+    dateLabel.font = Style.CurrentForecast.dateLabelFont
+    dateLabel.textColor = Style.CurrentForecast.textColor
+    dateLabel.textAlignment = Style.CurrentForecast.textAlignment
     
-    cityNameLabel.font = ForecastStyle.cityNameLabelFont
-    cityNameLabel.textColor = ForecastStyle.textColor
-    cityNameLabel.textAlignment = ForecastStyle.textAlignment
+    cityNameLabel.font = Style.CurrentForecast.cityNameLabelFont
+    cityNameLabel.textColor = Style.CurrentForecast.textColor
+    cityNameLabel.textAlignment = Style.CurrentForecast.textAlignment
     
-    temperatureLabel.font = ForecastStyle.temperatureLabelFont
-    temperatureLabel.textColor = ForecastStyle.textColor
-    temperatureLabel.textAlignment = ForecastStyle.textAlignment
+    temperatureLabel.font = Style.CurrentForecast.temperatureLabelFont
+    temperatureLabel.textColor = Style.CurrentForecast.textColor
+    temperatureLabel.textAlignment = Style.CurrentForecast.textAlignment
     
-    moreDetailsView.backgroundColor = ForecastStyle.backgroundColor
-    hourlyCollectionView.backgroundColor = ForecastStyle.backgroundColor
+    moreDetailsView.backgroundColor = Style.CurrentForecast.backgroundColor
+    hourlyCollectionView.backgroundColor = Style.CurrentForecast.backgroundColor
   }
   
 }
@@ -115,16 +113,16 @@ private extension ForecastView {
 private extension ForecastView {
   
   func setShadowForBaseView() {
-    backgroundColor = ForecastStyle.backgroundColor
-    layer.shadowColor = ForecastStyle.shadowColor
-    layer.shadowOffset = ForecastStyle.shadowOffset
-    layer.shadowOpacity = ForecastStyle.shadowOpacity
-    layer.shadowRadius = ForecastStyle.shadowRadius
+    backgroundColor = Style.CurrentForecast.backgroundColor
+    layer.shadowColor = Style.CurrentForecast.shadowColor
+    layer.shadowOffset = Style.CurrentForecast.shadowOffset
+    layer.shadowOpacity = Style.CurrentForecast.shadowOpacity
+    layer.shadowRadius = Style.CurrentForecast.shadowRadius
     layer.masksToBounds = false
   }
   
   func setRoundedCornersForContentView() {
-    contentView.layer.cornerRadius = ForecastStyle.cornerRadius
+    contentView.layer.cornerRadius = Style.CurrentForecast.cornerRadius
     contentView.layer.masksToBounds = true
   }
 }

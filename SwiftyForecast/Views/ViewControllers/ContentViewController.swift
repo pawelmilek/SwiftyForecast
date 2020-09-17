@@ -40,8 +40,9 @@ final class ContentViewController: UIViewController {
 private extension ContentViewController {
   
   func setUp() {
+    setupAppearance()
     setForecastViewDelegate()
-    setWeekTableView()
+    setupWeekTableView()
     arrangeConstraints()
     setViewModelClosureCallbacks()
     addNotificationObservers()
@@ -56,7 +57,7 @@ private extension ContentViewController {
     forecastView.delegate = self
   }
   
-  func setWeekTableView() {
+  func setupWeekTableView() {
     weekdaysTableView.register(cellClass: DailyForecastTableViewCell.self)
     weekdaysTableView.dataSource = self
     weekdaysTableView.delegate = self
@@ -64,8 +65,6 @@ private extension ContentViewController {
     weekdaysTableView.allowsSelection = false
     weekdaysTableView.rowHeight = UITableView.automaticDimension
     weekdaysTableView.estimatedRowHeight = 85
-    weekdaysTableView.backgroundColor = Style.ContentForecast.tableViewBackgroundColor
-    weekdaysTableView.separatorStyle = Style.ContentForecast.tableViewSeparatorStyle
     weekdaysTableView.tableFooterView = UIView()
   }
   
@@ -75,6 +74,12 @@ private extension ContentViewController {
     forecastViewStackViewBottomToSafeAreaBottomConstraint = forecastView.stackViewBottomToSafeAreaBottomConstraint
     dailyForecastTableViewBottomConstraint = forecastView.bottomAnchor.constraint(equalTo: weekdaysTableView.bottomAnchor,
                                                                                   constant: 0)
+  }
+  
+  func setupAppearance() {
+    view.backgroundColor = Style.ContentForecast.backgroundColor
+    weekdaysTableView.backgroundColor = Style.ContentForecast.tableViewBackgroundColor
+    weekdaysTableView.separatorStyle = Style.ContentForecast.tableViewSeparatorStyle
   }
   
 }

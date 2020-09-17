@@ -1,10 +1,6 @@
 import Foundation
 
 struct TemperatureMeasurement {
-  var value: Double {
-    measurement.value
-  }
-  
   private let measurement: Measurement<UnitTemperature>
   
   init(value: Double, unit: UnitTemperature) {

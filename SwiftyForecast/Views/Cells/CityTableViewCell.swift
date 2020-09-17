@@ -12,12 +12,16 @@ final class CityTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     setUp()
-    setUpStyle()
   }
   
   override func prepareForReuse() {
     super.prepareForReuse()
     setUp()
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    setUpStyle()
   }
 }
 
@@ -48,10 +52,10 @@ private extension CityTableViewCell {
     cityNameLabel.textAlignment = Style.CityCell.cityNameLabelTextAlignment
     separatorView.backgroundColor = Style.CityCell.separatorColor
     
-    mapView.layer.borderColor = UIColor.lightOrange.cgColor
+    mapView.layer.borderColor = UIColor.primaryOne.cgColor
     mapView.layer.borderWidth = 0.5
   }
-  
+
 }
 
 // MARK: - Configure by city
