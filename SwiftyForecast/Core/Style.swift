@@ -74,7 +74,7 @@ struct Style {
   // MARK: - CurrentForecastView
   struct CurrentForecast {
     static let backgroundColor = UIColor.clear
-    static let shadowColor = UIColor.systemRed.cgColor
+    static let shadowColor = UIColor.primaryOne.cgColor
     static let shadowOffset = CGSize(width: 0, height: 5)
     static let shadowOpacity: Float = 0.5
     static let shadowRadius: CGFloat = 10.0
