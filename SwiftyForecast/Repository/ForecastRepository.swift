@@ -19,7 +19,7 @@ struct ForecastRepository: Repository {
       completion(.success(forecastDTO))
       
     } else {
-      refreshForecastData(latitude: latitude, longitude: longitude) { result in
+      service.getForecast(latitude: latitude, longitude: longitude) { result in
         switch result {
         case .success(let data):
           self.dataAccessObject.put(data)
@@ -32,19 +32,4 @@ struct ForecastRepository: Repository {
       }
     }
   }
-  
-  private func refreshForecastData(latitude: Double,
-                                   longitude: Double,
-                                   completion: @escaping (Result<ForecastResponse, WebServiceError>) -> ()) {
-    service.getForecast(latitude: latitude, longitude: longitude) { result in
-      switch result {
-      case .success(let data):
-        completion(.success(data))
-        
-      case .failure(let error):
-        completion(.failure(error))
-      }
-    }
-  }
 }
-

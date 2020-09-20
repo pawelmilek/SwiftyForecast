@@ -119,6 +119,10 @@ private extension ForecastViewController {
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(contentDataDidChange),
                                    for: .reloadContentPageData)
+    
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(locationDidRemoveFromList),
+                                   for: .locationRemovedFromList)
   }
   
   func removeNotificationObservers() {
@@ -178,11 +182,17 @@ extension ForecastViewController {
   }
   
   @objc func contentDataDidChange(_ notification: NSNotification) {
-    guard let value = notification.userInfo?[NotificationCenterUserInfo.cityListUpdated.key],
+    guard let value = notification.userInfo?[NotificationCenterUserInfo.cityUpdatedAtIndex.key],
       let index = value as? Int else { return }
     
     loadData(at: index)
     setupPageControl()
+  }
+  
+  @objc func locationDidRemoveFromList(_ notification: NSNotification) {
+    guard let value = notification.userInfo?[NotificationCenterUserInfo.cityUpdated.key],
+    let city = value as? CityDTO else { return }
+    viewModel?.removeContentViewModel(with: city.location)
   }
   
 }

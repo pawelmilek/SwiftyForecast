@@ -1,6 +1,7 @@
 enum NotificationCenterUserInfo: String {
   case segmentedControlChanged
-  case cityListUpdated
+  case cityUpdatedAtIndex
+  case cityUpdated
   
   var key: String {
     return self.rawValue

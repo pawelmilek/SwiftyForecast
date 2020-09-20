@@ -1,6 +1,6 @@
 import Foundation
 
-struct DefaultDailyForecastCellViewModel: DailyForecastCellViewModel {
+struct DefaultDailyCellViewModel: DailyCellViewModel {
   let attributedDate: NSAttributedString
   let conditionIcon: NSAttributedString?
   var temperatureMin: String {

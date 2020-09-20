@@ -1,6 +1,6 @@
 import Foundation
 
-struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
+struct DefaultHourlyCellViewModel: HourlyCellViewModel {
   let time: String
   let conditionIcon: NSAttributedString?
   private var hourlyData: HourlyDataDTO
@@ -15,7 +15,7 @@ struct DefaultHourlyForecastCellViewModel: HourlyForecastCellViewModel {
 }
 
 // MARK: - Temperature in Celsius
-extension DefaultHourlyForecastCellViewModel {
+extension DefaultHourlyCellViewModel {
   
   var temperature: String {
     switch NotationSystem.selectedUnitNotation {

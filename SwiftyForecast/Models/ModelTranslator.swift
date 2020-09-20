@@ -11,7 +11,11 @@ struct ModelTranslator {
     let cityDTO = CityDTO(id: city.id,
                           name: city.name,
                           country: city.country,
+                          state: city.state,
+                          postalCode: city.postalCode,
                           timeZoneName: city.timeZoneName,
+                          lastUpdate: city.lastUpdate,
+                          isUserLocation: city.isUserLocation,
                           location: location)
     return cityDTO
   }
@@ -93,12 +97,25 @@ struct ModelTranslator {
     let locationDTO = LocationDTO(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
     return locationDTO
   }
+
+}
+
+// MARK: - Data Transfer Object translate to model
+extension ModelTranslator {
   
-
-//  func translate(dto: ForecastDTO?, realm: Realm? = RealmProvider.core.realm) -> ForecastResponse? {
-//    guard let dto = dto else { return nil }
-//
-//    return nil
-//  }
-
+  func translate(dto: CityDTO, in realm: Realm? = RealmProvider.core.realm) -> City {
+    let city = City(name: dto.name,
+                    country: dto.country,
+                    state: dto.state,
+                    postalCode: dto.postalCode,
+                    timeZoneName: dto.timeZoneName,
+                    location: translate(dto: dto.location),
+                    isUserLocation: dto.isUserLocation)
+    return city
+  }
+  
+  func translate(dto: LocationDTO) -> CLLocation {
+    return CLLocation(latitude: dto.latitude, longitude: dto.longitude)
+  }
+  
 }

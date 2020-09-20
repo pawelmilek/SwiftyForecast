@@ -58,7 +58,7 @@ private extension ContentViewController {
   }
   
   func setupWeekTableView() {
-    weekdaysTableView.register(cellClass: DailyForecastTableViewCell.self)
+    weekdaysTableView.register(cellClass: DailyTableViewCell.self)
     weekdaysTableView.dataSource = self
     weekdaysTableView.delegate = self
     weekdaysTableView.showsVerticalScrollIndicator = false
@@ -221,8 +221,8 @@ extension ContentViewController: UITableViewDataSource {
     guard let dailyItems = viewModel?.sevenDaysData,
       let item = dailyItems[safe: indexPath.row] else { return UITableViewCell() }
     
-    let viewModel = DefaultDailyForecastCellViewModel(dailyData: item)
-    let cell = tableView.dequeueCell(DailyForecastTableViewCell.self, for: indexPath)
+    let viewModel = DefaultDailyCellViewModel(dailyData: item)
+    let cell = tableView.dequeueCell(DailyTableViewCell.self, for: indexPath)
     cell.configure(by: viewModel)
     return cell
   }

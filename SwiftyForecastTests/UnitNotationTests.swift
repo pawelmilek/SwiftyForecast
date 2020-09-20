@@ -2,18 +2,18 @@ import XCTest
 @testable import SwiftyForecast
 
 class UnitNotationTests: XCTestCase {
-  private var viewModelDaily: DailyForecastCellViewModel!
-  private var viewModelHourly: HourlyForecastCellViewModel!
+  private var viewModelDaily: DailyCellViewModel!
+  private var viewModelHourly: HourlyCellViewModel!
 //  private var viewModelCurrent: CurrentForecastViewModel!
   
   override func setUp() {
     super.setUp()
     
     let dailyForecast = ForecastGenerator.generateDailyForecast()
-    viewModelDaily = DefaultDailyForecastCellViewModel(dailyData: dailyForecast.sevenDaysData.first!)
+    viewModelDaily = DefaultDailyCellViewModel(dailyData: dailyForecast.sevenDaysData.first!)
     
     let hourlyForecast = ForecastGenerator.generateHourlyForecast()
-    viewModelHourly = DefaultHourlyForecastCellViewModel(hourlyData: hourlyForecast.data.first!)
+    viewModelHourly = DefaultHourlyCellViewModel(hourlyData: hourlyForecast.data.first!)
     
 //    let currentForecast = ForecastGenerator.generateCurrentForecast()
     //    viewModel = DefaultCurrentForecastViewModel(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)

@@ -3,14 +3,14 @@ import XCTest
 
 class DailyForecastTests: XCTestCase {
   private var dailyForecast: DailyForecastDTO!
-  private var viewModel: DailyForecastCellViewModel!
+  private var viewModel: DailyCellViewModel!
   
   override func setUp() {
     super.setUp()
     
     dailyForecast = ForecastGenerator.generateDailyForecast()
     let data = dailyForecast.sevenDaysData.first!
-    viewModel = DefaultDailyForecastCellViewModel(dailyData: data)
+    viewModel = DefaultDailyCellViewModel(dailyData: data)
   }
   
   override func tearDown() {

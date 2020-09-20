@@ -3,13 +3,13 @@ import XCTest
 
 class HourlyForecastTests: XCTestCase {
   private var hourlyForecast: HourlyForecastDTO!
-  private var viewModel: HourlyForecastCellViewModel!
+  private var viewModel: HourlyCellViewModel!
   
   override func setUp() {
     super.setUp()
     hourlyForecast = ForecastGenerator.generateHourlyForecast()
     let data = hourlyForecast.data.first!
-    viewModel = DefaultHourlyForecastCellViewModel(hourlyData: data)
+    viewModel = DefaultHourlyCellViewModel(hourlyData: data)
   }
   
   override func tearDown() {

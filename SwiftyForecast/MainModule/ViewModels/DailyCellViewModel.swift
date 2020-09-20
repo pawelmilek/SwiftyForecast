@@ -1,6 +1,6 @@
 import Foundation
 
-protocol DailyForecastCellViewModel {
+protocol DailyCellViewModel {
   var attributedDate: NSAttributedString { get }
   var conditionIcon: NSAttributedString? { get }
   var temperatureMin: String { get }

@@ -52,9 +52,10 @@ private extension CityListSelectionViewController {
       self?.tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
       
       if let updatedIndex = updates.first, updatedIndex > 0 {
-        ForecastNotificationCenter.post(.reloadContentPageData,
-                                        object: nil,
-                                        userInfo: [NotificationCenterUserInfo.cityListUpdated.key: updatedIndex])
+        self?.viewModel?.postNotificationLocationCityUpdated(at: updatedIndex)
+
+      } else if let deletedIndex = deletions.first, deletedIndex > 0 {
+        self?.viewModel?.postNotificationLocationRemovedFromList(at: deletedIndex)
       }
     }
   }

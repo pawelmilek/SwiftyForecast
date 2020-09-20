@@ -13,7 +13,7 @@ protocol ContentViewModel: class {
   var sunsetTime: String { get }
   var numberOfDays: Int { get }
   var sevenDaysData: [DailyDataDTO] { get }
-  var location: LocationDTO? { get }
+  var location: LocationDTO { get }
   var pageIndex: Int { get set }
   
   var onSuccess: (() -> Void)? { get set }

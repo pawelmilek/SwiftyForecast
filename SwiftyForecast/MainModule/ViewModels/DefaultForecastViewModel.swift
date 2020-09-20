@@ -59,8 +59,19 @@ final class DefaultForecastViewModel: ForecastViewModel {
     self.modelTranslator = modelTranslator
   }
   
-  func add(at index: Int) {
-    addContentViewModel(at: index)
+  func addContentViewModel(at index: Int) {
+    guard let city = city(at: index) else { return }
+    let viewModel = DefaultContentViewModel(city: city, repository: self.repository)
+    
+    if !checkIfExists(viewModel) {
+      contentViewModels.append(viewModel)
+    }
+  }
+  
+  func removeContentViewModel(with location: LocationDTO) {
+    guard let viewModel = contentViewModels.first(where: { $0.location == location }) else { return }
+    guard let indexToRemove = contentViewModels.firstIndex(where: { $0.location == viewModel.location }) else { return }
+    contentViewModels.remove(at: indexToRemove)
   }
   
   func city(at index: Int) -> CityDTO? {
@@ -139,15 +150,6 @@ private extension DefaultForecastViewModel {
       case .failure(let error):
         self.onFailure?(error)
       }
-    }
-  }
-  
-  func addContentViewModel(at index: Int) {
-    guard let city = city(at: index) else { return }
-    let viewModel = DefaultContentViewModel(city: city, repository: self.repository)
-    
-    if !checkIfExists(viewModel) {
-      contentViewModels.append(viewModel)
     }
   }
   

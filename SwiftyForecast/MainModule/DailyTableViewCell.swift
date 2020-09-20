@@ -1,6 +1,6 @@
 import UIKit
 
-final class DailyForecastTableViewCell: UITableViewCell {
+final class DailyTableViewCell: UITableViewCell {
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var iconLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
@@ -17,7 +17,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
 }
 
 // MARK: - Private - SetUps
-private extension DailyForecastTableViewCell {
+private extension DailyTableViewCell {
   
   func setUp() {
     backgroundColor = Style.DailyForecastCell.backgroundColor
@@ -37,9 +37,9 @@ private extension DailyForecastTableViewCell {
 }
 
 // MARK: - Configurate cell by item
-extension DailyForecastTableViewCell {
+extension DailyTableViewCell {
   
-  func configure(by item: DailyForecastCellViewModel?) {
+  func configure(by item: DailyCellViewModel?) {
     if let daily = item {
       dateLabel.attributedText = daily.attributedDate
       iconLabel.attributedText = daily.conditionIcon

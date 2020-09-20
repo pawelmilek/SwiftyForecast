@@ -26,7 +26,7 @@ final class ForecastView: UIView {
   }()
   
   private var viewDidExpand = false
-  private var viewModels: [HourlyForecastCellViewModel]?
+  private var viewModels: [HourlyCellViewModel]?
   private var hourlyCount: Int {
     return viewModels?.count ?? 0
   }
@@ -174,7 +174,7 @@ extension ForecastView {
     sunriseView.alpha = 1
     sunsetView.alpha = 1
     
-    viewModels = viewModel.hourly?.data.compactMap { DefaultHourlyForecastCellViewModel(hourlyData: $0) }
+    viewModels = viewModel.hourly?.data.compactMap { DefaultHourlyCellViewModel(hourlyData: $0) }
     hourlyCollectionView.reloadData()
     moreDetailsView.alpha = 1
   }

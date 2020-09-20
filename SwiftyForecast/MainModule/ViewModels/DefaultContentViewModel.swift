@@ -28,7 +28,7 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var cityName: String {
-    return city?.name ?? InvalidReference.notApplicable
+    return city.name
   }
   
   var temperature: String {
@@ -77,8 +77,8 @@ final class DefaultContentViewModel: ContentViewModel {
     return forecast?.daily.sevenDaysData ?? []
   }
   
-  var location: LocationDTO? {
-    return city?.location
+  var location: LocationDTO {
+    return city.location
   }
   
   var onSuccess: (() -> Void)?
@@ -92,7 +92,7 @@ final class DefaultContentViewModel: ContentViewModel {
     }
   }
   
-  private let city: CityDTO?
+  private let city: CityDTO
   private let repository: Repository
   private var forecast: ForecastDTO?
   
@@ -107,7 +107,6 @@ extension DefaultContentViewModel {
   
   func loadData() {
     guard !isLoadingData else { return }
-    guard let location = location else { return }
     
     isLoadingData = true
     repository.getForecast(latitude: location.latitude, longitude: location.longitude) { [weak self] response in

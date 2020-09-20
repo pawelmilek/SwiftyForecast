@@ -14,7 +14,8 @@ protocol ForecastViewModel {
   
   init(repository: Repository, dataAccessObject: CityDAO, modelTranslator: ModelTranslator)
   
-  func add(at index: Int)
+  func addContentViewModel(at index: Int)
+  func removeContentViewModel(with location: LocationDTO)
   func city(at index: Int) -> CityDTO?
   func index(of city: CityDTO) -> Int?
   func contentViewController(at index: Int) -> ContentViewController?

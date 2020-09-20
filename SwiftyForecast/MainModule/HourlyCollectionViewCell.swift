@@ -39,7 +39,7 @@ private extension HourlyCollectionViewCell {
 // MARK: - Configure
 extension HourlyCollectionViewCell {
   
-  func configure(by hourly: HourlyForecastCellViewModel?) {
+  func configure(by hourly: HourlyCellViewModel?) {
     if let hourly = hourly {
       timeLabel.text = hourly.time
       iconLabel.attributedText = hourly.conditionIcon
