@@ -20,6 +20,7 @@ final class LocationSearchResultsTableViewController: UITableViewController {
 private extension LocationSearchResultsTableViewController {
   
   func setUp() {
+    tableView.tableFooterView = UIView()
     tableView.separatorColor = Style.LocationSearch.separatorColor
     tableView.backgroundColor = Style.LocationSearch.backgroundColor
     
