@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 struct DefaultForecastDAO: ForecastDAO {  
-  func get(latitude: Double, longitude: Double) -> ForecastResponse? { // "51.110124|17.032161"
+  func get(latitude: Double, longitude: Double) -> ForecastResponse? {
     let compoundKey = "\(latitude)|\(longitude)"
     let forecast = try? ForecastResponse.fetchAll().filter("compoundKey = %@", compoundKey).first
     return forecast

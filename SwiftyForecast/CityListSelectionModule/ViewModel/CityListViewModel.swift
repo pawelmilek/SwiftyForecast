@@ -8,8 +8,6 @@ protocol CityListViewModel {
   
   init(cityDAO: CityDAO, forecastDAO: ForecastDAO)
   
-  func postNotificationLocationCityUpdated(at index: Int)
-  func postNotificationLocationRemovedFromList(at index: Int)
   func delete(at indexPath: IndexPath)
   func select(at index: Int)
   func name(at index: Int) -> String

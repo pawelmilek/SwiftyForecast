@@ -9,7 +9,7 @@ final class GeocoderHelper {
       return
     }
     
-    LocationProvider.shared.requestLocation { location in
+    LocationProvider.shared.request { location in
       GeocoderHelper.place(at: location.coordinate) { result in
         switch result {
         case .success(let data):

@@ -78,7 +78,7 @@ final class DefaultContentViewModel: ContentViewModel {
   }
   
   var location: LocationDTO {
-    return city.location
+    return LocationDTO(latitude: city.latitude, longitude: city.longitude)
   }
   
   var onSuccess: (() -> Void)?

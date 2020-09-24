@@ -109,11 +109,7 @@ private extension ContentViewController {
     
     viewModel?.onFailure = { error in
       DispatchQueue.main.async {
-        if case GeocoderError.locationDisabled = error {
-          LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
-        } else {
-          (error as? ErrorHandleable)?.handler()
-        }
+        (error as? ErrorHandleable)?.handler()
       }
     }
     

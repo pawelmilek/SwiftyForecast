@@ -8,7 +8,9 @@ final class LocationProvider: NSObject {
   var currentLocation: CLLocation? {
     didSet {
       guard let currentLocation = currentLocation else { return }
-      self.locationFound?(currentLocation)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        self?.locationFound?(currentLocation)
+      }
     }
   }
   
@@ -20,8 +22,7 @@ final class LocationProvider: NSObject {
     super.init()
     
     locationManager.delegate = self
-    locationManager.distanceFilter = kCLDistanceFilterNone
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
     locationManager.allowsBackgroundLocationUpdates = false
     requestAuthorization()
   }
@@ -56,11 +57,7 @@ extension LocationProvider {
 // MARK: - Get current location
 extension LocationProvider {
   
-  func requestLocation() {
-    locationManager.requestLocation()
-  }
-  
-  func requestLocation(completion: @escaping (CLLocation) -> ()) {
+  func request(completion: @escaping (CLLocation) -> ()) {
     guard isLocationServicesEnabled else {
       presentLocationServicesSettingsPopupAlert()
       return
@@ -68,7 +65,7 @@ extension LocationProvider {
     
     didUpdateLocationsFlag = false
     locationFound = completion
-    locationManager.startUpdatingLocation()
+    locationManager.requestLocation()
   }
   
 }
@@ -78,13 +75,12 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     guard !didUpdateLocationsFlag else { return }
-    guard let location = locations.first else { return }
+    guard let mostRecentLocation = locations.first else { return }
     
-    DispatchQueue.main.async { [weak self] in
-      self?.didUpdateLocationsFlag = true
-      self?.currentLocation = location
-      self?.locationManager.stopUpdatingLocation()
-    }
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) Current location: \(mostRecentLocation.coordinate.latitude) \(mostRecentLocation.coordinate.longitude)")
+    didUpdateLocationsFlag = true
+    currentLocation = mostRecentLocation
+    locationManager.stopUpdatingLocation()
   }
   
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -114,7 +110,7 @@ extension LocationProvider: CLLocationManagerDelegate {
   
 }
 
-// MARK: - Show settings alert view
+// MARK: - Private - Show settings alert view
 extension LocationProvider {
   
   func presentLocationServicesSettingsPopupAlert() {

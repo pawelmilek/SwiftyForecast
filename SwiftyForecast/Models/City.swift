@@ -6,7 +6,8 @@ import Intents
 import Contacts
 
 @objcMembers final class City: Object, Codable {
-  dynamic var id = 0
+  dynamic var orderIndex = 0
+  dynamic var compoundKey = "\(InvalidReference.undefined)|\(InvalidReference.undefined)|\(InvalidReference.undefined)"
   dynamic var name = ""
   dynamic var country = ""
   dynamic var state = ""
@@ -14,11 +15,14 @@ import Contacts
   dynamic var timeZoneName = ""
   dynamic var lastUpdate = Date()
   dynamic var isUserLocation = false
-  private var latitude = RealmOptional<Double>()
-  private var longitude = RealmOptional<Double>()
+  dynamic var latitude = 0.0
+  dynamic var longitude = 0.0
+  
+  private var compoundKeyValue: String {
+    "\(self.name)|\(self.country)|\(self.state)"
+  }
   
   var placemark: CLPlacemark? {
-    guard let location = location else { return nil }
     let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
     return placemark
   }
@@ -27,20 +31,8 @@ import Contacts
     DateFormatter.shortLocalTime(from: timeZoneName)
   }
 
-  var location: CLLocation? {
-    get {
-      guard let latitude = latitude.value, let longitude = longitude.value else { return nil }
-      return CLLocation(latitude: latitude, longitude: longitude)
-    }
-    set {
-      guard let newLocation = newValue?.coordinate else {
-        longitude.value = nil
-        latitude.value = nil
-        return
-      }
-      latitude.value = newLocation.latitude
-      longitude.value = newLocation.longitude
-    }
+  var location: CLLocation {
+    return CLLocation(latitude: latitude, longitude: longitude)
   }
   
   private enum CityCodingKeys: String, CodingKey {
@@ -59,7 +51,8 @@ import Contacts
                    state: String,
                    postalCode: String,
                    timeZoneName: String,
-                   location: CLLocation?,
+                   latitude: Double,
+                   longitude: Double,
                    isUserLocation: Bool = false) {
     self.init()
     self.name = name
@@ -67,8 +60,10 @@ import Contacts
     self.state = state
     self.postalCode = postalCode
     self.timeZoneName = timeZoneName
-    self.location = location
     self.isUserLocation = isUserLocation
+    self.latitude = latitude
+    self.longitude = longitude
+    self.compoundKey = compoundKeyValue
   }
   
   required convenience init(from decoder: Decoder) throws {
@@ -81,16 +76,19 @@ import Contacts
     let timeZone = try container.decode(String.self, forKey: .timeZoneName)
     let latitude = try container.decode(Double.self, forKey: .latitude)
     let longitude = try container.decode(Double.self, forKey: .longitude)
-    let location = CLLocation(latitude: latitude, longitude: longitude)
     
-    self.init(name: name, country: country, state: state, postalCode: postal, timeZoneName: timeZone, location: location)
+    self.init(name: name,
+              country: country,
+              state: state,
+              postalCode: postal,
+              timeZoneName: timeZone,
+              latitude: latitude,
+              longitude: longitude)
   }
   
   required init() {
     super.init()
   }
-  
-  override static func primaryKey() -> String? { CityProperty.id.key }
   
   convenience init(placemark: CLPlacemark, isUserLocation: Bool) {
     self.init()
@@ -101,8 +99,13 @@ import Contacts
     postalCode = placemark.postalCode ?? InvalidReference.notApplicable
     timeZoneName = placemark.timeZone?.identifier ?? InvalidReference.notApplicable
     self.isUserLocation = isUserLocation
-    location = CLLocation(latitude: placemark.location?.coordinate.latitude ?? 0.0,
-                          longitude: placemark.location?.coordinate.longitude ?? 0.0)
+    latitude = placemark.location?.coordinate.latitude ?? 0.0
+    longitude = placemark.location?.coordinate.longitude ?? 0.0
+    self.compoundKey = compoundKeyValue
+  }
+  
+  override static func primaryKey() -> String? {
+    CityProperty.compoundKey.key
   }
 }
 
@@ -110,34 +113,23 @@ import Contacts
 extension City {
   
   static func fetchAll(in realm: Realm? = RealmProvider.core.realm) throws -> Results<City> {
-    guard let realm = realm else {
-      throw RealmError.initializationFailed
-    }
+    guard let realm = realm else { throw RealmError.initializationFailed }
     return realm.objects(City.self)
   }
   
-  static func fetchAllOrdered(in realm: Realm? = RealmProvider.core.realm) throws -> Results<City> {
-    guard let realm = realm else {
-      throw RealmError.initializationFailed
-    }
+  static func fetchAllOrderedByIndex(in realm: Realm? = RealmProvider.core.realm) throws -> Results<City> {
+    guard let realm = realm else { throw RealmError.initializationFailed }
     
-    let sortDescriptors = [SortDescriptor(keyPath: CityProperty.id.key, ascending: true),
+    let sortDescriptors = [SortDescriptor(keyPath: CityProperty.orderIndex.key, ascending: true),
                            SortDescriptor(keyPath: CityProperty.isUserLocation.key, ascending: false)]
     return realm.objects(City.self).sorted(by: sortDescriptors)
   }
   
-  static func fetchCurrent(in realm: Realm? = RealmProvider.core.realm) throws -> City? {
-    guard let realm = realm else {
-      throw RealmError.initializationFailed
-    }
-    return realm.objects(City.self).first(where: { $0.isUserLocation == true })
-  }
-  
-  @discardableResult
-  static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(_ city: City, in realm: Realm? = RealmProvider.core.realm) throws {
     guard let realm = realm else { throw RealmError.initializationFailed }
+
     do {
-      city.id = nextId(in: realm)
+      city.orderIndex = nextSortIndex(in: realm)
       
       try realm.write {
         realm.add(city, update: .all)
@@ -145,42 +137,36 @@ extension City {
     } catch {
       throw RealmError.transactionFailed(description: "Adding new city")
     }
-    
-    return city
   }
   
-  @discardableResult
-  static func add(from placemark: CLPlacemark, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(from placemark: CLPlacemark, isUserLocation: Bool = true, in realm: Realm? = RealmProvider.core.realm) throws {
     guard let realm = realm else { throw RealmError.initializationFailed }
 
-    let newCity = City(placemark: placemark, isUserLocation: true)
     do {
-      newCity.id = nextId(in: realm)
+      let newCity = City(placemark: placemark, isUserLocation: isUserLocation)
+      newCity.orderIndex = nextSortIndex(in: realm)
+      newCity.isUserLocation = isUserLocation
+      
       try realm.write {
         realm.add(newCity, update: .all)
       }
     } catch {
       throw RealmError.transactionFailed(description: "Adding new city")
     }
-    
-    return newCity
   }
   
-  @discardableResult
-  static func add(_ city: City, withId id: Int, in realm: Realm? = RealmProvider.core.realm) throws -> City {
+  static func add(_ city: City, sortIndex: Int, in realm: Realm? = RealmProvider.core.realm) throws {
     guard let realm = realm else { throw RealmError.initializationFailed }
 
-    let newCity = city
     do {
-      newCity.id = id
+      city.orderIndex = sortIndex
+      
       try realm.write {
-        realm.add(newCity, update: .all)
+        realm.add(city, update: .all)
       }
     } catch {
       throw RealmError.transactionFailed(description: "Adding new city")
     }
-    
-    return newCity
   }
   
   func delete() throws {
@@ -212,8 +198,8 @@ extension City {
 // MARK: - ID interator
 extension City {
   
-  private static func nextId(in realm: Realm? = RealmProvider.core.realm) -> Int {
-    return (realm?.objects(City.self).map{ $0.id }.max() ?? 0) + 1
+  private static func nextSortIndex(in realm: Realm? = RealmProvider.core.realm) -> Int {
+    return (realm?.objects(City.self).map{ $0.orderIndex }.max() ?? 0) + 1
   }
   
 }

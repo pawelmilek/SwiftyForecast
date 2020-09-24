@@ -27,11 +27,6 @@ final class ForecastViewController: UIViewController {
     setUp()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    showOrHideLocationServicesPrompt()
-  }
-  
   deinit {
     removeNotificationObservers()
   }
@@ -59,7 +54,7 @@ private extension ForecastViewController {
     navigationItem.titleView = notationSegmentedControl
   }
   
-  func setupPageControl() {
+  func setPageControl() {
     DispatchQueue.main.async { [weak self] in
       guard let self = self else { return }
       self.pageControl.numberOfPages = self.viewModel?.numberOfCities ?? 0
@@ -134,25 +129,9 @@ private extension ForecastViewController {
 // MARK: - Private - Show or hide navigation prompt
 private extension ForecastViewController {
   
-  func showOrHideLocationServicesPrompt() {
-    let delayInSeconds = 1.0
-    DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds) { [weak self] in
-      guard let strongSelf = self else { return }
-      
-      if LocationProvider.shared.isLocationServicesEnabled {
-        strongSelf.navigationItem.prompt = nil
-        
-      } else {
-        strongSelf.navigationItem.prompt = NSLocalizedString("Please enable location services!", comment: "")
-        DispatchQueue.main.asyncAfter(deadline: .now() + delayInSeconds + 3) { [weak self] in
-          guard let strongSelf = self else { return }
-          strongSelf.navigationItem.prompt = nil
-          strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
-        }
-      }
-      
-      strongSelf.navigationController?.viewIfLoaded?.setNeedsLayout()
-    }
+  func renderLocationServicesPrompt() {
+    guard let navigationController = self.navigationController else { return }
+    viewModel?.showOrHideLocationServicesPrompt(at: navigationController)
   }
   
 }
@@ -178,6 +157,7 @@ extension ForecastViewController {
   }
   
   @objc func applicationDidBecomeActive(_ notification: NSNotification) {
+    renderLocationServicesPrompt()
     loadData(at: pageControl.currentPage)
   }
   
@@ -186,13 +166,13 @@ extension ForecastViewController {
       let index = value as? Int else { return }
     
     loadData(at: index)
-    setupPageControl()
+    setPageControl()
   }
   
   @objc func locationDidRemoveFromList(_ notification: NSNotification) {
     guard let value = notification.userInfo?[NotificationCenterUserInfo.cityUpdated.key],
     let city = value as? CityDTO else { return }
-    viewModel?.removeContentViewModel(with: city.location)
+    viewModel?.removeContentViewModel(with: LocationDTO(latitude: city.latitude, longitude: city.longitude))
   }
   
 }
@@ -202,6 +182,7 @@ extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
   func citySelection(_ view: CityListSelectionViewController, at index: Int) {
     loadData(at: index)
+    setPageControl()
     moveToPage(at: index) { [weak self] _ in
       self?.viewModel?.currentIndex = index
       self?.viewModel?.pendingIndex = nil
@@ -228,6 +209,11 @@ private extension ForecastViewController {
                                             direction: .reverse,
                                             animated: false,
                                             completion: completion)
+    } else if index == currentIndex {
+      pageViewController.setViewControllers([contentViewController],
+                                            direction: .forward,
+                                            animated: false,
+                                            completion: completion)
     }
   }
   
@@ -245,7 +231,8 @@ extension ForecastViewController: UIPageViewControllerDataSource {
       return nil
     }
     
-    return viewModel?.contentViewController(at: viewControllerIndex - 1)
+    let beforeViewControllerIndex = viewControllerIndex - 1
+    return viewModel?.contentViewController(at: beforeViewControllerIndex)
     
   }
   
@@ -255,11 +242,13 @@ extension ForecastViewController: UIPageViewControllerDataSource {
     
     let viewControllerIndex = pageContentViewController.pageIndex
     let cityCount = viewModel?.numberOfCities ?? 0
-    if viewControllerIndex == NSNotFound || (viewControllerIndex + 1) == cityCount {
+    let afterViewControllerIndex = viewControllerIndex + 1
+    
+    if viewControllerIndex == NSNotFound || afterViewControllerIndex == cityCount {
       return nil
     }
     
-    return viewModel?.contentViewController(at: viewControllerIndex + 1)
+    return viewModel?.contentViewController(at: afterViewControllerIndex)
   }
   
 }
@@ -293,24 +282,14 @@ private extension ForecastViewController {
   func setViewModelClosureCallbacks() {
     DispatchQueue.main.async { [weak self] in
       self?.viewModel?.onIndexUpdate = { [weak self] _ in
-        self?.setupPageControl()
+        self?.setPageControl()
       }
     }
     
     viewModel?.onSuccess = {
       DispatchQueue.main.async { [weak self] in
         self?.setPageViewController()
-        self?.setupPageControl()
-      }
-    }
-    
-    viewModel?.onFailure = { error in
-      DispatchQueue.main.async {
-        if case GeocoderError.locationDisabled = error {
-          LocationProvider.shared.presentLocationServicesSettingsPopupAlert() // TODO: Fix handling!
-        } else {
-          (error as? ErrorHandleable)?.handler()
-        }
+        self?.setPageControl()
       }
     }
     

@@ -1,13 +1,12 @@
 import UIKit
 import MapKit
 
-final class AddCalloutViewController: UIViewController, ErrorHandleable {
+final class MapCalloutViewController: UIViewController, ErrorHandleable {
   @IBOutlet private weak var addButton: UIButton!
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var subtitleLabel: UILabel!
   
-  private var viewModel: AddCalloutViewModel?
-  private weak var delegate: AddCalloutViewControllerDelegate?
+  private var viewModel: MapCalloutViewModel?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,22 +22,21 @@ final class AddCalloutViewController: UIViewController, ErrorHandleable {
   }
   
   deinit {
-    debugPrint("File: \(#file), Function: \(#function), line: \(#line) deinit AddCalloutViewController")
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) deinit MapCalloutViewController")
   }
 }
 
-// MARK: Configure
-extension AddCalloutViewController {
+// MARK: Configure view controller
+extension MapCalloutViewController {
   
-  func configure(viewModel: AddCalloutViewModel, delegate: AddCalloutViewControllerDelegate) {
+  func configure(viewModel: MapCalloutViewModel) {
     self.viewModel = viewModel
-    self.delegate = delegate
   }
   
 }
 
 // MARK: - Private - SetUp
-private extension AddCalloutViewController {
+private extension MapCalloutViewController {
   
   func setUp() {
     setLabels()
@@ -76,28 +74,21 @@ private extension AddCalloutViewController {
 }
 
 // MARK: - Actions
-private extension AddCalloutViewController {
+private extension MapCalloutViewController {
 
   @objc func addButtonTapped(_ sender: UIButton) {
-    viewModel?.add { result in
-      switch result {
-      case .success:
-        delegate?.addCalloutViewController(self, didPressAdd: sender)
-        
-      case .failure(let error):
-        error.handler()
-      }
-    }
+    viewModel?.addCityToLocationList()
   }
   
 }
 
 // MARK: - Factory method
-extension AddCalloutViewController {
+extension MapCalloutViewController {
   
-  static func make(viewModel: AddCalloutViewModel, delegate: AddCalloutViewControllerDelegate) -> AddCalloutViewController {
-    let viewController = StoryboardViewControllerFactory.make(AddCalloutViewController.self, from: .locationSearch)
-    viewController.configure(viewModel: viewModel, delegate: delegate)
+  static func make(viewModel: MapCalloutViewModel) -> MapCalloutViewController {
+    let viewController = StoryboardViewControllerFactory.make(MapCalloutViewController.self, from: .locationSearch)
+    viewController.configure(viewModel: viewModel)
     return viewController
   }
+  
 }

@@ -11,7 +11,6 @@ final class DefaultCityListViewModel: CityListViewModel {
   var onApplyListChanges: ((_ deletions: [Int], _ insertions: [Int], _ updates: [Int]) -> Void)?
   
   private var citiesToken: NotificationToken?
-  
   private var storedCities: [CityDTO] = []
   
   private var cityArray: [CityDTO] {
@@ -23,9 +22,8 @@ final class DefaultCityListViewModel: CityListViewModel {
     return cityDAO.getAll()
   }
   
-  private var cityViewModels: [CityViewModel] {
-    guard let cities = cityResults else { return [] }
-    return cities.compactMap { DefaultCityViewModel(city: $0) }
+  private var cityViewModels: [CityCellViewModel] {
+    return cityArray.compactMap { DefaultCityCellViewModel(city: $0) }
   }
   
   private let cityDAO: CityDAO
@@ -36,19 +34,26 @@ final class DefaultCityListViewModel: CityListViewModel {
     self.forecastDAO = forecastDAO
     self.storedCities = cityDAO.getAll().compactMap { ModelTranslator().translate($0) }
     
-    citiesToken = cityResults?.observe { changes in
+    citiesToken = cityResults?.observe { [weak self] changes in
       switch changes {
       case .initial:
-        self.onInitialDataLoad?()
+        self?.onInitialDataLoad?()
         
       case .update(_, deletions: let deletions, insertions: let insertions, modifications: let modifications):
-        self.onApplyListChanges?(deletions, insertions, modifications)
+        self?.onApplyListChanges?(deletions, insertions, modifications)
         debugPrint("deletions: \(deletions)")
         debugPrint("insertions: \(insertions)")
         debugPrint("modifications: \(modifications)")
         
+        if let insertedIndex = insertions.first, insertedIndex > 0 {
+          self?.postNotificationLocationCityUpdated(at: insertedIndex)
+
+        } else if let deletedIndex = deletions.first, deletedIndex > 0 {
+          self?.postNotificationLocationRemovedFromList(at: deletedIndex)
+        }
+        
       case .error(let error):
-        debugPrint(error)
+        fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
       }
     }
   }
@@ -62,22 +67,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   func map(at index: Int) -> (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
-    return cityViewModels[safe: index]?.map
-  }
-  
-  func postNotificationLocationCityUpdated(at index: Int) {
-    ForecastNotificationCenter.post(.reloadContentPageData,
-                                    object: nil,
-                                    userInfo: [NotificationCenterUserInfo.cityUpdatedAtIndex.key: index])
-  }
-  
-  func postNotificationLocationRemovedFromList(at index: Int) {
-    guard let deletedCity = storedCities[safe: index] else { return }
-    storedCities.remove(at: index)
-
-    ForecastNotificationCenter.post(.locationRemovedFromList,
-                                    object: nil,
-                                    userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
+    return cityViewModels[safe: index]?.miniMapData
   }
   
   func onViewDeinit() {
@@ -95,12 +85,12 @@ extension DefaultCityListViewModel {
   
   func delete(at indexPath: IndexPath) {
     guard let cities = cityResults, cities.count >= indexPath.row else { return }
-    guard let coordinate = cities[indexPath.row].location?.coordinate else { return }
-
+    let coordinate = cities[indexPath.row].location.coordinate
+    
     do {
       let city = cities[indexPath.row]
       try cityDAO.delete(city)
-      
+        
       if let forecast = forecastDAO.get(latitude: coordinate.latitude, longitude: coordinate.longitude) {
         try forecastDAO.delete(forecast)
       }
@@ -108,6 +98,26 @@ extension DefaultCityListViewModel {
     } catch {
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) delete city")
     }
+  }
+  
+}
+
+// MARK: - Private - Post notifications
+extension DefaultCityListViewModel {
+  
+  func postNotificationLocationCityUpdated(at index: Int) {
+    ForecastNotificationCenter.post(.reloadContentPageData,
+                                    object: nil,
+                                    userInfo: [NotificationCenterUserInfo.cityUpdatedAtIndex.key: index])
+  }
+  
+  func postNotificationLocationRemovedFromList(at index: Int) {
+    guard let deletedCity = storedCities[safe: index] else { return }
+    storedCities.remove(at: index)
+
+    ForecastNotificationCenter.post(.locationRemovedFromList,
+                                    object: nil,
+                                    userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
   }
   
 }

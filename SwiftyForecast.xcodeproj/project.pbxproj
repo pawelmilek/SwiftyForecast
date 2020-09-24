@@ -19,7 +19,7 @@
 		E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */; };
 		E216C3A822B6CD2F00C18A3D /* UnitNotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E216C3A722B6CD2F00C18A3D /* UnitNotationTests.swift */; };
 		E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2192258214483AA0093FEBD /* OfflineViewController.swift */; };
-		E21E4A36251439BA00066401 /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E4A34251439BA00066401 /* CityViewModel.swift */; };
+		E21E4A36251439BA00066401 /* CityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E4A34251439BA00066401 /* CityCellViewModel.swift */; };
 		E21E4A3A25143D0700066401 /* DefaultContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* DefaultContentViewModel.swift */; };
 		E22CDFDF247C250700C9EACD /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E22CDFDE247C250700C9EACD /* Realm */; };
 		E22CDFE1247C250700C9EACD /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E22CDFE0247C250700C9EACD /* RealmSwift */; };
@@ -58,13 +58,13 @@
 		E26ACD1B24FF204000AC15A6 /* ForecastDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastDTO.swift */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
-		E2741B1424D1160E00C0FA8E /* DefaultCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */; };
+		E2741B1424D1160E00C0FA8E /* DefaultCityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */; };
 		E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */; };
-		E2741B2D24DE36F200C0FA8E /* AddCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */; };
-		E2741B2F24E0468700C0FA8E /* AddCalloutViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2E24E0468700C0FA8E /* AddCalloutViewControllerDelegate.swift */; };
+		E2741B2D24DE36F200C0FA8E /* MapCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */; };
+		E2741B2F24E0468700C0FA8E /* MapCalloutViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2E24E0468700C0FA8E /* MapCalloutViewControllerDelegate.swift */; };
 		E2741B3124E0496900C0FA8E /* UIImage+AlwaysTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B3024E0496900C0FA8E /* UIImage+AlwaysTemplate.swift */; };
-		E2741B3324E04FA000C0FA8E /* AddCalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B3224E04FA000C0FA8E /* AddCalloutViewModel.swift */; };
-		E2741B3524E051FC00C0FA8E /* DefaultAddCalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B3424E051FC00C0FA8E /* DefaultAddCalloutViewModel.swift */; };
+		E2741B3324E04FA000C0FA8E /* MapCalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B3224E04FA000C0FA8E /* MapCalloutViewModel.swift */; };
+		E2741B3524E051FC00C0FA8E /* DefaultMapCalloutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B3424E051FC00C0FA8E /* DefaultMapCalloutViewModel.swift */; };
 		E274BE7E20F52F11006EAE3E /* FontWeatherIconError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */; };
 		E274DAF124A0604F001F8655 /* LocationSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */; };
 		E27E2F831DA0482C00B3EABF /* CityListSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F7F1DA0482C00B3EABF /* CityListSelectionViewController.swift */; };
@@ -222,7 +222,7 @@
 		E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReachabilityError+ErrorHandleable.swift"; sourceTree = "<group>"; };
 		E216C3A722B6CD2F00C18A3D /* UnitNotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitNotationTests.swift; sourceTree = "<group>"; };
 		E2192258214483AA0093FEBD /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
-		E21E4A34251439BA00066401 /* CityViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
+		E21E4A34251439BA00066401 /* CityCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityCellViewModel.swift; sourceTree = "<group>"; };
 		E224416321618EA4009D409F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E220E84371007D8CE4 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
@@ -259,13 +259,13 @@
 		E26ACD1A24FF204000AC15A6 /* ForecastDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDTO.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityViewModel.swift; sourceTree = "<group>"; };
+		E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityCellViewModel.swift; sourceTree = "<group>"; };
 		E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+CustomTransition.swift"; sourceTree = "<group>"; };
-		E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalloutViewController.swift; sourceTree = "<group>"; };
-		E2741B2E24E0468700C0FA8E /* AddCalloutViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalloutViewControllerDelegate.swift; sourceTree = "<group>"; };
+		E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCalloutViewController.swift; sourceTree = "<group>"; };
+		E2741B2E24E0468700C0FA8E /* MapCalloutViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCalloutViewControllerDelegate.swift; sourceTree = "<group>"; };
 		E2741B3024E0496900C0FA8E /* UIImage+AlwaysTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+AlwaysTemplate.swift"; sourceTree = "<group>"; };
-		E2741B3224E04FA000C0FA8E /* AddCalloutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalloutViewModel.swift; sourceTree = "<group>"; };
-		E2741B3424E051FC00C0FA8E /* DefaultAddCalloutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAddCalloutViewModel.swift; sourceTree = "<group>"; };
+		E2741B3224E04FA000C0FA8E /* MapCalloutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCalloutViewModel.swift; sourceTree = "<group>"; };
+		E2741B3424E051FC00C0FA8E /* DefaultMapCalloutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMapCalloutViewModel.swift; sourceTree = "<group>"; };
 		E274BE7D20F52F11006EAE3E /* FontWeatherIconError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontWeatherIconError.swift; sourceTree = "<group>"; };
 		E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		E27E2F7F1DA0482C00B3EABF /* CityListSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListSelectionViewController.swift; sourceTree = "<group>"; };
@@ -452,8 +452,8 @@
 		E21E4A312514389900066401 /* CityListSelectionModule */ = {
 			isa = PBXGroup;
 			children = (
-				E21E4A33251438FC00066401 /* View */,
 				E21E4A32251438EF00066401 /* ViewModel */,
+				E21E4A33251438FC00066401 /* View */,
 			);
 			path = CityListSelectionModule;
 			sourceTree = "<group>";
@@ -461,7 +461,9 @@
 		E21E4A32251438EF00066401 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				E21E4A34251439BA00066401 /* CityCellViewModel.swift */,
 				E2CF4D71226E78CF00062E36 /* CityListViewModel.swift */,
+				E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */,
 				E2CF4D73226E799700062E36 /* DefaultCityListViewModel.swift */,
 			);
 			path = ViewModel;
@@ -648,8 +650,8 @@
 		E24C8C4C24CFC887004E3A2C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E2741B3224E04FA000C0FA8E /* AddCalloutViewModel.swift */,
-				E2741B3424E051FC00C0FA8E /* DefaultAddCalloutViewModel.swift */,
+				E2741B3224E04FA000C0FA8E /* MapCalloutViewModel.swift */,
+				E2741B3424E051FC00C0FA8E /* DefaultMapCalloutViewModel.swift */,
 				E24C8C4F24CFC8AD004E3A2C /* DefaultLocationSearchResultsViewModel.swift */,
 				E24C8C4D24CFC891004E3A2C /* LocationSearchResultsViewModel.swift */,
 			);
@@ -723,8 +725,8 @@
 				E24C8C4A24CFBC7A004E3A2C /* LocationSearchResultsTableViewControllerDelegate.swift */,
 				E274DAEF24A0604F001F8655 /* LocationSearchResultsTableViewController.swift */,
 				E293695224985CD90055FB2E /* LocationSearchViewController.swift */,
-				E2741B2C24DE36F200C0FA8E /* AddCalloutViewController.swift */,
-				E2741B2E24E0468700C0FA8E /* AddCalloutViewControllerDelegate.swift */,
+				E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */,
+				E2741B2E24E0468700C0FA8E /* MapCalloutViewControllerDelegate.swift */,
 			);
 			path = LocationSearchModule;
 			sourceTree = "<group>";
@@ -831,10 +833,8 @@
 		E2CF4D70226E75AD00062E36 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E21E4A34251439BA00066401 /* CityViewModel.swift */,
 				E2CF4D81226E86B200062E36 /* ContentViewModel.swift */,
 				E2CF4D77226E7B4600062E36 /* DailyCellViewModel.swift */,
-				E2741B1324D1160E00C0FA8E /* DefaultCityViewModel.swift */,
 				E2CF4DE52288E46100062E36 /* DefaultContentViewModel.swift */,
 				E2CF4D79226E7B6000062E36 /* DefaultDailyCellViewModel.swift */,
 				E2DC149424955C8D00D1A329 /* DefaultForecastViewModel.swift */,
@@ -985,7 +985,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Pawel Milek";
 				TargetAttributes = {
 					E29911F51D456EAC0083B484 = {
@@ -1067,7 +1067,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2DC147B248F225D00D1A329 /* UIViewController+LoadFromNib.swift in Sources */,
-				E2741B3324E04FA000C0FA8E /* AddCalloutViewModel.swift in Sources */,
+				E2741B3324E04FA000C0FA8E /* MapCalloutViewModel.swift in Sources */,
 				E21E4A3A25143D0700066401 /* DefaultContentViewModel.swift in Sources */,
 				E27E2FCF1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift in Sources */,
 				E2B0359B250531EA00DC0E77 /* DefaultForecastDAO.swift in Sources */,
@@ -1107,7 +1107,7 @@
 				E2DC146C248D496900D1A329 /* FileLoaderError.swift in Sources */,
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2EC1D151D919C0A00FD1F95 /* UIColor+Flat.swift in Sources */,
-				E2741B1424D1160E00C0FA8E /* DefaultCityViewModel.swift in Sources */,
+				E2741B1424D1160E00C0FA8E /* DefaultCityCellViewModel.swift in Sources */,
 				E2C208A524848010006C772E /* TemperatureMeasurement.swift in Sources */,
 				E2DC149524955C8D00D1A329 /* DefaultForecastViewModel.swift in Sources */,
 				E24C8C4B24CFBC7A004E3A2C /* LocationSearchResultsTableViewControllerDelegate.swift in Sources */,
@@ -1134,7 +1134,7 @@
 				E2DC1469248D494C00D1A329 /* FileLoadable.swift in Sources */,
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E2435BD522AD7332007589CE /* Double+ToCelsius.swift in Sources */,
-				E2741B2F24E0468700C0FA8E /* AddCalloutViewControllerDelegate.swift in Sources */,
+				E2741B2F24E0468700C0FA8E /* MapCalloutViewControllerDelegate.swift in Sources */,
 				E2DC14912495282400D1A329 /* ForecastViewModel.swift in Sources */,
 				E27E2FCE1DA04D1D00B3EABF /* SegueIdentifierType.swift in Sources */,
 				E23997ED20E84371007D8CE4 /* NetworkResponseParser.swift in Sources */,
@@ -1156,7 +1156,7 @@
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
 				E27E2FCB1DA04D1D00B3EABF /* NibLoadableView.swift in Sources */,
 				E2CF4D82226E86B200062E36 /* ContentViewModel.swift in Sources */,
-				E2741B2D24DE36F200C0FA8E /* AddCalloutViewController.swift in Sources */,
+				E2741B2D24DE36F200C0FA8E /* MapCalloutViewController.swift in Sources */,
 				E27E2FCC1DA04D1D00B3EABF /* Registrable.swift in Sources */,
 				E27E2F861DA0482C00B3EABF /* ContentViewController.swift in Sources */,
 				E29B10E224E9790F0030503C /* UITableView+RealmChanges.swift in Sources */,
@@ -1169,7 +1169,7 @@
 				E293695424985CDA0055FB2E /* LocationSearchViewController.swift in Sources */,
 				E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */,
 				E2435BCB22AD563D007589CE /* NotationSystem.swift in Sources */,
-				E2741B3524E051FC00C0FA8E /* DefaultAddCalloutViewModel.swift in Sources */,
+				E2741B3524E051FC00C0FA8E /* DefaultMapCalloutViewModel.swift in Sources */,
 				E26ACD1B24FF204000AC15A6 /* ForecastDTO.swift in Sources */,
 				E23CD76920EDBCDB00F0F72A /* ConditionFontIcon.swift in Sources */,
 				E2CF4D76226E7A4100062E36 /* ForecastService.swift in Sources */,
@@ -1208,7 +1208,7 @@
 				E23CD76020ED950500F0F72A /* HourlyCollectionViewCell.swift in Sources */,
 				E23CD76320ED9A3500F0F72A /* UICollectionView+Registrable.swift in Sources */,
 				E2DC1485248F230600D1A329 /* KeyboardObserverEventResponder.swift in Sources */,
-				E21E4A36251439BA00066401 /* CityViewModel.swift in Sources */,
+				E21E4A36251439BA00066401 /* CityCellViewModel.swift in Sources */,
 				E293695B249867740055FB2E /* UIApplication+TopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1271,6 +1271,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1379,6 +1380,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1436,6 +1438,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

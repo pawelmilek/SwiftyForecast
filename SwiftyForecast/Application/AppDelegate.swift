@@ -40,9 +40,9 @@ private extension AppDelegate {
   func setupLocationProvider() {
     LocationProvider.shared.authorizationCompletionBlock = { isAuthorized in
       if isAuthorized {
-        LocationProvider.shared.requestLocation()
-        ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
-
+        LocationProvider.shared.request { _ in
+          ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
+        }
       } else {
         LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
       }

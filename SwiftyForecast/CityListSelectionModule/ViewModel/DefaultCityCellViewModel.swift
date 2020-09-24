@@ -9,10 +9,10 @@ struct DefaultCityCellViewModel: CityCellViewModel {
     return city.localTime
   }
   
-  var map: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
-    guard let placemark = city.placemark else { return nil }
-    
-    let mkPlacemark = MKPlacemark(placemark: placemark)
+  var onSuccessTimeZoneGecoded: (() -> Void)?
+  
+  var miniMapData: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
+    let mkPlacemark = MKPlacemark(placemark: city.placemark)
     let annotation = MKPointAnnotation()
     annotation.coordinate = mkPlacemark.coordinate
     annotation.title = mkPlacemark.name
@@ -25,9 +25,9 @@ struct DefaultCityCellViewModel: CityCellViewModel {
     return (annotation: annotation, region: region)
   }
   
-  private let city: City
+  private let city: CityDTO
   
-  init(city: City) {
+  init(city: CityDTO) {
     self.city = city
     fetchTimeZone(for: city)
   }
@@ -36,9 +36,10 @@ struct DefaultCityCellViewModel: CityCellViewModel {
 // MARK: - Private - Fetch local time
 private extension DefaultCityCellViewModel {
 
-  func fetchTimeZone(for city: City) {
+  // TODO: Improve time zone fetching. Prevent multiple executions
+  func fetchTimeZone(for city: CityDTO) {
     guard city.timeZoneName == InvalidReference.notApplicable else { return }
-    let coordinate = city.location.coordinate
+    let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
     
     GeocoderHelper.timeZone(for: coordinate) { result in
       switch result {
@@ -46,11 +47,12 @@ private extension DefaultCityCellViewModel {
         let realm = RealmProvider.core.realm
         
         try! realm.write {
-          city.timeZoneName = data.identifier
+          let realmCity = ModelTranslator().translate(dto: city)
+          realmCity.timeZoneName = data.identifier
         }
 
-      case .failure:
-        break
+      case .failure(let error):
+        debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error)")
       }
     }
   }

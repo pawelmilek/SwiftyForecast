@@ -24,15 +24,8 @@ import CoreLocation
     "\(self.latitude)|\(self.longitude)"
   }
   
-  var location: CLLocation? {
-    get {
-      return CLLocation(latitude: latitude, longitude: longitude)
-    }
-    set {
-      guard let newLocation = newValue?.coordinate else { return }
-      latitude = newLocation.latitude
-      longitude = newLocation.longitude
-    }
+  var location: CLLocation {
+    return CLLocation(latitude: latitude, longitude: longitude)
   }
   
   convenience init(timezone: String,

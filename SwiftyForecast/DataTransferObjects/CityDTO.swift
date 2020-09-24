@@ -1,7 +1,8 @@
 import Foundation
+import MapKit
 
 struct CityDTO {
-  let id: Int
+  let compoundKey: String
   let name: String
   let country: String
   let state: String
@@ -9,5 +10,8 @@ struct CityDTO {
   let timeZoneName: String
   let lastUpdate: Date
   let isUserLocation: Bool
-  let location: LocationDTO
+  let latitude: Double
+  let longitude: Double
+  let placemark: CLPlacemark
+  let localTime: String
 }

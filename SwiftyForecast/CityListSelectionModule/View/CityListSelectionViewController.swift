@@ -50,13 +50,6 @@ private extension CityListSelectionViewController {
     
     viewModel?.onApplyListChanges = { [weak self] deletions, insertions, updates in
       self?.tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
-      
-      if let updatedIndex = updates.first, updatedIndex > 0 {
-        self?.viewModel?.postNotificationLocationCityUpdated(at: updatedIndex)
-
-      } else if let deletedIndex = deletions.first, deletedIndex > 0 {
-        self?.viewModel?.postNotificationLocationRemovedFromList(at: deletedIndex)
-      }
     }
   }
   

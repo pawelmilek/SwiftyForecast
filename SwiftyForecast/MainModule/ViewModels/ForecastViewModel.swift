@@ -10,7 +10,6 @@ protocol ForecastViewModel {
   var onIndexUpdate: ((Int) -> Void)? { get set }
   var onLoadingStatus: ((Bool) -> Void)? { get set }
   var onSuccess: (() -> Void)? { get set }
-  var onFailure: ((Error) -> Void)? { get set }
   
   init(repository: Repository, dataAccessObject: CityDAO, modelTranslator: ModelTranslator)
   
@@ -20,6 +19,7 @@ protocol ForecastViewModel {
   func index(of city: CityDTO) -> Int?
   func contentViewController(at index: Int) -> ContentViewController?
   func measuringSystemSwitched(_ sender: SegmentedControl)
+  func showOrHideLocationServicesPrompt(at navigationController: UINavigationController)
   func loadAllData()
   func loadData(at index: Int)
 }

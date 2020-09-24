@@ -76,7 +76,7 @@ private extension LocationSearchViewController {
 private extension LocationSearchViewController {
   
   func requestLocation() {
-    sharedLocationProvider.requestLocation { location in
+    sharedLocationProvider.request { location in
       DispatchQueue.main.async { [weak self] in
         let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: location.coordinate, span: span)
@@ -111,11 +111,10 @@ extension LocationSearchViewController: LocationSearchResultsTableViewController
 }
 
 // MARK: - CityCalloutViewDelegate delegate
-extension LocationSearchViewController: AddCalloutViewControllerDelegate {
-  
-  func addCalloutViewController(_ view: AddCalloutViewController, didPressAdd button: UIButton) {
-    view.dismiss(animated: true) { [weak self] in
-      ForecastNotificationCenter.post(.addCityFromCallout)
+extension LocationSearchViewController: MapCalloutViewControllerDelegate {
+
+  func calloutViewController(didAdd city: CityDTO) {
+    dismiss(animated: true) { [weak self] in
       self?.searchController = nil
       self?.coordinator?.onAddCityFromCalloutViewController()
     }
@@ -139,8 +138,8 @@ extension LocationSearchViewController: MKMapViewDelegate {
 extension LocationSearchViewController {
   
   func showPopover(base: UIView, for selectedPin: MKPlacemark) {
-    let viewModel = DefaultAddCalloutViewModel(placemark: selectedPin)
-    let viewController = AddCalloutViewController.make(viewModel: viewModel, delegate: self)
+    let viewModel = DefaultMapCalloutViewModel(placemark: selectedPin, delegate: self)
+    let viewController = MapCalloutViewController.make(viewModel: viewModel)
     viewController.modalPresentationStyle = .popover
 
     if let popoverPresentationController = viewController.popoverPresentationController {

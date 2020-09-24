@@ -6,9 +6,9 @@ struct ModelTranslator {
   
   func translate(_ city: City?) -> CityDTO? {
     guard let city = city else { return nil }
-    guard let location = translate(city.location) else { return nil }
+    guard let placemark = city.placemark else { return nil }
 
-    let cityDTO = CityDTO(id: city.id,
+    let cityDTO = CityDTO(compoundKey: city.compoundKey,
                           name: city.name,
                           country: city.country,
                           state: city.state,
@@ -16,19 +16,22 @@ struct ModelTranslator {
                           timeZoneName: city.timeZoneName,
                           lastUpdate: city.lastUpdate,
                           isUserLocation: city.isUserLocation,
-                          location: location)
+                          latitude: city.latitude,
+                          longitude: city.longitude,
+                          placemark: placemark,
+                          localTime: city.localTime)
     return cityDTO
   }
   
   func translate(forecast: ForecastResponse?) -> ForecastDTO? {
     guard let forecast = forecast else { return nil }
-    guard let location = translate(forecast.location) else { return nil }
     guard let currently = translate(forecast.currently) else { return nil }
     guard let hourly = translate(forecast.hourly) else { return nil }
     guard let daily = translate(forecast.daily) else { return nil }
     
     let forecastDTO = ForecastDTO(timezone: forecast.timezone,
-                                  location: location,
+                                  latitude: forecast.latitude,
+                                  longitude: forecast.longitude,
                                   currently: currently,
                                   hourly: hourly,
                                   daily: daily)
@@ -91,13 +94,6 @@ struct ModelTranslator {
                                             sevenDaysData: sevenDaysData)
     return dailyForecastDTO
   }
-  
-  func translate(_ location: CLLocation?) -> LocationDTO? {
-    guard let location = location else { return nil }
-    let locationDTO = LocationDTO(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-    return locationDTO
-  }
-
 }
 
 // MARK: - Data Transfer Object translate to model
@@ -109,7 +105,8 @@ extension ModelTranslator {
                     state: dto.state,
                     postalCode: dto.postalCode,
                     timeZoneName: dto.timeZoneName,
-                    location: translate(dto: dto.location),
+                    latitude: dto.latitude,
+                    longitude: dto.longitude,
                     isUserLocation: dto.isUserLocation)
     return city
   }
