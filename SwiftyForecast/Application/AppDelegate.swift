@@ -44,7 +44,7 @@ private extension AppDelegate {
           ForecastNotificationCenter.post(.locationServiceDidRequestLocation)
         }
       } else {
-        LocationProvider.shared.presentLocationServicesSettingsPopupAlert()
+        ForecastNotificationCenter.post(.locationServicesDisabled)
       }
     }
   }

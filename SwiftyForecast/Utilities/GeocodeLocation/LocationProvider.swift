@@ -5,6 +5,7 @@ final class LocationProvider: NSObject {
   static let shared = LocationProvider()
   
   var authorizationCompletionBlock: ((_ isAuthorized: Bool) -> ())? = { _ in }
+  
   var currentLocation: CLLocation? {
     didSet {
       guard let currentLocation = currentLocation else { return }
@@ -59,7 +60,7 @@ extension LocationProvider {
   
   func request(completion: @escaping (CLLocation) -> ()) {
     guard isLocationServicesEnabled else {
-      presentLocationServicesSettingsPopupAlert()
+      ForecastNotificationCenter.post(.locationServicesDisabled)
       return
     }
     
@@ -105,33 +106,8 @@ extension LocationProvider: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
     locationManager.stopUpdatingLocation()
-    AlertViewPresenter.presentError(withMessage: error.localizedDescription)
+    debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error.localizedDescription)")
+    ForecastNotificationCenter.post(.locationProviderDidFail)
   }
   
-}
-
-// MARK: - Private - Show settings alert view
-extension LocationProvider {
-  
-  func presentLocationServicesSettingsPopupAlert() {
-    let cancelAction: (UIAlertAction) -> () = { _ in }
-    
-    let settingsAction: (UIAlertAction) -> () = { _ in
-      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
-      UIApplication.shared.open(settingsURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
-    }
-    
-    let title = NSLocalizedString("Location Services Disabled", comment: "")
-    let message = NSLocalizedString("Please enable Location Services. We will keep your data private.", comment: "")
-    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
-    
-    let rootViewController = UIApplication.topViewController
-    AlertViewPresenter.presentPopupAlert(in: rootViewController!, title: title, message: message, actionTitles: actionsTitle, actions: [cancelAction, settingsAction])
-  }
-  
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-  return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

@@ -41,7 +41,7 @@ private extension CityListSelectionViewController {
     
     viewModel?.onCitySelected = { [weak self] index in
       guard let self = self else { return }
-      self.delegate?.citySelection(self, at: index)
+      self.delegate?.cityListSelection(self, didSelect: index)
     }
     
     viewModel?.onInitialDataLoad = { [weak self] in

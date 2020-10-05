@@ -46,6 +46,11 @@ import Contacts
     case longitude
   }
   
+  
+  override static func primaryKey() -> String? {
+    CityProperty.orderIndex.key
+  }
+  
   convenience init(name: String,
                    country: String,
                    state: String,
@@ -102,10 +107,6 @@ import Contacts
     latitude = placemark.location?.coordinate.latitude ?? 0.0
     longitude = placemark.location?.coordinate.longitude ?? 0.0
     self.compoundKey = compoundKeyValue
-  }
-  
-  override static func primaryKey() -> String? {
-    CityProperty.compoundKey.key
   }
 }
 

@@ -117,7 +117,11 @@ private extension ForecastViewController {
     
     ForecastNotificationCenter.add(observer: self,
                                    selector: #selector(locationDidRemoveFromList),
-                                   for: .locationRemovedFromList)
+                                   for: .cityRemovedFromLocationList)
+    
+    ForecastNotificationCenter.add(observer: self,
+                                   selector: #selector(locationProviderDidFailWithError),
+                                   for: .locationProviderDidFail)
   }
   
   func removeNotificationObservers() {
@@ -175,12 +179,37 @@ extension ForecastViewController {
     viewModel?.removeContentViewModel(with: LocationDTO(latitude: city.latitude, longitude: city.longitude))
   }
   
+  @objc func locationProviderDidFailWithError() {
+    AlertViewPresenter.presentPopupAlert(in: self,
+                                         title: NSLocalizedString("Error", comment: ""),
+                                         message: NSLocalizedString("Location provider failed", comment: ""))
+  }
+  
+  @objc func presentLocationServicesSettingsPopupAlert() {
+    let cancelAction: (UIAlertAction) -> () = { _ in }
+    
+    let settingsAction: (UIAlertAction) -> () = { _ in
+      let settingsURL = URL(string: UIApplication.openSettingsURLString)!
+      UIApplication.shared.open(settingsURL)
+    }
+    
+    let title = NSLocalizedString("Location Services Disabled", comment: "")
+    let message = NSLocalizedString("Please enable Location Services. We will keep your data private.", comment: "")
+    let actionsTitle = [NSLocalizedString("Cancel", comment: ""), NSLocalizedString("Settings", comment: "")]
+    
+    AlertViewPresenter.presentPopupAlert(in: self,
+                                         title: title,
+                                         message: message,
+                                         actionTitles: actionsTitle,
+                                         actions: [cancelAction, settingsAction])
+  }
+  
 }
 
 // MARK: - CityListTableViewControllerDelegate protocol
 extension ForecastViewController: CityListSelectionViewControllerDelegate {
   
-  func citySelection(_ view: CityListSelectionViewController, at index: Int) {
+  func cityListSelection(_ view: CityListSelectionViewController, didSelect index: Int) {
     loadData(at: index)
     setPageControl()
     moveToPage(at: index) { [weak self] _ in

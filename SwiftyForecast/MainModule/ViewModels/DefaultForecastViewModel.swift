@@ -41,7 +41,7 @@ final class DefaultForecastViewModel: ForecastViewModel {
    }
   
   private var allCities: [CityDTO] {
-    return dataAccessObject.getAll().compactMap { modelTranslator.translate($0) }
+    return cityDataAccessObject.getAllOrderedByIndex().compactMap { modelTranslator.translate($0) }
   }
 
   private var isUserLocationPage: Bool {
@@ -50,14 +50,14 @@ final class DefaultForecastViewModel: ForecastViewModel {
 
   private var contentViewModels: [ContentViewModel] = []
   private let repository: Repository
-  private let dataAccessObject: CityDAO
+  private let cityDataAccessObject: CityDAO
   private let modelTranslator: ModelTranslator
 
   init(repository: Repository,
        dataAccessObject: CityDAO = DefaultCityDAO(),
        modelTranslator: ModelTranslator = ModelTranslator()) {
     self.repository = repository
-    self.dataAccessObject = dataAccessObject
+    self.cityDataAccessObject = dataAccessObject
     self.modelTranslator = modelTranslator
   }
   
@@ -165,7 +165,10 @@ private extension DefaultForecastViewModel {
       
       switch result {
       case .success(let placemark):
-        self?.insertUserCurrentLocation(by: placemark)
+        let city = City(placemark: placemark, isUserLocation: true)
+        
+        self?.removePreviousUserLocationForecastResponse(by: city)
+        self?.insertUserCurrentLocation(by: city)
         self?.onSuccess?()
         successCounterToPreventMultipleExecution = successCounterToPreventMultipleExecution + 1
         
@@ -191,7 +194,10 @@ private extension DefaultForecastViewModel {
       
       switch result {
       case .success(let placemark):
-        self?.insertUserCurrentLocation(by: placemark)
+        let city = City(placemark: placemark, isUserLocation: true)
+        
+        self?.removePreviousUserLocationForecastResponse(by: city)
+        self?.insertUserCurrentLocation(by: city)
         successCounterToPreventMultipleExecution = successCounterToPreventMultipleExecution + 1
         
       case .failure(let error):
@@ -212,9 +218,26 @@ private extension DefaultForecastViewModel {
 // MARK: - Private -
 private extension DefaultForecastViewModel {
   
-  func insertUserCurrentLocation(by placemark: CLPlacemark) {
-    let city = City(placemark: placemark, isUserLocation: true)
-    try! dataAccessObject.put(city, sortIndex: Self.userLocationSortIndex)
+  func removePreviousUserLocationForecastResponse(by currentCity: City) {
+    var containsCurrentCity: Bool {
+      let city = cityDataAccessObject.getAllOrderedByIndex().first(where: { $0.compoundKey == currentCity.compoundKey })
+      return city != nil
+    }
+    
+    guard !containsCurrentCity else { return }
+    
+    guard let previousCity = cityDataAccessObject.getAllOrderedByIndex().first(where: { $0.orderIndex == Self.userLocationSortIndex && $0.isUserLocation == true }) else { return }
+    
+    removeContentViewModel(with: LocationDTO(latitude: previousCity.latitude, longitude: previousCity.longitude))
+    
+    let forecastDAO = DefaultForecastDAO()
+    if let forecast = forecastDAO.get(latitude: previousCity.latitude, longitude: previousCity.longitude) {
+      try! forecastDAO.delete(forecast)
+    }
+  }
+  
+  func insertUserCurrentLocation(by city: City) {
+    try! cityDataAccessObject.put(city, sortIndex: Self.userLocationSortIndex)
     createAndAddContentViewModel(with: city)
   }
   

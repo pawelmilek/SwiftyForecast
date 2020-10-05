@@ -19,7 +19,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   private var cityResults: Results<City>? {
-    return cityDAO.getAll()
+    return cityDAO.getAllResultOrderedByIndex()
   }
   
   private var cityViewModels: [CityCellViewModel] {
@@ -32,7 +32,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   init(cityDAO: CityDAO = DefaultCityDAO(), forecastDAO: ForecastDAO = DefaultForecastDAO()) {
     self.cityDAO = cityDAO
     self.forecastDAO = forecastDAO
-    self.storedCities = cityDAO.getAll().compactMap { ModelTranslator().translate($0) }
+    self.storedCities = cityDAO.getAllOrderedByIndex().compactMap { ModelTranslator().translate($0) }
     
     citiesToken = cityResults?.observe { [weak self] changes in
       switch changes {
@@ -115,7 +115,7 @@ extension DefaultCityListViewModel {
     guard let deletedCity = storedCities[safe: index] else { return }
     storedCities.remove(at: index)
 
-    ForecastNotificationCenter.post(.locationRemovedFromList,
+    ForecastNotificationCenter.post(.cityRemovedFromLocationList,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
   }
