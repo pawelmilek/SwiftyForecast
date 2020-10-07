@@ -11,7 +11,7 @@ protocol ForecastViewModel {
   var onLoadingStatus: ((Bool) -> Void)? { get set }
   var onSuccess: (() -> Void)? { get set }
   
-  init(repository: Repository, dataAccessObject: CityDAO, modelTranslator: ModelTranslator)
+  init(repository: Repository, cityDataAccessObject: CityDAO, forecastDataAccessObject: ForecastDAO, modelTranslator: ModelTranslator)
   
   func addContentViewModel(at index: Int)
   func removeContentViewModel(with location: LocationDTO)

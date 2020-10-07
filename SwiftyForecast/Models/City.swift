@@ -12,7 +12,7 @@ import Contacts
   dynamic var country = ""
   dynamic var state = ""
   dynamic var postalCode = ""
-  dynamic var timeZoneName = ""
+  dynamic var timeZoneIdentifier = ""
   dynamic var lastUpdate = Date()
   dynamic var isUserLocation = false
   dynamic var latitude = 0.0
@@ -28,7 +28,7 @@ import Contacts
   }
   
   var localTime: String {
-    DateFormatter.shortLocalTime(from: timeZoneName)
+    DateFormatter.shortLocalTime(from: timeZoneIdentifier)
   }
 
   var location: CLLocation {
@@ -55,7 +55,7 @@ import Contacts
                    country: String,
                    state: String,
                    postalCode: String,
-                   timeZoneName: String,
+                   timeZoneIdentifier: String,
                    latitude: Double,
                    longitude: Double,
                    isUserLocation: Bool = false) {
@@ -64,7 +64,7 @@ import Contacts
     self.country = country
     self.state = state
     self.postalCode = postalCode
-    self.timeZoneName = timeZoneName
+    self.timeZoneIdentifier = timeZoneIdentifier
     self.isUserLocation = isUserLocation
     self.latitude = latitude
     self.longitude = longitude
@@ -78,7 +78,7 @@ import Contacts
     let country = try container.decode(String.self, forKey: .country)
     let state = try container.decode(String.self, forKey: .state)
     let postal = try container.decode(String.self, forKey: .postalCode)
-    let timeZone = try container.decode(String.self, forKey: .timeZoneName)
+    let timeZoneName = try container.decode(String.self, forKey: .timeZoneName)
     let latitude = try container.decode(Double.self, forKey: .latitude)
     let longitude = try container.decode(Double.self, forKey: .longitude)
     
@@ -86,7 +86,7 @@ import Contacts
               country: country,
               state: state,
               postalCode: postal,
-              timeZoneName: timeZone,
+              timeZoneIdentifier: timeZoneName,
               latitude: latitude,
               longitude: longitude)
   }
@@ -102,7 +102,7 @@ import Contacts
     country = placemark.country ?? InvalidReference.notApplicable
     state = placemark.administrativeArea ?? InvalidReference.notApplicable
     postalCode = placemark.postalCode ?? InvalidReference.notApplicable
-    timeZoneName = placemark.timeZone?.identifier ?? InvalidReference.notApplicable
+    timeZoneIdentifier = placemark.timeZone?.identifier ?? InvalidReference.notApplicable
     self.isUserLocation = isUserLocation
     latitude = placemark.location?.coordinate.latitude ?? 0.0
     longitude = placemark.location?.coordinate.longitude ?? 0.0

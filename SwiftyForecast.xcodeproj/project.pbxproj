@@ -58,6 +58,7 @@
 		E26ACD1B24FF204000AC15A6 /* ForecastDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastDTO.swift */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
+		E2729262252D3CB500F7E872 /* TimeZoneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */; };
 		E2741B1424D1160E00C0FA8E /* DefaultCityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */; };
 		E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */; };
 		E2741B2D24DE36F200C0FA8E /* MapCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */; };
@@ -167,7 +168,6 @@
 		E2DC1481248F230600D1A329 /* KeyboardObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC147E248F230600D1A329 /* KeyboardObserver.swift */; };
 		E2DC1483248F230600D1A329 /* KeyboardUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC147F248F230600D1A329 /* KeyboardUserInfo.swift */; };
 		E2DC1485248F230600D1A329 /* KeyboardObserverEventResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1480248F230600D1A329 /* KeyboardObserverEventResponder.swift */; };
-		E2DC1488248F232A00D1A329 /* LoadingIndicatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */; };
 		E2DC148B248F24E800D1A329 /* StoryboardViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */; };
 		E2DC148F248F25A700D1A329 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC148E248F25A700D1A329 /* Observer.swift */; };
 		E2DC14912495282400D1A329 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC14902495282400D1A329 /* ForecastViewModel.swift */; };
@@ -259,6 +259,7 @@
 		E26ACD1A24FF204000AC15A6 /* ForecastDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDTO.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneLoader.swift; sourceTree = "<group>"; };
 		E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityCellViewModel.swift; sourceTree = "<group>"; };
 		E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+CustomTransition.swift"; sourceTree = "<group>"; };
 		E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCalloutViewController.swift; sourceTree = "<group>"; };
@@ -371,7 +372,6 @@
 		E2DC147E248F230600D1A329 /* KeyboardObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardObserver.swift; sourceTree = "<group>"; };
 		E2DC147F248F230600D1A329 /* KeyboardUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardUserInfo.swift; sourceTree = "<group>"; };
 		E2DC1480248F230600D1A329 /* KeyboardObserverEventResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardObserverEventResponder.swift; sourceTree = "<group>"; };
-		E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorType.swift; sourceTree = "<group>"; };
 		E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardViewControllerFactory.swift; sourceTree = "<group>"; };
 		E2DC148E248F25A700D1A329 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		E2DC14902495282400D1A329 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
@@ -445,6 +445,7 @@
 				E28AFC782374FF2300D1D5ED /* PathFinder.swift */,
 				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
 				E2DC145A248D33B400D1A329 /* RealmUtility.swift */,
+				E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -789,7 +790,6 @@
 				E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */,
 				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
 				E2854FF92290F0DB00CD7554 /* ForecastUserDefaults.swift */,
-				E2DC1487248F232A00D1A329 /* LoadingIndicatorType.swift */,
 				E2DC148E248F25A700D1A329 /* Observer.swift */,
 				E28AFC742374FCC100D1D5ED /* RealmProvider.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
@@ -1115,6 +1115,7 @@
 				E2DC145F248D3CAF00D1A329 /* NetworkConstant.swift in Sources */,
 				E27E2F8C1DA048B600B3EABF /* CityTableViewCell.swift in Sources */,
 				E254B5D02102C45100B34E8F /* LocationProvider.swift in Sources */,
+				E2729262252D3CB500F7E872 /* TimeZoneLoader.swift in Sources */,
 				E274DAF124A0604F001F8655 /* LocationSearchResultsTableViewController.swift in Sources */,
 				E26ACD0D24FC7AAC00AC15A6 /* Repository.swift in Sources */,
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
@@ -1192,7 +1193,6 @@
 				E2DC1483248F230600D1A329 /* KeyboardUserInfo.swift in Sources */,
 				E2435BD722AD736C007589CE /* Double+ToFahrenheit.swift in Sources */,
 				E2DC1472248F21F500D1A329 /* UIView+ApplicableBlurEffect.swift in Sources */,
-				E2DC1488248F232A00D1A329 /* LoadingIndicatorType.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmProvider.swift in Sources */,
 				E2741B3124E0496900C0FA8E /* UIImage+AlwaysTemplate.swift in Sources */,
 				E239980320E85987007D8CE4 /* DailyForecast.swift in Sources */,

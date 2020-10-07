@@ -13,7 +13,7 @@ struct ModelTranslator {
                           country: city.country,
                           state: city.state,
                           postalCode: city.postalCode,
-                          timeZoneName: city.timeZoneName,
+                          timeZoneIdentifier: city.timeZoneIdentifier,
                           lastUpdate: city.lastUpdate,
                           isUserLocation: city.isUserLocation,
                           latitude: city.latitude,
@@ -104,7 +104,7 @@ extension ModelTranslator {
                     country: dto.country,
                     state: dto.state,
                     postalCode: dto.postalCode,
-                    timeZoneName: dto.timeZoneName,
+                    timeZoneIdentifier: dto.timeZoneIdentifier,
                     latitude: dto.latitude,
                     longitude: dto.longitude,
                     isUserLocation: dto.isUserLocation)

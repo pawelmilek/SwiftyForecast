@@ -13,5 +13,6 @@ protocol CityListViewModel {
   func name(at index: Int) -> String
   func localTime(at index: Int) -> String
   func map(at index: Int) -> (annotation: MKPointAnnotation, region: MKCoordinateRegion)?
+  func cityCellViewModel(at index: Int) -> CityCellViewModel?
   func onViewDeinit()
 }

@@ -3,7 +3,7 @@ import MapKit
 
 final class DefaultCityListViewModel: CityListViewModel {
   var numberOfCities: Int {
-    return cityViewModels.count
+    return cityCellViewModels.count
   }
   
   var onCitySelected: ((Int) -> Void)?
@@ -22,7 +22,7 @@ final class DefaultCityListViewModel: CityListViewModel {
     return cityDAO.getAllResultOrderedByIndex()
   }
   
-  private var cityViewModels: [CityCellViewModel] {
+  private var cityCellViewModels: [CityCellViewModel] {
     return cityArray.compactMap { DefaultCityCellViewModel(city: $0) }
   }
   
@@ -59,17 +59,21 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   func name(at index: Int) -> String {
-    return cityViewModels[safe: index]?.name ?? InvalidReference.notApplicable
+    cityCellViewModels[safe: index]?.name ?? InvalidReference.notApplicable
   }
   
   func localTime(at index: Int) -> String {
-    return cityViewModels[safe: index]?.localTime ?? InvalidReference.notApplicable
+    cityCellViewModels[safe: index]?.localTime ?? InvalidReference.notApplicable
   }
   
   func map(at index: Int) -> (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
-    return cityViewModels[safe: index]?.miniMapData
+    cityCellViewModels[safe: index]?.miniMapData
   }
   
+  func cityCellViewModel(at index: Int) -> CityCellViewModel? {
+    cityCellViewModels[safe: index]
+  }
+    
   func onViewDeinit() {
     citiesToken?.invalidate()
   }

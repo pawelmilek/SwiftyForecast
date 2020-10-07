@@ -455,102 +455,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0581FC45-1DAA-4998-BE08-D56A00EFDE50"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/Models/City.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "add(_:in:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FDBDFE80-668A-4702-B9C2-ADECA640E39C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityCellViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D7F73656-AADB-4D26-BD18-001DDE75849B"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityCellViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "29FE9C0D-62F7-4FFF-85C0-499C78B2CB1F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityCellViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "unknown"
-            landmarkType = "0">
-            <Locations>
-               <Location
-                  uuid = "29FE9C0D-62F7-4FFF-85C0-499C78B2CB1F - 7d8dedf21410fc0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Foundation.TimeZone, SwiftyForecast.GeocoderError&gt;) -&gt; () in SwiftyForecast.DefaultCityCellViewModel.(fetchTimeZone in _6CCE5B35E1C09A43F657F99785E09F15)(for: SwiftyForecast.CityDTO) -&gt; ()"
-                  moduleName = "SwiftyForecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityCellViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "386">
-               </Location>
-               <Location
-                  uuid = "29FE9C0D-62F7-4FFF-85C0-499C78B2CB1F - 7d8dedf21410fc0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;Foundation.TimeZone, SwiftyForecast.GeocoderError&gt;) -&gt; () in SwiftyForecast.DefaultCityCellViewModel.(fetchTimeZone in _6CCE5B35E1C09A43F657F99785E09F15)(for: SwiftyForecast.CityDTO) -&gt; ()"
-                  moduleName = "SwiftyForecast"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityCellViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45"
-                  offsetFromSymbolStart = "431">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "0B0F211D-6F84-4611-BB41-8DC2F88A57D9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -647,128 +551,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7332B4D2-F521-40B0-9DAB-572094D04ECF"
+            uuid = "ABEE7642-3C36-4F6E-B0A9-B757E5AA32D3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
+            filePath = "SwiftyForecast/Utilities/TimeZoneLoader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "removePreviousUserLocationForecastResponse(by:)"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "load(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E63AB966-8AB6-468D-AE43-94C7466C8268"
-            shouldBeEnabled = "Yes"
+            uuid = "E13AB050-6CEE-45D4-A470-3616CB31872C"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
+            filePath = "SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
-            landmarkName = "removePreviousUserLocationForecastResponse(by:)"
-            landmarkType = "7">
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "cityCellViewModels"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "E13AB050-6CEE-45D4-A470-3616CB31872C - 41af1445b5db2862"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftyForecast.DefaultCityListViewModel.(cityCellViewModels in _ECDB03D35E3867E6126DE6A4C3DBFC40).getter : Swift.Array&lt;SwiftyForecast.CityCellViewModel&gt;"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "53">
+               </Location>
+               <Location
+                  uuid = "E13AB050-6CEE-45D4-A470-3616CB31872C - a6be3bcffb5b671c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftyForecast.CityDTO) -&gt; Swift.Optional&lt;SwiftyForecast.CityCellViewModel&gt; in SwiftyForecast.DefaultCityListViewModel.(cityCellViewModels in _ECDB03D35E3867E6126DE6A4C3DBFC40).getter : Swift.Array&lt;SwiftyForecast.CityCellViewModel&gt;"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "73">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EDFC3B3E-0C25-46C9-9E7A-24FC9E2FF9C1"
-            shouldBeEnabled = "Yes"
+            uuid = "42EA381B-28D4-4D95-965D-F8796E1F0512"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
+            filePath = "SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "removePreviousUserLocationForecastResponse(by:)"
-            landmarkType = "7">
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "cityArray"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "42EA381B-28D4-4D95-965D-F8796E1F0512 - 987ac7682571ae76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftyForecast.DefaultCityListViewModel.(cityArray in _ECDB03D35E3867E6126DE6A4C3DBFC40).getter : Swift.Array&lt;SwiftyForecast.CityDTO&gt;"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "107">
+               </Location>
+               <Location
+                  uuid = "42EA381B-28D4-4D95-965D-F8796E1F0512 - 1f4d1422d267b792"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (SwiftyForecast.City) -&gt; Swift.Optional&lt;SwiftyForecast.CityDTO&gt; in SwiftyForecast.DefaultCityListViewModel.(cityArray in _ECDB03D35E3867E6126DE6A4C3DBFC40).getter : Swift.Array&lt;SwiftyForecast.CityDTO&gt;"
+                  moduleName = "SwiftyForecast"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/PawelMilek/Dev/Swift/iOS/SwiftyForecast/SwiftyForecast/CityListSelectionModule/ViewModel/DefaultCityListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1D931A7E-B6A6-4B4F-9796-A37D4E2EE966"
+            uuid = "1452FA45-5F88-4CCA-8FE6-400260802E2D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
+            filePath = "SwiftyForecast/Utilities/TimeZoneLoader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "removePreviousUserLocationForecastResponse(by:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6497B1C6-84C4-4027-9E23-3F375B505177"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "addContentViewModel(at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9D4D9E06-0CBD-4C73-AF75-172844D5B7E1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "addContentViewModel(at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F21BEB8B-CED7-44FA-94FF-141402DFB7FF"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "addContentViewModel(at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D801DA38-F9EB-4E8D-AAEB-127EC7A2FFD2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftyForecast/MainModule/ViewModels/DefaultForecastViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "removePreviousUserLocationForecastResponse(by:)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "load(for:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
