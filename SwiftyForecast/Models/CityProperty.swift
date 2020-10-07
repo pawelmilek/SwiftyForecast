@@ -5,7 +5,7 @@ enum CityProperty: String {
   case country
   case state
   case postalCode
-  case timeZoneName
+  case timeZoneIdentifier
   case lastUpdate
   case isUserLocation
   case latitude

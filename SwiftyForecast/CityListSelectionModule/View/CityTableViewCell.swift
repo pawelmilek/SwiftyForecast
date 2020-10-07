@@ -9,6 +9,8 @@ final class CityTableViewCell: UITableViewCell {
   @IBOutlet private weak var separatorView: UIView!
   @IBOutlet private weak var mapView: MKMapView!
   
+  var onReuse: () -> Void = {}
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     setUp()
@@ -17,6 +19,7 @@ final class CityTableViewCell: UITableViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     setUp()
+    onReuse()
   }
   
   override func layoutSubviews() {
@@ -75,6 +78,10 @@ extension CityTableViewCell {
       mapView.setRegion(region, animated: false)
       mapView.layoutIfNeeded()
     }
+  }
+  
+  func configure(time localTime: String) {
+    currentTimeLabel.text = localTime
   }
   
 }

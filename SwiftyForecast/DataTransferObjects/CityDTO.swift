@@ -7,7 +7,7 @@ struct CityDTO {
   let country: String
   let state: String
   let postalCode: String
-  let timeZoneName: String
+  let timeZoneIdentifier: String
   let lastUpdate: Date
   let isUserLocation: Bool
   let latitude: Double

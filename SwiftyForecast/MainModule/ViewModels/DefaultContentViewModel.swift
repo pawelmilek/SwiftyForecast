@@ -104,7 +104,7 @@ final class DefaultContentViewModel: ContentViewModel {
 
 // MARK: - Fetch Forecast Data
 extension DefaultContentViewModel {
-  
+
   func loadData() {
     guard !isLoadingData else { return }
     

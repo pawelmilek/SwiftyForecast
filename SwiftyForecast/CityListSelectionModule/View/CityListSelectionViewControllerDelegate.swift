@@ -1,3 +1,3 @@
 protocol CityListSelectionViewControllerDelegate: AnyObject {
-  func citySelection(_ view: CityListSelectionViewController, at index: Int)
+  func cityListSelection(_ view: CityListSelectionViewController, didSelect index: Int)
 }

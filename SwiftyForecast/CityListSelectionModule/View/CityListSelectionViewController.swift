@@ -41,7 +41,7 @@ private extension CityListSelectionViewController {
     
     viewModel?.onCitySelected = { [weak self] index in
       guard let self = self else { return }
-      self.delegate?.citySelection(self, at: index)
+      self.delegate?.cityListSelection(self, didSelect: index)
     }
     
     viewModel?.onInitialDataLoad = { [weak self] in
@@ -100,8 +100,25 @@ extension CityListSelectionViewController: UITableViewDataSource {
     let cityName = viewModel.name(at: row)
     let localTime = viewModel.localTime(at: row)
     let map = viewModel.map(at: row)
+    
     cell.tag = row
     cell.configure(by: cityName, time: localTime, annotation: map?.annotation, region: map?.region)
+    
+    let cityCellViewModel = viewModel.cityCellViewModel(at: row)
+    let token = cityCellViewModel?.loadTimeZone { result in
+      if case .success = result {
+        DispatchQueue.main.async {
+          cell.configure(time: viewModel.localTime(at: row))
+        }
+      }
+    }
+    
+    cell.onReuse = {
+      if let token = token {
+        cityCellViewModel?.cancelLoad(token)
+      }
+    }
+    
     return cell
   }
   

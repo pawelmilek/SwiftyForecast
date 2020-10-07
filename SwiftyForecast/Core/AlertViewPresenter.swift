@@ -34,7 +34,9 @@ extension AlertViewPresenter {
   
   static func presentError(withMessage msg: String, animated: Bool = true, completion: (() -> Void)? = nil) {
     let alertWindow = UIWindow(frame: UIScreen.main.bounds)
-    alertWindow.rootViewController = UIViewController()
+    let viewController = UIViewController()
+    viewController.view.backgroundColor = .clear
+    alertWindow.rootViewController = viewController
     alertWindow.windowLevel = UIWindow.Level.alert + 1
     alertWindow.makeKeyAndVisible()
     
@@ -42,7 +44,7 @@ extension AlertViewPresenter {
     let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default)
     alert.addAction(okAction)
     
-    alertWindow.rootViewController?.present(alert, animated: animated, completion: completion)
+    viewController.present(alert, animated: animated, completion: completion)
   }
   
 }

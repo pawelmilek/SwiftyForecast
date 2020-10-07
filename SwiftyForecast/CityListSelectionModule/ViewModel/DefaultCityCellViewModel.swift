@@ -26,35 +26,41 @@ struct DefaultCityCellViewModel: CityCellViewModel {
   }
   
   private let city: CityDTO
+  private let timeZoneLoader: TimeZoneLoader
   
-  init(city: CityDTO) {
+  init(city: CityDTO, timeZoneLoader: TimeZoneLoader = TimeZoneLoader()) {
     self.city = city
-    fetchTimeZone(for: city)
+    self.timeZoneLoader = timeZoneLoader
   }
-}
-
-// MARK: - Private - Fetch local time
-private extension DefaultCityCellViewModel {
-
-  // TODO: Improve time zone fetching. Prevent multiple executions
-  func fetchTimeZone(for city: CityDTO) {
-    guard city.timeZoneName == InvalidReference.notApplicable else { return }
-    let coordinate = CLLocationCoordinate2D(latitude: city.latitude, longitude: city.longitude)
+  
+  func loadTimeZone(completion: @escaping (Result<String, GeocoderError>) -> ()) -> UUID? {
+    guard localTime == InvalidReference.notApplicable else {
+      completion(.success(city.timeZoneIdentifier))
+      return nil
+    }
     
-    GeocoderHelper.timeZone(for: coordinate) { result in
+    let result = timeZoneLoader.load(for: (city.latitude, city.longitude)) { result in
       switch result {
-      case .success(let data):
+      case .success(let timeZone):
         let realm = RealmProvider.core.realm
+        let realmCities = try! City.fetchAll(in: realm).filter("compoundKey = %@", city.compoundKey)
         
         try! realm.write {
-          let realmCity = ModelTranslator().translate(dto: city)
-          realmCity.timeZoneName = data.identifier
+          if let realmCity = realmCities.first {
+            realmCity.timeZoneIdentifier = timeZone.identifier
+            completion(.success(timeZone.identifier))
+          }
         }
 
       case .failure(let error):
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error)")
       }
     }
+    
+    return result
   }
-
+  
+  func cancelLoad(_ uuid: UUID) {
+    timeZoneLoader.cancel(uuid)
+  }
 }

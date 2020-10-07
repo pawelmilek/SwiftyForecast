@@ -3,7 +3,7 @@ import MapKit
 
 final class DefaultCityListViewModel: CityListViewModel {
   var numberOfCities: Int {
-    return cityViewModels.count
+    return cityCellViewModels.count
   }
   
   var onCitySelected: ((Int) -> Void)?
@@ -19,10 +19,10 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   private var cityResults: Results<City>? {
-    return cityDAO.getAll()
+    return cityDAO.getAllResultOrderedByIndex()
   }
   
-  private var cityViewModels: [CityCellViewModel] {
+  private var cityCellViewModels: [CityCellViewModel] {
     return cityArray.compactMap { DefaultCityCellViewModel(city: $0) }
   }
   
@@ -32,7 +32,7 @@ final class DefaultCityListViewModel: CityListViewModel {
   init(cityDAO: CityDAO = DefaultCityDAO(), forecastDAO: ForecastDAO = DefaultForecastDAO()) {
     self.cityDAO = cityDAO
     self.forecastDAO = forecastDAO
-    self.storedCities = cityDAO.getAll().compactMap { ModelTranslator().translate($0) }
+    self.storedCities = cityDAO.getAllOrderedByIndex().compactMap { ModelTranslator().translate($0) }
     
     citiesToken = cityResults?.observe { [weak self] changes in
       switch changes {
@@ -59,17 +59,21 @@ final class DefaultCityListViewModel: CityListViewModel {
   }
   
   func name(at index: Int) -> String {
-    return cityViewModels[safe: index]?.name ?? InvalidReference.notApplicable
+    cityCellViewModels[safe: index]?.name ?? InvalidReference.notApplicable
   }
   
   func localTime(at index: Int) -> String {
-    return cityViewModels[safe: index]?.localTime ?? InvalidReference.notApplicable
+    cityCellViewModels[safe: index]?.localTime ?? InvalidReference.notApplicable
   }
   
   func map(at index: Int) -> (annotation: MKPointAnnotation, region: MKCoordinateRegion)? {
-    return cityViewModels[safe: index]?.miniMapData
+    cityCellViewModels[safe: index]?.miniMapData
   }
   
+  func cityCellViewModel(at index: Int) -> CityCellViewModel? {
+    cityCellViewModels[safe: index]
+  }
+    
   func onViewDeinit() {
     citiesToken?.invalidate()
   }
@@ -115,7 +119,7 @@ extension DefaultCityListViewModel {
     guard let deletedCity = storedCities[safe: index] else { return }
     storedCities.remove(at: index)
 
-    ForecastNotificationCenter.post(.locationRemovedFromList,
+    ForecastNotificationCenter.post(.cityRemovedFromLocationList,
                                     object: nil,
                                     userInfo: [NotificationCenterUserInfo.cityUpdated.key: deletedCity])
   }
