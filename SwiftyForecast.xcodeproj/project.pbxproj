@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E200102B2167D8E7008E6090 /* SharedGroupContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */; };
 		E206E1C120E9673A00AC72EA /* HourlyForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1C020E9673A00AC72EA /* HourlyForecast.swift */; };
 		E206E1C320E9683B00AC72EA /* DailyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1C220E9683B00AC72EA /* DailyData.swift */; };
 		E206E1C520E968A300AC72EA /* HourlyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E206E1C420E968A300AC72EA /* HourlyData.swift */; };
@@ -59,6 +58,13 @@
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
 		E2729262252D3CB500F7E872 /* TimeZoneLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */; };
+		E272927B252E8AC800F7E872 /* RateLimiterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272927A252E8AC800F7E872 /* RateLimiterTests.swift */; };
+		E2729283252E929200F7E872 /* StringToDateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2729282252E929200F7E872 /* StringToDateTests.swift */; };
+		E272928725367D1E00F7E872 /* DoubleRoundedToStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272928625367D1E00F7E872 /* DoubleRoundedToStringTests.swift */; };
+		E272928D25367FF200F7E872 /* DoubleToKPHTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E272928C25367FF200F7E872 /* DoubleToKPHTests.swift */; };
+		E27292912536812700F7E872 /* DistanceMeasurementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27292902536812700F7E872 /* DistanceMeasurementTests.swift */; };
+		E2729295253682D800F7E872 /* DoubleToTemperatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2729294253682D800F7E872 /* DoubleToTemperatureTests.swift */; };
+		E27292992536844A00F7E872 /* ConvertToHoursMinutesSecondsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27292982536844A00F7E872 /* ConvertToHoursMinutesSecondsTests.swift */; };
 		E2741B1424D1160E00C0FA8E /* DefaultCityCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */; };
 		E2741B2B24DA390700C0FA8E /* UINavigationController+CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */; };
 		E2741B2D24DE36F200C0FA8E /* MapCalloutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */; };
@@ -145,9 +151,6 @@
 		E2CF4D8A2273C39700062E36 /* HourlyForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D892273C39700062E36 /* HourlyForecastTests.swift */; };
 		E2CF4D9E2274F85400062E36 /* ForecastGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D9D2274F85400062E36 /* ForecastGenerator.swift */; };
 		E2CF4DA1227500FB00062E36 /* forecastChicagoStub.json in Resources */ = {isa = PBXBuildFile; fileRef = E2CF4DA0227500FA00062E36 /* forecastChicagoStub.json */; };
-		E2CF4DA92275014E00062E36 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DA52275014E00062E36 /* JSONFileLoader.swift */; };
-		E2CF4DAA2275014E00062E36 /* FileLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DA62275014E00062E36 /* FileLoadable.swift */; };
-		E2CF4DAC227501B100062E36 /* FileLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DAB227501B000062E36 /* FileLoaderError.swift */; };
 		E2CF4DC222750B5100062E36 /* forecastChicagoStub.json in Resources */ = {isa = PBXBuildFile; fileRef = E2CF4DA0227500FA00062E36 /* forecastChicagoStub.json */; };
 		E2CF4DD422768A9D00062E36 /* DailyForecastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD322768A9D00062E36 /* DailyForecastTests.swift */; };
 		E2CF4DD822768C3F00062E36 /* DefaultForecastService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */; };
@@ -155,7 +158,6 @@
 		E2D960812120F34800AE0B6E /* GeocoderHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocoderHelper.swift */; };
 		E2DB17BF20EDCC28003982A0 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
-		E2DC145B248D33B400D1A329 /* RealmUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145A248D33B400D1A329 /* RealmUtility.swift */; };
 		E2DC145F248D3CAF00D1A329 /* NetworkConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
 		E2DC1469248D494C00D1A329 /* FileLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1468248D494C00D1A329 /* FileLoadable.swift */; };
@@ -210,7 +212,6 @@
 
 /* Begin PBXFileReference section */
 		E200101A2167C191008E6090 /* Swifty Forecast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Swifty Forecast.entitlements"; sourceTree = "<group>"; };
-		E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedGroupContainer.swift; sourceTree = "<group>"; };
 		E206E1C020E9673A00AC72EA /* HourlyForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecast.swift; sourceTree = "<group>"; };
 		E206E1C220E9683B00AC72EA /* DailyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyData.swift; sourceTree = "<group>"; };
 		E206E1C420E968A300AC72EA /* HourlyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyData.swift; sourceTree = "<group>"; };
@@ -260,6 +261,13 @@
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeZoneLoader.swift; sourceTree = "<group>"; };
+		E272927A252E8AC800F7E872 /* RateLimiterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateLimiterTests.swift; sourceTree = "<group>"; };
+		E2729282252E929200F7E872 /* StringToDateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringToDateTests.swift; sourceTree = "<group>"; };
+		E272928625367D1E00F7E872 /* DoubleRoundedToStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleRoundedToStringTests.swift; sourceTree = "<group>"; };
+		E272928C25367FF200F7E872 /* DoubleToKPHTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleToKPHTests.swift; sourceTree = "<group>"; };
+		E27292902536812700F7E872 /* DistanceMeasurementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceMeasurementTests.swift; sourceTree = "<group>"; };
+		E2729294253682D800F7E872 /* DoubleToTemperatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleToTemperatureTests.swift; sourceTree = "<group>"; };
+		E27292982536844A00F7E872 /* ConvertToHoursMinutesSecondsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertToHoursMinutesSecondsTests.swift; sourceTree = "<group>"; };
 		E2741B1324D1160E00C0FA8E /* DefaultCityCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCityCellViewModel.swift; sourceTree = "<group>"; };
 		E2741B2A24DA390700C0FA8E /* UINavigationController+CustomTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+CustomTransition.swift"; sourceTree = "<group>"; };
 		E2741B2C24DE36F200C0FA8E /* MapCalloutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCalloutViewController.swift; sourceTree = "<group>"; };
@@ -349,9 +357,6 @@
 		E2CF4D8B2273C39700062E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2CF4D9D2274F85400062E36 /* ForecastGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastGenerator.swift; sourceTree = "<group>"; };
 		E2CF4DA0227500FA00062E36 /* forecastChicagoStub.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = forecastChicagoStub.json; sourceTree = "<group>"; };
-		E2CF4DA52275014E00062E36 /* JSONFileLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
-		E2CF4DA62275014E00062E36 /* FileLoadable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoadable.swift; sourceTree = "<group>"; };
-		E2CF4DAB227501B000062E36 /* FileLoaderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLoaderError.swift; sourceTree = "<group>"; };
 		E2CF4DD322768A9D00062E36 /* DailyForecastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastTests.swift; sourceTree = "<group>"; };
 		E2CF4DD522768B3A00062E36 /* DefaultForecastService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultForecastService.swift; sourceTree = "<group>"; };
 		E2CF4DDC227E313400062E36 /* ForecastNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastNotificationCenter.swift; sourceTree = "<group>"; };
@@ -359,7 +364,6 @@
 		E2D960802120F34800AE0B6E /* GeocoderHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderHelper.swift; sourceTree = "<group>"; };
 		E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
-		E2DC145A248D33B400D1A329 /* RealmUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmUtility.swift; sourceTree = "<group>"; };
 		E2DC145E248D3CAF00D1A329 /* NetworkConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstant.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
 		E2DC1468248D494C00D1A329 /* FileLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoadable.swift; sourceTree = "<group>"; };
@@ -444,7 +448,6 @@
 				E2E0761D20F5124C008A5B63 /* FontWeatherIcon */,
 				E28AFC782374FF2300D1D5ED /* PathFinder.swift */,
 				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
-				E2DC145A248D33B400D1A329 /* RealmUtility.swift */,
 				E2729261252D3CB500F7E872 /* TimeZoneLoader.swift */,
 			);
 			path = Utilities;
@@ -794,7 +797,6 @@
 				E28AFC742374FCC100D1D5ED /* RealmProvider.swift */,
 				E2DB17BE20EDCC28003982A0 /* SegmentedControl.swift */,
 				E27E2FAD1DA04D1D00B3EABF /* SegueIdentifierType.swift */,
-				E200102A2167D8E7008E6090 /* SharedGroupContainer.swift */,
 				E2DC148A248F24E800D1A329 /* StoryboardViewControllerFactory.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 				E270891824CE5904003F7587 /* Coordinator */,
@@ -846,19 +848,26 @@
 		E2CF4D882273C39700062E36 /* SwiftyForecastTests */ = {
 			isa = PBXGroup;
 			children = (
-				E2CF4D8B2273C39700062E36 /* Info.plist */,
+				E2B035AA2509B24B00DC0E77 /* Doubles */,
 				E293C5EE234AC924003BBE0B /* CollectionSafeSubscriptTests.swift */,
-				E2CCCEFE250B19B300109D6D /* DateFormatterShortLocalTimeTests.swift */,
+				E27292982536844A00F7E872 /* ConvertToHoursMinutesSecondsTests.swift */,
 				E285500522922AB700CD7554 /* CurrentForecastTests.swift */,
 				E2CF4DD322768A9D00062E36 /* DailyForecastTests.swift */,
+				E2CCCEFE250B19B300109D6D /* DateFormatterShortLocalTimeTests.swift */,
+				E27292902536812700F7E872 /* DistanceMeasurementTests.swift */,
+				E272928625367D1E00F7E872 /* DoubleRoundedToStringTests.swift */,
+				E272928C25367FF200F7E872 /* DoubleToKPHTests.swift */,
+				E2729294253682D800F7E872 /* DoubleToTemperatureTests.swift */,
 				E2B035B12509BCC200DC0E77 /* ForecastRepositoryTests.swift */,
 				E2B035AD2509B88200DC0E77 /* ForecastUserDefaultsTests.swift */,
+				E2B035B72509C04B00DC0E77 /* ForecastWebServiceTests.swift */,
 				E2CF4D892273C39700062E36 /* HourlyForecastTests.swift */,
 				E2CCCEF6250B00C500109D6D /* HttpClientTests.swift */,
-				E216C3A722B6CD2F00C18A3D /* UnitNotationTests.swift */,
-				E2B035B72509C04B00DC0E77 /* ForecastWebServiceTests.swift */,
-				E2B035AA2509B24B00DC0E77 /* Doubles */,
+				E2CF4D8B2273C39700062E36 /* Info.plist */,
+				E272927A252E8AC800F7E872 /* RateLimiterTests.swift */,
+				E2729282252E929200F7E872 /* StringToDateTests.swift */,
 				E2CF4D9F2274F8B600062E36 /* Stubs */,
+				E216C3A722B6CD2F00C18A3D /* UnitNotationTests.swift */,
 				E2CF4D9C2274F7B800062E36 /* Utilities */,
 			);
 			path = SwiftyForecastTests;
@@ -867,8 +876,6 @@
 		E2CF4D9C2274F7B800062E36 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E2CF4DA22275014E00062E36 /* DataLoader */,
-				E2CF4DAB227501B000062E36 /* FileLoaderError.swift */,
 				E2CF4D9D2274F85400062E36 /* ForecastGenerator.swift */,
 			);
 			path = Utilities;
@@ -880,15 +887,6 @@
 				E2CF4DA0227500FA00062E36 /* forecastChicagoStub.json */,
 			);
 			path = Stubs;
-			sourceTree = "<group>";
-		};
-		E2CF4DA22275014E00062E36 /* DataLoader */ = {
-			isa = PBXGroup;
-			children = (
-				E2CF4DA52275014E00062E36 /* JSONFileLoader.swift */,
-				E2CF4DA62275014E00062E36 /* FileLoadable.swift */,
-			);
-			path = DataLoader;
 			sourceTree = "<group>";
 		};
 		E2CF4DD722768B5200062E36 /* Service */ = {
@@ -1086,7 +1084,6 @@
 				E2CF4D74226E799700062E36 /* DefaultCityListViewModel.swift in Sources */,
 				E24ADB802123B63C0089C460 /* UIScreen+PhoneModel.swift in Sources */,
 				E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */,
-				E2DC145B248D33B400D1A329 /* RealmUtility.swift in Sources */,
 				E26ACD0B24FC79DD00AC15A6 /* ForecastRepository.swift in Sources */,
 				E2CF4D7E226E838E00062E36 /* DefaultHourlyCellViewModel.swift in Sources */,
 				E2B0356F25007AFA00DC0E77 /* RateLimiter.swift in Sources */,
@@ -1121,7 +1118,6 @@
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
 				E2E0762520F5165E008A5B63 /* FontLoader.swift in Sources */,
 				E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */,
-				E200102B2167D8E7008E6090 /* SharedGroupContainer.swift in Sources */,
 				E23997EF20E84371007D8CE4 /* ErrorHandleable.swift in Sources */,
 				E2B035752500882D00DC0E77 /* HourlyForecastDTO.swift in Sources */,
 				E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */,
@@ -1217,23 +1213,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E272928725367D1E00F7E872 /* DoubleRoundedToStringTests.swift in Sources */,
+				E272927B252E8AC800F7E872 /* RateLimiterTests.swift in Sources */,
+				E27292992536844A00F7E872 /* ConvertToHoursMinutesSecondsTests.swift in Sources */,
 				E2CCCEFF250B19B300109D6D /* DateFormatterShortLocalTimeTests.swift in Sources */,
+				E272928D25367FF200F7E872 /* DoubleToKPHTests.swift in Sources */,
+				E2729295253682D800F7E872 /* DoubleToTemperatureTests.swift in Sources */,
 				E2CCCEFD250B0D9200109D6D /* URLSessionMock.swift in Sources */,
 				E293C5EF234AC924003BBE0B /* CollectionSafeSubscriptTests.swift in Sources */,
+				E27292912536812700F7E872 /* DistanceMeasurementTests.swift in Sources */,
 				E2B035B22509BCC200DC0E77 /* ForecastRepositoryTests.swift in Sources */,
 				E2CCCEF7250B00C500109D6D /* HttpClientTests.swift in Sources */,
 				E2CCCEF9250B037700109D6D /* TestForecastWebRequest.swift in Sources */,
 				E2B035B82509C04B00DC0E77 /* ForecastWebServiceTests.swift in Sources */,
 				E2CCCEFB250B0D5800109D6D /* URLSessionDataTaskMock.swift in Sources */,
-				E2CF4DAA2275014E00062E36 /* FileLoadable.swift in Sources */,
 				E2B035AE2509B88200DC0E77 /* ForecastUserDefaultsTests.swift in Sources */,
 				E216C3A822B6CD2F00C18A3D /* UnitNotationTests.swift in Sources */,
 				E2CF4DD422768A9D00062E36 /* DailyForecastTests.swift in Sources */,
-				E2CF4DA92275014E00062E36 /* JSONFileLoader.swift in Sources */,
 				E2CF4D8A2273C39700062E36 /* HourlyForecastTests.swift in Sources */,
+				E2729283252E929200F7E872 /* StringToDateTests.swift in Sources */,
 				E285500622922AB700CD7554 /* CurrentForecastTests.swift in Sources */,
 				E2CF4D9E2274F85400062E36 /* ForecastGenerator.swift in Sources */,
-				E2CF4DAC227501B100062E36 /* FileLoaderError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
