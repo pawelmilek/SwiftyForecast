@@ -26,10 +26,20 @@ struct DefaultMapCalloutViewModel: MapCalloutViewModel {
     guard let cityDao = cityDataTransferObject else { return }
     
     do {
-      try dataAccessObject.put(city)
+      if !isExisting(cityDao) {
+        try dataAccessObject.put(city)
+      }
+      
       delegate?.calloutViewController(didAdd: cityDao)
     } catch {
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) Unexpected Realm \(RealmError.initializationFailed)")
     }
+  }
+  
+  private func isExisting(_ city: CityDTO) -> Bool {
+    guard let _ = dataAccessObject.getAllResultOrderedByIndex()?.first(where: { $0.compoundKey == city.compoundKey }) else {
+      return false
+    }
+    return true
   }
 }
