@@ -31,6 +31,7 @@ struct DefaultMapCalloutViewModel: MapCalloutViewModel {
       }
       
       delegate?.calloutViewController(didAdd: cityDao)
+      AppStoreReviewNotifier.notify(.locationAdded)
     } catch {
       debugPrint("File: \(#file), Function: \(#function), line: \(#line) Unexpected Realm \(RealmError.initializationFailed)")
     }

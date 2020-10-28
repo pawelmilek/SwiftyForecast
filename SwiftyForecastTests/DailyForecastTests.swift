@@ -8,7 +8,7 @@ class DailyForecastTests: XCTestCase {
   override func setUp() {
     super.setUp()
     
-    dailyForecast = ForecastGenerator.generateDailyForecast()
+    dailyForecast = MockGenerator.generateDailyForecast()
     let data = dailyForecast.sevenDaysData.first!
     viewModel = DefaultDailyCellViewModel(dailyData: data)
   }

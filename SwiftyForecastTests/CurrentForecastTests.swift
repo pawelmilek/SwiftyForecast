@@ -7,7 +7,7 @@ class CurrentForecastTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    currentForecast = ForecastGenerator.generateCurrentForecast()
+    currentForecast = MockGenerator.generateCurrentForecast()
 //    viewModel = DefaultCurrentForecastViewModel(currentForecast: CurrentForecast, currentDayDetails details: DailyData, city: City)
   }
   
@@ -18,7 +18,7 @@ class CurrentForecastTests: XCTestCase {
   }
   
   func testForecastTimezone() {
-    let timezone = ForecastGenerator.generateTimezone()
+    let timezone = MockGenerator.generateTimezone()
     XCTAssertEqual(timezone, "America/Chicago", "Forecast invalid timezone.")
   }
 }

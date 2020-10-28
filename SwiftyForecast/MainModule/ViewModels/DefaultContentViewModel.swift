@@ -33,13 +33,14 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var temperature: String {
     guard let currently = forecast?.currently else { return InvalidReference.notApplicable }
-    switch ForecastUserDefaults.unitNotation {
-    case .imperial:
-      return currently.temperature.roundedToString + Style.degreeSign
-      
-    case .metric:
+    switch NotationController().temperatureNotation {
+    case .celsius:
       let temperatureInCelsius = currently.temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign
+      
+    case .fahrenheit:
+      AppStoreReviewNotifier.notify(.enjoyableOutsideTemperatureReached(value: Int(currently.temperature.roundedToString) ?? 0))
+      return currently.temperature.roundedToString + Style.degreeSign
     }
   }
   
@@ -60,7 +61,7 @@ final class DefaultContentViewModel: ContentViewModel {
   
   var windSpeed: String {
     let speed = forecast?.currently.windSpeed ?? 0
-    switch ForecastUserDefaults.unitNotation {
+    switch NotationController().unitNotation {
     case .imperial:
       return String(format: "%.f MPH", speed)
       

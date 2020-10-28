@@ -1,7 +1,7 @@
 import Foundation
 
-final class JSONFileLoader: FileLoadable {
-  
+enum JSONFileLoader {
+
   static func loadFile(with name: String) throws -> Data {
     guard let path = Bundle.main.path(forResource: name, ofType: "json") else {
       throw FileLoaderError.fileNotFound(name: name)
@@ -13,7 +13,7 @@ final class JSONFileLoader: FileLoadable {
       return data
       
     } catch {
-      throw FileLoaderError.dataNotAvailable
+      throw FileLoaderError.fileNotFound(name: name)
     }
   }
   

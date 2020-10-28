@@ -4,29 +4,35 @@ struct DefaultDailyCellViewModel: DailyCellViewModel {
   let attributedDate: NSAttributedString
   let conditionIcon: NSAttributedString?
   var temperatureMin: String {
-    if NotationSystem.selectedUnitNotation == .metric {
+    switch notationController.temperatureNotation {
+    case .celsius:
       let temperatureInCelsiusMin = dailyData.temperatureMin.ToCelsius()
       return temperatureInCelsiusMin.roundedToString + Style.degreeSign
-    } else {
+      
+    case .fahrenheit:
       return dailyData.temperatureMin.roundedToString + Style.degreeSign
     }
   }
   
   var temperatureMax: String {
-    if NotationSystem.selectedUnitNotation == .metric {
+    switch notationController.temperatureNotation {
+    case .celsius:
       let temperatureInCelsiusMax = dailyData.temperatureMax.ToCelsius()
       return temperatureInCelsiusMax.roundedToString + Style.degreeSign
-    } else {
+      
+    case .fahrenheit:
       return dailyData.temperatureMax.roundedToString + Style.degreeSign
     }
   }
   
   private let dailyData: DailyDataDTO
-  
-  init(dailyData: DailyDataDTO) {
+  private let notationController: NotationController
+
+  init(dailyData: DailyDataDTO, notationController: NotationController = NotationController()) {
     self.dailyData = dailyData
-    attributedDate = DailyDateRenderer.render(dailyData.date)
-    conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
-                                           font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
+    self.notationController = notationController
+    self.attributedDate = DailyDateRenderer.render(dailyData.date)
+    self.conditionIcon = ConditionFontIcon.make(icon: dailyData.icon,
+                                                font: Style.DailyForecastCell.conditionIconSize)?.attributedIcon
   }
 }

@@ -7,7 +7,7 @@ class HourlyForecastTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    hourlyForecast = ForecastGenerator.generateHourlyForecast()
+    hourlyForecast = MockGenerator.generateHourlyForecast()
     let data = hourlyForecast.data.first!
     viewModel = DefaultHourlyCellViewModel(hourlyData: data)
   }

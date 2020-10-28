@@ -153,7 +153,10 @@ extension ContentViewController: ForecastViewDelegate {
                     self.forecastView.animateLabelsScaling()
                     self.view.layoutIfNeeded()
                     self.impactFeedback(style: .soft)
-    })
+                   }, completion: { isFinished in
+                    guard isFinished else { return }
+                    AppStoreReviewNotifier.notify(.detailsInteractionExpanded)
+                   })
   }
   
   func currentForecastDidCollapse() {
@@ -240,8 +243,11 @@ extension ContentViewController {
   @objc func unitNotationDidChange(_ notification: NSNotification) {
     guard let segmentedControl = notification.userInfo?[NotificationCenterUserInfo.segmentedControlChanged.key] as? SegmentedControl else { return }
     guard let unitNotation = UnitNotation(rawValue: segmentedControl.selectedIndex) else { return }
+    guard let temperatureNotation = TemperatureNotation(rawValue: segmentedControl.selectedIndex) else { return }
 
-    NotationSystem.selectedUnitNotation = unitNotation
+    let notationController = NotationController()
+    notationController.unitNotation = unitNotation
+    notationController.temperatureNotation = temperatureNotation
     selectionFeedback()
     reloadData()
   }
