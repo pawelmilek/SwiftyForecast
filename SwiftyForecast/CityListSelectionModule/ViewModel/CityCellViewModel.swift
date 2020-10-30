@@ -6,7 +6,7 @@ protocol CityCellViewModel {
   var miniMapData: (annotation: MKPointAnnotation, region: MKCoordinateRegion)? { get }
   var onSuccessTimeZoneGecoded: (() -> Void)? { get set }
   
-  init(city: CityDTO, timeZoneLoader: TimeZoneLoader)
+  init(city: CityDTO, timeZoneLoader: TimeZoneLoadable)
   
   func loadTimeZone(completion: @escaping (Result<String, GeocoderError>) -> ()) -> UUID?
   func cancelLoad(_ uuid: UUID)

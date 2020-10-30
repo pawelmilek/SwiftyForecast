@@ -18,12 +18,13 @@ struct DefaultHourlyCellViewModel: HourlyCellViewModel {
 extension DefaultHourlyCellViewModel {
   
   var temperature: String {
-    switch NotationSystem.selectedUnitNotation {
-    case .metric:
+    
+    switch NotationController().temperatureNotation {
+    case .celsius:
       let temperatureInCelsius = hourlyData.temperature.ToCelsius()
       return temperatureInCelsius.roundedToString + Style.degreeSign
       
-    case .imperial:
+    case .fahrenheit:
       return hourlyData.temperature.roundedToString + Style.degreeSign
     }
   }

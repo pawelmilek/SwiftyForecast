@@ -26,9 +26,9 @@ struct DefaultCityCellViewModel: CityCellViewModel {
   }
   
   private let city: CityDTO
-  private let timeZoneLoader: TimeZoneLoader
+  private let timeZoneLoader: TimeZoneLoadable
   
-  init(city: CityDTO, timeZoneLoader: TimeZoneLoader = TimeZoneLoader()) {
+  init(city: CityDTO, timeZoneLoader: TimeZoneLoadable = TimeZoneLoader()) {
     self.city = city
     self.timeZoneLoader = timeZoneLoader
   }

@@ -7,10 +7,16 @@ final class ForecastViewController: UIViewController {
   weak var coordinator: MainCoordinator?
   var viewModel: ForecastViewModel?
   
+  private lazy var appStoreReviewObserver: AppStoreReviewObserver = {
+    let observer = AppStoreReviewObserver()
+    observer.eventResponder = self
+    return observer
+  }()
+  
   private lazy var notationSegmentedControl: SegmentedControl = {
     let segmentedControl = SegmentedControl(frame: CGRect(x: 0, y: 0, width: 150, height: 25))
     segmentedControl.items = [TemperatureNotation.fahrenheit, TemperatureNotation.celsius]
-    segmentedControl.selectedIndex = ForecastUserDefaults.unitNotation.rawValue
+    segmentedControl.selectedIndex = NotationController().temperatureNotation.rawValue
     segmentedControl.addTarget(self, action: #selector(measuringSystemSwitched), for: .valueChanged)
     return segmentedControl
   }()
@@ -29,6 +35,7 @@ final class ForecastViewController: UIViewController {
   
   deinit {
     removeNotificationObservers()
+    stopAppStoreReviewObserver()
   }
 }
 
@@ -36,11 +43,20 @@ final class ForecastViewController: UIViewController {
 private extension ForecastViewController {
   
   func setUp() {
+    startAppStoreReviewObserver()
     setupAppearance()
     setNotationSystemSegmentedControl()
     setViewModelClosureCallbacks()
     addNotificationObservers()
     loadAllData()
+  }
+  
+  func startAppStoreReviewObserver() {
+    appStoreReviewObserver.startObserving()
+  }
+  
+  func stopAppStoreReviewObserver() {
+    appStoreReviewObserver.stopObserving()
   }
   
   func setPageViewController() {
@@ -52,6 +68,31 @@ private extension ForecastViewController {
   
   func setNotationSystemSegmentedControl() {
     navigationItem.titleView = notationSegmentedControl
+  }
+  
+  func setViewModelClosureCallbacks() {
+    DispatchQueue.main.async { [weak self] in
+      self?.viewModel?.onIndexUpdate = { [weak self] _ in
+        self?.setPageControl()
+      }
+    }
+    
+    viewModel?.onSuccess = {
+      DispatchQueue.main.async { [weak self] in
+        self?.setPageViewController()
+        self?.setPageControl()
+      }
+    }
+    
+    viewModel?.onLoadingStatus = { isLoading in
+      DispatchQueue.main.async {
+        if isLoading {
+          ActivityIndicatorView.shared.startAnimating()
+        } else {
+          ActivityIndicatorView.shared.stopAnimating()
+        }
+      }
+    }
   }
   
   func setPageControl() {
@@ -305,32 +346,11 @@ extension ForecastViewController: UIPageViewControllerDelegate {
   
 }
 
-// MAKR: - Private - Set view models closures
-private extension ForecastViewController {
-  
-  func setViewModelClosureCallbacks() {
-    DispatchQueue.main.async { [weak self] in
-      self?.viewModel?.onIndexUpdate = { [weak self] _ in
-        self?.setPageControl()
-      }
-    }
-    
-    viewModel?.onSuccess = {
-      DispatchQueue.main.async { [weak self] in
-        self?.setPageViewController()
-        self?.setPageControl()
-      }
-    }
-    
-    viewModel?.onLoadingStatus = { isLoading in
-      DispatchQueue.main.async {
-        if isLoading {
-          ActivityIndicatorView.shared.startAnimating()
-        } else {
-          ActivityIndicatorView.shared.stopAnimating()
-        }
-      }
-    }
+// MARK: - AppStoreReviewObserverEventResponder protocol
+extension ForecastViewController: AppStoreReviewObserverEventResponder {
+
+  func appStoreReviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
+    AppStoreReviewManager().requestReview(for: desirableMoment)
   }
   
 }

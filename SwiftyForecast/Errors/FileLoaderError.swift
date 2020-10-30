@@ -1,6 +1,6 @@
 enum FileLoaderError: ErrorHandleable {
   case fileNotFound(name: String)
-  case dataNotAvailable
+  case incorrectFormat
   case unsupportedError
 }
 
@@ -11,9 +11,9 @@ extension FileLoaderError {
     switch self {
     case .fileNotFound(_):
       return "File Not Found"
-      
-    case .dataNotAvailable:
-      return "Data Not Available"
+
+    case .incorrectFormat:
+      return "Error reading unrecognized format"
       
     case .unsupportedError:
       return "Unsupported Error"

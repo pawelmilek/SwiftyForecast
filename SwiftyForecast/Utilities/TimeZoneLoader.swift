@@ -1,8 +1,6 @@
 import MapKit
 
-class TimeZoneLoader {
-  typealias Location = (latitude: Double, longitude: Double)
-  
+class TimeZoneLoader: TimeZoneLoadable {
   private var loadedTimeZones = [String: TimeZone]()
   private var runningRequests = [UUID: CLGeocoder]()
   

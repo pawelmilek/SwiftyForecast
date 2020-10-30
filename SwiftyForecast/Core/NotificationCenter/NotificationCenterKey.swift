@@ -1,6 +1,6 @@
 import Foundation
 
-public extension Notification.Name {
+extension Notification.Name {
   static let applicationDidBecomeActive = Notification.Name("applicationDidBecomeActive")
   
   static let unitNotationDidChange = Notification.Name("unitNotationDidChange")

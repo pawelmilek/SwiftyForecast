@@ -8,7 +8,7 @@ struct NetworkResponseParser<M> where M: Decodable {
       return .success(decodedModel)
       
     } catch let error {
-      debugPrint(error)
+      debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(error)")
       return .failure(.decoderFailed)
     }
   }
