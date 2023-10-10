@@ -2,24 +2,38 @@ import Foundation
 import RealmSwift
 
 struct RealmProvider {
-  static var core: RealmProvider = {
-    return RealmProvider(config: config)
-  }()
-  
-  private static let config = Realm.Configuration(fileURL: try! PathFinder.inLibrary("core.realm"),
-                                                  schemaVersion: 1,
-                                                  deleteRealmIfMigrationNeeded: true)
-  
-  let configuration: Realm.Configuration
-  var realm: Realm {
-    do {
-      return try Realm(configuration: configuration)
-    } catch {
-      fatalError(RealmError.initializationFailed.description)
+    private static let realmName = "core.realm"
+
+    static var shared: RealmProvider = {
+        do {
+            let fileURL = try PathFinder.inLibrary(realmName)
+            let config = Realm.Configuration(
+                fileURL: fileURL,
+                schemaVersion: 1,
+                deleteRealmIfMigrationNeeded: true
+            )
+
+            return RealmProvider(config: config)
+        } catch {
+            fatalError("Error: core.realm not load \(realmName)")
+        }
+    }()
+
+    var realm: Realm {
+        do {
+            return try Realm(configuration: configuration)
+        } catch {
+            fatalError(RealmError.initializationFailed.errorDescription!)
+        }
     }
-  }
-  
-  private init(config: Realm.Configuration) {
-    configuration = config
-  }
+
+    var fileURL: URL? {
+        configuration.fileURL
+    }
+
+    private let configuration: Realm.Configuration
+
+    private init(config: Realm.Configuration) {
+        configuration = config
+    }
 }

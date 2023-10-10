@@ -2,52 +2,58 @@ import UIKit
 import SafariServices
 
 final class MainCoordinator: Coordinator {
-  var childCoordinators = [Coordinator]()
-  var navigationController: UINavigationController
-  
-  init(navigationController: UINavigationController) {
-    self.navigationController = navigationController
-  }
-  
-  func start() {
-    let viewController = ForecastViewController.make()
-    let service = DefaultForecastService(httpClient: HttpClient(), request: DefaultForecastWebRequest())
-    viewController.viewModel = DefaultForecastViewModel(repository: ForecastRepository(service: service))
-    viewController.coordinator = self
-    navigationController.pushViewController(viewController, animated: false)
-  }
-  
-  func onTapPoweredByBarButton(url: URL?) {
-    if let url = url {
-      let safariViewController = SFSafariViewController(url: url)
-      navigationController.present(safariViewController, animated: true)
-    }
-  }
-  
-  func onTapCityListSelectionBarButton() {
-    let viewController = CityListSelectionViewController.make()
-    viewController.coordinator = self
-    viewController.viewModel = DefaultCityListViewModel()
-    
-    if let forecastViewController = navigationController.viewControllers.first(where: { $0 is CityListSelectionViewControllerDelegate }) {
-      viewController.delegate = forecastViewController as? CityListSelectionViewControllerDelegate
+    let navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
-    navigationController.push(viewController: viewController, transitionType: .moveIn, transitionSubtype: .fromTop)
-  }
-  
-  func onSelectCityFromAvailableCollection() {
-    navigationController.pop(transitionType: .reveal, transitionSubtype: .fromBottom)
-  }
-  
-  func onSearchLocation() {
-    let viewController = LocationSearchViewController.make()
-    viewController.coordinator = self
-    
-    navigationController.pushViewController(viewController, animated: true)
-  }
-  
-  func onAddCityFromCalloutViewController() {
-    navigationController.popViewController(animated: true)
-  }
+    @MainActor
+    func start() {
+        let viewController = MainViewController.make()
+        let service = WeatherService()
+        let repository = WeatherRepository(service: service)
+        viewController.viewModel = MainViewController.ViewModel(repository: repository)
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: false)
+    }
+
+    @MainActor
+    func openWeatherAPISoruceWebPage(url: URL) {
+        let safariViewController = SFSafariViewController(url: url)
+        navigationController.present(safariViewController, animated: true)
+    }
+
+    @MainActor
+    func openLocationListViewController() {
+        let viewController = LocationListViewController.make()
+        viewController.viewModel = LocationListViewController.ViewModel()
+
+        if let forecastViewController = navigationController.viewControllers
+            .first(where: { $0 is LocationListViewControllerDelegate }) {
+            viewController.delegate = forecastViewController as? LocationListViewControllerDelegate
+        }
+
+        navigationController.push(
+            viewController: viewController,
+            transitionType: .moveIn,
+            transitionSubtype: .fromTop
+        )
+    }
+
+    @MainActor
+    func openLocationSearchViewController() {
+        let viewController = LocationSearchViewController()
+        navigationController.present(viewController, animated: true)
+    }
+
+    @MainActor
+    func popTopViewControllerFromBottom() {
+        navigationController.pop(transitionType: .reveal, transitionSubtype: .fromBottom)
+    }
+
+    @MainActor
+    func popTopViewController() {
+        navigationController.popViewController(animated: true)
+    }
 }

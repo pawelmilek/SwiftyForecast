@@ -1,7 +1,7 @@
+import UIKit
+
 protocol Repository {
-  init(service: ForecastService, dataAccessObject: ForecastDAO)
-  
-  func getForecast(latitude: Double,
-                   longitude: Double,
-                   completion: @escaping (Result<ForecastDTO?, WebServiceError>) -> ()) -> Void
+    func fetch(latitude: Double, longitude: Double) async throws -> WeatherModel
+    func fetchIcon(_ iconCode: String) async throws -> UIImage
+    func fetchLargeIcon(_ iconCode: String) async throws -> UIImage
 }

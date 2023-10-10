@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="gTV-IL-0wX" customClass="HourlyViewCell" customModule="SwiftyForecast" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="93" height="121"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="93" height="121"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="peN-ON-fKT">
+                        <rect key="frame" x="0.0" y="5" width="93" height="111"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="TimeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="av8-ky-2rX">
+                                <rect key="frame" x="0.0" y="0.0" width="93" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kg5-VA-qG6">
+                                <rect key="frame" x="0.0" y="14.5" width="93" height="79.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="999" verticalCompressionResistancePriority="1000" text="TemperatureLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EP0-Bj-lE4">
+                                <rect key="frame" x="0.0" y="94" width="93" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="peN-ON-fKT" secondAttribute="bottom" constant="5" id="8Vn-ff-PJp"/>
+                <constraint firstItem="peN-ON-fKT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="FjJ-2B-whR"/>
+                <constraint firstAttribute="trailing" secondItem="peN-ON-fKT" secondAttribute="trailing" id="ivx-TG-J5b"/>
+                <constraint firstItem="peN-ON-fKT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wpk-PY-okb"/>
+            </constraints>
+            <size key="customSize" width="93" height="151"/>
+            <connections>
+                <outlet property="iconImageView" destination="Kg5-VA-qG6" id="5Cd-uL-NO8"/>
+                <outlet property="temperatureLabel" destination="EP0-Bj-lE4" id="JWw-eI-5UA"/>
+                <outlet property="timeLabel" destination="av8-ky-2rX" id="U6r-B7-fG1"/>
+            </connections>
+            <point key="canvasLocation" x="133.59999999999999" y="-18.440779610194905"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -49,5 +49,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>ConfigurationSettings</key>
+    <dict>
+        <key>WeatherServiceApiKey</key>
+        <string>$(API_KEY)</string>
+    </dict>
 </dict>
 </plist>
