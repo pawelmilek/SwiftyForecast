@@ -1,3 +1,4 @@
+import Foundation
 import RealmSwift
 
 @objcMembers final class HourlyForecast: Object, Decodable {
