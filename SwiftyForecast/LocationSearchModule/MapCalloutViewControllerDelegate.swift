@@ -1,5 +1,5 @@
 import UIKit
 
-protocol MapCalloutViewControllerDelegate: class {
+protocol MapCalloutViewControllerDelegate: AnyObject {
   func calloutViewController(didAdd city: CityDTO)
 }

@@ -1,3 +1,3 @@
-protocol AppStoreReviewObserverEventResponder: class {
+protocol AppStoreReviewObserverEventResponder: AnyObject {
   func appStoreReviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType)
 }

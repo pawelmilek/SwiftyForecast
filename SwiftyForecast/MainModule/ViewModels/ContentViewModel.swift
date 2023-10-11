@@ -1,7 +1,7 @@
 import Foundation
 import CoreLocation
 
-protocol ContentViewModel: class {
+protocol ContentViewModel: AnyObject {
   var hourly: HourlyForecastDTO? { get }
   var icon: NSAttributedString? { get }
   var weekdayMonthDay: String { get }
