@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,26 +15,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="j7m-f6-y4J">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="r7N-DF-PUt">
-                                <rect key="frame" x="0.0" y="237.33333333333334" width="393" height="377.33333333333326"/>
+                            <imageView clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splashScreen" translatesAutoresizingMaskIntoConstraints="NO" id="QXq-Kx-uFt">
+                                <rect key="frame" x="0.0" y="255.66666666666663" width="393" height="341"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="r7N-DF-PUt" secondAttribute="height" multiplier="25:24" id="dKA-rQ-Riq"/>
+                                    <constraint firstAttribute="width" secondItem="QXq-Kx-uFt" secondAttribute="height" multiplier="393:341" id="mdZ-gD-ftz"/>
                                 </constraints>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oNP-2n-MY4"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="j7m-f6-y4J" firstAttribute="leading" secondItem="oNP-2n-MY4" secondAttribute="leading" id="33l-Zj-Wrr"/>
-                            <constraint firstItem="j7m-f6-y4J" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="75R-46-wOX"/>
-                            <constraint firstItem="r7N-DF-PUt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="MVr-Qa-gDp"/>
-                            <constraint firstItem="oNP-2n-MY4" firstAttribute="trailing" secondItem="r7N-DF-PUt" secondAttribute="trailing" id="NDG-0c-Bfh"/>
-                            <constraint firstItem="j7m-f6-y4J" firstAttribute="trailing" secondItem="oNP-2n-MY4" secondAttribute="trailing" id="Ob2-wn-m4Q"/>
-                            <constraint firstItem="r7N-DF-PUt" firstAttribute="leading" secondItem="oNP-2n-MY4" secondAttribute="leading" id="QtQ-1O-ufI"/>
-                            <constraint firstAttribute="bottom" secondItem="j7m-f6-y4J" secondAttribute="bottom" id="myy-jb-qrn"/>
+                            <constraint firstItem="QXq-Kx-uFt" firstAttribute="trailing" secondItem="oNP-2n-MY4" secondAttribute="trailing" id="1YW-xO-KE4"/>
+                            <constraint firstItem="QXq-Kx-uFt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="DsV-9X-xaD"/>
+                            <constraint firstItem="QXq-Kx-uFt" firstAttribute="leading" secondItem="oNP-2n-MY4" secondAttribute="leading" id="jPF-cQ-5yl"/>
+                            <constraint firstItem="QXq-Kx-uFt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="qyD-xk-Wal"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -45,7 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="background" width="414" height="736"/>
-        <image name="ic_launchScreen" width="512" height="512"/>
+        <image name="splashScreen" width="1024" height="1024"/>
     </resources>
 </document>

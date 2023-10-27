@@ -81,7 +81,7 @@ enum WeatherEndpoint: Endpoint {
     private enum Constant {
         static var apiKey: String = {
             do {
-                let value = try ConfigurationSettings.value(for: .apiKey)
+                let value = try ConfigurationSettingsAccessor.value(for: .apiKey)
                 return value
             } catch {
                 fatalError("Weather service APIKey is unavailable. Please, check configuration settings file.")

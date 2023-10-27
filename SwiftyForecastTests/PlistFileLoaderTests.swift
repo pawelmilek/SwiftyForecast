@@ -6,15 +6,16 @@ class PlistFileLoaderTests: XCTestCase {
     func testVerboseDictionaryResult() throws {
         let sut: [String: Int] = try PlistFileLoader.loadFile(with: "ReviewDesirableMomentConfig_Test")
         XCTAssertEqual(sut["locationCount"], 22)
-        XCTAssertEqual(sut["minEnjoyableTemperatureInFahrenheit"], 100)
-        XCTAssertEqual(sut["maxEnjoyableTemperatureInFahrenheit"], 1000)
+        XCTAssertEqual(sut["enjoyableTemperatureCount"], 100)
     }
 
     func testDecodableReviewDesirableMomentConfigResult() throws {
-        let sut: ReviewDesirableMomentConfig = try PlistFileLoader.loadFile(with: "ReviewDesirableMomentConfig_Test")
+        let sut = try PlistFileLoader.loadFile(
+            with: "ReviewDesirableMomentConfig_Test",
+            model: ReviewDesirableMomentConfig.self
+        )
         XCTAssertEqual(sut.locationCount, 22)
-        XCTAssertEqual(sut.minEnjoyableTemperatureInFahrenheit, 100)
-        XCTAssertEqual(sut.maxEnjoyableTemperatureInFahrenheit, 1000)
+        XCTAssertEqual(sut.enjoyableTemperatureCount, 100)
     }
 
     func testThrowingFileNotFoundException() {

@@ -1,37 +1,31 @@
 import UIKit
 import CoreLocation
-import RealmSwift
 import Combine
 
 final class MainViewController: UIViewController {
     var coordinator: MainCoordinator?
-    var viewModel: MainViewController.ViewModel?
+    var viewModel: ViewModel?
 
-    private lazy var pageViewController: UIPageViewController = {
-        let viewController = UIPageViewController(
-            transitionStyle: .scroll,
-            navigationOrientation: .horizontal
-        )
-        return viewController
+    private let lottieAnimationViewController = LottieAnimationViewController()
+
+    private lazy var notationSegmentedControl: UISegmentedControl = {
+        let control = UISegmentedControl(items: viewModel?.notationSegmentedControlItems ?? [])
+        control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        control.selectedSegmentIndex = viewModel?.notationSegmentedControlIndex ?? 0
+        control.addAction( UIAction { [weak self] action in
+            guard let sender = action.sender as? UISegmentedControl else { return }
+            self?.viewModel?.onSegmentedControlDidChange(sender.selectedSegmentIndex)
+        }, for: .valueChanged)
+
+        return control
     }()
-
-    private lazy var notationSegmentedControl: SegmentedControl = {
-        let frame = CGRect(x: 0, y: 0, width: 170, height: 25)
-        let segmentedControl = SegmentedControl(frame: frame)
-        segmentedControl.items = viewModel?.notationSegmentedControlItems ?? []
-        segmentedControl.selectedIndex = viewModel?.notationSegmentedControlDefaultIndex ?? 0
-        segmentedControl.addTarget(
-            self,
-            action: #selector(temperatureNotationSystemDidChange),
-            for: .valueChanged
-        )
-        return segmentedControl
-    }()
-
-    private var locationManager: LocationManager?
+    private let pageViewController = UIPageViewController(
+        transitionStyle: .scroll,
+        navigationOrientation: .horizontal
+    )
+    private let locationManager = LocationManager()
     private var appStoreReviewManager: AppStoreReviewManager?
-    private var appStoreReviewObserver: AppStoreReviewObserver?
-    private var pageViewControllers: [WeatherViewController] = []
+    private var viewControllers: [WeatherViewController] = []
     private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -39,8 +33,9 @@ final class MainViewController: UIViewController {
         setup()
     }
 
-    deinit {
-        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel?.onViewDidDisappear()
     }
 }
 
@@ -48,49 +43,39 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
 
     func setup() {
-        setLocationManager()
         subscribeToLocationManager()
         subscribeToViewModel()
-        setupAppStoreReview()
-        setupPoweredByLeftBarButtonItem()
-        setNotationSystemSegmentedControl()
-        addNotificationObservers()
         setupChildaPageViewController()
+        setupNavigationItem()
+        setupAppStoreReview()
         setupAppearance()
     }
 
-    func setLocationManager() {
-        locationManager = LocationManager()
-    }
-
     func subscribeToLocationManager() {
-        locationManager?.$authorizationStatus
-            .sink { [self] authorizationStatus in
-                switch authorizationStatus {
-                case .notDetermined:
-                    locationManager?.requestAuthorization()
-
-                case .authorizedWhenInUse, .authorizedAlways:
-                    locationManager?.requestLocation()
-
-                default:
-                    showEnableLocationServicesPrompt()
-                }
+        locationManager.$authorizationStatus
+            .sink { [weak self] authorizationStatus in
+                self?.verifyLocation(authorizationStatus: authorizationStatus)
             }
             .store(in: &cancellables)
 
-        locationManager?.$currentLocation
-            .print()
+        locationManager.$isObtainingLocation
+            .sink { [weak self] isObtainingLocation in
+                self?.presentObtainingLocationAnimationIfNeeded(isObtainingLocation)
+            }
+            .store(in: &cancellables)
+
+        locationManager.$currentLocation
             .compactMap { $0 }
-            .sink { [self] location in
-                viewModel?.onUpdateUserLocation(location)
+            .sink { [self] currentLocation in
+                viewModel?.onDidUpdateLocation(currentLocation)
             }
             .store(in: &cancellables)
 
-        locationManager?.$error
+        locationManager.$error
             .compactMap { $0 }
             .sink { error in
-                AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
+//                AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
+                // TODO: Use Apple Logger to log error description
             }
             .store(in: &cancellables)
 
@@ -98,48 +83,56 @@ private extension MainViewController {
 
     func subscribeToViewModel() {
         guard let viewModel else { return }
+        viewModel.shouldNavigateToCurrentPage
+            .filter { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                viewModel.onDidChangePageNavigation(index: ViewModel.userLocationPageIndex)
+                self?.transitionToCurrentViewController()
+            }
+            .store(in: &cancellables)
 
         viewModel.$currentWeatherViewModels
-            .sink { [self] currentWeatherViewModels in
-                pageViewControllers = currentWeatherViewModels.compactMap {
-                    WeatherViewController.make(viewModel: $0)
-                }
+            .filter { !$0.isEmpty }
+            .map { viewModels -> [WeatherViewController] in
+                viewModels.map { WeatherViewController.make(viewModel: $0) }
+            }
+            .sink { [weak self] viewControllers in
+                self?.reloadPages(viewControllers)
             }
             .store(in: &cancellables)
+    }
 
-        Publishers.CombineLatest(
-            viewModel.$previousPageIndex,
-            viewModel.$currentPageIndex
-        )
-        .dropFirst()
-        .sink { [self] newValue in
-            transition(
-                fromPageIndex: newValue.0,
-                toPageIndex: newValue.1
-            )
+    func reloadPages(_ weatherViewControllers: [WeatherViewController]) {
+        self.viewControllers.removeAll()
+        self.viewControllers.append(contentsOf: weatherViewControllers)
+    }
+
+    func verifyLocation(authorizationStatus: CLAuthorizationStatus) {
+        switch authorizationStatus {
+        case .notDetermined:
+            locationManager.requestAuthorization()
+
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+
+        default:
+            showEnableLocationServicesPrompt()
         }
-        .store(in: &cancellables)
+    }
 
-        viewModel.$isLoading
-            .sink { isLoading in
-                if isLoading {
-                    ActivityIndicatorView.shared.startAnimating()
-                } else {
-                    ActivityIndicatorView.shared.stopAnimating()
-                }
-            }
-            .store(in: &cancellables)
+    func presentObtainingLocationAnimationIfNeeded(_ isObtainingLocation: Bool) {
+        if isObtainingLocation {
+            self.parent?.present(lottieAnimationViewController, animated: false)
+        } else {
+            lottieAnimationViewController.dismiss(animated: false)
+        }
     }
 
     func setupAppStoreReview() {
         appStoreReviewManager = AppStoreReviewManager()
-        setupAppStoreReviewObserver()
-    }
-
-    func setupAppStoreReviewObserver() {
-        appStoreReviewObserver = AppStoreReviewObserver()
-        appStoreReviewObserver?.eventResponder = self
-        appStoreReviewObserver?.startObserving()
+        appStoreReviewManager?.setEventResponderDelegate(self)
+        appStoreReviewManager?.startObserving()
     }
 
     func showEnableLocationServicesPrompt() {
@@ -147,36 +140,55 @@ private extension MainViewController {
         viewModel?.showEnableLocationServicesPrompt(at: navigationController)
     }
 
+    func setupNavigationItem() {
+        setupPoweredByLeftBarButtonItem()
+        setupSearchLocationRightBarButtonItem()
+        setupNotationSystemSegmentedControl()
+    }
+
     func setupPoweredByLeftBarButtonItem() {
         let imageSize = CGSize(width: 52, height: 22)
         let button = UIButton()
-        button.setImage(UIImage.icPoweredby, for: .normal)
+        button.setImage(UIImage.poweredBy, for: .normal)
 
         let barButton = UIBarButtonItem(customView: button)
         barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
         barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
         barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
 
-        button.addTarget(self, action: #selector(poweredByBarButtonTapped), for: .touchUpInside)
+        button.addAction( UIAction { [weak self] _ in
+            self?.poweredByBarButtonTapped()
+        }, for: .touchUpInside)
         navigationItem.leftBarButtonItem = barButton
     }
 
-    @objc func poweredByBarButtonTapped(_ sender: UIBarButtonItem) {
+    func poweredByBarButtonTapped() {
         guard let url = viewModel?.powerByURL else { return }
         coordinator?.openWeatherAPISoruceWebPage(url: url)
     }
 
-    func setNotationSystemSegmentedControl() {
-        navigationItem.titleView = notationSegmentedControl
+    func setupSearchLocationRightBarButtonItem() {
+        let imageSize = CGSize(width: 44, height: 44)
+        let button = UIButton(type: .system)
+        button.setImage(UIImage.mapMarker, for: .normal)
+
+        let barButton = UIBarButtonItem(customView: button)
+        barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
+        barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
+        barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
+
+        button.addAction( UIAction { [weak self] _ in
+            self?.openLocationListBarButtonTapped()
+        }, for: .touchUpInside)
+        navigationItem.rightBarButtonItem = barButton
     }
 
-    func addNotificationObservers() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(applicationDidBecomeActive),
-            name: .applicationDidBecomeActive,
-            object: nil
-        )
+    func openLocationListBarButtonTapped() {
+        coordinator?.openLocationListViewController()
+    }
+
+    func setupNotationSystemSegmentedControl() {
+        navigationItem.titleView = notationSegmentedControl
     }
 
     func setupChildaPageViewController() {
@@ -186,82 +198,37 @@ private extension MainViewController {
     }
 
     func setupAppearance() {
-        notationSegmentedControl.font = Style.Main.segmentedControlFont
-        notationSegmentedControl.borderWidth = Style.Main.segmentedControlBorderWidth
-        notationSegmentedControl.selectedLabelColor = Style.Main.segmentedControlSelectedLabelColor
-        notationSegmentedControl.unselectedLabelColor = Style.Main.segmentedControlUnselectedLabelColor
-        notationSegmentedControl.borderColor = Style.Main.segmentedControlBorderColor
-        notationSegmentedControl.thumbColor = Style.Main.segmentedControlThumbColor
-        notationSegmentedControl.backgroundColor = Style.Main.segmentedControlBackgroundColor
-
-        let proxy = UIPageControl.appearance()
-        proxy.pageIndicatorTintColor = Style.Main.pageIndicatorTintColor
-        proxy.currentPageIndicatorTintColor = Style.Main.currentPageIndicatorColor
+        let proxyPageControl = UIPageControl.appearance()
+        proxyPageControl.pageIndicatorTintColor = Style.Main.pageIndicatorTintColor
+        proxyPageControl.currentPageIndicatorTintColor = Style.Main.currentPageIndicatorColor
         view.backgroundColor = Style.Main.backgroundColor
     }
 
 }
 
-// MARK: - Actions
-extension MainViewController {
-
-    @IBAction func rightBarButtonTapped(_ sender: UIBarButtonItem) {
-        coordinator?.openLocationListViewController()
-    }
-
-    @objc func temperatureNotationSystemDidChange(_ sender: SegmentedControl) {
-        viewModel?.temperatureNotationSystemChanged(sender)
-    }
-
-    @objc func applicationDidBecomeActive(_ notification: NSNotification) {
-        locationManager?.requestLocation()
-    }
-
-}
-
 // MARK: - LocationListSelectionViewControllerDelegate
-extension MainViewController: LocationListViewControllerDelegate {
+extension MainViewController: LocationSearchViewControllerDelegate {
 
     func locationListViewController(
-        _ view: LocationListViewController,
-        didTapSearchLocationButton sender: UIButton
+        _ view: LocationSearchViewController,
+        didSelectLocation location: LocationModel
     ) {
-        coordinator?.openLocationSearchViewController()
+        guard let index = viewModel?.index(of: location) else { return }
+        viewModel?.onDidChangePageNavigation(index: index)
+        coordinator?.dismissViewController()
+        transitionToCurrentViewController()
     }
 
-    func locationListViewController(
-        _ view: LocationListViewController,
-        didSelectLocationAt index: Int
-    ) {
-        viewModel?.onSelectLocation(at: index)
-        coordinator?.popTopViewControllerFromBottom()
-    }
+    private func transitionToCurrentViewController() {
+        guard let index = viewModel?.currentPageIndex else { return }
 
-}
-
-// MARK: - Private - Transition page view controllers
-private extension MainViewController {
-
-    func transition(fromPageIndex: Int, toPageIndex: Int, completion: ((Bool) -> Void)? = nil) {
-        guard let viewController = pageViewControllers[safe: toPageIndex] else { return }
-
-        if toPageIndex > fromPageIndex {
-            pageViewController.setViewControllers([viewController],
-                                                  direction: .forward,
-                                                  animated: false,
-                                                  completion: completion)
-
-        } else if toPageIndex < fromPageIndex {
-            pageViewController.setViewControllers([viewController],
-                                                  direction: .reverse,
-                                                  animated: false,
-                                                  completion: completion)
-        } else if toPageIndex == fromPageIndex {
-            pageViewController.setViewControllers([viewController],
-                                                  direction: .forward,
-                                                  animated: false,
-                                                  completion: completion)
-        }
+        let viewController = viewControllers[index]
+        pageViewController.setViewControllers(
+            [viewController],
+            direction: .forward,
+            animated: false,
+            completion: nil
+        )
     }
 
 }
@@ -274,17 +241,20 @@ extension MainViewController: UIPageViewControllerDataSource {
         guard let viewController = viewController as? WeatherViewController else {
             return nil
         }
-        guard let pageIndex = pageViewControllers.firstIndex(of: viewController) else {
+
+        guard let pageIndex = viewControllers.firstIndex(where: {
+            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
+        }) else {
             return nil
         }
 
-        if pageIndex == NSNotFound || pageIndex == 0 {
+        let previousIndex = pageIndex - 1
+        let firstPageIndex = 0
+        guard previousIndex >= firstPageIndex else {
             return nil
         }
 
-        let beforePageIndex = pageIndex - 1
-        return pageViewControllers[safe: beforePageIndex]
-
+        return viewControllers[previousIndex]
     }
 
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -292,34 +262,28 @@ extension MainViewController: UIPageViewControllerDataSource {
         guard let viewController = viewController as? WeatherViewController else {
             return nil
         }
-        guard let pageIndex = pageViewControllers.firstIndex(of: viewController) else {
+
+        guard let pageIndex = viewControllers.firstIndex(where: {
+            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
+        }) else {
             return nil
         }
 
-        let maxNumberOfPageViewControllers = pageViewControllers.count
-        let afterPageIndex = pageIndex + 1
-
-        if afterPageIndex == NSNotFound || afterPageIndex == maxNumberOfPageViewControllers {
+        let nextIndex = pageIndex + 1
+        let lastPageIndex = viewControllers.count - 1
+        guard nextIndex <= lastPageIndex else {
             return nil
         }
 
-        return pageViewControllers[safe: afterPageIndex]
+        return viewControllers[nextIndex]
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        pageViewControllers.count
+        viewControllers.count
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let viewController = self.pageViewController.viewControllers?.first as? WeatherViewController else {
-            return 0
-        }
-
-        guard let currentPageIndex = pageViewControllers.firstIndex(of: viewController) else {
-            return 0
-        }
-
-        return currentPageIndex
+        viewModel?.currentPageIndex ?? 0
     }
 
 }
@@ -328,21 +292,15 @@ extension MainViewController: UIPageViewControllerDataSource {
 extension MainViewController: UIPageViewControllerDelegate {
 
     func pageViewController(_ pageViewController: UIPageViewController,
-                            willTransitionTo pendingViewControllers: [UIViewController]) {
-        //        guard let viewController = pendingViewControllers.first as? WeatherViewController else { return }
-        //        viewModel?.onBeginTransition(at: viewController.pageIndex)
-        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController,
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
                             transitionCompleted completed: Bool) {
-        //        guard completed, let pendingIndex = viewModel?.pendingIndex else { return }
-        //        viewModel?.onEndTransition(at: pendingIndex)
         guard completed else { return }
+        guard let viewController = pageViewController.viewControllers?.first as? WeatherViewController else { return }
+        guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return }
+
+        viewModel?.onDidChangePageNavigation(index: currentIndex)
         pageTransitionImpactFeedback()
-        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
     private func pageTransitionImpactFeedback() {
@@ -354,19 +312,10 @@ extension MainViewController: UIPageViewControllerDelegate {
 }
 
 // MARK: - AppStoreReviewObserverEventResponder
-extension MainViewController: AppStoreReviewObserverEventResponder {
+extension MainViewController: ReviewObserverEventResponder {
 
-    func appStoreReviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
+    func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
         appStoreReviewManager?.requestReview(for: desirableMoment)
-    }
-
-}
-
-// MARK: - Factory method
-extension MainViewController {
-
-    static func make() -> MainViewController {
-        return UIViewController.make(MainViewController.self, from: .main)
     }
 
 }

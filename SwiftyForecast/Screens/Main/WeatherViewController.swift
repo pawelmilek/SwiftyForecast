@@ -3,16 +3,20 @@ import Combine
 
 final class WeatherViewController: UIViewController {
     private enum Constant {
-        static let weekdaysTableViewEstimatedRowHeight = CGFloat(85)
-        static let weekdaysTableViewHeightForRowAtIndexPath = CGFloat(40)
+        static let weekdaysTableViewHeightForRowAtIndexPath = CGFloat(50)
+        static let hourlySizeForItem = CGSize(width: 62, height: 85)
+        static let hourlyInsetForSection = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        static let hourlyMinimumLineSpacingForSection = CGFloat(15)
     }
 
-    @IBOutlet private weak var currentWeatherView: CurrentWeatherView!
-    @IBOutlet private weak var weekdaysTableView: UITableView!
+    @IBOutlet private weak var hourlyCollectionView: UICollectionView!
+    @IBOutlet private weak var dailyTableView: UITableView!
+    private var weatherCardViewController: CurrentWeatherCardViewController!
 
-    var viewModel: CurrentWeatherView.ViewModel?
-    var hourlyForecastViewModel: HourlyForecastViewModel?
-    var dailyForecastViewModel: DailyForecastViewModel?
+    var viewModel: ViewModel?
+    private var dailyForecastViewModels: [DailyViewCell.ViewModel] = []
+    private var hourlyForecastViewModels: [HourlyViewCell.ViewModel] = []
+
     private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -21,8 +25,10 @@ final class WeatherViewController: UIViewController {
         loadData()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContainerViewSegue" {
+            weatherCardViewController = segue.destination as? CurrentWeatherCardViewController
+        }
     }
 
     private func loadData() {
@@ -33,8 +39,12 @@ final class WeatherViewController: UIViewController {
         viewModel?.reloadData()
     }
 
-    func temperatureNotationSystemDidChange(_ sender: SegmentedControl) {
-        viewModel?.onSegmentedControlChange(sender)
+    func loadHourlyData() {
+        hourlyCollectionView.reloadData()
+    }
+
+    func loadDailyData() {
+        dailyTableView.reloadData()
     }
 }
 
@@ -42,66 +52,76 @@ final class WeatherViewController: UIViewController {
 private extension WeatherViewController {
 
     func setup() {
-        currentWeatherView.delegate = self
         setupAppearance()
+        setupHourlyCollectionView()
         setupWeekTableView()
         subscriberToViewModel()
+        subscribeToNotificationCenterPublisher()
     }
-
-}
-
-// MARK: - Private - Setups
-private extension WeatherViewController {
 
     func setupAppearance() {
         view.backgroundColor = Style.Weather.backgroundColor
-        weekdaysTableView.backgroundColor = Style.Weather.tableViewBackgroundColor
-        weekdaysTableView.separatorStyle = Style.Weather.tableViewSeparatorStyle
+        hourlyCollectionView.backgroundColor = Style.Weather.backgroundColor
+        dailyTableView.backgroundColor = Style.Weather.tableViewBackgroundColor
+        dailyTableView.separatorStyle = Style.Weather.tableViewSeparatorStyle
+    }
+
+    func setupHourlyCollectionView() {
+        hourlyCollectionView.register(cellClass: HourlyViewCell.self)
+        hourlyCollectionView.dataSource = self
+        hourlyCollectionView.delegate = self
+        hourlyCollectionView.showsVerticalScrollIndicator = false
+        hourlyCollectionView.showsHorizontalScrollIndicator = false
+        hourlyCollectionView.contentInsetAdjustmentBehavior = .never
     }
 
     func setupWeekTableView() {
-        weekdaysTableView.register(cellClass: DailyViewCell.self)
-        weekdaysTableView.dataSource = self
-        weekdaysTableView.delegate = self
-        weekdaysTableView.showsVerticalScrollIndicator = false
-        weekdaysTableView.allowsSelection = false
-        weekdaysTableView.rowHeight = UITableView.automaticDimension
-        weekdaysTableView.estimatedRowHeight = Constant.weekdaysTableViewEstimatedRowHeight
-        weekdaysTableView.tableFooterView = UIView()
+        dailyTableView.register(cellClass: DailyViewCell.self)
+        dailyTableView.dataSource = self
+        dailyTableView.delegate = self
+        dailyTableView.showsVerticalScrollIndicator = false
+        dailyTableView.allowsSelection = false
+        dailyTableView.rowHeight = UITableView.automaticDimension
+        dailyTableView.tableFooterView = UIView()
     }
-
 }
 
 // MAKR: - Private - Set view models closures
 private extension WeatherViewController {
 
     func subscriberToViewModel() {
-        loadingIndicatorSubscriber()
-        errorSubscriber()
-        measurementSystemSubscriber()
-        weekdayAndLocationSubscriber()
-        iconAndDescriptionSubscriber()
-        temperatureSubscriber()
-        conditionsSubscriber()
-        hourlyForecastSubscriber()
-        dailyForecastSubscriber()
+        subscribeToWeatherPublisher()
+        subscriberToLoadingAndErrorPublisher()
+        subscribeToForecastPublisher()
     }
 
-    func loadingIndicatorSubscriber() {
-        viewModel?.$isLoading
+    func subscribeToWeatherPublisher() {
+        guard let viewModel else { return }
+
+        viewModel.$locationModel
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { isLoading in
-                if isLoading {
-                    ActivityIndicatorView.shared.startAnimating()
-                } else {
-                    ActivityIndicatorView.shared.stopAnimating()
-                }
+            .sink { [self] locationModel in
+                weatherCardViewController.loadData(at: locationModel)
             }
             .store(in: &cancellables)
     }
 
-    func errorSubscriber() {
-        viewModel?.$error
+    func subscriberToLoadingAndErrorPublisher() {
+        guard let viewModel else { return }
+        viewModel.$isLoading
+            .receive(on: DispatchQueue.main)
+            .sink { [self] isLoading in
+                if isLoading {
+                    hideContent()
+
+                } else {
+                    showContent()
+                }
+            }
+            .store(in: &cancellables)
+
+        viewModel.$error
             .receive(on: DispatchQueue.main)
             .sink { error in
                 if let error = error as? ErrorPresentable {
@@ -113,110 +133,107 @@ private extension WeatherViewController {
             .store(in: &cancellables)
     }
 
-    func measurementSystemSubscriber() {
-        guard let viewModel else { return }
-        Publishers.Zip(
-            viewModel.$measurementSystem,
-            viewModel.$temperatureNotation
-        )
-        .sink { [self] _ in
-            reloadData()
-        }
-        .store(in: &cancellables)
-    }
-
-    func weekdayAndLocationSubscriber() {
-        guard let viewModel else { return }
-        viewModel.$weekdayMonthDay
-            .assign(to: \.text!, on: currentWeatherView.dateLabel)
-            .store(in: &cancellables)
-
-        viewModel.$locationName
-            .assign(to: \.text!, on: currentWeatherView.locationName)
-            .store(in: &cancellables)
-    }
-
-    func iconAndDescriptionSubscriber() {
+    func subscribeToForecastPublisher() {
         guard let viewModel else { return }
 
-        viewModel.$icon
-            .assign(to: \.image, on: currentWeatherView.iconImageView)
-            .store(in: &cancellables)
-        viewModel.$description
-            .assign(to: \.text!, on: currentWeatherView.conditionDescription)
-            .store(in: &cancellables)
-        viewModel.$dayNight
-            .assign(to: \.text!, on: currentWeatherView.dayNightLabel)
-            .store(in: &cancellables)
-    }
+        viewModel.$twentyFourHoursForecastModel
+            .combineLatest(viewModel.$fiveDaysForecastModel)
+            .map { ($0.0.map { HourlyViewCell.ViewModel(model: $0) }, $0.1.map { DailyViewCell.ViewModel(model: $0) }) }
+            .sink { [self] (hourlyViewModels, dailyViewModels) in
+                hourlyForecastViewModels = hourlyViewModels
+                dailyForecastViewModels = dailyViewModels
 
-    func temperatureSubscriber() {
-        guard let viewModel else { return }
-        viewModel.$temperature
-            .assign(to: \.text!, on: currentWeatherView.temperatureLabel)
-            .store(in: &cancellables)
-        viewModel.$temperatureMaxMin
-            .assign(to: \.text!, on: currentWeatherView.temperatureMaxMinLabel)
-            .store(in: &cancellables)
-    }
-
-    func conditionsSubscriber() {
-        guard let viewModel else { return }
-        Publishers.CombineLatest4(
-            viewModel.$sunriseSymbol,
-            viewModel.$sunriseTime,
-            viewModel.$sunsetSymbol,
-            viewModel.$sunsetTime
-        )
-        .sink { [self] newValue in
-            currentWeatherView.sunriseView.configure(symbol: newValue.0, value: newValue.1)
-            currentWeatherView.sunsetView.configure(symbol: newValue.2, value: newValue.3)
-        }
-        .store(in: &cancellables)
-
-        Publishers.CombineLatest4(
-            viewModel.$windSpeedSymbol,
-            viewModel.$windSpeed,
-            viewModel.$humiditySymbol,
-            viewModel.$humidity
-        )
-        .sink { [self] newValue in
-            currentWeatherView.windView.configure(symbol: newValue.0, value: newValue.1)
-            currentWeatherView.humidityView.configure(symbol: newValue.2, value: newValue.3)
-        }
-        .store(in: &cancellables)
-    }
-
-    func hourlyForecastSubscriber() {
-        viewModel?.$isTwentyFourHoursForecastLoaded
-            .sink { [self] newValue in
-                guard let viewModel, newValue == true else { return }
-                hourlyForecastViewModel = HourlyForecastViewModel(
-                    models: viewModel.twentyFourHoursForecastModel
-                )
-                currentWeatherView.loadHourlyData()
+                loadHourlyData()
+                loadDailyData()
             }
             .store(in: &cancellables)
     }
 
-    func dailyForecastSubscriber() {
-        viewModel?.$isFiveDaysForecastLoaded
-            .sink { [self] newValue in
-                guard let viewModel, newValue == true else { return }
-                dailyForecastViewModel = DailyForecastViewModel(
-                    models: viewModel.fiveDaysForecastModel
-                )
-                weekdaysTableView.reloadData()
+    func subscribeToNotificationCenterPublisher() {
+        NotificationCenter.default
+            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .sink { [weak self] _ in
+                self?.loadData()
+                self?.weatherCardViewController.loadData()
             }
             .store(in: &cancellables)
     }
+
+    func showContent() {
+        UIView.animate(withDuration: 0.3) { [self] in
+            hourlyCollectionView.alpha = 1.0
+            dailyTableView.alpha = 1.0
+        }
+    }
+
+    func hideContent() {
+        UIView.animate(withDuration: 0.3) { [self] in
+            hourlyCollectionView.alpha = 0.0
+            dailyTableView.alpha = 0.0
+        }
+    }
+}
+
+// MARK: - UICollectionViewDataSource protocol
+extension WeatherViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        hourlyForecastViewModels.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: HourlyViewCell.reuseIdentifier,
+            for: indexPath
+        ) as? HourlyViewCell else {
+            return HourlyViewCell()
+        }
+
+        guard !hourlyForecastViewModels.isEmpty else { return cell }
+
+        let item = hourlyForecastViewModels[indexPath.row]
+        cell.iconImageView.kf.setImage(with: item.iconURL)
+        cell.timeLabel.text = item.time
+        cell.temperatureLabel.text = item.temperature
+        return cell
+    }
+
+}
+
+// MARK: UICollectionViewDelegateFlowLayout protocol
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return Constant.hourlySizeForItem
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        return Constant.hourlyInsetForSection
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return Constant.hourlyMinimumLineSpacingForSection
+    }
+
 }
 
 // MARK: - UITableViewDataSource protcol
 extension WeatherViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dailyForecastViewModel?.numberOfItems ?? 0
+        dailyForecastViewModels.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -225,12 +242,12 @@ extension WeatherViewController: UITableViewDataSource {
             for: indexPath
         ) as? DailyViewCell else { return UITableViewCell() }
 
-        guard let dailyForecastViewModel,
-              let item = dailyForecastViewModel.dailyItem(at: indexPath) else { return cell }
+        guard !dailyForecastViewModels.isEmpty else { return cell }
 
-        cell.dateLabel.attributedText = item.attributedDate
-        cell.iconImageView.kf.setImage(with: item.iconURL)
-        cell.temperatureLabel.text = item.temperature
+        let viewModel = dailyForecastViewModels[indexPath.row]
+        cell.iconImageView.kf.setImage(with: viewModel.iconURL)
+        cell.dateLabel.attributedText = viewModel.attributedDate
+        cell.temperatureLabel.text = viewModel.temperature
         return cell
     }
 
@@ -245,30 +262,10 @@ extension WeatherViewController: UITableViewDelegate {
 
 }
 
-// MARK: - CurrentWeatherViewDelegate
-extension WeatherViewController: CurrentWeatherViewDelegate {
-
-    func currentWeatherView(
-        _ view: CurrentWeatherView,
-        numberOfHourlyItemsInSection section: Int
-    ) -> Int {
-        hourlyForecastViewModel?.numberOfItems ?? 0
-    }
-
-    func currentWeatherView(
-        _ view: CurrentWeatherView,
-        hourlyDataForItemAt indexPath: IndexPath
-    ) -> HourlyForecastData? {
-        guard let hourlyForecastViewModel else { return nil }
-        return hourlyForecastViewModel.hourlyItem(at: indexPath)
-    }
-
-}
-
 // MARK: - Factory method
 extension WeatherViewController {
 
-    static func make(viewModel: CurrentWeatherView.ViewModel) -> WeatherViewController {
+    static func make(viewModel: ViewModel) -> WeatherViewController {
         let viewController = UIViewController.make(WeatherViewController.self, from: .main)
         viewController.viewModel = viewModel
         return viewController

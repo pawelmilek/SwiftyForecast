@@ -29,14 +29,21 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>ConfigurationSettings</key>
+	<dict>
+		<key>WeatherServiceApiKey</key>
+		<string>$(API_KEY)</string>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The app requires location services to get weather in your area.</string>
+	<string>The app requires location services to get weather data in your area.</string>
+	<key>NSLocationDefaultAccuracyReduced</key>
+	<true/>
 	<key>NSLocationWhenInUsageDescription</key>
 	<string>I need to know where you are.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app requires location services to get weather in your area.</string>
+	<string>The app requires location services to get weather data in your area.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -49,10 +56,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>ConfigurationSettings</key>
-    <dict>
-        <key>WeatherServiceApiKey</key>
-        <string>$(API_KEY)</string>
-    </dict>
 </dict>
 </plist>

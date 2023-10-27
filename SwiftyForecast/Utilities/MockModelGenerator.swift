@@ -1,20 +1,32 @@
+//
+//  MockModelGenerator.swift
+//  SwiftyForecast
+//
+//  Created by Pawel Milek on 10/18/23.
+//  Copyright © 2023 Pawel Milek. All rights reserved.
+//
+
 import Foundation
 import CoreLocation
-import RealmSwift
 
 struct MockModelGenerator {
-
-    static func generateWeatherModel() -> WeatherModel {
+    static func generateCurrentWeatherModel() -> CurrentWeatherModel {
         do {
             let currentWeatherData = try JSONFileLoader.loadFile(with: "current_weather_response")
-            let fiveDaysForecastWeatherData = try JSONFileLoader.loadFile(with: "five_days_forecast_weather_response")
-
             let currentResponse = JSONParser<CurrentWeatherResponse>.parse(currentWeatherData)
-            let forecastResponse = JSONParser<ForecastWeatherResponse>.parse(fiveDaysForecastWeatherData)
-
-            let model = ResponseParser.parse((currentResponse, forecastResponse))
+            let model = ResponseParser.parse(current: currentResponse)
             return model
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 
+    static func generateForecastWeatherModel() -> ForecastWeatherModel {
+        do {
+            let fiveDaysForecastWeatherData = try JSONFileLoader.loadFile(with: "five_days_forecast_weather_response")
+            let forecastResponse = JSONParser<ForecastWeatherResponse>.parse(fiveDaysForecastWeatherData)
+            let model = ResponseParser.parse(forecast: forecastResponse)
+            return model
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -25,7 +37,6 @@ struct MockModelGenerator {
             let currentWeatherData = try JSONFileLoader.loadFile(with: "current_weather_response")
             let currentResponse = JSONParser<CurrentWeatherResponse>.parse(currentWeatherData)
             let locationModel = LocationModel()
-            locationModel._id = ObjectId.generate()
             locationModel.compoundKey = "name||state||country||postalCode"
             locationModel.name = currentResponse.name
             locationModel.country = "Poland"
@@ -37,36 +48,8 @@ struct MockModelGenerator {
             locationModel.lastUpdate = Date()
             locationModel.isUserLocation = false
             return locationModel
-
         } catch {
             fatalError(error.localizedDescription)
         }
     }
-
 }
-
-//// MARK: - Data Transfer Objects
-//extension MockModelGenerator {
-//
-//  static func generateCityDTO() -> LocationModel {
-//    let latitude = 37.33233141
-//    let longitude = -122.0312186
-//    let name = "Cupertino"
-//    let location = CLLocation(latitude: latitude, longitude: longitude)
-//    let placemark = CLPlacemark(location: location, name: name, postalAddress: nil)
-//    let cityDTO = LocationModel(compoundKey: "Cupertino|United States|CA",
-//                          name: "Cupertino",
-//                          country: "United States",
-//                          state: "CA",
-//                          postalCode: "95014",
-//                          timeZoneIdentifier: "America/Los_Angeles",
-//                          lastUpdate: Date(), // "2020-10-18T18:56:04.793Z",
-//                          isUserLocation: true,
-//                          latitude: latitude,
-//                          longitude: longitude,
-//                          placemark: placemark,
-//                          localTime: "10:00AM")
-//
-//    return cityDTO
-//  }
-//}

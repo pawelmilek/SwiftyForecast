@@ -5,20 +5,17 @@ import Combine
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var coordinator: MainCoordinator?
+    private let networkReachabilityManager = NetworkReachabilityManager.shared
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupCoordinator()
-//        setupNetworkReachabilityHandling()
+        setupNetworkReachabilityHandling()
         setNavigationBarStyle()
         debugPrintRealmFileURL()
         return true
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .applicationDidBecomeActive, object: self)
     }
 }
 
@@ -46,21 +43,21 @@ private extension AppDelegate {
                 if (rootViewController.viewControllers.first(where: {
                     $0.view.tag == OfflineViewController.identifier
                 })) != nil {
-                    DispatchQueue.main.async {
-                        rootViewController.popViewController(animated: false)
-                    }
+                    rootViewController.popViewController(animated: false)
                 }
             }
         }
 
-        NetworkReachabilityManager.shared.whenUnreachable { _ in
-            debugPrint("File: \(#file), Function: \(#function), line: \(#line) Network whenUnreachable")
-            onNetworkUnavailable()
+        networkReachabilityManager.whenUnreachable { _ in
+            DispatchQueue.main.async {
+                onNetworkUnavailable()
+            }
         }
 
-        NetworkReachabilityManager.shared.whenReachable { _ in
-            debugPrint("File: \(#file), Function: \(#function), line: \(#line) Network whenReachable")
-            onNetworkAvailable()
+        networkReachabilityManager.whenReachable { _ in
+            DispatchQueue.main.async {
+                onNetworkAvailable()
+            }
         }
     }
 
@@ -87,7 +84,6 @@ private extension AppDelegate {
     }
 
     func debugPrintRealmFileURL() {
-        let realmURLAbsoluteString = RealmProvider.shared.fileURL?.absoluteString ?? InvalidReference.undefined
-        debugPrint("Realm file URL: \(realmURLAbsoluteString)")
+        RealmManager.shared.debugPrintRealmFileURL()
     }
 }

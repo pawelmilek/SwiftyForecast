@@ -5,22 +5,28 @@ import CoreLocation
 import Combine
 
 extension MainViewController {
-
     @MainActor
     final class ViewModel: ObservableObject {
         static let userLocationPageIndex = 0
-        @Published private(set) var isLoading = false
-        @Published private(set) var currentPageIndex = 0
-        @Published private(set) var previousPageIndex = 0
-        @Published private(set) var currentWeatherViewModels = [CurrentWeatherView.ViewModel]()
+
+        private(set) var currentPageIndex = userLocationPageIndex
+        @Published private(set) var currentWeatherViewModels = [WeatherViewController.ViewModel]()
+        @Published private var hasValidatedUserLocation = false
+        @Published private var hasUpdatedViewModels = false
+
+        var shouldNavigateToCurrentPage: AnyPublisher<Bool, Never> {
+            return Publishers.Zip($hasValidatedUserLocation, $hasUpdatedViewModels)
+                .map { $0.0 && $0.1 }
+                .eraseToAnyPublisher()
+        }
 
         var notationSegmentedControlItems: [String] {
             [TemperatureNotation.fahrenheit.description,
              TemperatureNotation.celsius.description]
         }
 
-        var notationSegmentedControlDefaultIndex: Int {
-            NotationController().temperatureNotation.rawValue
+        var notationSegmentedControlIndex: Int {
+            notationController.temperatureNotation.rawValue
         }
 
         var powerByURL: URL? {
@@ -28,94 +34,107 @@ extension MainViewController {
         }
 
         var numberOfLocations: Int {
-            let result = try? locationDAO.read().count
+            let result = try? databaseManager.readAll().count
             return result ?? 0
         }
 
-        var currentVisibleWeatherViewModel: CurrentWeatherView.ViewModel {
-            return currentWeatherViewModels[currentPageIndex]
-        }
-
-        private let repository: Repository
-        private let locationDAO: LocationDataAccessObject
+        private let service: WeatherServiceProtocol
+        private let notationController: NotationController
+        private let measurementSystemNotification: MeasurementSystemNotification
+        private let databaseManager: DatabaseManager
         private var token: NotificationToken?
+        private var cancellables = Set<AnyCancellable>()
 
         init(
-            repository: Repository,
-            locationDAO: LocationDataAccessObject = LocationDataAccessObject()
+            service: WeatherServiceProtocol,
+            notationController: NotationController = NotationController(),
+            measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
+            databaseManager: DatabaseManager = RealmManager.shared
         ) {
-            self.repository = repository
-            self.locationDAO = locationDAO
-
-            token = RealmProvider.shared.realm.observe { [weak self] notification, _ in
-                switch notification {
-                case .didChange:
-                    self?.updateViewModelsWhenRealmUpdateOccurred()
-
-                case .refreshRequired:
-                    self?.updateViewModelsWhenRealmUpdateOccurred()
-                }
-            }
+            self.service = service
+            self.notationController = notationController
+            self.measurementSystemNotification = measurementSystemNotification
+            self.databaseManager = databaseManager
+            registerRealmCollectionNotificationToken()
         }
 
         deinit {
             token?.invalidate()
         }
 
-        private func updateViewModelsWhenRealmUpdateOccurred() {
-            setCurrentWeatherViewModels()
+        private func registerRealmCollectionNotificationToken() {
+            token = try? databaseManager.readAll().observe { [weak self] changes in
+                switch changes {
+                case .initial:
+                    self?.setCurrentWeatherViewModels()
+
+                case .update:
+                    self?.setCurrentWeatherViewModels()
+                    self?.hasUpdatedViewModels = true
+
+                case .error(let error):
+                    fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
+                }
+            }
         }
 
         private func setCurrentWeatherViewModels() {
-            guard let orderedLocations = try? locationDAO.readSorted() else {
-                currentWeatherViewModels = []
-                return
+            if let allSorted = try? databaseManager.readAllSorted() {
+                currentWeatherViewModels.removeAll()
+                currentWeatherViewModels = allSorted.compactMap { .init(locationModel: $0, service: service) }
+            } else {
+                currentWeatherViewModels.removeAll()
             }
-
-            let viewModels: [CurrentWeatherView.ViewModel] = orderedLocations.compactMap { [self] in
-                    .init(locationModel: $0, repository: repository)
-            }
-
-            currentWeatherViewModels = viewModels
         }
 
-        func onUpdateUserLocation(_ location: CLLocation) {
-            isLoading.toggle()
-
+        func onDidUpdateLocation(_ location: CLLocation) {
             Task(priority: .userInitiated) {
                 do {
                     let placemark = try await Geocoder.fetchPlacemark(at: location)
-                    let newLocation = createUserLocationModel(by: placemark)
+                    let newLocation = LocationModel(placemark: placemark, isUserLocation: true)
+                    let entryValidator = UserLocationEntryValidator(location: newLocation)
+                    hasValidatedUserLocation = entryValidator.validate()
 
-                    try createOrUpdateDatabaseEntry(for: newLocation)
-                    onSelectLocation(at: Self.userLocationPageIndex)
-                    isLoading.toggle()
                 } catch {
                     fatalError(error.localizedDescription)
                 }
             }
         }
 
-        private func createUserLocationModel(by placemark: CLPlacemark) -> LocationModel {
-            LocationModel(placemark: placemark, isUserLocation: true)
+        func index(of location: LocationModel) -> Int? {
+            guard let index = try? databaseManager.readAllSorted()
+                .firstIndex(where: { $0.compoundKey == location.compoundKey }) else { return nil }
+            return index
         }
 
-        private func createOrUpdateDatabaseEntry(for location: LocationModel) throws {
-            if locationDAO.checkExistanceByCompoundKey(location) {
-                try locationDAO.update(location)
-            } else {
-                try locationDAO.create(location)
-            }
-        }
-
-        func onSelectLocation(at index: Int) {
-            previousPageIndex = currentPageIndex
+        func onDidChangePageNavigation(index: Int) {
+            resetUpdatePublishers()
             currentPageIndex = index
         }
 
-        func temperatureNotationSystemChanged(_ sender: SegmentedControl) {
-            currentVisibleWeatherViewModel.onSegmentedControlChange(sender)
+        func onViewDidDisappear() {
+            resetUpdatePublishers()
+        }
+
+        func resetUpdatePublishers() {
+            hasUpdatedViewModels = false
+            hasValidatedUserLocation = false
+        }
+
+        func onSegmentedControlDidChange(_ selectedSegmentIndex: Int) {
+            guard let selectedMeasurementSystem = MeasurementSystem(rawValue: selectedSegmentIndex),
+                  let selectedTemperatureNotation = TemperatureNotation(rawValue: selectedSegmentIndex) else {
+                return
+            }
+
+            notationController.measurementSystem = selectedMeasurementSystem
+            notationController.temperatureNotation = selectedTemperatureNotation
+            postDidChangeMeasurementSystem()
             unitSelectionHapticFeedback()
+        }
+
+        private func postDidChangeMeasurementSystem() {
+            measurementSystemNotification.post()
         }
 
         private func unitSelectionHapticFeedback() {

@@ -1,7 +1,14 @@
+//
+//  DailyDateRenderer.swift
+//  SwiftyForecast
+//
+//  Created by Pawel Milek on 10/18/23.
+//  Copyright © 2023 Pawel Milek. All rights reserved.
+//
+
 import Foundation
 
 struct DailyDateRenderer {
-
   static func render(_ date: Date) -> NSAttributedString {
     let formatter = DateFormatter()
 
@@ -20,5 +27,4 @@ struct DailyDateRenderer {
     attributedString.addAttributes([.font: Style.DailyCell.monthFont], range: monthRange)
     return attributedString
   }
-
 }

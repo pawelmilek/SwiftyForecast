@@ -7,7 +7,8 @@ final class DailyViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.setUp()
+        setup()
+        registerTraitUserInterfaceStyleObserver()
     }
 
     override func prepareForReuse() {
@@ -18,10 +19,10 @@ final class DailyViewCell: UITableViewCell {
     }
 }
 
-// MARK: - Private - SetUps
+// MARK: - Private - Setups
 private extension DailyViewCell {
 
-    func setUp() {
+    func setup() {
         backgroundColor = Style.DailyCell.backgroundColor
 
         dateLabel.textColor = Style.DailyCell.dateColor
@@ -31,6 +32,23 @@ private extension DailyViewCell {
         temperatureLabel.font = Style.DailyCell.temperatureFont
         temperatureLabel.textColor = Style.DailyCell.temperatureColor
         temperatureLabel.textAlignment = Style.DailyCell.temperatureAlignment
+        setupConditionIconShadow()
     }
 
+    func registerTraitUserInterfaceStyleObserver() {
+        self.registerForTraitChanges(
+            [UITraitUserInterfaceStyle.self],
+            target: self,
+            action: #selector(setupConditionIconShadow)
+        )
+    }
+
+    @objc
+    func setupConditionIconShadow() {
+        iconImageView.layer.shadowRadius = Style.DailyCell.iconShadowRadius
+        iconImageView.layer.shadowOpacity = Style.DailyCell.iconShadowOpacity
+        iconImageView.layer.shadowOffset = Style.DailyCell.iconShadowOffset
+        iconImageView.layer.shadowColor = UIColor.shadow.cgColor
+        iconImageView.layer.masksToBounds = false
+    }
 }
