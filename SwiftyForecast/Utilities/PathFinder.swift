@@ -1,35 +1,21 @@
+//
+//  PathFinder.swift
+//  SwiftyForecast
+//
+//  Created by Pawel Milek on 10/18/23.
+//  Copyright © 2023 Pawel Milek. All rights reserved.
+//
+
 import Foundation
 
 final class PathFinder {
-  static let groupIdentifier = "group.com.pawelmilek.Swifty-Forecast"
-  
-  static func inLibrary(_ name: String) throws -> URL {
-    return try FileManager.default
-      .url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-      .appendingPathComponent(name)
-  }
-  
-  static func inDocuments(_ name: String) throws -> URL {
-    return try FileManager.default
-      .url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-      .appendingPathComponent(name)
-  }
-  
-  static func inMainBundle(_ name: String) throws -> URL {
-    guard let url = Bundle.main.url(forResource: name, withExtension: nil) else {
-      throw PathError.notFound
+    static func documentDirectory() throws -> URL {
+        guard let directory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first else {
+            throw CocoaError.error(.fileReadUnsupportedScheme)
+        }
+        return directory
     }
-    return url
-  }
-  
-  static func inSharedContainer(_ name: String) throws -> URL {
-    guard let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: PathFinder.groupIdentifier) else {
-      throw PathError.containerNotFound(identifier: PathFinder.groupIdentifier)
-    }
-    return url.appendingPathComponent(name)
-  }
-  
-  static func documents() throws -> URL {
-    return try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-  }
 }

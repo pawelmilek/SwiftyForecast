@@ -30,6 +30,9 @@ DerivedData/
 *.dSYM.zip
 *.dSYM
 
+## Config files containing secret keys
+Config.xcconfig
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace

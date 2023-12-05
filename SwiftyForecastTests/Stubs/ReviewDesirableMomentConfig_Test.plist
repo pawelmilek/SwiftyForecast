@@ -4,11 +4,7 @@
 <dict>
 	<key>locationCount</key>
 	<integer>22</integer>
-	<key>detailsInteractionCount</key>
-	<integer>999</integer>
-	<key>minEnjoyableTemperatureInFahrenheit</key>
+	<key>enjoyableTemperatureCount</key>
 	<integer>100</integer>
-	<key>maxEnjoyableTemperatureInFahrenheit</key>
-	<integer>1000</integer>
 </dict>
 </plist>

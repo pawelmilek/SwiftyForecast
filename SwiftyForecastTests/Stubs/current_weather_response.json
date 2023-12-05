@@ -1,0 +1,43 @@
+{
+    "coord": {
+        "lon": 21.9994,
+        "lat": 50.048
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "clear sky",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 290.88,
+        "feels_like": 290.35,
+        "temp_min": 290.16,
+        "temp_max": 290.88,
+        "pressure": 989,
+        "humidity": 63
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 6.17,
+        "deg": 200
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1697028284,
+    "sys": {
+        "type": 2,
+        "id": 19358,
+        "country": "PL",
+        "sunrise": 1696999594,
+        "sunset": 1697039451
+    },
+    "timezone": 7200,
+    "id": 759734,
+    "name": "Rzeszów",
+    "cod": 200
+}
