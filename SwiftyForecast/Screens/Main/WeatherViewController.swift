@@ -4,9 +4,9 @@ import Combine
 final class WeatherViewController: UIViewController {
     private enum Constant {
         static let weekdaysTableViewHeightForRowAtIndexPath = CGFloat(50)
-        static let hourlySizeForItem = CGSize(width: 62, height: 85)
+        static let hourlySizeForItem = CGSize(width: 70, height: 85)
         static let hourlyInsetForSection = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        static let hourlyMinimumLineSpacingForSection = CGFloat(15)
+        static let hourlyMinimumLineSpacingForSection = CGFloat(20)
     }
 
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
