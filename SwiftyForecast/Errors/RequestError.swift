@@ -1,4 +1,4 @@
-enum RequestError: ErrorPresentable {
+enum RequestError: Error {
     case invalidURL(url: String)
     case response
     case decode

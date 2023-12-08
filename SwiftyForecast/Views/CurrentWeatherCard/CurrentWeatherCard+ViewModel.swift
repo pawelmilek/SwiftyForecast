@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import UIKit
+import SwiftUI
 
 extension CurrentWeatherCard {
     @MainActor
@@ -16,7 +16,7 @@ extension CurrentWeatherCard {
         @Published private(set) var error: Error?
         @Published private(set) var isLoading = false
         @Published private(set) var locationName = ""
-        @Published private(set) var icon: UIImage?
+        @Published private(set) var icon: Image?
         @Published private(set) var description = "-"
         @Published private(set) var daytimeDescription = "-"
         @Published private(set) var temperature = "--"
@@ -122,7 +122,7 @@ extension CurrentWeatherCard {
                     )
                     let dataModel = ResponseParser.parse(current: currentResponse)
                     let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon)
-                    icon = largeIcon
+                    icon = Image(uiImage: largeIcon)
                     model = dataModel
                     isLoading = false
                 } catch {

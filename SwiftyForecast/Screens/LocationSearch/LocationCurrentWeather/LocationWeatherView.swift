@@ -32,7 +32,6 @@ struct LocationWeatherView: View {
             }
             .padding(.top, 15)
             .padding(.horizontal, 22.5)
-        .frame(maxWidth: .infinity)
             .opacity(opacity)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {

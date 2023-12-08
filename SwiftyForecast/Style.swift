@@ -56,7 +56,7 @@ struct Style {
     // MARK: - HourlyViewCell
     struct HourlyCell {
         static let backgroundColor = UIColor.primary
-        static let cornerRadius = CGFloat(15)
+        static let cornerRadius = CGFloat(18)
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
         static let timeColor = UIColor.white
         static let timeAlignment = NSTextAlignment.center

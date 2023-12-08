@@ -12,37 +12,38 @@ struct CurrentWeatherCard: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
-        VStack(spacing: 15) {
-            locationNameView
-            HStack(spacing: 25) {
-                VStack {
-                    iconView
-                    dayDescriptionView
+        GeometryReader { proxy in
+            VStack(spacing: 15) {
+                locationNameView
+                HStack(spacing: 0) {
+                    iconDescriptionView
+                        .frame(maxWidth: proxy.size.width * 0.5)
+                    temperatureView
+                        .frame(maxWidth: proxy.size.width * 0.5)
                 }
-                temperatureView
+                conditionsView
             }
-            conditionsView
+            .foregroundStyle(Style.WeatherCard.textColor)
+            .padding(15)
+            .background(
+                RoundedRectangle(cornerRadius: Style.WeatherCard.cornerRadius)
+                    .inset(by: 2.5)
+                    .fill(Style.WeatherCard.backgroundColor)
+                    .strokeBorder(
+                        .shadow,
+                        lineWidth: Style.WeatherCard.lineBorderWidth,
+                        antialiased: true
+                    )
+            )
+            .compositingGroup()
+            .shadow(
+                color: Style.WeatherCard.shadowColor,
+                radius: Style.WeatherCard.shadowRadius,
+                x: Style.WeatherCard.shadow.x,
+                y: Style.WeatherCard.shadow.y
+            )
         }
-        .foregroundStyle(Style.WeatherCard.textColor)
-        .padding(15)
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: Style.WeatherCard.cornerRadius)
-                .inset(by: 2.5)
-                .fill(Style.WeatherCard.backgroundColor)
-                .strokeBorder(
-                    .shadow,
-                    lineWidth: Style.WeatherCard.lineBorderWidth,
-                    antialiased: true
-                )
-        )
-        .compositingGroup()
-        .shadow(
-            color: Style.WeatherCard.shadowColor,
-            radius: Style.WeatherCard.shadowRadius,
-            x: Style.WeatherCard.shadow.x,
-            y: Style.WeatherCard.shadow.y
-        )
+        .frame(maxHeight: 250)
     }
 }
 
@@ -53,10 +54,17 @@ private extension CurrentWeatherCard {
             .font(Style.WeatherCard.locationNameFont)
     }
 
+    var iconDescriptionView: some View {
+        VStack(spacing: 0) {
+            iconView
+            dayDescriptionView
+        }
+    }
+
     var iconView: some View {
         Group {
             if let icon = viewModel.icon {
-                Image(uiImage: icon)
+                icon
             } else {
                 Image(.defaultConditionContent)
             }
@@ -73,29 +81,26 @@ private extension CurrentWeatherCard {
         VStack {
             Text(viewModel.daytimeDescription)
             Text(viewModel.description)
+                .modifier(TextScaledModifier())
         }
         .font(Style.WeatherCard.dayDescriptionFont)
     }
 
     var temperatureView: some View {
-        VStack {
+        VStack(spacing: 0) {
             Text(viewModel.temperature)
                 .font(Style.WeatherCard.temperatureFont)
-                .scaledToFill()
-                .minimumScaleFactor(0.5)
-                .lineLimit(1)
-            emptyText
-            Text(viewModel.temperatureMaxMin)
-                .font(Style.WeatherCard.temperatureMaxMinFont)
+                .modifier(TextScaledModifier())
+            VStack {
+                Text("")
+                Text(viewModel.temperatureMaxMin)
+            }
+            .font(Style.WeatherCard.temperatureMaxMinFont)
         }
     }
 
-    var emptyText: some View {
-        Text("")
-    }
-
     var conditionsView: some View {
-        HStack(spacing: 30) {
+        HStack(spacing: 15) {
             VStack {
                 Image(systemName: viewModel.sunrise.symbol)
                 Text(viewModel.sunrise.getTime())
@@ -114,6 +119,7 @@ private extension CurrentWeatherCard {
             }
         }
         .font(Style.WeatherCard.conditionsFont)
+        .fixedSize()
     }
 }
 

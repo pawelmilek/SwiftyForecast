@@ -1,4 +1,4 @@
-enum GeocoderError: ErrorPresentable {
+enum GeocoderError: Error {
     case coordinateNotFound
     case placemarkNotFound
     case locationDisabled

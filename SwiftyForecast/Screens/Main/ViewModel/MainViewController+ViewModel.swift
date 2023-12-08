@@ -1,4 +1,5 @@
 import UIKit
+import WidgetKit
 import RealmSwift
 import SafariServices
 import CoreLocation
@@ -94,7 +95,7 @@ extension MainViewController {
                     let newLocation = LocationModel(placemark: placemark, isUserLocation: true)
                     let entryValidator = UserLocationEntryValidator(location: newLocation)
                     hasValidatedUserLocation = entryValidator.validate()
-
+                    reloadWidgetTimeline()
                 } catch {
                     fatalError(error.localizedDescription)
                 }
@@ -131,6 +132,7 @@ extension MainViewController {
             notationController.temperatureNotation = selectedTemperatureNotation
             postDidChangeMeasurementSystem()
             unitSelectionHapticFeedback()
+            reloadWidgetTimeline()
         }
 
         private func postDidChangeMeasurementSystem() {
@@ -153,6 +155,15 @@ extension MainViewController {
 
             navigationController.viewIfLoaded?.setNeedsLayout()
         }
-    }
 
+        private func reloadWidgetTimeline() {
+            WidgetCenter.shared.getCurrentConfigurations { result in
+                guard case .success(let widgets) = result else { return }
+
+                if let widget = widgets.first {
+                    WidgetCenter.shared.reloadTimelines(ofKind: widget.kind)
+                }
+            }
+        }
+    }
 }

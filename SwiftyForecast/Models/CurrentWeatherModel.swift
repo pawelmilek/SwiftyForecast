@@ -22,3 +22,20 @@ struct CurrentWeatherModel {
     let sunrise: Date
     let sunset: Date
 }
+
+extension CurrentWeatherModel {
+    static let example = CurrentWeatherModel(
+        date: Date(timeIntervalSinceReferenceDate: 724103328.0),
+        dayNightState: .night,
+        temperature: 276.14,
+        maxTemperature: 276.14,
+        minTemperature: 275.55,
+        description: "clear sky",
+        icon: "01n",
+        humidity: 87,
+        pressure: 1009,
+        windSpeed: 4.63,
+        sunrise: Date(timeIntervalSinceReferenceDate: 724054877.0),
+        sunset: Date(timeIntervalSinceReferenceDate: 724084197.0)
+    )
+}

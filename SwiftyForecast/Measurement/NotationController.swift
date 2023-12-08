@@ -1,3 +1,11 @@
+//
+//  NotationController.swift
+//  SwiftyForecast
+//
+//  Created by Pawel Milek on 10/18/23.
+//  Copyright © 2023 Pawel Milek. All rights reserved.
+//
+
 import Foundation
 
 final class NotationController {
@@ -22,13 +30,14 @@ final class NotationController {
     }
 
     private enum Constant {
+        static let appGroupContainerId = "group.com.pawelmilek.Swifty-Forecast"
         static let measurementSystem = "MeasurementSystemKey"
         static let temperatureUnit = "TemperatureUnitKey"
     }
 
     private let storage: UserDefaults
 
-    init(storage: UserDefaults = .standard) {
+    init(storage: UserDefaults = UserDefaults(suiteName: Constant.appGroupContainerId)!) {
         self.storage = storage
     }
 

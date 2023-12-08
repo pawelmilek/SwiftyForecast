@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Mg9-gB-8k9">
-                                <rect key="frame" x="22.666666666666657" y="84" width="348" height="734"/>
+                                <rect key="frame" x="18" y="84" width="357" height="734"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qE3-vJ-lQj">
-                                        <rect key="frame" x="0.0" y="0.0" width="348" height="260"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="357" height="260"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="aee-ju-mxE"/>
                                         </constraints>
@@ -29,7 +29,7 @@
                                         </connections>
                                     </containerView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="999" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SEl-7v-jxS" userLabel="Hourly Collection View">
-                                        <rect key="frame" x="0.0" y="280" width="348" height="90"/>
+                                        <rect key="frame" x="0.0" y="280" width="357" height="90"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="9Zw-40-zvy"/>
@@ -43,7 +43,7 @@
                                         <cells/>
                                     </collectionView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mn2-1W-q0r">
-                                        <rect key="frame" x="0.0" y="390" width="348" height="344"/>
+                                        <rect key="frame" x="0.0" y="390" width="357" height="344"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" red="0.90668827299999999" green="0.29767078159999999" blue="0.37253367900000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableView>
@@ -55,8 +55,8 @@
                         <constraints>
                             <constraint firstItem="Mg9-gB-8k9" firstAttribute="top" secondItem="IuX-10-a2v" secondAttribute="top" constant="25" id="HXe-12-E1y"/>
                             <constraint firstItem="IuX-10-a2v" firstAttribute="bottom" secondItem="Mg9-gB-8k9" secondAttribute="bottom" id="kDt-qq-qyp"/>
-                            <constraint firstItem="Mg9-gB-8k9" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="22.5" id="s1p-jb-4So"/>
-                            <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="Mg9-gB-8k9" secondAttribute="trailing" constant="22.5" id="sAj-Wl-hYr"/>
+                            <constraint firstItem="Mg9-gB-8k9" firstAttribute="leading" secondItem="IuX-10-a2v" secondAttribute="leading" constant="18" id="s1p-jb-4So"/>
+                            <constraint firstItem="IuX-10-a2v" firstAttribute="trailing" secondItem="Mg9-gB-8k9" secondAttribute="trailing" constant="18" id="sAj-Wl-hYr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uKH-Pc-zJF">

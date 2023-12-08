@@ -11,7 +11,7 @@ import Charts
 
 struct HourlyForecastChart: View {
     @ObservedObject var viewModel: ViewModel
-    
+
     var background: Color {
         Color(uiColor: .primary).opacity(0.5)
     }
@@ -33,14 +33,13 @@ struct HourlyForecastChart: View {
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
                                     .fontDesign(.monospaced)
-                                    .scaledToFill()
-                                    .minimumScaleFactor(0.5)
                                     .foregroundColor(Color(uiColor: .tertiary))
+                                    .modifier(TextScaledModifier())
                                 AsyncImage(url: item.iconURL, content: { image in
                                     image
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(maxWidth: 40, maxHeight: 40)
+                                        .frame(maxWidth: 35, maxHeight: 35)
                                         .shadow(
                                             color: Color(uiColor: .shadow),
                                             radius: Style.WeatherCard.iconShadowRadius,
@@ -49,7 +48,7 @@ struct HourlyForecastChart: View {
                                         )
                                 }, placeholder: {
                                     ProgressView()
-                                        .frame(maxWidth: 40, maxHeight: 40)
+                                        .frame(maxWidth: 35, maxHeight: 35)
                                 })
                                 .padding(.horizontal, 0)
                                 .padding(.vertical, -8)
@@ -64,9 +63,9 @@ struct HourlyForecastChart: View {
                         AxisGridLine(
                             centered: true,
                             stroke: StrokeStyle(
-                                lineWidth: 0.25,
+                                lineWidth: 0.5,
                                 miterLimit: 1,
-                                dash: [],
+                                dash: [1, 2],
                                 dashPhase: 1
                             )
                         )
