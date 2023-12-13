@@ -138,6 +138,7 @@ private extension WeatherViewController {
 
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
+            .receive(on: DispatchQueue.main)
             .map { ($0.0.map { HourlyViewCell.ViewModel(model: $0) }, $0.1.map { DailyViewCell.ViewModel(model: $0) }) }
             .sink { [self] (hourlyViewModels, dailyViewModels) in
                 hourlyForecastViewModels = hourlyViewModels
@@ -152,9 +153,10 @@ private extension WeatherViewController {
     func subscribeToNotificationCenterPublisher() {
         NotificationCenter.default
             .publisher(for: UIApplication.didBecomeActiveNotification)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.loadData()
-                self?.weatherCardViewController.loadData()
+                self?.viewModel?.reloadCurrentLocation()
+                self?.weatherCardViewController.reloadCurrentLocation()
             }
             .store(in: &cancellables)
     }

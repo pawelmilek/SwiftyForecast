@@ -752,22 +752,22 @@
 			isa = PBXGroup;
 			children = (
 				E23997DC20E84129007D8CE4 /* Application */,
+				E24E90572ADA7DF8009255C8 /* Screens */,
+				E21ABD3F2AE8269900F93F01 /* Views */,
+				E23997DA20E84104007D8CE4 /* Models */,
+				E270891824CE5904003F7587 /* Coordinator */,
+				E23997D720E84094007D8CE4 /* Storyboards */,
+				E23997DF20E84371007D8CE4 /* Network */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
 				E283573B2B2728AA00E3807A /* RealmManager */,
 				E28357342B27168400E3807A /* LocationManager */,
 				E2A32F25254459DF000ACEFE /* AppStoreReview */,
-				E21ABD3F2AE8269900F93F01 /* Views */,
-				E270891824CE5904003F7587 /* Coordinator */,
 				E2435BD322AD6293007589CE /* Measurement */,
-				E23997DF20E84371007D8CE4 /* Network */,
 				E28357332B27150D00E3807A /* Modifiers */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E21A0B9420EE88F5006AC409 /* Utilities */,
-				E24E90572ADA7DF8009255C8 /* Screens */,
-				E23997DA20E84104007D8CE4 /* Models */,
-				E23997D720E84094007D8CE4 /* Storyboards */,
 				E23997D820E840C1007D8CE4 /* Resources */,
 			);
 			path = SwiftyForecast;

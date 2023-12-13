@@ -22,12 +22,12 @@ final class CurrentWeatherCardViewController: UIViewController {
         setup()
     }
 
-    func loadData() {
-        viewModel.loadData()
+    func reloadCurrentLocation() {
+        viewModel.reloadCurrentLocation()
     }
 
     func loadData(at location: LocationModel) {
-        viewModel.loadWeather(at: location)
+        viewModel.loadData(at: location)
     }
 
     private func setup() {

@@ -76,7 +76,7 @@ struct LocationWeatherView: View {
         }
         .onChange(of: viewModel.locationModel) {
             guard let locationModel = viewModel.locationModel else { return }
-            cardViewModel.loadWeather(at: locationModel)
+            cardViewModel.setLocationModel(locationModel)
         }
         .onChange(of: viewModel.isExistingLocation) {
             toolbarAddItemOpacity = viewModel.isExistingLocation == true ? 0.0 : 1.0

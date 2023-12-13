@@ -73,7 +73,7 @@ extension LocationWeatherView {
 
         private func verifyLocationExistanceInDatabase(_ location: LocationModel) {
             do {
-                if try databaseManager.read(by: location.compoundKey) != nil {
+                if try databaseManager.readBy(primaryKey: location.compoundKey) != nil {
                     isExistingLocation = true
                 } else {
                     isExistingLocation = false

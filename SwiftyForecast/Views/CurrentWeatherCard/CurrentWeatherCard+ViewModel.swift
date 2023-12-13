@@ -47,7 +47,19 @@ extension CurrentWeatherCard {
             registerMeasurementSystemObserver()
         }
 
+        func setLocationModel(_ locationModel: LocationModel) {
+            self.locationModel = locationModel
+        }
+
         private func subscribeToPublisher() {
+            $locationModel
+                .compactMap { $0 }
+                .receive(on: DispatchQueue.main)
+                .sink { [self] locationModel in
+                    loadData(at: locationModel)
+                }
+                .store(in: &cancellables)
+
             $model
                 .compactMap { $0 }
                 .receive(on: DispatchQueue.main)
@@ -90,23 +102,26 @@ extension CurrentWeatherCard {
             setWindSpeedAccordingToMeasurementSystem()
         }
 
-        func loadData() {
-            guard let locationModel else { return }
-            loadWeather(at: locationModel)
+        func reloadCurrentLocation() {
+            guard locationModel != nil else { return }
+            do {
+                self.locationModel = try RealmManager.shared.readAllSorted().first(where: { $0.name == locationName })
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
 
-        func loadWeather(at location: LocationModel) {
+        func loadData(at locationModel: LocationModel) {
             guard !isLoading else { return }
             isLoading = true
-            locationName = location.name
-            locationModel = location
+
+            locationName = locationModel.name
+            let latitude = locationModel.latitude
+            let longitude = locationModel.longitude
 
             Task(priority: .userInitiated) {
                 do {
-                    let currentResponse = try await service.fetchCurrent(
-                        latitude: location.latitude,
-                        longitude: location.longitude
-                    )
+                    let currentResponse = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
                     let dataModel = ResponseParser.parse(current: currentResponse)
                     let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon)
                     icon = Image(uiImage: largeIcon)

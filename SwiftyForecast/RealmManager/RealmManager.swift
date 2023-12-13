@@ -3,7 +3,7 @@ import RealmSwift
 
 protocol DatabaseManager {
     func create(_ location: LocationModel) throws
-    func read(by primaryKey: String) throws -> LocationModel?
+    func readBy(primaryKey: String) throws -> LocationModel?
     func readAll() throws -> Results<LocationModel>
     func readAllSorted() throws -> Results<LocationModel>
     func update(_ location: LocationModel) throws
@@ -51,7 +51,7 @@ extension RealmManager {
         }
     }
 
-    func read(by primaryKey: String) throws -> LocationModel? {
+    func readBy(primaryKey: String) throws -> LocationModel? {
         return realm.object(ofType: LocationModel.self, forPrimaryKey: primaryKey)
     }
 

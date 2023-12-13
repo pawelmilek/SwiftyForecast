@@ -23,7 +23,7 @@ struct WeatherProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WeatherEntry) -> Void) {
-        Task {
+        Task(priority: .userInitiated) {
             let result = await loadWeatherDataForCurrentLocation()
             let now = Date.now
 
@@ -41,7 +41,7 @@ struct WeatherProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WeatherEntry>) -> Void) {
-        Task {
+        Task(priority: .userInitiated) {
             let result = await loadWeatherDataForCurrentLocation()
             let now = Date.now
 

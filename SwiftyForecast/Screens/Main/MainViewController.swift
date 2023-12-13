@@ -74,8 +74,7 @@ private extension MainViewController {
         locationManager.$error
             .compactMap { $0 }
             .sink { error in
-//                AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
-                // TODO: Use Apple Logger to log error description
+                debugPrint(error.localizedDescription)
             }
             .store(in: &cancellables)
 

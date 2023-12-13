@@ -38,7 +38,7 @@ final class PreviewRealmManager: DatabaseManager {
         }
     }
 
-    func read(by primaryKey: String) throws -> LocationModel? {
+    func readBy(primaryKey: String) throws -> LocationModel? {
         return previewRealm.object(ofType: LocationModel.self, forPrimaryKey: primaryKey)
     }
 

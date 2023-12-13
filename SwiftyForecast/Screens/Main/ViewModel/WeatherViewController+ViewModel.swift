@@ -68,22 +68,26 @@ extension WeatherViewController {
                 .store(in: &cancellables)
         }
 
+        func reloadCurrentLocation() {
+            guard locationModel != nil else { return }
+            do {
+                self.locationModel = try RealmManager.shared.readAllSorted().first(where: { $0.name == locationName })
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
+
         func loadData() {
             guard let locationModel else { return }
             guard !isLoading else { return }
             isLoading = true
 
-            let locationCoordinate = CLLocationCoordinate2D(
-                latitude: locationModel.latitude,
-                longitude: locationModel.longitude
-            )
+            let latitude = locationModel.latitude
+            let longitude = locationModel.longitude
 
             Task(priority: .userInitiated) {
                 do {
-                    let forecast = try await service.fetchForecast(
-                        latitude: locationCoordinate.latitude,
-                        longitude: locationCoordinate.longitude
-                    )
+                    let forecast = try await service.fetchForecast(latitude: latitude, longitude: longitude)
                     let data = ResponseParser.parse(forecast: forecast)
                     weatherModel = data
                     isLoading = false
