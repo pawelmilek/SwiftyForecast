@@ -9,7 +9,7 @@
 import Foundation
 
 struct SpeedFormatterMetric: SpeedValueDisplayable {
-    var current: String {
+    var currentFormatted: String {
         let metersPerSecond = Measurement(value: valueMetersPerSecond, unit: UnitSpeed.metersPerSecond)
         return formantted(metersPerSecond)
     }

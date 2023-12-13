@@ -19,23 +19,16 @@ extension WeatherViewController {
         private var cancellables = Set<AnyCancellable>()
 
         private let service: WeatherServiceProtocol
-        private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
-        private let notationController: NotationController
         private let measurementSystemNotification: MeasurementSystemNotification
         private let appStoreReviewCenter: ReviewNotificationCenter
 
         init(
             locationModel: LocationModel,
             service: WeatherServiceProtocol = WeatherService(),
-            temperatureFormatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory(),
-            speedFormatterFactory: SpeedFormatterFactoryProtocol = SpeedFormatterFactory(),
-            notationController: NotationController = NotationController(),
             measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
             appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
         ) {
             self.service = service
-            self.temperatureFormatterFactory = temperatureFormatterFactory
-            self.notationController = notationController
             self.measurementSystemNotification = measurementSystemNotification
             self.appStoreReviewCenter = appStoreReviewCenter
             subscriteToPublishers()

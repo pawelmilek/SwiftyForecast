@@ -26,7 +26,7 @@ struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
         by notation: TemperatureNotation,
         valueInKelvin current: Double
     ) -> TemperatureValueDisplayable {
-        let value = TemperatureValue(current: current, max: .signalingNaN, min: .signalingNaN)
+        let value = TemperatureValue(current: current, min: .signalingNaN, max: .signalingNaN)
         return make(by: notation, valueInKelvin: value)
     }
 
@@ -38,15 +38,15 @@ struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
         case .celsius:
             return TemperatureCelsiusFormatter(
                 currentInKelvin: valueInKelvin.current,
-                maxInKelvin: valueInKelvin.max,
-                minInKelvin: valueInKelvin.min
+                minInKelvin: valueInKelvin.min,
+                maxInKelvin: valueInKelvin.max
             )
 
         case .fahrenheit:
             return TemperatureFahrenheitFormatter(
                 currentInKelvin: valueInKelvin.current,
-                maxInKelvin: valueInKelvin.max,
-                minInKelvin: valueInKelvin.min
+                minInKelvin: valueInKelvin.min,
+                maxInKelvin: valueInKelvin.max
             )
         }
     }

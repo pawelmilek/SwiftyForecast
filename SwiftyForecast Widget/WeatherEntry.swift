@@ -11,26 +11,26 @@ import SwiftUI
 
 struct WeatherEntry: TimelineEntry {
     let date: Date
+    let locationName: String
     let icon: Image
+    let description: String
     let temperature: String
     let temperatureMaxMin: String
-    let locationName: String
-    let description: String
 
     init(
         date: Date,
-        icon: Image,
-        temperature: String,
-        temperatureMaxMin: String,
         locationName: String,
-        description: String
+        icon: Image,
+        description: String,
+        temperature: String,
+        temperatureMaxMin: String
     ) {
         self.date = date
+        self.locationName = locationName
         self.icon = icon
+        self.description = description
         self.temperature = temperature
         self.temperatureMaxMin = temperatureMaxMin
-        self.locationName = locationName
-        self.description = description
     }
 }
 
@@ -38,19 +38,19 @@ extension WeatherEntry {
     static let sampleTimeline = [
         WeatherEntry(
             date: Date(),
-            icon: Image(.cloudySky),
-            temperature: "69°",
-            temperatureMaxMin: "⏶ 75°  ⏷ 72°",
             locationName: "Cupertino",
-            description: "light intensity shower rain"
+            icon: Image(.cloudySky),
+            description: "light intensity shower rain",
+            temperature: "69°",
+            temperatureMaxMin: "⏶ 75°  ⏷ 72°"
         ),
         WeatherEntry(
             date: Date(),
-            icon: Image(.clearSky),
-            temperature: "87°",
-            temperatureMaxMin: "⏶ 92°  ⏷ 45°",
             locationName: "Cupertino",
-            description: "scattered clouds"
+            icon: Image(.clearSky),
+            description: "scattered clouds",
+            temperature: "87°",
+            temperatureMaxMin: "⏶ 92°  ⏷ 45°"
         )
     ]
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SpeedValueDisplayable {
-    var current: String { get }
+    var currentFormatted: String { get }
 }
 
 extension SpeedValueDisplayable {

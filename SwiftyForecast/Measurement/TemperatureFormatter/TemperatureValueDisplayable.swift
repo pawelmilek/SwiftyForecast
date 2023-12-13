@@ -10,12 +10,13 @@ import Foundation
 
 protocol TemperatureValueDisplayable {
     var currentFormatted: String { get }
-    var maxFormatted: String { get }
     var minFormatted: String { get }
+    var maxFormatted: String { get }
 
     var currentValue: Int { get }
-    var maxValue: Int { get }
     var minValue: Int { get }
+    var maxValue: Int { get }
+
 }
 
 extension TemperatureValueDisplayable {

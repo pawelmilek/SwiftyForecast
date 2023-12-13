@@ -26,21 +26,15 @@ extension LocationWeatherView {
 
         private let searchCompletion: MKLocalSearchCompletion
         private let service: WeatherServiceProtocol
-        private let temperatureVolumeFormatter: TemperatureFormatterFactoryProtocol
-        private let notationController: NotationController
         private let databaseManager: DatabaseManager
         private let appStoreReviewCenter: ReviewNotificationCenter
 
         init(searchCompletion: MKLocalSearchCompletion,
              service: WeatherServiceProtocol = WeatherService(),
-             temperatureVolumeFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory(),
-             notationController: NotationController = NotationController(),
              databaseManager: DatabaseManager = RealmManager.shared,
              appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()) {
             self.searchCompletion = searchCompletion
             self.service = service
-            self.temperatureVolumeFormatter = temperatureVolumeFactory
-            self.notationController = notationController
             self.databaseManager = databaseManager
             self.appStoreReviewCenter = appStoreReviewCenter
             subscriteToPublishers()

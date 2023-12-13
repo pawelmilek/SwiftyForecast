@@ -11,13 +11,16 @@ struct ResponseParser {
         let currentIcon = current.conditions.first?.icon ?? InvalidReference.undefined
         let dayNightSign = String(currentIcon.suffix(1))
         let dayNightState = DayNightState(rawValue: dayNightSign) ?? .day
+        let temperatureValue = TemperatureValue(
+            current: current.main.temp,
+            min: current.main.tempMin,
+            max: current.main.tempMax
+        )
 
         let currentWeatherModel = CurrentWeatherModel(
             date: currentDate,
             dayNightState: dayNightState,
-            temperature: current.main.temp,
-            maxTemperature: current.main.tempMax,
-            minTemperature: current.main.tempMin,
+            temperatureValue: temperatureValue,
             description: currentDescription,
             icon: currentIcon,
             humidity: current.main.humidity,

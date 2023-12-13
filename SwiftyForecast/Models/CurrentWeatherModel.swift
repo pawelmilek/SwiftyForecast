@@ -11,9 +11,7 @@ import Foundation
 struct CurrentWeatherModel {
     let date: Date
     let dayNightState: DayNightState
-    let temperature: Double
-    let maxTemperature: Double
-    let minTemperature: Double
+    let temperatureValue: TemperatureValue
     let description: String
     let icon: String
     let humidity: Int
@@ -27,9 +25,7 @@ extension CurrentWeatherModel {
     static let example = CurrentWeatherModel(
         date: Date(timeIntervalSinceReferenceDate: 724103328.0),
         dayNightState: .night,
-        temperature: 276.14,
-        maxTemperature: 276.14,
-        minTemperature: 275.55,
+        temperatureValue: TemperatureValue(current: 276.14, min: 275.55, max: 276.14),
         description: "clear sky",
         icon: "01n",
         humidity: 87,

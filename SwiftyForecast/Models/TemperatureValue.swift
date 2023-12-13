@@ -10,6 +10,6 @@ import Foundation
 
 struct TemperatureValue {
     let current: Double
-    let max: Double
     let min: Double
+    let max: Double
 }

@@ -30,21 +30,19 @@ extension CurrentWeatherCard {
 
         private var cancellables = Set<AnyCancellable>()
         private let service: WeatherServiceProtocol
-        private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
-        private let speedFormatterFactory: SpeedFormatterFactoryProtocol
-        private let notationController: NotationController
         private let measurementSystemNotification: MeasurementSystemNotification
+        private let temperatureRenderer: TemperatureRenderer
+        private let speedRenderer: SpeedRenderer
 
         init(service: WeatherServiceProtocol = WeatherService(),
-             temperatureFormatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory(),
-             speedFormatterFactory: SpeedFormatterFactoryProtocol = SpeedFormatterFactory(),
-             notationController: NotationController = NotationController(),
+             temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
+             speedRenderer: SpeedRenderer = SpeedRenderer(),
              measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()) {
             self.service = service
-            self.temperatureFormatterFactory = temperatureFormatterFactory
-            self.speedFormatterFactory = speedFormatterFactory
-            self.notationController = notationController
+            self.temperatureRenderer = temperatureRenderer
+            self.speedRenderer = speedRenderer
             self.measurementSystemNotification = measurementSystemNotification
+
             subscribeToPublisher()
             registerMeasurementSystemObserver()
         }
@@ -67,27 +65,16 @@ extension CurrentWeatherCard {
 
         private func setTemperatureAccordingToUnitNotation() {
             guard let model else { return }
-
-            let temperatureFormatter = temperatureFormatterFactory.make(
-                by: notationController.temperatureNotation,
-                valueInKelvin: TemperatureValue(
-                    current: model.temperature,
-                    max: model.maxTemperature,
-                    min: model.minTemperature
-                )
-            )
-            temperature = temperatureFormatter.currentFormatted
-            temperatureMaxMin = "⏶ \(temperatureFormatter.maxFormatted)  ⏷ \(temperatureFormatter.minFormatted)"
+            let rendered = temperatureRenderer.render(model.temperatureValue)
+            temperature = rendered.current
+            temperatureMaxMin = rendered.maxMin
         }
 
         private func setWindSpeedAccordingToMeasurementSystem() {
             guard let model else { return }
 
-            let speedFormatter = speedFormatterFactory.make(
-                by: notationController.measurementSystem,
-                valueInMetersPerSec: model.windSpeed
-            )
-            windSpeed.value = speedFormatter.current
+            let rendered = speedRenderer.render(model.windSpeed)
+            windSpeed.value = rendered
         }
 
         private func registerMeasurementSystemObserver() {

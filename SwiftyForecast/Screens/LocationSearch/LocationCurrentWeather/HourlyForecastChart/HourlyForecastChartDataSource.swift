@@ -6,6 +6,7 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
+// swiftlint:disable identifier_name
 import Foundation
 
 struct HourlyForecastChartDataSource: Identifiable, Equatable {
@@ -15,25 +16,16 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
     let temperatureFormatted: String
     let iconURL: URL?
 
-    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
-    private let notationController: NotationController
-
     init(
         model: HourlyForecastModel,
-        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory(),
-        notationController: NotationController = NotationController()
+        temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
     ) {
-        self.temperatureFormatterFactory = temperatureFormatterFactory
-        self.notationController = notationController
         hour = model.date.formatted(date: .omitted, time: .shortened)
 
-        let formatter = temperatureFormatterFactory.make(
-            by: notationController.temperatureNotation,
-            valueInKelvin: model.temperature
-        )
+        let rendered = temperatureRenderer.render(model.temperature)
 
-        temperatureValue = formatter.currentValue
-        temperatureFormatted = formatter.currentFormatted
+        temperatureValue = rendered.currentValue
+        temperatureFormatted = rendered.current
         iconURL = WeatherEndpoint.icon(symbol: model.icon).url
     }
 

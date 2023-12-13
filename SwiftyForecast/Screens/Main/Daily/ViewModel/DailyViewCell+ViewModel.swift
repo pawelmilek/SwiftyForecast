@@ -8,29 +8,22 @@ extension DailyViewCell {
         private(set) var iconURL: URL?
 
         private let model: DailyForecastModel
-        private let temperatureVolumeFactory: TemperatureFormatterFactoryProtocol
-        private let notationController: NotationController
+        private let temperatureRenderer: TemperatureRenderer
 
         init(
             model: DailyForecastModel,
-            temperatureVolumeFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory(),
-            notationController: NotationController = NotationController()
+            temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
         ) {
             self.model = model
-            self.temperatureVolumeFactory = temperatureVolumeFactory
-            self.notationController = notationController
+            self.temperatureRenderer = temperatureRenderer
             attributedDate = DailyDateRenderer.render(model.date)
             iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
             setTemperatureAccordingToUnitNotation(model.temperature)
         }
 
         private func setTemperatureAccordingToUnitNotation(_ valueInKelvin: Double) {
-            let temperatureVolume = temperatureVolumeFactory.make(
-                by: notationController.temperatureNotation,
-                valueInKelvin: valueInKelvin
-            )
-
-            temperature = temperatureVolume.currentFormatted
+            let rendered = temperatureRenderer.render(valueInKelvin)
+            temperature = rendered.current
         }
 
         func setTemperature() {

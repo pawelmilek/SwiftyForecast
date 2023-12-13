@@ -13,20 +13,14 @@ struct TemperatureCelsiusFormatter: TemperatureValueDisplayable {
     private let maxInKelvin: Double
     private let minInKelvin: Double
 
-    init(currentInKelvin: Double, maxInKelvin: Double, minInKelvin: Double) {
+    init(currentInKelvin: Double, minInKelvin: Double, maxInKelvin: Double) {
         self.currentInKelvin = currentInKelvin
-        self.maxInKelvin = maxInKelvin
         self.minInKelvin = minInKelvin
+        self.maxInKelvin = maxInKelvin
     }
 
     var currentFormatted: String {
         let temperature = toCelsius(currentInKelvin)
-        let result = formantted(temperature)
-        return result
-    }
-
-    var maxFormatted: String {
-        let temperature = toCelsius(maxInKelvin)
         let result = formantted(temperature)
         return result
     }
@@ -37,18 +31,24 @@ struct TemperatureCelsiusFormatter: TemperatureValueDisplayable {
         return result
     }
 
+    var maxFormatted: String {
+        let temperature = toCelsius(maxInKelvin)
+        let result = formantted(temperature)
+        return result
+    }
+
     var currentValue: Int {
         let temperature = toCelsius(currentInKelvin)
         return Int(temperature.value)
     }
 
-    var maxValue: Int {
-        let temperature = toCelsius(maxInKelvin)
+    var minValue: Int {
+        let temperature = toCelsius(minInKelvin)
         return Int(temperature.value)
     }
 
-    var minValue: Int {
-        let temperature = toCelsius(minInKelvin)
+    var maxValue: Int {
+        let temperature = toCelsius(maxInKelvin)
         return Int(temperature.value)
     }
 

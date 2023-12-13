@@ -10,23 +10,17 @@ import Foundation
 
 struct TemperatureFahrenheitFormatter: TemperatureValueDisplayable {
     private let currentInKelvin: Double
-    private let maxInKelvin: Double
     private let minInKelvin: Double
+    private let maxInKelvin: Double
 
-    init(currentInKelvin: Double, maxInKelvin: Double, minInKelvin: Double) {
+    init(currentInKelvin: Double, minInKelvin: Double, maxInKelvin: Double) {
         self.currentInKelvin = currentInKelvin
-        self.maxInKelvin = maxInKelvin
         self.minInKelvin = minInKelvin
+        self.maxInKelvin = maxInKelvin
     }
 
     var currentFormatted: String {
         let temperature = toFahrenheit(currentInKelvin)
-        let result = formantted(temperature)
-        return result
-    }
-
-    var maxFormatted: String {
-        let temperature = toFahrenheit(maxInKelvin)
         let result = formantted(temperature)
         return result
     }
@@ -37,18 +31,24 @@ struct TemperatureFahrenheitFormatter: TemperatureValueDisplayable {
         return result
     }
 
+    var maxFormatted: String {
+        let temperature = toFahrenheit(maxInKelvin)
+        let result = formantted(temperature)
+        return result
+    }
+
     var currentValue: Int {
         let temperature = toFahrenheit(currentInKelvin)
         return Int(temperature.value)
     }
 
-    var maxValue: Int {
-        let temperature = toFahrenheit(maxInKelvin)
+    var minValue: Int {
+        let temperature = toFahrenheit(minInKelvin)
         return Int(temperature.value)
     }
 
-    var minValue: Int {
-        let temperature = toFahrenheit(minInKelvin)
+    var maxValue: Int {
+        let temperature = toFahrenheit(maxInKelvin)
         return Int(temperature.value)
     }
 

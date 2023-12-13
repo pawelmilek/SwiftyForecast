@@ -11,6 +11,10 @@
 		E2092ABF2B0CB40700F38CF9 /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2092ABE2B0CB40700F38CF9 /* LocationList.swift */; };
 		E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */; };
 		E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */; };
+		E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */; };
+		E2117B482B29D48300F91ADB /* TemperatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */; };
+		E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */; };
+		E2117B4B2B29D69700F91ADB /* SpeedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */; };
 		E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2192258214483AA0093FEBD /* OfflineViewController.swift */; };
 		E21ABD062AE5A0DF00F93F01 /* LocationWeatherView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD002AE5A0DF00F93F01 /* LocationWeatherView+ViewModel.swift */; };
 		E21ABD072AE5A0DF00F93F01 /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
@@ -230,6 +234,9 @@
 		E2092ABE2B0CB40700F38CF9 /* LocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationList.swift; sourceTree = "<group>"; };
 		E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReachabilityError+ErrorHandleable.swift"; sourceTree = "<group>"; };
+		E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProviderDataSource.swift; sourceTree = "<group>"; };
+		E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureRenderer.swift; sourceTree = "<group>"; };
+		E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedRenderer.swift; sourceTree = "<group>"; };
 		E2192258214483AA0093FEBD /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		E21ABD002AE5A0DF00F93F01 /* LocationWeatherView+ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LocationWeatherView+ViewModel.swift"; sourceTree = "<group>"; };
 		E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchCompleter.swift; sourceTree = "<group>"; };
@@ -419,6 +426,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E2117B442B29B9E200F91ADB /* Provider */ = {
+			isa = PBXGroup;
+			children = (
+				E2F671202B23682400B791A0 /* WeatherProvider.swift */,
+				E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */,
+			);
+			path = Provider;
+			sourceTree = "<group>";
+		};
 		E21A0B9420EE88F5006AC409 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -461,7 +477,6 @@
 		E2227E852ADD54AD000C3886 /* TemperatureFormatter */ = {
 			isa = PBXGroup;
 			children = (
-				E21ABD4B2AE93E6E00F93F01 /* TemperatureValue.swift */,
 				E2227E882ADD54C7000C3886 /* TemperatureCelsiusFormatter.swift */,
 				E2227E8A2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift */,
 				E2227E862ADD54B8000C3886 /* TemperatureValueDisplayable.swift */,
@@ -507,6 +522,7 @@
 		E23997DA20E84104007D8CE4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E21ABD4B2AE93E6E00F93F01 /* TemperatureValue.swift */,
 				E2B035722500881A00DC0E77 /* CurrentWeatherModel.swift */,
 				E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */,
 				E2B0357A2500885100DC0E77 /* DailyForecastModel.swift */,
@@ -594,6 +610,8 @@
 				E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */,
 				E28550012290F26E00CD7554 /* MeasurementSystem.swift */,
 				E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */,
+				E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */,
+				E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */,
 				E2227E8C2ADD5DB8000C3886 /* SpeedFormatter */,
 				E2227E852ADD54AD000C3886 /* TemperatureFormatter */,
 			);
@@ -867,7 +885,7 @@
 			children = (
 				E2FDBD6A2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift */,
 				E2F6711E2B23680800B791A0 /* CurrentWeatherView.swift */,
-				E2F671202B23682400B791A0 /* WeatherProvider.swift */,
+				E2117B442B29B9E200F91ADB /* Provider */,
 				E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */,
 				E2F671242B2368F700B791A0 /* WeatherEntry.swift */,
 				E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */,
@@ -1138,11 +1156,13 @@
 				E23997ED20E84371007D8CE4 /* JSONParser.swift in Sources */,
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
 				E21ABD462AE8301A00F93F01 /* LocationRow.swift in Sources */,
+				E2117B4B2B29D69700F91ADB /* SpeedRenderer.swift in Sources */,
 				E21ABD062AE5A0DF00F93F01 /* LocationWeatherView+ViewModel.swift in Sources */,
 				E2FEB7B32B15F92E009D54B2 /* Humidity.swift in Sources */,
 				E28092E82AFD0A410019FD7C /* LocationSearchViewController.swift in Sources */,
 				E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */,
 				E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */,
+				E2117B482B29D48300F91ADB /* TemperatureRenderer.swift in Sources */,
 				E2FEB7B72B15FA18009D54B2 /* CurrentWeatherCardViewController.swift in Sources */,
 				E2227E872ADD54B8000C3886 /* TemperatureValueDisplayable.swift in Sources */,
 				E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */,
@@ -1218,6 +1238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */,
+				E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */,
 				E283572B2B23894800E3807A /* Geocoder.swift in Sources */,
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2F671232B23682F00B791A0 /* WeatherProvider.swift in Sources */,
@@ -1233,6 +1254,7 @@
 				E2AD326B2B23774400F46FBE /* Endpoint.swift in Sources */,
 				E2AD32692B23774400F46FBE /* CurrentWeatherResponse.swift in Sources */,
 				E2AD32682B23774400F46FBE /* WeatherEndpoint.swift in Sources */,
+				E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */,
 				E2F671162B234EAE00B791A0 /* TemperatureValueDisplayable.swift in Sources */,
 				E2F6711A2B2350AD00B791A0 /* TemperatureCelsiusFormatter.swift in Sources */,
 				E2AD32702B23779000F46FBE /* ConfigurationSettingsAccessor.swift in Sources */,
