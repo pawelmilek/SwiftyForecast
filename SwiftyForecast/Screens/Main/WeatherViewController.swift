@@ -210,7 +210,14 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return Constant.hourlySizeForItem
+//        return Constant.hourlySizeForItem
+        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
+            return Constant.hourlySizeForItem
+        }
+
+        let numberOfCells = CGFloat(4)
+        let width = (collectionView.frame.size.width - (numberOfCells * view.frame.size.width / 15)) / numberOfCells
+        return CGSize(width: width, height: 85)
     }
 
     func collectionView(
@@ -218,7 +225,15 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         insetForSectionAt section: Int
     ) -> UIEdgeInsets {
-        return Constant.hourlyInsetForSection
+//        return Constant.hourlyInsetForSection
+        let cellWidthPadding = collectionView.frame.size.width / 30
+        let cellHeightPadding = collectionView.frame.size.height / 4
+        return UIEdgeInsets(
+            top: cellHeightPadding,
+            left: cellWidthPadding,
+            bottom: cellHeightPadding,
+            right: cellWidthPadding
+        )
     }
 
     func collectionView(

@@ -5,7 +5,7 @@ import Combine
 extension WeatherViewController {
     @MainActor
     final class ViewModel: ObservableObject, Equatable {
-        static let numberOfThreeHoursForecastItems = 8
+        static let numberOfThreeHoursForecastItems = 7
 
         var compoundKey: String { locationModel?.compoundKey ?? "" }
         @Published private(set) var isLoading = false
