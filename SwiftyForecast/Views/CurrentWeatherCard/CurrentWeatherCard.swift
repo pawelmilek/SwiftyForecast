@@ -52,6 +52,8 @@ private extension CurrentWeatherCard {
     var locationNameView: some View {
         Text(viewModel.locationName)
             .font(Style.WeatherCard.locationNameFont)
+            .id(viewModel.locationName)
+            .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
     }
 
     var iconDescriptionView: some View {
@@ -59,6 +61,8 @@ private extension CurrentWeatherCard {
             iconView
             dayDescriptionView
         }
+        .id(viewModel.description)
+        .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
     }
 
     var iconView: some View {
@@ -97,6 +101,8 @@ private extension CurrentWeatherCard {
             }
             .font(Style.WeatherCard.temperatureMaxMinFont)
         }
+        .id(viewModel.temperature)
+        .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
     }
 
     var conditionsView: some View {
@@ -105,18 +111,29 @@ private extension CurrentWeatherCard {
                 Image(systemName: viewModel.sunrise.symbol)
                 Text(viewModel.sunrise.getTime())
             }
+            .id(viewModel.sunrise.getTime())
+            .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
+
             VStack {
                 Image(systemName: viewModel.windSpeed.symbol)
                 Text(viewModel.windSpeed.value)
             }
+            .id(viewModel.windSpeed.value)
+            .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
+
             VStack {
                 Image(systemName: viewModel.humidity.symbol)
                 Text(viewModel.humidity.value)
             }
+            .id(viewModel.humidity.value)
+            .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
+
             VStack {
                 Image(systemName: viewModel.sunset.symbol)
                 Text(viewModel.sunset.getTime())
             }
+            .id(viewModel.sunset.getTime())
+            .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
         }
         .font(Style.WeatherCard.conditionsFont)
         .fixedSize()

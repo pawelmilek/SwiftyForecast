@@ -49,7 +49,7 @@ private extension CurrentWeatherView {
             .fontWeight(.semibold)
             .fontDesign(.monospaced)
             .foregroundStyle(.white)
-            .lineLimit(2)
+            .modifier(TextScaledModifier())
     }
 
     var temperatureView: some View {
