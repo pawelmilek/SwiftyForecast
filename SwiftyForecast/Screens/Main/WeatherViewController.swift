@@ -3,10 +3,11 @@ import Combine
 
 final class WeatherViewController: UIViewController {
     private enum Constant {
-        static let weekdaysTableViewHeightForRowAtIndexPath = CGFloat(50)
-        static let hourlySizeForItem = CGSize(width: 70, height: 85)
+        static let weekdayCellHeight = CGFloat(53)
+        static let numberOfHourlyCellsInRow = CGFloat(4)
+        static let hourlySizeForItem = CGSize(width: 77, height: 65)
         static let hourlyInsetForSection = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        static let hourlyMinimumLineSpacingForSection = CGFloat(20)
+        static let hourlyMinimumLineSpacingForSection = CGFloat(10)
     }
 
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
@@ -210,38 +211,20 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return Constant.hourlySizeForItem
+
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
             return Constant.hourlySizeForItem
         }
 
-        let numberOfCells = CGFloat(4)
-        let width = (collectionView.frame.size.width - (numberOfCells * view.frame.size.width / 15)) / numberOfCells
-        return CGSize(width: width, height: 85)
-    }
+        let sectionInsetLeftAndRightSum = flowLayout.sectionInset.left + flowLayout.sectionInset.right
+        let numberOfHorizontalSpacing = Constant.numberOfHourlyCellsInRow - 1
+        let minimumLineSpacing = flowLayout.minimumLineSpacing
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAt section: Int
-    ) -> UIEdgeInsets {
-//        return Constant.hourlyInsetForSection
-        let cellWidthPadding = collectionView.frame.size.width / 30
-        let cellHeightPadding = collectionView.frame.size.height / 4
-        return UIEdgeInsets(
-            top: cellHeightPadding,
-            left: cellWidthPadding,
-            bottom: cellHeightPadding,
-            right: cellWidthPadding
-        )
-    }
+        let collectionViewWidth = collectionView.frame.size.width
+        let totalAvailableSpace = sectionInsetLeftAndRightSum + (minimumLineSpacing * numberOfHorizontalSpacing)
 
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumLineSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return Constant.hourlyMinimumLineSpacingForSection
+        let width = (collectionViewWidth - totalAvailableSpace) / Constant.numberOfHourlyCellsInRow
+        return CGSize(width: width, height: Constant.hourlySizeForItem.height)
     }
 
 }
@@ -274,7 +257,7 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        Constant.weekdaysTableViewHeightForRowAtIndexPath
+        Constant.weekdayCellHeight
     }
 
 }

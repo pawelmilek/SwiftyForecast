@@ -883,14 +883,14 @@
 		E2FDBD692B2079DF0012D7C4 /* SwiftyForecast Widget */ = {
 			isa = PBXGroup;
 			children = (
+				E2117B442B29B9E200F91ADB /* Provider */,
+				E2AD32772B2381CD00F46FBE /* WidgetLocationManager.swift */,
 				E2FDBD6A2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift */,
 				E2F6711E2B23680800B791A0 /* CurrentWeatherView.swift */,
-				E2117B442B29B9E200F91ADB /* Provider */,
 				E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */,
 				E2F671242B2368F700B791A0 /* WeatherEntry.swift */,
 				E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */,
 				E2FDBD702B2079E00012D7C4 /* Info.plist */,
-				E2AD32772B2381CD00F46FBE /* WidgetLocationManager.swift */,
 			);
 			path = "SwiftyForecast Widget";
 			sourceTree = "<group>";
@@ -1425,7 +1425,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				ENABLE_TESTABILITY = YES;
@@ -1436,7 +1436,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1458,7 +1458,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";
@@ -1468,7 +1468,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0;
+				MARKETING_VERSION = 3.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

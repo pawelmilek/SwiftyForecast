@@ -34,8 +34,8 @@ struct Style {
 
         static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .semibold)
         static let dayDescriptionFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
-        static let temperatureFont = Font.system(size: 80, weight: .semibold, design: .monospaced)
-        static let temperatureMaxMinFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
+        static let temperatureFont = Font.system(size: 80, weight: .black, design: .monospaced)
+        static let temperatureMaxMinFont = Font.system(.footnote, design: .monospaced, weight: .black)
         static let conditionsFont = Font.system(.caption, design: .monospaced, weight: .semibold)
 
         static let iconShadowRadius = CGFloat(0.5)
@@ -56,13 +56,13 @@ struct Style {
     // MARK: - HourlyViewCell
     struct HourlyCell {
         static let backgroundColor = UIColor.primary
-        static let cornerRadius = CGFloat(18)
+        static let cornerRadius = CGFloat(15)
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
-        static let timeColor = UIColor.white
+        static let timeColor = UIColor.tertiary
         static let timeAlignment = NSTextAlignment.center
-        static let temperatureFont = UIFont.preferredFont(for: .footnote, weight: .semibold, design: .monospaced)
-        static let temperatureColor = UIColor.white
-        static let temperatureAlignment = NSTextAlignment.center
+        static let temperatureFont = UIFont.preferredFont(for: .body, weight: .bold, design: .monospaced)
+        static let temperatureColor = UIColor.tertiary
+        static let temperatureAlignment = NSTextAlignment.right
         static let iconContentMode = UIView.ContentMode.scaleAspectFit
 
         static let lineBorderWidth = CGFloat(2)

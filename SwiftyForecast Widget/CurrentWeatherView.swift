@@ -13,12 +13,9 @@ struct CurrentWeatherView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            HStack(alignment: .top, spacing: 0) {
-                iconView
-                    .frame(maxWidth: proxy.size.width * 0.5)
-                locationView
-                    .frame(maxWidth: proxy.size.width * 0.5, alignment: .leading)
-            }
+            iconView
+                .frame(maxWidth: proxy.size.width * 0.5)
+
             temperatureView
             .frame(maxWidth: proxy.size.width, alignment: .center)
             .offset(y: 30)
@@ -26,6 +23,10 @@ struct CurrentWeatherView: View {
         .overlay(alignment: .bottom) {
             descriptionView
                 .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .overlay(alignment: .topTrailing) {
+            locationView
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }
 }
@@ -44,21 +45,27 @@ private extension CurrentWeatherView {
     }
 
     var locationView: some View {
-        Text(entry.locationName)
-            .font(.caption2)
-            .fontWeight(.semibold)
-            .fontDesign(.monospaced)
-            .foregroundStyle(.white)
-            .lineLimit(2)
+        HStack(spacing: 3) {
+            Text(entry.locationName)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .fontDesign(.monospaced)
+                .foregroundStyle(.white)
+            Image(systemName: "location.fill")
+                .font(.system(size: 10))
+                .foregroundStyle(.white)
+        }
+
     }
 
     var temperatureView: some View {
         VStack(spacing: -10) {
             Text(entry.temperature)
-                .font(.system(size: 50, weight: .bold, design: .monospaced))
+                .font(.system(size: 50, weight: .heavy, design: .monospaced))
                 .modifier(TextScaledModifier())
             Text(entry.temperatureMaxMin)
                 .font(.caption2)
+                .fontWeight(.bold)
         }
         .lineLimit(1)
         .foregroundStyle(.accent)

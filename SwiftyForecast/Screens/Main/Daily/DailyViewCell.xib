@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,38 +10,39 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="72" id="KGk-i7-Jjw" customClass="DailyViewCell" customModule="SwiftyForecast" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="447" height="72"/>
+            <rect key="frame" x="0.0" y="0.0" width="447" height="53"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="447" height="72"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="53"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="Kdw-q5-afC">
-                        <rect key="frame" x="397" y="13.5" width="45" height="45"/>
+                        <rect key="frame" x="389" y="0.0" width="53" height="53"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="45" id="CQd-OQ-JTf"/>
-                            <constraint firstAttribute="height" constant="45" id="cA9-2G-MGx"/>
+                            <constraint firstAttribute="width" secondItem="Kdw-q5-afC" secondAttribute="height" multiplier="1:1" id="5Or-Q7-Ecp"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" text="DateLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdO-y7-kPE">
-                        <rect key="frame" x="5" y="25.5" width="77.5" height="21"/>
+                        <rect key="frame" x="5" y="16" width="77.666666666666671" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="TemperatureLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyb-bT-xSd">
-                        <rect key="frame" x="154.5" y="26" width="138.5" height="20"/>
+                        <rect key="frame" x="154.33333333333331" y="16.666666666666668" width="138.33333333333331" height="20.000000000000004"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Kdw-q5-afC" secondAttribute="bottom" id="20p-Kd-u5j"/>
                     <constraint firstAttribute="trailing" secondItem="Kdw-q5-afC" secondAttribute="trailing" constant="5" id="2gj-rw-Y5b"/>
                     <constraint firstAttribute="trailing" secondItem="Kdw-q5-afC" secondAttribute="trailing" constant="5" id="Bbp-sX-X2j"/>
                     <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="eyb-bT-xSd" secondAttribute="bottom" constant="26" id="Bqh-Ir-hSZ"/>
                     <constraint firstItem="eyb-bT-xSd" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="D4H-I3-xV0"/>
                     <constraint firstItem="eyb-bT-xSd" firstAttribute="top" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="R0p-Rl-zjS"/>
+                    <constraint firstItem="Kdw-q5-afC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="a2H-zt-gs9"/>
                     <constraint firstItem="FdO-y7-kPE" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cBi-Kc-0tK"/>
                     <constraint firstItem="Kdw-q5-afC" firstAttribute="centerY" secondItem="eyb-bT-xSd" secondAttribute="centerY" id="fql-Eq-aGr"/>
                     <constraint firstItem="eyb-bT-xSd" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="k3c-17-AT7"/>
