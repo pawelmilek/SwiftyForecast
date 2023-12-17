@@ -60,7 +60,7 @@ struct Style {
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
         static let timeColor = UIColor.tertiary
         static let timeAlignment = NSTextAlignment.center
-        static let temperatureFont = UIFont.preferredFont(for: .callout, weight: .bold, design: .monospaced)
+        static let temperatureFont = UIFont.preferredFont(for: .body, weight: .bold, design: .monospaced)
         static let temperatureColor = UIColor.tertiary
         static let temperatureAlignment = NSTextAlignment.right
         static let iconContentMode = UIView.ContentMode.scaleAspectFit

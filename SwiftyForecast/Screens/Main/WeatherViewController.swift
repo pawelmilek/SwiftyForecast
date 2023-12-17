@@ -3,7 +3,7 @@ import Combine
 
 final class WeatherViewController: UIViewController {
     private enum Constant {
-        static let weekdaysTableViewHeightForRowAtIndexPath = CGFloat(50)
+        static let weekdayCellHeight = CGFloat(53)
         static let numberOfHourlyCellsInRow = CGFloat(4)
         static let hourlySizeForItem = CGSize(width: 77, height: 65)
         static let hourlyInsetForSection = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
@@ -257,7 +257,7 @@ extension WeatherViewController: UITableViewDataSource {
 extension WeatherViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        Constant.weekdaysTableViewHeightForRowAtIndexPath
+        Constant.weekdayCellHeight
     }
 
 }
