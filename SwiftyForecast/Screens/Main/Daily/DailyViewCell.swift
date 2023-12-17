@@ -27,7 +27,7 @@ private extension DailyViewCell {
 
         dateLabel.textColor = Style.DailyCell.dateColor
         dateLabel.textAlignment = Style.DailyCell.dateAlignment
-        dateLabel.numberOfLines = 2
+        dateLabel.numberOfLines = Style.DailyCell.numberOfLines
 
         temperatureLabel.font = Style.DailyCell.temperatureFont
         temperatureLabel.textColor = Style.DailyCell.temperatureColor

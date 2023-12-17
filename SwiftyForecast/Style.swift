@@ -82,6 +82,7 @@ struct Style {
 
         static let dateColor = UIColor.tertiary
         static let dateAlignment = NSTextAlignment.left
+        static let numberOfLines = 2
 
         static let iconColor = UIColor.tertiary
         static let iconAlignment = NSTextAlignment.center
