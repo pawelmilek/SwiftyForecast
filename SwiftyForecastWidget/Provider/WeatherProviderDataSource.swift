@@ -17,6 +17,23 @@ struct WeatherProviderDataSource {
         let description: String
         let temperature: String
         let temperatureMaxMin: String
+        let hourly: [HourlyEntryData]
+    }
+
+    struct HourlyEntryData {
+        let icon: Image
+        let temperature: String
+        let time: String
+
+        init(
+            icon: Image,
+            temperature: String,
+            time: String
+        ) {
+            self.icon = icon
+            self.temperature = temperature
+            self.time = time
+        }
     }
 
     private let service: WeatherServiceProtocol
@@ -34,17 +51,18 @@ struct WeatherProviderDataSource {
         let placemark = await fetchPlacemark(at: location)
         let name = placemark.locality ?? InvalidReference.undefined
         let coordinate = placemark.location?.coordinate ?? location.coordinate
-        let model = await fetchCurrentWeather(coordinate: coordinate)
-        let icon = await fetchIcon(with: model.icon)
+        let currentModel = await fetchCurrentWeather(coordinate: coordinate)
+        let currentIcon = await fetchIcon(with: currentModel.icon)
+        let hourlyEntryData = await loadHourlyEntryData(coordinate: coordinate)
 
-        let readyForDisplayTemperature = temperatureRenderer.render(model.temperatureValue)
-
+        let readyForDisplayCurrentTemperature = temperatureRenderer.render(currentModel.temperatureValue)
         let result = EntryData(
             name: name,
-            icon: icon,
-            description: model.description,
-            temperature: readyForDisplayTemperature.current,
-            temperatureMaxMin: readyForDisplayTemperature.maxMin
+            icon: currentIcon,
+            description: currentModel.description,
+            temperature: readyForDisplayCurrentTemperature.current,
+            temperatureMaxMin: readyForDisplayCurrentTemperature.maxMin,
+            hourly: hourlyEntryData
         )
 
         return result
@@ -81,4 +99,34 @@ struct WeatherProviderDataSource {
             fatalError(error.localizedDescription)
         }
     }
+
+    private func loadHourlyEntryData(coordinate: CLLocationCoordinate2D) async -> [HourlyEntryData] {
+        let models = await fetchTwelveHoursForecastWeather(coordinate: coordinate)
+
+        var hourlyEntryData = [HourlyEntryData]()
+        for model in models {
+            let icon = await fetchIcon(with: model.icon)
+            let data = HourlyEntryData(
+                icon: icon,
+                temperature: temperatureRenderer.render(model.temperature).current,
+                time: model.date.shortTime
+            )
+            hourlyEntryData.append(data)
+        }
+        return hourlyEntryData
+    }
+
+    private func fetchTwelveHoursForecastWeather(coordinate: CLLocationCoordinate2D) async -> [HourlyForecastModel] {
+        do {
+            let forecast = try await service.fetchForecast(
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+            )
+            let forecastModel = ResponseParser.parse(forecast: forecast)
+            return Array(forecastModel.hourly.prefix(upTo: 4))
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
 }

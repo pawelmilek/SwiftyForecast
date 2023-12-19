@@ -10,24 +10,34 @@ import WidgetKit
 import SwiftUI
 
 struct SwiftyForecastWidget: Widget {
-    let kind = "com.pawelmilek.Swifty-Forecast.widget"
+    private enum Constant {
+        static let kind = "com.pawelmilek.Swifty-Forecast.widget"
+        static let supportedFamilies: [WidgetFamily] = [.systemSmall, .systemMedium]
+    }
 
     var body: some WidgetConfiguration {
         StaticConfiguration(
-            kind: kind,
+            kind: Constant.kind,
             provider: WeatherProvider()
         ) { entry in
-            CurrentWeatherView(entry: entry)
+            WeatherWidgetEntryView(entry: entry)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .containerBackground(.widgetBackground, for: .widget)
         }
         .configurationDisplayName("Weather")
-        .description("Glance the conditions for current location.")
-        .supportedFamilies([.systemSmall])
+        .description("Glance the current conditions and forecast for a location.")
+        .supportedFamilies(Constant.supportedFamilies)
     }
 }
 
 #Preview(as: .systemSmall) {
+    SwiftyForecastWidget()
+} timeline: {
+    WeatherEntry.sampleTimeline.first!
+    WeatherEntry.sampleTimeline.last!
+}
+
+#Preview(as: .systemMedium) {
     SwiftyForecastWidget()
 } timeline: {
     WeatherEntry.sampleTimeline.first!

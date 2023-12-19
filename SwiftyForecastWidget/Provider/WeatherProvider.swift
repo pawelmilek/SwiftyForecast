@@ -33,7 +33,14 @@ struct WeatherProvider: TimelineProvider {
                 icon: result.icon,
                 description: result.description,
                 temperature: result.temperature,
-                temperatureMaxMin: result.temperatureMaxMin
+                temperatureMaxMin: result.temperatureMaxMin,
+                hourly: result.hourly.compactMap {
+                    HourlyEntry(
+                        icon: $0.icon,
+                        temperature: $0.temperature,
+                        time: $0.time
+                    )
+                }
             )
 
             completion(entry)
@@ -51,7 +58,14 @@ struct WeatherProvider: TimelineProvider {
                 icon: result.icon,
                 description: result.description,
                 temperature: result.temperature,
-                temperatureMaxMin: result.temperatureMaxMin
+                temperatureMaxMin: result.temperatureMaxMin,
+                hourly: result.hourly.compactMap {
+                    HourlyEntry(
+                        icon: $0.icon,
+                        temperature: $0.temperature,
+                        time: $0.time
+                    )
+                }
             )
 
             let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: now)!

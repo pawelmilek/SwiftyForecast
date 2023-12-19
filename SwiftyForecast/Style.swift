@@ -4,13 +4,13 @@ import SwiftUI
 struct Style {
     // MARK: - NavigationBar
     struct NavigationBar {
-        static let barButtonItemColor = UIColor.tertiary
-        static let titleColor = UIColor.tertiary
+        static let barButtonItemColor = UIColor.accent
+        static let titleColor = UIColor.accent
     }
 
     // MARK: - MainViewController
     struct Main {
-        static let pageIndicatorTintColor = UIColor.tertiary
+        static let pageIndicatorTintColor = UIColor.accent
         static let currentPageIndicatorColor = UIColor.primary
         static let backgroundColor = UIColor.systemBackground
     }
@@ -27,9 +27,9 @@ struct Style {
         static let backgroundColor = Color(uiColor: .primary)
         static let cornerRadius: CGFloat = 25
         static let shadowColor = Color(.shadow)
-        static let lineBorderWidth = CGFloat(2)
+        static let lineBorderWidth = CGFloat(2.5)
         static let shadowRadius = CGFloat(0)
-        static let shadow = (x: CGFloat(2.5), y: CGFloat(2.5))
+        static let shadow = (x: CGFloat(3), y: CGFloat(3))
         static let textColor = Color.white
 
         static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .semibold)
@@ -58,10 +58,10 @@ struct Style {
         static let backgroundColor = UIColor.primary
         static let cornerRadius = CGFloat(15)
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
-        static let timeColor = UIColor.tertiary
+        static let timeColor = UIColor.accent
         static let timeAlignment = NSTextAlignment.center
         static let temperatureFont = UIFont.preferredFont(for: .body, weight: .bold, design: .monospaced)
-        static let temperatureColor = UIColor.tertiary
+        static let temperatureColor = UIColor.accent
         static let temperatureAlignment = NSTextAlignment.right
         static let iconContentMode = UIView.ContentMode.scaleAspectFit
 
@@ -80,15 +80,15 @@ struct Style {
     struct DailyCell {
         static let backgroundColor = UIColor.clear
 
-        static let dateColor = UIColor.tertiary
+        static let dateColor = UIColor.accent
         static let dateAlignment = NSTextAlignment.left
         static let numberOfLines = 2
 
-        static let iconColor = UIColor.tertiary
+        static let iconColor = UIColor.accent
         static let iconAlignment = NSTextAlignment.center
 
         static let temperatureFont = UIFont.preferredFont(for: .title3, weight: .bold, design: .monospaced)
-        static let temperatureColor = UIColor.tertiary
+        static let temperatureColor = UIColor.accent
         static let temperatureAlignment = NSTextAlignment.center
 
         static let weekdayFont = UIFont.preferredFont(for: .subheadline, weight: .bold, design: .monospaced)
@@ -107,7 +107,7 @@ struct Style {
         static let timeAlignment = NSTextAlignment.left
 
         static let nameFont = Font.system(.subheadline, design: .monospaced, weight: .semibold)
-        static let nameColor = Color(uiColor: .tertiary)
+        static let nameColor = Color(uiColor: .accent)
         static let locationNameAlignment = NSTextAlignment.left
 
         static let cornerRadius = CGFloat(15)
@@ -134,9 +134,9 @@ struct Style {
     struct Offline {
         static let backgroundColor = UIColor.systemBackground
         static let symbolFont = UIFont.systemFont(ofSize: 100, weight: .light)
-        static let symbolColor = UIColor.tertiary
+        static let symbolColor = UIColor.accent
         static let descriptionFont = UIFont.preferredFont(for: .title2, weight: .bold, design: .monospaced)
-        static let descriptionColor = UIColor.tertiary
+        static let descriptionColor = UIColor.accent
         static let descriptionAlignment = NSTextAlignment.center
     }
 }

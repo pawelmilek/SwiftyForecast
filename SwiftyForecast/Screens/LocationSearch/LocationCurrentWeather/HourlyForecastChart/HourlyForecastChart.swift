@@ -33,7 +33,7 @@ struct HourlyForecastChart: View {
                                     .font(.subheadline)
                                     .fontWeight(.semibold)
                                     .fontDesign(.monospaced)
-                                    .foregroundColor(Color(uiColor: .tertiary))
+                                    .foregroundStyle(.accent)
                                     .modifier(TextScaledModifier())
                                 AsyncImage(url: item.iconURL, content: { image in
                                     image
@@ -74,7 +74,7 @@ struct HourlyForecastChart: View {
                                 Text(hour)
                                     .font(.footnote)
                                     .fontDesign(.monospaced)
-                                    .foregroundStyle(Color(uiColor: .tertiary)).opacity(0.5)
+                                    .foregroundStyle(.accent).opacity(0.5)
                             }
                         }
                     }
@@ -86,7 +86,7 @@ struct HourlyForecastChart: View {
         } label: {
             headerView
         }
-        .groupBoxStyle(YellowGroupBoxStyle())
+        .groupBoxStyle(BackgroundGroupBoxStyle())
         .frame(maxHeight: ViewModel.chartHeight)
     }
 }
@@ -100,7 +100,7 @@ private extension HourlyForecastChart {
         .font(.footnote)
         .fontWeight(.semibold)
         .fontDesign(.monospaced)
-        .foregroundStyle(Color(uiColor: .tertiary))
+        .foregroundStyle(.accent)
     }
 }
 
@@ -111,18 +111,4 @@ private extension HourlyForecastChart {
         )
     )
     .padding(22.5)
-}
-
-struct YellowGroupBoxStyle: GroupBoxStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.content
-            .padding(.top, 40)
-            .padding(.horizontal, 10)
-            .background(.background)
-            .cornerRadius(20)
-            .overlay(
-                configuration.label.padding(10),
-                alignment: .topLeading
-            )
-    }
 }

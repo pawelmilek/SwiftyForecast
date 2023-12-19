@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E29911F51D456EAC0083B484"
-               BuildableName = "SwiftyForecast.app"
-               BlueprintName = "SwiftyForecast"
+               BuildableName = "Swifty Forecast.app"
+               BlueprintName = "Swifty Forecast"
                ReferencedContainer = "container:SwiftyForecast.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29911F51D456EAC0083B484"
-            BuildableName = "SwiftyForecast.app"
-            BlueprintName = "SwiftyForecast"
+            BuildableName = "Swifty Forecast.app"
+            BlueprintName = "Swifty Forecast"
             ReferencedContainer = "container:SwiftyForecast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E29911F51D456EAC0083B484"
-            BuildableName = "SwiftyForecast.app"
-            BlueprintName = "SwiftyForecast"
+            BuildableName = "Swifty Forecast.app"
+            BlueprintName = "Swifty Forecast"
             ReferencedContainer = "container:SwiftyForecast.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

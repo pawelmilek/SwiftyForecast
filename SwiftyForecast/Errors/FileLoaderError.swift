@@ -1,4 +1,4 @@
-enum FileLoaderError: ErrorPresentable {
+enum FileLoaderError: Error {
   case fileNotFound(name: String)
   case incorrectFormat
   case unsupportedError
