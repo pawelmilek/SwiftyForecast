@@ -123,13 +123,10 @@ private extension WeatherViewController {
             .store(in: &cancellables)
 
         viewModel.$error
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { error in
-                if let error = error as? ErrorPresentable {
-                    error.present()
-                } else if let error {
-                    AlertViewPresenter.shared.presentError(withMessage: error.localizedDescription)
-                }
+                debugPrint(error.localizedDescription)
             }
             .store(in: &cancellables)
     }

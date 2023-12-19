@@ -39,7 +39,7 @@ struct LocationWeatherView: View {
                         onDismissSearch()
                     } label: {
                         Text("Cancel")
-                            .foregroundStyle(Color(uiColor: .tertiary))
+                            .foregroundStyle(.accent)
                             .font(.subheadline)
                             .fontDesign(.monospaced)
                             .fontWeight(.semibold)
@@ -51,7 +51,7 @@ struct LocationWeatherView: View {
                         onDismissSearch()
                     } label: {
                         Text("Add")
-                            .foregroundStyle(Color(uiColor: .tertiary))
+                            .foregroundStyle(.accent)
                             .fontDesign(.monospaced)
                             .fontWeight(.semibold)
                     }

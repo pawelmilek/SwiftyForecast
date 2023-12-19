@@ -160,8 +160,10 @@ extension MainViewController {
             WidgetCenter.shared.getCurrentConfigurations { result in
                 guard case .success(let widgets) = result else { return }
 
-                if let widget = widgets.first {
-                    WidgetCenter.shared.reloadTimelines(ofKind: widget.kind)
+                Task { @MainActor in
+                    if let widget = widgets.first {
+                        WidgetCenter.shared.reloadTimelines(ofKind: widget.kind)
+                    }
                 }
             }
         }

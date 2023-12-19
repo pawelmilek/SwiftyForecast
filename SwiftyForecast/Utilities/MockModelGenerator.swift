@@ -31,25 +31,4 @@ struct MockModelGenerator {
             fatalError(error.localizedDescription)
         }
     }
-
-    static func generateLocationModel() -> LocationModel {
-        do {
-            let currentWeatherData = try JSONFileLoader.loadFile(with: "current_weather_response")
-            let currentResponse = JSONParser<CurrentWeatherResponse>.parse(currentWeatherData)
-            let locationModel = LocationModel()
-            locationModel.compoundKey = "name||state||country||postalCode"
-            locationModel.name = currentResponse.name
-            locationModel.country = "Poland"
-            locationModel.state = ""
-            locationModel.postalCode = ""
-            locationModel.secondsFromGMT = currentResponse.timezone
-            locationModel.latitude = currentResponse.coordinate.latitude
-            locationModel.longitude = currentResponse.coordinate.longitude
-            locationModel.lastUpdate = Date()
-            locationModel.isUserLocation = false
-            return locationModel
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
 }

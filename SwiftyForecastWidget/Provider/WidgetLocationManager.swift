@@ -36,16 +36,20 @@ final class WidgetLocationManager: NSObject {
 
     func startUpdatingLocation() async -> CLLocation {
         await withCheckedContinuation { continuation in
-            self.startUpdatingLocation { location in
+            self.requestLocation { location in
                 continuation.resume(returning: location)
             }
         }
     }
 
-    private func startUpdatingLocation(completionHandler: @escaping (CLLocation) -> Void) {
+    func stopUpdatingLocation() {
+        manager.stopUpdatingLocation()
+    }
+
+    private func requestLocation(completionHandler: @escaping (CLLocation) -> Void) {
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
         self.completionHandler = completionHandler
-        self.manager.startUpdatingLocation()
+        manager.requestLocation()
     }
 }
 
@@ -83,6 +87,9 @@ extension WidgetLocationManager: CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let latestLocation = locations.first else { return }
+
+        debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
+        debugPrint(latestLocation)
         self.completionHandler?(latestLocation)
     }
 

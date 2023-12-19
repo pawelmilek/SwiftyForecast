@@ -2,14 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationUsageDescription</key>
-	<string>The app requires location services to get weather data in your area.</string>
 	<key>NSWidgetWantsLocation</key>
 	<true/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>The app requires location services to get weather data in your area.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>The app requires location services to get weather data in your area.</string>
 	<key>NSLocationDefaultAccuracyReduced</key>
 	<true/>
 	<key>ConfigurationSettings</key>
