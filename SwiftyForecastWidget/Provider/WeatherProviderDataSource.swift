@@ -53,6 +53,26 @@ struct WeatherProviderDataSource {
         let coordinate = placemark.location?.coordinate ?? location.coordinate
         let currentModel = await fetchCurrentWeather(coordinate: coordinate)
         let currentIcon = await fetchIcon(with: currentModel.icon)
+
+        let readyForDisplayCurrentTemperature = temperatureRenderer.render(currentModel.temperatureValue)
+        let result = EntryData(
+            name: name,
+            icon: currentIcon,
+            description: currentModel.description,
+            temperature: readyForDisplayCurrentTemperature.current,
+            temperatureMaxMin: readyForDisplayCurrentTemperature.maxMin,
+            hourly: []
+        )
+
+        return result
+    }
+
+    func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> EntryData {
+        let placemark = await fetchPlacemark(at: location)
+        let name = placemark.locality ?? InvalidReference.undefined
+        let coordinate = placemark.location?.coordinate ?? location.coordinate
+        let currentModel = await fetchCurrentWeather(coordinate: coordinate)
+        let currentIcon = await fetchIcon(with: currentModel.icon)
         let hourlyEntryData = await loadHourlyEntryData(coordinate: coordinate)
 
         let readyForDisplayCurrentTemperature = temperatureRenderer.render(currentModel.temperatureValue)

@@ -19,64 +19,114 @@ struct WeatherProvider: TimelineProvider {
     }
 
     func placeholder(in context: Context) -> WeatherEntry {
-        WeatherEntry.sampleTimeline.first!
+        debugPrint("placeholder \(context.family)")
+        return WeatherEntry.sampleTimeline.first!
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WeatherEntry) -> Void) {
         Task(priority: .userInitiated) {
-            let result = await loadWeatherDataForCurrentLocation()
+            debugPrint("getSnapshot \(context.family)")
+
+            locationManager.stopUpdatingLocation()
+            let location = await locationManager.startUpdatingLocation()
+
             let now = Date.now
+            if context.family == .systemSmall {
+                let result = await loadWeatherData(for: location)
+                let entry = WeatherEntry(
+                    date: now,
+                    locationName: result.name,
+                    icon: result.icon,
+                    description: result.description,
+                    temperature: result.temperature,
+                    temperatureMaxMin: result.temperatureMaxMin,
+                    hourly: []
+                )
+                completion(entry)
+            }
 
-            let entry = WeatherEntry(
-                date: now,
-                locationName: result.name,
-                icon: result.icon,
-                description: result.description,
-                temperature: result.temperature,
-                temperatureMaxMin: result.temperatureMaxMin,
-                hourly: result.hourly.compactMap {
-                    HourlyEntry(
-                        icon: $0.icon,
-                        temperature: $0.temperature,
-                        time: $0.time
-                    )
-                }
-            )
-
-            completion(entry)
+            if context.family == .systemMedium {
+                let result = await loadWeatherDataWithHourlyForecast(for: location)
+                let entry = WeatherEntry(
+                    date: now,
+                    locationName: result.name,
+                    icon: result.icon,
+                    description: result.description,
+                    temperature: result.temperature,
+                    temperatureMaxMin: result.temperatureMaxMin,
+                    hourly: result.hourly.compactMap {
+                        HourlyEntry(
+                            icon: $0.icon,
+                            temperature: $0.temperature,
+                            time: $0.time
+                        )
+                    }
+                )
+                completion(entry)
+            }
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WeatherEntry>) -> Void) {
         Task(priority: .userInitiated) {
-            let result = await loadWeatherDataForCurrentLocation()
-            let now = Date.now
+            debugPrint("getTimeline \(context.family)")
+            debugPrint("isMainThread \(Thread.isMainThread)")
 
-            let entry = WeatherEntry(
-                date: now,
-                locationName: result.name,
-                icon: result.icon,
-                description: result.description,
-                temperature: result.temperature,
-                temperatureMaxMin: result.temperatureMaxMin,
-                hourly: result.hourly.compactMap {
-                    HourlyEntry(
-                        icon: $0.icon,
-                        temperature: $0.temperature,
-                        time: $0.time
-                    )
-                }
-            )
+            let location = await locationManager.startUpdatingLocation()
+            let now = Date.now
+            var entries = [WeatherEntry]()
+
+            if context.family == .systemSmall {
+                let result = await loadWeatherData(for: location)
+                let entry = WeatherEntry(
+                    date: now,
+                    locationName: result.name,
+                    icon: result.icon,
+                    description: result.description,
+                    temperature: result.temperature,
+                    temperatureMaxMin: result.temperatureMaxMin,
+                    hourly: []
+                )
+
+                entries.append(entry)
+            }
+
+            if context.family == .systemMedium {
+                let result = await loadWeatherDataWithHourlyForecast(for: location)
+                let entry = WeatherEntry(
+                    date: now,
+                    locationName: result.name,
+                    icon: result.icon,
+                    description: result.description,
+                    temperature: result.temperature,
+                    temperatureMaxMin: result.temperatureMaxMin,
+                    hourly: result.hourly.compactMap {
+                        HourlyEntry(
+                            icon: $0.icon,
+                            temperature: $0.temperature,
+                            time: $0.time
+                        )
+                    }
+                )
+
+                entries.append(entry)
+            }
 
             let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: now)!
-            let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+            let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
             completion(timeline)
         }
     }
 
-    private func loadWeatherDataForCurrentLocation() async -> WeatherProviderDataSource.EntryData {
-        let location = await locationManager.startUpdatingLocation()
+    private func loadWeatherData(for location: CLLocation) async -> WeatherProviderDataSource.EntryData {
+        debugPrint("loadWeatherData")
         let result = await dataSource.loadEntryData(for: location)
+        return result
+    }
+
+    private func loadWeatherDataWithHourlyForecast(for location: CLLocation) async -> WeatherProviderDataSource.EntryData {
+        debugPrint("loadWeatherDataWithHourlyForecast")
+        let result = await dataSource.loadEntryDataWithHourlyForecast(for: location)
         return result
     }
 }
