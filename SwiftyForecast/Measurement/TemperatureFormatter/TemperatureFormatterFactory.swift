@@ -26,7 +26,7 @@ struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
         by notation: TemperatureNotation,
         valueInKelvin current: Double
     ) -> TemperatureValueDisplayable {
-        let value = TemperatureValue(current: current, min: .signalingNaN, max: .signalingNaN)
+        let value = TemperatureValue(current: current)
         return make(by: notation, valueInKelvin: value)
     }
 
