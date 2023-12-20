@@ -12,7 +12,13 @@ import SwiftUI
 struct SwiftyForecastWidget: Widget {
     private enum Constant {
         static let kind = "com.pawelmilek.Swifty-Forecast.widget"
-        static let supportedFamilies: [WidgetFamily] = [.systemSmall, .systemMedium]
+        static let supportedFamilies: [WidgetFamily] = [
+            .systemSmall,
+            .systemMedium,
+            .accessoryInline,
+            .accessoryCircular,
+            .accessoryRectangular
+        ]
     }
 
     var body: some WidgetConfiguration {

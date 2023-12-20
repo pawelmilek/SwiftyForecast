@@ -11,9 +11,10 @@ import Foundation
 struct TemperatureRenderer {
     struct ReadyForDisplay {
         let currentValue: Int
-        let current: String
-        let maxMin: String
-
+        let minValue: Int
+        let maxValue: Int
+        let currentFormatted: String
+        let maxMinFormatted: String
     }
 
     private let notationController: NotationController
@@ -35,8 +36,10 @@ struct TemperatureRenderer {
 
         return ReadyForDisplay(
             currentValue: value.currentValue,
-            current: value.currentFormatted,
-            maxMin: "⏶ \(value.maxFormatted)  ⏷ \(value.minFormatted)"
+            minValue: value.minValue,
+            maxValue: value.maxValue,
+            currentFormatted: value.currentFormatted,
+            maxMinFormatted: "⏶ \(value.maxFormatted)  ⏷ \(value.minFormatted)"
         )
     }
 
@@ -48,8 +51,10 @@ struct TemperatureRenderer {
 
         return ReadyForDisplay(
             currentValue: value.currentValue,
-            current: value.currentFormatted,
-            maxMin: ""
+            minValue: Int.min,
+            maxValue: Int.max,
+            currentFormatted: value.currentFormatted,
+            maxMinFormatted: ""
         )
     }
 }

@@ -23,7 +23,7 @@ extension HourlyViewCell {
 
         private func setTemperatureAccordingToUnitNotation(_ valueInKelvin: Double) {
             let rendered = temperatureRenderer.render(valueInKelvin)
-            temperature = rendered.current
+            temperature = rendered.currentFormatted
         }
 
         func setTemperature() {

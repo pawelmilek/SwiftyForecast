@@ -15,80 +15,37 @@ struct WeatherWidgetEntryView: View {
     var body: some View {
         switch family {
         case .systemSmall:
-            systemSmallView
+            SmallWidgetView(entry: entry)
 
         case .systemMedium:
-            systemMediumView
+            MediumWidgetView(entry: entry)
+
+        case .accessoryInline:
+            InlineWidgetView(
+                temperature: entry.temperatureFormatted,
+                location: entry.locationName
+            )
+
+        case .accessoryCircular:
+            CircularWidgetView(
+                current: entry.temperatureCurrentValue,
+                min: entry.temperatureMinValue,
+                max: entry.temperatureMaxValue
+            )
+
+        case .accessoryRectangular:
+            RectangularWidgetView(
+                currentFormatted: entry.temperatureFormatted,
+                maxMinFormatted: entry.temperatureMaxMinFormatted,
+                conditionDescription: entry.description
+            )
 
         default:
-            systemSmallView
-        }
-    }
-}
-
-private extension WeatherWidgetEntryView {
-
-    var systemSmallView: some View {
-        GeometryReader { proxy in
-            ConditionIcon(icon: entry.icon)
-                .frame(maxWidth: proxy.size.width * 0.5)
-
-            TemperatureView(
-                current: entry.temperature,
-                maxMin: entry.temperatureMaxMin
+            ContentUnavailableView(
+                "Not Implemented \(family.debugDescription)",
+                systemImage: "exclamationmark.triangle"
             )
-            .frame(maxWidth: proxy.size.width)
-            .offset(y: 30)
-        }
-        .overlay(alignment: .bottom) {
-            ConditionDescription(description: entry.description)
-                .frame(maxWidth: .infinity)
-        }
-        .overlay(alignment: .topTrailing) {
-            LocationView(name: entry.locationName)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-        }
-    }
-
-    var systemMediumView: some View {
-        GeometryReader { proxy in
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    locationAndTemperature
-                        .frame(maxWidth: proxy.size.width * 0.4, alignment: .leading)
-                    temperatureMaxMinAndCondition
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .frame(maxHeight: proxy.size.height * 0.6, alignment: .top)
-                TwelveHourForecastView(hourly: entry.hourly)
-            }
-        }
-    }
-
-    var locationAndTemperature: some View {
-        VStack(spacing: 0) {
-            LocationView(name: entry.locationName)
-            Text(entry.temperature)
-                .font(.system(size: 60, weight: .heavy, design: .monospaced))
-                .foregroundStyle(.accent)
-                .modifier(TextScaledModifier())
-        }
-    }
-
-    var temperatureMaxMinAndCondition: some View {
-        VStack(alignment: .trailing, spacing: 5) {
-            HStack(alignment: .bottom, spacing: 0) {
-                Text(entry.temperatureMaxMin)
-                    .font(.caption2)
-                    .fontWeight(.heavy)
-                    .foregroundStyle(.accent)
-                ConditionIcon(icon: entry.icon)
-                    .frame(maxWidth: 40)
-            }
-            ConditionDescription(description: entry.description)
-                .scaledToFit()
-                .minimumScaleFactor(0.8)
-                .lineLimit(1)
+            .foregroundStyle(.accent)
         }
     }
 }

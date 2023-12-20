@@ -78,8 +78,8 @@ extension CurrentWeatherCard {
         private func setTemperatureAccordingToUnitNotation() {
             guard let model else { return }
             let rendered = temperatureRenderer.render(model.temperatureValue)
-            temperature = rendered.current
-            temperatureMaxMin = rendered.maxMin
+            temperature = rendered.currentFormatted
+            temperatureMaxMin = rendered.maxMinFormatted
         }
 
         private func setWindSpeedAccordingToMeasurementSystem() {

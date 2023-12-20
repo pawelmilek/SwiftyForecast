@@ -47,6 +47,11 @@
 		E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
 		E23CD76020ED950500F0F72A /* HourlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */; };
 		E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */; };
+		E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FEB2B331D52009C8F81 /* InlineWidgetView.swift */; };
+		E2416FEE2B331D68009C8F81 /* CircularWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FED2B331D68009C8F81 /* CircularWidgetView.swift */; };
+		E2416FF02B331D74009C8F81 /* RectangularWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FEF2B331D74009C8F81 /* RectangularWidgetView.swift */; };
+		E2416FF22B331E06009C8F81 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FF12B331E06009C8F81 /* MediumWidgetView.swift */; };
+		E2416FF52B331F52009C8F81 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FF42B331F52009C8F81 /* SmallWidgetView.swift */; };
 		E242F7F62B1B864700ADD614 /* HourlyForecastChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E242F7F52B1B864700ADD614 /* HourlyForecastChartDataSource.swift */; };
 		E24E90752ADA81DF009255C8 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E90742ADA81DF009255C8 /* WeatherViewController.swift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
@@ -54,7 +59,6 @@
 		E26ACD1B24FF204000AC15A6 /* ForecastWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
-		E2768B522B30EB92004C4994 /* TwelveHourForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2768B512B30EB92004C4994 /* TwelveHourForecastView.swift */; };
 		E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2768B542B30ED14004C4994 /* HourlyEntry.swift */; };
 		E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F871DA0487600B3EABF /* Main.storyboard */; };
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
@@ -281,6 +285,11 @@
 		E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCell.swift; sourceTree = "<group>"; };
 		E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyViewCell.xib; sourceTree = "<group>"; };
+		E2416FEB2B331D52009C8F81 /* InlineWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineWidgetView.swift; sourceTree = "<group>"; };
+		E2416FED2B331D68009C8F81 /* CircularWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularWidgetView.swift; sourceTree = "<group>"; };
+		E2416FEF2B331D74009C8F81 /* RectangularWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularWidgetView.swift; sourceTree = "<group>"; };
+		E2416FF12B331E06009C8F81 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
+		E2416FF42B331F52009C8F81 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
 		E242F7F52B1B864700ADD614 /* HourlyForecastChartDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastChartDataSource.swift; sourceTree = "<group>"; };
 		E24E90742ADA81DF009255C8 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		E24EB89225410010001F5D72 /* MockModelGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockModelGenerator.swift; sourceTree = "<group>"; };
@@ -289,7 +298,6 @@
 		E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherModel.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		E2768B512B30EB92004C4994 /* TwelveHourForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwelveHourForecastView.swift; sourceTree = "<group>"; };
 		E2768B542B30ED14004C4994 /* HourlyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyEntry.swift; sourceTree = "<group>"; };
 		E27E2F871DA0487600B3EABF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -617,6 +625,17 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		E2416FF32B331F14009C8F81 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */,
+				E29947B92B30E3AE00EBA3D1 /* ConditionDescription.swift */,
+				E29947B52B30E2B400EBA3D1 /* ConditionIcon.swift */,
+				E29947B72B30E33300EBA3D1 /* LocationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E242F7F42B1B861600ADD614 /* HourlyForecastChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,11 +830,12 @@
 			isa = PBXGroup;
 			children = (
 				E2F6711E2B23680800B791A0 /* WeatherWidgetEntryView.swift */,
-				E2768B512B30EB92004C4994 /* TwelveHourForecastView.swift */,
-				E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */,
-				E29947B92B30E3AE00EBA3D1 /* ConditionDescription.swift */,
-				E29947B52B30E2B400EBA3D1 /* ConditionIcon.swift */,
-				E29947B72B30E33300EBA3D1 /* LocationView.swift */,
+				E2416FF42B331F52009C8F81 /* SmallWidgetView.swift */,
+				E2416FF12B331E06009C8F81 /* MediumWidgetView.swift */,
+				E2416FEF2B331D74009C8F81 /* RectangularWidgetView.swift */,
+				E2416FED2B331D68009C8F81 /* CircularWidgetView.swift */,
+				E2416FEB2B331D52009C8F81 /* InlineWidgetView.swift */,
+				E2416FF32B331F14009C8F81 /* Views */,
 			);
 			path = WidgetEntryView;
 			sourceTree = "<group>";
@@ -1290,9 +1310,10 @@
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2CFA7AB2B309E63001DE3E8 /* MockModelGenerator.swift in Sources */,
 				E2CFA7A82B309E57001DE3E8 /* HourlyForecastChartDataSource.swift in Sources */,
-				E2768B522B30EB92004C4994 /* TwelveHourForecastView.swift in Sources */,
 				E2CFA7B32B30A217001DE3E8 /* BackgroundGroupBoxStyle.swift in Sources */,
 				E2F671232B23682F00B791A0 /* WeatherProvider.swift in Sources */,
+				E2416FF22B331E06009C8F81 /* MediumWidgetView.swift in Sources */,
+				E2416FEE2B331D68009C8F81 /* CircularWidgetView.swift in Sources */,
 				E2F671182B234F2F00B791A0 /* NotationController.swift in Sources */,
 				E2F6711C2B23609D00B791A0 /* CurrentWeatherModel.swift in Sources */,
 				E2AD32652B23772700F46FBE /* Main.swift in Sources */,
@@ -1302,6 +1323,7 @@
 				E2FDBD6B2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift in Sources */,
 				E2AD32672B23774400F46FBE /* Coordinate.swift in Sources */,
 				E2F671172B234EB600B791A0 /* TemperatureValue.swift in Sources */,
+				E2416FF02B331D74009C8F81 /* RectangularWidgetView.swift in Sources */,
 				E29947B82B30E33300EBA3D1 /* LocationView.swift in Sources */,
 				E2AD326B2B23774400F46FBE /* Endpoint.swift in Sources */,
 				E2AD32692B23774400F46FBE /* CurrentWeatherResponse.swift in Sources */,
@@ -1315,6 +1337,7 @@
 				E2AD32702B23779000F46FBE /* ConfigurationSettingsAccessor.swift in Sources */,
 				E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */,
 				E2F671192B234F3400B791A0 /* MeasurementSystem.swift in Sources */,
+				E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */,
 				E2F671222B23682900B791A0 /* WeatherWidgetEntryView.swift in Sources */,
 				E2AD32792B23833A00F46FBE /* WidgetLocationManager.swift in Sources */,
 				E2AD32622B23729900F46FBE /* Wind.swift in Sources */,
@@ -1336,6 +1359,7 @@
 				E2AD32602B23729200F46FBE /* Condition.swift in Sources */,
 				E2F6711D2B2360A000B791A0 /* DayNightState.swift in Sources */,
 				E2CFA7AE2B309F36001DE3E8 /* JSONParser.swift in Sources */,
+				E2416FF52B331F52009C8F81 /* SmallWidgetView.swift in Sources */,
 				E2AD32662B23774400F46FBE /* HTTPMethod.swift in Sources */,
 				E28357322B2714F300E3807A /* TextScaledModifier.swift in Sources */,
 				E2F6712A2B23691300B791A0 /* WeatherEntry.swift in Sources */,
@@ -1499,7 +1523,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1532,7 +1556,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
