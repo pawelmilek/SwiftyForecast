@@ -11,81 +11,73 @@ import SwiftUI
 import CoreLocation
 
 struct WeatherProviderDataSource {
-    struct EntryData {
+    struct CurrentWeatherData {
         let name: String
         let icon: Image
         let description: String
-        let temperature: String
-        let temperatureMaxMin: String
-        let hourly: [HourlyEntryData]
+        let temperatureValue: TemperatureValue
+        let hourly: [HourlyForecastData]
     }
 
-    struct HourlyEntryData {
+    struct HourlyForecastData {
         let icon: Image
-        let temperature: String
+        let temperatureValue: TemperatureValue
         let time: String
 
         init(
             icon: Image,
-            temperature: String,
+            temperatureValue: TemperatureValue,
             time: String
         ) {
             self.icon = icon
-            self.temperature = temperature
+            self.temperatureValue = temperatureValue
             self.time = time
         }
     }
 
     private let service: WeatherServiceProtocol
-    private let temperatureRenderer: TemperatureRenderer
 
-    init(
-        service: WeatherServiceProtocol = WeatherService(),
-        temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
-    ) {
+    init(service: WeatherServiceProtocol = WeatherService()) {
         self.service = service
-        self.temperatureRenderer = temperatureRenderer
     }
 
-    func loadEntryData(for location: CLLocation) async -> EntryData {
-        let placemark = await fetchPlacemark(at: location)
-        let name = placemark.locality ?? InvalidReference.undefined
-        let coordinate = placemark.location?.coordinate ?? location.coordinate
-        let currentModel = await fetchCurrentWeather(coordinate: coordinate)
+    func loadEntryData(for location: CLLocation) async -> CurrentWeatherData {
+        let name = await locationName(at: location)
+        let currentModel = await fetchCurrentWeather(coordinate: location.coordinate)
         let currentIcon = await fetchIcon(with: currentModel.icon)
 
-        let readyForDisplayCurrentTemperature = temperatureRenderer.render(currentModel.temperatureValue)
-        let result = EntryData(
+        let result = CurrentWeatherData(
             name: name,
             icon: currentIcon,
             description: currentModel.description,
-            temperature: readyForDisplayCurrentTemperature.current,
-            temperatureMaxMin: readyForDisplayCurrentTemperature.maxMin,
+            temperatureValue: currentModel.temperatureValue,
             hourly: []
         )
 
         return result
     }
 
-    func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> EntryData {
-        let placemark = await fetchPlacemark(at: location)
-        let name = placemark.locality ?? InvalidReference.undefined
-        let coordinate = placemark.location?.coordinate ?? location.coordinate
-        let currentModel = await fetchCurrentWeather(coordinate: coordinate)
+    func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> CurrentWeatherData {
+        let name = await locationName(at: location)
+        let currentModel = await fetchCurrentWeather(coordinate: location.coordinate)
         let currentIcon = await fetchIcon(with: currentModel.icon)
-        let hourlyEntryData = await loadHourlyEntryData(coordinate: coordinate)
+        let hourlyEntryData = await loadHourlyEntryData(coordinate: location.coordinate)
 
-        let readyForDisplayCurrentTemperature = temperatureRenderer.render(currentModel.temperatureValue)
-        let result = EntryData(
+        let result = CurrentWeatherData(
             name: name,
             icon: currentIcon,
             description: currentModel.description,
-            temperature: readyForDisplayCurrentTemperature.current,
-            temperatureMaxMin: readyForDisplayCurrentTemperature.maxMin,
+            temperatureValue: currentModel.temperatureValue,
             hourly: hourlyEntryData
         )
 
         return result
+    }
+
+    private func locationName(at location: CLLocation) async -> String {
+        let placemark = await fetchPlacemark(at: location)
+        let name = placemark.locality ?? InvalidReference.undefined
+        return name
     }
 
     private func fetchPlacemark(at location: CLLocation) async -> CLPlacemark {
@@ -120,15 +112,15 @@ struct WeatherProviderDataSource {
         }
     }
 
-    private func loadHourlyEntryData(coordinate: CLLocationCoordinate2D) async -> [HourlyEntryData] {
+    private func loadHourlyEntryData(coordinate: CLLocationCoordinate2D) async -> [HourlyForecastData] {
         let models = await fetchTwelveHoursForecastWeather(coordinate: coordinate)
 
-        var hourlyEntryData = [HourlyEntryData]()
+        var hourlyEntryData = [HourlyForecastData]()
         for model in models {
             let icon = await fetchIcon(with: model.icon)
-            let data = HourlyEntryData(
+            let data = HourlyForecastData(
                 icon: icon,
-                temperature: temperatureRenderer.render(model.temperature).current,
+                temperatureValue: TemperatureValue(current: model.temperature),
                 time: model.date.shortTime
             )
             hourlyEntryData.append(data)

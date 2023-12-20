@@ -29,8 +29,8 @@ class LocationModel: Object, ObjectKeyIdentifiable {
         compoundKey = "\(name)|\(country)"
         state = placemark.administrativeArea ?? InvalidReference.notApplicable
         postalCode = placemark.postalCode ?? InvalidReference.notApplicable
-        latitude = placemark.location?.coordinate.latitude ?? Double.nan
-        longitude = placemark.location?.coordinate.longitude ?? Double.nan
+        latitude = placemark.location?.coordinate.latitude ?? Double.signalingNaN
+        longitude = placemark.location?.coordinate.longitude ?? Double.signalingNaN
         secondsFromGMT = placemark.timeZone?.secondsFromGMT() ?? Int.min
         self.isUserLocation = isUserLocation
     }

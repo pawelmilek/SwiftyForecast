@@ -10,30 +10,50 @@ import WidgetKit
 import SwiftUI
 
 struct WeatherEntry: TimelineEntry {
+    var temperatureCurrentValue: Int {
+        temperatureRenderer.render(temperatureValue).currentValue
+    }
+
+    var temperatureMinValue: Int {
+        temperatureRenderer.render(temperatureValue).minValue
+    }
+
+    var temperatureMaxValue: Int {
+        temperatureRenderer.render(temperatureValue).maxValue
+    }
+
+    var temperatureFormatted: String {
+        temperatureRenderer.render(temperatureValue).currentFormatted
+    }
+
+    var temperatureMaxMinFormatted: String {
+        temperatureRenderer.render(temperatureValue).maxMinFormatted
+    }
+
     let date: Date
     let locationName: String
     let icon: Image
     let description: String
-    let temperature: String
-    let temperatureMaxMin: String
+    let temperatureValue: TemperatureValue
     let hourly: [HourlyEntry]
+    private let temperatureRenderer: TemperatureRenderer
 
     init(
         date: Date,
         locationName: String,
         icon: Image,
         description: String,
-        temperature: String,
-        temperatureMaxMin: String,
-        hourly: [HourlyEntry]
+        temperatureValue: TemperatureValue,
+        hourly: [HourlyEntry],
+        temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
     ) {
         self.date = date
         self.locationName = locationName
-        self.icon = icon
         self.description = description
-        self.temperature = temperature
-        self.temperatureMaxMin = temperatureMaxMin
+        self.icon = icon
+        self.temperatureValue = temperatureValue
         self.hourly = hourly
+        self.temperatureRenderer = temperatureRenderer
     }
 }
 
@@ -44,58 +64,56 @@ extension WeatherEntry {
             locationName: "Cupertino",
             icon: Image(.cloudyDay),
             description: "light intensity shower rain",
-            temperature: "69°",
-            temperatureMaxMin: "⏶ 75°  ⏷ 72°",
+            temperatureValue: TemperatureValue(current: 281, min: 278.67, max: 281),
             hourly: [
                 HourlyEntry(
                     icon: Image(.rainyDay),
-                    temperature: "69°",
-                    time: "7:00 PM"
+                    time: "7:00 PM",
+                    temperatureValue: TemperatureValue(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: Image(.cloudyNight),
-                    temperature: "65°",
-                    time: "10:00 PM"
+                    time: "10:00 PM",
+                    temperatureValue: TemperatureValue(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: Image(.thunderDay),
-                    temperature: "62°",
-                    time: "1:00 AM"
+                    time: "1:00 AM",
+                    temperatureValue: TemperatureValue(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: Image(.clearDay),
-                    temperature: "55°",
-                    time: "4:00 AM"
+                    time: "4:00 AM",
+                    temperatureValue: TemperatureValue(current: 276.46)
                 )
             ]
         ),
         WeatherEntry(
             date: Date(),
-            locationName: "Cupertino",
+            locationName: "Chicago",
             icon: Image(.clearDay),
             description: "scattered clouds",
-            temperature: "87°",
-            temperatureMaxMin: "⏶ 92°  ⏷ 45°",
+            temperatureValue: TemperatureValue(current: 278.93, min: 277.32, max: 278.93),
             hourly: [
                 HourlyEntry(
                     icon: Image(.cloudyDay),
-                    temperature: "76°",
-                    time: "7:00 PM"
+                    time: "7:00 PM",
+                    temperatureValue: TemperatureValue(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: Image(.cloudyNight),
-                    temperature: "75°",
-                    time: "10:00 PM"
+                    time: "10:00 PM",
+                    temperatureValue: TemperatureValue(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: Image(.cloudyNight),
-                    temperature: "71°",
-                    time: "1:00 AM"
+                    time: "1:00 AM",
+                    temperatureValue: TemperatureValue(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: Image(.thunderDay),
-                    temperature: "70°",
-                    time: "4:00 AM"
+                    time: "4:00 AM",
+                    temperatureValue: TemperatureValue(current: 278.93)
                 )
             ]
         )

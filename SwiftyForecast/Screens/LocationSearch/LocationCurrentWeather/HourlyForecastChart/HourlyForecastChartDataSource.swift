@@ -25,7 +25,7 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
         let rendered = temperatureRenderer.render(model.temperature)
 
         temperatureValue = rendered.currentValue
-        temperatureFormatted = rendered.current
+        temperatureFormatted = rendered.currentFormatted
         iconURL = WeatherEndpoint.icon(symbol: model.icon).url
     }
 

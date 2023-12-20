@@ -12,4 +12,10 @@ struct TemperatureValue {
     let current: Double
     let min: Double
     let max: Double
+
+    init(current: Double, min: Double = 0, max: Double = 0) {
+        self.current = current
+        self.min = min
+        self.max = max
+    }
 }
