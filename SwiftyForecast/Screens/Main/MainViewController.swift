@@ -141,7 +141,7 @@ private extension MainViewController {
 
     func setupNavigationItem() {
         setupPoweredByLeftBarButtonItem()
-        setupSearchLocationRightBarButtonItem()
+        setupRightBarButtonItems()
         setupNotationSystemSegmentedControl()
     }
 
@@ -166,23 +166,28 @@ private extension MainViewController {
         coordinator?.openWeatherAPISoruceWebPage(url: url)
     }
 
-    func setupSearchLocationRightBarButtonItem() {
-        let imageSize = CGSize(width: 44, height: 44)
-        let button = UIButton(type: .system)
-        button.setImage(UIImage.mapMarker, for: .normal)
+    func setupRightBarButtonItems() {
+        let config = UIImage.SymbolConfiguration(weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config)
 
-        let barButton = UIBarButtonItem(customView: button)
-        barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
-        barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
+        let openInfoBarButton = UIBarButtonItem(
+            image: infoImage,
+            style: .plain,
+            target: self,
+            action: #selector(openLocationListBarButtonTapped)
+        )
 
-        button.addAction( UIAction { [weak self] _ in
-            self?.openLocationListBarButtonTapped()
-        }, for: .touchUpInside)
-        navigationItem.rightBarButtonItem = barButton
+        let openLocationBarButton = UIBarButtonItem(
+            image: UIImage.mapMarker,
+            style: .plain,
+            target: self,
+            action: #selector(openLocationListBarButtonTapped)
+        )
+
+        navigationItem.rightBarButtonItems = [openLocationBarButton, openInfoBarButton]
     }
 
-    func openLocationListBarButtonTapped() {
+    @objc func openLocationListBarButtonTapped() {
         coordinator?.openLocationListViewController()
     }
 

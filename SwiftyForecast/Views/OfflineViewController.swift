@@ -5,7 +5,7 @@ final class OfflineViewController: UIViewController {
 
     private var centerImageView: UIImageView = {
         let imageView = UIImageView()
-        var config = UIImage.SymbolConfiguration(
+        let config = UIImage.SymbolConfiguration(
             font: Style.Offline.symbolFont,
             scale: .large
         )

@@ -23,6 +23,7 @@ struct RectangularWidgetView: View {
         VStack {
             HStack(spacing: 5) {
                 Image(systemName: symbol)
+                    .contentTransition(.symbolEffect(.replace.offUp))
                 Text(dayNightState.description)
             }
             .font(.caption)
