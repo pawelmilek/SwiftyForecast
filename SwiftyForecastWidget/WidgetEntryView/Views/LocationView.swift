@@ -24,8 +24,3 @@ struct LocationView: View {
         }
     }
 }
-
-#Preview(traits: .sizeThatFitsLayout) {
-    LocationView(name: "Chicago")
-        .padding()
-}

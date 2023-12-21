@@ -37,7 +37,8 @@ struct WeatherWidgetEntryView: View {
             RectangularWidgetView(
                 currentFormatted: entry.temperatureFormatted,
                 maxMinFormatted: entry.temperatureMaxMinFormatted,
-                conditionDescription: entry.description
+                conditionDescription: entry.description,
+                dayNightState: entry.dayNightState
             )
 
         default:

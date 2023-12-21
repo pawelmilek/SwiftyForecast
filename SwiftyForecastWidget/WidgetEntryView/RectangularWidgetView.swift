@@ -13,25 +13,32 @@ struct RectangularWidgetView: View {
     let currentFormatted: String
     let maxMinFormatted: String
     let conditionDescription: String
+    let dayNightState: DayNightState
+
+    private var symbol: String {
+        dayNightState == .day ? "sun.max.circle.fill" : "moon.stars.circle.fill"
+    }
 
     var body: some View {
-        ZStack {
-            AccessoryWidgetBackground()
-                .cornerRadius(8)
-            VStack {
-                HStack {
-                    Text(currentFormatted)
-                        .fontWeight(.heavy)
-                    Spacer()
-                    Text(maxMinFormatted)
-                }
-                .lineLimit(1)
-                Text(conditionDescription)
-                    .lineLimit(2)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        VStack {
+            HStack(spacing: 5) {
+                Image(systemName: symbol)
+                Text(dayNightState.description)
             }
-            .padding(.horizontal, 10)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .font(.caption)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text(currentFormatted)
+                    .fontWeight(.heavy)
+                Spacer()
+                Text(maxMinFormatted)
+            }
+            .lineLimit(1)
+            Text(conditionDescription)
+                .modifier(TextScaledModifier())
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .padding(.horizontal, 10)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

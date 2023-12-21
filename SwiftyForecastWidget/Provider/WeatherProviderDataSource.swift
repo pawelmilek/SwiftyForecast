@@ -10,71 +10,69 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct WeatherProviderDataSource {
-    struct CurrentWeatherData {
-        let name: String
-        let icon: Image
-        let description: String
-        let temperatureValue: TemperatureValue
-        let hourly: [HourlyForecastData]
-    }
-
-    struct HourlyForecastData {
-        let icon: Image
-        let temperatureValue: TemperatureValue
-        let time: String
-
-        init(
-            icon: Image,
-            temperatureValue: TemperatureValue,
-            time: String
-        ) {
-            self.icon = icon
-            self.temperatureValue = temperatureValue
-            self.time = time
-        }
-    }
-
+final class WeatherProviderDataSource {
     private let service: WeatherServiceProtocol
+    private var location: CLLocation?
 
     init(service: WeatherServiceProtocol = WeatherService()) {
         self.service = service
     }
 
-    func loadEntryData(for location: CLLocation) async -> CurrentWeatherData {
-        let name = await locationName(at: location)
-        let currentModel = await fetchCurrentWeather(coordinate: location.coordinate)
-        let currentIcon = await fetchIcon(with: currentModel.icon)
+    func loadEntryData(for location: CLLocation) async -> WeatherEntry {
+        self.location = location
+        let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
+        let icon = await fetchIcon(with: currentModel.icon)
 
-        let result = CurrentWeatherData(
-            name: name,
-            icon: currentIcon,
+        let result = WeatherEntry(
+            date: .now,
+            locationName: name,
+            icon: icon,
             description: currentModel.description,
             temperatureValue: currentModel.temperatureValue,
+            dayNightState: currentModel.dayNightState,
             hourly: []
         )
 
         return result
     }
 
-    func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> CurrentWeatherData {
-        let name = await locationName(at: location)
-        let currentModel = await fetchCurrentWeather(coordinate: location.coordinate)
-        let currentIcon = await fetchIcon(with: currentModel.icon)
-        let hourlyEntryData = await loadHourlyEntryData(coordinate: location.coordinate)
+    func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
+        self.location = location
+        let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
+        let (icon, hourlyEntryData) = await fetchConditionIconAndHourlyForecast(currentModel.icon)
 
-        let result = CurrentWeatherData(
-            name: name,
-            icon: currentIcon,
+        let result = WeatherEntry(
+            date: .now,
+            locationName: name,
+            icon: icon,
             description: currentModel.description,
             temperatureValue: currentModel.temperatureValue,
+            dayNightState: currentModel.dayNightState,
             hourly: hourlyEntryData
         )
 
         return result
     }
 
-    private func locationName(at location: CLLocation) async -> String {
+    private func fetchLocationNameAndCurrentWeather() async -> (name: String, model: CurrentWeatherModel) {
+        guard let location else { fatalError("Location unavailable") }
+
+        async let nameResult = fetchLocationName()
+        async let modelResult = fetchCurrentWeather()
+        let (name, model) = await (nameResult, modelResult)
+        return (name, model)
+    }
+
+    private func fetchConditionIconAndHourlyForecast(_ icon: String) async -> (icon: Image, models: [HourlyEntry]) {
+        async let iconResult = fetchIcon(with: icon)
+        async let hourlyEntryDataResult = loadHourlyEntryData()
+        let (icon, hourlyEntryData) = await (iconResult, hourlyEntryDataResult)
+        return (icon, hourlyEntryData)
+    }
+
+    private func fetchLocationName() async -> String {
+        guard let location else { return "" }
+
         let placemark = await fetchPlacemark(at: location)
         let name = placemark.locality ?? InvalidReference.undefined
         return name
@@ -89,7 +87,11 @@ struct WeatherProviderDataSource {
         }
     }
 
-    private func fetchCurrentWeather(coordinate: CLLocationCoordinate2D) async -> CurrentWeatherModel {
+    private func fetchCurrentWeather() async -> CurrentWeatherModel {
+        guard let coordinate = location?.coordinate else {
+            fatalError("Location coordinate unavailable")
+        }
+
         do {
             let response = try await service.fetchCurrent(
                 latitude: coordinate.latitude,
@@ -112,23 +114,26 @@ struct WeatherProviderDataSource {
         }
     }
 
-    private func loadHourlyEntryData(coordinate: CLLocationCoordinate2D) async -> [HourlyForecastData] {
-        let models = await fetchTwelveHoursForecastWeather(coordinate: coordinate)
+    private func loadHourlyEntryData() async -> [HourlyEntry] {
+        let models = await fetchTwelveHoursForecastWeather()
 
-        var hourlyEntryData = [HourlyForecastData]()
+        var hourlyEntry = [HourlyEntry]()
         for model in models {
             let icon = await fetchIcon(with: model.icon)
-            let data = HourlyForecastData(
+            let data = HourlyEntry(
                 icon: icon,
-                temperatureValue: TemperatureValue(current: model.temperature),
-                time: model.date.shortTime
+                time: model.date.shortTime,
+                temperatureValue: TemperatureValue(current: model.temperature)
             )
-            hourlyEntryData.append(data)
+            hourlyEntry.append(data)
         }
-        return hourlyEntryData
+        return hourlyEntry
     }
 
-    private func fetchTwelveHoursForecastWeather(coordinate: CLLocationCoordinate2D) async -> [HourlyForecastModel] {
+    private func fetchTwelveHoursForecastWeather() async -> [HourlyForecastModel] {
+        guard let coordinate = location?.coordinate else {
+            fatalError("Location coordinate unavailable")
+        }
         do {
             let forecast = try await service.fetchForecast(
                 latitude: coordinate.latitude,

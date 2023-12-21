@@ -35,6 +35,7 @@ struct WeatherEntry: TimelineEntry {
     let icon: Image
     let description: String
     let temperatureValue: TemperatureValue
+    let dayNightState: DayNightState
     let hourly: [HourlyEntry]
     private let temperatureRenderer: TemperatureRenderer
 
@@ -44,6 +45,7 @@ struct WeatherEntry: TimelineEntry {
         icon: Image,
         description: String,
         temperatureValue: TemperatureValue,
+        dayNightState: DayNightState,
         hourly: [HourlyEntry],
         temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
     ) {
@@ -52,6 +54,7 @@ struct WeatherEntry: TimelineEntry {
         self.description = description
         self.icon = icon
         self.temperatureValue = temperatureValue
+        self.dayNightState = dayNightState
         self.hourly = hourly
         self.temperatureRenderer = temperatureRenderer
     }
@@ -65,6 +68,7 @@ extension WeatherEntry {
             icon: Image(.cloudyDay),
             description: "light intensity shower rain",
             temperatureValue: TemperatureValue(current: 281, min: 278.67, max: 281),
+            dayNightState: .day,
             hourly: [
                 HourlyEntry(
                     icon: Image(.rainyDay),
@@ -94,6 +98,7 @@ extension WeatherEntry {
             icon: Image(.clearDay),
             description: "scattered clouds",
             temperatureValue: TemperatureValue(current: 278.93, min: 277.32, max: 278.93),
+            dayNightState: .night,
             hourly: [
                 HourlyEntry(
                     icon: Image(.cloudyDay),

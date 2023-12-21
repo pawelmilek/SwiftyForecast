@@ -30,37 +30,13 @@ struct WeatherProvider: TimelineProvider {
             locationManager.stopUpdatingLocation()
             let location = await locationManager.startUpdatingLocation()
 
-            let now = Date.now
-
             if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                let result = await loadWeatherData(for: location)
-                let entry = WeatherEntry(
-                    date: now,
-                    locationName: result.name,
-                    icon: result.icon,
-                    description: result.description,
-                    temperatureValue: result.temperatureValue,
-                    hourly: []
-                )
+                let entry = await loadWeatherData(for: location)
                 completion(entry)
             }
 
             if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                let result = await loadWeatherDataWithHourlyForecast(for: location)
-                let entry = WeatherEntry(
-                    date: now,
-                    locationName: result.name,
-                    icon: result.icon,
-                    description: result.description,
-                    temperatureValue: result.temperatureValue,
-                    hourly: result.hourly.compactMap {
-                        HourlyEntry(
-                            icon: $0.icon,
-                            time: $0.time,
-                            temperatureValue: $0.temperatureValue
-                        )
-                    }
-                )
+                let entry = await loadWeatherDataWithHourlyForecast(for: location)
                 completion(entry)
             }
         }
@@ -72,45 +48,19 @@ struct WeatherProvider: TimelineProvider {
 
             locationManager.stopUpdatingLocation()
             let location = await locationManager.startUpdatingLocation()
-            let now = Date.now
-
             var entries = [WeatherEntry]()
 
             if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                let result = await loadWeatherData(for: location)
-                let entry = WeatherEntry(
-                    date: now,
-                    locationName: result.name,
-                    icon: result.icon,
-                    description: result.description,
-                    temperatureValue: result.temperatureValue,
-                    hourly: []
-                )
-
+                let entry = await loadWeatherData(for: location)
                 entries.append(entry)
             }
 
             if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                let result = await loadWeatherDataWithHourlyForecast(for: location)
-                let entry = WeatherEntry(
-                    date: now,
-                    locationName: result.name,
-                    icon: result.icon,
-                    description: result.description,
-                    temperatureValue: result.temperatureValue,
-                    hourly: result.hourly.compactMap {
-                        HourlyEntry(
-                            icon: $0.icon,
-                            time: $0.time,
-                            temperatureValue: $0.temperatureValue
-                        )
-                    }
-                )
-
+                let entry = await loadWeatherDataWithHourlyForecast(for: location)
                 entries.append(entry)
             }
 
-            let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: now)!
+            let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: .now)!
             let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
             completion(timeline)
         }
@@ -127,17 +77,13 @@ struct WeatherProvider: TimelineProvider {
         family == .systemMedium
     }
 
-    private func loadWeatherData(
-        for location: CLLocation
-    ) async -> WeatherProviderDataSource.CurrentWeatherData {
+    private func loadWeatherData(for location: CLLocation) async -> WeatherEntry {
         debugPrint("loadWeatherData")
         let result = await dataSource.loadEntryData(for: location)
         return result
     }
 
-    private func loadWeatherDataWithHourlyForecast(
-        for location: CLLocation
-    ) async -> WeatherProviderDataSource.CurrentWeatherData {
+    private func loadWeatherDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
         debugPrint("loadWeatherDataWithHourlyForecast")
         let result = await dataSource.loadEntryDataWithHourlyForecast(for: location)
         return result
