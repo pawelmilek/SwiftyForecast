@@ -31,7 +31,9 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ConfigurationSettings</key>
 	<dict>
-		<key>WeatherServiceApiKey</key>
+		<key>SupportEmail</key>
+		<string>$(SUPPORT_EMAIL)</string>
+		<key>WeatherServiceAPIKey</key>
 		<string>$(API_KEY)</string>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>

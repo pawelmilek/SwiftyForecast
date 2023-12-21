@@ -8,7 +8,7 @@
 	<true/>
 	<key>ConfigurationSettings</key>
 	<dict>
-		<key>WeatherServiceApiKey</key>
+		<key>WeatherServiceAPIKey</key>
 		<string>$(API_KEY)</string>
 	</dict>
 	<key>NSExtension</key>

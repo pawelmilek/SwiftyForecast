@@ -10,7 +10,8 @@ import Foundation
 
 struct ConfigurationSettingsAccessor {
     enum Key: String {
-        case apiKey = "WeatherServiceApiKey"
+        case apiKey = "WeatherServiceAPIKey"
+        case supportEmailKey = "SupportEmail"
     }
 
     private static let configurationKey = "ConfigurationSettings"

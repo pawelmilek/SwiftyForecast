@@ -140,51 +140,40 @@ private extension MainViewController {
     }
 
     func setupNavigationItem() {
-        setupPoweredByLeftBarButtonItem()
-        setupRightBarButtonItems()
+        setupLeftBarButtonItem()
+        setupRightBarButtonItem()
         setupNotationSystemSegmentedControl()
     }
 
-    func setupPoweredByLeftBarButtonItem() {
-        let imageSize = CGSize(width: 52, height: 22)
-        let button = UIButton()
-        button.setImage(UIImage.poweredBy, for: .normal)
-
-        let barButton = UIBarButtonItem(customView: button)
-        barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
-        barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
-
-        button.addAction( UIAction { [weak self] _ in
-            self?.poweredByBarButtonTapped()
-        }, for: .touchUpInside)
-        navigationItem.leftBarButtonItem = barButton
-    }
-
-    func poweredByBarButtonTapped() {
-        guard let url = viewModel?.powerByURL else { return }
-        coordinator?.openWeatherAPISoruceWebPage(url: url)
-    }
-
-    func setupRightBarButtonItems() {
+    func setupLeftBarButtonItem() {
+        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
         let config = UIImage.SymbolConfiguration(weight: .semibold)
-        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config)
-
-        let openInfoBarButton = UIBarButtonItem(
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
+        let openInfoButton = UIBarButtonItem(
             image: infoImage,
             style: .plain,
             target: self,
-            action: #selector(openLocationListBarButtonTapped)
+            action: #selector(openInfoBarButtonTapped)
         )
+        navigationItem.leftBarButtonItem = openInfoButton
+    }
 
-        let openLocationBarButton = UIBarButtonItem(
-            image: UIImage.mapMarker,
+    func setupRightBarButtonItem() {
+        let openLocationButton = UIBarButtonItem(
+            image: .mapMarker,
             style: .plain,
             target: self,
             action: #selector(openLocationListBarButtonTapped)
         )
+        navigationItem.rightBarButtonItem = openLocationButton
+    }
 
-        navigationItem.rightBarButtonItems = [openLocationBarButton, openInfoBarButton]
+    @objc func openInfoBarButtonTapped() {
+        let sheetViewController = InformationViewController()
+        present(sheetViewController, animated: true, completion: nil)
+
+//        guard let url = viewModel?.powerByURL else { return }
+//        coordinator?.openWeatherAPISoruceWebPage(url: url)
     }
 
     @objc func openLocationListBarButtonTapped() {
