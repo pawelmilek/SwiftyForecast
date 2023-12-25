@@ -27,7 +27,7 @@ final class AppStoreReviewManager {
     }
 
     private var currentAppVersion: String {
-        return Bundle.main.releaseVersionNumber
+        return Bundle.main.versionNumber
     }
 
     private var reviewWortyLocationCount: Int {

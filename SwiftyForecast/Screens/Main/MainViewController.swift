@@ -140,49 +140,43 @@ private extension MainViewController {
     }
 
     func setupNavigationItem() {
-        setupPoweredByLeftBarButtonItem()
-        setupSearchLocationRightBarButtonItem()
+        setupLeftBarButtonItem()
+        setupRightBarButtonItem()
         setupNotationSystemSegmentedControl()
     }
 
-    func setupPoweredByLeftBarButtonItem() {
-        let imageSize = CGSize(width: 52, height: 22)
-        let button = UIButton()
-        button.setImage(UIImage.poweredBy, for: .normal)
-
-        let barButton = UIBarButtonItem(customView: button)
-        barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
-        barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
-
-        button.addAction( UIAction { [weak self] _ in
-            self?.poweredByBarButtonTapped()
-        }, for: .touchUpInside)
-        navigationItem.leftBarButtonItem = barButton
+    func setupLeftBarButtonItem() {
+        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
+        let config = UIImage.SymbolConfiguration(weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
+        let openInfoButton = UIBarButtonItem(
+            image: infoImage,
+            style: .plain,
+            target: self,
+            action: #selector(openInfoBarButtonTapped)
+        )
+        navigationItem.leftBarButtonItem = openInfoButton
     }
 
-    func poweredByBarButtonTapped() {
-        guard let url = viewModel?.powerByURL else { return }
-        coordinator?.openWeatherAPISoruceWebPage(url: url)
+    func setupRightBarButtonItem() {
+        let openLocationButton = UIBarButtonItem(
+            image: .mapMarker,
+            style: .plain,
+            target: self,
+            action: #selector(openLocationListBarButtonTapped)
+        )
+        navigationItem.rightBarButtonItem = openLocationButton
     }
 
-    func setupSearchLocationRightBarButtonItem() {
-        let imageSize = CGSize(width: 44, height: 44)
-        let button = UIButton(type: .system)
-        button.setImage(UIImage.mapMarker, for: .normal)
+    @objc func openInfoBarButtonTapped() {
+        let sheetViewController = InformationViewController()
+        present(sheetViewController, animated: true, completion: nil)
 
-        let barButton = UIBarButtonItem(customView: button)
-        barButton.customView?.translatesAutoresizingMaskIntoConstraints = false
-        barButton.customView?.heightAnchor.constraint(equalToConstant: imageSize.height).isActive = true
-        barButton.customView?.widthAnchor.constraint(equalToConstant: imageSize.width).isActive = true
-
-        button.addAction( UIAction { [weak self] _ in
-            self?.openLocationListBarButtonTapped()
-        }, for: .touchUpInside)
-        navigationItem.rightBarButtonItem = barButton
+//        guard let url = viewModel?.powerByURL else { return }
+//        coordinator?.openWeatherAPISoruceWebPage(url: url)
     }
 
-    func openLocationListBarButtonTapped() {
+    @objc func openLocationListBarButtonTapped() {
         coordinator?.openLocationListViewController()
     }
 
