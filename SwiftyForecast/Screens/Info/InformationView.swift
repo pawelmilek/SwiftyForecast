@@ -44,7 +44,7 @@ struct InformationView: View {
                         action: nil
                     )
                     DisclosureGroup {
-                        Text("UIKit, SwiftUI, Combine, Charts, WidgetKit, MapKit, StoreKit, WebKit")
+                        Text("UIKit, SwiftUI, Combine, Charts, WidgetKit, MapKit, StoreKit, WebKit, TipKit")
                             .font(.footnote)
                             .fontWeight(.heavy)
                             .fontDesign(.monospaced)

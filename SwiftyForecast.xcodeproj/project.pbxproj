@@ -94,6 +94,8 @@
 		E28AFC7D2374FF5D00D1D5ED /* PathError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC7C2374FF5D00D1D5ED /* PathError.swift */; };
 		E28CEC082B39BB82003DB3A6 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC072B39BB82003DB3A6 /* HTMLView.swift */; };
 		E28CEC0A2B39C5AB003DB3A6 /* packages_license.html in Resources */ = {isa = PBXBuildFile; fileRef = E28CEC092B39C5AB003DB3A6 /* packages_license.html */; };
+		E28CEC0D2B3EB768003DB3A6 /* InformationTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */; };
+		E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
 		E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */; };
 		E290F24F2ADD8BEE001B3276 /* SpeedFormatterImperial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */; };
 		E290F2542ADDAF55001B3276 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E290F2532ADDAF55001B3276 /* Kingfisher */; };
@@ -341,6 +343,8 @@
 		E28AFC7C2374FF5D00D1D5ED /* PathError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathError.swift; sourceTree = "<group>"; };
 		E28CEC072B39BB82003DB3A6 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
 		E28CEC092B39C5AB003DB3A6 /* packages_license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = packages_license.html; sourceTree = "<group>"; };
+		E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTip.swift; sourceTree = "<group>"; };
+		E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTip.swift; sourceTree = "<group>"; };
 		E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterMetric.swift; sourceTree = "<group>"; };
 		E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterImperial.swift; sourceTree = "<group>"; };
 		E293695A249867740055FB2E /* UIApplication+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopViewController.swift"; sourceTree = "<group>"; };
@@ -803,6 +807,15 @@
 			path = RealmManager;
 			sourceTree = "<group>";
 		};
+		E28CEC0B2B3EB74C003DB3A6 /* Tips */ = {
+			isa = PBXGroup;
+			children = (
+				E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */,
+				E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */,
+			);
+			path = Tips;
+			sourceTree = "<group>";
+		};
 		E290F2552ADDBA81001B3276 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +879,7 @@
 				E28357332B27150D00E3807A /* Modifiers */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E23997E520E84371007D8CE4 /* Errors */,
+				E28CEC0B2B3EB74C003DB3A6 /* Tips */,
 				E21A0B9420EE88F5006AC409 /* Utilities */,
 				E23997D820E840C1007D8CE4 /* Resources */,
 			);
@@ -1287,6 +1301,7 @@
 				E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */,
 				E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */,
 				E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */,
+				E28CEC0D2B3EB768003DB3A6 /* InformationTip.swift in Sources */,
 				E2DC148B248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift in Sources */,
 				E28357392B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift in Sources */,
 				E21ABD072AE5A0DF00F93F01 /* LocationSearchCompleter.swift in Sources */,
@@ -1321,6 +1336,7 @@
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
 				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
+				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
 				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
@@ -1579,7 +1595,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1612,7 +1628,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.0;
+				MARKETING_VERSION = 3.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
