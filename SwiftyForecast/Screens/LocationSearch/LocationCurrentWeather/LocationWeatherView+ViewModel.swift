@@ -148,6 +148,17 @@ extension LocationWeatherView {
             } catch {
                 fatalError(error.localizedDescription)
             }
+            donateAddFavoriteEvent()
+            postAppStoreReviewEvent()
+        }
+
+        private func donateAddFavoriteEvent() {
+            Task(priority: .userInitiated) {
+                await LocationsTip.addFavoriteEvent.donate()
+            }
+        }
+
+        private func postAppStoreReviewEvent() {
             appStoreReviewCenter.post(.locationAdded)
         }
     }

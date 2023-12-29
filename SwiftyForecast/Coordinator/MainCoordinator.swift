@@ -17,9 +17,9 @@ final class MainCoordinator: Coordinator {
     }
 
     @MainActor
-    func openWeatherAPISoruceWebPage(url: URL) {
-        let safariViewController = SFSafariViewController(url: url)
-        navigationController.present(safariViewController, animated: true)
+    func openInformationViewController() {
+        let sheetViewController = InformationViewController()
+        navigationController.present(sheetViewController, animated: true, completion: nil)
     }
 
     @MainActor

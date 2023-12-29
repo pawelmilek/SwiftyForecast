@@ -1,4 +1,5 @@
 import UIKit
+import TipKit
 import Combine
 
 @UIApplicationMain
@@ -12,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         setupCoordinator()
+        setupTips()
         setupNetworkReachabilityHandling()
         setNavigationBarStyle()
         debugPrintRealmFileURL()
@@ -28,6 +30,13 @@ private extension AppDelegate {
         window?.rootViewController = coordinator?.navigationController
         window?.makeKeyAndVisible()
         coordinator?.start()
+    }
+
+    func setupTips() {
+        try? Tips.configure([
+            .displayFrequency(.immediate),
+            .datastoreLocation(.applicationDefault)
+        ])
     }
 
     func setupNetworkReachabilityHandling() {

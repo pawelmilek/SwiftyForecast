@@ -1,4 +1,5 @@
 import UIKit
+import TipKit
 import CoreLocation
 import Combine
 
@@ -7,6 +8,29 @@ final class MainViewController: UIViewController {
     var viewModel: ViewModel?
 
     private let lottieAnimationViewController = LottieAnimationViewController()
+
+    private lazy var openInfoBarButton: UIBarButtonItem = {
+        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
+        let config = UIImage.SymbolConfiguration(weight: .semibold)
+        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
+        let openInfoButton = UIBarButtonItem(
+            image: infoImage,
+            style: .plain,
+            target: self,
+            action: #selector(openInfoBarButtonTapped)
+        )
+
+        return openInfoButton
+    }()
+
+    private lazy var openLocationBarButton: UIBarButtonItem = {
+        UIBarButtonItem(
+            image: .mapMarker,
+            style: .plain,
+            target: self,
+            action: #selector(openLocationListBarButtonTapped)
+        )
+    }()
 
     private lazy var notationSegmentedControl: UISegmentedControl = {
         let control = UISegmentedControl(items: viewModel?.notationSegmentedControlItems ?? [])
@@ -19,12 +43,18 @@ final class MainViewController: UIViewController {
 
         return control
     }()
+
     private let pageViewController = UIPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal
     )
+
     private let locationManager = LocationManager()
     private var appStoreReviewManager: AppStoreReviewManager?
+    private let informationTip = InformationTip()
+    private var tipObservationTask: Task<Void, Never>?
+    private weak var tipPopoverController: TipUIPopoverViewController?
+
     private var viewControllers: [WeatherViewController] = []
     private var cancellables = Set<AnyCancellable>()
 
@@ -33,9 +63,15 @@ final class MainViewController: UIViewController {
         setup()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupTipObservationTask()
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel?.onViewDidDisappear()
+        stopTipObservationTask()
     }
 }
 
@@ -146,34 +182,22 @@ private extension MainViewController {
     }
 
     func setupLeftBarButtonItem() {
-        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
-        let config = UIImage.SymbolConfiguration(weight: .semibold)
-        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
-        let openInfoButton = UIBarButtonItem(
-            image: infoImage,
-            style: .plain,
-            target: self,
-            action: #selector(openInfoBarButtonTapped)
-        )
-        navigationItem.leftBarButtonItem = openInfoButton
+        navigationItem.leftBarButtonItem = openInfoBarButton
     }
 
     func setupRightBarButtonItem() {
-        let openLocationButton = UIBarButtonItem(
-            image: .mapMarker,
-            style: .plain,
-            target: self,
-            action: #selector(openLocationListBarButtonTapped)
-        )
-        navigationItem.rightBarButtonItem = openLocationButton
+        navigationItem.rightBarButtonItem = openLocationBarButton
     }
 
     @objc func openInfoBarButtonTapped() {
-        let sheetViewController = InformationViewController()
-        present(sheetViewController, animated: true, completion: nil)
+        coordinator?.openInformationViewController()
+        donateInformationVisitEvent()
+    }
 
-//        guard let url = viewModel?.powerByURL else { return }
-//        coordinator?.openWeatherAPISoruceWebPage(url: url)
+    private func donateInformationVisitEvent() {
+        Task(priority: .userInitiated) {
+            await InformationTip.visitViewEvent.donate()
+        }
     }
 
     @objc func openLocationListBarButtonTapped() {
@@ -197,6 +221,31 @@ private extension MainViewController {
         view.backgroundColor = Style.Main.backgroundColor
     }
 
+    func setupTipObservationTask() {
+        tipObservationTask = tipObservationTask ?? Task { @MainActor in
+            for await shouldDisplay in informationTip.shouldDisplayUpdates {
+                if shouldDisplay {
+                    let popoverController = TipUIPopoverViewController(
+                        informationTip,
+                        sourceItem: openInfoBarButton
+                    )
+                    popoverController.view.tintColor = UIColor.primary
+                    present(popoverController, animated: true)
+                    tipPopoverController = popoverController
+                } else {
+                    if presentedViewController is TipUIPopoverViewController {
+                        dismiss(animated: true)
+                        tipPopoverController = nil
+                    }
+                }
+            }
+        }
+    }
+
+    func stopTipObservationTask() {
+        tipObservationTask?.cancel()
+        tipObservationTask = nil
+    }
 }
 
 // MARK: - LocationListSelectionViewControllerDelegate

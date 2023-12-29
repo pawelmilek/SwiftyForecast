@@ -8,11 +8,13 @@
 
 import SwiftUI
 import RealmSwift
+import TipKit
 
 struct LocationList: View {
     @Environment(\.isSearching) private var isSearching: Bool
     @Binding var searchText: String
     var onSelectRow: (LocationModel) -> Void
+    private let locationsTip = LocationsTip()
 
     @ObservedResults(
         LocationModel.self,
@@ -22,6 +24,9 @@ struct LocationList: View {
 
     var body: some View {
         List {
+            TipView(locationsTip)
+                .tint(Color(uiColor: .primary))
+                .listRowSeparator(.hidden)
             ForEach(locations) { location in
                 LocationRow(item: location)
                 .deleteDisabled(location.isUserLocation)
@@ -42,4 +47,11 @@ struct LocationList: View {
 
 #Preview {
     LocationList(searchText: .constant("Search Text"), onSelectRow: {_ in })
+        .task {
+            try? Tips.resetDatastore()
+            try? Tips.configure([
+                .displayFrequency(.immediate),
+                .datastoreLocation(.applicationDefault)
+            ])
+        }
 }
