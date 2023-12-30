@@ -43,24 +43,7 @@ struct InformationView: View {
                         link: nil,
                         action: nil
                     )
-                    DisclosureGroup {
-                        Text("UIKit, SwiftUI, Combine, Charts, WidgetKit, MapKit, StoreKit, WebKit, TipKit")
-                            .font(.footnote)
-                            .fontWeight(.heavy)
-                            .fontDesign(.monospaced)
-                            .foregroundStyle(.primary)
-                            .padding(.leading, 15)
-                            .padding(.vertical, 10)
-                    } label: {
-                        InfoRow(
-                            tintColor: .orange,
-                            symbol: "swift",
-                            title: "Frameworks",
-                            content: nil,
-                            link: nil,
-                            action: nil
-                        )
-                    }
+                    InfromationFrameworkView()
                     InfoRow(
                         tintColor: .green,
                         symbol: "ellipsis.curlybraces",
