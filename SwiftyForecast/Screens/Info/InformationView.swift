@@ -53,13 +53,13 @@ struct InformationView: View {
                         action: nil
                     )
                     InfoRow(
-                        tintColor: Color(uiColor: .primary),
+                        tintColor: Color(.customPrimary),
                         symbol: "globe",
                         title: "Website",
                         content: nil,
                         link: (
                             destination: "https://sites.google.com/view/pmilek/home",
-                            label:  Bundle.main.applicationName
+                            label: Bundle.main.applicationName
                         ),
                         action: nil
                     )

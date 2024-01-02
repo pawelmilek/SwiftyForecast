@@ -4,6 +4,8 @@ import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    @AppStorage("userThemeSetting") var userThemeSetting: AppearanceTheme?
+
     var window: UIWindow?
     private var coordinator: MainCoordinator?
     private let networkReachabilityManager = NetworkReachabilityManager.shared
@@ -16,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupTips()
         setupNetworkReachabilityHandling()
         setNavigationBarStyle()
+        setupUserInterfaceStyle()
+        setupNotificationCenter()
         debugPrintRealmFileURL()
         return true
     }
@@ -33,6 +37,7 @@ private extension AppDelegate {
     }
 
     func setupTips() {
+//        try? Tips.resetDatastore()
         try? Tips.configure([
             .displayFrequency(.immediate),
             .datastoreLocation(.applicationDefault)
@@ -90,6 +95,29 @@ private extension AppDelegate {
         setTransparentBackground()
         setTitleTextColor()
         setBarButtonItemColor()
+    }
+
+    func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(setupUserInterfaceStyle),
+            name: .didChangeAppearance,
+            object: nil
+        )
+    }
+
+    @objc
+    func setupUserInterfaceStyle() {
+        switch userThemeSetting {
+        case .dark:
+            window?.overrideUserInterfaceStyle = .dark
+
+        case .light:
+            window?.overrideUserInterfaceStyle = .light
+
+        default:
+            window?.overrideUserInterfaceStyle = .unspecified
+        }
     }
 
     func debugPrintRealmFileURL() {

@@ -8,10 +8,9 @@ final class MainViewController: UIViewController {
     var viewModel: ViewModel?
 
     private let lottieAnimationViewController = LottieAnimationViewController()
-
     private lazy var openInfoBarButton: UIBarButtonItem = {
         let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
-        let config = UIImage.SymbolConfiguration(weight: .semibold)
+        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
         let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
         let openInfoButton = UIBarButtonItem(
             image: infoImage,
@@ -19,17 +18,39 @@ final class MainViewController: UIViewController {
             target: self,
             action: #selector(openInfoBarButtonTapped)
         )
-
         return openInfoButton
     }()
 
+    private lazy var openAppearanceBarButton: UIBarButtonItem = {
+        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
+        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
+        let image = UIImage(
+            systemName: "circle.lefthalf.filled.inverse",
+            withConfiguration: config.applying(colorsConfig)
+        )
+        let button = UIBarButtonItem(
+            image: image,
+            style: .plain,
+            target: self,
+            action: #selector(openAppearanceBarButtonTapped)
+        )
+        return button
+    }()
+
     private lazy var openLocationBarButton: UIBarButtonItem = {
-        UIBarButtonItem(
-            image: .mapMarker,
+        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
+        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
+        let image = UIImage(
+            systemName: "mappin.circle",
+            withConfiguration: config.applying(colorsConfig)
+        )
+        let button = UIBarButtonItem(
+            image: image,
             style: .plain,
             target: self,
             action: #selector(openLocationListBarButtonTapped)
         )
+        return button
     }()
 
     private lazy var notationSegmentedControl: UISegmentedControl = {
@@ -52,8 +73,12 @@ final class MainViewController: UIViewController {
     private let locationManager = LocationManager()
     private var appStoreReviewManager: AppStoreReviewManager?
     private let informationTip = InformationTip()
-    private var tipObservationTask: Task<Void, Never>?
-    private weak var tipPopoverController: TipUIPopoverViewController?
+    private let appearanceTip = AppearanceTip()
+
+    private var informationTipObservationTask: Task<Void, Never>?
+    private weak var informationTipPopoverController: TipUIPopoverViewController?
+    private var appearanceTipObservationTask: Task<Void, Never>?
+    private weak var appearanceTipPopoverController: TipUIPopoverViewController?
 
     private var viewControllers: [WeatherViewController] = []
     private var cancellables = Set<AnyCancellable>()
@@ -65,13 +90,13 @@ final class MainViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        setupTipObservationTask()
+        setupTipObservationTasks()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         viewModel?.onViewDidDisappear()
-        stopTipObservationTask()
+        stopTipObservationTasks()
     }
 }
 
@@ -113,7 +138,6 @@ private extension MainViewController {
                 debugPrint(error.localizedDescription)
             }
             .store(in: &cancellables)
-
     }
 
     func subscribeToViewModel() {
@@ -182,22 +206,29 @@ private extension MainViewController {
     }
 
     func setupLeftBarButtonItem() {
-        navigationItem.leftBarButtonItem = openInfoBarButton
+        navigationItem.leftBarButtonItems = [openInfoBarButton, openAppearanceBarButton]
     }
 
     func setupRightBarButtonItem() {
         navigationItem.rightBarButtonItem = openLocationBarButton
     }
 
-    @objc func openInfoBarButtonTapped() {
+    @objc
+    func openInfoBarButtonTapped() {
         coordinator?.openInformationViewController()
         donateInformationVisitEvent()
     }
 
-    private func donateInformationVisitEvent() {
+    func donateInformationVisitEvent() {
         Task(priority: .userInitiated) {
             await InformationTip.visitViewEvent.donate()
         }
+    }
+
+    @objc
+    func openAppearanceBarButtonTapped() {
+        coordinator?.openAppearanceViewController()
+        AppearanceTip.showTip = false
     }
 
     @objc func openLocationListBarButtonTapped() {
@@ -217,40 +248,70 @@ private extension MainViewController {
     func setupAppearance() {
         let proxyPageControl = UIPageControl.appearance()
         proxyPageControl.pageIndicatorTintColor = Style.Main.pageIndicatorTintColor
-        proxyPageControl.currentPageIndicatorTintColor = Style.Main.currentPageIndicatorColor
+        proxyPageControl.currentPageIndicatorTintColor = .customPrimary
         view.backgroundColor = Style.Main.backgroundColor
     }
 
-    func setupTipObservationTask() {
-        tipObservationTask = tipObservationTask ?? Task { @MainActor in
+    func setupTipObservationTasks() {
+        setInformationTipObservationTask()
+        setAppearanceTipObservationTask()
+    }
+
+    func setInformationTipObservationTask() {
+        informationTipObservationTask = informationTipObservationTask ?? Task { @MainActor in
             for await shouldDisplay in informationTip.shouldDisplayUpdates {
                 if shouldDisplay {
                     let popoverController = TipUIPopoverViewController(
                         informationTip,
                         sourceItem: openInfoBarButton
                     )
-                    popoverController.view.tintColor = UIColor.primary
+                    popoverController.view.tintColor = .customPrimary
                     present(popoverController, animated: true)
-                    tipPopoverController = popoverController
+                    informationTipPopoverController = popoverController
                 } else {
                     if presentedViewController is TipUIPopoverViewController {
                         dismiss(animated: true)
-                        tipPopoverController = nil
+                        informationTipPopoverController = nil
                     }
                 }
             }
         }
     }
 
-    func stopTipObservationTask() {
-        tipObservationTask?.cancel()
-        tipObservationTask = nil
+    func setAppearanceTipObservationTask() {
+        appearanceTipObservationTask = appearanceTipObservationTask ?? Task { @MainActor in
+            for await shouldDisplay in appearanceTip.shouldDisplayUpdates {
+                if shouldDisplay {
+                    let popoverController = TipUIPopoverViewController(
+                        appearanceTip,
+                        sourceItem: openAppearanceBarButton
+                    )
+                    popoverController.view.tintColor = .customPrimary
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.present(popoverController, animated: true)
+                        self.appearanceTipPopoverController = popoverController
+                    }
+                } else {
+                    if presentedViewController is TipUIPopoverViewController {
+                        dismiss(animated: true)
+                        appearanceTipPopoverController = nil
+                    }
+                }
+            }
+        }
+    }
+
+    func stopTipObservationTasks() {
+        informationTipObservationTask?.cancel()
+        informationTipObservationTask = nil
+
+        appearanceTipObservationTask?.cancel()
+        appearanceTipObservationTask = nil
     }
 }
 
 // MARK: - LocationListSelectionViewControllerDelegate
 extension MainViewController: LocationSearchViewControllerDelegate {
-
     func locationListViewController(
         _ view: LocationSearchViewController,
         didSelectLocation location: LocationModel
@@ -272,12 +333,10 @@ extension MainViewController: LocationSearchViewControllerDelegate {
             completion: nil
         )
     }
-
 }
 
 // MARK: - UIPageViewControllerDataSource
 extension MainViewController: UIPageViewControllerDataSource {
-
     func pageViewController(_ pageViewController: UIPageViewController,
                             viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let viewController = viewController as? WeatherViewController else {
@@ -327,12 +386,10 @@ extension MainViewController: UIPageViewControllerDataSource {
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         viewModel?.currentPageIndex ?? 0
     }
-
 }
 
 // MARK: - UIPageViewControllerDelegate
 extension MainViewController: UIPageViewControllerDelegate {
-
     func pageViewController(_ pageViewController: UIPageViewController,
                             didFinishAnimating finished: Bool,
                             previousViewControllers: [UIViewController],
@@ -350,14 +407,11 @@ extension MainViewController: UIPageViewControllerDelegate {
         generator.prepare()
         generator.impactOccurred()
     }
-
 }
 
 // MARK: - AppStoreReviewObserverEventResponder
 extension MainViewController: ReviewObserverEventResponder {
-
     func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
         appStoreReviewManager?.requestReview(for: desirableMoment)
     }
-
 }

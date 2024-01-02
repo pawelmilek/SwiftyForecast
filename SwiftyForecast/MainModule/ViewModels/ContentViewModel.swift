@@ -15,11 +15,11 @@ protocol ContentViewModel: AnyObject {
   var sevenDaysData: [DailyDataDTO] { get }
   var location: LocationDTO { get }
   var pageIndex: Int { get set }
-  
+
   var onSuccess: (() -> Void)? { get set }
   var onFailure: ((Error) -> Void)? { get set }
   var onLoadingStatus: ((Bool) -> Void)? { get set }
-  
+
   init(city: CityDTO, repository: Repository)
 
   func loadData()

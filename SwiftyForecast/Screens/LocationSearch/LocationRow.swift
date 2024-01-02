@@ -48,7 +48,7 @@ private extension LocationRow {
         VStack(alignment: .leading, spacing: 0) {
             Text(localTime)
                 .font(Style.LocationRow.timeFont)
-                .foregroundStyle(Style.LocationRow.timeColor)
+                .foregroundStyle(.customPrimary)
             Text(name)
                 .font(Style.LocationRow.nameFont)
                 .foregroundStyle(Style.LocationRow.nameColor)
@@ -58,7 +58,7 @@ private extension LocationRow {
     var mapView: some View {
         Map(position: $position, interactionModes: []) {
             Marker(name, coordinate: region.center)
-                .tint(Style.LocationRow.timeColor)
+                .tint(.customPrimary)
         }
         .cornerRadius(Style.LocationRow.cornerRadius)
     }

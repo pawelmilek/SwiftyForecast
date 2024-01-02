@@ -22,7 +22,7 @@ struct ReviewNotificationCenter {
 
     func post(_ type: ReviewDesirableMomentType, object: Any? = nil) {
         notificationCenter.post(
-            name: .appStoreDesirableMomentHappen,
+            name: .didRequestAppStoreReview,
             object: object,
             userInfo: [InfoKey.desirableMoment: type]
         )

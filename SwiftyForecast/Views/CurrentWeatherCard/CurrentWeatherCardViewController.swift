@@ -13,10 +13,6 @@ final class CurrentWeatherCardViewController: UIViewController {
     private let viewModel = CurrentWeatherCard.ViewModel()
     private var hostingViewController: UIHostingController<CurrentWeatherCard>!
 
-    override func loadView() {
-        super.loadView()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

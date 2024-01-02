@@ -55,8 +55,6 @@ final class WeatherProviderDataSource {
     }
 
     private func fetchLocationNameAndCurrentWeather() async -> (name: String, model: CurrentWeatherModel) {
-        guard let location else { fatalError("Location unavailable") }
-
         async let nameResult = fetchLocationName()
         async let modelResult = fetchCurrentWeather()
         let (name, model) = await (nameResult, modelResult)

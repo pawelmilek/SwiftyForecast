@@ -5,6 +5,7 @@
 //  Created by Pawel Milek on 12/11/23.
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
+//swiftlint:disable switch_case_alignment
 
 import Foundation
 import CoreLocation
