@@ -39,7 +39,6 @@
 		E2227E8E2ADD5DD9000C3886 /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
 		E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */; };
 		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
-		E228F8492B44842600B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E22A221B2AE004230069A83A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A221A2AE004230069A83A /* LocationManager.swift */; };
 		E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E233AC1123DE7D9000DC0EF5 /* Reachability */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
@@ -1233,7 +1232,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2AD32742B237B5E00F46FBE /* ReviewDesirableMomentConfig.plist in Resources */,
-				E228F8492B44842600B60E33 /* Assets.xcassets in Resources */,
 				E2FDBD6F2B2079E00012D7C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1639,7 +1637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.3;
+				MARKETING_VERSION = 3.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1672,7 +1670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.3;
+				MARKETING_VERSION = 3.4.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
