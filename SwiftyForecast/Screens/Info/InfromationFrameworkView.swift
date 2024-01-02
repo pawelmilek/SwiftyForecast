@@ -26,7 +26,7 @@ struct InfromationFrameworkView: View {
                 HStack {
                     Text(item)
                         .fontDesign(.monospaced)
-                        .foregroundStyle(.customPrimary)
+                        .foregroundStyle(.accent)
                     Spacer()
                     Image(systemName: "books.vertical.fill")
                         .foregroundStyle(.orange)
