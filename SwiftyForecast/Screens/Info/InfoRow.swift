@@ -20,7 +20,7 @@ struct InfoRow: View {
         LabeledContent {
             if let content {
                 Text(content)
-                    .foregroundStyle(.customPrimary)
+                    .foregroundStyle(.accent)
                     .fontWeight(.heavy)
             } else if let link {
                 Link(destination: URL(string: link.destination)!,
