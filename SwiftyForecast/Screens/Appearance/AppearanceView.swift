@@ -9,18 +9,14 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    enum Constant {
-        static let height = CGFloat(410)
-    }
-
     @Environment(\.colorScheme) var colorScheme
-    @AppStorage("userThemeSetting") var userThemeSetting: AppearanceTheme = .systemDefault
+    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
     @State private var circleOffset = CGSize.zero
     var onAppearanceChange: () -> Void
 
     var body: some View {
         VStack(spacing: 35) {
-            Circle().fill(userThemeSetting.color(colorScheme).gradient)
+            Circle().fill(appearanceTheme.color(colorScheme).gradient)
                 .frame(maxWidth: 150, maxHeight: 150)
                 .mask {
                     Rectangle()
@@ -41,7 +37,7 @@ struct AppearanceView: View {
             }
             .foregroundStyle(.accent)
             .fontDesign(.monospaced)
-            Picker("User Theme Settings", selection: $userThemeSetting) {
+            Picker("User Theme Settings", selection: $appearanceTheme) {
                 ForEach(AppearanceTheme.allCases, id: \.self) { item in
                     Text(item.rawValue)
                         .foregroundStyle(.accent)
@@ -64,8 +60,8 @@ struct AppearanceView: View {
             let isDark = colorScheme == .dark
             setCircleOffset(isDark: isDark)
         }
-        .onChange(of: userThemeSetting) {
-            let isDark = userThemeSetting == .dark
+        .onChange(of: appearanceTheme) {
+            let isDark = appearanceTheme == .dark
             setCircleOffset(isDark: isDark)
             onAppearanceChange()
         }
@@ -75,6 +71,10 @@ struct AppearanceView: View {
         withAnimation(.bouncy) {
             circleOffset = CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150)
         }
+    }
+
+    enum Constant {
+        static let height = CGFloat(410)
     }
 }
 

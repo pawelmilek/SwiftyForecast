@@ -4,7 +4,7 @@ import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    @AppStorage("userThemeSetting") var userThemeSetting: AppearanceTheme?
+    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme?
 
     var window: UIWindow?
     private var coordinator: MainCoordinator?
@@ -108,7 +108,7 @@ private extension AppDelegate {
 
     @objc
     func setupUserInterfaceStyle() {
-        switch userThemeSetting {
+        switch appearanceTheme {
         case .dark:
             window?.overrideUserInterfaceStyle = .dark
 
@@ -116,7 +116,13 @@ private extension AppDelegate {
             window?.overrideUserInterfaceStyle = .light
 
         default:
-            window?.overrideUserInterfaceStyle = .unspecified
+            if UITraitCollection.current.userInterfaceStyle == .dark {
+                print("Dark mode")
+                window?.overrideUserInterfaceStyle = .dark
+            } else {
+                print("Light mode")
+                window?.overrideUserInterfaceStyle = .light
+            }
         }
     }
 

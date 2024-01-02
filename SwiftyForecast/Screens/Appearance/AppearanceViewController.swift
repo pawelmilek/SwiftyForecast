@@ -10,7 +10,6 @@ import UIKit
 import SwiftUI
 
 class AppearanceViewController: UIViewController {
-    @AppStorage("userThemeSetting") var userThemeSetting: AppearanceTheme = .systemDefault
     private var hostingViewController: UIHostingController<AppearanceView>!
 
     override func viewDidLoad() {
