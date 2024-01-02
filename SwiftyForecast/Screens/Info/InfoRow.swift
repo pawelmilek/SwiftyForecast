@@ -20,7 +20,7 @@ struct InfoRow: View {
         LabeledContent {
             if let content {
                 Text(content)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.customPrimary)
                     .fontWeight(.heavy)
             } else if let link {
                 Link(destination: URL(string: link.destination)!,
@@ -73,7 +73,7 @@ struct InfoRow: View {
         content: nil,
         link: (
             destination: "https://sites.google.com/view/pmilek/home",
-            label:  "Swifty Forecast"
+            label: "Swifty Forecast"
         ),
         action: nil
     )

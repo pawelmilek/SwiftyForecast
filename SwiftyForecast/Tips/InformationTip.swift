@@ -9,9 +9,7 @@
 import TipKit
 
 struct InformationTip: Tip {
-    static let visitViewEvent = Event(id: "visitViewEvent")
-
-    init() { }
+    static let visitViewEvent = Event(id: "visitInformationViewEvent")
 
     var title: Text {
         Text("Information")

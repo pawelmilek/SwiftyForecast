@@ -28,7 +28,7 @@ struct CurrentWeatherCard: View {
             .background(
                 RoundedRectangle(cornerRadius: Style.WeatherCard.cornerRadius)
                     .inset(by: 2.5)
-                    .fill(Style.WeatherCard.backgroundColor)
+                    .fill(.customPrimary.gradient)
                     .strokeBorder(
                         .shadow,
                         lineWidth: Style.WeatherCard.lineBorderWidth,

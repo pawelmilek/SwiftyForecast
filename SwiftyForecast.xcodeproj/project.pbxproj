@@ -38,6 +38,7 @@
 		E2227E8B2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8A2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift */; };
 		E2227E8E2ADD5DD9000C3886 /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
 		E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */; };
+		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E22A221B2AE004230069A83A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A221A2AE004230069A83A /* LocationManager.swift */; };
 		E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E233AC1123DE7D9000DC0EF5 /* Reachability */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
@@ -127,7 +128,7 @@
 		E2A32F5225448CD9000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */; };
 		E2A32F5825448CEB000ACEFE /* PlistFileLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F5725448CEB000ACEFE /* PlistFileLoaderTests.swift */; };
 		E2A32F5B25448DC5000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */; };
-		E2A32F6B25449B54000ACEFE /* ReviewNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6A25449B54000ACEFE /* ReviewNotificationName.swift */; };
+		E2A32F6B25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */; };
 		E2A32F7025449DA3000ACEFE /* ReviewObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */; };
 		E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */; };
 		E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
@@ -171,6 +172,12 @@
 		E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D655211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift */; };
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
 		E2B1D65C211FB26C00F0002A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* MainViewController.swift */; };
+		E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */; };
+		E2BC4DB12B442A0C00D05F54 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */; };
+		E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
+		E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
+		E2BC4DB82B44304000D05F54 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* AppearanceView.swift */; };
+		E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */; };
 		E2C873CE2B10ECDD00FD4D9C /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C873CD2B10ECDD00FD4D9C /* HourlyForecastChart.swift */; };
 		E2CCCEFB250B0D5800109D6D /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */; };
 		E2CF4D76226E7A4100062E36 /* WeatherServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* WeatherServiceProtocol.swift */; };
@@ -198,7 +205,6 @@
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
 		E2E7127B2AD99FDE002BFFA7 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2E7127A2AD99FDE002BFFA7 /* Realm */; };
 		E2E7127D2AD99FDE002BFFA7 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2E7127C2AD99FDE002BFFA7 /* RealmSwift */; };
-		E2EC1CF91D918F4A00FD1F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E2F17C2D20F4097C00068BD2 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */; };
 		E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */; };
 		E2F671142B234EA200B791A0 /* TemperatureFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */; };
@@ -376,7 +382,7 @@
 		E2A32F4D25448C52000ACEFE /* ReviewDesirableMomentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDesirableMomentConfig.swift; sourceTree = "<group>"; };
 		E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ReviewDesirableMomentConfig_Test.plist; sourceTree = "<group>"; };
 		E2A32F5725448CEB000ACEFE /* PlistFileLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlistFileLoaderTests.swift; sourceTree = "<group>"; };
-		E2A32F6A25449B54000ACEFE /* ReviewNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNotificationName.swift; sourceTree = "<group>"; };
+		E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewNotificationName+DidRequestAppStoreReview.swift"; sourceTree = "<group>"; };
 		E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewObserver.swift; sourceTree = "<group>"; };
 		E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNotificationCenter.swift; sourceTree = "<group>"; };
 		E2A42E392151BC7D00F9A79A /* GeocoderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderError.swift; sourceTree = "<group>"; };
@@ -396,6 +402,11 @@
 		E2B1D655211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+StoryboardIdentifiable.swift"; sourceTree = "<group>"; };
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
 		E2B1D65B211FB26C00F0002A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTip.swift; sourceTree = "<group>"; };
+		E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTheme.swift; sourceTree = "<group>"; };
+		E2BC4DB72B44304000D05F54 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
+		E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+DidChangeAppearance.swift"; sourceTree = "<group>"; };
 		E2C873CD2B10ECDD00FD4D9C /* HourlyForecastChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastChart.swift; sourceTree = "<group>"; };
 		E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 		E2CF4D75226E7A4100062E36 /* WeatherServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServiceProtocol.swift; sourceTree = "<group>"; };
@@ -711,6 +722,7 @@
 				E262B34724F8878D00BD7A2A /* Main */,
 				E21ABD422AE82FF900F93F01 /* LocationSearch */,
 				E249ABBA2B3475FA0020B88D /* Info */,
+				E2BC4DAF2B4429F600D05F54 /* Appearance */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -814,6 +826,7 @@
 		E28CEC0B2B3EB74C003DB3A6 /* Tips */ = {
 			isa = PBXGroup;
 			children = (
+				E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */,
 				E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */,
 				E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */,
 			);
@@ -883,8 +896,8 @@
 				E23997E520E84371007D8CE4 /* Errors */,
 				E28CEC0B2B3EB74C003DB3A6 /* Tips */,
 				E21A0B9420EE88F5006AC409 /* Utilities */,
+				E2BC4DB62B44300800D05F54 /* ThemeStyle */,
 				E23997D820E840C1007D8CE4 /* Resources */,
-				E25EF00A20F97CE200E4C115 /* Style.swift */,
 			);
 			path = SwiftyForecast;
 			sourceTree = "<group>";
@@ -918,7 +931,7 @@
 		E2A32F6E25449D78000ACEFE /* ReviewObserver */ = {
 			isa = PBXGroup;
 			children = (
-				E2A32F6A25449B54000ACEFE /* ReviewNotificationName.swift */,
+				E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */,
 				E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */,
 			);
 			path = ReviewObserver;
@@ -960,6 +973,25 @@
 				E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */,
 			);
 			path = Doubles;
+			sourceTree = "<group>";
+		};
+		E2BC4DAF2B4429F600D05F54 /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */,
+				E2BC4DB72B44304000D05F54 /* AppearanceView.swift */,
+				E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
+		E2BC4DB62B44300800D05F54 /* ThemeStyle */ = {
+			isa = PBXGroup;
+			children = (
+				E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */,
+				E25EF00A20F97CE200E4C115 /* Style.swift */,
+			);
+			path = ThemeStyle;
 			sourceTree = "<group>";
 		};
 		E2CF4D70226E75AD00062E36 /* ViewModel */ = {
@@ -1180,7 +1212,7 @@
 				E21ABD512AE9735F00F93F01 /* current_weather_response.json in Resources */,
 				E2A32F3E2544774F000ACEFE /* ReviewDesirableMomentConfig.plist in Resources */,
 				E28CEC0A2B39C5AB003DB3A6 /* packages_license.html in Resources */,
-				E2EC1CF91D918F4A00FD1F95 /* Assets.xcassets in Resources */,
+				E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */,
 				E28179122B385F8800D06917 /* device_types.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1237,6 +1269,7 @@
 				E21E4A3A25143D0700066401 /* WeatherViewController+ViewModel.swift in Sources */,
 				E27E2FCF1DA04D1D00B3EABF /* UITableView+DequeuableCell.swift in Sources */,
 				E2227E8E2ADD5DD9000C3886 /* SpeedFormatterFactory.swift in Sources */,
+				E2BC4DB82B44304000D05F54 /* AppearanceView.swift in Sources */,
 				E296A7E22AD6E3F2001BFADB /* HTTPMethod.swift in Sources */,
 				E21ABD0A2AE5A19300F93F01 /* View+ErrorAlert.swift in Sources */,
 				E296A7E92AD7DCD8001BFADB /* CurrentWeatherResponse.swift in Sources */,
@@ -1265,6 +1298,7 @@
 				E2227E892ADD54C7000C3886 /* TemperatureCelsiusFormatter.swift in Sources */,
 				E2DC149524955C8D00D1A329 /* MainViewController+ViewModel.swift in Sources */,
 				E2CF4D7A226E7B6000062E36 /* DailyViewCell+ViewModel.swift in Sources */,
+				E2BC4DB12B442A0C00D05F54 /* AppearanceViewController.swift in Sources */,
 				E2A32F4E25448C52000ACEFE /* ReviewDesirableMomentConfig.swift in Sources */,
 				E21ABD412AE82F3700F93F01 /* LocationSearchResultRow.swift in Sources */,
 				E281791A2B38770B00D06917 /* LicenseReader.swift in Sources */,
@@ -1283,7 +1317,7 @@
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
 				E249ABBC2B3476220020B88D /* InformationView.swift in Sources */,
 				E2FEB7B52B15F93F009D54B2 /* Daytime.swift in Sources */,
-				E2A32F6B25449B54000ACEFE /* ReviewNotificationName.swift in Sources */,
+				E2A32F6B25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */,
 				E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */,
 				E2B0357B2500885100DC0E77 /* DailyForecastModel.swift in Sources */,
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
@@ -1332,6 +1366,7 @@
 				E2854FFE2290F24800CD7554 /* TemperatureNotation.swift in Sources */,
 				E26CDFAF2B408B8B0018B5D2 /* InfromationFrameworkView.swift in Sources */,
 				E28179182B38768A00D06917 /* LicenseView.swift in Sources */,
+				E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */,
 				E2ABE7E42B0E427700E4EC4F /* LocationWeatherView.swift in Sources */,
 				E296A7F22AD7EA46001BFADB /* Condition.swift in Sources */,
 				E2A32F27254459FB000ACEFE /* AppStoreReviewManager.swift in Sources */,
@@ -1351,11 +1386,13 @@
 				E21ABD562AE9740F00F93F01 /* MockModelGenerator.swift in Sources */,
 				E21ABD442AE8300F00F93F01 /* LocationSearchView.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */,
+				E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */,
 				E296A7EE2AD7EA1A001BFADB /* CloudCoverage.swift in Sources */,
 				E2091DC22ADFE2B700959CB7 /* DayNightState.swift in Sources */,
 				E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */,
 				E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */,
+				E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */,
 				E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */,
 				E281790E2B3856AC00D06917 /* SupportEmail.swift in Sources */,
@@ -1405,6 +1442,7 @@
 				E2AD32692B23774400F46FBE /* CurrentWeatherResponse.swift in Sources */,
 				E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */,
 				E2AD32682B23774400F46FBE /* WeatherEndpoint.swift in Sources */,
+				E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */,
 				E29947B62B30E2B400EBA3D1 /* ConditionIcon.swift in Sources */,
 				E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */,
 				E2CFA7AD2B309F26001DE3E8 /* FileLoaderError.swift in Sources */,
@@ -1599,7 +1637,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.2;
+				MARKETING_VERSION = 3.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1632,7 +1670,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.2;
+				MARKETING_VERSION = 3.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

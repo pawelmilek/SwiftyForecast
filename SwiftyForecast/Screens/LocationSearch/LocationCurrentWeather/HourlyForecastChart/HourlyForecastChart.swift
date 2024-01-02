@@ -13,7 +13,7 @@ struct HourlyForecastChart: View {
     @ObservedObject var viewModel: ViewModel
 
     var background: Color {
-        Color(uiColor: .primary).opacity(0.5)
+        Color(.customPrimary).opacity(0.5)
     }
 
     var body: some View {
@@ -25,7 +25,7 @@ struct HourlyForecastChart: View {
                             x: .value("Hour", item.hour),
                             y: .value("Temperature", item.temperatureValue)
                         )
-                        .foregroundStyle(Color(.primary))
+                        .foregroundStyle(Color(.customPrimary))
                         .interpolationMethod(.catmullRom)
                         .symbol {
                             VStack(spacing: 0) {
@@ -41,7 +41,7 @@ struct HourlyForecastChart: View {
                                         .scaledToFit()
                                         .frame(maxWidth: 35, maxHeight: 35)
                                         .shadow(
-                                            color: Color(uiColor: .shadow),
+                                            color: Color(.shadow),
                                             radius: Style.WeatherCard.iconShadowRadius,
                                             x: Style.WeatherCard.iconShadowOffset.width,
                                             y: Style.WeatherCard.iconShadowOffset.height

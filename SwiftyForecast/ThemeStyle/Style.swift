@@ -11,7 +11,6 @@ struct Style {
     // MARK: - MainViewController
     struct Main {
         static let pageIndicatorTintColor = UIColor.accent
-        static let currentPageIndicatorColor = UIColor.primary
         static let backgroundColor = UIColor.systemBackground
     }
 
@@ -24,7 +23,6 @@ struct Style {
 
     // MARK: - CurrentWeatherCard
     struct WeatherCard {
-        static let backgroundColor = Color(uiColor: .primary)
         static let cornerRadius: CGFloat = 25
         static let shadowColor = Color(.shadow)
         static let lineBorderWidth = CGFloat(2.5)
@@ -55,7 +53,6 @@ struct Style {
 
     // MARK: - HourlyViewCell
     struct HourlyCell {
-        static let backgroundColor = UIColor.primary
         static let cornerRadius = CGFloat(15)
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
         static let timeColor = UIColor.accent
@@ -103,22 +100,19 @@ struct Style {
     struct LocationRow {
         static let backgroundColor = UIColor.clear
         static let timeFont = Font.system(.subheadline, design: .monospaced, weight: .semibold)
-        static let timeColor = Color(uiColor: .primary)
         static let timeAlignment = NSTextAlignment.left
 
         static let nameFont = Font.system(.subheadline, design: .monospaced, weight: .semibold)
-        static let nameColor = Color(uiColor: .accent)
+        static let nameColor = Color(.accent)
         static let locationNameAlignment = NSTextAlignment.left
 
         static let cornerRadius = CGFloat(15)
-        static let borderColor = Color(uiColor: .shadow)
-        static let shadowColor = Color(uiColor: .shadow)
+        static let borderColor = Color(.shadow)
+        static let shadowColor = Color(.shadow)
         static let lineBorderWidth = CGFloat(2)
         static let shadowRadius = CGFloat(0)
         static let shadowOpacity = Float(1.0)
         static let shadowOffset = (x: 2.5, y: 2.5)
-
-        static let separatorColor = UIColor.secondary.withAlphaComponent(0.8)
     }
 
     // MARK: - LocationSearchResultRow
