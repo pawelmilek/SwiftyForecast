@@ -1,5 +1,5 @@
 //
-//  ReviewNotificationName.swift
+//  ReviewNotificationName+DidRequestAppStoreReview.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -9,5 +9,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let appStoreDesirableMomentHappen = Notification.Name("appStoreDesirableMomentHappen")
+    static let didRequestAppStoreReview = Notification.Name("didRequestAppStoreReview")
 }

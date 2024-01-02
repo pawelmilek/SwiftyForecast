@@ -52,7 +52,7 @@ extension ReviewObserver {
         notificationCenter.addObserver(
             self,
             selector: #selector(desirableMomentDidHappen),
-            name: .appStoreDesirableMomentHappen,
+            name: .didRequestAppStoreReview,
             object: nil
         )
         isObserving = true

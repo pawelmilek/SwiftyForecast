@@ -37,7 +37,7 @@ private extension HourlyViewCell {
         temperatureLabel.font = Style.HourlyCell.temperatureFont
         temperatureLabel.textColor = Style.HourlyCell.temperatureColor
         temperatureLabel.textAlignment = Style.HourlyCell.temperatureAlignment
-        contentView.backgroundColor = Style.HourlyCell.backgroundColor
+        contentView.backgroundColor = .customPrimary
         setRoundedCornersAndBorder()
     }
 

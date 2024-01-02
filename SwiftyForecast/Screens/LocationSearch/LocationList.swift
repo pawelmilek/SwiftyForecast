@@ -25,7 +25,7 @@ struct LocationList: View {
     var body: some View {
         List {
             TipView(locationsTip)
-                .tint(Color(uiColor: .primary))
+                .tint(Color(.customPrimary))
                 .listRowSeparator(.hidden)
             ForEach(locations) { location in
                 LocationRow(item: location)

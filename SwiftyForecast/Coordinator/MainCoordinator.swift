@@ -23,6 +23,12 @@ final class MainCoordinator: Coordinator {
     }
 
     @MainActor
+    func openAppearanceViewController() {
+        let sheetViewController = AppearanceViewController()
+        navigationController.present(sheetViewController, animated: true, completion: nil)
+    }
+
+    @MainActor
     func openLocationListViewController() {
         let viewController = LocationSearchViewController()
 
