@@ -26,16 +26,15 @@ struct CurrentWeatherCard: View {
             .foregroundStyle(Style.WeatherCard.textColor)
             .padding(15)
             .background(
-                RoundedRectangle(cornerRadius: Style.WeatherCard.cornerRadius)
-                    .inset(by: 2.5)
-                    .fill(.customPrimary.gradient)
-                    .strokeBorder(
-                        .shadow,
-                        lineWidth: Style.WeatherCard.lineBorderWidth,
-                        antialiased: true
-                    )
+                MotionAnimationView()
             )
-            .compositingGroup()
+            .clipShape(
+                RoundedRectangle(
+                    cornerRadius: Style.WeatherCard.cornerRadius,
+                    style: .continuous
+                )
+                .inset(by: 2.5)
+            )
             .shadow(
                 color: Style.WeatherCard.shadowColor,
                 radius: Style.WeatherCard.shadowRadius,
