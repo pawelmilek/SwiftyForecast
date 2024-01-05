@@ -11,16 +11,30 @@ import Charts
 
 struct HourlyForecastChart: View {
     @ObservedObject var viewModel: ViewModel
-
-    var background: Color {
-        Color(.customPrimary).opacity(0.5)
-    }
+    let curGradient = LinearGradient(
+        gradient: Gradient(
+            colors: [
+                .customPrimary.opacity(0.5),
+                .customPrimary.opacity(0.2),
+                .customPrimary.opacity(0.05)
+            ]
+        ),
+        startPoint: .top,
+        endPoint: .bottom
+    )
 
     var body: some View {
         GroupBox {
             ScrollView(.horizontal, showsIndicators: false) {
                 Chart {
                     ForEach(viewModel.dataSource) { item in
+                        AreaMark(
+                            x: .value("Hour", item.hour),
+                            y: .value("Temperature", item.temperatureValue)
+                        )
+                        .foregroundStyle(curGradient)
+                        .interpolationMethod(.catmullRom)
+                        
                         LineMark(
                             x: .value("Hour", item.hour),
                             y: .value("Temperature", item.temperatureValue)
@@ -53,9 +67,9 @@ struct HourlyForecastChart: View {
                                 .padding(.horizontal, 0)
                                 .padding(.vertical, -8)
                             }
-                            .background(.background)
-                            .offset(y: -5)
+                            .offset(y: -12)
                         }
+
                     }
                 }
                 .chartXAxis {
@@ -88,6 +102,7 @@ struct HourlyForecastChart: View {
         }
         .groupBoxStyle(BackgroundGroupBoxStyle())
         .frame(maxHeight: ViewModel.chartHeight)
+
     }
 }
 

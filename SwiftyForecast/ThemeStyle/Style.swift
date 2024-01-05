@@ -25,9 +25,8 @@ struct Style {
     struct WeatherCard {
         static let cornerRadius: CGFloat = 25
         static let shadowColor = Color(.shadow)
-        static let lineBorderWidth = CGFloat(2.5)
         static let shadowRadius = CGFloat(0)
-        static let shadow = (x: CGFloat(3), y: CGFloat(3))
+        static let shadow = (x: CGFloat(2.5), y: CGFloat(2.5))
         static let textColor = Color.white
 
         static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .semibold)
@@ -53,7 +52,6 @@ struct Style {
 
     // MARK: - HourlyViewCell
     struct HourlyCell {
-        static let cornerRadius = CGFloat(15)
         static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
         static let timeColor = UIColor.accent
         static let timeAlignment = NSTextAlignment.center
@@ -62,7 +60,7 @@ struct Style {
         static let temperatureAlignment = NSTextAlignment.right
         static let iconContentMode = UIView.ContentMode.scaleAspectFit
 
-        static let lineBorderWidth = CGFloat(2)
+        static let cornerRadius = CGFloat(13)
         static let shadowRadius = CGFloat(0)
         static let shadowOpacity = Float(1.0)
         static let shadowOffset = CGSize(width: 2.5, height: 2.5)
