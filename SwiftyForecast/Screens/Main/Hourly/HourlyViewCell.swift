@@ -49,10 +49,7 @@ private extension HourlyViewCell {
         )
     }
 
-    func setupBorderAndShadow() {
-        contentView.layer.borderColor = UIColor.shadow.cgColor
-        contentView.layer.borderWidth = Style.HourlyCell.lineBorderWidth
-
+    func setupShadow() {
         contentView.layer.shadowColor = UIColor.shadow.cgColor
         contentView.layer.shadowOffset = Style.HourlyCell.shadowOffset
         contentView.layer.shadowOpacity = Style.HourlyCell.shadowOpacity
@@ -63,6 +60,6 @@ private extension HourlyViewCell {
     func setRoundedCornersAndBorder() {
         contentView.layer.cornerRadius = Style.HourlyCell.cornerRadius
         layer.masksToBounds = false
-        setupBorderAndShadow()
+        setupShadow()
     }
 }
