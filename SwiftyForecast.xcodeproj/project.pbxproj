@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E205736A2B48224500D20E61 /* MotionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20573692B48224500D20E61 /* MotionAnimationView.swift */; };
 		E2091DC22ADFE2B700959CB7 /* DayNightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2091DC12ADFE2B700959CB7 /* DayNightState.swift */; };
 		E2092ABF2B0CB40700F38CF9 /* LocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2092ABE2B0CB40700F38CF9 /* LocationList.swift */; };
 		E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */; };
@@ -269,6 +270,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E20573692B48224500D20E61 /* MotionAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionAnimationView.swift; sourceTree = "<group>"; };
 		E2091DC12ADFE2B700959CB7 /* DayNightState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNightState.swift; sourceTree = "<group>"; };
 		E2092ABE2B0CB40700F38CF9 /* LocationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationList.swift; sourceTree = "<group>"; };
 		E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
@@ -1066,6 +1068,7 @@
 				E2FEB7B02B15F922009D54B2 /* WindSpeed.swift */,
 				E2FEB7B62B15FA18009D54B2 /* CurrentWeatherCardViewController.swift */,
 				E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift */,
+				E20573692B48224500D20E61 /* MotionAnimationView.swift */,
 			);
 			path = CurrentWeatherCard;
 			sourceTree = "<group>";
@@ -1286,6 +1289,7 @@
 				E28AFC7D2374FF5D00D1D5ED /* PathError.swift in Sources */,
 				E296A7F62AD7EB5A001BFADB /* Main.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,
+				E205736A2B48224500D20E61 /* MotionAnimationView.swift in Sources */,
 				E28AFC792374FF2400D1D5ED /* PathFinder.swift in Sources */,
 				E28357362B2716B500E3807A /* CLAuthorizationStatus+CustomStringConvertible.swift in Sources */,
 				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
@@ -1625,7 +1629,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				ENABLE_TESTABILITY = YES;
@@ -1637,7 +1641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1659,7 +1663,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";
@@ -1670,7 +1674,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.5.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
