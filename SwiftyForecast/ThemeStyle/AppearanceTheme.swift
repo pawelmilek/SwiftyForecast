@@ -17,13 +17,13 @@ enum AppearanceTheme: String, CaseIterable {
     func color(_ scheme: ColorScheme) -> Color {
         switch self {
         case .systemDefault:
-            return scheme == .dark ? .shadow : .customPrimary
+            return scheme == .dark ? .purple : .customPrimary
 
         case .light:
             return .customPrimary
 
         case .dark:
-            return .shadow
+            return .purple
         }
     }
 
