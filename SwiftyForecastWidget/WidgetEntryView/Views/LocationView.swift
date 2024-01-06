@@ -17,10 +17,9 @@ struct LocationView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .fontDesign(.monospaced)
-                .foregroundStyle(.white)
             Image(systemName: "location.fill")
                 .font(.system(size: 10))
-                .foregroundStyle(.white)
         }
+        .foregroundStyle(.white)
     }
 }
