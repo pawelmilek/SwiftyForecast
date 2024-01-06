@@ -69,7 +69,7 @@ private extension CurrentWeatherCard {
             if let icon = viewModel.icon {
                 icon
             } else {
-                Image(.defaultConditionContent)
+                Image(.cloudyDay)
             }
         }
         .shadow(

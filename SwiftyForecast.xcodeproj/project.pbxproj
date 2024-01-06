@@ -180,6 +180,7 @@
 		E2BC4DB82B44304000D05F54 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* AppearanceView.swift */; };
 		E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */; };
 		E2C873CE2B10ECDD00FD4D9C /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C873CD2B10ECDD00FD4D9C /* HourlyForecastChart.swift */; };
+		E2C916F62B4972C200903619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E2CCCEFB250B0D5800109D6D /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */; };
 		E2CF4D76226E7A4100062E36 /* WeatherServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* WeatherServiceProtocol.swift */; };
 		E2CF4D7A226E7B6000062E36 /* DailyViewCell+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D79226E7B6000062E36 /* DailyViewCell+ViewModel.swift */; };
@@ -1235,6 +1236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2AD32742B237B5E00F46FBE /* ReviewDesirableMomentConfig.plist in Resources */,
+				E2C916F62B4972C200903619 /* Assets.xcassets in Resources */,
 				E2FDBD6F2B2079E00012D7C4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1629,7 +1631,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				ENABLE_TESTABILITY = YES;
@@ -1663,7 +1665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";

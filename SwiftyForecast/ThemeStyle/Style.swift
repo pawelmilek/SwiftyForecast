@@ -29,7 +29,7 @@ struct Style {
         static let shadow = (x: CGFloat(2.5), y: CGFloat(2.5))
         static let textColor = Color.white
 
-        static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .semibold)
+        static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .heavy)
         static let dayDescriptionFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
         static let temperatureFont = Font.system(size: 80, weight: .black, design: .monospaced)
         static let temperatureMaxMinFont = Font.system(.footnote, design: .monospaced, weight: .black)
