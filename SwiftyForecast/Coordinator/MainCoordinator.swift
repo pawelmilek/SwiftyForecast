@@ -11,7 +11,7 @@ final class MainCoordinator: Coordinator {
     @MainActor
     func start() {
         let viewController = UIViewController.make(MainViewController.self, from: .main)
-        viewController.viewModel = MainViewController.ViewModel(service: WeatherService())
+        viewController.viewModel = MainViewControllerViewModel(service: WeatherService())
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
@@ -19,13 +19,13 @@ final class MainCoordinator: Coordinator {
     @MainActor
     func openInformationViewController() {
         let sheetViewController = InformationViewController()
-        navigationController.present(sheetViewController, animated: true, completion: nil)
+        navigationController.present(sheetViewController, animated: true)
     }
 
     @MainActor
     func openAppearanceViewController() {
         let sheetViewController = AppearanceViewController()
-        navigationController.present(sheetViewController, animated: true, completion: nil)
+        navigationController.present(sheetViewController, animated: true)
     }
 
     @MainActor
