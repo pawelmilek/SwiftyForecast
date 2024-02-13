@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 final class CurrentWeatherCardViewController: UIViewController {
-    private let viewModel = CurrentWeatherCard.ViewModel()
+    private let viewModel = CurrentWeatherCardViewModel()
     private var hostingViewController: UIHostingController<CurrentWeatherCard>!
 
     override func viewDidLoad() {

@@ -8,48 +8,37 @@ final class MainViewController: UIViewController {
     var viewModel: ViewModel?
 
     private let lottieAnimationViewController = LottieAnimationViewController()
-    private lazy var openInfoBarButton: UIBarButtonItem = {
-        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
-        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
-        let infoImage = UIImage(systemName: "info.circle", withConfiguration: config.applying(colorsConfig))
-        let openInfoButton = UIBarButtonItem(
-            image: infoImage,
-            style: .plain,
-            target: self,
-            action: #selector(openInfoBarButtonTapped)
-        )
-        return openInfoButton
-    }()
 
-    private lazy var openAppearanceBarButton: UIBarButtonItem = {
-        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
-        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
-        let image = UIImage(
-            systemName: "circle.lefthalf.filled.inverse",
-            withConfiguration: config.applying(colorsConfig)
-        )
-        let button = UIBarButtonItem(
-            image: image,
-            style: .plain,
-            target: self,
-            action: #selector(openAppearanceBarButtonTapped)
-        )
+    private lazy var infoBarButton: UIButton = {
+        let image = UIImage(systemName: "info.circle")
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(openInfoBarButtonTapped), for: .touchUpInside)
         return button
     }()
 
-    private lazy var openLocationBarButton: UIBarButtonItem = {
-        let colorsConfig = UIImage.SymbolConfiguration(paletteColors: [.accent])
-        let config = UIImage.SymbolConfiguration(font: UIFont.preferredFont(forTextStyle: .title3))
-        let image = UIImage(
-            systemName: "mappin.circle",
-            withConfiguration: config.applying(colorsConfig)
-        )
-        let button = UIBarButtonItem(
-            image: image,
-            style: .plain,
-            target: self,
-            action: #selector(openLocationListBarButtonTapped)
-        )
+    private lazy var appearanceBarButton: UIButton = {
+        let image = UIImage(systemName: "circle.lefthalf.filled.inverse")
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(openAppearanceBarButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var leftBarButtonHorizontalStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [infoBarButton, appearanceBarButton])
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.spacing = 10
+        return stackView
+    }()
+
+    private lazy var locationBarButton: UIButton = {
+        let image = UIImage(systemName: "mappin.circle")
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.addTarget(self, action: #selector(openLocationListBarButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -107,7 +96,7 @@ private extension MainViewController {
         subscribeToLocationManager()
         subscribeToViewModel()
         setupChildaPageViewController()
-        setupNavigationItem()
+        setupNavigationItems()
         setupAppStoreReview()
         setupAppearance()
     }
@@ -199,18 +188,20 @@ private extension MainViewController {
         viewModel?.showEnableLocationServicesPrompt(at: navigationController)
     }
 
-    func setupNavigationItem() {
+    func setupNavigationItems() {
         setupLeftBarButtonItem()
         setupRightBarButtonItem()
         setupNotationSystemSegmentedControl()
     }
 
     func setupLeftBarButtonItem() {
-        navigationItem.leftBarButtonItems = [openInfoBarButton, openAppearanceBarButton]
+        let leftBarButtonItem = UIBarButtonItem(customView: leftBarButtonHorizontalStackView)
+        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 
     func setupRightBarButtonItem() {
-        navigationItem.rightBarButtonItem = openLocationBarButton
+        let rightBarButtonItem = UIBarButtonItem(customView: locationBarButton)
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
     @objc
@@ -263,7 +254,7 @@ private extension MainViewController {
                 if shouldDisplay {
                     let popoverController = TipUIPopoverViewController(
                         informationTip,
-                        sourceItem: openInfoBarButton
+                        sourceItem: infoBarButton
                     )
                     popoverController.view.tintColor = .customPrimary
                     present(popoverController, animated: true)
@@ -284,7 +275,7 @@ private extension MainViewController {
                 if shouldDisplay {
                     let popoverController = TipUIPopoverViewController(
                         appearanceTip,
-                        sourceItem: openAppearanceBarButton
+                        sourceItem: appearanceBarButton
                     )
                     popoverController.view.tintColor = .customPrimary
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

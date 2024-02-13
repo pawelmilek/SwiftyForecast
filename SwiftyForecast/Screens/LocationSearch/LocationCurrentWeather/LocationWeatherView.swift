@@ -11,7 +11,7 @@ import MapKit
 
 struct LocationWeatherView: View {
     @ObservedObject var viewModel: ViewModel
-    @StateObject private var cardViewModel = CurrentWeatherCard.ViewModel()
+    @StateObject private var cardViewModel = CurrentWeatherCardViewModel()
 
     var onDismissSearch: () -> Void
 

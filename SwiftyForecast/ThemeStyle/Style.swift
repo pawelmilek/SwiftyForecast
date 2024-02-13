@@ -107,7 +107,6 @@ struct Style {
         static let cornerRadius = CGFloat(15)
         static let borderColor = Color(.shadow)
         static let shadowColor = Color(.shadow)
-        static let lineBorderWidth = CGFloat(2)
         static let shadowRadius = CGFloat(0)
         static let shadowOpacity = Float(1.0)
         static let shadowOffset = (x: 2.5, y: 2.5)

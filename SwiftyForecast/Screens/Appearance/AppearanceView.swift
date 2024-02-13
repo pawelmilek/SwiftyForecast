@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    @Environment(\.colorScheme) var colorScheme
     @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
+    @Environment(\.colorScheme) var colorScheme
     @State private var circleOffset = CGSize.zero
     var onAppearanceChange: () -> Void
 

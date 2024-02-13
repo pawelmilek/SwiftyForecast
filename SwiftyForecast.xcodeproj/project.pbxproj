@@ -235,7 +235,7 @@
 		E2FEB7B32B15F92E009D54B2 /* Humidity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7B22B15F92E009D54B2 /* Humidity.swift */; };
 		E2FEB7B52B15F93F009D54B2 /* Daytime.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7B42B15F93F009D54B2 /* Daytime.swift */; };
 		E2FEB7B72B15FA18009D54B2 /* CurrentWeatherCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7B62B15FA18009D54B2 /* CurrentWeatherCardViewController.swift */; };
-		E2FEB7B92B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift */; };
+		E2FEB7B92B1650E7009D54B2 /* CurrentWeatherCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCardViewModel.swift */; };
 		E2FEB7BD2B172782009D54B2 /* MeasurementSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */; };
 /* End PBXBuildFile section */
 
@@ -450,7 +450,7 @@
 		E2FEB7B22B15F92E009D54B2 /* Humidity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Humidity.swift; sourceTree = "<group>"; };
 		E2FEB7B42B15F93F009D54B2 /* Daytime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daytime.swift; sourceTree = "<group>"; };
 		E2FEB7B62B15FA18009D54B2 /* CurrentWeatherCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCardViewController.swift; sourceTree = "<group>"; };
-		E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CurrentWeatherCard+ViewModel.swift"; sourceTree = "<group>"; };
+		E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCardViewModel.swift; sourceTree = "<group>"; };
 		E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSystemNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -724,8 +724,8 @@
 			children = (
 				E262B34724F8878D00BD7A2A /* Main */,
 				E21ABD422AE82FF900F93F01 /* LocationSearch */,
-				E249ABBA2B3475FA0020B88D /* Info */,
 				E2BC4DAF2B4429F600D05F54 /* Appearance */,
+				E249ABBA2B3475FA0020B88D /* Info */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -888,7 +888,6 @@
 				E21ABD3F2AE8269900F93F01 /* Views */,
 				E23997DA20E84104007D8CE4 /* Models */,
 				E270891824CE5904003F7587 /* Coordinator */,
-				E23997D720E84094007D8CE4 /* Storyboards */,
 				E23997DF20E84371007D8CE4 /* Network */,
 				E283573B2B2728AA00E3807A /* RealmManager */,
 				E28357342B27168400E3807A /* LocationManager */,
@@ -901,6 +900,7 @@
 				E21A0B9420EE88F5006AC409 /* Utilities */,
 				E2BC4DB62B44300800D05F54 /* ThemeStyle */,
 				E23997D820E840C1007D8CE4 /* Resources */,
+				E23997D720E84094007D8CE4 /* Storyboards */,
 			);
 			path = SwiftyForecast;
 			sourceTree = "<group>";
@@ -1068,7 +1068,7 @@
 				E2FEB7AE2B15F914009D54B2 /* Twilight.swift */,
 				E2FEB7B02B15F922009D54B2 /* WindSpeed.swift */,
 				E2FEB7B62B15FA18009D54B2 /* CurrentWeatherCardViewController.swift */,
-				E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift */,
+				E2FEB7B82B1650E7009D54B2 /* CurrentWeatherCardViewModel.swift */,
 				E20573692B48224500D20E61 /* MotionAnimationView.swift */,
 			);
 			path = CurrentWeatherCard;
@@ -1278,7 +1278,7 @@
 				E296A7E22AD6E3F2001BFADB /* HTTPMethod.swift in Sources */,
 				E21ABD0A2AE5A19300F93F01 /* View+ErrorAlert.swift in Sources */,
 				E296A7E92AD7DCD8001BFADB /* CurrentWeatherResponse.swift in Sources */,
-				E2FEB7B92B1650E7009D54B2 /* CurrentWeatherCard+ViewModel.swift in Sources */,
+				E2FEB7B92B1650E7009D54B2 /* CurrentWeatherCardViewModel.swift in Sources */,
 				E2FD3756232EFFC40083B383 /* LocationModel.swift in Sources */,
 				E23997EB20E84371007D8CE4 /* HttpClient.swift in Sources */,
 				E2092ABF2B0CB40700F38CF9 /* LocationList.swift in Sources */,
@@ -1631,7 +1631,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				ENABLE_TESTABILITY = YES;
@@ -1643,7 +1643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.4;
+				MARKETING_VERSION = 3.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1665,7 +1665,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";
@@ -1676,7 +1676,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.4;
+				MARKETING_VERSION = 3.5.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

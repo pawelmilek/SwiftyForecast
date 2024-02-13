@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CurrentWeatherCard: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: CurrentWeatherCardViewModel
 
     var body: some View {
         GeometryReader { proxy in
@@ -140,6 +140,6 @@ private extension CurrentWeatherCard {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    CurrentWeatherCard(viewModel: CurrentWeatherCard.ViewModel())
+    CurrentWeatherCard(viewModel: CurrentWeatherCardViewModel())
         .padding(22.5)
 }
