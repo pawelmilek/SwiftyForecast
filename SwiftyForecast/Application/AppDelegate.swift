@@ -4,7 +4,7 @@ import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme?
+    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
 
     var window: UIWindow?
     private var coordinator: MainCoordinator?
@@ -18,10 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupTips()
         setupNetworkReachabilityHandling()
         setNavigationBarStyle()
-        setupUserInterfaceStyle()
-        setupNotificationCenter()
+        setupAppearanceTheme()
+        setupAppearanceThemeNotificationCenter()
         debugPrintRealmFileURL()
         return true
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        setupAppearanceTheme()
     }
 }
 
@@ -97,17 +101,17 @@ private extension AppDelegate {
         setBarButtonItemColor()
     }
 
-    func setupNotificationCenter() {
+    func setupAppearanceThemeNotificationCenter() {
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(setupUserInterfaceStyle),
+            selector: #selector(setupAppearanceTheme),
             name: .didChangeAppearance,
             object: nil
         )
     }
 
     @objc
-    func setupUserInterfaceStyle() {
+    func setupAppearanceTheme() {
         switch appearanceTheme {
         case .dark:
             window?.overrideUserInterfaceStyle = .dark
@@ -115,14 +119,8 @@ private extension AppDelegate {
         case .light:
             window?.overrideUserInterfaceStyle = .light
 
-        default:
-            if UITraitCollection.current.userInterfaceStyle == .dark {
-                print("Dark mode")
-                window?.overrideUserInterfaceStyle = .dark
-            } else {
-                print("Light mode")
-                window?.overrideUserInterfaceStyle = .light
-            }
+        case .systemDefault:
+            window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
         }
     }
 

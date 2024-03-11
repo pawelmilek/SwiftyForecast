@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "add0a87ec4e31e2ca2a0b2085f0559201e4f5918",
-        "version" : "7.10.1"
+        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
+        "version" : "7.11.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
       "state" : {
-        "revision" : "3f1202f254ad5d71f6c5b518ed2d6b9e2abe6969",
-        "version" : "4.3.4"
+        "revision" : "f522990668c2f9132323a2e68d924c7dcb9130b4",
+        "version" : "4.4.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ashleymills/Reachability.swift",
       "state" : {
-        "revision" : "c01bbdf2d633cf049ae1ed1a68a2020a8bda32e2",
-        "version" : "5.1.0"
+        "revision" : "c01127cb51f591045696128effe43c16840d08bf",
+        "version" : "5.2.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "7227d6a447821c28895daa099b6c7cd4c99d461b",
-        "version" : "13.25.1"
+        "revision" : "a5e87a39cffdcc591f3203c11cfca68100d0b9a6",
+        "version" : "13.26.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift.git",
       "state" : {
-        "revision" : "569c656a8494ad03d790fd1075338c1da92d495a",
-        "version" : "10.45.2"
+        "revision" : "55466ae0fb29c5f21866792f05c1fc0c590d7c29",
+        "version" : "10.47.0"
       }
     }
   ],

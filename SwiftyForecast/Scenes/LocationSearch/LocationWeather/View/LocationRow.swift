@@ -17,14 +17,13 @@ struct LocationRow: View {
         VStack(alignment: .leading, spacing: 5) {
             headerView
             mapView
-                .overlay(
-                    RoundedRectangle(cornerRadius: Style.LocationRow.cornerRadius)
-                        .stroke(
-                            Style.LocationRow.borderColor,
-                            lineWidth: Style.LocationRow.lineBorderWidth
-                        )
+                .clipShape(
+                    RoundedRectangle(
+                        cornerRadius: Style.LocationRow.cornerRadius,
+                        style: .continuous
+                    )
+                    .inset(by: 2.5)
                 )
-                .compositingGroup()
                 .shadow(
                     color: Style.LocationRow.shadowColor,
                     radius: Style.LocationRow.shadowRadius,
