@@ -14,9 +14,9 @@ final class WeatherViewController: UIViewController {
     @IBOutlet private weak var dailyTableView: UITableView!
     private var weatherCardViewController: CurrentWeatherCardViewController!
 
-    var viewModel: ViewModel?
-    private var dailyForecastViewModels: [DailyViewCell.ViewModel] = []
-    private var hourlyForecastViewModels: [HourlyViewCell.ViewModel] = []
+    var viewModel: WeatherViewControllerViewModel?
+    private var dailyForecastViewModels: [DailyViewCellViewModel] = []
+    private var hourlyForecastViewModels: [HourlyViewCellViewModel] = []
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -137,7 +137,7 @@ private extension WeatherViewController {
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
-            .map { ($0.0.map { HourlyViewCell.ViewModel(model: $0) }, $0.1.map { DailyViewCell.ViewModel(model: $0) }) }
+            .map { ($0.0.map { HourlyViewCellViewModel(model: $0) }, $0.1.map { DailyViewCellViewModel(model: $0) }) }
             .sink { [self] (hourlyViewModels, dailyViewModels) in
                 hourlyForecastViewModels = hourlyViewModels
                 dailyForecastViewModels = dailyViewModels
@@ -262,7 +262,7 @@ extension WeatherViewController: UITableViewDelegate {
 // MARK: - Factory method
 extension WeatherViewController {
 
-    static func make(viewModel: ViewModel) -> WeatherViewController {
+    static func make(viewModel: WeatherViewControllerViewModel) -> WeatherViewController {
         let viewController = UIViewController.make(WeatherViewController.self, from: .main)
         viewController.viewModel = viewModel
         return viewController

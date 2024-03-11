@@ -10,7 +10,7 @@ import SwiftUI
 import Charts
 
 struct HourlyForecastChart: View {
-    @ObservedObject var viewModel: ViewModel
+    @ObservedObject var viewModel: HourlyForecastChartViewModel
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -95,13 +95,13 @@ struct HourlyForecastChart: View {
                 }
                 .chartYAxis(.hidden)
                 .chartYScale(domain: viewModel.chartYScaleRange.lowerBound...viewModel.chartYScaleRange.upperBound)
-                .frame(width: ViewModel.dataPointWidth * CGFloat(viewModel.numberOfHours))
+                .frame(width: HourlyForecastChartViewModel.dataPointWidth * CGFloat(viewModel.numberOfHours))
             }
         } label: {
             headerView
         }
         .groupBoxStyle(BackgroundGroupBoxStyle())
-        .frame(maxHeight: ViewModel.chartHeight)
+        .frame(maxHeight: HourlyForecastChartViewModel.chartHeight)
 
     }
 }
@@ -121,7 +121,7 @@ private extension HourlyForecastChart {
 
 #Preview {
     HourlyForecastChart(
-        viewModel: HourlyForecastChart.ViewModel(
+        viewModel: HourlyForecastChartViewModel(
             models: MockModelGenerator.generateForecastWeatherModel().hourly
         )
     )

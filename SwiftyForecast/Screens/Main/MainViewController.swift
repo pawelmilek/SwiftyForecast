@@ -5,7 +5,7 @@ import Combine
 
 final class MainViewController: UIViewController {
     var coordinator: MainCoordinator?
-    var viewModel: ViewModel?
+    var viewModel: MainViewControllerViewModel?
 
     private let lottieAnimationViewController = LottieAnimationViewController()
 
@@ -135,7 +135,7 @@ private extension MainViewController {
             .filter { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                viewModel.onDidChangePageNavigation(index: ViewModel.userLocationPageIndex)
+                viewModel.onDidChangePageNavigation(index: MainViewControllerViewModel.userLocationPageIndex)
                 self?.transitionToCurrentViewController()
             }
             .store(in: &cancellables)
