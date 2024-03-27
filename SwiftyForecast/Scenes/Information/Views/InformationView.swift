@@ -46,7 +46,7 @@ struct InformationView: View {
                         content: viewModel.frameworks
                     )
                     InfoRow(
-                        tintColor: .green,
+                        tintColor: .blue,
                         symbol: "ellipsis.curlybraces",
                         title: "Developer",
                         content: "Pawel Milek",
@@ -67,7 +67,22 @@ struct InformationView: View {
                 } header: {
                     Text("About the app")
                 }
-
+                Section {
+                    InfoRow(
+                        tintColor: .blue,
+                        symbol: "apps.iphone",
+                        title: "Apps Preview",
+                        content: nil,
+                        link: (
+                            destination: "https://apps.apple.com/us/developer/pawel-milek/id1139599148",
+                            label: ""
+                        ),
+                        action: nil
+                    )
+                    .popoverTip(AppStorePreviewTip(), arrowEdge: .bottom)
+                } header: {
+                    Text("App Store")
+                }
                 Section {
                     InfoRow(
                         tintColor: .blue,

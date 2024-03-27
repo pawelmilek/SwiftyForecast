@@ -15,8 +15,8 @@ final class WeatherViewController: UIViewController {
     private var weatherCardViewController: CurrentWeatherCardViewController!
 
     var viewModel: WeatherViewControllerViewModel?
-    private var dailyForecastViewModels: [DailyViewModel] = []
-    private var hourlyForecastViewModels: [HourlyViewModel] = []
+    private var dailyForecastViewModels: [DailyViewCellViewModel] = []
+    private var hourlyForecastViewModels: [HourlyViewCellViewModel] = []
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -137,7 +137,7 @@ private extension WeatherViewController {
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
-            .map { ($0.0.map { HourlyViewModel(model: $0) }, $0.1.map { DailyViewModel(model: $0) }) }
+            .map { ($0.0.map { HourlyViewCellViewModel(model: $0) }, $0.1.map { DailyViewCellViewModel(model: $0) }) }
             .sink { [self] (hourlyViewModels, dailyViewModels) in
                 hourlyForecastViewModels = hourlyViewModels
                 dailyForecastViewModels = dailyViewModels

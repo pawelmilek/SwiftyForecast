@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 struct LocationWeatherView: View {
-    @ObservedObject var viewModel: LocationWeatherViewModel
+    @ObservedObject var viewModel: LocationWeatherViewViewModel
     @StateObject private var cardViewModel = CurrentWeatherCardViewModel()
 
     var onDismissSearch: () -> Void
@@ -25,9 +25,7 @@ struct LocationWeatherView: View {
                 CurrentWeatherCard(viewModel: cardViewModel)
                 if viewModel.shouldShowHourlyForecastChart {
                     HourlyForecastChart(
-                        viewModel: HourlyForecastChartViewModel(
-                            models: viewModel.twentyFourHoursForecastModel
-                        )
+                        viewModel: HourlyForecastChartViewModel(models: viewModel.twentyFourHoursForecastModel)
                     )
                 }
                 Spacer()
@@ -87,8 +85,8 @@ struct LocationWeatherView: View {
 }
 
 #Preview {
-    LocationWeatherView(
-        viewModel: .init(searchCompletion: MKLocalSearchCompletion()),
-        onDismissSearch: {}
+    LocationWeatherView(viewModel: .init(searchCompletion: MKLocalSearchCompletion()),
+                        onDismissSearch: {
+    }
     )
 }
