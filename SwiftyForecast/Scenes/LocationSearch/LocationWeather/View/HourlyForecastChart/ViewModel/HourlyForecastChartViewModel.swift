@@ -13,11 +13,11 @@ final class HourlyForecastChartViewModel: ObservableObject {
     static let numberOfThreeHoursForecastItems = 8
     static let chartHeight: CGFloat = 280
     static let dataPointWidth: CGFloat = 65
-    
+
     @Published var dataSource: [HourlyForecastChartDataSource] = []
     @Published var chartYScaleRange: ClosedRange<Int> = 0...0
     var numberOfHours: Int { dataSource.count }
-    
+
     private let models: [HourlyForecastModel]
     private let notationController: NotationController
     init(
@@ -29,21 +29,21 @@ final class HourlyForecastChartViewModel: ObservableObject {
         createChartDataSource()
         calculateChartYScaleRange()
     }
-    
+
     private func createChartDataSource() {
         guard !models.isEmpty else { return }
         self.dataSource = models.compactMap { .init(model: $0) }
     }
-    
+
     private func calculateChartYScaleRange() {
         let minValue = dataSource.min { leftHand, rightHand in
             return leftHand.temperatureValue < rightHand.temperatureValue
         }?.temperatureValue ?? 0
-        
+
         let maxValue = dataSource.max { leftHand, rightHand in
             return leftHand.temperatureValue < rightHand.temperatureValue
         }?.temperatureValue ?? 0
-        
+
         let absoluteValue: Double = {
             let value = maxValue == 0 ? 10 : maxValue
             return Double(abs(value))

@@ -46,7 +46,7 @@ private extension NetworkReachabilityManager {
         case .cellular:
             debugPrint("File: \(#file), Function: \(#function), line: \(#line) Reachable via Cellular")
 
-        case .unavailable, .none:
+        case .unavailable:
             debugPrint("File: \(#file), Function: \(#function), line: \(#line) Network not reachable")
         }
     }

@@ -34,7 +34,7 @@ struct HourlyForecastChart: View {
                         )
                         .foregroundStyle(curGradient)
                         .interpolationMethod(.catmullRom)
-                        
+
                         LineMark(
                             x: .value("Hour", item.hour),
                             y: .value("Temperature", item.temperatureValue)

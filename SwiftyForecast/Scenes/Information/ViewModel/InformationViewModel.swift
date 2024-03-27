@@ -92,4 +92,3 @@ final class InformationViewModel: ObservableObject {
         openURL(dataProviderURL)
     }
 }
-
