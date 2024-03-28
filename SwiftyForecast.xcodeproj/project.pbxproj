@@ -237,6 +237,8 @@
 		E2D430F22BB4DC1C003F26EE /* HourlyForecastChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AB2BB4D954003F26EE /* HourlyForecastChartDataSource.swift */; };
 		E2D430F32BB4DC24003F26EE /* BackgroundGroupBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AD2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift */; };
 		E2D430F42BB4DC30003F26EE /* MotionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */; };
+		E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
+		E2D430F72BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
 		E2D960812120F34800AE0B6E /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* Geocoder.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
@@ -463,6 +465,7 @@
 		E2D430B82BB4D954003F26EE /* LocationWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherView.swift; sourceTree = "<group>"; };
 		E2D430B92BB4D954003F26EE /* LocationWeatherViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewViewModel.swift; sourceTree = "<group>"; };
 		E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewModel.swift; sourceTree = "<group>"; };
+		E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Equtable.swift"; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
@@ -712,6 +715,7 @@
 				E2DC1474248F221E00D1A329 /* UIViewController+Containment.swift */,
 				E2DC148A248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift */,
 				E2B1D655211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift */,
+				E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1612,6 +1616,7 @@
 				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
 				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
+				E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
 				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
@@ -1660,6 +1665,7 @@
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2CFA7AB2B309E63001DE3E8 /* MockModelGenerator.swift in Sources */,
 				E2D430E82BB4DB94003F26EE /* SpeedFormatterMetric.swift in Sources */,
+				E2D430F72BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */,
 				E2D430E72BB4DB89003F26EE /* SpeedValueDisplayable.swift in Sources */,
 				E2F671232B23682F00B791A0 /* WeatherProvider.swift in Sources */,
 				E2D430EE2BB4DC04003F26EE /* PathFinder.swift in Sources */,
@@ -1901,7 +1907,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.7;
+				MARKETING_VERSION = 3.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1935,7 +1941,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.5.7;
+				MARKETING_VERSION = 3.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2045,7 +2051,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.5.7;
+				MARKETING_VERSION = 3.6.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast.widget";
@@ -2092,7 +2098,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 3.5.7;
+				MARKETING_VERSION = 3.6.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast.widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";

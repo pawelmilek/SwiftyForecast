@@ -28,7 +28,12 @@ struct LocationList: View {
                 .tint(Color(.customPrimary))
                 .listRowSeparator(.hidden)
             ForEach(locations) { location in
-                LocationRow(item: location)
+                LocationRow(viewModel: LocationRowViewModel(
+                    location: location,
+                    service: WeatherService(),
+                    temperatureRenderer: TemperatureRenderer(),
+                    measurementSystemNotification: MeasurementSystemNotification()
+                ))
                 .deleteDisabled(location.isUserLocation)
                 .onTapGesture {
                     onSelectRow(location)

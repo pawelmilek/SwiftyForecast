@@ -97,12 +97,13 @@ struct Style {
     // MARK: - LocationRow
     struct LocationRow {
         static let backgroundColor = UIColor.clear
-        static let timeFont = Font.system(.subheadline, design: .monospaced, weight: .semibold)
-        static let timeAlignment = NSTextAlignment.left
+        static let timeFont = Font.system(.subheadline, design: .monospaced, weight: .bold)
 
-        static let nameFont = Font.system(.subheadline, design: .monospaced, weight: .semibold)
+        static let nameFont = Font.system(.subheadline, design: .monospaced, weight: .bold)
         static let nameColor = Color(.accent)
-        static let locationNameAlignment = NSTextAlignment.left
+
+        static let tempFont = Font.system(.title2, design: .monospaced, weight: .heavy)
+        static let tempColor = Color(.customPrimary)
 
         static let cornerRadius = CGFloat(15)
         static let borderColor = Color(.shadow)
