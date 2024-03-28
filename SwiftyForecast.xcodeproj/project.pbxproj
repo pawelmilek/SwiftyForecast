@@ -239,6 +239,8 @@
 		E2D430F42BB4DC30003F26EE /* MotionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */; };
 		E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
 		E2D430F72BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
+		E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
+		E2D430FB2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
 		E2D960812120F34800AE0B6E /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* Geocoder.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
@@ -466,6 +468,7 @@
 		E2D430B92BB4D954003F26EE /* LocationWeatherViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewViewModel.swift; sourceTree = "<group>"; };
 		E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewModel.swift; sourceTree = "<group>"; };
 		E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Equtable.swift"; sourceTree = "<group>"; };
+		E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRowViewModel.swift; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
@@ -1253,7 +1256,7 @@
 			children = (
 				E2D430B32BB4D954003F26EE /* HourlyForecastChart */,
 				E2D430B42BB4D954003F26EE /* LocationList.swift */,
-				E2D430B52BB4D954003F26EE /* LocationRow.swift */,
+				E2D430F82BB4F2A8003F26EE /* LocationRow */,
 				E2D430B62BB4D954003F26EE /* LocationSearchView.swift */,
 				E2D430B72BB4D954003F26EE /* LocationSearchViewController.swift */,
 				E2D430B82BB4D954003F26EE /* LocationWeatherView.swift */,
@@ -1268,6 +1271,15 @@
 				E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E2D430F82BB4F2A8003F26EE /* LocationRow */ = {
+			isa = PBXGroup;
+			children = (
+				E2D430B52BB4D954003F26EE /* LocationRow.swift */,
+				E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */,
+			);
+			path = LocationRow;
 			sourceTree = "<group>";
 		};
 		E2DC1464248D492200D1A329 /* DataLoader */ = {
@@ -1535,6 +1547,7 @@
 				E2D430C52BB4D954003F26EE /* HourlyForecastChartViewModel.swift in Sources */,
 				E2227E8B2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift in Sources */,
 				E2227E892ADD54C7000C3886 /* TemperatureCelsiusFormatter.swift in Sources */,
+				E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
 				E2D430BD2BB4D954003F26EE /* HourlyForecastChartDataSource.swift in Sources */,
 				E2D430D12BB4D954003F26EE /* LocationWeatherViewViewModel.swift in Sources */,
 				E2DC149524955C8D00D1A329 /* MainViewControllerViewModel.swift in Sources */,
@@ -1658,6 +1671,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D430FB2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
 				E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */,
 				E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */,
 				E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */,
@@ -1895,7 +1909,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				ENABLE_TESTABILITY = YES;
@@ -1930,7 +1944,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";
