@@ -73,19 +73,17 @@ enum WeatherEndpoint: Endpoint {
     private func parameterList(latitude: Double, longitude: Double) -> Parameters {
         let parameters = ["lat": "\(latitude)",
                           "lon": "\(longitude)",
-                          "appid": Constant.apiKey,
+                          "appid": apiKey,
                           "units": "standard"]
         return parameters
     }
 
-    private enum Constant {
-        static var apiKey: String = {
-            do {
-                let value = try ConfigurationSettingsAccessor.value(for: .apiKey)
-                return value
-            } catch {
-                fatalError("Weather service APIKey is unavailable. Please, check configuration settings file.")
-            }
-        }()
+    private var apiKey: String {
+        do {
+            let value = try ConfigurationSettingsAccessor.value(for: .apiKey)
+            return value
+        } catch {
+            fatalError("Weather service APIKey is unavailable. Please, check configuration settings file.")
+        }
     }
 }
