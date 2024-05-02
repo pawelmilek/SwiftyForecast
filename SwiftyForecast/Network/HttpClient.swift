@@ -3,6 +3,7 @@ import Foundation
 protocol HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
+        decoder: JSONDecoder,
         responseModel: T.Type
     ) async throws -> T
 }
@@ -10,6 +11,7 @@ protocol HTTPClient {
 extension HTTPClient {
     func sendRequest<T: Decodable>(
         endpoint: Endpoint,
+        decoder: JSONDecoder,
         responseModel: T.Type
     ) async throws -> T {
         guard let url = endpoint.url else {
@@ -36,7 +38,7 @@ extension HTTPClient {
 
             switch response.statusCode {
             case 200...226:
-                guard let decodedResponse = try? JSONDecoder().decode(responseModel, from: data) else {
+                guard let decodedResponse = try? decoder.decode(responseModel, from: data) else {
                     throw RequestError.decode
                 }
                 return decodedResponse

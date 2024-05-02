@@ -23,7 +23,7 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
 
     init(
         locationModel: LocationModel,
-        service: WeatherServiceProtocol = WeatherService(),
+        service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
     ) {

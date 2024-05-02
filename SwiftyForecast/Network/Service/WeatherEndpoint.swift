@@ -83,7 +83,7 @@ enum WeatherEndpoint: Endpoint {
             let value = try ConfigurationSettingsAccessor.value(for: .apiKey)
             return value
         } catch {
-            fatalError("Weather service APIKey is unavailable. Please, check configuration settings file.")
+            fatalError("Weather service APIKey is unavailable. Please, check configuration file.")
         }
     }
 }

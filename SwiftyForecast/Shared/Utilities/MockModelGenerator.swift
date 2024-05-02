@@ -13,7 +13,8 @@ struct MockModelGenerator {
     static func generateCurrentWeatherModel() -> CurrentWeatherModel {
         do {
             let currentWeatherData = try JSONFileLoader.loadFile(with: "current_weather_response")
-            let currentResponse = JSONParser<CurrentWeatherResponse>.parse(currentWeatherData)
+            let currentWeatherParser = JSONParser<CurrentWeatherResponse>(decoder: JSONDecoder())
+            let currentResponse = currentWeatherParser.parse(currentWeatherData)
             let model = ResponseParser.parse(current: currentResponse)
             return model
         } catch {
@@ -24,7 +25,8 @@ struct MockModelGenerator {
     static func generateForecastWeatherModel() -> ForecastWeatherModel {
         do {
             let fiveDaysForecastWeatherData = try JSONFileLoader.loadFile(with: "five_days_forecast_weather_response")
-            let forecastResponse = JSONParser<ForecastWeatherResponse>.parse(fiveDaysForecastWeatherData)
+            let fiveDaysForecastWeatherParser = JSONParser<ForecastWeatherResponse>(decoder: JSONDecoder())
+            let forecastResponse = fiveDaysForecastWeatherParser.parse(fiveDaysForecastWeatherData)
             let model = ResponseParser.parse(forecast: forecastResponse)
             return model
         } catch {

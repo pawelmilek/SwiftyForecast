@@ -14,22 +14,22 @@ final class WeatherProviderDataSource {
     private let service: WeatherServiceProtocol
     private var location: CLLocation?
 
-    init(service: WeatherServiceProtocol = WeatherService()) {
+    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder())) {
         self.service = service
     }
 
     func loadEntryData(for location: CLLocation) async -> WeatherEntry {
         self.location = location
         let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
-        let icon = await fetchIcon(with: currentModel.icon)
+        let icon = await fetchIcon(with: currentModel.icon.code)
 
         let result = WeatherEntry(
             date: .now,
             locationName: name,
             icon: icon,
             description: currentModel.description,
-            temperatureValue: currentModel.temperatureValue,
-            dayNightState: currentModel.dayNightState,
+            temperatureValue: currentModel.temperature,
+            dayNightState: currentModel.icon.dayNightState,
             hourly: []
         )
 
@@ -39,15 +39,15 @@ final class WeatherProviderDataSource {
     func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
         self.location = location
         let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
-        let (icon, hourlyEntryData) = await fetchConditionIconAndHourlyForecast(currentModel.icon)
+        let (icon, hourlyEntryData) = await fetchConditionIconAndHourlyForecast(currentModel.icon.code)
 
         let result = WeatherEntry(
             date: .now,
             locationName: name,
             icon: icon,
             description: currentModel.description,
-            temperatureValue: currentModel.temperatureValue,
-            dayNightState: currentModel.dayNightState,
+            temperatureValue: currentModel.temperature,
+            dayNightState: currentModel.icon.dayNightState,
             hourly: hourlyEntryData
         )
 

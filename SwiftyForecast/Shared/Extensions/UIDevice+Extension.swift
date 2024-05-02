@@ -16,7 +16,8 @@ extension UIDevice {
         static var all: [DeviceModel] {
             do {
                 let jsonData = try JSONFileLoader.loadFile(with: "device_types")
-                let models = JSONParser<[DeviceModel]>.parse(jsonData)
+                let deviceParser = JSONParser<[DeviceModel]>(decoder: JSONDecoder())
+                let models = deviceParser.parse(jsonData)
                 return models
             } catch {
                 fatalError(error.localizedDescription)

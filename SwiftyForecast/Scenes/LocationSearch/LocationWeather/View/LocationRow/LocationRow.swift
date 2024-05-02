@@ -15,7 +15,7 @@ struct LocationRow: View {
     init(location: LocationModel) {
         _viewModel = StateObject(wrappedValue: LocationRowViewModel(
             location: location,
-            service: WeatherService(),
+            service: WeatherService(decoder: JSONDecoder()),
             temperatureRenderer: TemperatureRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()
         ))

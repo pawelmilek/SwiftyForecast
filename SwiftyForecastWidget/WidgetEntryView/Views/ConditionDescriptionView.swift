@@ -1,5 +1,5 @@
 //
-//  ConditionDescription.swift
+//  ConditionDescriptionView.swift
 //  SwiftyForecastWidgetExtension
 //
 //  Created by Pawel Milek on 12/18/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ConditionDescription: View {
+struct ConditionDescriptionView: View {
     let description: String
 
     var body: some View {
@@ -31,6 +31,6 @@ struct ConditionDescription: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    ConditionDescription(description: "scattered clouds")
+    ConditionDescriptionView(description: "scattered clouds")
         .padding()
 }

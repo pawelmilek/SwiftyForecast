@@ -57,7 +57,7 @@ final class LocationRowViewModel: ObservableObject {
                     longitude: longitude
                 )
                 let model = ResponseParser.parse(current: currentResponse)
-                temperatureValue = model.temperatureValue
+                temperatureValue = model.temperature
                 isLoading = false
             } catch {
                 self.error = error

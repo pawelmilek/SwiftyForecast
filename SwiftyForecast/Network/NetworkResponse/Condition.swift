@@ -9,13 +9,15 @@
 import Foundation
 
 struct Condition: Codable {
-    let identifier: Int
+    // swiftlint:disable:next identifier_name
+    let id: Int
     let main: String
     let description: String
     let icon: String
 
     enum CodingKeys: String, CodingKey {
-        case identifier = "id"
+        // swiftlint:disable:next identifier_name
+        case id
         case main
         case description
         case icon

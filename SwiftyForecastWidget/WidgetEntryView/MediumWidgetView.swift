@@ -45,10 +45,10 @@ private extension MediumWidgetView {
                     .font(.caption2)
                     .fontWeight(.heavy)
                     .foregroundStyle(.accent)
-                ConditionIcon(icon: entry.icon)
+                ConditionView(icon: entry.icon)
                     .frame(maxWidth: 40)
             }
-            ConditionDescription(description: entry.description)
+            ConditionDescriptionView(description: entry.description)
                 .scaledToFit()
                 .minimumScaleFactor(0.8)
                 .lineLimit(1)
@@ -66,7 +66,7 @@ private extension MediumWidgetView {
                             .fontWeight(.heavy)
                             .fontDesign(.monospaced)
                             .foregroundStyle(.accent)
-                        ConditionIcon(icon: item.icon)
+                        ConditionView(icon: item.icon)
                             .frame(maxWidth: 40)
                     }
                     Text(item.time)

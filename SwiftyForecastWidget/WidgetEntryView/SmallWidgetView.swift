@@ -13,7 +13,7 @@ struct SmallWidgetView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            ConditionIcon(icon: entry.icon)
+            ConditionView(icon: entry.icon)
                 .frame(maxWidth: proxy.size.width * 0.5)
 
             TemperatureView(
@@ -24,7 +24,7 @@ struct SmallWidgetView: View {
             .offset(y: 30)
         }
         .overlay(alignment: .bottom) {
-            ConditionDescription(description: entry.description)
+            ConditionDescriptionView(description: entry.description)
                 .frame(maxWidth: .infinity)
         }
         .overlay(alignment: .topTrailing) {

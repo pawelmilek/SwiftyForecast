@@ -1,6 +1,7 @@
 import UIKit
 import SafariServices
 
+@MainActor
 final class MainCoordinator: Coordinator {
     let navigationController: UINavigationController
 
@@ -8,27 +9,23 @@ final class MainCoordinator: Coordinator {
         self.navigationController = navigationController
     }
 
-    @MainActor
     func start() {
         let viewController = UIViewController.make(MainViewController.self, from: .main)
-        viewController.viewModel = MainViewControllerViewModel(service: WeatherService())
+        viewController.viewModel = MainViewControllerViewModel(service: WeatherService(decoder: JSONDecoder()))
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: false)
     }
 
-    @MainActor
     func openInformationViewController() {
         let sheetViewController = InformationViewController()
         navigationController.present(sheetViewController, animated: true)
     }
 
-    @MainActor
     func openAppearanceViewController() {
         let sheetViewController = AppearanceViewController()
         navigationController.present(sheetViewController, animated: true)
     }
 
-    @MainActor
     func openLocationListViewController() {
         let viewController = LocationSearchViewController()
 
@@ -40,12 +37,10 @@ final class MainCoordinator: Coordinator {
         navigationController.present(viewController, animated: true)
     }
 
-    @MainActor
     func dismissViewController() {
         navigationController.dismiss(animated: true)
     }
 
-    @MainActor
     func popTopViewController() {
         navigationController.popViewController(animated: true)
     }

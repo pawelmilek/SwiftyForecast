@@ -1,5 +1,5 @@
 //
-//  ConditionIcon.swift
+//  ConditionView.swift
 //  SwiftyForecastWidgetExtension
 //
 //  Created by Pawel Milek on 12/18/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ConditionIcon: View {
+struct ConditionView: View {
     let icon: Image
 
     var body: some View {
@@ -25,6 +25,6 @@ struct ConditionIcon: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    ConditionIcon(icon: Image(.cloudyDay))
+    ConditionView(icon: Image(.cloudyDay))
         .padding()
 }

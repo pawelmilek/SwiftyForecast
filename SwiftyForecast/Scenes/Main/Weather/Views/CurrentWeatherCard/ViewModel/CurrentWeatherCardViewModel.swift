@@ -33,7 +33,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
-    init(service: WeatherServiceProtocol = WeatherService(),
+    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
          temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
          speedRenderer: SpeedRenderer = SpeedRenderer(),
          measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()) {
@@ -66,7 +66,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
                 setTemperatureAccordingToUnitNotation()
                 setWindSpeedAccordingToMeasurementSystem()
                 description = model.description
-                daytimeDescription = Daytime(rawValue: model.dayNightState.description)?.rawValue ?? ""
+                daytimeDescription = model.icon.dayNightState.description
                 humidity.value = "\(model.humidity)\("%")"
                 sunrise = .sunrise(time: model.sunrise.shortTime)
                 sunset = .sunset(time: model.sunset.shortTime)
@@ -76,7 +76,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
 
     private func setTemperatureAccordingToUnitNotation() {
         guard let model else { return }
-        let rendered = temperatureRenderer.render(model.temperatureValue)
+        let rendered = temperatureRenderer.render(model.temperature)
         temperature = rendered.currentFormatted
         temperatureMaxMin = rendered.maxMinFormatted
     }
@@ -122,7 +122,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
             do {
                 let currentResponse = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
                 let dataModel = ResponseParser.parse(current: currentResponse)
-                let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon)
+                let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon.code)
                 icon = Image(uiImage: largeIcon)
                 model = dataModel
                 isLoading = false

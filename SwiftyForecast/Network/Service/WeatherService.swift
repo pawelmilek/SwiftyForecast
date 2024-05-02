@@ -1,10 +1,18 @@
 import Kingfisher
 import UIKit
 
-struct WeatherService: HTTPClient, WeatherServiceProtocol {
+struct WeatherService: WeatherServiceProtocol, HTTPClient {
+    private let decoder: JSONDecoder
+
+    init(decoder: JSONDecoder) {
+        self.decoder = decoder
+        self.decoder.keyDecodingStrategy = .convertFromSnakeCase
+    }
+
     func fetchCurrent(latitude: Double, longitude: Double) async throws -> CurrentWeatherResponse {
         return try await sendRequest(
             endpoint: WeatherEndpoint.current(latitude: latitude, longitude: longitude),
+            decoder: decoder,
             responseModel: CurrentWeatherResponse.self
         )
     }
@@ -12,6 +20,7 @@ struct WeatherService: HTTPClient, WeatherServiceProtocol {
     func fetchForecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherResponse {
         return try await sendRequest(
             endpoint: WeatherEndpoint.forecast(latitude: latitude, longitude: longitude),
+            decoder: decoder,
             responseModel: ForecastWeatherResponse.self
         )
     }

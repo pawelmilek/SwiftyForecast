@@ -29,7 +29,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
     private let appStoreReviewCenter: ReviewNotificationCenter
 
     init(searchCompletion: MKLocalSearchCompletion,
-         service: WeatherServiceProtocol = WeatherService(),
+         service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
          databaseManager: DatabaseManager = RealmManager.shared,
          appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()) {
         self.searchCompletion = searchCompletion
