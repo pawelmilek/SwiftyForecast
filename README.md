@@ -15,7 +15,7 @@ The app is available for FREE on the [App Store](https://itunes.apple.com/us/app
 - Forecast for the ​next 5 days<br>
 - Choose between imperial and metric units system<br>
 - List of unlimited locations with time zone and current temperature<br>
-- Minimap preview available in locations list<br>
+- Minimap preview available in the locations list<br>
 
 ## Feedback
 If you like the app, please rate and review it in the App Store. When you have either questions or suggestions on how to improve the app let us know.
