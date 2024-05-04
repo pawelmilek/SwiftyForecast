@@ -15,7 +15,7 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2018-09-21] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/6fffb94a299ec37db98a65bb1dfc213f0c6e92ff)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.0...v1.0.1)
 
 ## 1.0.2
 * We tuned down the UI font to make it more eye-pleasing<br>
@@ -23,14 +23,14 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2018-09-25] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/e680f8a2eee19cfe277b942bc3bdc4e5fe52e1e9)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.1...v1.0.2)
 
 ## 1.0.3
 * Fixed a bug that allowed the user to add two or more of the same cities<br>
 * Under the hood performance improvements<br>
 
 [2018-09-30] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/8f8770258e0fd113091e3ddb9b40b0d01b4d614c)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.2...v1.0.3)
 
 ## 1.0.4
 * Add Today Extension - Widget<br>
@@ -40,13 +40,13 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2018-10-13] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/f7a2436ae8c271091cce399f1870bea6684ddb11)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.3...v1.0.4)
 
 ## 1.0.5
 * Under the hood performance improvements<br>
 
 [2018-10-24] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/75dd821810dc6b82aa0b859b538ff871bf3aa038)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.4...v1.0.5)
 
 ## 2.0.0
 🚨 **MASSIVE UPDATE** 🚨
@@ -56,14 +56,14 @@ Thank you for using the Swifty Forecast!
 * Minor bug fixes and improvements<br>
 
 [2020-10-23] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/85b835ae8cbf60b041a86147c2b43a4b824cf6a2)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v1.0.5...v2.0.0)
 
 ## 2.0.1
 * Now the app can ask for ratings and reviews<br>
 * Under the hood performance improvements<br>
 
 [2020-10-29] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/f4a873bf0d74bf2167ded35f61b2a561e9b6fad0)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v2.0.0...v2.0.1)
 
 ## 3.0.0
 🚨 **MASSIVE UPDATE** 🚨
@@ -76,7 +76,7 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2023-12-13] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/65272f6c09cf78a6c30adca27266cf304adb0f03)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v2.0.1...v3.0.0)
 
 ## 3.1.0
 * Improve Hourly Forecast UI<br>
@@ -84,49 +84,49 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2023-12-17] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/45c888b9055011ed5fe6e4eb72d77ca8be4425d7)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.0.0...v3.1.0)
 
 ## 3.2.0
 * New Medium Widget family support<br>
 * Under the hood performance improvements<br>
 
 [2022-12-19] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/75c6e83750bababb14493b63ad0319e7d4c45268)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.1.0...v3.2.0)
 
 ## 3.3.0
 * New Lock Screen Widget family support<br>
 * Under the hood performance improvements<br>
 
 [2023-12-20] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/9e8c2f5b0f9fcd61ace05f2b15973d18bf8fea57)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.2.0...v3.3.0)
 
 ## 3.3.1
 * Redesign Lock Screen Rectangular Widget<br>
 * Under the hood performance improvements<br>
 
 [2023-12-21] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/1bbb06753f72b3dc9a994226fb2676ec68b2985e)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.3.0...v3.3.1)
 
 ## 3.4.0
 * Add new Information view<br>
 * Under the hood performance improvements<br>
 
 [2023-12-25] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/4978ec45bd3e9668120e8c39aed3e470c91f4e4d)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.3.1...v3.4.0)
 
 ## 3.4.1
 * Discover the app's new feature via Tips!<br>
 * Under the hood performance improvements<br>
 
 [2023-12-29] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/88bef9ed90d1c20480425ab5b1ffba1f2d8ffd94)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.4.0...v3.4.1)
 
 ## 3.4.2
 * Information view improvements<br>
 * Under the hood performance improvements<br>
 
 [2023-12-30] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/ff33b13b6d691757e22b6b93fc3d05228de6da1d)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.4.1...v3.4.2)
 
 ## 3.4.3
 * Add new Appearance setting view<br>
@@ -134,13 +134,13 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2024-01-02] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/df1ec084ea4be3ea4e5008f985e6d5ab98ad686a)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.4.2...v3.4.3)
 
 ## 3.4.4
 * Under the hood performance improvements<br>
 
 [2024-02-02] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/a2479f498ad437e249308b669eb4fec6ffaddb59)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.4.3...v3.4.4)
 
 ## 3.5.0
 * Add Home card background motion animation<br>
@@ -148,43 +148,43 @@ Thank you for using the Swifty Forecast!
 * Under the hood performance improvements<br>
 
 [2024-02-05] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/76070c8ca40613c510f099a570fbc601355cd160)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.4.4...v3.5.0)
 
 ## 3.5.4
 * Add primary dark mode support<br>
 * Under the hood performance improvements<br>
 
 [2024-02-05] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/69468d207cdcf143f4cc4e5c7ef3103511a7bbc9)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.5.0...v3.5.4)
 
 ## 3.5.5
 * Under the hood performance improvements<br>
 
 [2024-02-24] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/beef730ca9fbc2cc2abec3a83bcc86edf2946b18)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.5.4...v3.5.5)
 
 ## 3.5.6
 * Under the hood performance improvements<br>
 
 [2024-03-11] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/135643280f4cb0f85b2a41797fec70e0cd927188)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.5.5...v3.5.6)
 
 ## 3.5.7
 * Add a new App Store Preview section in the Information scene<br>
 * Under the hood performance improvements<br>
 
 [2024-03-27] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/a055eff909eef8072021491aac26c6e4631eb8a9)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.5.6...v3.5.7)
 
 ## 3.6.0
 * Add a temperature at the locations list screen<br>
 * Under the hood performance improvements<br>
 
 [2024-03-27] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/d7736ee66bbe3a563f6ae606d10f34f6f34bd07f)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.5.7...v3.6.0)
 
 ## 3.6.1
 * Under the hood performance improvements<br>
 
 [2024-05-04] |
-[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/commit/a2aa764dc1803c299737f66915fa54926f868bcf)
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.6.0...v3.6.1)
