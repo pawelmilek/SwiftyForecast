@@ -14,7 +14,7 @@ final class WeatherProviderDataSource {
     private let service: WeatherServiceProtocol
     private var location: CLLocation?
 
-    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder())) {
+    init(service: WeatherServiceProtocol) {
         self.service = service
     }
 
@@ -95,7 +95,7 @@ final class WeatherProviderDataSource {
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )
-            let model = ResponseParser.parse(current: response)
+            let model = ResponseParser().parse(current: response)
             return model
         } catch {
             fatalError(error.localizedDescription)
@@ -120,7 +120,7 @@ final class WeatherProviderDataSource {
             let icon = await fetchIcon(with: model.icon)
             let data = HourlyEntry(
                 icon: icon,
-                time: model.date.shortTime,
+                time: model.date.formatted(date: .omitted, time: .shortened),
                 temperatureValue: TemperatureValue(current: model.temperature)
             )
             hourlyEntry.append(data)
@@ -137,7 +137,7 @@ final class WeatherProviderDataSource {
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )
-            let forecastModel = ResponseParser.parse(forecast: forecast)
+            let forecastModel = ResponseParser().parse(forecast: forecast)
             return Array(forecastModel.hourly.prefix(upTo: 4))
         } catch {
             fatalError(error.localizedDescription)

@@ -110,7 +110,6 @@ extension LocationManager: CLLocationManagerDelegate {
 
         self.error = error
         self.isObtainingLocation = false
-        debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)", code)
     }
 
 }

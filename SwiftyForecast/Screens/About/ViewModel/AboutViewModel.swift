@@ -30,11 +30,13 @@ final class AboutViewModel: ObservableObject {
     private let privacyPolicyURL: URL
     private let writeReviewURL: URL
     private let dataProviderURL: URL
+    private let bundle: Bundle
 
-    init() {
-        appName = Bundle.applicationName
-        appVersion = "\(Bundle.versionNumber) (\(Bundle.buildNumber))"
-        appCompatibility = "iOS \(Bundle.minimumOSVersion)"
+    init(bundle: Bundle) {
+        self.bundle = bundle
+        appName = bundle.applicationName
+        appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
+        appCompatibility = "iOS \(bundle.minimumOSVersion)"
         appURLString = Constant.appURLString
         recipient = try? ConfigurationSettingsAccessor.value(for: .supportEmailKey)
         privacyPolicyURL = URL(string: Constant.privacyPolicyURLString)!
@@ -61,6 +63,7 @@ final class AboutViewModel: ObservableObject {
         }
 
         let feedbackEmail = SupportEmail(
+            bundle: bundle,
             recipient: recipient,
             subject: "[Feedback] Swifty Forecast"
         )
@@ -74,6 +77,7 @@ final class AboutViewModel: ObservableObject {
             return
         }
         let bugEmail = SupportEmail(
+            bundle: bundle,
             recipient: recipient,
             subject: "[Bug] Swifty Forecast"
         )

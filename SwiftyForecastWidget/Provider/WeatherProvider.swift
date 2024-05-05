@@ -14,19 +14,20 @@ struct WeatherProvider: TimelineProvider {
     private let locationManager = WidgetLocationManager()
     private let dataSource: WeatherProviderDataSource
 
-    init(dataSource: WeatherProviderDataSource = WeatherProviderDataSource()) {
+    init(
+        dataSource: WeatherProviderDataSource = WeatherProviderDataSource(
+            service: WeatherService(decoder: JSONSnakeCaseDecoded())
+        )
+    ) {
         self.dataSource = dataSource
     }
 
     func placeholder(in context: Context) -> WeatherEntry {
-        debugPrint("placeholder \(context.family)")
         return WeatherEntry.sampleTimeline.first!
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WeatherEntry) -> Void) {
         Task(priority: .userInitiated) {
-            debugPrint("getSnapshot \(context.family)")
-
             locationManager.stopUpdatingLocation()
             let location = await locationManager.startUpdatingLocation()
 
@@ -44,8 +45,6 @@ struct WeatherProvider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WeatherEntry>) -> Void) {
         Task(priority: .userInitiated) {
-            debugPrint("getTimeline \(context.family)")
-
             locationManager.stopUpdatingLocation()
             let location = await locationManager.startUpdatingLocation()
             var entries = [WeatherEntry]()
@@ -78,13 +77,11 @@ struct WeatherProvider: TimelineProvider {
     }
 
     private func loadWeatherData(for location: CLLocation) async -> WeatherEntry {
-        debugPrint("loadWeatherData")
         let result = await dataSource.loadEntryData(for: location)
         return result
     }
 
     private func loadWeatherDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
-        debugPrint("loadWeatherDataWithHourlyForecast")
         let result = await dataSource.loadEntryDataWithHourlyForecast(for: location)
         return result
     }

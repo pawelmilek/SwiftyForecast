@@ -6,7 +6,6 @@ struct WeatherService: WeatherServiceProtocol, HTTPClient {
 
     init(decoder: JSONDecoder) {
         self.decoder = decoder
-        self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
     func fetchCurrent(latitude: Double, longitude: Double) async throws -> CurrentWeatherResponse {

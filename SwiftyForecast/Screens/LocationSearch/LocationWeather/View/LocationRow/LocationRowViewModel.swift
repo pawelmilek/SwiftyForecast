@@ -56,7 +56,7 @@ final class LocationRowViewModel: ObservableObject {
                     latitude: latitude,
                     longitude: longitude
                 )
-                let model = ResponseParser.parse(current: currentResponse)
+                let model = ResponseParser().parse(current: currentResponse)
                 temperatureValue = model.temperature
                 isLoading = false
             } catch {
@@ -72,7 +72,7 @@ final class LocationRowViewModel: ObservableObject {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [self] location in
-                localTime = Date.timeOnly(from: location.secondsFromGMT)
+                localTime = timeOnly(from: location.secondsFromGMT)
                 name = location.name + ", " + location.country
 
                 let annotation = MKPointAnnotation()
@@ -96,6 +96,15 @@ final class LocationRowViewModel: ObservableObject {
                 setTemperatureAccordingToUnitNotation(value: temperatureValue)
             }
             .store(in: &cancellables)
+    }
+
+    private func timeOnly(from secondsFromGMT: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: secondsFromGMT)
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .none
+        let time = dateFormatter.string(from: .now)
+        return time
     }
 
     private func registerMeasurementSystemObserver() {

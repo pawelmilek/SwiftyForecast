@@ -1,9 +1,7 @@
 import Foundation
 
 struct ResponseParser {
-    private init() { }
-
-    static func parse(current: CurrentWeatherResponse) -> CurrentWeatherModel {
+    func parse(current: CurrentWeatherResponse) -> CurrentWeatherModel {
         let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
         let sunriseDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunrise))
         let sunsetDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunset))
@@ -32,7 +30,7 @@ struct ResponseParser {
         return currentWeatherModel
     }
 
-    static func parse(forecast: ForecastWeatherResponse) -> ForecastWeatherModel {
+    func parse(forecast: ForecastWeatherResponse) -> ForecastWeatherModel {
         let hourlyForecastModels = forecast.data.map {
             HourlyForecastModel(
                 date: Date(timeIntervalSince1970: TimeInterval($0.dateTimeUnix)),
@@ -51,7 +49,7 @@ struct ResponseParser {
         return forecastWeatherModel
     }
 
-    private static func groupAndFilterOutTodayDate(forecast: ForecastWeatherResponse) -> [DailyForecastModel] {
+    private func groupAndFilterOutTodayDate(forecast: ForecastWeatherResponse) -> [DailyForecastModel] {
         let model = Dictionary(grouping: forecast.data, by: {
             Calendar.current.startOfDay(for: Date(timeIntervalSince1970: TimeInterval($0.dateTimeUnix)))
         })

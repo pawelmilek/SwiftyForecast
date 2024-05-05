@@ -15,7 +15,7 @@ final class HourlyViewCellViewModel: ObservableObject {
     ) {
         self.model = model
         self.temperatureRenderer = temperatureRenderer
-        time = model.date.shortTime
+        time = model.date.formatted(date: .omitted, time: .shortened)
         iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
         setTemperatureAccordingToUnitNotation(model.temperature)
     }

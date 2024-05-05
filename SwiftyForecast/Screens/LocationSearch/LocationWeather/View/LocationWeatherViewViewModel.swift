@@ -28,16 +28,17 @@ final class LocationWeatherViewViewModel: ObservableObject {
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
 
-    init(searchCompletion: MKLocalSearchCompletion,
-         service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
-         databaseManager: DatabaseManager = RealmManager.shared,
-         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()) {
+    init(
+        searchCompletion: MKLocalSearchCompletion,
+        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
+        databaseManager: DatabaseManager = RealmManager.shared,
+        appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
+    ) {
         self.searchCompletion = searchCompletion
         self.service = service
         self.databaseManager = databaseManager
         self.appStoreReviewCenter = appStoreReviewCenter
         subscriteToPublishers()
-        debugPrint("LocationSearchResultViewViewModel init")
     }
 
     private func subscriteToPublishers() {
@@ -129,7 +130,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
                     latitude: locationModel.latitude,
                     longitude: locationModel.longitude
                 )
-                forecastModel = ResponseParser.parse(forecast: forecast)
+                forecastModel = ResponseParser().parse(forecast: forecast)
                 isLoading = false
             } catch {
                 forecastModel = nil

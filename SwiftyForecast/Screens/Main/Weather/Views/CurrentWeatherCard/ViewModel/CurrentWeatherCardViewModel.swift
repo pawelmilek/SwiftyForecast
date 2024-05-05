@@ -33,7 +33,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
-    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
+    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
          temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
          speedRenderer: SpeedRenderer = SpeedRenderer(),
          measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()) {
@@ -68,8 +68,8 @@ final class CurrentWeatherCardViewModel: ObservableObject {
                 description = model.description
                 daytimeDescription = model.icon.dayNightState.description
                 humidity.value = "\(model.humidity)\("%")"
-                sunrise = .sunrise(time: model.sunrise.shortTime)
-                sunset = .sunset(time: model.sunset.shortTime)
+                sunrise = .sunrise(time: model.sunrise.formatted(date: .omitted, time: .shortened))
+                sunset = .sunset(time: model.sunset.formatted(date: .omitted, time: .shortened))
             }
             .store(in: &cancellables)
     }
@@ -121,7 +121,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
         Task(priority: .userInitiated) {
             do {
                 let currentResponse = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
-                let dataModel = ResponseParser.parse(current: currentResponse)
+                let dataModel = ResponseParser().parse(current: currentResponse)
                 let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon.code)
                 icon = Image(uiImage: largeIcon)
                 model = dataModel

@@ -1,5 +1,5 @@
 //
-//  AppStoreReviewManager.swift
+//  ReviewManager.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -9,7 +9,7 @@
 import StoreKit
 
 @MainActor
-final class AppStoreReviewManager {
+final class ReviewManager {
     private enum Key: String {
         case lastReviewVersion
         case locationCounter
@@ -26,7 +26,7 @@ final class AppStoreReviewManager {
     }
 
     private var currentAppVersion: String {
-        return Bundle.versionNumber
+        return bundle.versionNumber
     }
 
     private var reviewWortyLocationCount: Int {
@@ -51,8 +51,10 @@ final class AppStoreReviewManager {
 
     private var currentLocationCount = 0
     private let storage: UserDefaults
+    private let bundle: Bundle
 
-    init(storage: UserDefaults) {
+    init(bundle: Bundle, storage: UserDefaults) {
+        self.bundle = bundle
         self.storage = storage
     }
 
@@ -93,7 +95,7 @@ final class AppStoreReviewManager {
 }
 
 // MARK: - Private - Storage data
-private extension AppStoreReviewManager {
+private extension ReviewManager {
 
     func loadLastReviewVersion() -> String {
         storage.string(forKey: Key.lastReviewVersion.key) ?? InvalidReference.notApplicable

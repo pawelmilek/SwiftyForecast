@@ -89,7 +89,6 @@ extension WidgetLocationManager: CLLocationManagerDelegate {
         guard let latestLocation = locations.first else { return }
 
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
-        debugPrint(latestLocation)
         self.completionHandler?(latestLocation)
     }
 

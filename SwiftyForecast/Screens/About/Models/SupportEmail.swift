@@ -11,10 +11,12 @@ import SwiftUI
 
 @MainActor
 final class SupportEmail {
+    private let bundle: Bundle
     private let recipient: String
     private let subject: String
 
-    init(recipient: String, subject: String) {
+    init(bundle: Bundle, recipient: String, subject: String) {
+        self.bundle = bundle
         self.recipient = recipient
         self.subject = subject
     }
@@ -40,14 +42,15 @@ final class SupportEmail {
 
     private var body: String {
       """
-        Application: \(Bundle.applicationName)
-        Version: \(Bundle.versionNumber)
-        Build: \(Bundle.buildNumber)
+        Application: \(bundle.applicationName)
+        Version: \(bundle.versionNumber)
+        Build: \(bundle.buildNumber)
         Device: \(UIDevice.current.modelName)
-        iOS: \(UIDevice.current.systemVersion)
+        \(UIDevice.current.systemName): \(UIDevice.current.systemVersion)
 
         Please provide your feedback below.
         ------------------------------------
+
       """
     }
 }

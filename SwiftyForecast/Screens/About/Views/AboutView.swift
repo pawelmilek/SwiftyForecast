@@ -10,7 +10,7 @@ import SwiftUI
 import StoreKit
 
 struct AboutView: View {
-    @StateObject private var viewModel = AboutViewModel()
+    @StateObject private var viewModel = AboutViewModel(bundle: .main)
     @Environment(\.openURL) private var openURL
 
     var body: some View {

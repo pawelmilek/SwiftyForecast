@@ -23,7 +23,7 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
 
     init(
         locationModel: LocationModel,
-        service: WeatherServiceProtocol = WeatherService(decoder: JSONDecoder()),
+        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
     ) {
@@ -87,7 +87,7 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
         Task(priority: .userInitiated) {
             do {
                 let forecast = try await service.fetchForecast(latitude: latitude, longitude: longitude)
-                let data = ResponseParser.parse(forecast: forecast)
+                let data = ResponseParser().parse(forecast: forecast)
                 weatherModel = data
                 isLoading = false
 
