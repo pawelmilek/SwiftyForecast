@@ -1,5 +1,5 @@
 //
-//  InformationView.swift
+//  AboutView.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/21/23.
@@ -9,15 +9,15 @@
 import SwiftUI
 import StoreKit
 
-struct InformationView: View {
-    @StateObject private var viewModel = InformationViewModel()
+struct AboutView: View {
+    @StateObject private var viewModel = AboutViewModel()
     @Environment(\.openURL) private var openURL
 
     var body: some View {
         NavigationStack {
             List {
                 Section {
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "apps.iphone",
                         title: "Application",
@@ -25,7 +25,7 @@ struct InformationView: View {
                         link: nil,
                         action: nil
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "gear",
                         title: "Version",
@@ -33,7 +33,7 @@ struct InformationView: View {
                         link: nil,
                         action: nil
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "info.circle",
                         title: "Compatibility",
@@ -41,11 +41,11 @@ struct InformationView: View {
                         link: nil,
                         action: nil
                     )
-                    InfromationFrameworkView(
+                    AboutFrameworkView(
                         title: "Frameworks",
                         content: viewModel.frameworks
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "ellipsis.curlybraces",
                         title: "Developer",
@@ -53,7 +53,7 @@ struct InformationView: View {
                         link: nil,
                         action: nil
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: Color(.customPrimary),
                         symbol: "globe",
                         title: "Website",
@@ -68,7 +68,7 @@ struct InformationView: View {
                     Text("About the app")
                 }
                 Section {
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "apps.iphone",
                         title: "Apps Preview",
@@ -84,7 +84,7 @@ struct InformationView: View {
                     Text("App Store")
                 }
                 Section {
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "envelope.fill",
                         title: "Contact",
@@ -92,7 +92,7 @@ struct InformationView: View {
                         link: nil,
                         action: reportFeedback
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: .red,
                         symbol: "ant.fill",
                         title: "Report Issue",
@@ -100,7 +100,7 @@ struct InformationView: View {
                         link: nil,
                         action: reportIssue
                     )
-                    InfoRow(
+                    AboutRow(
                         tintColor: .yellow,
                         symbol: "star.fill",
                         title: "Rate Application",
@@ -116,7 +116,7 @@ struct InformationView: View {
                     NavigationLink {
                         LicenseView()
                     } label: {
-                        InfoRow(
+                        AboutRow(
                             tintColor: .blue,
                             symbol: "doc.plaintext.fill",
                             title: "Licenses",
@@ -125,7 +125,7 @@ struct InformationView: View {
                             action: nil
                         )
                     }
-                    InfoRow(
+                    AboutRow(
                         tintColor: .blue,
                         symbol: "lock.shield.fill",
                         title: "Privacy Policy",
@@ -138,7 +138,7 @@ struct InformationView: View {
                 }
 
                 Section {
-                    InfoRow(
+                    AboutRow(
                         tintColor: .orange,
                         symbol: "sun.haze.fill",
                         title: "OpenWeather",
@@ -192,5 +192,5 @@ struct InformationView: View {
 }
 
 #Preview {
-    InformationView()
+    AboutView()
 }

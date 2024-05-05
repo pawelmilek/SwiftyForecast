@@ -1,5 +1,5 @@
 //
-//  InfoRow.swift
+//  AboutRow.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/23/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct InfoRow: View {
+struct AboutRow: View {
     let tintColor: Color
     let symbol: String
     let title: String
@@ -54,7 +54,7 @@ struct InfoRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    InfoRow(
+    AboutRow(
         tintColor: .blue,
         symbol: "apps.iphone",
         title: "Application",
@@ -66,7 +66,7 @@ struct InfoRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    InfoRow(
+    AboutRow(
         tintColor: .pink,
         symbol: "globe",
         title: "Website",

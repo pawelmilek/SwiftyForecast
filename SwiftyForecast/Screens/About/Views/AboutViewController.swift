@@ -1,5 +1,5 @@
 //
-//  InformationViewController.swift
+//  AboutViewController.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/21/23.
@@ -9,8 +9,8 @@
 import UIKit
 import SwiftUI
 
-class InformationViewController: UIViewController {
-    private var hostingViewController: UIHostingController<InformationView>!
+class AboutViewController: UIViewController {
+    private var hostingViewController: UIHostingController<AboutView>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class InformationViewController: UIViewController {
     }
 
     private func setup() {
-        let informationView = InformationView()
+        let informationView = AboutView()
         hostingViewController = UIHostingController(rootView: informationView)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)

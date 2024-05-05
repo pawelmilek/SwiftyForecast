@@ -1,5 +1,5 @@
 //
-//  InformationViewModel.swift
+//  AboutViewModel.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/24/24.
@@ -10,7 +10,7 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class InformationViewModel: ObservableObject {
+final class AboutViewModel: ObservableObject {
     private enum Constant {
         static let appURLString = "https://sites.google.com/view/pmilek/swifty-forecast"
         static let privacyPolicyURLString = "https://sites.google.com/view/pmilek/privacy-policy"

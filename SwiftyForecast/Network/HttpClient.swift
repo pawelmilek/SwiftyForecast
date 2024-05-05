@@ -49,7 +49,6 @@ extension HTTPClient {
             default:
                 throw RequestError.unknown(statusCode: response.statusCode)
             }
-
         } catch {
             throw error
         }

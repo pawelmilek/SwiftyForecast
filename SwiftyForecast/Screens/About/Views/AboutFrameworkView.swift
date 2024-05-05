@@ -1,5 +1,5 @@
 //
-//  InfromationFrameworkView.swift
+//  AboutFrameworkView.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/30/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct InfromationFrameworkView: View {
+struct AboutFrameworkView: View {
     let title: String
     let content: [String]
 
@@ -29,7 +29,7 @@ struct InfromationFrameworkView: View {
                 .padding(.leading, 15)
             }
         } label: {
-            InfoRow(
+            AboutRow(
                 tintColor: .orange,
                 symbol: "swift",
                 title: title,
@@ -42,7 +42,7 @@ struct InfromationFrameworkView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    InfromationFrameworkView(
+    AboutFrameworkView(
         title: "Frameworks",
         content: [
             "UIKit",

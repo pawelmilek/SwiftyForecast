@@ -17,7 +17,7 @@ final class MainCoordinator: Coordinator {
     }
 
     func openInformationViewController() {
-        let sheetViewController = InformationViewController()
+        let sheetViewController = AboutViewController()
         navigationController.present(sheetViewController, animated: true)
     }
 
