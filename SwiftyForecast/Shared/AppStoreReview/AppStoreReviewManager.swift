@@ -8,14 +8,13 @@
 
 import StoreKit
 
+@MainActor
 final class AppStoreReviewManager {
-    enum Key: String {
+    private enum Key: String {
         case lastReviewVersion
         case locationCounter
 
-        var key: String {
-            return self.rawValue
-        }
+        var key: String { self.rawValue }
     }
 
     private lazy var lastReviewAppVersion = loadLastReviewVersion() {
@@ -52,20 +51,15 @@ final class AppStoreReviewManager {
 
     private var currentLocationCount = 0
     private let storage: UserDefaults
-    private var reviewObserver: Observer
 
-    init(
-        storage: UserDefaults = .standard,
-        reviewObserver: Observer = ReviewObserver()
-    ) {
+    init(storage: UserDefaults) {
         self.storage = storage
-        self.reviewObserver = reviewObserver
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {
         debugPrint("File: \(#file), Function: \(#function), line: \(#line) \(currentAppVersion)")
-        guard (lastReviewAppVersion == InvalidReference.notApplicable) ||
-                (lastReviewAppVersion != currentAppVersion) else {
+        guard (lastReviewAppVersion == InvalidReference.notApplicable)
+                || (currentAppVersion != lastReviewAppVersion) else {
             return
         }
 
@@ -85,7 +79,10 @@ final class AppStoreReviewManager {
         }
 
         lastReviewAppVersion = currentAppVersion
+        requestReview()
+    }
 
+    private func requestReview() {
         if let scene = UIApplication.shared.connectedScenes
             .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
             DispatchQueue.main.async {
@@ -93,22 +90,9 @@ final class AppStoreReviewManager {
             }
         }
     }
-
-    func startObserving() {
-        reviewObserver.startObserving()
-    }
-
-    func stopObserving() {
-        reviewObserver.stopObserving()
-    }
-
-    func setEventResponderDelegate(_ delegate: ReviewObserverEventResponder) {
-        reviewObserver.eventResponder = delegate
-    }
-
 }
 
-// MARK: - Private - Storage data access object helpers
+// MARK: - Private - Storage data
 private extension AppStoreReviewManager {
 
     func loadLastReviewVersion() -> String {

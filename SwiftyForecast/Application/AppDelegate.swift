@@ -8,6 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private var coordinator: MainCoordinator?
+    private var reviewObserver: ReviewObserver?
     private let networkReachabilityManager = NetworkReachabilityManager.shared
 
     func application(
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setNavigationBarStyle()
         setupAppearanceTheme()
         setupAppearanceThemeNotificationCenter()
+        setupReviewObserver()
         debugPrintRealmFileURL()
         return true
     }
@@ -76,6 +78,18 @@ private extension AppDelegate {
             DispatchQueue.main.async {
                 onNetworkAvailable()
             }
+        }
+    }
+
+    func setupReviewObserver() {
+        if let topViewController = coordinator?.topViewController as? ReviewObserverEventResponder {
+            reviewObserver = ReviewObserver(
+                eventResponder: topViewController,
+                notificationCenter: .default
+            )
+            reviewObserver?.start()
+        } else {
+            reviewObserver?.stop()
         }
     }
 

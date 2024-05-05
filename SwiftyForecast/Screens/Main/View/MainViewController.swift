@@ -59,8 +59,8 @@ final class MainViewController: UIViewController {
         navigationOrientation: .horizontal
     )
 
+    private let reviewManager = AppStoreReviewManager(storage: .standard)
     private let locationManager = LocationManager()
-    private var appStoreReviewManager: AppStoreReviewManager?
     private let informationTip = InformationTip()
     private let appearanceTip = AppearanceTip()
 
@@ -97,7 +97,6 @@ private extension MainViewController {
         subscribeToViewModel()
         setupChildaPageViewController()
         setupNavigationItems()
-        setupAppStoreReview()
         setupAppearance()
     }
 
@@ -177,12 +176,6 @@ private extension MainViewController {
         }
     }
 
-    func setupAppStoreReview() {
-        appStoreReviewManager = AppStoreReviewManager()
-        appStoreReviewManager?.setEventResponderDelegate(self)
-        appStoreReviewManager?.startObserving()
-    }
-
     func showEnableLocationServicesPrompt() {
         guard let navigationController = self.navigationController else { return }
         viewModel?.showEnableLocationServicesPrompt(at: navigationController)
@@ -206,7 +199,7 @@ private extension MainViewController {
 
     @objc
     func openInfoBarButtonTapped() {
-        coordinator?.openInformationViewController()
+        coordinator?.openAboutViewController()
         donateInformationVisitEvent()
     }
 
@@ -403,6 +396,6 @@ extension MainViewController: UIPageViewControllerDelegate {
 // MARK: - AppStoreReviewObserverEventResponder
 extension MainViewController: ReviewObserverEventResponder {
     func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
-        appStoreReviewManager?.requestReview(for: desirableMoment)
+        reviewManager.requestReview(for: desirableMoment)
     }
 }

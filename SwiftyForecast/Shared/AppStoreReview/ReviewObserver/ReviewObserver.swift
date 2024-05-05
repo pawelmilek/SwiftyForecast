@@ -12,26 +12,29 @@ protocol ReviewObserverEventResponder: AnyObject {
     func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType)
 }
 
-protocol Observer {
-    var eventResponder: ReviewObserverEventResponder? { get set }
-    func startObserving()
-    func stopObserving()
-}
-
-final class ReviewObserver: Observer {
-    weak var eventResponder: ReviewObserverEventResponder? {
-        didSet {
-            if eventResponder == nil {
-                stopObserving()
-            }
-        }
-    }
-
-    private var isObserving = false
+final class ReviewObserver {
+    private weak var eventResponder: ReviewObserverEventResponder?
     private let notificationCenter: NotificationCenter
 
-    init(notificationCenter: NotificationCenter = .default) {
+    init(
+        eventResponder: ReviewObserverEventResponder?,
+        notificationCenter: NotificationCenter
+    ) {
+        self.eventResponder = eventResponder
         self.notificationCenter = notificationCenter
+    }
+
+    func start() {
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(desirableMomentDidHappen),
+            name: .didRequestAppStoreReview,
+            object: nil
+        )
+    }
+
+    func stop() {
+        notificationCenter.removeObserver(self)
     }
 
     @objc func desirableMomentDidHappen(notification: Notification) {
@@ -41,26 +44,4 @@ final class ReviewObserver: Observer {
 
         eventResponder?.reviewDesirableMomentDidHappen(desirableMoment)
     }
-}
-
-// MARK: - Observer protocol
-extension ReviewObserver {
-
-    func startObserving() {
-        guard !isObserving else { return }
-
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(desirableMomentDidHappen),
-            name: .didRequestAppStoreReview,
-            object: nil
-        )
-        isObserving = true
-    }
-
-    func stopObserving() {
-        notificationCenter.removeObserver(self)
-        isObserving = false
-    }
-
 }

@@ -3,6 +3,10 @@ import SafariServices
 
 @MainActor
 final class MainCoordinator: Coordinator {
+    var topViewController: UIViewController? {
+        navigationController.topViewController
+    }
+
     let navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -16,7 +20,7 @@ final class MainCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
-    func openInformationViewController() {
+    func openAboutViewController() {
         let sheetViewController = AboutViewController()
         navigationController.present(sheetViewController, animated: true)
     }
