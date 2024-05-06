@@ -192,12 +192,12 @@ Thank you for using the Swifty Forecast!
 ## 3.6.2
 - Under the hood performance improvements<br>
 
-[2024-05-04] |
+[2024-05-05] |
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.6.1...v3.6.2)
 
 ## 3.7.0
 - Small UI design improvements<br> 
 - Under the hood performance improvements<br>
 
-[2024-05-04] |
+[2024-05-06] |
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.6.2...v3.7.0)
