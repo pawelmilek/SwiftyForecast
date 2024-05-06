@@ -12,6 +12,7 @@
 		E20C6B112BE82DAD00DDB57A /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B0F2BE82DAD00DDB57A /* DeviceModel.swift */; };
 		E20C6B132BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */; };
 		E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */; };
+		E20C6B172BE859DA00DDB57A /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = E20C6B162BE859DA00DDB57A /* Vortex */; };
 		E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */; };
 		E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */; };
 		E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */; };
@@ -500,6 +501,7 @@
 			files = (
 				E290F2542ADDAF55001B3276 /* Kingfisher in Frameworks */,
 				E2E7127D2AD99FDE002BFFA7 /* RealmSwift in Frameworks */,
+				E20C6B172BE859DA00DDB57A /* Vortex in Frameworks */,
 				E2E7127B2AD99FDE002BFFA7 /* Realm in Frameworks */,
 				E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */,
 				E2A5675B2B0779F4000324C0 /* Lottie in Frameworks */,
@@ -1336,6 +1338,7 @@
 				E2E7127C2AD99FDE002BFFA7 /* RealmSwift */,
 				E290F2532ADDAF55001B3276 /* Kingfisher */,
 				E2A5675A2B0779F4000324C0 /* Lottie */,
+				E20C6B162BE859DA00DDB57A /* Vortex */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
@@ -1428,6 +1431,7 @@
 				E2E712792AD99FDE002BFFA7 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E290F2522ADDAF55001B3276 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E2A567592B0779F4000324C0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -2164,6 +2168,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Vortex";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 		E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
@@ -2199,6 +2211,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E20C6B162BE859DA00DDB57A /* Vortex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */;
+			productName = Vortex;
+		};
 		E233AC1123DE7D9000DC0EF5 /* Reachability */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */;
