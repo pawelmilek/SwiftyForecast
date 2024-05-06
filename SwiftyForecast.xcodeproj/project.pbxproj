@@ -89,7 +89,7 @@
 		E28179122B385F8800D06917 /* device_types.json in Resources */ = {isa = PBXBuildFile; fileRef = E28179112B385F8800D06917 /* device_types.json */; };
 		E28179182B38768A00D06917 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28179172B38768A00D06917 /* LicenseView.swift */; };
 		E281791A2B38770B00D06917 /* LicenseReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28179192B38770B00D06917 /* LicenseReader.swift */; };
-		E283572B2B23894800E3807A /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* Geocoder.swift */; };
+		E283572B2B23894800E3807A /* GeocodeLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocodeLocation.swift */; };
 		E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
 		E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28357302B2714F000E3807A /* TextScaledModifier.swift */; };
 		E28357322B2714F300E3807A /* TextScaledModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28357302B2714F000E3807A /* TextScaledModifier.swift */; };
@@ -100,7 +100,6 @@
 		E2854FFA2290F0DB00CD7554 /* NotationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FF92290F0DB00CD7554 /* NotationController.swift */; };
 		E2854FFE2290F24800CD7554 /* TemperatureNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */; };
 		E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550012290F26E00CD7554 /* MeasurementSystem.swift */; };
-		E285500A2292303C00CD7554 /* DailyDateRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550092292303C00CD7554 /* DailyDateRenderer.swift */; };
 		E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC742374FCC100D1D5ED /* RealmManager.swift */; };
 		E28AFC792374FF2400D1D5ED /* PathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC782374FF2300D1D5ED /* PathFinder.swift */; };
 		E28AFC7D2374FF5D00D1D5ED /* PathError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC7C2374FF5D00D1D5ED /* PathError.swift */; };
@@ -209,8 +208,6 @@
 		E2D430D02BB4D954003F26EE /* LocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B82BB4D954003F26EE /* LocationWeatherView.swift */; };
 		E2D430D12BB4D954003F26EE /* LocationWeatherViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B92BB4D954003F26EE /* LocationWeatherViewViewModel.swift */; };
 		E2D430D22BB4D954003F26EE /* LocationWeatherViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B92BB4D954003F26EE /* LocationWeatherViewViewModel.swift */; };
-		E2D430D32BB4D954003F26EE /* LocationWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */; };
-		E2D430D42BB4D954003F26EE /* LocationWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */; };
 		E2D430D62BB4DA02003F26EE /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = E2D430D52BB4DA02003F26EE /* Realm */; };
 		E2D430D82BB4DA02003F26EE /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E2D430D72BB4DA02003F26EE /* RealmSwift */; };
 		E2D430DA2BB4DB0A003F26EE /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD3755232EFFC40083B383 /* LocationModel.swift */; };
@@ -242,7 +239,7 @@
 		E2D430F72BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
 		E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
 		E2D430FB2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
-		E2D960812120F34800AE0B6E /* Geocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* Geocoder.swift */; };
+		E2D960812120F34800AE0B6E /* GeocodeLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocodeLocation.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC1466248D493700D1A329 /* JSONFileLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1465248D493700D1A329 /* JSONFileLoader.swift */; };
 		E2DC146C248D496900D1A329 /* FileLoaderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC146B248D496900D1A329 /* FileLoaderError.swift */; };
@@ -390,7 +387,6 @@
 		E2854FF92290F0DB00CD7554 /* NotationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotationController.swift; sourceTree = "<group>"; };
 		E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureNotation.swift; sourceTree = "<group>"; };
 		E28550012290F26E00CD7554 /* MeasurementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSystem.swift; sourceTree = "<group>"; };
-		E28550092292303C00CD7554 /* DailyDateRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyDateRenderer.swift; sourceTree = "<group>"; };
 		E28AFC742374FCC100D1D5ED /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E28AFC782374FF2300D1D5ED /* PathFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathFinder.swift; sourceTree = "<group>"; };
 		E28AFC7C2374FF5D00D1D5ED /* PathError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathError.swift; sourceTree = "<group>"; };
@@ -468,10 +464,9 @@
 		E2D430B72BB4D954003F26EE /* LocationSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
 		E2D430B82BB4D954003F26EE /* LocationWeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherView.swift; sourceTree = "<group>"; };
 		E2D430B92BB4D954003F26EE /* LocationWeatherViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewViewModel.swift; sourceTree = "<group>"; };
-		E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationWeatherViewModel.swift; sourceTree = "<group>"; };
 		E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Equtable.swift"; sourceTree = "<group>"; };
 		E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRowViewModel.swift; sourceTree = "<group>"; };
-		E2D960802120F34800AE0B6E /* Geocoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geocoder.swift; sourceTree = "<group>"; };
+		E2D960802120F34800AE0B6E /* GeocodeLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocodeLocation.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC1465248D493700D1A329 /* JSONFileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONFileLoader.swift; sourceTree = "<group>"; };
 		E2DC146B248D496900D1A329 /* FileLoaderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLoaderError.swift; sourceTree = "<group>"; };
@@ -559,8 +554,7 @@
 				E2DC1464248D492200D1A329 /* DataLoader */,
 				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
 				E296A7E62AD6F49D001BFADB /* ConfigurationSettingsAccessor.swift */,
-				E28550092292303C00CD7554 /* DailyDateRenderer.swift */,
-				E2D960802120F34800AE0B6E /* Geocoder.swift */,
+				E2D960802120F34800AE0B6E /* GeocodeLocation.swift */,
 				E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */,
 				E24EB89225410010001F5D72 /* MockGenerator.swift */,
 				E28AFC782374FF2300D1D5ED /* PathFinder.swift */,
@@ -1271,7 +1265,6 @@
 		E2D430BC2BB4D954003F26EE /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E2D430BB2BB4D954003F26EE /* LocationWeatherViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1539,7 +1532,6 @@
 				E296A7F62AD7EB5A001BFADB /* Main.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,
 				E2CC9A012B6150E80044634E /* AboutViewModel.swift in Sources */,
-				E2D430D32BB4D954003F26EE /* LocationWeatherViewModel.swift in Sources */,
 				E28AFC792374FF2400D1D5ED /* PathFinder.swift in Sources */,
 				E28357362B2716B500E3807A /* CLAuthorizationStatus+CustomStringConvertible.swift in Sources */,
 				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
@@ -1572,7 +1564,6 @@
 				E22A221B2AE004230069A83A /* LocationManager.swift in Sources */,
 				E2CF4DD822768C3F00062E36 /* WeatherService.swift in Sources */,
 				E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */,
-				E285500A2292303C00CD7554 /* DailyDateRenderer.swift in Sources */,
 				E21E386E2B37576A00513B26 /* AboutRow.swift in Sources */,
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
 				E249ABBC2B3476220020B88D /* AboutView.swift in Sources */,
@@ -1617,7 +1608,7 @@
 				E266227E2B0A110D0010B567 /* LocationSearchResultList.swift in Sources */,
 				E2B1D65C211FB26C00F0002A /* MainViewController.swift in Sources */,
 				E2D430CB2BB4D954003F26EE /* LocationSearchView.swift in Sources */,
-				E2D960812120F34800AE0B6E /* Geocoder.swift in Sources */,
+				E2D960812120F34800AE0B6E /* GeocodeLocation.swift in Sources */,
 				E2854FFE2290F24800CD7554 /* TemperatureNotation.swift in Sources */,
 				E26CDFAF2B408B8B0018B5D2 /* AboutFrameworkView.swift in Sources */,
 				E225B4DA2BE437DF00AD8906 /* ConditionIcon.swift in Sources */,
@@ -1679,7 +1670,7 @@
 				E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */,
 				E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */,
 				E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */,
-				E283572B2B23894800E3807A /* Geocoder.swift in Sources */,
+				E283572B2B23894800E3807A /* GeocodeLocation.swift in Sources */,
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2CFA7AB2B309E63001DE3E8 /* MockGenerator.swift in Sources */,
 				E2D430E82BB4DB94003F26EE /* SpeedFormatterMetric.swift in Sources */,
@@ -1718,7 +1709,6 @@
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
-				E2D430D42BB4D954003F26EE /* LocationWeatherViewModel.swift in Sources */,
 				E2CFA7AD2B309F26001DE3E8 /* FileLoaderError.swift in Sources */,
 				E2F671162B234EAE00B791A0 /* TemperatureValueDisplayable.swift in Sources */,
 				E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */,

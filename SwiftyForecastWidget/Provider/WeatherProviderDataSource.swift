@@ -71,14 +71,15 @@ final class WeatherProviderDataSource {
     private func fetchLocationName() async -> String {
         guard let location else { return "" }
 
-        let placemark = await fetchPlacemark(at: location)
+        let placemark = await requestPlacemark(at: location)
         let name = placemark.locality ?? InvalidReference.undefined
         return name
     }
 
-    private func fetchPlacemark(at location: CLLocation) async -> CLPlacemark {
+    private func requestPlacemark(at location: CLLocation) async -> CLPlacemark {
         do {
-            let placemark = try await Geocoder.fetchPlacemark(at: location)
+            let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
+            let placemark = try await geocodeLocation.requestPlacemark(at: location)
             return placemark
         } catch {
             fatalError(error.localizedDescription)

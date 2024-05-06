@@ -13,17 +13,22 @@ protocol DatabaseManager {
 }
 
 final class RealmManager: DatabaseManager {
-    static let shared = RealmManager(name: "swifty.forecast")
+    static let shared = RealmManager(
+        name: "swifty.forecast",
+        pathFinder: PathFinder(fileManager: .default)
+    )
 
     private(set) var realm: Realm!
+    private let pathFinder: PathFinder
 
-    public init(name: String) {
+    private init(name: String, pathFinder: PathFinder) {
+        self.pathFinder = pathFinder
         setupScheme(with: name)
     }
 
     private func setupScheme(with name: String) {
         do {
-            let fileURL = try PathFinder.documentDirectory().appendingPathComponent("\(name).realm")
+            let fileURL = try pathFinder.documentDirectory().appendingPathComponent("\(name).realm")
             let configuration = Realm.Configuration(
                 fileURL: fileURL,
                 schemaVersion: 1,

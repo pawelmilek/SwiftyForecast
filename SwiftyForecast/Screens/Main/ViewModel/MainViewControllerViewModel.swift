@@ -90,7 +90,8 @@ final class MainViewControllerViewModel: ObservableObject {
     func onDidUpdateLocation(_ location: CLLocation) {
         Task(priority: .userInitiated) {
             do {
-                let placemark = try await Geocoder.fetchPlacemark(at: location)
+                let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
+                let placemark = try await geocodeLocation.requestPlacemark(at: location)
                 let newLocation = LocationModel(placemark: placemark, isUserLocation: true)
                 let entryValidator = UserLocationEntryValidator(location: newLocation)
                 hasValidatedUserLocation = entryValidator.validate()

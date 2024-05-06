@@ -87,7 +87,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
         Task(priority: .userInitiated) {
             isLoading = true
             await startSearch()
-            await fetchPlacemarkIfLocationFound()
+            await requestPlacemarkIfLocationFound()
             isLoading = false
         }
     }
@@ -106,11 +106,12 @@ final class LocationWeatherViewViewModel: ObservableObject {
         }
     }
 
-    private func fetchPlacemarkIfLocationFound() async {
+    private func requestPlacemarkIfLocationFound() async {
         guard let foundLocation else { return }
 
         do {
-            let placemark = try await Geocoder.fetchPlacemark(at: foundLocation)
+            let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
+            let placemark = try await geocodeLocation.requestPlacemark(at: foundLocation)
             locationModel = LocationModel(placemark: placemark)
         } catch {
             isLoading = false

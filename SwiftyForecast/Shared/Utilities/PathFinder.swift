@@ -8,9 +8,15 @@
 
 import Foundation
 
-final class PathFinder {
-    static func documentDirectory() throws -> URL {
-        guard let directory = FileManager.default.urls(
+struct PathFinder {
+    private let fileManager: FileManager
+
+    init(fileManager: FileManager) {
+        self.fileManager = fileManager
+    }
+
+    func documentDirectory() throws -> URL {
+        guard let directory = fileManager.urls(
             for: .documentDirectory,
             in: .userDomainMask
         ).first else {

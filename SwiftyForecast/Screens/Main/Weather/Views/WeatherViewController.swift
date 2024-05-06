@@ -137,7 +137,17 @@ private extension WeatherViewController {
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
-            .map { ($0.0.map { HourlyViewCellViewModel(model: $0) }, $0.1.map { DailyViewCellViewModel(model: $0) }) }
+            .map {
+                ($0.0.map {
+                    HourlyViewCellViewModel(model: $0)
+                },
+                 $0.1.map {
+                    DailyViewCellViewModel(
+                        model: $0,
+                        temperatureRenderer: TemperatureRenderer()
+                    )
+                })
+            }
             .sink { [self] (hourlyViewModels, dailyViewModels) in
                 hourlyForecastViewModels = hourlyViewModels
                 dailyForecastViewModels = dailyViewModels
