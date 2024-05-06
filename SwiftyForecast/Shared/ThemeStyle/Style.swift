@@ -33,7 +33,7 @@ struct Style {
         static let dayDescriptionFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
         static let temperatureFont = Font.system(size: 80, weight: .black, design: .monospaced)
         static let temperatureMaxMinFont = Font.system(.footnote, design: .monospaced, weight: .black)
-        static let conditionsFont = Font.system(.caption, design: .monospaced, weight: .semibold)
+        static let conditionsFont = Font.system(.caption2, design: .monospaced, weight: .light)
 
         static let iconShadowRadius = CGFloat(0.5)
         static let iconShadowOffset = CGSize(width: 1, height: 1)
@@ -99,10 +99,10 @@ struct Style {
         static let backgroundColor = UIColor.clear
         static let timeFont = Font.system(.subheadline, design: .monospaced, weight: .bold)
 
-        static let nameFont = Font.system(.subheadline, design: .monospaced, weight: .bold)
+        static let nameFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
         static let nameColor = Color(.accent)
 
-        static let tempFont = Font.system(.title2, design: .monospaced, weight: .heavy)
+        static let tempFont = Font.system(.title, design: .monospaced, weight: .heavy)
         static let tempColor = Color(.customPrimary)
 
         static let cornerRadius = CGFloat(15)

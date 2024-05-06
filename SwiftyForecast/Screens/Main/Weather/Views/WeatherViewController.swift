@@ -17,7 +17,6 @@ final class WeatherViewController: UIViewController {
     var viewModel: WeatherViewControllerViewModel?
     private var dailyForecastViewModels: [DailyViewCellViewModel] = []
     private var hourlyForecastViewModels: [HourlyViewCellViewModel] = []
-
     private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -170,14 +169,14 @@ private extension WeatherViewController {
     }
 
     func showContent() {
-        UIView.animate(withDuration: 0.3) { [self] in
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) { [self] in
             hourlyCollectionView.alpha = 1.0
             dailyTableView.alpha = 1.0
         }
     }
 
     func hideContent() {
-        UIView.animate(withDuration: 0.3) { [self] in
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) { [self] in
             hourlyCollectionView.alpha = 0.0
             dailyTableView.alpha = 0.0
         }
@@ -187,12 +186,17 @@ private extension WeatherViewController {
 // MARK: - UICollectionViewDataSource protocol
 extension WeatherViewController: UICollectionViewDataSource {
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         hourlyForecastViewModels.count
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
 
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: HourlyViewCell.reuseIdentifier,
@@ -202,22 +206,22 @@ extension WeatherViewController: UICollectionViewDataSource {
         }
 
         guard !hourlyForecastViewModels.isEmpty else { return cell }
-
         let item = hourlyForecastViewModels[indexPath.row]
         cell.iconImageView.kf.setImage(with: item.iconURL)
         cell.timeLabel.text = item.time
         cell.temperatureLabel.text = item.temperature
         return cell
     }
-
 }
 
 // MARK: UICollectionViewDelegateFlowLayout protocol
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
 
         guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
             return Constant.hourlySizeForItem
@@ -239,11 +243,17 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - UITableViewDataSource protcol
 extension WeatherViewController: UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         dailyForecastViewModels.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
             withIdentifier: DailyViewCell.reuseIdentifier,
             for: indexPath
@@ -263,7 +273,10 @@ extension WeatherViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate protocol
 extension WeatherViewController: UITableViewDelegate {
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         Constant.weekdayCellHeight
     }
 

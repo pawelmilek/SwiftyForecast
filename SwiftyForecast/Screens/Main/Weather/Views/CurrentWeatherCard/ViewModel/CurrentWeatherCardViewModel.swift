@@ -33,10 +33,12 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
-    init(service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
-         temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
-         speedRenderer: SpeedRenderer = SpeedRenderer(),
-         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()) {
+    init(
+        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
+        temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
+        speedRenderer: SpeedRenderer = SpeedRenderer(),
+        measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()
+    ) {
         self.service = service
         self.temperatureRenderer = temperatureRenderer
         self.speedRenderer = speedRenderer
@@ -83,7 +85,6 @@ final class CurrentWeatherCardViewModel: ObservableObject {
 
     private func setWindSpeedAccordingToMeasurementSystem() {
         guard let model else { return }
-
         let rendered = speedRenderer.render(model.windSpeed)
         windSpeed.value = rendered
     }

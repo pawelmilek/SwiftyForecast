@@ -8,7 +8,6 @@ final class DailyViewCellViewModel: ObservableObject {
     @Published private(set) var iconURL: URL?
     @Published private var model: DailyForecastModel
     @Published private var temperatureRenderer: TemperatureRenderer
-
     private var cancellables = Set<AnyCancellable>()
 
     init(
@@ -25,17 +24,17 @@ final class DailyViewCellViewModel: ObservableObject {
             .combineLatest($temperatureRenderer)
             .sink { [weak self] model, temperatureRenderer in
                 guard let self else { return }
-                attributedDate = render(model.date)
+                attributedDate = renderMonthWeekday(date: model.date)
                 iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
 
-                let rendered = temperatureRenderer.render(model.temperature)
-                temperature = rendered.currentFormatted
+                let currentFormatted = temperatureRenderer.render(model.temperature).currentFormatted
+                temperature = currentFormatted
 
             }
             .store(in: &cancellables)
     }
 
-    private func render(_ date: Date) -> NSAttributedString {
+    private func renderMonthWeekday(date: Date) -> NSAttributedString {
         let completeDate = date.formatted(date: .complete, time: .omitted)
         let splited = completeDate
             .split(separator: ",")
@@ -56,10 +55,5 @@ final class DailyViewCellViewModel: ObservableObject {
         attributedString.addAttributes([.font: Style.DailyCell.weekdayFont], range: weekdayRange)
         attributedString.addAttributes([.font: Style.DailyCell.monthFont], range: monthRange)
         return attributedString
-    }
-
-    func setTemperature() {
-        let rendered = temperatureRenderer.render(model.temperature)
-        temperature = rendered.currentFormatted
     }
 }

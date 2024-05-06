@@ -29,10 +29,11 @@ struct LocationList: View {
                 .listRowSeparator(.hidden)
             ForEach(locations) { location in
                 LocationRow(location: location)
-                .deleteDisabled(location.isUserLocation)
-                .onTapGesture {
-                    onSelectRow(location)
-                }
+                    .listRowSeparator(.hidden)
+                    .deleteDisabled(location.isUserLocation)
+                    .onTapGesture {
+                        onSelectRow(location)
+                    }
             }
             .onDelete(perform: $locations.remove)
         }

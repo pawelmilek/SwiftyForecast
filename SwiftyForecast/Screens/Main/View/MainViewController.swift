@@ -381,7 +381,6 @@ extension MainViewController: UIPageViewControllerDelegate {
         guard completed else { return }
         guard let viewController = pageViewController.viewControllers?.first as? WeatherViewController else { return }
         guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return }
-
         viewModel?.onDidChangePageNavigation(index: currentIndex)
         pageTransitionImpactFeedback()
     }

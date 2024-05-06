@@ -43,6 +43,7 @@ private extension LocationRow {
                 Text(viewModel.name)
                     .font(Style.LocationRow.nameFont)
                     .foregroundStyle(Style.LocationRow.nameColor)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             Text(viewModel.temperature)

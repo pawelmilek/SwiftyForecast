@@ -105,37 +105,37 @@ private extension CurrentWeatherCard {
     }
 
     var conditionsView: some View {
-        HStack(spacing: 15) {
+        HStack(spacing: 0) {
             VStack {
                 Image(systemName: viewModel.sunrise.symbol)
                 Text(viewModel.sunrise.getTime())
             }
             .id(viewModel.sunrise.getTime())
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
-
+            .frame(maxWidth: .infinity)
             VStack {
                 Image(systemName: viewModel.windSpeed.symbol)
                 Text(viewModel.windSpeed.value)
             }
             .id(viewModel.windSpeed.value)
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
-
+            .frame(maxWidth: .infinity)
             VStack {
                 Image(systemName: viewModel.humidity.symbol)
                 Text(viewModel.humidity.value)
             }
             .id(viewModel.humidity.value)
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
-
+            .frame(maxWidth: .infinity)
             VStack {
                 Image(systemName: viewModel.sunset.symbol)
                 Text(viewModel.sunset.getTime())
             }
             .id(viewModel.sunset.getTime())
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
+            .frame(maxWidth: .infinity)
         }
         .font(Style.WeatherCard.conditionsFont)
-        .fixedSize()
     }
 }
 
