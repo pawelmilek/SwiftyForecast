@@ -196,7 +196,7 @@ Thank you for using the Swifty Forecast!
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.6.1...v3.6.2)
 
 ## 3.7.0
-- Small UI design improvements 
+- Small UI design improvements<br> 
 - Under the hood performance improvements<br>
 
 [2024-05-04] |
