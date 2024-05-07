@@ -5,10 +5,23 @@ struct ResponseParser {
         let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
         let sunriseDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunrise))
         let sunsetDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunset))
-        let currentDescription = current.conditions.first?.description ?? InvalidReference.undefined
-        let id = current.conditions.first?.id ?? -1
-        let iconCode = current.conditions.first?.icon ?? InvalidReference.undefined
-        let conditionIcon = ConditionIcon(id: id, code: iconCode)
+
+        let condition: ConditionModel
+        if let currentCondition = current.conditions.first {
+            let id = currentCondition.id
+            let iconCode = currentCondition.icon
+            let name = currentCondition.main
+            let description = currentCondition.description
+            condition = ConditionModel(id: id, iconCode: iconCode, name: name, description: description)
+        } else {
+            condition = ConditionModel(
+                id: -1,
+                iconCode: InvalidReference.undefined,
+                name: InvalidReference.undefined,
+                description: InvalidReference.undefined
+            )
+        }
+
         let temperatureValue = TemperatureValue(
             current: current.main.temp,
             min: current.main.tempMin,
@@ -18,8 +31,7 @@ struct ResponseParser {
         let currentWeatherModel = CurrentWeatherModel(
             date: currentDate,
             temperature: temperatureValue,
-            description: currentDescription,
-            icon: conditionIcon,
+            condition: condition,
             humidity: current.main.humidity,
             pressure: current.main.pressure,
             windSpeed: current.wind.speed,

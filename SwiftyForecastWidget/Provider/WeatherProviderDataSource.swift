@@ -21,15 +21,15 @@ final class WeatherProviderDataSource {
     func loadEntryData(for location: CLLocation) async -> WeatherEntry {
         self.location = location
         let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
-        let icon = await fetchIcon(with: currentModel.icon.code)
+        let icon = await fetchIcon(with: currentModel.condition.iconCode)
 
         let result = WeatherEntry(
             date: .now,
             locationName: name,
             icon: icon,
-            description: currentModel.description,
+            description: currentModel.condition.description,
             temperatureValue: currentModel.temperature,
-            dayNightState: currentModel.icon.dayNightState,
+            dayNightState: currentModel.condition.state,
             hourly: []
         )
 
@@ -39,15 +39,15 @@ final class WeatherProviderDataSource {
     func loadEntryDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
         self.location = location
         let (name, currentModel) = await fetchLocationNameAndCurrentWeather()
-        let (icon, hourlyEntryData) = await fetchConditionIconAndHourlyForecast(currentModel.icon.code)
+        let (icon, hourlyEntryData) = await fetchConditionIconAndHourlyForecast(currentModel.condition.iconCode)
 
         let result = WeatherEntry(
             date: .now,
             locationName: name,
             icon: icon,
-            description: currentModel.description,
+            description: currentModel.condition.description,
             temperatureValue: currentModel.temperature,
-            dayNightState: currentModel.icon.dayNightState,
+            dayNightState: currentModel.condition.state,
             hourly: hourlyEntryData
         )
 

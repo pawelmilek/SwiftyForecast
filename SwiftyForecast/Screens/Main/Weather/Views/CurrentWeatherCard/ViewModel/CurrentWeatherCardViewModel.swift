@@ -67,13 +67,34 @@ final class CurrentWeatherCardViewModel: ObservableObject {
             .sink { [self] model in
                 setTemperatureAccordingToUnitNotation()
                 setWindSpeedAccordingToMeasurementSystem()
-                description = model.description
-                daytimeDescription = model.icon.dayNightState.description
+                description = model.condition.description
+                daytimeDescription = model.condition.state.description
                 humidity.value = "\(model.humidity)\("%")"
                 sunrise = .sunrise(time: model.sunrise.formatted(date: .omitted, time: .shortened))
                 sunset = .sunset(time: model.sunset.formatted(date: .omitted, time: .shortened))
+
+                checkCondition(model.condition)
             }
             .store(in: &cancellables)
+    }
+
+    private func checkCondition(_ condition: ConditionModel) {
+        switch condition.id {
+        case 200...232:
+            debugPrint(condition.name)
+        case 300...321:
+            debugPrint(condition.name)
+        case 500...531:
+            debugPrint(condition.name)
+        case 600...622:
+            debugPrint(condition.name)
+        case 701...781:
+            debugPrint(condition.name)
+        case 800...804:
+            debugPrint(condition.name)
+        default:
+            debugPrint(condition.name)
+        }
     }
 
     private func setTemperatureAccordingToUnitNotation() {
@@ -123,7 +144,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
             do {
                 let currentResponse = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
                 let dataModel = ResponseParser().parse(current: currentResponse)
-                let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.icon.code)
+                let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.condition.iconCode)
                 icon = Image(uiImage: largeIcon)
                 model = dataModel
                 isLoading = false

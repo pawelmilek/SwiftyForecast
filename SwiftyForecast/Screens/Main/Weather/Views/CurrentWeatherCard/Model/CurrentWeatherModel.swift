@@ -11,8 +11,7 @@ import Foundation
 struct CurrentWeatherModel {
     let date: Date
     let temperature: TemperatureValue
-    let description: String
-    let icon: ConditionIcon
+    let condition: ConditionModel
     let humidity: Int
     let pressure: Int
     let windSpeed: Double
@@ -24,8 +23,7 @@ extension CurrentWeatherModel {
     static let example = CurrentWeatherModel(
         date: Date(timeIntervalSinceReferenceDate: 724103328.0),
         temperature: TemperatureValue(current: 276.14, min: 275.55, max: 276.14),
-        description: "clear sky",
-        icon: ConditionIcon(id: 800, code: "01n"),
+        condition: ConditionModel(id: 800, iconCode: "01d", name: "Clear", description: "clear sky"),
         humidity: 87,
         pressure: 1009,
         windSpeed: 4.63,
