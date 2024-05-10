@@ -80,17 +80,19 @@ final class CurrentWeatherCardViewModel: ObservableObject {
 
     private func checkCondition(_ condition: ConditionModel) {
         switch condition.id {
-        case 200...232:
+        case 200...232: // Thunderstorm
             debugPrint(condition.name)
-        case 300...321:
+        case 300...321: // Drizzle
             debugPrint(condition.name)
-        case 500...531:
+        case 500...531: // Rain
             debugPrint(condition.name)
-        case 600...622:
+        case 600...622: // Snow
             debugPrint(condition.name)
-        case 701...781:
+        case 701...781: // Atmosphere
             debugPrint(condition.name)
-        case 800...804:
+        case 800: // Clear
+            debugPrint(condition.name)
+        case 801...804: // Clouds
             debugPrint(condition.name)
         default:
             debugPrint(condition.name)
