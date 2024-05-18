@@ -912,13 +912,13 @@
 		E29911ED1D456EAC0083B484 = {
 			isa = PBXGroup;
 			children = (
-				E20C6B182BE85BD800DDB57A /* CHANGELOG.md */,
 				E29911F81D456EAD0083B484 /* SwiftyForecast */,
 				E2CF4D882273C39700062E36 /* SwiftyForecastTests */,
 				E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */,
 				E29911F71D456EAC0083B484 /* Products */,
 				14FF84B878F0E000118ED0A2 /* Frameworks */,
 				E22450622B9F3F6100F14BAA /* Recovered References */,
+				E20C6B182BE85BD800DDB57A /* CHANGELOG.md */,
 			);
 			sourceTree = "<group>";
 		};
