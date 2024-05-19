@@ -12,44 +12,55 @@ struct AboutRow: View {
     let tintColor: Color
     let symbol: String
     let title: String
-    let content: String?
+    let label: String?
     let link: (destination: String, label: String)?
     let action: (() -> Void)?
 
     var body: some View {
         LabeledContent {
-            if let content {
-                Text(content)
+            contentView
+        } label: {
+            labelView
+        }
+    }
+
+    @ViewBuilder
+    private var contentView: some View {
+        Group {
+            if let label {
+                Text(label)
                     .foregroundStyle(.accent)
                     .fontWeight(.heavy)
-            } else if let link {
-                Link(destination: URL(string: link.destination)!,
-                     label: {
+            } else if let link, let destination = URL(string: link.destination) {
+                Link(destination: destination) {
                     Text(link.label)
                         .fontWeight(.heavy)
                         .foregroundStyle(tintColor)
-                })
+                }
             } else if let action {
                 Button("", action: action)
             } else {
                 EmptyView()
             }
-        } label: {
-            HStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 8)
-                        .frame(width: 30, height: 30)
-                        .foregroundStyle(tintColor)
-                    Image(systemName: symbol)
-                        .foregroundStyle(.white)
-                        .fontWeight(.semibold)
-
-                }
-                Text(title)
-            }
         }
         .font(.footnote)
         .fontDesign(.monospaced)
+    }
+
+    private var labelView: some View {
+        HStack {
+            RoundedRectangle(cornerRadius: 8)
+                .frame(width: 30, height: 30)
+                .foregroundStyle(tintColor)
+                .overlay {
+                    Image(systemName: symbol)
+                        .foregroundStyle(.white)
+                        .fontWeight(.semibold)
+                }
+            Text(title)
+                .font(.footnote)
+                .fontDesign(.monospaced)
+        }
     }
 }
 
@@ -58,7 +69,7 @@ struct AboutRow: View {
         tintColor: .blue,
         symbol: "apps.iphone",
         title: "Application",
-        content: "Swifty Forecast",
+        label: "Swifty Forecast",
         link: nil,
         action: nil
     )
@@ -70,7 +81,7 @@ struct AboutRow: View {
         tintColor: .pink,
         symbol: "globe",
         title: "Website",
-        content: nil,
+        label: nil,
         link: (
             destination: "https://sites.google.com/view/pmilek/home",
             label: "Swifty Forecast"

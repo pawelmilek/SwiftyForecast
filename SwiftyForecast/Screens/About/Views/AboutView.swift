@@ -21,7 +21,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "apps.iphone",
                         title: "Application",
-                        content: viewModel.appName,
+                        label: viewModel.appName,
                         link: nil,
                         action: nil
                     )
@@ -29,7 +29,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "gear",
                         title: "Version",
-                        content: viewModel.appVersion,
+                        label: viewModel.appVersion,
                         link: nil,
                         action: nil
                     )
@@ -37,7 +37,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "info.circle",
                         title: "Compatibility",
-                        content: viewModel.appCompatibility,
+                        label: viewModel.appCompatibility,
                         link: nil,
                         action: nil
                     )
@@ -49,7 +49,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "ellipsis.curlybraces",
                         title: "Developer",
-                        content: "Pawel Milek",
+                        label: "Pawel Milek",
                         link: nil,
                         action: nil
                     )
@@ -57,7 +57,7 @@ struct AboutView: View {
                         tintColor: Color(.customPrimary),
                         symbol: "globe",
                         title: "Website",
-                        content: nil,
+                        label: nil,
                         link: (
                             destination: viewModel.appURLString,
                             label: viewModel.appName
@@ -72,7 +72,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "apps.iphone",
                         title: "Apps Preview",
-                        content: nil,
+                        label: nil,
                         link: (
                             destination: "https://apps.apple.com/us/developer/pawel-milek/id1139599148",
                             label: ""
@@ -88,7 +88,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "envelope.fill",
                         title: "Contact",
-                        content: nil,
+                        label: nil,
                         link: nil,
                         action: reportFeedback
                     )
@@ -96,7 +96,7 @@ struct AboutView: View {
                         tintColor: .red,
                         symbol: "ant.fill",
                         title: "Report Issue",
-                        content: nil,
+                        label: nil,
                         link: nil,
                         action: reportIssue
                     )
@@ -104,7 +104,7 @@ struct AboutView: View {
                         tintColor: .yellow,
                         symbol: "star.fill",
                         title: "Rate Application",
-                        content: nil,
+                        label: nil,
                         link: nil,
                         action: requestReview
                     )
@@ -120,7 +120,7 @@ struct AboutView: View {
                             tintColor: .blue,
                             symbol: "doc.plaintext.fill",
                             title: "Licenses",
-                            content: nil,
+                            label: nil,
                             link: nil,
                             action: nil
                         )
@@ -129,7 +129,7 @@ struct AboutView: View {
                         tintColor: .blue,
                         symbol: "lock.shield.fill",
                         title: "Privacy Policy",
-                        content: nil,
+                        label: nil,
                         link: nil,
                         action: openDataPrivacyPolicy
                     )
@@ -142,18 +142,15 @@ struct AboutView: View {
                         tintColor: .orange,
                         symbol: "sun.haze.fill",
                         title: "OpenWeather",
-                        content: nil,
+                        label: nil,
                         link: nil,
                         action: openDataProvider
                     )
                 } header: {
                     Text("Data Provider")
                 } footer: {
-                    HStack {
-                        Text("Copyright © All right reserved.")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .padding(.vertical, 8)
+                    CopyrightFooterView()
+                        .padding(.top, 10)
                 }
             }
             .padding(.top, 1)

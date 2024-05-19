@@ -33,7 +33,7 @@ struct AboutFrameworkView: View {
                 tintColor: .orange,
                 symbol: "swift",
                 title: title,
-                content: nil,
+                label: nil,
                 link: nil,
                 action: nil
             )

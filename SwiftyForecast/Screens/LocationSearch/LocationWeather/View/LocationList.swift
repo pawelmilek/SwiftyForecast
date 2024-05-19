@@ -37,7 +37,7 @@ struct LocationList: View {
             }
             .onDelete(perform: $locations.remove)
         }
-        .listStyle(.grouped)
+        .listStyle(.plain)
         .overlay {
             if isSearching && !searchText.isEmpty {
                 LocationSearchResultList()
