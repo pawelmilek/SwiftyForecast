@@ -38,7 +38,7 @@ class LocationModel: Object, ObjectKeyIdentifiable {
 
 // MARK: - example data
 extension LocationModel {
-    static let examples = [
+    nonisolated(unsafe) static let examples = [
         LocationModel(
             value: [
                 "compoundKey": "Rzeszów|Poland",
