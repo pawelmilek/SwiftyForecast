@@ -18,15 +18,17 @@ final class LocationRowViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var locationName = ""
     @Published private(set) var temperature = ""
-    @Published private(set) var localTime = ""
+    @Published private(set) var locationCurrentTimeFormatted = ""
     @Published private(set) var name = ""
     @Published private(set) var temperatureValue: TemperatureValue?
     @Published private(set) var location: LocationModel?
 
+    private var locationSecondsFromGMT = 0
     private let service: WeatherServiceProtocol
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private var cancellables = Set<AnyCancellable>()
+    private let emitTimerPublisherInSeconds = TimeInterval(60)
 
     init(
         location: LocationModel,
@@ -37,7 +39,7 @@ final class LocationRowViewModel: ObservableObject {
             self.temperatureRenderer = temperatureRenderer
             self.measurementSystemNotification = measurementSystemNotification
 
-            subscribeToPublisher()
+            subscribeToPublishers()
             registerMeasurementSystemObserver()
             self.location = location
         }
@@ -47,11 +49,12 @@ final class LocationRowViewModel: ObservableObject {
         isLoading = true
 
         locationName = locationModel.name
-        let latitude = locationModel.latitude
-        let longitude = locationModel.longitude
 
         Task(priority: .userInitiated) {
             do {
+                let latitude = locationModel.latitude
+                let longitude = locationModel.longitude
+
                 let currentResponse = try await service.fetchCurrent(
                     latitude: latitude,
                     longitude: longitude
@@ -67,12 +70,14 @@ final class LocationRowViewModel: ObservableObject {
         }
     }
 
-    private func subscribeToPublisher() {
+    private func subscribeToPublishers() {
         $location
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [self] location in
-                localTime = timeOnly(from: location.secondsFromGMT)
+            .sink { [weak self] location in
+                guard let self else { return }
+                locationSecondsFromGMT = location.secondsFromGMT
+                locationCurrentTimeFormatted = timeOnly(location.secondsFromGMT, from: .now)
                 name = location.name + ", " + location.country
 
                 let annotation = MKPointAnnotation()
@@ -92,18 +97,31 @@ final class LocationRowViewModel: ObservableObject {
         $temperatureValue
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [self] temperatureValue in
-                setTemperatureAccordingToUnitNotation(value: temperatureValue)
+            .sink { [weak self] temperatureValue in
+                self?.setTemperatureAccordingToUnitNotation(value: temperatureValue)
+            }
+            .store(in: &cancellables)
+
+        Timer.publish(every: emitTimerPublisherInSeconds, on: .main, in: .common)
+            .autoconnect()
+            .map { [weak self] date in
+                guard let self else { return "" }
+                return timeOnly(locationSecondsFromGMT, from: date)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] locationCurrentTimeFormatted in
+                guard let self else { return }
+                self.locationCurrentTimeFormatted = locationCurrentTimeFormatted
             }
             .store(in: &cancellables)
     }
 
-    private func timeOnly(from secondsFromGMT: Int) -> String {
+    private func timeOnly(_ secondsFromGMT: Int, from date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(secondsFromGMT: secondsFromGMT)
         dateFormatter.timeStyle = .short
         dateFormatter.dateStyle = .none
-        let time = dateFormatter.string(from: .now)
+        let time = dateFormatter.string(from: date)
         return time
     }
 
@@ -123,5 +141,9 @@ final class LocationRowViewModel: ObservableObject {
     private func setTemperatureAccordingToUnitNotation(value: TemperatureValue) {
         let rendered = temperatureRenderer.render(value)
         temperature = rendered.currentFormatted
+    }
+
+    deinit {
+        debugPrint("LocationRowViewModel deinit")
     }
 }

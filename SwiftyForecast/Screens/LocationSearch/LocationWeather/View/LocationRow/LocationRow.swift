@@ -37,7 +37,7 @@ private extension LocationRow {
     var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.localTime)
+                Text(viewModel.locationCurrentTimeFormatted)
                     .font(Style.LocationRow.timeFont)
                     .foregroundStyle(.customPrimary)
                 Text(viewModel.name)
