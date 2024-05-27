@@ -2,30 +2,21 @@ import Foundation
 
 struct ResponseParser {
     func parse(current: CurrentWeatherResponse) -> CurrentWeatherModel {
+        guard let currentCondition = current.conditions.first else { fatalError() }
+
         let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
         let sunriseDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunrise))
         let sunsetDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunset))
-
-        let condition: ConditionModel
-        if let currentCondition = current.conditions.first {
-            let id = currentCondition.id
-            let iconCode = currentCondition.icon
-            let name = currentCondition.main
-            let description = currentCondition.description
-            condition = ConditionModel(id: id, iconCode: iconCode, name: name, description: description)
-        } else {
-            condition = ConditionModel(
-                id: -1,
-                iconCode: InvalidReference.undefined,
-                name: InvalidReference.undefined,
-                description: InvalidReference.undefined
-            )
-        }
-
         let temperatureValue = TemperatureValue(
             current: current.main.temp,
             min: current.main.tempMin,
             max: current.main.tempMax
+        )
+        let condition = ConditionModel(
+            id: currentCondition.id,
+            iconCode: currentCondition.icon,
+            name: currentCondition.main,
+            description: currentCondition.description
         )
 
         let currentWeatherModel = CurrentWeatherModel(

@@ -21,6 +21,8 @@ extension UIDevice {
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         #endif
-        return DeviceModel.all.first { $0.identifier == identifier }?.model ?? identifier
+
+        let devices = ReleasedDevices()
+        return devices.device(with: identifier).model
     }
 }

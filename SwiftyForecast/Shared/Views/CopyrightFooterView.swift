@@ -9,12 +9,10 @@
 import SwiftUI
 
 struct CopyrightFooterView: View {
-    private var currentYear: String {
-        Date.now.formatted(.dateTime.year())
-    }
+    let year: String
 
     var body: some View {
-        Text("Copyright © \(currentYear) All rights reserved.")
+        Text("Copyright © \(year) All rights reserved.")
             .font(.caption)
             .fontWeight(.medium)
             .multilineTextAlignment(.center)
@@ -25,5 +23,5 @@ struct CopyrightFooterView: View {
 }
 
 #Preview {
-    CopyrightFooterView()
+    CopyrightFooterView(year: Date.now.formatted(.dateTime.year()))
 }

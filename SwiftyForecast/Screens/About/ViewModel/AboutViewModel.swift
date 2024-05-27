@@ -11,38 +11,39 @@ import Combine
 
 @MainActor
 final class AboutViewModel: ObservableObject {
-    private enum Constant {
-        static let appURLString = "https://sites.google.com/view/pmilek/swifty-forecast"
-        static let privacyPolicyURLString = "https://sites.google.com/view/pmilek/privacy-policy"
-        static let writeReviewURLString = "https://apps.apple.com/app/id1161186194?action=write-review"
-        static let dataProviderURLString = "https://openweathermap.org"
+    @Published private(set) var appName: String
+    @Published private(set) var appVersion: String
+    @Published private(set) var appCompatibility: String
+    @Published private(set) var appURLString: String
+    @Published private(set) var currentYear: String
+    @Published private(set) var frameworks: [String]
+
+    private let bundle: Bundle
+    private let buildConfigurationFile: BuildConfigurationFile
+    private let networkResourceFactory: NetworkResourceFactoryProtocol
+
+    convenience init() {
+        self.init(
+            bundle: .main,
+            buildConfigurationFile: .init(),
+            networkResourceFactory: NetworkResourceFactory()
+        )
     }
 
-    @Published var isShowingSupportError = false
-    @Published private(set) var appName = ""
-    @Published private(set) var appVersion = ""
-    @Published private(set) var appCompatibility = ""
-    @Published private(set) var appURLString = ""
-    @Published private(set) var copyright = ""
-    @Published private(set) var frameworks = [String]()
-
-    private let recipient: String?
-    private let privacyPolicyURL: URL
-    private let writeReviewURL: URL
-    private let dataProviderURL: URL
-    private let bundle: Bundle
-
-    init(bundle: Bundle) {
+    init(
+        bundle: Bundle,
+        buildConfigurationFile: BuildConfigurationFile,
+        networkResourceFactory: NetworkResourceFactoryProtocol
+    ) {
         self.bundle = bundle
+        self.buildConfigurationFile = buildConfigurationFile
+        self.networkResourceFactory = networkResourceFactory
+
         appName = bundle.applicationName
         appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
         appCompatibility = "iOS \(bundle.minimumOSVersion)"
-        appURLString = Constant.appURLString
-        recipient = try? ConfigurationSettingsAccessor.value(for: .supportEmailKey)
-        privacyPolicyURL = URL(string: Constant.privacyPolicyURLString)!
-        writeReviewURL = URL(string: Constant.writeReviewURLString)!
-        dataProviderURL = URL(string: Constant.dataProviderURLString)!
-        copyright = "Copyright © All right reserved."
+        appURLString = "https://sites.google.com/view/pmilek/swifty-forecast"
+        currentYear = Date.now.formatted(.dateTime.year())
         frameworks = [
             "UIKit",
             "SwiftUI",
@@ -57,14 +58,9 @@ final class AboutViewModel: ObservableObject {
     }
 
     func reportFeedback(_ openURL: OpenURLAction) {
-        guard let recipient else {
-            isShowingSupportError.toggle()
-            return
-        }
-
         let feedbackEmail = SupportEmail(
             bundle: bundle,
-            recipient: recipient,
+            recipient: buildConfigurationFile.supportEmailAddress(),
             subject: "[Feedback] Swifty Forecast"
         )
 
@@ -72,27 +68,29 @@ final class AboutViewModel: ObservableObject {
     }
 
     func reportIssue(_ openURL: OpenURLAction) {
-        guard let recipient else {
-            isShowingSupportError.toggle()
-            return
-        }
         let bugEmail = SupportEmail(
             bundle: bundle,
-            recipient: recipient,
+            recipient: buildConfigurationFile.supportEmailAddress(),
             subject: "[Bug] Swifty Forecast"
         )
         bugEmail.send(openURL: openURL)
     }
 
-    func openDataPrivacyPolicy(_ openURL: OpenURLAction) {
-        openURL(privacyPolicyURL)
+    func openPrivacyPolicy(_ openURL: OpenURLAction) {
+        let privacyPolicy = networkResourceFactory.make(by: .privacyPolicy)
+        guard let url = try? privacyPolicy.content() else { return }
+        openURL(url)
     }
 
-    func openWriteReview(_ openURL: OpenURLAction) {
-        openURL(writeReviewURL)
+    func openAppStoreReview(_ openURL: OpenURLAction) {
+        let writeReview = networkResourceFactory.make(by: .appStoreReview)
+        guard let url = try? writeReview.content() else { return }
+        openURL(url)
     }
 
-    func openDataProvider(_ openURL: OpenURLAction) {
-        openURL(dataProviderURL)
+    func openWeatherService(_ openURL: OpenURLAction) {
+        let weatherService = networkResourceFactory.make(by: .weatherService)
+        guard let url = try? weatherService.content() else { return }
+        openURL(url)
     }
 }

@@ -39,10 +39,7 @@ final class ReviewManager {
 
     private lazy var desirableMoments: ReviewDesirableMomentConfig = {
         do {
-            let config = try PlistFileLoader.loadFile(
-                with: "ReviewDesirableMomentConfig",
-                model: ReviewDesirableMomentConfig.self
-            )
+            let config = try decodePlist.plist(ofType: ReviewDesirableMomentConfig.self)
             return config
         } catch {
             fatalError("File: \(#file), Function: \(#function), line: \(#line)")
@@ -52,10 +49,28 @@ final class ReviewManager {
     private var currentLocationCount = 0
     private let storage: UserDefaults
     private let bundle: Bundle
+    private let decodePlist: DecodedPlist
 
-    init(bundle: Bundle, storage: UserDefaults) {
+    convenience init() {
+        self.init(
+            bundle: .main,
+            storage: .standard,
+            decodePlist: DecodedPlist(name: "ReviewDesirableMomentConfig", bundle: .main)
+        )
+    }
+
+    convenience init(bundle: Bundle, storage: UserDefaults) {
+        self.init(
+            bundle: bundle,
+            storage: storage,
+            decodePlist: DecodedPlist(name: "ReviewDesirableMomentConfig", bundle: bundle)
+        )
+    }
+
+    init(bundle: Bundle, storage: UserDefaults, decodePlist: DecodedPlist) {
         self.bundle = bundle
         self.storage = storage
+        self.decodePlist = decodePlist
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {

@@ -58,10 +58,7 @@ enum WeatherEndpoint: Endpoint {
         case .forecast(let latitude, let longitude):
             return parameterList(latitude: latitude, longitude: longitude)
 
-        case .icon:
-            return [:]
-
-        case .iconLarge:
+        case .icon, .iconLarge:
             return [:]
         }
     }
@@ -71,19 +68,13 @@ enum WeatherEndpoint: Endpoint {
     var body: Body? { nil }
 
     private func parameterList(latitude: Double, longitude: Double) -> Parameters {
-        let parameters = ["lat": "\(latitude)",
-                          "lon": "\(longitude)",
-                          "appid": apiKey,
-                          "units": "standard"]
+        let weatherServiceAPIKey = BuildConfigurationFile().weatherServiceAPIKey()
+        let parameters = [
+            "lat": "\(latitude)",
+            "lon": "\(longitude)",
+            "appid": weatherServiceAPIKey,
+            "units": "standard"
+        ]
         return parameters
-    }
-
-    private var apiKey: String {
-        do {
-            let value = try ConfigurationSettingsAccessor.value(for: .apiKey)
-            return value
-        } catch {
-            fatalError("Weather service APIKey is unavailable. Please, check configuration file.")
-        }
     }
 }

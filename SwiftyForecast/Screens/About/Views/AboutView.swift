@@ -10,7 +10,7 @@ import SwiftUI
 import StoreKit
 
 struct AboutView: View {
-    @StateObject private var viewModel = AboutViewModel(bundle: .main)
+    @StateObject private var viewModel = AboutViewModel()
     @Environment(\.openURL) private var openURL
 
     var body: some View {
@@ -149,21 +149,13 @@ struct AboutView: View {
                 } header: {
                     Text("Data Provider")
                 } footer: {
-                    CopyrightFooterView()
+                    CopyrightFooterView(year: viewModel.currentYear)
                         .padding(.top, 10)
                 }
             }
             .padding(.top, 1)
             .navigationTitle("Info")
             .navigationBarTitleDisplayMode(.inline)
-            .alert(
-                "Support",
-                isPresented: $viewModel.isShowingSupportError
-            ) {
-                Button("OK") { }
-            } message: {
-                Text("Please, check your support email configuration and try again.")
-            }
         }
     }
 
@@ -176,15 +168,15 @@ struct AboutView: View {
     }
 
     private func openDataPrivacyPolicy() {
-        viewModel.openDataPrivacyPolicy(openURL)
+        viewModel.openPrivacyPolicy(openURL)
     }
 
     private func openDataProvider() {
-        viewModel.openDataProvider(openURL)
+        viewModel.openWeatherService(openURL)
     }
 
     private func requestReview() {
-        viewModel.openWriteReview(openURL)
+        viewModel.openAppStoreReview(openURL)
     }
 }
 

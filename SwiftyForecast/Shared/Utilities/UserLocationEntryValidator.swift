@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 struct UserLocationEntryValidator {
     private let databaseManager: DatabaseManager
     private let location: LocationModel

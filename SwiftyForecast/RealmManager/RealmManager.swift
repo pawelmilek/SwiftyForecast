@@ -13,22 +13,23 @@ protocol DatabaseManager {
 }
 
 final class RealmManager: DatabaseManager {
+    @MainActor
     static let shared = RealmManager(
         name: "swifty.forecast",
-        pathFinder: PathFinder(fileManager: .default)
+        fileManager: FileManager.default
     )
 
     private(set) var realm: Realm!
-    private let pathFinder: PathFinder
+    private let fileManager: FileManager
 
-    private init(name: String, pathFinder: PathFinder) {
-        self.pathFinder = pathFinder
+    private init(name: String, fileManager: FileManager) {
+        self.fileManager = fileManager
         setupScheme(with: name)
     }
 
     private func setupScheme(with name: String) {
         do {
-            let fileURL = try pathFinder.documentDirectory().appendingPathComponent("\(name).realm")
+            let fileURL = try documentDirectory().appendingPathComponent("\(name).realm")
             let configuration = Realm.Configuration(
                 fileURL: fileURL,
                 schemaVersion: 1,
@@ -39,6 +40,16 @@ final class RealmManager: DatabaseManager {
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+
+    private func documentDirectory() throws -> URL {
+        guard let directory = fileManager.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first else {
+            throw CocoaError.error(.fileReadUnsupportedScheme)
+        }
+        return directory
     }
 
     func debugPrintRealmFileURL() {

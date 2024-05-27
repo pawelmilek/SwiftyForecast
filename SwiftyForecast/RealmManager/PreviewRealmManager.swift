@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 final class PreviewRealmManager: DatabaseManager {
+    @MainActor
     static let shared = PreviewRealmManager()
 
     var previewRealm: Realm {
