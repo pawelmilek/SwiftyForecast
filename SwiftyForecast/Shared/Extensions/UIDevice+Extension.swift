@@ -21,17 +21,6 @@ extension UIDevice {
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         #endif
-        let devices = loadDeviceTypes(decoder: JSONDecoder())
-        return devices.first { $0.identifier == identifier }?.model ?? identifier
-    }
-
-    private func loadDeviceTypes(decoder: JSONDecoder) -> [DeviceModel] {
-        do {
-            let jsonData = try JSONFileLoader.loadFile(with: "device_types")
-            let result = try decoder.decode([DeviceModel].self, from: jsonData)
-            return result
-        } catch {
-            fatalError(error.localizedDescription)
-        }
+        return DeviceModel.all.first { $0.identifier == identifier }?.model ?? identifier
     }
 }

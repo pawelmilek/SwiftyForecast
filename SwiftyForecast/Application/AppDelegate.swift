@@ -1,6 +1,7 @@
 import UIKit
 import TipKit
 import Combine
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        setupFirebase()
         setupCoordinator()
         setupTips()
         setupNetworkReachabilityHandling()
@@ -33,6 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 // MARK: - Private - Setups
 private extension AppDelegate {
+
+    func setupFirebase() {
+        FirebaseApp.configure()
+    }
 
     func setupCoordinator() {
         coordinator = MainCoordinator(navigationController: UINavigationController())

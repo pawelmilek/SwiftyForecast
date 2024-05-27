@@ -15,9 +15,11 @@ enum PlistFileLoader {
             throw FileLoaderError.fileNotFound(name: name)
         }
 
-        if let reslut = try? PropertyListSerialization.propertyList(from: plistXML,
-                                                                    options: .mutableContainersAndLeaves,
-                                                                    format: nil) as? T {
+        if let reslut = try? PropertyListSerialization.propertyList(
+            from: plistXML,
+            options: .mutableContainersAndLeaves,
+            format: nil
+        ) as? T {
             return reslut
         } else {
             throw FileLoaderError.incorrectFormat

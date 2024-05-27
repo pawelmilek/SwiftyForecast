@@ -33,6 +33,9 @@ DerivedData/
 ## Config files containing secret keys
 Config.xcconfig
 
+## Google Firebase configuration file
+GoogleService-Info.plist
+
 ## Playgrounds
 timeline.xctimeline
 playground.xcworkspace
