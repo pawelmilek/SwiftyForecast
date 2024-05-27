@@ -51,26 +51,21 @@ final class ReviewManager {
     private let bundle: Bundle
     private let decodePlist: DecodedPlist
 
-    convenience init() {
-        self.init(
-            bundle: .main,
-            storage: .standard,
-            decodePlist: DecodedPlist(name: "ReviewDesirableMomentConfig", bundle: .main)
-        )
-    }
-
     convenience init(bundle: Bundle, storage: UserDefaults) {
         self.init(
             bundle: bundle,
             storage: storage,
-            decodePlist: DecodedPlist(name: "ReviewDesirableMomentConfig", bundle: bundle)
+            configuration: DecodedPlist(
+                name: "ReviewDesirableMomentConfig",
+                bundle: bundle
+            )
         )
     }
 
-    init(bundle: Bundle, storage: UserDefaults, decodePlist: DecodedPlist) {
+    init(bundle: Bundle, storage: UserDefaults, configuration: DecodedPlist) {
         self.bundle = bundle
         self.storage = storage
-        self.decodePlist = decodePlist
+        self.decodePlist = configuration
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {

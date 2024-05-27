@@ -20,7 +20,11 @@ struct MockGenerator {
 
     func generateCurrentWeatherModel() -> CurrentWeatherModel {
         do {
-            let resourceFile = ResourceFile(name: "current_weather_response", fileExtension: "json")
+            let resourceFile = ResourceFile(
+                name: "current_weather_response",
+                fileExtension: "json",
+                bundle: .main
+            )
             let data = try resourceFile.data()
             let currentResponse = try decoder.decode(CurrentWeatherResponse.self, from: data)
             let model = parser.parse(current: currentResponse)
@@ -32,7 +36,11 @@ struct MockGenerator {
 
     func generateForecastWeatherModel() -> ForecastWeatherModel {
         do {
-            let resourceFile = ResourceFile(name: "five_days_forecast_weather_response", fileExtension: "json")
+            let resourceFile = ResourceFile(
+                name: "five_days_forecast_weather_response",
+                fileExtension: "json",
+                bundle: .main
+            )
             let data = try resourceFile.data()
             let forecastResponse = try decoder.decode(ForecastWeatherResponse.self, from: data)
             let model = parser.parse(forecast: forecastResponse)

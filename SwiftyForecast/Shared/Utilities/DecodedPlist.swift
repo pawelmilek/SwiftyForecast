@@ -12,13 +12,6 @@ struct DecodedPlist {
     private let file: ResourceFile
     private let decoder: PropertyListDecoder
 
-    init(name: String) {
-        self.init(
-            file: ResourceFile(name: name, fileExtension: "plist", bundle: .main),
-            decoder: PropertyListDecoder()
-        )
-    }
-
     init(name: String, bundle: Bundle) {
         self.init(
             file: ResourceFile(name: name, fileExtension: "plist", bundle: bundle),

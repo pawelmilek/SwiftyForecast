@@ -1,6 +1,7 @@
 import Foundation
 import Reachability
 
+@MainActor
 final class NetworkReachabilityManager {
     static let shared = NetworkReachabilityManager()
     private let reachability: Reachability

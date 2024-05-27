@@ -12,13 +12,6 @@ struct ReleasedDevices {
     private let decoder: JSONDecoder
     private let resourceFile: ResourceFile
 
-    init() {
-        self.init(
-            resourceFile: ResourceFile(name: "device_types", fileExtension: "json"),
-            decoder: JSONDecoder()
-        )
-    }
-
     init(resourceFile: ResourceFile, decoder: JSONDecoder) {
         self.resourceFile = resourceFile
         self.decoder = decoder

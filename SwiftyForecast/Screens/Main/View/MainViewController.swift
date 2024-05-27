@@ -59,7 +59,14 @@ final class MainViewController: UIViewController {
         navigationOrientation: .horizontal
     )
 
-    private let reviewManager = ReviewManager(bundle: .main, storage: .standard)
+    private let reviewManager = ReviewManager(
+        bundle: .main,
+        storage: .standard,
+        configuration: DecodedPlist(
+            name: "ReviewDesirableMomentConfig",
+            bundle: .main
+        )
+    )
     private let locationManager = LocationManager()
     private let informationTip = InformationTip()
     private let appearanceTip = AppearanceTip()

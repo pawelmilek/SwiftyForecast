@@ -24,10 +24,6 @@ struct ResourceFile {
     private let fileExtension: String
     private let bundle: Bundle
 
-    init(name: String, fileExtension: String) {
-        self.init(name: name, fileExtension: fileExtension, bundle: .main)
-    }
-
     init(name: String, fileExtension: String, bundle: Bundle) {
         self.name = name
         self.fileExtension = fileExtension

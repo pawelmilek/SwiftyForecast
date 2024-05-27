@@ -22,7 +22,14 @@ extension UIDevice {
         }
         #endif
 
-        let devices = ReleasedDevices()
+        let devices = ReleasedDevices(
+            resourceFile: ResourceFile(
+                name: "device_types",
+                fileExtension: "json",
+                bundle: .main
+            ),
+            decoder: JSONDecoder()
+        )
         return devices.device(with: identifier).model
     }
 }
