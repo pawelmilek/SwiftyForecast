@@ -74,7 +74,7 @@ struct AboutView: View {
                         title: "Apps Preview",
                         label: nil,
                         link: (
-                            destination: "https://apps.apple.com/us/developer/pawel-milek/id1139599148",
+                            destination: viewModel.appStorePreviewURLString,
                             label: ""
                         ),
                         action: nil

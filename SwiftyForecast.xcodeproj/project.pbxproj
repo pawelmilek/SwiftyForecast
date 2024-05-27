@@ -577,16 +577,16 @@
 		E21A0B9420EE88F5006AC409 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */,
-				E2A32F4725447A05000ACEFE /* DecodedPlist.swift */,
-				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
 				E296A7E62AD6F49D001BFADB /* BuildConfigurationFile.swift */,
+				E2A32F4725447A05000ACEFE /* DecodedPlist.swift */,
 				E2D960802120F34800AE0B6E /* GeocodeLocation.swift */,
 				E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */,
 				E24EB89225410010001F5D72 /* MockGenerator.swift */,
-				E28092E32AFCC9720019FD7C /* UserLocationEntryValidator.swift */,
-				E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */,
+				E20DA45A214348AD0047491B /* NetworkReachabilityManager.swift */,
 				E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */,
+				E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */,
+				E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */,
+				E28092E32AFCC9720019FD7C /* UserLocationEntryValidator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

@@ -1,5 +1,5 @@
 //
-//  LicenseReader.swift
+//  PackageLicense.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/24/23.
@@ -8,20 +8,25 @@
 
 import SwiftUI
 
-class LicenseReader: ObservableObject {
-    @Published private(set) var fileURL: URL?
+class PackageLicense: ObservableObject {
+    @Published private(set) var url: URL?
+    private let resourceFile: ResourceFile
 
-    private let fileName: String
-
-    init(fileName: String) {
-        self.fileName = fileName
+    convenience init() {
+        self.init(
+            resourceFile: ResourceFile(
+                name: "packages_license",
+                fileExtension: "html",
+                bundle: .main
+            )
+        )
     }
 
-    func readFileURL() throws {
-        guard let url = Bundle.main.url(forResource: fileName, withExtension: "html") else {
-            throw FileLoaderError.fileNotFound(name: fileName)
-        }
+    init(resourceFile: ResourceFile) {
+        self.resourceFile = resourceFile
+    }
 
-        fileURL = url
+    func loadURL() throws {
+        url = try resourceFile.fileURL()
     }
 }

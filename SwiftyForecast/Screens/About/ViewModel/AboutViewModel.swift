@@ -15,6 +15,7 @@ final class AboutViewModel: ObservableObject {
     @Published private(set) var appVersion: String
     @Published private(set) var appCompatibility: String
     @Published private(set) var appURLString: String
+    @Published private(set) var appStorePreviewURLString: String
     @Published private(set) var currentYear: String
     @Published private(set) var frameworks: [String]
 
@@ -42,7 +43,8 @@ final class AboutViewModel: ObservableObject {
         appName = bundle.applicationName
         appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
         appCompatibility = "iOS \(bundle.minimumOSVersion)"
-        appURLString = "https://sites.google.com/view/pmilek/swifty-forecast"
+        appURLString = NetworkResourceType.appWebPage.stringURL
+        appStorePreviewURLString = NetworkResourceType.appStorePreview.stringURL
         currentYear = Date.now.formatted(.dateTime.year())
         frameworks = [
             "UIKit",
@@ -61,7 +63,7 @@ final class AboutViewModel: ObservableObject {
         let feedbackEmail = SupportEmail(
             bundle: bundle,
             recipient: buildConfigurationFile.supportEmailAddress(),
-            subject: "[Feedback] Swifty Forecast"
+            subject: "[Feedback] \(bundle.applicationName)"
         )
 
         feedbackEmail.send(openURL: openURL)
@@ -71,7 +73,7 @@ final class AboutViewModel: ObservableObject {
         let bugEmail = SupportEmail(
             bundle: bundle,
             recipient: buildConfigurationFile.supportEmailAddress(),
-            subject: "[Bug] Swifty Forecast"
+            subject: "[Bug] \(bundle.applicationName)"
         )
         bugEmail.send(openURL: openURL)
     }

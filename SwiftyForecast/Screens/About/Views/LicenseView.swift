@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct LicenseView: View {
-    @StateObject private var reader = LicenseReader(fileName: "packages_license")
+    @StateObject private var license = PackageLicense()
 
     var body: some View {
-        HTMLView(fileURL: reader.fileURL)
+        HTMLView(fileURL: license.url)
             .padding(.top, 1)
             .navigationBarTitle("Licenses")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                try? reader.readFileURL()
+                try? license.loadURL()
             }
     }
 }
