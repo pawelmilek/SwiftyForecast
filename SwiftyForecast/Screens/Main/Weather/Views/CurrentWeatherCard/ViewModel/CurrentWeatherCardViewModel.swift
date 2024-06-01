@@ -24,6 +24,8 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private(set) var sunset = Twilight.sunset(time: "")
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
+    @Published private(set) var condition: WeatherCondition = .clear
+
     @Published private var model: CurrentWeatherModel?
     @Published private var locationModel: LocationModel?
 
@@ -72,31 +74,9 @@ final class CurrentWeatherCardViewModel: ObservableObject {
                 humidity.value = "\(model.humidity)\("%")"
                 sunrise = .sunrise(time: model.sunrise.formatted(date: .omitted, time: .shortened))
                 sunset = .sunset(time: model.sunset.formatted(date: .omitted, time: .shortened))
-
-                checkCondition(model.condition)
+                condition = WeatherCondition(code: model.condition.id)
             }
             .store(in: &cancellables)
-    }
-
-    private func checkCondition(_ condition: ConditionModel) {
-        switch condition.id {
-        case 200...232: // Thunderstorm
-            debugPrint(condition.name)
-        case 300...321: // Drizzle
-            debugPrint(condition.name)
-        case 500...531: // Rain
-            debugPrint(condition.name)
-        case 600...622: // Snow
-            debugPrint(condition.name)
-        case 701...781: // Atmosphere
-            debugPrint(condition.name)
-        case 800: // Clear
-            debugPrint(condition.name)
-        case 801...804: // Clouds
-            debugPrint(condition.name)
-        default:
-            debugPrint(condition.name)
-        }
     }
 
     private func setTemperatureAccordingToUnitNotation() {

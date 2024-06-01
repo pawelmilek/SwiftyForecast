@@ -49,7 +49,7 @@
 		E22450782B9F3F9800F14BAA /* CurrentWeatherCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506B2B9F3F9800F14BAA /* CurrentWeatherCardViewModel.swift */; };
 		E22450792B9F3F9800F14BAA /* CurrentWeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506D2B9F3F9800F14BAA /* CurrentWeatherCard.swift */; };
 		E224507A2B9F3F9800F14BAA /* CurrentWeatherCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506E2B9F3F9800F14BAA /* CurrentWeatherCardViewController.swift */; };
-		E224507B2B9F3F9800F14BAA /* MotionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */; };
+		E224507B2B9F3F9800F14BAA /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* AnimationView.swift */; };
 		E224507C2B9F402300F14BAA /* DayNightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450652B9F3F9800F14BAA /* DayNightState.swift */; };
 		E224507D2B9F403100F14BAA /* DayNightState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450652B9F3F9800F14BAA /* DayNightState.swift */; };
 		E224507E2B9F403E00F14BAA /* CurrentWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450642B9F3F9800F14BAA /* CurrentWeatherModel.swift */; };
@@ -58,6 +58,8 @@
 		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E22A221B2AE004230069A83A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A221A2AE004230069A83A /* LocationManager.swift */; };
 		E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E233AC1123DE7D9000DC0EF5 /* Reachability */; };
+		E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
+		E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EB20E84371007D8CE4 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* HttpClient.swift */; };
 		E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* RequestError.swift */; };
@@ -77,6 +79,9 @@
 		E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */; };
 		E25B3EFE2BFA2EB400FFC11A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFD2BFA2EB400FFC11A /* RealmSwift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
+		E2644E352C0AD79E00B67E18 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
+		E2644E362C0AD7BD00B67E18 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
+		E2644E382C0AD7FC00B67E18 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = E2644E372C0AD7FC00B67E18 /* Vortex */; };
 		E266227E2B0A110D0010B567 /* LocationSearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E266227D2B0A110D0010B567 /* LocationSearchResultList.swift */; };
 		E26ACD1B24FF204000AC15A6 /* ForecastWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */; };
 		E26CDFAF2B408B8B0018B5D2 /* AboutFrameworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDFAE2B408B8B0018B5D2 /* AboutFrameworkView.swift */; };
@@ -241,7 +246,7 @@
 		E2D430F12BB4DC18003F26EE /* HourlyForecastChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B12BB4D954003F26EE /* HourlyForecastChartViewModel.swift */; };
 		E2D430F22BB4DC1C003F26EE /* HourlyForecastChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AB2BB4D954003F26EE /* HourlyForecastChartDataSource.swift */; };
 		E2D430F32BB4DC24003F26EE /* BackgroundGroupBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AD2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift */; };
-		E2D430F42BB4DC30003F26EE /* MotionAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */; };
+		E2D430F42BB4DC30003F26EE /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506F2B9F3F9800F14BAA /* AnimationView.swift */; };
 		E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
 		E2D430F72BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */; };
 		E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
@@ -360,10 +365,12 @@
 		E224506B2B9F3F9800F14BAA /* CurrentWeatherCardViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCardViewModel.swift; sourceTree = "<group>"; };
 		E224506D2B9F3F9800F14BAA /* CurrentWeatherCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCard.swift; sourceTree = "<group>"; };
 		E224506E2B9F3F9800F14BAA /* CurrentWeatherCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeatherCardViewController.swift; sourceTree = "<group>"; };
-		E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionAnimationView.swift; sourceTree = "<group>"; };
+		E224506F2B9F3F9800F14BAA /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		E224507F2B9F41BD00F14BAA /* AppStorePreviewTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorePreviewTip.swift; sourceTree = "<group>"; };
 		E225B4D92BE437DF00AD8906 /* ConditionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionModel.swift; sourceTree = "<group>"; };
 		E22A221A2AE004230069A83A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VortexSystem+Condition.swift"; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E220E84371007D8CE4 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
@@ -544,6 +551,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2644E382C0AD7FC00B67E18 /* Vortex in Frameworks */,
 				E25B3EFE2BFA2EB400FFC11A /* RealmSwift in Frameworks */,
 				E2AD32732B23791E00F46FBE /* Kingfisher in Frameworks */,
 				E2FDBD682B2079DF0012D7C4 /* SwiftUI.framework in Frameworks */,
@@ -675,7 +683,7 @@
 			children = (
 				E224506D2B9F3F9800F14BAA /* CurrentWeatherCard.swift */,
 				E224506E2B9F3F9800F14BAA /* CurrentWeatherCardViewController.swift */,
-				E224506F2B9F3F9800F14BAA /* MotionAnimationView.swift */,
+				E224506F2B9F3F9800F14BAA /* AnimationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1338,6 +1346,8 @@
 				E224506A2B9F3F9800F14BAA /* Model */,
 				E224506C2B9F3F9800F14BAA /* ViewModel */,
 				E22450702B9F3F9800F14BAA /* Views */,
+				E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */,
+				E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */,
 			);
 			path = CurrentWeatherCard;
 			sourceTree = "<group>";
@@ -1410,6 +1420,7 @@
 			packageProductDependencies = (
 				E2AD32722B23791E00F46FBE /* Kingfisher */,
 				E25B3EFD2BFA2EB400FFC11A /* RealmSwift */,
+				E2644E372C0AD7FC00B67E18 /* Vortex */,
 			);
 			productName = "SwiftyForecast WidgetExtension";
 			productReference = E2FDBD642B2079DF0012D7C4 /* SwiftyForecastWidgetExtension.appex */;
@@ -1605,6 +1616,7 @@
 				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2A567512B075139000324C0 /* LocationSearchResultConfiguration.swift in Sources */,
 				E2D430C52BB4D954003F26EE /* HourlyForecastChartViewModel.swift in Sources */,
+				E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */,
 				E2227E8B2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift in Sources */,
 				E2227E892ADD54C7000C3886 /* TemperatureCelsiusFormatter.swift in Sources */,
 				E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
@@ -1657,6 +1669,7 @@
 				E28357392B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift in Sources */,
 				E21ABD072AE5A0DF00F93F01 /* LocationSearchCompleter.swift in Sources */,
 				E21ABD4C2AE93E6E00F93F01 /* TemperatureValue.swift in Sources */,
+				E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */,
 				E22450762B9F3F9800F14BAA /* Twilight.swift in Sources */,
 				E2854FFA2290F0DB00CD7554 /* NotationController.swift in Sources */,
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
@@ -1701,7 +1714,7 @@
 				E20C6B132BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */,
 				E2D430CF2BB4D954003F26EE /* LocationWeatherView.swift in Sources */,
-				E224507B2B9F3F9800F14BAA /* MotionAnimationView.swift in Sources */,
+				E224507B2B9F3F9800F14BAA /* AnimationView.swift in Sources */,
 				E296A7EE2AD7EA1A001BFADB /* CloudCoverage.swift in Sources */,
 				E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */,
@@ -1758,7 +1771,7 @@
 				E2D430EA2BB4DBAF003F26EE /* SpeedFormatterImperial.swift in Sources */,
 				E2D430DF2BB4DB38003F26EE /* Humidity.swift in Sources */,
 				E2FDBD6B2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift in Sources */,
-				E2D430F42BB4DC30003F26EE /* MotionAnimationView.swift in Sources */,
+				E2D430F42BB4DC30003F26EE /* AnimationView.swift in Sources */,
 				E2AD32672B23774400F46FBE /* Coordinate.swift in Sources */,
 				E2F671172B234EB600B791A0 /* TemperatureValue.swift in Sources */,
 				E2416FF02B331D74009C8F81 /* RectangularWidgetView.swift in Sources */,
@@ -1786,6 +1799,7 @@
 				E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */,
 				E2D430F02BB4DC14003F26EE /* HourlyForecastChart.swift in Sources */,
 				E2F671222B23682900B791A0 /* WeatherWidgetEntryView.swift in Sources */,
+				E2644E362C0AD7BD00B67E18 /* VortexSystem+Condition.swift in Sources */,
 				E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */,
 				E2AD32792B23833A00F46FBE /* WidgetLocationManager.swift in Sources */,
 				E2AD32622B23729900F46FBE /* Wind.swift in Sources */,
@@ -1796,6 +1810,7 @@
 				E2AD32712B23779800F46FBE /* ForecastWeatherModel.swift in Sources */,
 				E2D430DC2BB4DB28003F26EE /* RealmManager.swift in Sources */,
 				E2AD325B2B23719100F46FBE /* WeatherServiceProtocol.swift in Sources */,
+				E2644E352C0AD79E00B67E18 /* WeatherCondition.swift in Sources */,
 				E2F671152B234EA600B791A0 /* TemperatureNotation.swift in Sources */,
 				E2D430EB2BB4DBBA003F26EE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */,
 				E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */,
@@ -1970,7 +1985,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$(APP_BUILD_NUMBER)";
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
@@ -1983,7 +1998,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "$(APP_VERSION_NUMBER)";
+				MARKETING_VERSION = 3.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2006,7 +2021,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$(APP_BUILD_NUMBER)";
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";
@@ -2017,7 +2032,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "$(APP_VERSION_NUMBER)";
+				MARKETING_VERSION = 3.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2302,6 +2317,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		E2644E372C0AD7FC00B67E18 /* Vortex */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */;
+			productName = Vortex;
 		};
 		E290F2532ADDAF55001B3276 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -26,7 +26,7 @@ struct CurrentWeatherCard: View {
             .foregroundStyle(Style.WeatherCard.textColor)
             .padding(15)
             .background(
-                MotionAnimationView()
+                AnimationView(condition: viewModel.condition)
             )
             .clipShape(
                 RoundedRectangle(
