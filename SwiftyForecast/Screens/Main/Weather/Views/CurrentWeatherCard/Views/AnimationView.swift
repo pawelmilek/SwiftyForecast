@@ -42,7 +42,6 @@ struct AnimationView: View {
             Image(systemName: "drop.fill")
                 .foregroundStyle(.white)
                 .font(.largeTitle)
-                .blur(radius: 0.3)
                 .frame(width: 25)
                 .rotationEffect(.degrees(45))
                 .tag("drop")
@@ -54,7 +53,6 @@ struct AnimationView: View {
             Image(systemName: "drop.fill")
                 .foregroundStyle(.white)
                 .font(.largeTitle)
-                .blur(radius: 0.3)
                 .frame(width: 25)
                 .rotationEffect(.degrees(45))
                 .tag("drop")
@@ -79,9 +77,8 @@ struct AnimationView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.white)
-                .blur(radius: 12)
-                .opacity(0.4)
-                .frame(width: 200, height: 200)
+                .blur(radius: 4)
+                .frame(width: 50, height: 50)
                 .tag("clouds")
         }
     }
@@ -92,19 +89,16 @@ struct AnimationView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.white)
-                .blur(radius: 25)
-                .opacity(0.25)
-                .frame(width: 200, height: 200)
+                .blur(radius: 4)
+                .frame(width: 50, height: 50)
                 .tag("atmosphere")
         }
     }
 
     private var clearView: some View {
         VortexView(condition.vortexSystem) {
-            Image(systemName: "moonphase.new.moon")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.white)
+            Circle()
+                .fill(.white)
                 .blur(radius: 3)
                 .frame(width: 30, height: 30)
                 .tag("clear")
@@ -112,7 +106,27 @@ struct AnimationView: View {
     }
 
     private var thunderstormView: some View {
-        clearView
+        ZStack {
+            VortexView(condition.vortexSystem) {
+                Image(systemName: "bolt.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.white)
+                    .blur(radius: 2)
+                    .frame(width: 50, height: 50)
+                    .tag("thunderstorm")
+            }
+
+            VortexView(.darkClouds) {
+                Image(systemName: "cloud.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.white)
+                    .blur(radius: 4)
+                    .frame(width: 50, height: 50)
+                    .tag("clouds")
+            }
+        }
     }
 }
 

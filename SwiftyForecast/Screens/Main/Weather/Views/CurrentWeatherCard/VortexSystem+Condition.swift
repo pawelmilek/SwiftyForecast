@@ -30,35 +30,50 @@ extension VortexSystem {
         VortexSystem(
             tags: ["drop"],
             position: [0.5, 0],
-            shape: .box(width: 2, height: 0),
+            shape: .box(width: 1.5, height: 0),
             birthRate: 300,
             lifespan: 0.5,
-            speed: 2.5,
-            speedVariation: 2,
+            speed: 3,
+            speedVariation: 4,
             angle: .degrees(200),
-            size: 0.03,
-            sizeVariation: 0.05,
-            stretchFactor: 5
+            size: 0.01,
+            sizeVariation: 0.02,
+            stretchFactor: 15
         )
     }()
 
     static let thunderstorm: VortexSystem = {
-        clear
+        VortexSystem(
+            tags: ["thunderstorm"],
+            position: [0.3, 0.6],
+            shape: .box(width: 0.7, height: 0.5),
+            birthRate: 30,
+            emissionDuration: 0.4,
+            idleDuration: 1,
+            lifespan: 0.3,
+            speed: 0,
+            speedVariation: 0.2,
+            angleRange: .degrees(360),
+            colors: .ramp( .white.opacity(1), .white.opacity(0.7), .white.opacity(0)),
+            size: 0.5,
+            sizeVariation: 0.5,
+            sizeMultiplierAtDeath: 0.02
+        )
     }()
 
     static let drizzle: VortexSystem = {
         VortexSystem(
             tags: ["drop"],
             position: [0.5, 0],
-            shape: .box(width: 2, height: 0),
-            birthRate: 70,
+            shape: .box(width: 1.5, height: 0),
+            birthRate: 100,
             lifespan: 0.5,
             speed: 3,
-            speedVariation: 2,
+            speedVariation: 4,
             angle: .degrees(200),
-            size: 0.04,
-            sizeVariation: 0.05,
-            stretchFactor: 5
+            size: 0.01,
+            sizeVariation: 0.02,
+            stretchFactor: 15
         )
     }()
 
@@ -66,45 +81,65 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clear"],
             shape: .ellipse(radius: 1),
-            birthRate: 80,
+            birthRate: 40,
             lifespan: 2,
             speed: 0,
-            speedVariation: 0.01,
+            speedVariation: 0.05,
             angleRange: .degrees(360),
-            colors: .ramp(.white, .white.opacity(0.5), .white.opacity(0)),
+            colors: .ramp(.white, .white, .white.opacity(0)),
             size: 0.01,
-            sizeVariation: 0.05,
-            sizeMultiplierAtDeath: 50
+            sizeMultiplierAtDeath: 20
         )
     }()
 
     static let atmosphere: VortexSystem = {
         VortexSystem(
             tags: ["atmosphere"],
-            position: [-0.4, 0.5],
-            shape: .ellipse(radius: 1),
-            birthRate: 2,
-            lifespan: 20,
-            speed: 0.06,
-            speedVariation: 0.05,
+            position: [0, 0.5],
+            shape: .box(width: 0, height: 0.5),
+            birthRate: 7,
+            lifespan: 13,
+            speed: 0.02,
             angle: .degrees(90),
             acceleration: [0.02, 0],
-            sizeVariation: 0.9
+            colors: .ramp( .lightGray.opacity(0.3), .lightGray.opacity(0.7), .lightGray.opacity(0.2), .lightGray.opacity(0)),
+            size: 0.25,
+            sizeVariation: 0.2,
+            sizeMultiplierAtDeath: 10
         )
     }()
 
     static let clouds: VortexSystem = {
         VortexSystem(
             tags: ["clouds"],
-            position: [-0.4, 0.5],
-            shape: .box(width: 1, height: 1),
-            birthRate: 0.7,
-            lifespan: 20,
-            speed: 0.08,
-            speedVariation: 0.05,
+            position: [0, 0.5],
+            shape: .box(width: 0, height: 0.5),
+            birthRate: 7,
+            lifespan: 13,
+            speed: 0.03,
             angle: .degrees(90),
             acceleration: [0.02, 0],
-            sizeVariation: 0.9
+            colors: .ramp( .white.opacity(0.3), .white.opacity(0.7), .white.opacity(0.2), .white.opacity(0)),
+            size: 0.25,
+            sizeVariation: 0.2,
+            sizeMultiplierAtDeath: 10
+        )
+    }()
+
+    static let darkClouds: VortexSystem = {
+        VortexSystem(
+            tags: ["clouds"],
+            position: [0, 0.5],
+            shape: .box(width: 0, height: 0.5),
+            birthRate: 10,
+            lifespan: 13,
+            speed: 0.03,
+            angle: .degrees(90),
+            acceleration: [0.02, 0],
+            colors: .ramp( .white.opacity(0.2), .white.opacity(0.6), .darkGray.opacity(0.2), .lightGray.opacity(0)),
+            size: 0.25,
+            sizeVariation: 0.2,
+            sizeMultiplierAtDeath: 11
         )
     }()
 }
