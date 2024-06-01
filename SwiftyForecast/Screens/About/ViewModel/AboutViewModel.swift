@@ -114,7 +114,7 @@ final class AboutViewModel: ObservableObject {
         openURL(url)
     }
 
-    func shareContent() -> URL {
+    func shareURL() -> URL {
         guard let url = URL(string: NetworkResourceType.appShare(appId: appId).stringURL) else {
             fatalError()
         }

@@ -22,7 +22,7 @@ enum NetworkResourceType {
         case .appShare(let appId):
             "https://apps.apple.com/app/id\(appId)"
         case .appStoreReview(let appId):
-            "https://apps.apple.com/app/id\(appId)?action=write-review" // 1161186194
+            "https://apps.apple.com/app/id\(appId)?action=write-review"
         case .appStorePreview:
             "https://apps.apple.com/us/developer/pawel-milek/id1139599148"
         case .weatherService:

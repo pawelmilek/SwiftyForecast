@@ -42,12 +42,8 @@ struct AboutView: View {
                         link: nil,
                         action: nil
                     )
-                    AboutFrameworkView(
-                        title: "Frameworks",
-                        content: viewModel.frameworks
-                    )
                     ShareRow(
-                        item: viewModel.shareContent(),
+                        item: viewModel.shareURL(),
                         tintColor: .customPrimary
                     )
                 } header: {
