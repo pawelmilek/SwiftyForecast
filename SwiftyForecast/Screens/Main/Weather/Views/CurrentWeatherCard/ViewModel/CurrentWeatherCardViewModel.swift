@@ -124,8 +124,8 @@ final class CurrentWeatherCardViewModel: ObservableObject {
 
         Task(priority: .userInitiated) {
             do {
-                let currentResponse = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
-                let dataModel = ResponseParser().parse(current: currentResponse)
+                let response = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
+                let dataModel = ResponseParser().parse(current: response)
                 let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.condition.iconCode)
                 icon = Image(uiImage: largeIcon)
                 model = dataModel

@@ -10,18 +10,22 @@ final class MainViewController: UIViewController {
     private let lottieAnimationViewController = LottieAnimationViewController()
 
     private lazy var infoBarButton: UIButton = {
-        let image = UIImage(systemName: "info.circle")
-        let button = UIButton(type: .system)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(openInfoBarButtonTapped), for: .touchUpInside)
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "info")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.openInfoBarButtonTapped()
+           })
         return button
     }()
 
     private lazy var appearanceBarButton: UIButton = {
-        let image = UIImage(systemName: "circle.lefthalf.filled.inverse")
-        let button = UIButton(type: .system)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(openAppearanceBarButtonTapped), for: .touchUpInside)
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "paintpalette.fill")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.openAppearanceBarButtonTapped()
+           })
         return button
     }()
 
@@ -30,15 +34,17 @@ final class MainViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
         stackView.alignment = .center
-        stackView.spacing = 10
+        stackView.spacing = 8
         return stackView
     }()
 
     private lazy var locationBarButton: UIButton = {
-        let image = UIImage(systemName: "mappin.circle")
-        let button = UIButton(type: .system)
-        button.setImage(image, for: .normal)
-        button.addTarget(self, action: #selector(openLocationListBarButtonTapped), for: .touchUpInside)
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "location.fill")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.openLocationListBarButtonTapped()
+           })
         return button
     }()
 

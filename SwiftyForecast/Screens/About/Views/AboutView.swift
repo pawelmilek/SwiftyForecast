@@ -12,10 +12,11 @@ import StoreKit
 struct AboutView: View {
     @StateObject private var viewModel = AboutViewModel()
     @Environment(\.openURL) private var openURL
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         NavigationStack {
-            List {
+            Form {
                 Section {
                     AboutRow(
                         tintColor: .customPrimary,
@@ -45,19 +46,12 @@ struct AboutView: View {
                         title: "Frameworks",
                         content: viewModel.frameworks
                     )
-                    AboutRow(
-                        tintColor: .customPrimary,
-                        symbol: "square.and.arrow.up",
-                        title: "Share",
-                        label: nil,
-                        link: (
-                            destination: viewModel.appURLString,
-                            label: ""
-                        ),
-                        action: nil
+                    ShareRow(
+                        item: viewModel.shareContent(),
+                        tintColor: .customPrimary
                     )
                 } header: {
-                    Text("About the app")
+                    Text("App")
                 }
                 Section {
                     AboutRow(
@@ -145,9 +139,20 @@ struct AboutView: View {
                         .padding(.top, 10)
                 }
             }
-            .padding(.top, 1)
+            .padding(.top, 0.25)
             .navigationTitle("About")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .tint(.accent)
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
+                    .controlSize(.small)
+                }
+            }
         }
     }
 

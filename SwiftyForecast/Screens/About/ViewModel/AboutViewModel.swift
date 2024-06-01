@@ -11,18 +11,19 @@ import Combine
 
 @MainActor
 final class AboutViewModel: ObservableObject {
-    @Published private(set) var appName: String
-    @Published private(set) var appVersion: String
-    @Published private(set) var appCompatibility: String
-    @Published private(set) var appURLString: String
-    @Published private(set) var appStorePreviewURLString: String
-    @Published private(set) var currentYear: String
-    @Published private(set) var frameworks: [String]
-
-    private let bundle: Bundle
-    private let buildConfigurationFile: BuildConfigurationFile
+    @Published private(set) var appName = ""
+    @Published private(set) var appVersion = ""
+    @Published private(set) var appCompatibility = ""
+    @Published private(set) var appURLString = ""
+    @Published private(set) var appStorePreviewURLString = ""
+    @Published private(set) var currentYear = ""
+    @Published private(set) var frameworks = [String]()
+    @Published private var bundle: Bundle
+    @Published private var buildConfigurationFile: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
-    private let appId: Int
+    private var appId = 0
+
+    private var cancellables = Set<AnyCancellable>()
 
     convenience init() {
         self.init(
@@ -40,16 +41,8 @@ final class AboutViewModel: ObservableObject {
         self.bundle = bundle
         self.buildConfigurationFile = buildConfigurationFile
         self.networkResourceFactory = networkResourceFactory
-
-        appName = bundle.applicationName
-        appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
-        appCompatibility = "iOS \(bundle.minimumOSVersion)"
-        appId = buildConfigurationFile.appId()
-
-        appURLString = NetworkResourceType.appShare(appId: appId).stringURL
-        appStorePreviewURLString = NetworkResourceType.appStorePreview.stringURL
-        currentYear = Date.now.formatted(.dateTime.year())
-        frameworks = [
+        self.currentYear = Date.now.formatted(.dateTime.year())
+        self.frameworks = [
             "UIKit",
             "SwiftUI",
             "Combine",
@@ -60,6 +53,28 @@ final class AboutViewModel: ObservableObject {
             "WebKit",
             "TipKit"
         ]
+
+        subscribeToPublishers()
+    }
+
+    private func subscribeToPublishers() {
+        $bundle
+            .sink { [weak self] bundle in
+                guard let self else { return }
+                appName = bundle.applicationName
+                appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
+                appCompatibility = "iOS \(bundle.minimumOSVersion)"
+            }
+            .store(in: &cancellables)
+
+        $buildConfigurationFile
+            .sink { [weak self] buildConfigurationFile in
+                guard let self else { return }
+                appId = buildConfigurationFile.appId()
+                appURLString = NetworkResourceType.appShare(appId: appId).stringURL
+                appStorePreviewURLString = NetworkResourceType.appStorePreview.stringURL
+            }
+            .store(in: &cancellables)
     }
 
     func reportFeedback(_ openURL: OpenURLAction) {
@@ -97,5 +112,13 @@ final class AboutViewModel: ObservableObject {
         let weatherService = networkResourceFactory.make(by: .weatherService)
         guard let url = try? weatherService.content() else { return }
         openURL(url)
+    }
+
+    func shareContent() -> URL {
+        guard let url = URL(string: NetworkResourceType.appShare(appId: appId).stringURL) else {
+            fatalError()
+        }
+
+        return url
     }
 }

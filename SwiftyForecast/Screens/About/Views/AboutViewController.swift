@@ -28,9 +28,10 @@ class AboutViewController: UIViewController {
 
     private func setupSheetPresentation() {
         if let presentationController = presentationController as? UISheetPresentationController {
-            presentationController.detents = [.medium(), .large()]
-            presentationController.prefersGrabberVisible = true
+            presentationController.detents = [.large()]
+            presentationController.prefersGrabberVisible = false
         }
+        isModalInPresentation = true
     }
 
     private func setupAutolayoutConstraints() {
