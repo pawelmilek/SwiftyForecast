@@ -19,6 +19,7 @@ struct BuildConfigurationFile {
     private enum ConfigurationKey {
         static let weatherServiceAPIKey = "WeatherServiceAPIKey"
         static let supportEmailKey = "SupportEmail"
+        static let appId = "AppId"
     }
 
     private let plistKey = "ConfigurationSettings"
@@ -43,6 +44,14 @@ struct BuildConfigurationFile {
     func supportEmailAddress() -> String {
         do {
             return try value(with: ConfigurationKey.supportEmailKey)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    func appId() -> Int {
+        do {
+            return try Int(value(with: ConfigurationKey.appId)) ?? 0
         } catch {
             fatalError(error.localizedDescription)
         }

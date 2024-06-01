@@ -22,6 +22,7 @@ final class AboutViewModel: ObservableObject {
     private let bundle: Bundle
     private let buildConfigurationFile: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
+    private let appId: Int
 
     convenience init() {
         self.init(
@@ -43,7 +44,9 @@ final class AboutViewModel: ObservableObject {
         appName = bundle.applicationName
         appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
         appCompatibility = "iOS \(bundle.minimumOSVersion)"
-        appURLString = NetworkResourceType.appWebPage.stringURL
+        appId = buildConfigurationFile.appId()
+
+        appURLString = NetworkResourceType.appShare(appId: appId).stringURL
         appStorePreviewURLString = NetworkResourceType.appStorePreview.stringURL
         currentYear = Date.now.formatted(.dateTime.year())
         frameworks = [
@@ -85,7 +88,7 @@ final class AboutViewModel: ObservableObject {
     }
 
     func openAppStoreReview(_ openURL: OpenURLAction) {
-        let writeReview = networkResourceFactory.make(by: .appStoreReview)
+        let writeReview = networkResourceFactory.make(by: .appStoreReview(appId: appId))
         guard let url = try? writeReview.content() else { return }
         openURL(url)
     }

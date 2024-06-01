@@ -10,8 +10,8 @@ import Foundation
 
 enum NetworkResourceType {
     case privacyPolicy
-    case appWebPage
-    case appStoreReview
+    case appShare(appId: Int)
+    case appStoreReview(appId: Int)
     case appStorePreview
     case weatherService
 
@@ -19,10 +19,10 @@ enum NetworkResourceType {
         switch self {
         case .privacyPolicy:
             "https://sites.google.com/view/pmilek/privacy-policy"
-        case .appWebPage:
-            "https://sites.google.com/view/pmilek/swifty-forecast"
-        case .appStoreReview:
-            "https://apps.apple.com/app/id1161186194?action=write-review"
+        case .appShare(let appId):
+            "https://apps.apple.com/app/id\(appId)"
+        case .appStoreReview(let appId):
+            "https://apps.apple.com/app/id\(appId)?action=write-review" // 1161186194
         case .appStorePreview:
             "https://apps.apple.com/us/developer/pawel-milek/id1139599148"
         case .weatherService:

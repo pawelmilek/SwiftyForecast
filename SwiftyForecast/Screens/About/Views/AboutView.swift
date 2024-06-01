@@ -18,7 +18,7 @@ struct AboutView: View {
             List {
                 Section {
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "apps.iphone",
                         title: "Application",
                         label: viewModel.appName,
@@ -26,7 +26,7 @@ struct AboutView: View {
                         action: nil
                     )
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "gear",
                         title: "Version",
                         label: viewModel.appVersion,
@@ -34,7 +34,7 @@ struct AboutView: View {
                         action: nil
                     )
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "info.circle",
                         title: "Compatibility",
                         label: viewModel.appCompatibility,
@@ -46,21 +46,13 @@ struct AboutView: View {
                         content: viewModel.frameworks
                     )
                     AboutRow(
-                        tintColor: .blue,
-                        symbol: "ellipsis.curlybraces",
-                        title: "Developer",
-                        label: "Pawel Milek",
-                        link: nil,
-                        action: nil
-                    )
-                    AboutRow(
-                        tintColor: Color(.customPrimary),
-                        symbol: "globe",
-                        title: "Website",
+                        tintColor: .customPrimary,
+                        symbol: "square.and.arrow.up",
+                        title: "Share",
                         label: nil,
                         link: (
                             destination: viewModel.appURLString,
-                            label: viewModel.appName
+                            label: ""
                         ),
                         action: nil
                     )
@@ -69,7 +61,7 @@ struct AboutView: View {
                 }
                 Section {
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "apps.iphone",
                         title: "Apps Preview",
                         label: nil,
@@ -85,7 +77,7 @@ struct AboutView: View {
                 }
                 Section {
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "envelope.fill",
                         title: "Contact",
                         label: nil,
@@ -117,7 +109,7 @@ struct AboutView: View {
                         LicenseView()
                     } label: {
                         AboutRow(
-                            tintColor: .blue,
+                            tintColor: .customPrimary,
                             symbol: "doc.plaintext.fill",
                             title: "Licenses",
                             label: nil,
@@ -126,7 +118,7 @@ struct AboutView: View {
                         )
                     }
                     AboutRow(
-                        tintColor: .blue,
+                        tintColor: .customPrimary,
                         symbol: "lock.shield.fill",
                         title: "Privacy Policy",
                         label: nil,
@@ -139,7 +131,7 @@ struct AboutView: View {
 
                 Section {
                     AboutRow(
-                        tintColor: .orange,
+                        tintColor: .customPrimary,
                         symbol: "sun.haze.fill",
                         title: "OpenWeather",
                         label: nil,
@@ -154,7 +146,7 @@ struct AboutView: View {
                 }
             }
             .padding(.top, 1)
-            .navigationTitle("Info")
+            .navigationTitle("About")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

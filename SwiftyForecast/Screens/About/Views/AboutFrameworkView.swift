@@ -30,7 +30,7 @@ struct AboutFrameworkView: View {
             }
         } label: {
             AboutRow(
-                tintColor: .orange,
+                tintColor: .customPrimary,
                 symbol: "swift",
                 title: title,
                 label: nil,
