@@ -96,13 +96,13 @@ extension VortexSystem {
         VortexSystem(
             tags: ["atmosphere"],
             position: [0, 0.5],
-            shape: .box(width: 0, height: 0.5),
+            shape: .box(width: 0.5, height: 0.5),
             birthRate: 7,
             lifespan: 13,
             speed: 0.02,
             angle: .degrees(90),
             acceleration: [0.02, 0],
-            colors: .ramp( .lightGray.opacity(0.3), .lightGray.opacity(0.7), .lightGray.opacity(0.2), .lightGray.opacity(0)),
+            colors: .ramp( .lightGray.opacity(0.2), .lightGray.opacity(0.7), .lightGray.opacity(0.3), .lightGray.opacity(0)),
             size: 0.25,
             sizeVariation: 0.2,
             sizeMultiplierAtDeath: 10
@@ -113,7 +113,7 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0, 0.5],
-            shape: .box(width: 0, height: 0.5),
+            shape: .box(width: 0.5, height: 0.5),
             birthRate: 7,
             lifespan: 13,
             speed: 0.03,
@@ -130,13 +130,13 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0, 0.5],
-            shape: .box(width: 0, height: 0.5),
+            shape: .box(width: 0.5, height: 0.5),
             birthRate: 10,
             lifespan: 13,
             speed: 0.03,
             angle: .degrees(90),
             acceleration: [0.02, 0],
-            colors: .ramp( .white.opacity(0.2), .white.opacity(0.6), .darkGray.opacity(0.2), .lightGray.opacity(0)),
+            colors: .ramp( .darkGray.opacity(0.2), .white.opacity(0.6), .darkGray.opacity(0.1), .lightGray.opacity(0)),
             size: 0.25,
             sizeVariation: 0.2,
             sizeMultiplierAtDeath: 11
