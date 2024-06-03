@@ -33,7 +33,7 @@ struct AnimationView: View {
         case .clear:
             clearView
         case .clouds:
-            cloudView
+            cloudsView
         }
     }
 
@@ -71,15 +71,20 @@ struct AnimationView: View {
         }
     }
 
-    private var cloudView: some View {
-        VortexView(condition.vortexSystem) {
-            Image(systemName: "cloud.fill")
-                .resizable()
-                .scaledToFit()
-                .foregroundStyle(.white)
-                .blur(radius: 4)
-                .frame(width: 50, height: 50)
-                .tag("clouds")
+    private var cloudsView: some View {
+        VortexViewReader { proxy in
+            VortexView(condition.vortexSystem) {
+                Image(systemName: "cloud.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundStyle(.white)
+                    .blur(radius: 1)
+                    .frame(width: 50, height: 50)
+                    .tag("clouds")
+            }
+            .onAppear {
+                proxy.burst()
+            }
         }
     }
 
@@ -89,7 +94,7 @@ struct AnimationView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.white)
-                .blur(radius: 4)
+                .blur(radius: 3)
                 .frame(width: 50, height: 50)
                 .tag("atmosphere")
         }
@@ -112,8 +117,8 @@ struct AnimationView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.white)
-                    .blur(radius: 2)
                     .frame(width: 50, height: 50)
+                    .blendMode(.plusLighter)
                     .tag("thunderstorm")
             }
 
@@ -122,7 +127,7 @@ struct AnimationView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.white)
-                    .blur(radius: 4)
+                    .blur(radius: 1)
                     .frame(width: 50, height: 50)
                     .tag("clouds")
             }
@@ -132,12 +137,7 @@ struct AnimationView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     VStack {
-        AnimationView(condition: .clear)
+        AnimationView(condition: .thunderstorm)
         Spacer()
     }
-}
-
-#Preview(traits: .sizeThatFitsLayout) {
-    AnimationView(condition: .clear)
-        .frame(height: 300)
 }

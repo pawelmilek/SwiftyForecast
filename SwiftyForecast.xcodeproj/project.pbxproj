@@ -260,6 +260,9 @@
 		E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1474248F221E00D1A329 /* UIViewController+Containment.swift */; };
 		E2DC148B248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC148A248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift */; };
 		E2DC149524955C8D00D1A329 /* MainViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC149424955C8D00D1A329 /* MainViewControllerViewModel.swift */; };
+		E2E6C6F92C0E312100500EE8 /* LogEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6F82C0E312100500EE8 /* LogEventService.swift */; };
+		E2E6C6FB2C0E313000500EE8 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* AnalyticsService.swift */; };
+		E2E6C6FD2C0E315900500EE8 /* ForecastLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FC2C0E315900500EE8 /* ForecastLogEvent.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
 		E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */; };
 		E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */; };
@@ -504,6 +507,9 @@
 		E2DC1474248F221E00D1A329 /* UIViewController+Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Containment.swift"; sourceTree = "<group>"; };
 		E2DC148A248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MakeFromStoryboard.swift"; sourceTree = "<group>"; };
 		E2DC149424955C8D00D1A329 /* MainViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerViewModel.swift; sourceTree = "<group>"; };
+		E2E6C6F82C0E312100500EE8 /* LogEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventService.swift; sourceTree = "<group>"; };
+		E2E6C6FA2C0E313000500EE8 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		E2E6C6FC2C0E315900500EE8 /* ForecastLogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastLogEvent.swift; sourceTree = "<group>"; };
 		E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+PreferredFont.swift"; sourceTree = "<group>"; };
 		E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleasedDevices.swift; sourceTree = "<group>"; };
@@ -1074,6 +1080,9 @@
 		E2CAC9E02C04308B00E573D2 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				E2E6C6F82C0E312100500EE8 /* LogEventService.swift */,
+				E2E6C6FA2C0E313000500EE8 /* AnalyticsService.swift */,
+				E2E6C6FC2C0E315900500EE8 /* ForecastLogEvent.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -1643,6 +1652,7 @@
 				E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */,
 				E22A221B2AE004230069A83A /* LocationManager.swift in Sources */,
 				E2CF4DD822768C3F00062E36 /* WeatherService.swift in Sources */,
+				E2E6C6FB2C0E313000500EE8 /* AnalyticsService.swift in Sources */,
 				E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */,
 				E21E386E2B37576A00513B26 /* AboutRow.swift in Sources */,
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
@@ -1652,6 +1662,7 @@
 				E2B0357B2500885100DC0E77 /* DailyForecastModel.swift in Sources */,
 				E224507C2B9F402300F14BAA /* DayNightState.swift in Sources */,
 				E2ED36E52C04EDBA0001C3EF /* NetworkResourceFactory.swift in Sources */,
+				E2E6C6FD2C0E315900500EE8 /* ForecastLogEvent.swift in Sources */,
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E296A7EB2AD7E15B001BFADB /* ForecastWeatherResponse.swift in Sources */,
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
@@ -1676,6 +1687,7 @@
 				E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */,
 				E22450762B9F3F9800F14BAA /* Twilight.swift in Sources */,
 				E2854FFA2290F0DB00CD7554 /* NotationController.swift in Sources */,
+				E2E6C6F92C0E312100500EE8 /* LogEventService.swift in Sources */,
 				E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */,
 				E29B10E224E9790F0030503C /* UITableView+RealmChanges.swift in Sources */,
 				E2B035782500883E00DC0E77 /* HourlyForecastModel.swift in Sources */,
@@ -1989,7 +2001,7 @@
 				CODE_SIGN_ENTITLEMENTS = SwiftyForecast/Resources/SwiftyForecast.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
@@ -2026,7 +2038,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N3HG6C68EY;
 				INFOPLIST_FILE = "$(SRCROOT)/SwiftyForecast/Resources/Info.plist";

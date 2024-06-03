@@ -137,7 +137,7 @@ struct AboutView: View {
             }
             .padding(.top, 0.25)
             .navigationTitle("About")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
