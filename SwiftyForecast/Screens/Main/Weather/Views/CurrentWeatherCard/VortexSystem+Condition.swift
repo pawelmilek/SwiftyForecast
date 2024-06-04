@@ -77,16 +77,16 @@ extension VortexSystem {
         VortexSystem(
             tags: ["atmosphere"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.2),
-            birthRate: 18,
-            burstCount: 18,
-            lifespan: 3,
+            shape: .ellipse(radius: 0.4),
+            birthRate: 3,
+            burstCount: 5,
+            lifespan: 6,
             angleRange: .degrees(360),
-            dampingFactor: 100,
-            colors: .ramp(.white.opacity(0.2), .white.opacity(0.2), .white.opacity(0.2), .white.opacity(0.1), .white.opacity(0.0)),
-            size: 3,
-            sizeVariation: 0.02,
-            sizeMultiplierAtDeath: 2.3
+            dampingFactor: 80,
+            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .white.opacity(0.3), .white.opacity(0)),
+            size: 2,
+            sizeVariation: 2,
+            sizeMultiplierAtDeath: 2
         )
     }()
 
@@ -94,15 +94,15 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.2),
-            birthRate: 10,
+            shape: .ellipse(radius: 0.4),
+            birthRate: 3,
             burstCount: 5,
-            lifespan: 3,
+            lifespan: 6,
             angleRange: .degrees(360),
-            dampingFactor: 100,
-            colors: .ramp(.white.opacity(0.2), .white.opacity(0.3), .white.opacity(0.3), .white.opacity(0.1), .white.opacity(0.0)),
-            size: 3,
-            sizeVariation: 0.02,
+            dampingFactor: 80,
+            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .white.opacity(0.3), .white.opacity(0)),
+            size: 2,
+            sizeVariation: 2,
             sizeMultiplierAtDeath: 2
         )
     }()
@@ -111,15 +111,15 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.2),
-            birthRate: 12,
+            shape: .ellipse(radius: 0.1),
+            birthRate: 3,
             burstCount: 5,
-            lifespan: 3,
+            lifespan: 6,
             angleRange: .degrees(360),
-            dampingFactor: 100,
-            colors: .ramp(.darkGray.opacity(0.2), .darkGray.opacity(0.3), .darkGray.opacity(0.2), .darkGray.opacity(0.1), .darkGray.opacity(0)),
-            size: 3,
-            sizeVariation: 0.02,
+            dampingFactor: 80,
+            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .black.opacity(0.3), .black.opacity(0)),
+            size: 2,
+            sizeVariation: 2,
             sizeMultiplierAtDeath: 2
         )
     }()

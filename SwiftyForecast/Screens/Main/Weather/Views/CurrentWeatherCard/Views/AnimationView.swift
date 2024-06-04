@@ -78,7 +78,7 @@ struct AnimationView: View {
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.white)
-                    .blur(radius: 1)
+                    .blur(radius: 1.2)
                     .frame(width: 50, height: 50)
                     .tag("clouds")
             }
@@ -94,7 +94,7 @@ struct AnimationView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.white)
-                .blur(radius: 3)
+                .blur(radius: 2.5)
                 .frame(width: 50, height: 50)
                 .tag("atmosphere")
         }
@@ -122,14 +122,19 @@ struct AnimationView: View {
                     .tag("thunderstorm")
             }
 
-            VortexView(.darkClouds) {
-                Image(systemName: "cloud.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundStyle(.white)
-                    .blur(radius: 1)
-                    .frame(width: 50, height: 50)
-                    .tag("clouds")
+            VortexViewReader { proxy in
+                VortexView(.darkClouds) {
+                    Image(systemName: "cloud.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundStyle(.white)
+                        .blur(radius: 1.2)
+                        .frame(width: 50, height: 50)
+                        .tag("clouds")
+                }
+                .onAppear {
+                    proxy.burst()
+                }
             }
         }
     }
