@@ -42,7 +42,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let notationController: NotationController
     private let measurementSystemNotification: MeasurementSystemNotification
     private let databaseManager: DatabaseManager
-    private let logEvent: ForecastLogEvent
+    private let analyticsManager: AnalyticsManager
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -52,7 +52,7 @@ final class MainViewControllerViewModel: ObservableObject {
             notationController: NotationController(),
             measurementSystemNotification: MeasurementSystemNotification(),
             databaseManager: RealmManager.shared,
-            logEvent: ForecastLogEvent(service: AnalyticsService())
+            analyticsManager: AnalyticsManager(service: AnalyticsService())
         )
     }
 
@@ -61,13 +61,13 @@ final class MainViewControllerViewModel: ObservableObject {
         notationController: NotationController = NotationController(),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         databaseManager: DatabaseManager = RealmManager.shared,
-        logEvent: ForecastLogEvent = ForecastLogEvent(service: AnalyticsService())
+        analyticsManager: AnalyticsManager = AnalyticsManager(service: AnalyticsService())
     ) {
         self.service = service
         self.notationController = notationController
         self.measurementSystemNotification = measurementSystemNotification
         self.databaseManager = databaseManager
-        self.logEvent = logEvent
+        self.analyticsManager = analyticsManager
         registerRealmCollectionNotificationToken()
     }
 
@@ -146,7 +146,9 @@ final class MainViewControllerViewModel: ObservableObject {
         postDidChangeMeasurementSystem()
         unitSelectionHapticFeedback()
         reloadWidgetTimeline()
-        logEvent.logSwitchTempNotationEvent(value: selectedTemperatureNotation.name)
+        analyticsManager.log(
+            event: .temperatureNotationSwitched(notation: selectedTemperatureNotation.name)
+        )
     }
 
     private func postDidChangeMeasurementSystem() {

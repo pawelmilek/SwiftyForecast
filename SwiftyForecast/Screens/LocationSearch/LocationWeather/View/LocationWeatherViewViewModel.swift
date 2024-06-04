@@ -17,7 +17,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var isExistingLocation = true
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel] = []
     @Published private(set) var shouldShowHourlyForecastChart = false
-    @Published private(set) var locationModel: LocationModel?
+    @Published private(set) var location: LocationModel?
     @Published private var forecastModel: ForecastWeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
@@ -27,22 +27,25 @@ final class LocationWeatherViewViewModel: ObservableObject {
     private let service: WeatherServiceProtocol
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
+    private let analyticsManager: AnalyticsManager
 
     init(
         searchCompletion: MKLocalSearchCompletion,
         service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
         databaseManager: DatabaseManager = RealmManager.shared,
-        appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
+        appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter(),
+        analyticsManager: AnalyticsManager = AnalyticsManager(service: AnalyticsService())
     ) {
         self.searchCompletion = searchCompletion
         self.service = service
         self.databaseManager = databaseManager
         self.appStoreReviewCenter = appStoreReviewCenter
+        self.analyticsManager = analyticsManager
         subscriteToPublishers()
     }
 
     private func subscriteToPublishers() {
-        $locationModel
+        $location
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] locationModel in
@@ -112,7 +115,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
         do {
             let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
             let placemark = try await geocodeLocation.requestPlacemark(at: foundLocation)
-            locationModel = LocationModel(placemark: placemark)
+            location = LocationModel(placemark: placemark)
         } catch {
             isLoading = false
             self.error = error
@@ -121,15 +124,15 @@ final class LocationWeatherViewViewModel: ObservableObject {
     }
 
     func loadData() {
-        guard let locationModel else { return }
+        guard let location else { return }
         guard !isLoading else { return }
         isLoading = true
 
         Task(priority: .userInitiated) {
             do {
                 let forecast = try await service.fetchForecast(
-                    latitude: locationModel.latitude,
-                    longitude: locationModel.longitude
+                    latitude: location.latitude,
+                    longitude: location.longitude
                 )
                 forecastModel = ResponseParser().parse(forecast: forecast)
                 isLoading = false
@@ -143,14 +146,15 @@ final class LocationWeatherViewViewModel: ObservableObject {
     }
 
     func addNewLocation() {
-        guard let locationModel else { return }
+        guard let location else { return }
         do {
-            try databaseManager.create(locationModel)
+            try databaseManager.create(location)
         } catch {
             fatalError(error.localizedDescription)
         }
         donateAddFavoriteEvent()
         postAppStoreReviewEvent()
+        logAddNewLocation(name: location.name + ", " + location.country)
     }
 
     private func donateAddFavoriteEvent() {
@@ -161,5 +165,18 @@ final class LocationWeatherViewViewModel: ObservableObject {
 
     private func postAppStoreReviewEvent() {
         appStoreReviewCenter.post(.locationAdded)
+    }
+
+    private func logAddNewLocation(name: String) {
+        analyticsManager.log(event: .newLocationAdded(name: name))
+    }
+
+    func logScreenViewed(className: String) {
+        analyticsManager.log(
+            event: .screenViewed(
+                name: "Location Weather Screen",
+                className: "\(type(of: self))"
+            )
+        )
     }
 }

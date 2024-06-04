@@ -23,7 +23,7 @@ final class AboutViewModel: ObservableObject {
     @Published private var bundle: Bundle
     @Published private var buildConfigurationFile: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
-    private let logEvent: ForecastLogEvent
+    private let analyticsManager: AnalyticsManager
     private var cancellables = Set<AnyCancellable>()
     private var appId = 0
     let appStorePreviewTip = AppStorePreviewTip()
@@ -33,7 +33,7 @@ final class AboutViewModel: ObservableObject {
             bundle: .main,
             buildConfigurationFile: .init(),
             networkResourceFactory: NetworkResourceFactory(),
-            logEvent: ForecastLogEvent(service: AnalyticsService())
+            analyticsManager: AnalyticsManager(service: AnalyticsService())
         )
     }
 
@@ -41,12 +41,12 @@ final class AboutViewModel: ObservableObject {
         bundle: Bundle,
         buildConfigurationFile: BuildConfigurationFile,
         networkResourceFactory: NetworkResourceFactoryProtocol,
-        logEvent: ForecastLogEvent
+        analyticsManager: AnalyticsManager
     ) {
         self.bundle = bundle
         self.buildConfigurationFile = buildConfigurationFile
         self.networkResourceFactory = networkResourceFactory
-        self.logEvent = logEvent
+        self.analyticsManager = analyticsManager
         self.currentYear = Date.now.formatted(.dateTime.year())
         subscribeToPublishers()
     }
@@ -102,11 +102,11 @@ final class AboutViewModel: ObservableObject {
     }
 
     func logEventRowTapped(_ title: String) {
-        logEvent.logAboutRowEvent(title: title)
+        analyticsManager.log(event: .aboutRowTapped(title: title))
     }
 
     func logEventScreen(_ name: String, className: String) {
-        logEvent.logScreenEvent(name: name, className: className)
+        analyticsManager.log(event: .screenViewed(name: name, className: className))
     }
 
 }

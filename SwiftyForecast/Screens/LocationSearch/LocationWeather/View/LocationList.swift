@@ -12,6 +12,8 @@ import TipKit
 
 struct LocationList: View {
     @Environment(\.isSearching) private var isSearching: Bool
+    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
+
     @Binding var searchText: String
     var onSelectRow: (LocationModel) -> Void
     private let locationsTip = LocationsTip()
@@ -33,6 +35,7 @@ struct LocationList: View {
                     .deleteDisabled(location.isUserLocation)
                     .onTapGesture {
                         onSelectRow(location)
+                        logLocationSelected(location.name + ", " + location.country)
                     }
             }
             .onDelete(perform: $locations.remove)
@@ -43,6 +46,12 @@ struct LocationList: View {
                 LocationSearchResultList()
             }
         }
+    }
+
+    private func logLocationSelected(_ name: String) {
+        analyticsManager.log(
+            event: .locationSelected(name: name)
+        )
     }
 }
 

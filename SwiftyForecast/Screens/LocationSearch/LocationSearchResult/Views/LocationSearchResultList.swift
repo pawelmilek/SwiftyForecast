@@ -13,6 +13,7 @@ struct LocationSearchResultList: View {
     @Environment(\.dismissSearch) private var dismissSearch
     @EnvironmentObject private var locationSearchCompleter: LocationSearchCompleter
     @StateObject private var searchResultConfig = LocationSearchResultConfiguration()
+    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
 
     var body: some View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in
@@ -34,6 +35,18 @@ struct LocationSearchResultList: View {
                 onDismissSearch: dismiss
             )
         }
+        .onAppear {
+            logScreenViewed()
+        }
+    }
+
+    private func logScreenViewed() {
+        analyticsManager.log(
+            event: .screenViewed(
+                name: "Location Search Result",
+                className: "\(type(of: self))"
+            )
+        )
     }
 
     private var shouldShowContentUnavailableView: Bool {

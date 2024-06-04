@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
-    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appearanceTheme") private var appearanceTheme: AppearanceTheme = .systemDefault
+    @Environment(\.colorScheme) private var colorScheme
+    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
     @State private var circleOffset = CGSize.zero
+
     var onAppearanceChange: () -> Void
 
     var body: some View {
@@ -59,12 +61,30 @@ struct AppearanceView: View {
         .onChange(of: colorScheme) {
             let isDark = colorScheme == .dark
             setCircleOffset(isDark: isDark)
+            logColorShemeSwitched(colorScheme)
         }
         .onChange(of: appearanceTheme) {
             let isDark = appearanceTheme == .dark
             setCircleOffset(isDark: isDark)
             onAppearanceChange()
+        }.onAppear {
+            logScreenViewed()
         }
+    }
+
+    private func logScreenViewed() {
+        analyticsManager.log(
+            event: .screenViewed(
+                name: "Appearance Screen",
+                className: "\(type(of: self))"
+            )
+        )
+    }
+
+    private func logColorShemeSwitched(_ colorScheme: ColorScheme) {
+        analyticsManager.log(
+            event: .colorSchemeSwitched(name: String(describing: colorScheme))
+        )
     }
 
     private func setCircleOffset(isDark: Bool) {

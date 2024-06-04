@@ -67,6 +67,7 @@ struct LocationWeatherView: View {
         }
         .onAppear {
             viewModel.startSearchRequest()
+            viewModel.logScreenViewed(className: "\(type(of: self))")
         }
         .onChange(of: viewModel.isLoading) {
             withAnimation(.easeInOut(duration: 0.5)) {
@@ -74,9 +75,9 @@ struct LocationWeatherView: View {
                 isToolbarDisabled = viewModel.isLoading
             }
         }
-        .onChange(of: viewModel.locationModel) {
-            guard let locationModel = viewModel.locationModel else { return }
-            cardViewModel.setLocationModel(locationModel)
+        .onChange(of: viewModel.location) {
+            guard let location = viewModel.location else { return }
+            cardViewModel.setLocationModel(location)
         }
         .onChange(of: viewModel.isExistingLocation) {
             toolbarAddItemOpacity = viewModel.isExistingLocation == true ? 0.0 : 1.0

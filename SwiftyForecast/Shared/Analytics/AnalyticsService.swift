@@ -9,8 +9,12 @@
 import Foundation
 import FirebaseAnalytics
 
-final class AnalyticsService: LogEventService {
-    func log(event: String, parameters: [String: Any]) {
-        Analytics.logEvent(event, parameters: parameters)
+protocol AnalyticsServiceProtocol: AnyObject {
+    func send(event: String, metadata: [String: String])
+}
+
+final class AnalyticsService: AnalyticsServiceProtocol {
+    func send(event: String, metadata: [String: String]) {
+        Analytics.logEvent(event, parameters: metadata)
     }
 }
