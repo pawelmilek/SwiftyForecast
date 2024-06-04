@@ -9,19 +9,24 @@
 enum TemperatureNotation: Int, CaseIterable {
     case fahrenheit
     case celsius
-}
-
-// MARK: - CustomStringConvertible protocol
-extension TemperatureNotation: CustomStringConvertible {
 
     var description: String {
         switch self {
         case .fahrenheit:
-            return "ºF"
+            "ºF"
 
         case .celsius:
-            return "ºC"
+            "ºC"
         }
     }
 
+    var name: String {
+        switch self {
+        case .fahrenheit:
+            "fahrenheit"
+
+        case .celsius:
+            "celsius"
+        }
+    }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 final class ForecastLogEvent: ObservableObject {
     enum LogEventType {
+        static let switchTempNotation = "temp_notation_switched"
         static let aboutRow = "about_row_tapped"
         static let search = "location_searched"
         static let location = "location_selected"
@@ -20,6 +21,13 @@ final class ForecastLogEvent: ObservableObject {
 
     init(service: LogEventService) {
         self.service = service
+    }
+
+    func logSwitchTempNotationEvent(value: String) {
+        service.log(
+            event: LogEventType.switchTempNotation,
+            parameters: ["temp_notation": value]
+        )
     }
 
     func logAboutRowEvent(title: String) {

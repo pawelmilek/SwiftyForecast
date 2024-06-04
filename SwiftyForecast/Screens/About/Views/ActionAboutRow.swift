@@ -1,31 +1,23 @@
 //
-//  AboutRow.swift
+//  ActionAboutRow.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 12/23/23.
-//  Copyright © 2023 Pawel Milek. All rights reserved.
+//  Created by Pawel Milek on 6/3/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import SwiftUI
 
-struct AboutRow: View {
+struct ActionAboutRow: View {
     let tintColor: Color
     let symbol: String
     let title: String
-    let content: String
+    let action: (() -> Void)
 
     var body: some View {
-        HStack {
+        Button(action: action) {
             labelView
-            contentView
         }
-    }
-
-    private var contentView: some View {
-        Text(content)
-            .foregroundStyle(.accent)
-            .fontWeight(.heavy)
-            .font(.footnote)
     }
 
     private var labelView: some View {
@@ -37,6 +29,7 @@ struct AboutRow: View {
                 Image(systemName: symbol)
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
+
             }
             Text(title)
                 .font(.footnote)
@@ -47,11 +40,12 @@ struct AboutRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    AboutRow(
+    ActionAboutRow(
         tintColor: .blue,
         symbol: "apps.iphone",
         title: "Application",
-        content: "Swifty Forecast"
+        action: { }
     )
     .padding()
 }
+

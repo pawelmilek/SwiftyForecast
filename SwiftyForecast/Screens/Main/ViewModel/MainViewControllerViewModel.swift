@@ -42,19 +42,32 @@ final class MainViewControllerViewModel: ObservableObject {
     private let notationController: NotationController
     private let measurementSystemNotification: MeasurementSystemNotification
     private let databaseManager: DatabaseManager
+    private let logEvent: ForecastLogEvent
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
+
+    convenience init(service: WeatherServiceProtocol) {
+        self.init(
+            service: service,
+            notationController: NotationController(),
+            measurementSystemNotification: MeasurementSystemNotification(),
+            databaseManager: RealmManager.shared,
+            logEvent: ForecastLogEvent(service: AnalyticsService())
+        )
+    }
 
     init(
         service: WeatherServiceProtocol,
         notationController: NotationController = NotationController(),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
-        databaseManager: DatabaseManager = RealmManager.shared
+        databaseManager: DatabaseManager = RealmManager.shared,
+        logEvent: ForecastLogEvent = ForecastLogEvent(service: AnalyticsService())
     ) {
         self.service = service
         self.notationController = notationController
         self.measurementSystemNotification = measurementSystemNotification
         self.databaseManager = databaseManager
+        self.logEvent = logEvent
         registerRealmCollectionNotificationToken()
     }
 
@@ -133,6 +146,7 @@ final class MainViewControllerViewModel: ObservableObject {
         postDidChangeMeasurementSystem()
         unitSelectionHapticFeedback()
         reloadWidgetTimeline()
+        logEvent.logSwitchTempNotationEvent(value: selectedTemperatureNotation.name)
     }
 
     private func postDidChangeMeasurementSystem() {

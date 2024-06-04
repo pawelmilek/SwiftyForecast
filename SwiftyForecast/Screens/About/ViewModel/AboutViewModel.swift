@@ -14,46 +14,40 @@ final class AboutViewModel: ObservableObject {
     @Published private(set) var appName = ""
     @Published private(set) var appVersion = ""
     @Published private(set) var appCompatibility = ""
-    @Published private(set) var appURLString = ""
-    @Published private(set) var appStorePreviewURLString = ""
+    @Published private(set) var appURL: URL?
+    @Published private(set) var appStorePreviewURL: URL?
+    @Published private(set) var writeReviewURL: URL?
+    @Published private(set) var privacyPolicyURL: URL?
+    @Published private(set) var weatherDataProviderURL: URL?
     @Published private(set) var currentYear = ""
-    @Published private(set) var frameworks = [String]()
     @Published private var bundle: Bundle
     @Published private var buildConfigurationFile: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
-    private var appId = 0
-
+    private let logEvent: ForecastLogEvent
     private var cancellables = Set<AnyCancellable>()
+    private var appId = 0
+    let appStorePreviewTip = AppStorePreviewTip()
 
     convenience init() {
         self.init(
             bundle: .main,
             buildConfigurationFile: .init(),
-            networkResourceFactory: NetworkResourceFactory()
+            networkResourceFactory: NetworkResourceFactory(),
+            logEvent: ForecastLogEvent(service: AnalyticsService())
         )
     }
 
     init(
         bundle: Bundle,
         buildConfigurationFile: BuildConfigurationFile,
-        networkResourceFactory: NetworkResourceFactoryProtocol
+        networkResourceFactory: NetworkResourceFactoryProtocol,
+        logEvent: ForecastLogEvent
     ) {
         self.bundle = bundle
         self.buildConfigurationFile = buildConfigurationFile
         self.networkResourceFactory = networkResourceFactory
+        self.logEvent = logEvent
         self.currentYear = Date.now.formatted(.dateTime.year())
-        self.frameworks = [
-            "UIKit",
-            "SwiftUI",
-            "Combine",
-            "Charts",
-            "WidgetKit",
-            "MapKit",
-            "StoreKit",
-            "WebKit",
-            "TipKit"
-        ]
-
         subscribeToPublishers()
     }
 
@@ -71,8 +65,11 @@ final class AboutViewModel: ObservableObject {
             .sink { [weak self] buildConfigurationFile in
                 guard let self else { return }
                 appId = buildConfigurationFile.appId()
-                appURLString = NetworkResourceType.appShare(appId: appId).stringURL
-                appStorePreviewURLString = NetworkResourceType.appStorePreview.stringURL
+                appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).content()
+                appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).content()
+                writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).content()
+                privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).content()
+                weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).content()
             }
             .store(in: &cancellables)
     }
@@ -96,24 +93,6 @@ final class AboutViewModel: ObservableObject {
         bugEmail.send(openURL: openURL)
     }
 
-    func openPrivacyPolicy(_ openURL: OpenURLAction) {
-        let privacyPolicy = networkResourceFactory.make(by: .privacyPolicy)
-        guard let url = try? privacyPolicy.content() else { return }
-        openURL(url)
-    }
-
-    func openAppStoreReview(_ openURL: OpenURLAction) {
-        let writeReview = networkResourceFactory.make(by: .appStoreReview(appId: appId))
-        guard let url = try? writeReview.content() else { return }
-        openURL(url)
-    }
-
-    func openWeatherService(_ openURL: OpenURLAction) {
-        let weatherService = networkResourceFactory.make(by: .weatherService)
-        guard let url = try? weatherService.content() else { return }
-        openURL(url)
-    }
-
     func shareURL() -> URL {
         guard let url = URL(string: NetworkResourceType.appShare(appId: appId).stringURL) else {
             fatalError()
@@ -121,4 +100,13 @@ final class AboutViewModel: ObservableObject {
 
         return url
     }
+
+    func logEventRowTapped(_ title: String) {
+        logEvent.logAboutRowEvent(title: title)
+    }
+
+    func logEventScreen(_ name: String, className: String) {
+        logEvent.logScreenEvent(name: name, className: className)
+    }
+
 }

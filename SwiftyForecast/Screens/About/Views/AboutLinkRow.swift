@@ -1,31 +1,25 @@
 //
-//  AboutRow.swift
+//  AboutLinkRow.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 12/23/23.
-//  Copyright © 2023 Pawel Milek. All rights reserved.
+//  Created by Pawel Milek on 6/3/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import SwiftUI
 
-struct AboutRow: View {
+struct AboutLinkRow: View {
     let tintColor: Color
     let symbol: String
     let title: String
-    let content: String
+    let url: URL?
 
     var body: some View {
-        HStack {
-            labelView
-            contentView
-        }
-    }
-
-    private var contentView: some View {
-        Text(content)
-            .foregroundStyle(.accent)
-            .fontWeight(.heavy)
-            .font(.footnote)
+        Button(action: {}, label: {
+            Link(destination: url!, label: {
+                labelView
+            })
+        })
     }
 
     private var labelView: some View {
@@ -37,21 +31,23 @@ struct AboutRow: View {
                 Image(systemName: symbol)
                     .foregroundStyle(.white)
                     .fontWeight(.semibold)
+
             }
             Text(title)
                 .font(.footnote)
                 .foregroundStyle(Color(.label))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .font(.footnote)
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    AboutRow(
-        tintColor: .blue,
-        symbol: "apps.iphone",
-        title: "Application",
-        content: "Swifty Forecast"
+#Preview {
+    AboutLinkRow(
+        tintColor: .pink,
+        symbol: "globe",
+        title: "Website",
+        url: URL(string: "https://sites.google.com/view/pmilek/home")!
     )
     .padding()
 }

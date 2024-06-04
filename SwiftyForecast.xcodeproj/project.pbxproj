@@ -73,7 +73,6 @@
 		E2416FF22B331E06009C8F81 /* MediumWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FF12B331E06009C8F81 /* MediumWidgetView.swift */; };
 		E2416FF52B331F52009C8F81 /* SmallWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FF42B331F52009C8F81 /* SmallWidgetView.swift */; };
 		E2447C682BFBAE6E0016A590 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		E249ABBC2B3476220020B88D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249ABBB2B3476220020B88D /* AboutView.swift */; };
 		E249ABBE2B3484980020B88D /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249ABBD2B3484980020B88D /* AboutViewController.swift */; };
 		E24E90752ADA81DF009255C8 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24E90742ADA81DF009255C8 /* WeatherViewController.swift */; };
 		E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */; };
@@ -85,7 +84,6 @@
 		E2644E402C0BC6EB00B67E18 /* ShareRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644E3F2C0BC6EB00B67E18 /* ShareRow.swift */; };
 		E266227E2B0A110D0010B567 /* LocationSearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E266227D2B0A110D0010B567 /* LocationSearchResultList.swift */; };
 		E26ACD1B24FF204000AC15A6 /* ForecastWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */; };
-		E26CDFAF2B408B8B0018B5D2 /* AboutFrameworkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26CDFAE2B408B8B0018B5D2 /* AboutFrameworkView.swift */; };
 		E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* MainCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
 		E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2768B542B30ED14004C4994 /* HourlyEntry.swift */; };
@@ -263,6 +261,11 @@
 		E2E6C6F92C0E312100500EE8 /* LogEventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6F82C0E312100500EE8 /* LogEventService.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* AnalyticsService.swift */; };
 		E2E6C6FD2C0E315900500EE8 /* ForecastLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FC2C0E315900500EE8 /* ForecastLogEvent.swift */; };
+		E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */; };
+		E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */; };
+		E2E6C7032C0EAD2C00500EE8 /* AboutShareRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */; };
+		E2E6C7052C0EAF3900500EE8 /* ActionAboutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */; };
+		E2E6C7062C0EB0FA00500EE8 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249ABBB2B3476220020B88D /* AboutView.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
 		E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */; };
 		E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */; };
@@ -395,7 +398,6 @@
 		E2644E3F2C0BC6EB00B67E18 /* ShareRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRow.swift; sourceTree = "<group>"; };
 		E266227D2B0A110D0010B567 /* LocationSearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultList.swift; sourceTree = "<group>"; };
 		E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherModel.swift; sourceTree = "<group>"; };
-		E26CDFAE2B408B8B0018B5D2 /* AboutFrameworkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFrameworkView.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E2768B542B30ED14004C4994 /* HourlyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyEntry.swift; sourceTree = "<group>"; };
@@ -510,6 +512,10 @@
 		E2E6C6F82C0E312100500EE8 /* LogEventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEventService.swift; sourceTree = "<group>"; };
 		E2E6C6FA2C0E313000500EE8 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		E2E6C6FC2C0E315900500EE8 /* ForecastLogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastLogEvent.swift; sourceTree = "<group>"; };
+		E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLinkRow.swift; sourceTree = "<group>"; };
+		E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNavigationLinkRow.swift; sourceTree = "<group>"; };
+		E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutShareRow.swift; sourceTree = "<group>"; };
+		E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionAboutRow.swift; sourceTree = "<group>"; };
 		E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+PreferredFont.swift"; sourceTree = "<group>"; };
 		E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleasedDevices.swift; sourceTree = "<group>"; };
@@ -1109,9 +1115,12 @@
 		E2CC9A042B61532F0044634E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E26CDFAE2B408B8B0018B5D2 /* AboutFrameworkView.swift */,
+				E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */,
+				E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */,
 				E21E386D2B37576A00513B26 /* AboutRow.swift */,
+				E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */,
 				E249ABBB2B3476220020B88D /* AboutView.swift */,
+				E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */,
 				E249ABBD2B3484980020B88D /* AboutViewController.swift */,
 				E28CEC072B39BB82003DB3A6 /* HTMLView.swift */,
 				E28179172B38768A00D06917 /* LicenseView.swift */,
@@ -1656,7 +1665,6 @@
 				E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */,
 				E21E386E2B37576A00513B26 /* AboutRow.swift in Sources */,
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
-				E249ABBC2B3476220020B88D /* AboutView.swift in Sources */,
 				E2A32F6B25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */,
 				E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */,
 				E2B0357B2500885100DC0E77 /* DailyForecastModel.swift in Sources */,
@@ -1666,15 +1674,19 @@
 				E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */,
 				E296A7EB2AD7E15B001BFADB /* ForecastWeatherResponse.swift in Sources */,
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
+				E2E6C7032C0EAD2C00500EE8 /* AboutShareRow.swift in Sources */,
 				E28CEC082B39BB82003DB3A6 /* HTMLView.swift in Sources */,
 				E2117B4B2B29D69700F91ADB /* SpeedRenderer.swift in Sources */,
 				E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */,
 				E20DA45B214348AD0047491B /* NetworkReachabilityManager.swift in Sources */,
 				E2117B482B29D48300F91ADB /* TemperatureRenderer.swift in Sources */,
 				E22450722B9F3F9800F14BAA /* CurrentWeatherModel.swift in Sources */,
+				E2E6C7052C0EAF3900500EE8 /* ActionAboutRow.swift in Sources */,
 				E2227E872ADD54B8000C3886 /* TemperatureValueDisplayable.swift in Sources */,
+				E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */,
 				E22450772B9F3F9800F14BAA /* WindSpeed.swift in Sources */,
 				E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */,
+				E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */,
 				E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */,
 				E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */,
 				E22450752B9F3F9800F14BAA /* Humidity.swift in Sources */,
@@ -1704,7 +1716,6 @@
 				E2D430CB2BB4D954003F26EE /* LocationSearchView.swift in Sources */,
 				E2D960812120F34800AE0B6E /* GeocodeLocation.swift in Sources */,
 				E2854FFE2290F24800CD7554 /* TemperatureNotation.swift in Sources */,
-				E26CDFAF2B408B8B0018B5D2 /* AboutFrameworkView.swift in Sources */,
 				E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */,
 				E28179182B38768A00D06917 /* LicenseView.swift in Sources */,
 				E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */,
@@ -1715,6 +1726,7 @@
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
 				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
+				E2E6C7062C0EB0FA00500EE8 /* AboutView.swift in Sources */,
 				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
 				E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,

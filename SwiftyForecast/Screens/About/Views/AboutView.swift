@@ -22,25 +22,19 @@ struct AboutView: View {
                         tintColor: .customPrimary,
                         symbol: "apps.iphone",
                         title: "Application",
-                        label: viewModel.appName,
-                        link: nil,
-                        action: nil
+                        content: viewModel.appName
                     )
                     AboutRow(
                         tintColor: .customPrimary,
                         symbol: "gear",
                         title: "Version",
-                        label: viewModel.appVersion,
-                        link: nil,
-                        action: nil
+                        content: viewModel.appVersion
                     )
                     AboutRow(
                         tintColor: .customPrimary,
                         symbol: "info.circle",
                         title: "Compatibility",
-                        label: viewModel.appCompatibility,
-                        link: nil,
-                        action: nil
+                        content: viewModel.appCompatibility
                     )
                     ShareRow(
                         item: viewModel.shareURL(),
@@ -50,83 +44,73 @@ struct AboutView: View {
                     Text("App")
                 }
                 Section {
-                    AboutRow(
+                    AboutLinkRow(
                         tintColor: .customPrimary,
                         symbol: "apps.iphone",
                         title: "Apps Preview",
-                        label: nil,
-                        link: (
-                            destination: viewModel.appStorePreviewURLString,
-                            label: ""
-                        ),
-                        action: nil
+                        url: viewModel.appStorePreviewURL
                     )
-                    .popoverTip(AppStorePreviewTip(), arrowEdge: .bottom)
+                    .simultaneousGesture(TapGesture().onEnded() {
+                        viewModel.logEventRowTapped("Apps Preview")
+                    })
+                    .popoverTip(viewModel.appStorePreviewTip, arrowEdge: .bottom)
                 } header: {
                     Text("App Store")
                 }
                 Section {
-                    AboutRow(
+                    ActionAboutRow(
                         tintColor: .customPrimary,
                         symbol: "envelope.fill",
                         title: "Contact",
-                        label: nil,
-                        link: nil,
                         action: reportFeedback
                     )
-                    AboutRow(
+                    ActionAboutRow(
                         tintColor: .red,
                         symbol: "ant.fill",
                         title: "Report Issue",
-                        label: nil,
-                        link: nil,
                         action: reportIssue
                     )
-                    AboutRow(
+                    AboutLinkRow(
                         tintColor: .yellow,
                         symbol: "star.fill",
                         title: "Rate Application",
-                        label: nil,
-                        link: nil,
-                        action: requestReview
+                        url: viewModel.writeReviewURL
                     )
+                    .simultaneousGesture(TapGesture().onEnded() {
+                        viewModel.logEventRowTapped("Rate Application")
+                    })
                 } header: {
                     Text("Feedback")
                 }
 
                 Section {
-                    NavigationLink {
-                        LicenseView()
-                    } label: {
-                        AboutRow(
-                            tintColor: .customPrimary,
-                            symbol: "doc.plaintext.fill",
-                            title: "Licenses",
-                            label: nil,
-                            link: nil,
-                            action: nil
-                        )
-                    }
-                    AboutRow(
+                    AboutNavigationLinkRow(
+                        tintColor: .customPrimary,
+                        symbol: "doc.plaintext.fill",
+                        title: "Licenses",
+                        destination: {
+                            LicenseView()
+                        }
+                    )
+                    AboutLinkRow(
                         tintColor: .customPrimary,
                         symbol: "lock.shield.fill",
                         title: "Privacy Policy",
-                        label: nil,
-                        link: nil,
-                        action: openDataPrivacyPolicy
+                        url: viewModel.privacyPolicyURL
                     )
+                    .simultaneousGesture(TapGesture().onEnded() {
+                        viewModel.logEventRowTapped("Privacy Policy")
+                    })
                 } header: {
                     Text("Documents")
                 }
 
                 Section {
-                    AboutRow(
+                    AboutLinkRow(
                         tintColor: .customPrimary,
                         symbol: "sun.haze.fill",
                         title: "OpenWeather",
-                        label: nil,
-                        link: nil,
-                        action: openDataProvider
+                        url: viewModel.weatherDataProviderURL
                     )
                 } header: {
                     Text("Data Provider")
@@ -150,6 +134,9 @@ struct AboutView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.logEventScreen("About Screen", className: "\(type(of: self))")
+        }
     }
 
     private func reportFeedback() {
@@ -158,18 +145,6 @@ struct AboutView: View {
 
     private func reportIssue() {
         viewModel.reportIssue(openURL)
-    }
-
-    private func openDataPrivacyPolicy() {
-        viewModel.openPrivacyPolicy(openURL)
-    }
-
-    private func openDataProvider() {
-        viewModel.openWeatherService(openURL)
-    }
-
-    private func requestReview() {
-        viewModel.openAppStoreReview(openURL)
     }
 }
 
