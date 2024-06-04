@@ -265,7 +265,7 @@
 		E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */; };
 		E2E6C7032C0EAD2C00500EE8 /* AboutShareRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */; };
 		E2E6C7052C0EAF3900500EE8 /* ActionAboutRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */; };
-		E2E6C7062C0EB0FA00500EE8 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249ABBB2B3476220020B88D /* AboutView.swift */; };
+		E2E6C7062C0EB0FA00500EE8 /* AboutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E249ABBB2B3476220020B88D /* AboutScreen.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
 		E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */; };
 		E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */; };
@@ -390,7 +390,7 @@
 		E2416FEF2B331D74009C8F81 /* RectangularWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularWidgetView.swift; sourceTree = "<group>"; };
 		E2416FF12B331E06009C8F81 /* MediumWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediumWidgetView.swift; sourceTree = "<group>"; };
 		E2416FF42B331F52009C8F81 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
-		E249ABBB2B3476220020B88D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		E249ABBB2B3476220020B88D /* AboutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreen.swift; sourceTree = "<group>"; };
 		E249ABBD2B3484980020B88D /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		E24E90742ADA81DF009255C8 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		E24EB89225410010001F5D72 /* MockGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGenerator.swift; sourceTree = "<group>"; };
@@ -1119,7 +1119,7 @@
 				E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */,
 				E21E386D2B37576A00513B26 /* AboutRow.swift */,
 				E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */,
-				E249ABBB2B3476220020B88D /* AboutView.swift */,
+				E249ABBB2B3476220020B88D /* AboutScreen.swift */,
 				E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */,
 				E249ABBD2B3484980020B88D /* AboutViewController.swift */,
 				E28CEC072B39BB82003DB3A6 /* HTMLView.swift */,
@@ -1726,7 +1726,7 @@
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
 				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
-				E2E6C7062C0EB0FA00500EE8 /* AboutView.swift in Sources */,
+				E2E6C7062C0EB0FA00500EE8 /* AboutScreen.swift in Sources */,
 				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
 				E2D430F62BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,

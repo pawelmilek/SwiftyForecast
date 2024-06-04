@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 class AboutViewController: UIViewController {
-    private var hostingViewController: UIHostingController<AboutView>!
+    private var hostingViewController: UIHostingController<AboutScreen>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class AboutViewController: UIViewController {
     }
 
     private func setup() {
-        let informationView = AboutView()
+        let informationView = AboutScreen()
         hostingViewController = UIHostingController(rootView: informationView)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)
