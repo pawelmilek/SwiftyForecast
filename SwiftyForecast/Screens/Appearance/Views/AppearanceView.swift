@@ -11,7 +11,7 @@ import SwiftUI
 struct AppearanceView: View {
     @AppStorage("appearanceTheme") private var appearanceTheme: AppearanceTheme = .systemDefault
     @Environment(\.colorScheme) private var colorScheme
-    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
+    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
     @State private var circleOffset = CGSize.zero
 
     var onAppearanceChange: () -> Void

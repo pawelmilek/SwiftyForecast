@@ -52,7 +52,7 @@ final class MainViewControllerViewModel: ObservableObject {
             notationController: NotationController(),
             measurementSystemNotification: MeasurementSystemNotification(),
             databaseManager: RealmManager.shared,
-            analyticsManager: AnalyticsManager(service: AnalyticsService())
+            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         )
     }
 
@@ -61,7 +61,7 @@ final class MainViewControllerViewModel: ObservableObject {
         notationController: NotationController = NotationController(),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         databaseManager: DatabaseManager = RealmManager.shared,
-        analyticsManager: AnalyticsManager = AnalyticsManager(service: AnalyticsService())
+        analyticsManager: AnalyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
     ) {
         self.service = service
         self.notationController = notationController

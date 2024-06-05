@@ -9,9 +9,9 @@
 import Foundation
 
 final class AnalyticsManager: ObservableObject {
-    private let service: AnalyticsServiceProtocol
+    private let service: AnalyticsService
 
-    init(service: AnalyticsServiceProtocol) {
+    init(service: AnalyticsService) {
         self.service = service
     }
 

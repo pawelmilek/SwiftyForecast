@@ -33,7 +33,7 @@ final class AboutViewModel: ObservableObject {
             bundle: .main,
             buildConfigurationFile: .init(),
             networkResourceFactory: NetworkResourceFactory(),
-            analyticsManager: AnalyticsManager(service: AnalyticsService())
+            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         )
     }
 

@@ -13,7 +13,7 @@ struct LocationSearchResultList: View {
     @Environment(\.dismissSearch) private var dismissSearch
     @EnvironmentObject private var locationSearchCompleter: LocationSearchCompleter
     @StateObject private var searchResultConfig = LocationSearchResultConfiguration()
-    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
+    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
 
     var body: some View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in

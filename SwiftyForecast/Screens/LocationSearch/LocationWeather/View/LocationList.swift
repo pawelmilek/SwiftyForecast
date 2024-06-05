@@ -12,7 +12,7 @@ import TipKit
 
 struct LocationList: View {
     @Environment(\.isSearching) private var isSearching: Bool
-    @StateObject private var analyticsManager = AnalyticsManager(service: AnalyticsService())
+    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
 
     @Binding var searchText: String
     var onSelectRow: (LocationModel) -> Void

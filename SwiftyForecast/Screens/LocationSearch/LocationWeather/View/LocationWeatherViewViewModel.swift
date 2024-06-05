@@ -34,7 +34,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
         service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
         databaseManager: DatabaseManager = RealmManager.shared,
         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter(),
-        analyticsManager: AnalyticsManager = AnalyticsManager(service: AnalyticsService())
+        analyticsManager: AnalyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
     ) {
         self.searchCompletion = searchCompletion
         self.service = service
