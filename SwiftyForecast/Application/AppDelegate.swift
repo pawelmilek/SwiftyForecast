@@ -1,6 +1,5 @@
 import UIKit
 import TipKit
-import Combine
 import FirebaseCore
 
 @UIApplicationMain
@@ -10,16 +9,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var coordinator: MainCoordinator?
     private var reviewObserver: ReviewObserver?
-    private let networkReachabilityManager = NetworkReachabilityManager.shared
+    private var networkMonitor: NetworkMonitor?
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        setupNetworkMonitor()
         setupFirebase()
         setupCoordinator()
         setupTips()
-        setupNetworkReachabilityHandling()
         setNavigationBarStyle()
         setupAppearanceTheme()
         setupAppearanceThemeNotificationCenter()
@@ -38,6 +37,12 @@ private extension AppDelegate {
 
     func setupFirebase() {
         FirebaseApp.configure()
+    }
+
+    func setupNetworkMonitor() {
+        networkMonitor = NetworkMonitor(notificationCenter: .default)
+        setupNetworkReachabilityHandling()
+        networkMonitor?.startMonitoring()
     }
 
     func setupCoordinator() {
@@ -74,13 +79,13 @@ private extension AppDelegate {
             }
         }
 
-        networkReachabilityManager.whenUnreachable { _ in
+        networkMonitor?.whenUnreachable { _ in
             DispatchQueue.main.async {
                 onNetworkUnavailable()
             }
         }
 
-        networkReachabilityManager.whenReachable { _ in
+        networkMonitor?.whenReachable { _ in
             DispatchQueue.main.async {
                 onNetworkAvailable()
             }

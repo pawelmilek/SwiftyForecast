@@ -1,17 +1,25 @@
 import Foundation
 import Reachability
+import Combine
 
 @MainActor
-final class NetworkReachabilityManager {
-    static let shared = NetworkReachabilityManager()
+final class NetworkMonitor: ObservableObject {
     private let reachability: Reachability
+    private let notificationCenter: NotificationCenter
 
-    private init() {
+    init(notificationCenter: NotificationCenter) {
         do {
             reachability = try Reachability()
+            self.notificationCenter = notificationCenter
             registerObserver()
-            try reachability.startNotifier()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 
+    func startMonitoring() {
+        do {
+            try reachability.startNotifier()
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -19,10 +27,10 @@ final class NetworkReachabilityManager {
 }
 
 // MARK: - Private - Register observer
-private extension NetworkReachabilityManager {
+private extension NetworkMonitor {
 
     func registerObserver() {
-        NotificationCenter.default.addObserver(
+        notificationCenter.addObserver(
             self,
             selector: #selector(networkStatusChanged),
             name: .reachabilityChanged,
@@ -33,7 +41,7 @@ private extension NetworkReachabilityManager {
 }
 
 // MARK: - Private - Network status changed
-private extension NetworkReachabilityManager {
+private extension NetworkMonitor {
 
     @objc func networkStatusChanged(_ notification: Notification) {
         guard let reachability = notification.object as? Reachability else {
@@ -54,7 +62,7 @@ private extension NetworkReachabilityManager {
 }
 
 // MARK: - Network status checkers
-extension NetworkReachabilityManager {
+extension NetworkMonitor {
 
     func isReachable(completion: @escaping () -> Void) {
         if reachability.connection != .unavailable {
