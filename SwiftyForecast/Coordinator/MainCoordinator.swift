@@ -15,9 +15,14 @@ final class MainCoordinator: Coordinator {
 
     func start() {
         let viewController = UIViewController.make(MainViewController.self, from: .main)
-        viewController.viewModel = MainViewControllerViewModel(service: WeatherService(decoder: JSONSnakeCaseDecoded()))
+        viewController.viewModel = MainViewControllerViewModel(
+            service: WeatherService(decoder: JSONSnakeCaseDecoded())
+        )
         viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(
+            viewController,
+            animated: false
+        )
     }
 
     func openAboutViewController() {

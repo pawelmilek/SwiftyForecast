@@ -79,9 +79,9 @@ private extension AppDelegate {
     }
 
     func setupReviewObserver() {
-        if let topViewController = coordinator?.topViewController as? ReviewObserverEventResponder {
+        if let mainVC = coordinator?.topViewController as? ReviewObserverEventResponder {
             reviewObserver = ReviewObserver(
-                eventResponder: topViewController,
+                eventResponder: mainVC,
                 notificationCenter: .default
             )
             reviewObserver?.start()
