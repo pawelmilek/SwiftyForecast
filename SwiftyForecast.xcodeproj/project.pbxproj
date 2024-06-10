@@ -17,7 +17,6 @@
 		E20C6B1A2BE85BD800DDB57A /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = E20C6B182BE85BD800DDB57A /* CHANGELOG.md */; };
 		E20C6B1C2BE9ABC800DDB57A /* ConditionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225B4D92BE437DF00AD8906 /* ConditionModel.swift */; };
 		E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkMonitor.swift */; };
-		E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */; };
 		E2117B462B29B9F500F91ADB /* WeatherProviderDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */; };
 		E2117B482B29D48300F91ADB /* TemperatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */; };
 		E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */; };
@@ -77,7 +76,6 @@
 		E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225B4D92BE437DF00AD8906 /* ConditionModel.swift */; };
 		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E22A221B2AE004230069A83A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A221A2AE004230069A83A /* LocationManager.swift */; };
-		E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E233AC1123DE7D9000DC0EF5 /* Reachability */; };
 		E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
 		E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
@@ -362,7 +360,6 @@
 		E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSnakeCaseDecoded.swift; sourceTree = "<group>"; };
 		E20C6B182BE85BD800DDB57A /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		E20DA45A214348AD0047491B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
-		E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReachabilityError+ErrorHandleable.swift"; sourceTree = "<group>"; };
 		E2117B452B29B9F500F91ADB /* WeatherProviderDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProviderDataSource.swift; sourceTree = "<group>"; };
 		E2117B472B29D48300F91ADB /* TemperatureRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureRenderer.swift; sourceTree = "<group>"; };
 		E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedRenderer.swift; sourceTree = "<group>"; };
@@ -574,7 +571,6 @@
 				E20C6B172BE859DA00DDB57A /* Vortex in Frameworks */,
 				E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */,
 				E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */,
-				E233AC1223DE7D9000DC0EF5 /* Reachability in Frameworks */,
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
 				E2A5675B2B0779F4000324C0 /* Lottie in Frameworks */,
 			);
@@ -795,7 +791,6 @@
 			children = (
 				E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */,
 				E2D430F52BB4EBB9003F26EE /* MKCoordinateRegion+Equtable.swift */,
-				E20DA45E21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift */,
 				E2A567542B0773C0000324C0 /* Registrable.swift */,
 				E21ABD492AE9172300F93F01 /* UIApplication+KeyWindow.swift */,
 				E293695A249867740055FB2E /* UIApplication+TopViewController.swift */,
@@ -814,7 +809,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		E23997DF20E84371007D8CE4 /* Networking */ = {
+		E23997DF20E84371007D8CE4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */,
@@ -824,7 +819,7 @@
 				E2CF4DD722768B5200062E36 /* Service */,
 				E296A7EC2AD7E639001BFADB /* NetworkResponse */,
 			);
-			path = Networking;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		E23997E520E84371007D8CE4 /* Errors */ = {
@@ -1028,7 +1023,7 @@
 				E24E90572ADA7DF8009255C8 /* Screens */,
 				E21ABD3F2AE8269900F93F01 /* Shared */,
 				E270891824CE5904003F7587 /* Coordinator */,
-				E23997DF20E84371007D8CE4 /* Networking */,
+				E23997DF20E84371007D8CE4 /* Network */,
 				E283573B2B2728AA00E3807A /* RealmManager */,
 				E23997D820E840C1007D8CE4 /* Resources */,
 				E23997D720E84094007D8CE4 /* Storyboards */,
@@ -1438,7 +1433,6 @@
 			);
 			name = "Swifty Forecast";
 			packageProductDependencies = (
-				E233AC1123DE7D9000DC0EF5 /* Reachability */,
 				E290F2532ADDAF55001B3276 /* Kingfisher */,
 				E2A5675A2B0779F4000324C0 /* Lottie */,
 				E20C6B162BE859DA00DDB57A /* Vortex */,
@@ -1535,7 +1529,6 @@
 			);
 			mainGroup = E29911ED1D456EAC0083B484;
 			packageReferences = (
-				E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */,
 				E290F2522ADDAF55001B3276 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E2A567592B0779F4000324C0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
@@ -1676,7 +1669,6 @@
 				E2CC9A012B6150E80044634E /* AboutViewModel.swift in Sources */,
 				E28357362B2716B500E3807A /* CLAuthorizationStatus+CustomStringConvertible.swift in Sources */,
 				E2ED36E72C04EDC70001C3EF /* NetworkResourceType.swift in Sources */,
-				E20DA45F21434ACB0047491B /* ReachabilityError+ErrorHandleable.swift in Sources */,
 				E24E90752ADA81DF009255C8 /* WeatherViewController.swift in Sources */,
 				E2227E842ADD5439000C3886 /* TemperatureFormatterFactory.swift in Sources */,
 				E2DC146C248D496900D1A329 /* FileLoaderError.swift in Sources */,
@@ -2349,14 +2341,6 @@
 				minimumVersion = 1.0.1;
 			};
 		};
-		E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -2406,11 +2390,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
-		};
-		E233AC1123DE7D9000DC0EF5 /* Reachability */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E233AC1023DE7D9000DC0EF5 /* XCRemoteSwiftPackageReference "Reachability" */;
-			productName = Reachability;
 		};
 		E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

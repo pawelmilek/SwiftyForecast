@@ -1,99 +1,43 @@
 import Foundation
-import Reachability
 import Combine
+import Network
+//
+//protocol NetworkObserver: AnyObject {
+//    var hasNetworkConnection: Bool { get set }
+//    func start()
+//}
+//
+//extension NWPathMonitor: NetworkObserver {
+//    func start() {
+//        self.start(queue: DispatchQueue.global(qos: .userInteractive))
+//    }
+//}
 
-@MainActor
+extension NWPathMonitor: Sendable { }
+
 final class NetworkMonitor: ObservableObject {
-    private let reachability: Reachability
-    private let notificationCenter: NotificationCenter
+    @Published var hasNetworkConnection = true
+    private let monitor: NWPathMonitor
 
-    init(notificationCenter: NotificationCenter) {
-        do {
-            reachability = try Reachability()
-            self.notificationCenter = notificationCenter
-            registerObserver()
-        } catch {
-            fatalError(error.localizedDescription)
+    convenience init() {
+        self.init(monitor: .init())
+    }
+
+    init(monitor: NWPathMonitor) {
+        self.monitor = monitor
+        monitor.pathUpdateHandler = { [weak self] path in
+            guard let self else { return }
+            setNetworkConnectionState(path.status == .satisfied)
         }
     }
 
-    func startMonitoring() {
-        do {
-            try reachability.startNotifier()
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-}
-
-// MARK: - Private - Register observer
-private extension NetworkMonitor {
-
-    func registerObserver() {
-        notificationCenter.addObserver(
-            self,
-            selector: #selector(networkStatusChanged),
-            name: .reachabilityChanged,
-            object: reachability
-        )
+    private func setNetworkConnectionState(_ value: Bool) {
+        hasNetworkConnection = value
     }
 
-}
-
-// MARK: - Private - Network status changed
-private extension NetworkMonitor {
-
-    @objc func networkStatusChanged(_ notification: Notification) {
-        guard let reachability = notification.object as? Reachability else {
-            return
-        }
-
-        switch reachability.connection {
-        case .wifi:
-            debugPrint("File: \(#file), Function: \(#function), line: \(#line) Reachable via WiFi")
-
-        case .cellular:
-            debugPrint("File: \(#file), Function: \(#function), line: \(#line) Reachable via Cellular")
-
-        case .unavailable:
-            debugPrint("File: \(#file), Function: \(#function), line: \(#line) Network not reachable")
-        }
-    }
-}
-
-// MARK: - Network status checkers
-extension NetworkMonitor {
-
-    func isReachable(completion: @escaping () -> Void) {
-        if reachability.connection != .unavailable {
-            completion()
-        }
+    func start() {
+        monitor.start(queue: DispatchQueue.global(qos: .userInteractive))
     }
 
-    func isUnreachable(completion: @escaping () -> Void) {
-        if reachability.connection == .unavailable {
-            completion()
-        }
-    }
-
-    func isReachableViaWWANCellular(completion: @escaping () -> Void) {
-        if reachability.connection == .cellular {
-            completion()
-        }
-    }
-
-    func isReachableViaWiFi(completion: @escaping () -> Void) {
-        if reachability.connection == .wifi {
-            completion()
-        }
-    }
-
-    func whenReachable(completionHandler: @escaping (_ networkReachable: Reachability) -> Void) {
-        reachability.whenReachable = completionHandler
-    }
-
-    func whenUnreachable(completionHandler: @escaping (_ networkReachable: Reachability) -> Void) {
-        reachability.whenUnreachable = completionHandler
-    }
 
 }

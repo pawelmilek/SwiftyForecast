@@ -48,4 +48,21 @@ final class MainCoordinator: Coordinator {
     func popTopViewController() {
         navigationController.popViewController(animated: true)
     }
+
+    func pushOfflineViewController() {
+        guard !navigationController.viewControllers
+            .contains(where: { $0.view.tag == OfflineViewController.identifier }) else {
+            return
+        }
+        navigationController.pushViewController(OfflineViewController(), animated: false)
+    }
+
+    func popOfflineViewController() {
+        guard let offlineVCIndex = navigationController.viewControllers
+            .firstIndex(where: { $0.view.tag == OfflineViewController.identifier }) else {
+            return
+        }
+
+        navigationController.viewControllers.remove(at: offlineVCIndex)
+    }
 }

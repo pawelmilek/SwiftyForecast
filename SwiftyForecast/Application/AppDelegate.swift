@@ -1,6 +1,7 @@
 import UIKit
 import TipKit
 import FirebaseCore
+import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,6 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var coordinator: MainCoordinator?
     private var reviewObserver: ReviewObserver?
     private var networkMonitor: NetworkMonitor?
+    private var cancellables = Set<AnyCancellable>()
 
     func application(
         _ application: UIApplication,
@@ -40,9 +42,9 @@ private extension AppDelegate {
     }
 
     func setupNetworkMonitor() {
-        networkMonitor = NetworkMonitor(notificationCenter: .default)
-        setupNetworkReachabilityHandling()
-        networkMonitor?.startMonitoring()
+        networkMonitor = NetworkMonitor()
+        subscribeToNetworkMonitorPublisher()
+        networkMonitor?.start()
     }
 
     func setupCoordinator() {
@@ -61,35 +63,19 @@ private extension AppDelegate {
         ])
     }
 
-    func setupNetworkReachabilityHandling() {
-        let onNetworkUnavailable = {
-            if let rootViewController = self.window?.rootViewController as? UINavigationController {
-                let offlineViewController = OfflineViewController()
-                rootViewController.pushViewController(offlineViewController, animated: false)
-            }
-        }
-
-        let onNetworkAvailable = {
-            if let rootViewController = self.window?.rootViewController as? UINavigationController {
-                if (rootViewController.viewControllers.first(where: {
-                    $0.view.tag == OfflineViewController.identifier
-                })) != nil {
-                    rootViewController.popViewController(animated: false)
+    func subscribeToNetworkMonitorPublisher() {
+        networkMonitor?.$hasNetworkConnection
+            .print()
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] hasNetworkConnection in
+                if hasNetworkConnection {
+                    self?.coordinator?.popOfflineViewController()
+                } else {
+                    self?.coordinator?.pushOfflineViewController()
                 }
             }
-        }
-
-        networkMonitor?.whenUnreachable { _ in
-            DispatchQueue.main.async {
-                onNetworkUnavailable()
-            }
-        }
-
-        networkMonitor?.whenReachable { _ in
-            DispatchQueue.main.async {
-                onNetworkAvailable()
-            }
-        }
+            .store(in: &cancellables)
     }
 
     func setupReviewObserver() {
