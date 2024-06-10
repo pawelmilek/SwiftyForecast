@@ -1,14 +1,21 @@
 import UIKit
+import Combine
 
 final class DailyViewCell: UITableViewCell {
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet private weak var dateLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
+    @IBOutlet private weak var temperatureLabel: UILabel!
+    private var cancellables = Set<AnyCancellable>()
+    private var viewModel: DailyViewCellViewModel? {
+        didSet {
+            subscribePublishers()
+            viewModel?.render()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        registerTraitUserInterfaceStyleObserver()
     }
 
     override func prepareForReuse() {
@@ -16,6 +23,10 @@ final class DailyViewCell: UITableViewCell {
         dateLabel.attributedText = NSAttributedString()
         iconImageView.image = UIImage()
         temperatureLabel.text = ""
+    }
+
+    func set(viewModel: DailyViewCellViewModel) {
+        self.viewModel = viewModel
     }
 }
 
@@ -33,6 +44,7 @@ private extension DailyViewCell {
         temperatureLabel.textColor = Style.DailyCell.temperatureColor
         temperatureLabel.textAlignment = Style.DailyCell.temperatureAlignment
         setupConditionIconShadow()
+        registerTraitUserInterfaceStyleObserver()
     }
 
     func registerTraitUserInterfaceStyleObserver() {
@@ -50,5 +62,24 @@ private extension DailyViewCell {
         iconImageView.layer.shadowOffset = Style.DailyCell.iconShadowOffset
         iconImageView.layer.shadowColor = UIColor.shadow.cgColor
         iconImageView.layer.masksToBounds = false
+    }
+
+    func subscribePublishers() {
+        guard let viewModel else { return }
+
+        viewModel.$attributedDate
+            .assign(to: \.attributedText!, on: dateLabel)
+            .store(in: &cancellables)
+
+        viewModel.$temperature
+            .assign(to: \.text!, on: temperatureLabel)
+            .store(in: &cancellables)
+
+        viewModel.$iconURL
+            .compactMap { $0 }
+            .sink { [weak self] iconURL in
+                self?.iconImageView.kf.setImage(with: iconURL)
+            }
+            .store(in: &cancellables)
     }
 }

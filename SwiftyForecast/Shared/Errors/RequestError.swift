@@ -6,16 +6,14 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-enum RequestError: Error {
+import Foundation
+
+enum RequestError: LocalizedError {
     case invalidURL(url: String)
     case response
     case decode
     case client(statusCode: Int)
     case unknown(statusCode: Int)
-}
-
-// MARK: - Error description
-extension RequestError {
 
     var errorDescription: String? {
         switch self {
@@ -36,5 +34,4 @@ extension RequestError {
 
         }
     }
-
 }

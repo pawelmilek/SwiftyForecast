@@ -276,6 +276,9 @@
 		E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1474248F221E00D1A329 /* UIViewController+Containment.swift */; };
 		E2DC148B248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC148A248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift */; };
 		E2DC149524955C8D00D1A329 /* MainViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC149424955C8D00D1A329 /* MainViewControllerViewModel.swift */; };
+		E2E4BA4F2C1754A800734382 /* HourlyForcecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA4E2C1754A800734382 /* HourlyForcecastDataSource.swift */; };
+		E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */; };
+		E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E6C6FD2C0E315900500EE8 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FC2C0E315900500EE8 /* AnalyticsManager.swift */; };
 		E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */; };
@@ -533,6 +536,9 @@
 		E2DC1474248F221E00D1A329 /* UIViewController+Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Containment.swift"; sourceTree = "<group>"; };
 		E2DC148A248F24E800D1A329 /* UIViewController+MakeFromStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+MakeFromStoryboard.swift"; sourceTree = "<group>"; };
 		E2DC149424955C8D00D1A329 /* MainViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerViewModel.swift; sourceTree = "<group>"; };
+		E2E4BA4E2C1754A800734382 /* HourlyForcecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForcecastDataSource.swift; sourceTree = "<group>"; };
+		E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastDataSource.swift; sourceTree = "<group>"; };
+		E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastFlowLayout.swift; sourceTree = "<group>"; };
 		E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		E2E6C6FC2C0E315900500EE8 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLinkRow.swift; sourceTree = "<group>"; };
@@ -1070,7 +1076,6 @@
 			isa = PBXGroup;
 			children = (
 				E2D430BA2BB4D954003F26EE /* View */,
-				E2D430BC2BB4D954003F26EE /* ViewModel */,
 			);
 			path = LocationWeather;
 			sourceTree = "<group>";
@@ -1199,6 +1204,8 @@
 			isa = PBXGroup;
 			children = (
 				E24E90742ADA81DF009255C8 /* WeatherViewController.swift */,
+				E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */,
+				E2E4BA522C17595C00734382 /* DataSource */,
 				E2FEB7AB2B15F8C7009D54B2 /* CurrentWeatherCard */,
 				E24E90722ADA8106009255C8 /* Daily */,
 				E24E90732ADA811F009255C8 /* Hourly */,
@@ -1369,13 +1376,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		E2D430BC2BB4D954003F26EE /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		E2D430F82BB4F2A8003F26EE /* LocationRow */ = {
 			isa = PBXGroup;
 			children = (
@@ -1383,6 +1383,15 @@
 				E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */,
 			);
 			path = LocationRow;
+			sourceTree = "<group>";
+		};
+		E2E4BA522C17595C00734382 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				E2E4BA4E2C1754A800734382 /* HourlyForcecastDataSource.swift */,
+				E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */,
+			);
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */ = {
@@ -1677,6 +1686,7 @@
 				E2D430C52BB4D954003F26EE /* HourlyForecastChartViewModel.swift in Sources */,
 				E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */,
 				E2227E8B2ADD54D7000C3886 /* TemperatureFahrenheitFormatter.swift in Sources */,
+				E2E4BA4F2C1754A800734382 /* HourlyForcecastDataSource.swift in Sources */,
 				E2227E892ADD54C7000C3886 /* TemperatureCelsiusFormatter.swift in Sources */,
 				E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
 				E2D430BD2BB4D954003F26EE /* HourlyForecastChartDataSource.swift in Sources */,
@@ -1694,6 +1704,7 @@
 				E2D430C92BB4D954003F26EE /* LocationRow.swift in Sources */,
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
 				E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */,
+				E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */,
 				E28092E42AFCC9720019FD7C /* UserLocationEntryValidator.swift in Sources */,
 				E23997EF20E84371007D8CE4 /* ErrorPresentable.swift in Sources */,
 				E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */,
@@ -1728,6 +1739,7 @@
 				E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */,
 				E22450772B9F3F9800F14BAA /* WindSpeed.swift in Sources */,
 				E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */,
+				E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */,
 				E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */,
 				E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */,
 				E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */,

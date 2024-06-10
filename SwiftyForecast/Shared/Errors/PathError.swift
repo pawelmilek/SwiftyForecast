@@ -8,13 +8,9 @@
 
 import Foundation
 
-enum PathError: Error {
+enum PathError: LocalizedError {
     case notFound
     case containerNotFound(identifier: String)
-}
-
-// MARK: - LocalizedError protocol
-extension PathError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
@@ -25,5 +21,4 @@ extension PathError: LocalizedError {
             return "Shared container for group \(identifier) not found"
         }
     }
-
 }

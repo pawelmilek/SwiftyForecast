@@ -25,7 +25,6 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
     @Published private(set) var condition: WeatherCondition = .clear
-
     @Published private var model: CurrentWeatherModel?
     @Published private var locationModel: LocationModel?
 
@@ -35,11 +34,20 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
+    convenience init() {
+        self.init(
+            service: WeatherService(decoder: JSONSnakeCaseDecoded()),
+            temperatureRenderer: TemperatureRenderer(),
+            speedRenderer: SpeedRenderer(),
+            measurementSystemNotification: MeasurementSystemNotification()
+        )
+    }
+
     init(
-        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
-        temperatureRenderer: TemperatureRenderer = TemperatureRenderer(),
-        speedRenderer: SpeedRenderer = SpeedRenderer(),
-        measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification()
+        service: WeatherServiceProtocol,
+        temperatureRenderer: TemperatureRenderer,
+        speedRenderer: SpeedRenderer,
+        measurementSystemNotification: MeasurementSystemNotification
     ) {
         self.service = service
         self.temperatureRenderer = temperatureRenderer

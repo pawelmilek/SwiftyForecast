@@ -6,7 +6,9 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-enum FileLoaderError: Error {
+import Foundation
+
+enum FileLoaderError: LocalizedError {
   case fileNotFound(name: String)
 }
 

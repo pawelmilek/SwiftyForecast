@@ -11,10 +11,6 @@ enum RealmError: ErrorPresentable {
     case transactionFailed(description: String)
     case fetchFailed
     case unknown
-}
-
-// MARK: - ErrorHandleable protocol
-extension RealmError {
 
     var errorDescription: String? {
         switch self {
@@ -31,5 +27,4 @@ extension RealmError {
             return "Realm unknown error."
         }
     }
-
 }

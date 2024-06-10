@@ -1,14 +1,21 @@
 import UIKit
+import Combine
 
 final class HourlyViewCell: UICollectionViewCell {
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet private weak var timeLabel: UILabel!
+    @IBOutlet private weak var iconImageView: UIImageView!
+    @IBOutlet private weak var temperatureLabel: UILabel!
+    private var cancellables = Set<AnyCancellable>()
+    private var viewModel: HourlyViewCellViewModel? {
+        didSet {
+            subscribePublishers()
+            viewModel?.render()
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        registerTraitUserInterfaceStyleObserver()
     }
 
     override func prepareForReuse() {
@@ -16,6 +23,10 @@ final class HourlyViewCell: UICollectionViewCell {
         timeLabel.text = ""
         iconImageView.image = UIImage()
         temperatureLabel.text = ""
+    }
+
+    func set(viewModel: HourlyViewCellViewModel) {
+        self.viewModel = viewModel
     }
 }
 
@@ -39,6 +50,7 @@ private extension HourlyViewCell {
         temperatureLabel.textAlignment = Style.HourlyCell.temperatureAlignment
         contentView.backgroundColor = .customPrimary
         setRoundedCornersAndBorder()
+        registerTraitUserInterfaceStyleObserver()
     }
 
     func registerTraitUserInterfaceStyleObserver() {
@@ -61,5 +73,24 @@ private extension HourlyViewCell {
         contentView.layer.cornerRadius = Style.HourlyCell.cornerRadius
         layer.masksToBounds = false
         setupShadow()
+    }
+
+    func subscribePublishers() {
+        guard let viewModel else { return }
+
+        viewModel.$time
+            .assign(to: \.text!, on: timeLabel)
+            .store(in: &cancellables)
+
+        viewModel.$iconURL
+            .compactMap { $0 }
+            .sink { [weak self] iconURL in
+                self?.iconImageView.kf.setImage(with: iconURL)
+            }
+            .store(in: &cancellables)
+
+        viewModel.$temperature
+            .assign(to: \.text!, on: temperatureLabel)
+            .store(in: &cancellables)
     }
 }

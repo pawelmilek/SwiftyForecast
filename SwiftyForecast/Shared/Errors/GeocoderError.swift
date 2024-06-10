@@ -6,7 +6,9 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-enum GeocoderError: Error {
+import Foundation
+
+enum GeocoderError: LocalizedError {
     case coordinateNotFound
     case placemarkNotFound
     case locationDisabled

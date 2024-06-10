@@ -1,14 +1,12 @@
 import Foundation
-import Combine
 
 @MainActor
 final class DailyViewCellViewModel: ObservableObject {
     @Published private(set) var attributedDate = NSAttributedString()
     @Published private(set) var temperature = ""
     @Published private(set) var iconURL: URL?
-    @Published private var model: DailyForecastModel
-    @Published private var temperatureRenderer: TemperatureRenderer
-    private var cancellables = Set<AnyCancellable>()
+    private var model: DailyForecastModel
+    private var temperatureRenderer: TemperatureRenderer
 
     init(
         model: DailyForecastModel,
@@ -16,22 +14,12 @@ final class DailyViewCellViewModel: ObservableObject {
     ) {
         self.model = model
         self.temperatureRenderer = temperatureRenderer
-        subscribePublishers()
     }
 
-    private func subscribePublishers() {
-        $model
-            .combineLatest($temperatureRenderer)
-            .sink { [weak self] model, temperatureRenderer in
-                guard let self else { return }
-                attributedDate = renderMonthWeekday(date: model.date)
-                iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
-
-                let currentFormatted = temperatureRenderer.render(model.temperature).currentFormatted
-                temperature = currentFormatted
-
-            }
-            .store(in: &cancellables)
+    func render() {
+        attributedDate = renderMonthWeekday(date: model.date)
+        iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
+        temperature = temperatureRenderer.render(model.temperature).currentFormatted
     }
 
     private func renderMonthWeekday(date: Date) -> NSAttributedString {

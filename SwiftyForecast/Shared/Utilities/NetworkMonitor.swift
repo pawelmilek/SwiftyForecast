@@ -38,6 +38,4 @@ final class NetworkMonitor: ObservableObject {
     func start() {
         monitor.start(queue: DispatchQueue.global(qos: .userInteractive))
     }
-
-
 }

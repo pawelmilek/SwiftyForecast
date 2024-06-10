@@ -8,14 +8,16 @@
 
 import Foundation
 
-protocol ErrorPresentable: Error, LocalizedError { }
+protocol ErrorPresentable: LocalizedError { }
 
 // MARK: - Present errors
 extension ErrorPresentable {
 
   func present() {
     DispatchQueue.main.async {
-        AlertViewPresenter.shared.presentError(withMessage: self.errorDescription ?? InvalidReference.undefined)
+        AlertViewPresenter.shared.presentError(
+            withMessage: self.errorDescription ?? InvalidReference.undefined
+        )
     }
   }
 

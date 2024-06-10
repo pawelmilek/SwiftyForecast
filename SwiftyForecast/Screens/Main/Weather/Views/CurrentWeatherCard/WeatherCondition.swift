@@ -39,6 +39,7 @@ enum WeatherCondition: Identifiable, CaseIterable {
         }
     }
 
+    // swiftlint:disable:next identifier_name
     var id: Self { self }
 
     var code: ClosedRange<Int> {

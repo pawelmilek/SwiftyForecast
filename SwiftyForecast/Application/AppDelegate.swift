@@ -65,7 +65,6 @@ private extension AppDelegate {
 
     func subscribeToNetworkMonitorPublisher() {
         networkMonitor?.$hasNetworkConnection
-            .print()
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in

@@ -4,20 +4,21 @@ import Combine
 final class WeatherViewController: UIViewController {
     private enum Constant {
         static let weekdayCellHeight = CGFloat(53)
-        static let numberOfHourlyCellsInRow = CGFloat(4)
+        static let hourlyCellsInRow = CGFloat(4)
         static let hourlySizeForItem = CGSize(width: 77, height: 65)
-        static let hourlyInsetForSection = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        static let hourlyMinimumLineSpacingForSection = CGFloat(10)
     }
 
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
     @IBOutlet private weak var dailyTableView: UITableView!
     private var weatherCardViewController: CurrentWeatherCardViewController!
-
-    var viewModel: WeatherViewControllerViewModel?
-    private var dailyForecastViewModels: [DailyViewCellViewModel] = []
-    private var hourlyForecastViewModels: [HourlyViewCellViewModel] = []
+    private let dailyForecastDataSource = DailyForecastDataSource()
+    private let hourlyForcecastDataSource = HourlyForcecastDataSource()
+    private let hourlyForecastFlowLayout = HourlyForecastFlowLayout(
+        cellsInRow: Constant.hourlyCellsInRow,
+        sizeForItem: Constant.hourlySizeForItem
+    )
     private var cancellables = Set<AnyCancellable>()
+    var viewModel: WeatherViewControllerViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +56,8 @@ private extension WeatherViewController {
         setupAppearance()
         setupHourlyCollectionView()
         setupWeekTableView()
-        subscriberToViewModel()
-        subscribeToNotificationCenterPublisher()
+        subscriberPublishers()
+        subscribeNotificationCenterPublisher()
     }
 
     func setupAppearance() {
@@ -68,8 +69,8 @@ private extension WeatherViewController {
 
     func setupHourlyCollectionView() {
         hourlyCollectionView.register(cellClass: HourlyViewCell.self)
-        hourlyCollectionView.dataSource = self
-        hourlyCollectionView.delegate = self
+        hourlyCollectionView.dataSource = hourlyForcecastDataSource
+        hourlyCollectionView.delegate = hourlyForecastFlowLayout
         hourlyCollectionView.showsVerticalScrollIndicator = false
         hourlyCollectionView.showsHorizontalScrollIndicator = false
         hourlyCollectionView.contentInsetAdjustmentBehavior = .never
@@ -77,11 +78,11 @@ private extension WeatherViewController {
 
     func setupWeekTableView() {
         dailyTableView.register(cellClass: DailyViewCell.self)
-        dailyTableView.dataSource = self
-        dailyTableView.delegate = self
+        dailyTableView.dataSource = dailyForecastDataSource
         dailyTableView.showsVerticalScrollIndicator = false
         dailyTableView.allowsSelection = false
-        dailyTableView.rowHeight = UITableView.automaticDimension
+        dailyTableView.rowHeight = Constant.weekdayCellHeight
+        dailyTableView.estimatedRowHeight = UITableView.automaticDimension
         dailyTableView.tableFooterView = UIView()
     }
 }
@@ -89,13 +90,13 @@ private extension WeatherViewController {
 // MAKR: - Private - Set view models closures
 private extension WeatherViewController {
 
-    func subscriberToViewModel() {
-        subscribeToWeatherPublisher()
-        subscriberToLoadingAndErrorPublisher()
-        subscribeToForecastPublisher()
+    func subscriberPublishers() {
+        subscribeWeatherPublisher()
+        subscriberLoadingAndErrorPublishers()
+        subscribeForecastPublishers()
     }
 
-    func subscribeToWeatherPublisher() {
+    func subscribeWeatherPublisher() {
         guard let viewModel else { return }
 
         viewModel.$locationModel
@@ -107,7 +108,7 @@ private extension WeatherViewController {
             .store(in: &cancellables)
     }
 
-    func subscriberToLoadingAndErrorPublisher() {
+    func subscriberLoadingAndErrorPublishers() {
         guard let viewModel else { return }
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
@@ -130,7 +131,7 @@ private extension WeatherViewController {
             .store(in: &cancellables)
     }
 
-    func subscribeToForecastPublisher() {
+    func subscribeForecastPublishers() {
         guard let viewModel else { return }
 
         viewModel.$twentyFourHoursForecastModel
@@ -138,18 +139,21 @@ private extension WeatherViewController {
             .receive(on: DispatchQueue.main)
             .map {
                 ($0.0.map {
-                    HourlyViewCellViewModel(model: $0)
+                    HourlyViewCellViewModel(
+                        model: $0,
+                        temperatureRenderer: .init()
+                    )
                 },
                  $0.1.map {
                     DailyViewCellViewModel(
                         model: $0,
-                        temperatureRenderer: TemperatureRenderer()
+                        temperatureRenderer: .init()
                     )
                 })
             }
             .sink { [self] (hourlyViewModels, dailyViewModels) in
-                hourlyForecastViewModels = hourlyViewModels
-                dailyForecastViewModels = dailyViewModels
+                hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
+                dailyForecastDataSource.set(viewModeles: dailyViewModels)
 
                 loadHourlyData()
                 loadDailyData()
@@ -157,7 +161,7 @@ private extension WeatherViewController {
             .store(in: &cancellables)
     }
 
-    func subscribeToNotificationCenterPublisher() {
+    func subscribeNotificationCenterPublisher() {
         NotificationCenter.default
             .publisher(for: UIApplication.didBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
@@ -181,105 +185,6 @@ private extension WeatherViewController {
             dailyTableView.alpha = 0.0
         }
     }
-}
-
-// MARK: - UICollectionViewDataSource protocol
-extension WeatherViewController: UICollectionViewDataSource {
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        hourlyForecastViewModels.count
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: HourlyViewCell.reuseIdentifier,
-            for: indexPath
-        ) as? HourlyViewCell else {
-            return HourlyViewCell()
-        }
-
-        guard !hourlyForecastViewModels.isEmpty else { return cell }
-        let item = hourlyForecastViewModels[indexPath.row]
-        cell.iconImageView.kf.setImage(with: item.iconURL)
-        cell.timeLabel.text = item.time
-        cell.temperatureLabel.text = item.temperature
-        return cell
-    }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout protocol
-extension WeatherViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-
-        guard let flowLayout = collectionViewLayout as? UICollectionViewFlowLayout else {
-            return Constant.hourlySizeForItem
-        }
-
-        let sectionInsetLeftAndRightSum = flowLayout.sectionInset.left + flowLayout.sectionInset.right
-        let numberOfHorizontalSpacing = Constant.numberOfHourlyCellsInRow - 1
-        let minimumLineSpacing = flowLayout.minimumLineSpacing
-
-        let collectionViewWidth = collectionView.frame.size.width
-        let totalAvailableSpace = sectionInsetLeftAndRightSum + (minimumLineSpacing * numberOfHorizontalSpacing)
-
-        let width = (collectionViewWidth - totalAvailableSpace) / Constant.numberOfHourlyCellsInRow
-        return CGSize(width: width, height: Constant.hourlySizeForItem.height)
-    }
-
-}
-
-// MARK: - UITableViewDataSource protcol
-extension WeatherViewController: UITableViewDataSource {
-
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        dailyForecastViewModels.count
-    }
-
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: DailyViewCell.reuseIdentifier,
-            for: indexPath
-        ) as? DailyViewCell else { return UITableViewCell() }
-
-        guard !dailyForecastViewModels.isEmpty else { return cell }
-
-        let viewModel = dailyForecastViewModels[indexPath.row]
-        cell.iconImageView.kf.setImage(with: viewModel.iconURL)
-        cell.dateLabel.attributedText = viewModel.attributedDate
-        cell.temperatureLabel.text = viewModel.temperature
-        return cell
-    }
-
-}
-
-// MARK: - UITableViewDelegate protocol
-extension WeatherViewController: UITableViewDelegate {
-
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
-        Constant.weekdayCellHeight
-    }
-
 }
 
 // MARK: - Factory method
