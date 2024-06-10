@@ -5,7 +5,13 @@ import Combine
 
 final class MainViewController: UIViewController {
     var coordinator: MainCoordinator?
-    var viewModel: MainViewControllerViewModel?
+    var viewModel: MainViewControllerViewModel? {
+        didSet {
+            pageViewController.onDidChangePageNavigation = { [weak self] index in
+                self?.viewModel?.onDidChangePageNavigation(index: index)
+            }
+        }
+    }
 
     private let lottieAnimationViewController = LottieAnimationViewController()
 
@@ -60,7 +66,7 @@ final class MainViewController: UIViewController {
         return control
     }()
 
-    private let pageViewController = UIPageViewController(
+    private let pageViewController = MainPageViewController(
         transitionStyle: .scroll,
         navigationOrientation: .horizontal
     )
@@ -81,8 +87,6 @@ final class MainViewController: UIViewController {
     private weak var informationTipPopoverController: TipUIPopoverViewController?
     private var appearanceTipObservationTask: Task<Void, Never>?
     private weak var appearanceTipPopoverController: TipUIPopoverViewController?
-
-    private var viewControllers: [WeatherViewController] = []
     private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -143,6 +147,14 @@ private extension MainViewController {
 
     func subscribeToViewModel() {
         guard let viewModel else { return }
+        viewModel.$currentWeatherViewModels
+            .filter { !$0.isEmpty }
+            .map { $0.map { WeatherViewController.make(viewModel: $0) } }
+            .sink { [weak self] viewControllers in
+                self?.pageViewController.set(viewControllers: viewControllers)
+            }
+            .store(in: &cancellables)
+
         viewModel.shouldNavigateToCurrentPage
             .filter { $0 }
             .receive(on: DispatchQueue.main)
@@ -151,21 +163,6 @@ private extension MainViewController {
                 self?.transitionToCurrentViewController()
             }
             .store(in: &cancellables)
-
-        viewModel.$currentWeatherViewModels
-            .filter { !$0.isEmpty }
-            .map { viewModels -> [WeatherViewController] in
-                viewModels.map { WeatherViewController.make(viewModel: $0) }
-            }
-            .sink { [weak self] viewControllers in
-                self?.reloadPages(viewControllers)
-            }
-            .store(in: &cancellables)
-    }
-
-    func reloadPages(_ weatherViewControllers: [WeatherViewController]) {
-        self.viewControllers.removeAll()
-        self.viewControllers.append(contentsOf: weatherViewControllers)
     }
 
     func verifyLocation(authorizationStatus: CLAuthorizationStatus) {
@@ -237,8 +234,6 @@ private extension MainViewController {
     }
 
     func setupChildaPageViewController() {
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
         add(pageViewController)
     }
 
@@ -321,87 +316,7 @@ extension MainViewController: LocationSearchViewControllerDelegate {
 
     private func transitionToCurrentViewController() {
         guard let index = viewModel?.currentPageIndex else { return }
-
-        let viewController = viewControllers[index]
-        pageViewController.setViewControllers(
-            [viewController],
-            direction: .forward,
-            animated: false,
-            completion: nil
-        )
-    }
-}
-
-// MARK: - UIPageViewControllerDataSource
-extension MainViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let viewController = viewController as? WeatherViewController else {
-            return nil
-        }
-
-        guard let pageIndex = viewControllers.firstIndex(where: {
-            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
-        }) else {
-            return nil
-        }
-
-        let previousIndex = pageIndex - 1
-        let firstPageIndex = 0
-        guard previousIndex >= firstPageIndex else {
-            return nil
-        }
-
-        return viewControllers[previousIndex]
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let viewController = viewController as? WeatherViewController else {
-            return nil
-        }
-
-        guard let pageIndex = viewControllers.firstIndex(where: {
-            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
-        }) else {
-            return nil
-        }
-
-        let nextIndex = pageIndex + 1
-        let lastPageIndex = viewControllers.count - 1
-        guard nextIndex <= lastPageIndex else {
-            return nil
-        }
-
-        return viewControllers[nextIndex]
-    }
-
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        viewControllers.count
-    }
-
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        viewModel?.currentPageIndex ?? 0
-    }
-}
-
-// MARK: - UIPageViewControllerDelegate
-extension MainViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController,
-                            didFinishAnimating finished: Bool,
-                            previousViewControllers: [UIViewController],
-                            transitionCompleted completed: Bool) {
-        guard completed else { return }
-        guard let viewController = pageViewController.viewControllers?.first as? WeatherViewController else { return }
-        guard let currentIndex = viewControllers.firstIndex(of: viewController) else { return }
-        viewModel?.onDidChangePageNavigation(index: currentIndex)
-        pageTransitionImpactFeedback()
-    }
-
-    private func pageTransitionImpactFeedback() {
-        let generator = UIImpactFeedbackGenerator(style: .light)
-        generator.prepare()
-        generator.impactOccurred()
+        pageViewController.display(at: index)
     }
 }
 

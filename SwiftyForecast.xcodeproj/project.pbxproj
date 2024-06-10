@@ -279,6 +279,7 @@
 		E2E4BA4F2C1754A800734382 /* HourlyForcecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA4E2C1754A800734382 /* HourlyForcecastDataSource.swift */; };
 		E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */; };
 		E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */; };
+		E2E4BA5C2C1783DD00734382 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA5B2C1783DC00734382 /* MainPageViewController.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E6C6FD2C0E315900500EE8 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FC2C0E315900500EE8 /* AnalyticsManager.swift */; };
 		E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */; };
@@ -539,6 +540,7 @@
 		E2E4BA4E2C1754A800734382 /* HourlyForcecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForcecastDataSource.swift; sourceTree = "<group>"; };
 		E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastDataSource.swift; sourceTree = "<group>"; };
 		E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastFlowLayout.swift; sourceTree = "<group>"; };
+		E2E4BA5B2C1783DC00734382 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		E2E6C6FC2C0E315900500EE8 /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutLinkRow.swift; sourceTree = "<group>"; };
@@ -1233,6 +1235,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B1D65B211FB26C00F0002A /* MainViewController.swift */,
+				E2E4BA5B2C1783DC00734382 /* MainPageViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1672,6 +1675,7 @@
 				E2EF17D82BF9795B00C0D83C /* CopyrightFooterView.swift in Sources */,
 				E2CF4D7E226E838E00062E36 /* HourlyViewCellViewModel.swift in Sources */,
 				E296A7F42AD7EA53001BFADB /* Wind.swift in Sources */,
+				E2E4BA5C2C1783DD00734382 /* MainPageViewController.swift in Sources */,
 				E28AFC7D2374FF5D00D1D5ED /* PathError.swift in Sources */,
 				E296A7F62AD7EB5A001BFADB /* Main.swift in Sources */,
 				E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */,

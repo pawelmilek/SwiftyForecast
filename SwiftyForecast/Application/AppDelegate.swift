@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupFirebase()
         setupCoordinator()
         setupTips()
-        setNavigationBarStyle()
+        setupNavigationBarStyle()
         setupAppearanceTheme()
         setupAppearanceThemeNotificationCenter()
         setupReviewObserver()
@@ -89,7 +89,7 @@ private extension AppDelegate {
         }
     }
 
-    func setNavigationBarStyle() {
+    func setupNavigationBarStyle() {
         let setTransparentBackground = {
             UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
             UINavigationBar.appearance().shadowImage = UIImage()
