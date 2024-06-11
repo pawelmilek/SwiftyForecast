@@ -45,7 +45,7 @@ extension MainPageViewController {
         guard let viewController = viewController as? WeatherViewController else { return nil }
 
         guard let pageIndex = weatherViewControllers.firstIndex(where: {
-            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
+            $0.viewModel.compoundKey == viewController.viewModel.compoundKey
         }) else {
             return nil
         }
@@ -66,7 +66,7 @@ extension MainPageViewController {
         guard let viewController = viewController as? WeatherViewController else { return nil }
 
         guard let pageIndex = weatherViewControllers.firstIndex(where: {
-            $0.viewModel?.compoundKey == viewController.viewModel?.compoundKey
+            $0.viewModel.compoundKey == viewController.viewModel.compoundKey
         }) else {
             return nil
         }

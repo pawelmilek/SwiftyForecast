@@ -29,14 +29,14 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private var locationModel: LocationModel?
 
     private var cancellables = Set<AnyCancellable>()
-    private let service: WeatherServiceProtocol
+    private let service: WeatherService
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
     convenience init() {
         self.init(
-            service: WeatherService(decoder: JSONSnakeCaseDecoded()),
+            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
             temperatureRenderer: TemperatureRenderer(),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()
@@ -44,7 +44,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     }
 
     init(
-        service: WeatherServiceProtocol,
+        service: WeatherService,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification

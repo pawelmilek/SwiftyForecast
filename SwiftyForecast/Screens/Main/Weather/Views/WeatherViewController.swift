@@ -18,7 +18,17 @@ final class WeatherViewController: UIViewController {
         sizeForItem: Constant.hourlySizeForItem
     )
     private var cancellables = Set<AnyCancellable>()
-    var viewModel: WeatherViewControllerViewModel?
+    let viewModel: WeatherViewControllerViewModel
+
+    init?(viewModel: WeatherViewControllerViewModel, coder: NSCoder) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+
+    @available(*, unavailable, renamed: "init(viewModel:coder:)")
+    required init?(coder: NSCoder) {
+        fatalError("Invalid way of decoding this class")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,11 +43,11 @@ final class WeatherViewController: UIViewController {
     }
 
     private func loadData() {
-        viewModel?.loadData()
+        viewModel.loadData()
     }
 
     private func reloadData() {
-        viewModel?.reloadData()
+        viewModel.reloadData()
     }
 
     func loadHourlyData() {
@@ -87,7 +97,7 @@ private extension WeatherViewController {
     }
 }
 
-// MAKR: - Private - Set view models closures
+// MARK: - Private - Subscribe publishers
 private extension WeatherViewController {
 
     func subscriberPublishers() {
@@ -97,8 +107,6 @@ private extension WeatherViewController {
     }
 
     func subscribeWeatherPublisher() {
-        guard let viewModel else { return }
-
         viewModel.$locationModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
@@ -109,7 +117,6 @@ private extension WeatherViewController {
     }
 
     func subscriberLoadingAndErrorPublishers() {
-        guard let viewModel else { return }
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [self] isLoading in
@@ -132,8 +139,6 @@ private extension WeatherViewController {
     }
 
     func subscribeForecastPublishers() {
-        guard let viewModel else { return }
-
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
@@ -166,8 +171,9 @@ private extension WeatherViewController {
             .publisher(for: UIApplication.didBecomeActiveNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.viewModel?.reloadCurrentLocation()
-                self?.weatherCardViewController.reloadCurrentLocation()
+                guard let self else { return }
+                viewModel.reloadCurrentLocation()
+                weatherCardViewController.reloadCurrentLocation()
             }
             .store(in: &cancellables)
     }
@@ -189,11 +195,15 @@ private extension WeatherViewController {
 
 // MARK: - Factory method
 extension WeatherViewController {
-
     static func make(viewModel: WeatherViewControllerViewModel) -> WeatherViewController {
-        let viewController = UIViewController.make(WeatherViewController.self, from: .main)
-        viewController.viewModel = viewModel
+        let storyboard = UIStoryboard(storyboard: .main)
+        let viewController = storyboard.instantiateViewController(identifier: WeatherViewController.storyboardIdentifier) { coder in
+            WeatherViewController(
+                viewModel: viewModel,
+                coder: coder
+            )
+        }
+
         return viewController
     }
-
 }

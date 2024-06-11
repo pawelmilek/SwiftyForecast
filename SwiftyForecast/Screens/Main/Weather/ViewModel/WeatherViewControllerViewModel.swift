@@ -17,13 +17,13 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private let service: WeatherServiceProtocol
+    private let service: WeatherService
     private let measurementSystemNotification: MeasurementSystemNotification
     private let appStoreReviewCenter: ReviewNotificationCenter
 
     init(
         locationModel: LocationModel,
-        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
+        service: WeatherService = OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
     ) {

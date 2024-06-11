@@ -4,15 +4,6 @@ import CoreLocation
 import Combine
 
 final class MainViewController: UIViewController {
-    var coordinator: MainCoordinator?
-    var viewModel: MainViewControllerViewModel? {
-        didSet {
-            pageViewController.onDidChangePageNavigation = { [weak self] index in
-                self?.viewModel?.onDidChangePageNavigation(index: index)
-            }
-        }
-    }
-
     private let lottieAnimationViewController = LottieAnimationViewController()
 
     private lazy var infoBarButton: UIButton = {
@@ -55,12 +46,12 @@ final class MainViewController: UIViewController {
     }()
 
     private lazy var notationSegmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: viewModel?.notationSegmentedControlItems ?? [])
+        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems ?? [])
         control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
-        control.selectedSegmentIndex = viewModel?.notationSegmentedControlIndex ?? 0
+        control.selectedSegmentIndex = viewModel.notationSegmentedControlIndex ?? 0
         control.addAction( UIAction { [weak self] action in
             guard let sender = action.sender as? UISegmentedControl else { return }
-            self?.viewModel?.onSegmentedControlDidChange(sender.selectedSegmentIndex)
+            self?.viewModel.onSegmentedControlDidChange(sender.selectedSegmentIndex)
         }, for: .valueChanged)
 
         return control
@@ -89,6 +80,26 @@ final class MainViewController: UIViewController {
     private weak var appearanceTipPopoverController: TipUIPopoverViewController?
     private var cancellables = Set<AnyCancellable>()
 
+    let coordinator: Coordinator
+    var viewModel: MainViewControllerViewModel {
+        didSet {
+            pageViewController.onDidChangePageNavigation = { [weak self] index in
+                self?.viewModel.onDidChangePageNavigation(index: index)
+            }
+        }
+    }
+
+    init?(viewModel: MainViewControllerViewModel, coordinator: Coordinator, coder: NSCoder) {
+        self.viewModel = viewModel
+        self.coordinator = coordinator
+        super.init(coder: coder)
+    }
+
+    @available(*, unavailable, renamed: "init(viewModel:coordinator:coder:)")
+    required init?(coder: NSCoder) {
+        fatalError("Invalid way of decoding this class")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -101,7 +112,7 @@ final class MainViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel?.onViewDidDisappear()
+        viewModel.onViewDidDisappear()
         stopTipObservationTasks()
     }
 }
@@ -133,7 +144,7 @@ private extension MainViewController {
         locationManager.$currentLocation
             .compactMap { $0 }
             .sink { [self] currentLocation in
-                viewModel?.onDidUpdateLocation(currentLocation)
+                viewModel.onDidUpdateLocation(currentLocation)
             }
             .store(in: &cancellables)
 
@@ -146,7 +157,6 @@ private extension MainViewController {
     }
 
     func subscribeToViewModel() {
-        guard let viewModel else { return }
         viewModel.$currentWeatherViewModels
             .filter { !$0.isEmpty }
             .map { $0.map { WeatherViewController.make(viewModel: $0) } }
@@ -159,8 +169,9 @@ private extension MainViewController {
             .filter { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                guard let self else { return }
                 viewModel.onDidChangePageNavigation(index: MainViewControllerViewModel.userLocationPageIndex)
-                self?.transitionToCurrentViewController()
+                transitionToCurrentViewController()
             }
             .store(in: &cancellables)
     }
@@ -188,7 +199,7 @@ private extension MainViewController {
 
     func showEnableLocationServicesPrompt() {
         guard let navigationController = self.navigationController else { return }
-        viewModel?.showEnableLocationServicesPrompt(at: navigationController)
+        viewModel.showEnableLocationServicesPrompt(at: navigationController)
     }
 
     func setupNavigationItems() {
@@ -209,7 +220,7 @@ private extension MainViewController {
 
     @objc
     func openInfoBarButtonTapped() {
-        coordinator?.openAboutViewController()
+        coordinator.openAboutViewController()
         donateInformationVisitEvent()
     }
 
@@ -221,12 +232,12 @@ private extension MainViewController {
 
     @objc
     func openAppearanceBarButtonTapped() {
-        coordinator?.openAppearanceViewController()
+        coordinator.openAppearanceViewController()
         AppearanceTip.showTip = false
     }
 
     @objc func openLocationListBarButtonTapped() {
-        coordinator?.openLocationListViewController()
+        coordinator.openLocationListViewController()
     }
 
     func setupNotationSystemSegmentedControl() {
@@ -308,15 +319,14 @@ extension MainViewController: LocationSearchViewControllerDelegate {
         _ view: LocationSearchViewController,
         didSelectLocation location: LocationModel
     ) {
-        guard let index = viewModel?.index(of: location) else { return }
-        viewModel?.onDidChangePageNavigation(index: index)
-        coordinator?.dismissViewController()
+        guard let index = viewModel.index(of: location) else { return }
+        viewModel.onDidChangePageNavigation(index: index)
+        coordinator.dismissViewController()
         transitionToCurrentViewController()
     }
 
     private func transitionToCurrentViewController() {
-        guard let index = viewModel?.currentPageIndex else { return }
-        pageViewController.display(at: index)
+        pageViewController.display(at: viewModel.currentPageIndex)
     }
 }
 

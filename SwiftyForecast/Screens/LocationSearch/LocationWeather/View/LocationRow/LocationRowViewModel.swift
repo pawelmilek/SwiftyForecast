@@ -24,7 +24,7 @@ final class LocationRowViewModel: ObservableObject {
     @Published private(set) var location: LocationModel?
 
     private var locationSecondsFromGMT = 0
-    private let service: WeatherServiceProtocol
+    private let service: WeatherService
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private var cancellables = Set<AnyCancellable>()
@@ -32,7 +32,7 @@ final class LocationRowViewModel: ObservableObject {
 
     init(
         location: LocationModel,
-        service: WeatherServiceProtocol,
+        service: WeatherService,
         temperatureRenderer: TemperatureRenderer,
         measurementSystemNotification: MeasurementSystemNotification) {
             self.service = service

@@ -24,14 +24,14 @@ final class LocationWeatherViewViewModel: ObservableObject {
     private var foundLocation: CLLocation?
 
     private let searchCompletion: MKLocalSearchCompletion
-    private let service: WeatherServiceProtocol
+    private let service: WeatherService
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
     private let analyticsManager: AnalyticsManager
 
     init(
         searchCompletion: MKLocalSearchCompletion,
-        service: WeatherServiceProtocol = WeatherService(decoder: JSONSnakeCaseDecoded()),
+        service: WeatherService = OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
         databaseManager: DatabaseManager = RealmManager.shared,
         appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter(),
         analyticsManager: AnalyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())

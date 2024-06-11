@@ -12,3 +12,5 @@ extension StoryboardIdentifiable where Self: UIViewController {
     }
 
 }
+
+extension UIViewController: StoryboardIdentifiable { }

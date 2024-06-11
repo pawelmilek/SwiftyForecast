@@ -38,7 +38,7 @@ final class MainViewControllerViewModel: ObservableObject {
         return result ?? 0
     }
 
-    private let service: WeatherServiceProtocol
+    private let service: WeatherService
     private let notationController: NotationController
     private let measurementSystemNotification: MeasurementSystemNotification
     private let databaseManager: DatabaseManager
@@ -46,7 +46,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
-    convenience init(service: WeatherServiceProtocol) {
+    convenience init(service: WeatherService) {
         self.init(
             service: service,
             notationController: NotationController(),
@@ -57,7 +57,7 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     init(
-        service: WeatherServiceProtocol,
+        service: WeatherService,
         notationController: NotationController = NotationController(),
         measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
         databaseManager: DatabaseManager = RealmManager.shared,

@@ -16,7 +16,9 @@ struct WeatherProvider: TimelineProvider {
 
     init(
         dataSource: WeatherProviderDataSource = WeatherProviderDataSource(
-            service: WeatherService(decoder: JSONSnakeCaseDecoded())
+            service: OpenWeatherMapService(
+                decoder: JSONSnakeCaseDecoded()
+            )
         )
     ) {
         self.dataSource = dataSource

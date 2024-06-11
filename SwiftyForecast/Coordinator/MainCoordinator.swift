@@ -14,15 +14,20 @@ final class MainCoordinator: Coordinator {
     }
 
     func start() {
-        let viewController = UIViewController.make(MainViewController.self, from: .main)
-        viewController.viewModel = MainViewControllerViewModel(
-            service: WeatherService(decoder: JSONSnakeCaseDecoded())
-        )
-        viewController.coordinator = self
-        navigationController.pushViewController(
-            viewController,
-            animated: false
-        )
+        let storyboard = UIStoryboard(storyboard: .main)
+        let viewController = storyboard.instantiateViewController(identifier: MainViewController.storyboardIdentifier) { coder in
+            MainViewController(
+                viewModel: MainViewControllerViewModel(
+                    service: OpenWeatherMapService(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                coordinator: self,
+                coder: coder
+            )
+        }
+
+        navigationController.pushViewController(viewController, animated: false)
     }
 
     func openAboutViewController() {
