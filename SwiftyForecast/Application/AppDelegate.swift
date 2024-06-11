@@ -49,10 +49,10 @@ private extension AppDelegate {
 
     func setupCoordinator() {
         coordinator = MainCoordinator(navigationController: UINavigationController())
+        coordinator?.start()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = coordinator?.navigationController
         window?.makeKeyAndVisible()
-        coordinator?.start()
     }
 
     func setupTips() {
@@ -69,9 +69,9 @@ private extension AppDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in
                 if hasNetworkConnection {
-                    self?.coordinator?.popOfflineViewController()
+                    self?.coordinator?.popOffline()
                 } else {
-                    self?.coordinator?.pushOfflineViewController()
+                    self?.coordinator?.pushOffline()
                 }
             }
             .store(in: &cancellables)

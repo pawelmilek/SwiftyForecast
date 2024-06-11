@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 
 class AppearanceViewController: UIViewController {
+    weak var coordinator: Coordinator?
     private var hostingViewController: UIHostingController<AppearanceView>!
 
     override func viewDidLoad() {

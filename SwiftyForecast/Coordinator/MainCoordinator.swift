@@ -3,11 +3,13 @@ import SafariServices
 
 @MainActor
 final class MainCoordinator: Coordinator {
+    var childCoordinators: [Coordinator] = []
+
     var topViewController: UIViewController? {
         navigationController.topViewController
     }
 
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -30,36 +32,39 @@ final class MainCoordinator: Coordinator {
         navigationController.pushViewController(viewController, animated: false)
     }
 
-    func openAboutViewController() {
-        let sheetViewController = AboutViewController()
-        navigationController.present(sheetViewController, animated: true)
+    func openAbout() {
+        let aboutViewController = AboutViewController()
+        aboutViewController.coordinator = self
+        navigationController.present(aboutViewController, animated: true)
     }
 
-    func openAppearanceViewController() {
-        let sheetViewController = AppearanceViewController()
-        navigationController.present(sheetViewController, animated: true)
+    func openAppearanceSwitch() {
+        let appearanceViewController = AppearanceViewController()
+        appearanceViewController.coordinator = self
+        navigationController.present(appearanceViewController, animated: true)
     }
 
-    func openLocationListViewController() {
-        let viewController = LocationSearchViewController()
-
+    func openLocations() {
+        let locationSearchViewController = LocationSearchViewController()
+        locationSearchViewController.coordinator = self
+        
         if let visibleViewController = navigationController
             .viewControllers.first(where: { $0 is LocationSearchViewControllerDelegate }) {
-            viewController.delegate = visibleViewController as? LocationSearchViewControllerDelegate
+            locationSearchViewController.delegate = visibleViewController as? LocationSearchViewControllerDelegate
         }
-        viewController.modalPresentationStyle = .fullScreen
-        navigationController.present(viewController, animated: true)
+        locationSearchViewController.modalPresentationStyle = .fullScreen
+        navigationController.present(locationSearchViewController, animated: true)
     }
 
-    func dismissViewController() {
+    func dismiss() {
         navigationController.dismiss(animated: true)
     }
 
-    func popTopViewController() {
+    func popTop() {
         navigationController.popViewController(animated: true)
     }
 
-    func pushOfflineViewController() {
+    func pushOffline() {
         guard !navigationController.viewControllers
             .contains(where: { $0.view.tag == OfflineViewController.identifier }) else {
             return
@@ -67,7 +72,7 @@ final class MainCoordinator: Coordinator {
         navigationController.pushViewController(OfflineViewController(), animated: false)
     }
 
-    func popOfflineViewController() {
+    func popOffline() {
         guard let offlineVCIndex = navigationController.viewControllers
             .firstIndex(where: { $0.view.tag == OfflineViewController.identifier }) else {
             return

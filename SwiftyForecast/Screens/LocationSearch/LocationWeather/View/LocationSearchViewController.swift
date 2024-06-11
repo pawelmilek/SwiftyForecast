@@ -17,9 +17,10 @@ protocol LocationSearchViewControllerDelegate: AnyObject {
 }
 
 final class LocationSearchViewController: UIViewController {
+    weak var coordinator: Coordinator?
     weak var delegate: LocationSearchViewControllerDelegate?
     private var hostingViewController: UIHostingController<LocationSearchView>!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

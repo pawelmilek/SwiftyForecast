@@ -220,24 +220,18 @@ private extension MainViewController {
 
     @objc
     func openInfoBarButtonTapped() {
-        coordinator.openAboutViewController()
-        donateInformationVisitEvent()
-    }
-
-    func donateInformationVisitEvent() {
-        Task(priority: .userInitiated) {
-            await InformationTip.visitViewEvent.donate()
-        }
+        coordinator.openAbout()
+        viewModel.donateInformationVisitEvent()
     }
 
     @objc
     func openAppearanceBarButtonTapped() {
-        coordinator.openAppearanceViewController()
+        coordinator.openAppearanceSwitch()
         AppearanceTip.showTip = false
     }
 
     @objc func openLocationListBarButtonTapped() {
-        coordinator.openLocationListViewController()
+        coordinator.openLocations()
     }
 
     func setupNotationSystemSegmentedControl() {
@@ -321,7 +315,7 @@ extension MainViewController: LocationSearchViewControllerDelegate {
     ) {
         guard let index = viewModel.index(of: location) else { return }
         viewModel.onDidChangePageNavigation(index: index)
-        coordinator.dismissViewController()
+        coordinator.dismiss()
         transitionToCurrentViewController()
     }
 

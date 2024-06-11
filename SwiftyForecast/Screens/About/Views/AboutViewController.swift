@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 
 class AboutViewController: UIViewController {
+    weak var coordinator: Coordinator?
     private var hostingViewController: UIHostingController<AboutScreen>!
 
     override func viewDidLoad() {

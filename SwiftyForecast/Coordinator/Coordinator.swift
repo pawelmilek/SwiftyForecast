@@ -1,14 +1,15 @@
 import UIKit
 
 protocol Coordinator: AnyObject {
-    var navigationController: UINavigationController { get }
+    var childCoordinators: [Coordinator] { get set }
+    var navigationController: UINavigationController { get set }
 
     func start()
-    func openAboutViewController()
-    func openAppearanceViewController()
-    func openLocationListViewController()
-    func dismissViewController()
-    func popTopViewController()
-    func pushOfflineViewController()
-    func popOfflineViewController()
+    func openAbout()
+    func openAppearanceSwitch()
+    func openLocations()
+    func dismiss()
+    func popTop()
+    func pushOffline()
+    func popOffline()
 }

@@ -75,6 +75,12 @@ final class MainViewControllerViewModel: ObservableObject {
         token?.invalidate()
     }
 
+    func donateInformationVisitEvent() {
+        Task(priority: .userInitiated) {
+            await InformationTip.visitViewEvent.donate()
+        }
+    }
+
     private func registerRealmCollectionNotificationToken() {
         token = try? databaseManager.readAll().observe { [weak self] changes in
             switch changes {
