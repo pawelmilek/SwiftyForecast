@@ -25,7 +25,9 @@ struct LocationWeatherView: View {
                 CurrentWeatherCard(viewModel: cardViewModel)
                 if viewModel.shouldShowHourlyForecastChart {
                     HourlyForecastChart(
-                        viewModel: HourlyForecastChartViewModel(models: viewModel.twentyFourHoursForecastModel)
+                        viewModel: HourlyForecastChartViewModel(
+                            models: viewModel.twentyFourHoursForecastModel
+                        )
                     )
                 }
                 Spacer()

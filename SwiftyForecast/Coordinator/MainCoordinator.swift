@@ -1,4 +1,5 @@
 import UIKit
+import CoreLocation
 import SafariServices
 
 @MainActor
@@ -20,9 +21,11 @@ final class MainCoordinator: Coordinator {
         let viewController = storyboard.instantiateViewController(identifier: MainViewController.storyboardIdentifier) { coder in
             MainViewController(
                 viewModel: MainViewControllerViewModel(
-                    service: OpenWeatherMapService(
-                        decoder: JSONSnakeCaseDecoded()
-                    )
+                    geocodeLocation: GeocodeLocation(geocoder: CLGeocoder()),
+                    notationSystemStore: NotationSystemStore(),
+                    measurementSystemNotification: MeasurementSystemNotification(),
+                    databaseManager: RealmManager.shared,
+                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 coordinator: self,
                 coder: coder
@@ -79,5 +82,17 @@ final class MainCoordinator: Coordinator {
         }
 
         navigationController.viewControllers.remove(at: offlineVCIndex)
+    }
+
+    func timedLocationServicesPrompt() {
+        guard let viewController = navigationController.viewControllers.first else { return }
+
+        viewController.navigationItem.prompt = "Please enable location services"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            viewController.navigationItem.prompt = nil
+            self?.navigationController.viewIfLoaded?.setNeedsLayout()
+        }
+
+        navigationController.viewIfLoaded?.setNeedsLayout()
     }
 }

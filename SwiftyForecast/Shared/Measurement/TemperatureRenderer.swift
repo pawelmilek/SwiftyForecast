@@ -17,11 +17,11 @@ struct TemperatureRenderer {
         let maxMinFormatted: String
     }
 
-    private let notationController: NotationController
+    private let notationController: NotationSystemStore
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        notationController: NotationController = NotationController(),
+        notationController: NotationSystemStore = NotationSystemStore(),
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory()
     ) {
         self.notationController = notationController

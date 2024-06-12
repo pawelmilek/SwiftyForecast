@@ -12,4 +12,5 @@ protocol Coordinator: AnyObject {
     func popTop()
     func pushOffline()
     func popOffline()
+    func timedLocationServicesPrompt()
 }

@@ -168,12 +168,14 @@ final class LocationWeatherViewViewModel: ObservableObject {
     }
 
     private func logAddNewLocation(name: String) {
-        analyticsManager.log(event: .newLocationAdded(name: name))
+        analyticsManager.send(
+            event: LocationWeatherViewEvent.newLocationAdded(name: name)
+        )
     }
 
     func logScreenViewed(className: String) {
-        analyticsManager.log(
-            event: .screenViewed(
+        analyticsManager.send(
+            event: ScreenAnalyticsEvent.screenViewed(
                 name: "Location Weather Screen",
                 className: "\(type(of: self))"
             )

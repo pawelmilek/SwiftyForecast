@@ -11,6 +11,7 @@ import UIKit
 protocol Registrable: AnyObject {}
 
 extension Registrable where Self: UICollectionView {
+    @MainActor
     func register<T: UICollectionViewCell>(cellClass: T.Type) {
         let nib = UINib(nibName: T.nibName, bundle: nil)
         register(nib, forCellWithReuseIdentifier: T.reuseIdentifier)
@@ -18,6 +19,7 @@ extension Registrable where Self: UICollectionView {
 }
 
 extension Registrable where Self: UITableView {
+    @MainActor
     func register<T: UITableViewCell>(cellClass: T.Type) {
         let nib = UINib(nibName: T.nibName, bundle: nil)
         register(nib, forCellReuseIdentifier: T.reuseIdentifier)

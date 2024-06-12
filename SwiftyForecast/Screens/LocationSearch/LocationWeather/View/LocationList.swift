@@ -12,7 +12,9 @@ import TipKit
 
 struct LocationList: View {
     @Environment(\.isSearching) private var isSearching: Bool
-    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
+    @StateObject private var analyticsManager = AnalyticsManager(
+        service: FirebaseAnalyticsService()
+    )
 
     @Binding var searchText: String
     var onSelectRow: (LocationModel) -> Void
@@ -49,8 +51,8 @@ struct LocationList: View {
     }
 
     private func logLocationSelected(_ name: String) {
-        analyticsManager.log(
-            event: .locationSelected(name: name)
+        analyticsManager.send(
+            event: LocationListEvent.locationSelected(name: name)
         )
     }
 }

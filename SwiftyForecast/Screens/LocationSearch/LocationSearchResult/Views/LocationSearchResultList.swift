@@ -41,8 +41,8 @@ struct LocationSearchResultList: View {
     }
 
     private func logScreenViewed() {
-        analyticsManager.log(
-            event: .screenViewed(
+        analyticsManager.send(
+            event: ScreenAnalyticsEvent.screenViewed(
                 name: "Location Search Result",
                 className: "\(type(of: self))"
             )

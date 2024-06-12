@@ -87,4 +87,3 @@ enum WeatherCondition: Identifiable, CaseIterable {
         }
     }
 }
-

@@ -8,11 +8,8 @@
 
 import Foundation
 
-extension NSNotification.Name {
-    static let didChangeMeasurementSystem = NSNotification.Name("didChangeMeasurementSystem")
-}
-
 struct MeasurementSystemNotification {
+    private let didChangeMeasurementSystem = NSNotification.Name("didChangeMeasurementSystem")
     private let notificationCenter: NotificationCenter
 
     init(notificationCenter: NotificationCenter = .default) {
@@ -21,7 +18,7 @@ struct MeasurementSystemNotification {
 
     func post() {
         notificationCenter.post(
-            name: .didChangeMeasurementSystem,
+            name: didChangeMeasurementSystem,
             object: self
         )
     }
@@ -30,7 +27,7 @@ struct MeasurementSystemNotification {
         notificationCenter.addObserver(
             observer,
             selector: selector,
-            name: .didChangeMeasurementSystem,
+            name: didChangeMeasurementSystem,
             object: nil
         )
     }

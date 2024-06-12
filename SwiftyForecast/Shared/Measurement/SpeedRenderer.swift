@@ -9,11 +9,11 @@
 import Foundation
 
 struct SpeedRenderer {
-    private let notationController: NotationController
+    private let notationController: NotationSystemStore
     private let speedFormatterFactory: SpeedFormatterFactoryProtocol
 
     init(
-        notationController: NotationController = NotationController(),
+        notationController: NotationSystemStore = NotationSystemStore(),
         speedFormatterFactory: SpeedFormatterFactoryProtocol = SpeedFormatterFactory()
     ) {
         self.notationController = notationController

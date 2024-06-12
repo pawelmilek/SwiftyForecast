@@ -19,10 +19,10 @@ final class HourlyForecastChartViewModel: ObservableObject {
     var numberOfHours: Int { dataSource.count }
 
     private let models: [HourlyForecastModel]
-    private let notationController: NotationController
+    private let notationController: NotationSystemStore
     init(
         models: [HourlyForecastModel],
-        notationController: NotationController = NotationController()
+        notationController: NotationSystemStore = NotationSystemStore()
     ) {
         self.models = Array(models.prefix(upTo: Self.numberOfThreeHoursForecastItems))
         self.notationController = notationController

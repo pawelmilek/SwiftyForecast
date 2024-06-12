@@ -1,5 +1,5 @@
 //
-//  NotationController.swift
+//  NotationSystemStore.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/18/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class NotationController {
+final class NotationSystemStore {
     var measurementSystem: MeasurementSystem {
         get {
             loadMeasurementSystem()

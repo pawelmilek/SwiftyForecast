@@ -15,7 +15,7 @@ final class AnalyticsManager: ObservableObject {
         self.service = service
     }
 
-    func log(event: AnalyticsEvent) {
-        service.send(event: event.name, metadata: event.metadata)
+    func send(event: AnalyticsEvent) {
+        service.send(event: event)
     }
 }

@@ -135,7 +135,10 @@ struct AboutScreen: View {
             }
         }
         .onAppear {
-            viewModel.logEventScreen("About Screen", className: "\(type(of: self))")
+            viewModel.logEventScreen(
+                "About Screen",
+                className: "\(type(of: self))"
+            )
         }
     }
 

@@ -73,8 +73,8 @@ struct AppearanceView: View {
     }
 
     private func logScreenViewed() {
-        analyticsManager.log(
-            event: .screenViewed(
+        analyticsManager.send(
+            event: ScreenAnalyticsEvent.screenViewed(
                 name: "Appearance Screen",
                 className: "\(type(of: self))"
             )
@@ -82,8 +82,10 @@ struct AppearanceView: View {
     }
 
     private func logColorShemeSwitched(_ colorScheme: ColorScheme) {
-        analyticsManager.log(
-            event: .colorSchemeSwitched(name: String(describing: colorScheme))
+        analyticsManager.send(
+            event: AppearanceViewEvent.colorSchemeSwitched(
+                name: String(describing: colorScheme)
+            )
         )
     }
 

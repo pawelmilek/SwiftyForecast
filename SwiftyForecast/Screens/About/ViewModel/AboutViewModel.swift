@@ -102,11 +102,20 @@ final class AboutViewModel: ObservableObject {
     }
 
     func logEventRowTapped(_ title: String) {
-        analyticsManager.log(event: .aboutRowTapped(title: title))
+        analyticsManager.send(
+            event: AboutScreenEvent.rowTapped(
+                title: title
+            )
+        )
     }
 
     func logEventScreen(_ name: String, className: String) {
-        analyticsManager.log(event: .screenViewed(name: name, className: className))
+        analyticsManager.send(
+            event: ScreenAnalyticsEvent.screenViewed(
+                name: name,
+                className: className
+            )
+        )
     }
 
 }

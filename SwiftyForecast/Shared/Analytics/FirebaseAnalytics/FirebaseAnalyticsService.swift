@@ -10,7 +10,7 @@ import Foundation
 import FirebaseAnalytics
 
 final class FirebaseAnalyticsService: AnalyticsService {
-    func send(event: String, metadata: [String: String]) {
-        Analytics.logEvent(event, parameters: metadata)
+    func send(event: AnalyticsEvent) {
+        Analytics.logEvent(event.name, parameters: event.metadata)
     }
 }

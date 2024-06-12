@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AnalyticsService: AnyObject {
-    func send(event: String, metadata: [String: String])
+    func send(event: AnalyticsEvent)
 }

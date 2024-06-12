@@ -197,7 +197,9 @@ private extension WeatherViewController {
 extension WeatherViewController {
     static func make(viewModel: WeatherViewControllerViewModel) -> WeatherViewController {
         let storyboard = UIStoryboard(storyboard: .main)
-        let viewController = storyboard.instantiateViewController(identifier: WeatherViewController.storyboardIdentifier) { coder in
+        let viewController = storyboard.instantiateViewController(
+            identifier: WeatherViewController.storyboardIdentifier
+        ) { coder in
             WeatherViewController(
                 viewModel: viewModel,
                 coder: coder

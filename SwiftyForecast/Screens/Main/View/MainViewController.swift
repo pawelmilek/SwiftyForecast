@@ -46,12 +46,12 @@ final class MainViewController: UIViewController {
     }()
 
     private lazy var notationSegmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems ?? [])
+        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems)
         control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
-        control.selectedSegmentIndex = viewModel.notationSegmentedControlIndex ?? 0
         control.addAction( UIAction { [weak self] action in
             guard let sender = action.sender as? UISegmentedControl else { return }
             self?.viewModel.onSegmentedControlDidChange(sender.selectedSegmentIndex)
+            UIImpactFeedbackGenerator().impactOccurred()
         }, for: .valueChanged)
 
         return control
@@ -157,6 +157,10 @@ private extension MainViewController {
     }
 
     func subscribeToViewModel() {
+        viewModel.$notationSegmentedControlIndex
+            .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
+            .store(in: &cancellables)
+
         viewModel.$currentWeatherViewModels
             .filter { !$0.isEmpty }
             .map { $0.map { WeatherViewController.make(viewModel: $0) } }
@@ -185,7 +189,7 @@ private extension MainViewController {
             locationManager.startUpdatingLocation()
 
         default:
-            showEnableLocationServicesPrompt()
+            coordinator.timedLocationServicesPrompt()
         }
     }
 
@@ -195,11 +199,6 @@ private extension MainViewController {
         } else {
             lottieAnimationViewController.dismiss(animated: false)
         }
-    }
-
-    func showEnableLocationServicesPrompt() {
-        guard let navigationController = self.navigationController else { return }
-        viewModel.showEnableLocationServicesPrompt(at: navigationController)
     }
 
     func setupNavigationItems() {

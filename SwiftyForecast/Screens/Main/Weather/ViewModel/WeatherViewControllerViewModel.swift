@@ -16,16 +16,24 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
     @Published private(set) var locationModel: LocationModel?
 
     private var cancellables = Set<AnyCancellable>()
-
     private let service: WeatherService
     private let measurementSystemNotification: MeasurementSystemNotification
     private let appStoreReviewCenter: ReviewNotificationCenter
 
+    convenience init(locationModel: LocationModel) {
+        self.init(
+            locationModel: locationModel,
+            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            measurementSystemNotification: MeasurementSystemNotification(),
+            appStoreReviewCenter: ReviewNotificationCenter()
+        )
+    }
+
     init(
         locationModel: LocationModel,
-        service: WeatherService = OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
-        measurementSystemNotification: MeasurementSystemNotification = MeasurementSystemNotification(),
-        appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter()
+        service: WeatherService,
+        measurementSystemNotification: MeasurementSystemNotification,
+        appStoreReviewCenter: ReviewNotificationCenter
     ) {
         self.service = service
         self.measurementSystemNotification = measurementSystemNotification
@@ -62,7 +70,7 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] weatherModel in
                 setTwentyFourHoursForecastModel(weatherModel.hourly)
-                setFiveDaysForecastModel(weatherModel.daily)
+                fiveDaysForecastModel = weatherModel.daily
             }
             .store(in: &cancellables)
     }
@@ -105,17 +113,13 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
         if let hourly = weatherModel?.hourly,
            let daily = weatherModel?.daily {
             setTwentyFourHoursForecastModel(hourly)
-            setFiveDaysForecastModel(daily)
+            fiveDaysForecastModel = daily
         }
     }
 
     private func setTwentyFourHoursForecastModel(_ hourly: [HourlyForecastModel]) {
         guard hourly.count >= Self.numberOfThreeHoursForecastItems else { return }
         twentyFourHoursForecastModel = Array(hourly[...Self.numberOfThreeHoursForecastItems])
-    }
-
-    private func setFiveDaysForecastModel(_ daily: [DailyForecastModel]) {
-        fiveDaysForecastModel = daily
     }
 
     private func postAppStoreReviewRequest() {

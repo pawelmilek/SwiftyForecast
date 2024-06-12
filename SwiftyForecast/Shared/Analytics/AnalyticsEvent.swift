@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AnalyticsEvent {
-    let name: String
-    let metadata: [String: String]
+protocol AnalyticsEvent {
+    var name: String { get }
+    var metadata: [String: Any] { get }
 }
