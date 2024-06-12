@@ -4,8 +4,6 @@ import CoreLocation
 import Combine
 
 final class MainViewController: UIViewController {
-    private let lottieAnimationViewController = LottieAnimationViewController()
-
     private lazy var infoBarButton: UIButton = {
         var configuration = UIButton.Configuration.bordered()
         configuration.image = UIImage(systemName: "info")
@@ -70,7 +68,6 @@ final class MainViewController: UIViewController {
             bundle: .main
         )
     )
-    private let locationManager = LocationManager()
     private let informationTip = InformationTip()
     private let appearanceTip = AppearanceTip()
 
@@ -89,7 +86,11 @@ final class MainViewController: UIViewController {
         }
     }
 
-    init?(viewModel: MainViewControllerViewModel, coordinator: Coordinator, coder: NSCoder) {
+    init?(
+        viewModel: MainViewControllerViewModel,
+        coordinator: Coordinator,
+        coder: NSCoder
+    ) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(coder: coder)
@@ -103,6 +104,8 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        viewModel.onViewDidLoad()
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -121,39 +124,10 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
 
     func setup() {
-        subscribeToLocationManager()
         subscribeToViewModel()
         setupChildaPageViewController()
         setupNavigationItems()
         setupAppearance()
-    }
-
-    func subscribeToLocationManager() {
-        locationManager.$authorizationStatus
-            .sink { [weak self] authorizationStatus in
-                self?.verifyLocation(authorizationStatus: authorizationStatus)
-            }
-            .store(in: &cancellables)
-
-        locationManager.$isObtainingLocation
-            .sink { [weak self] isObtainingLocation in
-                self?.presentObtainingLocationAnimationIfNeeded(isObtainingLocation)
-            }
-            .store(in: &cancellables)
-
-        locationManager.$currentLocation
-            .compactMap { $0 }
-            .sink { [self] currentLocation in
-                viewModel.onDidUpdateLocation(currentLocation)
-            }
-            .store(in: &cancellables)
-
-        locationManager.$error
-            .compactMap { $0 }
-            .sink { error in
-                debugPrint(error.localizedDescription)
-            }
-            .store(in: &cancellables)
     }
 
     func subscribeToViewModel() {
@@ -164,8 +138,11 @@ private extension MainViewController {
         viewModel.$currentWeatherViewModels
             .filter { !$0.isEmpty }
             .map { $0.map { WeatherViewController.make(viewModel: $0) } }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] viewControllers in
-                self?.pageViewController.set(viewControllers: viewControllers)
+                guard let self else { return }
+                pageViewController.set(viewControllers: viewControllers)
+                pageViewController.display(at: viewModel.currentPageIndex)
             }
             .store(in: &cancellables)
 
@@ -178,27 +155,29 @@ private extension MainViewController {
                 transitionToCurrentViewController()
             }
             .store(in: &cancellables)
-    }
 
-    func verifyLocation(authorizationStatus: CLAuthorizationStatus) {
-        switch authorizationStatus {
-        case .notDetermined:
-            locationManager.requestAuthorization()
+        viewModel.$isRequestingLocation
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isRequestingLocation in
+                self?.coordinator.presentLocationAnimation(isLoading: isRequestingLocation)
+            }
+            .store(in: &cancellables)
 
-        case .authorizedWhenInUse, .authorizedAlways:
-            locationManager.startUpdatingLocation()
+        viewModel.$locationError
+            .receive(on: DispatchQueue.main)
+            .sink { locationError in
+                guard let locationError else { return }
+                debugPrint(locationError.localizedDescription)
+            }
+            .store(in: &cancellables)
 
-        default:
-            coordinator.timedLocationServicesPrompt()
-        }
-    }
+        viewModel.$hasUpdatedViewModels
+            .filter { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { hasUpdatedViewModels in
 
-    func presentObtainingLocationAnimationIfNeeded(_ isObtainingLocation: Bool) {
-        if isObtainingLocation {
-            self.parent?.present(lottieAnimationViewController, animated: false)
-        } else {
-            lottieAnimationViewController.dismiss(animated: false)
-        }
+            }
+            .store(in: &cancellables)
     }
 
     func setupNavigationItems() {

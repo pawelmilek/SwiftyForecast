@@ -13,4 +13,5 @@ protocol Coordinator: AnyObject {
     func pushOffline()
     func popOffline()
     func timedLocationServicesPrompt()
+    func presentLocationAnimation(isLoading: Bool)
 }

@@ -46,15 +46,11 @@ final class WeatherViewController: UIViewController {
         viewModel.loadData()
     }
 
-    private func reloadData() {
-        viewModel.reloadData()
-    }
-
-    func loadHourlyData() {
+    private func loadHourlyData() {
         hourlyCollectionView.reloadData()
     }
 
-    func loadDailyData() {
+    private func loadDailyData() {
         dailyTableView.reloadData()
     }
 }
@@ -168,7 +164,7 @@ private extension WeatherViewController {
 
     func subscribeNotificationCenterPublisher() {
         NotificationCenter.default
-            .publisher(for: UIApplication.didBecomeActiveNotification)
+            .publisher(for: UIApplication.willEnterForegroundNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }

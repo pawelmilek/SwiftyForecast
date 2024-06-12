@@ -9,15 +9,12 @@
 import Foundation
 import CoreLocation
 
-@MainActor
 final class LocationManager: NSObject {
-    @Published var hasPermission = false
-    @Published var isGettingExactLocation = false
     @Published var authorizationStatus: CLAuthorizationStatus
     @Published var accuracyAuthorizationStatus: CLAccuracyAuthorization
     @Published var currentLocation: CLLocation?
     @Published var error: Error?
-    @Published var isObtainingLocation = false
+    @Published var isRequestingLocation = false
 
     private let manager: CLLocationManager
 
@@ -33,17 +30,18 @@ final class LocationManager: NSObject {
         manager.pausesLocationUpdatesAutomatically = true
         manager.showsBackgroundLocationIndicator = true
         manager.activityType = .otherNavigation
+
     }
 
     func requestLocation() {
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
-        isObtainingLocation = true
+        isRequestingLocation = true
         manager.requestLocation()
     }
 
     func startUpdatingLocation() {
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
-        isObtainingLocation = true
+        isRequestingLocation = true
         manager.startUpdatingLocation()
     }
 
@@ -56,33 +54,13 @@ final class LocationManager: NSObject {
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
         manager.requestWhenInUseAuthorization()
     }
-
 }
 
 // MARK: - CLLocationManagerDelegate
 extension LocationManager: CLLocationManagerDelegate {
-
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
         accuracyAuthorizationStatus = manager.accuracyAuthorization
-
-        switch manager.authorizationStatus {
-        case .notDetermined, .restricted, .denied:
-            hasPermission = false
-        case .authorizedAlways, .authorizedWhenInUse:
-            hasPermission = true
-        @unknown default:
-            hasPermission = false
-        }
-
-        switch manager.accuracyAuthorization {
-        case .fullAccuracy:
-            isGettingExactLocation = true
-        case .reducedAccuracy:
-            isGettingExactLocation = false
-        @unknown default:
-            isGettingExactLocation = false
-        }
 
         debugPrint(
             "\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)",
@@ -91,14 +69,20 @@ extension LocationManager: CLLocationManagerDelegate {
         )
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(
+        _ manager: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
         guard let lastLocation = locations.last else { return }
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)", lastLocation)
-        self.isObtainingLocation = false
+        self.isRequestingLocation = false
         self.currentLocation = lastLocation
     }
 
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    func locationManager(
+        _ manager: CLLocationManager,
+        didFailWithError error: Error
+    ) {
         let code = (error as NSError).code
 
         if code == CLError.Code.locationUnknown.rawValue {
@@ -109,7 +93,6 @@ extension LocationManager: CLLocationManagerDelegate {
         }
 
         self.error = error
-        self.isObtainingLocation = false
+        self.isRequestingLocation = false
     }
-
 }

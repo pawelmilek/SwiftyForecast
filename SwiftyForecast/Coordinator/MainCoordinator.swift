@@ -24,7 +24,8 @@ final class MainCoordinator: Coordinator {
                     geocodeLocation: GeocodeLocation(geocoder: CLGeocoder()),
                     notationSystemStore: NotationSystemStore(),
                     measurementSystemNotification: MeasurementSystemNotification(),
-                    databaseManager: RealmManager.shared,
+                    databaseManager: RealmManager.shared, 
+                    locationManager: LocationManager(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 coordinator: self,
@@ -94,5 +95,21 @@ final class MainCoordinator: Coordinator {
         }
 
         navigationController.viewIfLoaded?.setNeedsLayout()
+    }
+
+    func presentLocationAnimation(isLoading: Bool) {
+        if isLoading {
+            guard !navigationController.viewControllers
+                .contains(where: { $0.view.tag == LottieAnimationViewController.identifier }) else {
+                return
+            }
+            navigationController.pushViewController(LottieAnimationViewController(), animated: false)
+        } else {
+            guard let index = navigationController.viewControllers
+                .firstIndex(where: { $0.view.tag == LottieAnimationViewController.identifier }) else {
+                return
+            }
+            navigationController.viewControllers.remove(at: index)
+        }
     }
 }

@@ -7,28 +7,27 @@ import Combine
 final class MainViewControllerViewModel: ObservableObject {
     static let userLocationPageIndex = 0
 
-    private(set) var currentPageIndex = userLocationPageIndex
-    @Published private(set) var currentWeatherViewModels = [WeatherViewControllerViewModel]()
-    @Published private(set) var notationSegmentedControlIndex: Int
-    @Published private var hasValidatedUserLocation = false
-    @Published private var hasUpdatedViewModels = false
-
     var shouldNavigateToCurrentPage: AnyPublisher<Bool, Never> {
         return Publishers.Zip($hasValidatedUserLocation, $hasUpdatedViewModels)
             .map { $0.0 && $0.1 }
             .eraseToAnyPublisher()
     }
-
-    var notationSegmentedControlItems: [String] {
-        [TemperatureNotation.fahrenheit.description,
-         TemperatureNotation.celsius.description]
-    }
+    private(set) var currentPageIndex = userLocationPageIndex
+    @Published private(set) var currentWeatherViewModels = [WeatherViewControllerViewModel]()
+    @Published private(set) var notationSegmentedControlItems: [String]
+    @Published private(set) var notationSegmentedControlIndex: Int
+    @Published private(set) var locationAuthorizationStatusDenied = false
+    @Published private(set) var isRequestingLocation = true
+    @Published private(set) var hasValidatedUserLocation = false
+    @Published private(set) var hasUpdatedViewModels = false
+    @Published private(set) var locationError: Error?
 
     private let geocodeLocation: GeocodeLocationProtocol
     private let notationSystemStore: NotationSystemStore
     private let measurementSystemNotification: MeasurementSystemNotification
     private let databaseManager: DatabaseManager
     private let analyticsManager: AnalyticsManager
+    private let locationManager: LocationManager
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -37,19 +36,62 @@ final class MainViewControllerViewModel: ObservableObject {
         notationSystemStore: NotationSystemStore,
         measurementSystemNotification: MeasurementSystemNotification,
         databaseManager: DatabaseManager,
+        locationManager: LocationManager,
         analyticsManager: AnalyticsManager
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSystemStore = notationSystemStore
         self.measurementSystemNotification = measurementSystemNotification
         self.databaseManager = databaseManager
+        self.locationManager = locationManager
         self.analyticsManager = analyticsManager
         self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
+        self.notationSegmentedControlItems = [
+            TemperatureNotation.fahrenheit.description,
+            TemperatureNotation.celsius.description
+        ]
         registerRealmCollectionNotificationToken()
     }
 
     deinit {
         token?.invalidate()
+    }
+
+    func onViewDidLoad() {
+        subscirbePublishers()
+    }
+
+    private func subscirbePublishers() {
+        locationManager.$authorizationStatus
+            .sink { [weak self] authorizationStatus in
+                guard let self else { return }
+                switch authorizationStatus {
+                case .notDetermined:
+                    locationManager.requestAuthorization()
+
+                case .authorizedWhenInUse, .authorizedAlways:
+                    locationManager.startUpdatingLocation()
+
+                default:
+                    locationAuthorizationStatusDenied = true
+                }
+            }
+            .store(in: &cancellables)
+
+        locationManager.$currentLocation
+            .compactMap { $0 }
+            .sink { [self] currentLocation in
+                updateLocationDatabase(with: currentLocation)
+            }
+            .store(in: &cancellables)
+
+        locationManager.$isRequestingLocation
+            .assign(to: \.isRequestingLocation, on: self)
+            .store(in: &cancellables)
+
+        locationManager.$error
+            .assign(to: \.locationError, on: self)
+            .store(in: &cancellables)
     }
 
     func donateInformationVisitEvent() {
@@ -64,7 +106,10 @@ final class MainViewControllerViewModel: ObservableObject {
             case .initial:
                 self?.setCurrentWeatherViewModels()
 
-            case .update:
+            case .update(_, let deletions, let insertions, let modifications):
+                debugPrint("deletions: \(deletions)")
+                debugPrint("insertions: \(insertions)")
+                debugPrint("modifications: \(modifications)")
                 self?.setCurrentWeatherViewModels()
                 self?.hasUpdatedViewModels = true
 
@@ -83,7 +128,7 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    func onDidUpdateLocation(_ location: CLLocation) {
+    private func updateLocationDatabase(with location: CLLocation) {
         Task(priority: .userInitiated) {
             do {
                 let placemark = try await geocodeLocation.requestPlacemark(at: location)

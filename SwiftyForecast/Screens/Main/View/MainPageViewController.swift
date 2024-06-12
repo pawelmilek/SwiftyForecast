@@ -21,8 +21,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     }
 
     func set(viewControllers: [WeatherViewController]) {
-        weatherViewControllers.removeAll()
-        weatherViewControllers.append(contentsOf: viewControllers)
+        weatherViewControllers = viewControllers
     }
 
     func display(at index: Int) {

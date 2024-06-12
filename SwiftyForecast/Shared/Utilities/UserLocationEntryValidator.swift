@@ -13,9 +13,6 @@ struct UserLocationEntryValidator {
     private let databaseManager: DatabaseManager
     private let location: LocationModel
 
-    private var isUserLocationAvailable: Bool {
-        availableUserLocation != nil
-    }
     private var availableUserLocation: LocationModel? {
         return try? databaseManager.readAll().first(where: { $0.isUserLocation })
     }
@@ -30,7 +27,8 @@ struct UserLocationEntryValidator {
 
     @discardableResult
     func validate() -> Bool {
-        if isUserLocationAvailable {
+        let locationExist = availableUserLocation != nil
+        if locationExist {
             updateIfHasCurrentEntry()
             deleteIfHasObsoleteEntry()
         } else {
