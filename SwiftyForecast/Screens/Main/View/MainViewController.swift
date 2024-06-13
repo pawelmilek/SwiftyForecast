@@ -154,14 +154,6 @@ private extension MainViewController {
                 debugPrint(locationError.localizedDescription)
             }
             .store(in: &cancellables)
-
-//        viewModel.$hasUpdatedViewModels
-//            .filter { $0 }
-//            .receive(on: DispatchQueue.main)
-//            .sink { hasUpdatedViewModels in
-//
-//            }
-//            .store(in: &cancellables)
     }
 
     func setupNavigationItems() {

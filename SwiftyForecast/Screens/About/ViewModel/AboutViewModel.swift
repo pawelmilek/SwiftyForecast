@@ -51,6 +51,13 @@ final class AboutViewModel: ObservableObject {
         subscribeToPublishers()
     }
 
+
+    func donateDidAppBecomeActiveEvent() {
+        Task(priority: .userInitiated) {
+            await AppearanceTip.didAppBecomeActiveEvent.donate()
+        }
+    }
+
     private func subscribeToPublishers() {
         $bundle
             .sink { [weak self] bundle in

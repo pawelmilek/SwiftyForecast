@@ -54,6 +54,7 @@ struct AboutScreen: View {
                         viewModel.logEventRowTapped("Apps Preview")
                     })
                     .popoverTip(viewModel.appStorePreviewTip, arrowEdge: .bottom)
+                    .foregroundStyle(.customPrimary)
                 } header: {
                     Text("App Store")
                 }
@@ -126,6 +127,7 @@ struct AboutScreen: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
                         dismiss()
+                        viewModel.donateDidAppBecomeActiveEvent()
                     }
                     .tint(.accent)
                     .buttonStyle(.bordered)

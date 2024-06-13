@@ -9,7 +9,7 @@
 import UIKit
 
 class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    private var weatherViewControllers: [WeatherViewController] = []
+    private var weatherViewControllers = [WeatherViewController]()
     private let generator = UIImpactFeedbackGenerator(style: .light)
     private var currentIndex = 0
     var onDidChangePageNavigation: ((Int) -> Void)?
@@ -25,12 +25,17 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     }
 
     func transition(at index: Int) {
-        currentIndex = index
+
         setViewControllers(
             [weatherViewControllers[index]],
             direction: .forward,
             animated: false,
-            completion: nil
+            completion: { isCompleted in
+                if isCompleted {
+                    self.currentIndex = index
+                    debugPrint("currentIndex: \(self.currentIndex)")
+                }
+            }
         )
     }
 }

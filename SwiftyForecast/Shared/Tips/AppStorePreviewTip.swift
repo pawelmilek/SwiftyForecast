@@ -16,10 +16,13 @@ struct AppStorePreviewTip: Tip {
 
     var title: Text {
         Text("Preview")
+            .fontWeight(.bold)
+            .fontDesign(.monospaced)
     }
 
     var message: Text? {
         Text("Find more apps on the Apple Store.")
+            .fontDesign(.monospaced)
     }
 
     var image: Image? {

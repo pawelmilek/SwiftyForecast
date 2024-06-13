@@ -11,8 +11,6 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var notationSegmentedControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var isRequestingLocation = true
-    @Published private(set) var hasValidatedUserLocation = false
-    @Published private(set) var hasUpdatedViewModels = false
     @Published private(set) var locationError: Error?
 
     private let geocodeLocation: GeocodeLocationProtocol
@@ -55,7 +53,6 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     func onViewDidAppear() {
-        donateDidAppBecomeActiveEvent()
     }
 
     private func subscirbePublishers() {
@@ -91,17 +88,6 @@ final class MainViewControllerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func donateDidAppBecomeActiveEvent() {
-        Task(priority: .userInitiated) {
-            try await Task.sleep(
-                until: .now + .seconds(10),
-                tolerance: .seconds(2),
-                clock: .suspending
-            )
-            await AppearanceTip.didAppBecomeActiveEvent.donate()
-        }
-    }
-
     private func registerRealmCollectionNotificationToken() {
         token = try? databaseManager.readAll().observe { [weak self] changes in
             switch changes {
@@ -113,7 +99,6 @@ final class MainViewControllerViewModel: ObservableObject {
                 debugPrint("insertions: \(insertions)")
                 debugPrint("modifications: \(modifications)")
                 self?.setCurrentWeatherViewModels()
-                self?.hasUpdatedViewModels = true
 
             case .error(let error):
                 fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
@@ -149,7 +134,8 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     func index(of location: LocationModel) -> Int? {
-        guard let index = try? databaseManager.readAllSorted()
+        guard let index = try? databaseManager
+            .readAllSorted()
             .firstIndex(where: { $0.compoundKey == location.compoundKey }) else { return nil }
         return index
     }
