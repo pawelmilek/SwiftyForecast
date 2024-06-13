@@ -7,8 +7,14 @@
 //
 
 import Foundation
+import RealmSwift
 
-class CurrentLocationRecord {
+protocol CurrentLocationRecordProtocol {
+    func insert(_ entry: LocationModel)
+}
+
+
+struct CurrentLocationRecord: CurrentLocationRecordProtocol {
     private let databaseManager: DatabaseManager
 
     init(databaseManager: DatabaseManager) {

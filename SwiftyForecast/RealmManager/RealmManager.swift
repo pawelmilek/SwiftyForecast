@@ -68,7 +68,7 @@ extension RealmManager {
     }
 
     func readBy(primaryKey: String) throws -> LocationModel? {
-        return realm.object(ofType: LocationModel.self, forPrimaryKey: primaryKey)
+        realm.object(ofType: LocationModel.self, forPrimaryKey: primaryKey)
     }
 
     func readAll() throws -> Results<LocationModel> {

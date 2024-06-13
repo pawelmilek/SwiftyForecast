@@ -24,7 +24,8 @@ final class MainCoordinator: Coordinator {
                     geocodeLocation: GeocodeLocation(geocoder: CLGeocoder()),
                     notationSystemStore: NotationSystemStore(),
                     measurementSystemNotification: MeasurementSystemNotification(),
-                    databaseManager: RealmManager.shared, 
+                    currentLocationRecord: CurrentLocationRecord(databaseManager: RealmManager.shared),
+                    databaseManager: RealmManager.shared,
                     locationManager: LocationManager(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
@@ -37,9 +38,13 @@ final class MainCoordinator: Coordinator {
     }
 
     func openAbout() {
-        let aboutViewController = AboutViewController()
-        aboutViewController.coordinator = self
-        navigationController.present(aboutViewController, animated: true)
+        navigationController.present(
+            AboutViewController(
+                viewModel: AboutViewModel(),
+                coordinator: self
+            ),
+            animated: true
+        )
     }
 
     func openAppearanceSwitch() {
@@ -49,15 +54,13 @@ final class MainCoordinator: Coordinator {
     }
 
     func openLocations() {
-        let locationSearchViewController = LocationSearchViewController()
-        locationSearchViewController.coordinator = self
-        
+        let viewController = LocationSearchViewController(coordinator: self)
         if let visibleViewController = navigationController
             .viewControllers.first(where: { $0 is LocationSearchViewControllerDelegate }) {
-            locationSearchViewController.delegate = visibleViewController as? LocationSearchViewControllerDelegate
+            viewController.delegate = visibleViewController as? LocationSearchViewControllerDelegate
         }
-        locationSearchViewController.modalPresentationStyle = .fullScreen
-        navigationController.present(locationSearchViewController, animated: true)
+
+        navigationController.present(viewController, animated: true)
     }
 
     func dismiss() {

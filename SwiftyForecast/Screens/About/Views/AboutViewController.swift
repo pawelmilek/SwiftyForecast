@@ -12,6 +12,20 @@ import SwiftUI
 class AboutViewController: UIViewController {
     weak var coordinator: Coordinator?
     private var hostingViewController: UIHostingController<AboutScreen>!
+    private let viewModel: AboutViewModel
+
+    init(
+        viewModel: AboutViewModel,
+        coordinator: Coordinator
+    ) {
+        self.viewModel = viewModel
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("Invalid way of decoding this class")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +33,7 @@ class AboutViewController: UIViewController {
     }
 
     private func setup() {
-        let informationView = AboutScreen()
+        let informationView = AboutScreen(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: informationView)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)

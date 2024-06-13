@@ -10,7 +10,7 @@ import SwiftUI
 import StoreKit
 
 struct AboutScreen: View {
-    @StateObject private var viewModel = AboutViewModel()
+    @ObservedObject var viewModel: AboutViewModel
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
 
@@ -154,5 +154,5 @@ struct AboutScreen: View {
 }
 
 #Preview {
-    AboutScreen()
+    AboutScreen(viewModel: .init())
 }

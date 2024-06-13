@@ -16,6 +16,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let geocodeLocation: GeocodeLocationProtocol
     private let notationSystemStore: NotationSystemStore
     private let measurementSystemNotification: MeasurementSystemNotification
+    private let currentLocationRecord: CurrentLocationRecordProtocol
     private let databaseManager: DatabaseManager
     private let analyticsManager: AnalyticsManager
     private let locationManager: LocationManager
@@ -26,6 +27,7 @@ final class MainViewControllerViewModel: ObservableObject {
         geocodeLocation: GeocodeLocationProtocol,
         notationSystemStore: NotationSystemStore,
         measurementSystemNotification: MeasurementSystemNotification,
+        currentLocationRecord: CurrentLocationRecordProtocol,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         analyticsManager: AnalyticsManager
@@ -33,6 +35,7 @@ final class MainViewControllerViewModel: ObservableObject {
         self.geocodeLocation = geocodeLocation
         self.notationSystemStore = notationSystemStore
         self.measurementSystemNotification = measurementSystemNotification
+        self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
         self.locationManager = locationManager
         self.analyticsManager = analyticsManager
@@ -119,8 +122,7 @@ final class MainViewControllerViewModel: ObservableObject {
         Task(priority: .userInitiated) {
             do {
                 let placemark = try await geocodeLocation.requestPlacemark(at: location)
-                let record = CurrentLocationRecord(databaseManager: databaseManager)
-                record.insert(
+                currentLocationRecord.insert(
                     LocationModel(
                         placemark: placemark,
                         isUserLocation: true
