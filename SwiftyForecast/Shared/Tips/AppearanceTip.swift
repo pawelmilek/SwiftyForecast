@@ -9,8 +9,7 @@
 import TipKit
 
 struct AppearanceTip: Tip {
-    @Parameter
-    static var showTip: Bool = true
+    static let didAppBecomeActiveEvent = Event(id: "didAppBecomeActiveEvent")
 
     var title: Text {
         Text("Appearance")
@@ -29,7 +28,7 @@ struct AppearanceTip: Tip {
 
     var rules: [Rule] {
         [
-            #Rule(Self.$showTip) { $0 == true }
+            #Rule(Self.didAppBecomeActiveEvent) { $0.donations.count == 1 }
         ]
     }
 }

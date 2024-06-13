@@ -22,7 +22,7 @@ class LocationModel: Object, ObjectKeyIdentifiable {
     @Persisted var lastUpdate = Date()
     @Persisted var isUserLocation = false
 
-    convenience init(placemark: CLPlacemark, isUserLocation: Bool = false) {
+    convenience init(placemark: CLPlacemark, isUserLocation: Bool) {
         self.init()
         name = placemark.locality ?? InvalidReference.notApplicable
         country = placemark.country ?? InvalidReference.notApplicable

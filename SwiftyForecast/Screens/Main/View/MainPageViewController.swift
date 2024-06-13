@@ -20,11 +20,11 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         dataSource = self
     }
 
-    func set(viewControllers: [WeatherViewController]) {
+    func set(_ viewControllers: [WeatherViewController]) {
         weatherViewControllers = viewControllers
     }
 
-    func display(at index: Int) {
+    func transition(at index: Int) {
         currentIndex = index
         setViewControllers(
             [weatherViewControllers[index]],

@@ -20,7 +20,7 @@ struct LocationsTip: Tip {
     }
 
     public var message: Text? {
-        Text("Search and add your favorite locations.")
+        Text("Search and add favorite locations.")
             .fontDesign(.monospaced)
     }
 

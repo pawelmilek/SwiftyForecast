@@ -9,7 +9,9 @@
 import TipKit
 
 struct InformationTip: Tip {
-    static let visitViewEvent = Event(id: "visitInformationViewEvent")
+    var options: [Option] {
+        MaxDisplayCount(1)
+    }
 
     var title: Text {
         Text("Information")
@@ -24,13 +26,5 @@ struct InformationTip: Tip {
 
     var image: Image? {
         Image(systemName: "info.circle.fill")
-    }
-
-    var rules: [Rule] {
-        [
-            #Rule(Self.visitViewEvent) { event in
-                event.donations.count == 0
-            }
-        ]
     }
 }

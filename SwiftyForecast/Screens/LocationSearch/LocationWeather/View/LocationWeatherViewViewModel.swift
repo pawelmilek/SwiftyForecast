@@ -115,7 +115,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
         do {
             let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
             let placemark = try await geocodeLocation.requestPlacemark(at: foundLocation)
-            location = LocationModel(placemark: placemark)
+            location = LocationModel(placemark: placemark, isUserLocation: false)
         } catch {
             isLoading = false
             self.error = error

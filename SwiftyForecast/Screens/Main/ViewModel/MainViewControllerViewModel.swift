@@ -5,14 +5,7 @@ import Combine
 
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
-    static let userLocationPageIndex = 0
-
-    var shouldNavigateToCurrentPage: AnyPublisher<Bool, Never> {
-        return Publishers.Zip($hasValidatedUserLocation, $hasUpdatedViewModels)
-            .map { $0.0 && $0.1 }
-            .eraseToAnyPublisher()
-    }
-    private(set) var currentPageIndex = userLocationPageIndex
+    static let currentLocationIndex = 0
     @Published private(set) var currentWeatherViewModels = [WeatherViewControllerViewModel]()
     @Published private(set) var notationSegmentedControlItems: [String]
     @Published private(set) var notationSegmentedControlIndex: Int
@@ -61,6 +54,10 @@ final class MainViewControllerViewModel: ObservableObject {
         subscirbePublishers()
     }
 
+    func onViewDidAppear() {
+        donateDidAppBecomeActiveEvent()
+    }
+
     private func subscirbePublishers() {
         locationManager.$authorizationStatus
             .sink { [weak self] authorizationStatus in
@@ -81,7 +78,7 @@ final class MainViewControllerViewModel: ObservableObject {
         locationManager.$currentLocation
             .compactMap { $0 }
             .sink { [self] currentLocation in
-                updateLocationDatabase(with: currentLocation)
+                insertCurrentLocation(currentLocation)
             }
             .store(in: &cancellables)
 
@@ -94,9 +91,14 @@ final class MainViewControllerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func donateInformationVisitEvent() {
+    private func donateDidAppBecomeActiveEvent() {
         Task(priority: .userInitiated) {
-            await InformationTip.visitViewEvent.donate()
+            try await Task.sleep(
+                until: .now + .seconds(10),
+                tolerance: .seconds(2),
+                clock: .suspending
+            )
+            await AppearanceTip.didAppBecomeActiveEvent.donate()
         }
     }
 
@@ -128,13 +130,17 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    private func updateLocationDatabase(with location: CLLocation) {
+    private func insertCurrentLocation(_ location: CLLocation) {
         Task(priority: .userInitiated) {
             do {
                 let placemark = try await geocodeLocation.requestPlacemark(at: location)
-                let newLocation = LocationModel(placemark: placemark, isUserLocation: true)
-                let entryValidator = UserLocationEntryValidator(location: newLocation)
-                hasValidatedUserLocation = entryValidator.validate()
+                let record = CurrentLocationRecord(databaseManager: databaseManager)
+                record.insert(
+                    LocationModel(
+                        placemark: placemark,
+                        isUserLocation: true
+                    )
+                )
                 reloadWidgetTimeline()
             } catch {
                 fatalError(error.localizedDescription)
@@ -146,20 +152,6 @@ final class MainViewControllerViewModel: ObservableObject {
         guard let index = try? databaseManager.readAllSorted()
             .firstIndex(where: { $0.compoundKey == location.compoundKey }) else { return nil }
         return index
-    }
-
-    func onDidChangePageNavigation(index: Int) {
-        resetUpdatePublishers()
-        currentPageIndex = index
-    }
-
-    func onViewDidDisappear() {
-        resetUpdatePublishers()
-    }
-
-    func resetUpdatePublishers() {
-        hasUpdatedViewModels = false
-        hasValidatedUserLocation = false
     }
 
     func onSegmentedControlDidChange(_ selectedSegmentIndex: Int) {

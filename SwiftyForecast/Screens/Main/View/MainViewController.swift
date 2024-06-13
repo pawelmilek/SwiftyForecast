@@ -78,13 +78,7 @@ final class MainViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     let coordinator: Coordinator
-    var viewModel: MainViewControllerViewModel {
-        didSet {
-            pageViewController.onDidChangePageNavigation = { [weak self] index in
-                self?.viewModel.onDidChangePageNavigation(index: index)
-            }
-        }
-    }
+    var viewModel: MainViewControllerViewModel
 
     init?(
         viewModel: MainViewControllerViewModel,
@@ -111,11 +105,11 @@ final class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupTipObservationTasks()
+        viewModel.onViewDidAppear()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        viewModel.onViewDidDisappear()
         stopTipObservationTasks()
     }
 }
@@ -141,18 +135,8 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] viewControllers in
                 guard let self else { return }
-                pageViewController.set(viewControllers: viewControllers)
-                pageViewController.display(at: viewModel.currentPageIndex)
-            }
-            .store(in: &cancellables)
-
-        viewModel.shouldNavigateToCurrentPage
-            .filter { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
-                viewModel.onDidChangePageNavigation(index: MainViewControllerViewModel.userLocationPageIndex)
-                transitionToCurrentViewController()
+                pageViewController.set(viewControllers)
+                pageTransition(at: MainViewControllerViewModel.currentLocationIndex)
             }
             .store(in: &cancellables)
 
@@ -171,13 +155,13 @@ private extension MainViewController {
             }
             .store(in: &cancellables)
 
-        viewModel.$hasUpdatedViewModels
-            .filter { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { hasUpdatedViewModels in
-
-            }
-            .store(in: &cancellables)
+//        viewModel.$hasUpdatedViewModels
+//            .filter { $0 }
+//            .receive(on: DispatchQueue.main)
+//            .sink { hasUpdatedViewModels in
+//
+//            }
+//            .store(in: &cancellables)
     }
 
     func setupNavigationItems() {
@@ -199,13 +183,11 @@ private extension MainViewController {
     @objc
     func openInfoBarButtonTapped() {
         coordinator.openAbout()
-        viewModel.donateInformationVisitEvent()
     }
 
     @objc
     func openAppearanceBarButtonTapped() {
         coordinator.openAppearanceSwitch()
-        AppearanceTip.showTip = false
     }
 
     @objc func openLocationListBarButtonTapped() {
@@ -292,13 +274,12 @@ extension MainViewController: LocationSearchViewControllerDelegate {
         didSelectLocation location: LocationModel
     ) {
         guard let index = viewModel.index(of: location) else { return }
-        viewModel.onDidChangePageNavigation(index: index)
+        pageTransition(at: index)
         coordinator.dismiss()
-        transitionToCurrentViewController()
     }
 
-    private func transitionToCurrentViewController() {
-        pageViewController.display(at: viewModel.currentPageIndex)
+    private func pageTransition(at index: Int) {
+        pageViewController.transition(at: index)
     }
 }
 

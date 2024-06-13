@@ -107,7 +107,7 @@
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
 		E27E2F8E1DA048DD00B3EABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */; };
 		E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB01DA04D1D00B3EABF /* UIView+NibLoadableView.swift */; };
-		E28092E42AFCC9720019FD7C /* UserLocationEntryValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28092E32AFCC9720019FD7C /* UserLocationEntryValidator.swift */; };
+		E28092E42AFCC9720019FD7C /* CurrentLocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */; };
 		E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28092E52AFCF6690019FD7C /* PreviewRealmManager.swift */; };
 		E281790E2B3856AC00D06917 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790D2B3856AC00D06917 /* SupportEmail.swift */; };
 		E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+Extension.swift */; };
@@ -421,7 +421,7 @@
 		E27E2F8D1DA048DD00B3EABF /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E27E2FB01DA04D1D00B3EABF /* UIView+NibLoadableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+NibLoadableView.swift"; sourceTree = "<group>"; };
 		E27E2FDA1DA057C100B3EABF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E28092E32AFCC9720019FD7C /* UserLocationEntryValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationEntryValidator.swift; sourceTree = "<group>"; };
+		E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationRecord.swift; sourceTree = "<group>"; };
 		E28092E52AFCF6690019FD7C /* PreviewRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRealmManager.swift; sourceTree = "<group>"; };
 		E281790D2B3856AC00D06917 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		E281790F2B385C6600D06917 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
@@ -632,7 +632,7 @@
 				E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */,
 				E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */,
 				E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */,
-				E28092E32AFCC9720019FD7C /* UserLocationEntryValidator.swift */,
+				E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1681,7 +1681,7 @@
 				E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */,
 				E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */,
 				E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */,
-				E28092E42AFCC9720019FD7C /* UserLocationEntryValidator.swift in Sources */,
+				E28092E42AFCC9720019FD7C /* CurrentLocationRecord.swift in Sources */,
 				E23997EF20E84371007D8CE4 /* ErrorPresentable.swift in Sources */,
 				E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */,
 				E224507A2B9F3F9800F14BAA /* CurrentWeatherCardViewController.swift in Sources */,
@@ -2062,7 +2062,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.0;
+				MARKETING_VERSION = "$(APP_VERSION_NUMBER)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2097,7 +2097,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.8.0;
+				MARKETING_VERSION = "$(APP_VERSION_NUMBER)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pawelmilek.Swifty-Forecast";
 				PRODUCT_NAME = "$(TARGET_NAME)";
