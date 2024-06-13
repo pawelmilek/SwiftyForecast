@@ -1,5 +1,5 @@
 //
-//  LocationWeatherViewViewModel.swift
+//  SearchedLocationWeatherViewViewModel.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/22/23.
@@ -11,35 +11,36 @@ import SwiftUI
 import Combine
 
 @MainActor
-final class LocationWeatherViewViewModel: ObservableObject {
+final class SearchedLocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = false
     @Published private(set) var isExistingLocation = true
-    @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel] = []
-    @Published private(set) var shouldShowHourlyForecastChart = false
     @Published private(set) var location: LocationModel?
-    @Published private var forecastModel: ForecastWeatherModel?
+    @Published private(set) var forecastModel: ForecastWeatherModel?
+    @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]?
 
+    private let threeHoursForecastItems = 8
     private var cancellables = Set<AnyCancellable>()
-    private var foundLocation: CLLocation?
-
-    private let searchCompletion: MKLocalSearchCompletion
+    private let searchedLocation: MKLocalSearchCompletion
     private let service: WeatherService
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
+    private let locationPlace: LocationPlaceable
     private let analyticsManager: AnalyticsManager
 
     init(
-        searchCompletion: MKLocalSearchCompletion,
-        service: WeatherService = OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
-        databaseManager: DatabaseManager = RealmManager.shared,
-        appStoreReviewCenter: ReviewNotificationCenter = ReviewNotificationCenter(),
-        analyticsManager: AnalyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
+        searchedLocation: MKLocalSearchCompletion,
+        service: WeatherService,
+        databaseManager: DatabaseManager,
+        appStoreReviewCenter: ReviewNotificationCenter,
+        locationPlace: LocationPlaceable,
+        analyticsManager: AnalyticsManager
     ) {
-        self.searchCompletion = searchCompletion
+        self.searchedLocation = searchedLocation
         self.service = service
         self.databaseManager = databaseManager
         self.appStoreReviewCenter = appStoreReviewCenter
+        self.locationPlace = locationPlace
         self.analyticsManager = analyticsManager
         subscriteToPublishers()
     }
@@ -48,39 +49,25 @@ final class LocationWeatherViewViewModel: ObservableObject {
         $location
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] locationModel in
-                self?.verifyLocationExistanceInDatabase(locationModel)
-                self?.loadData()
+            .sink { [weak self] location in
+                self?.verifyLocationExistanceInDatabase(location)
+                self?.loadData(location)
             }
             .store(in: &cancellables)
 
         $forecastModel
-            .compactMap { $0 }
+            .compactMap { $0?.hourly[...self.threeHoursForecastItems] }
+            .map {  Array($0.prefix(upTo: self.threeHoursForecastItems)) }
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] weatherModel in
-                setTwentyFourHoursForecastModel(weatherModel.hourly)
+            .sink { [weak self] twentyFourHoursForecastModel in
+                self?.twentyFourHoursForecastModel = twentyFourHoursForecastModel
             }
             .store(in: &cancellables)
     }
 
-    private func setTwentyFourHoursForecastModel(_ hourly: [HourlyForecastModel]) {
-        guard hourly.count >= WeatherViewControllerViewModel.numberOfThreeHoursForecastItems else {
-            return
-        }
-
-        twentyFourHoursForecastModel = Array(
-            hourly[...WeatherViewControllerViewModel.numberOfThreeHoursForecastItems]
-        )
-        shouldShowHourlyForecastChart = !twentyFourHoursForecastModel.isEmpty
-    }
-
     private func verifyLocationExistanceInDatabase(_ location: LocationModel) {
         do {
-            if try databaseManager.readBy(primaryKey: location.compoundKey) != nil {
-                isExistingLocation = true
-            } else {
-                isExistingLocation = false
-            }
+            isExistingLocation = try databaseManager.readBy(primaryKey: location.compoundKey) != nil
         } catch {
             self.error = error
         }
@@ -89,19 +76,23 @@ final class LocationWeatherViewViewModel: ObservableObject {
     func startSearchRequest() {
         Task(priority: .userInitiated) {
             isLoading = true
-            await startSearch()
-            await requestPlacemarkIfLocationFound()
+            await fetchPlacemark()
             isLoading = false
         }
     }
 
-    private func startSearch() async {
-        let searchRequest = MKLocalSearch.Request(completion: searchCompletion)
+    private func fetchPlacemark() async {
+        let searchRequest = MKLocalSearch.Request(completion: searchedLocation)
         let search = MKLocalSearch(request: searchRequest)
 
         do {
             let response = try await search.start()
-            foundLocation = response.mapItems.first?.placemark.location
+            if let foundLocation = response.mapItems.first?.placemark.location {
+                try await geocode(location: foundLocation)
+            } else {
+                fatalError()
+            }
+
         } catch {
             isLoading = false
             self.error = error
@@ -109,22 +100,12 @@ final class LocationWeatherViewViewModel: ObservableObject {
         }
     }
 
-    private func requestPlacemarkIfLocationFound() async {
-        guard let foundLocation else { return }
-
-        do {
-            let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
-            let placemark = try await geocodeLocation.requestPlacemark(at: foundLocation)
-            location = LocationModel(placemark: placemark, isUserLocation: false)
-        } catch {
-            isLoading = false
-            self.error = error
-            debugPrint(error.localizedDescription)
-        }
+    private func geocode(location: CLLocation) async throws {
+        let placemark = try await locationPlace.placemark(at: location)
+        self.location = LocationModel(placemark: placemark, isUserLocation: false)
     }
 
-    func loadData() {
-        guard let location else { return }
+    func loadData(_ location: LocationModel) {
         guard !isLoading else { return }
         isLoading = true
 
@@ -138,7 +119,7 @@ final class LocationWeatherViewViewModel: ObservableObject {
                 isLoading = false
             } catch {
                 forecastModel = nil
-                twentyFourHoursForecastModel = []
+                twentyFourHoursForecastModel = nil
                 self.error = error
                 isLoading = false
             }

@@ -140,6 +140,13 @@ private extension CurrentWeatherCard {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    CurrentWeatherCard(viewModel: CurrentWeatherCardViewModel())
-        .padding(22.5)
+    CurrentWeatherCard(
+        viewModel: CurrentWeatherCardViewModel(
+            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            temperatureRenderer: TemperatureRenderer(),
+            speedRenderer: SpeedRenderer(),
+            measurementSystemNotification: MeasurementSystemNotification()
+        )
+    )
+    .padding(22.5)
 }

@@ -1,5 +1,5 @@
 //
-//  LocationWeatherView.swift
+//  SearchedLocationWeatherView.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/10/23.
@@ -9,11 +9,10 @@
 import SwiftUI
 import MapKit
 
-struct LocationWeatherView: View {
-    @ObservedObject var viewModel: LocationWeatherViewViewModel
-    @StateObject private var cardViewModel = CurrentWeatherCardViewModel()
-
-    var onDismissSearch: () -> Void
+struct SearchedLocationWeatherView: View {
+    @ObservedObject var viewModel: SearchedLocationWeatherViewViewModel
+    @ObservedObject var cardViewModel: CurrentWeatherCardViewModel
+    var onCancel: () -> Void
 
     @State private var opacity = 0.0
     @State private var toolbarAddItemOpacity = 0.0
@@ -23,10 +22,10 @@ struct LocationWeatherView: View {
         NavigationStack {
             VStack(spacing: 15) {
                 CurrentWeatherCard(viewModel: cardViewModel)
-                if viewModel.shouldShowHourlyForecastChart {
+                if let twentyFourHoursForecastModel = viewModel.twentyFourHoursForecastModel {
                     HourlyForecastChart(
                         viewModel: HourlyForecastChartViewModel(
-                            models: viewModel.twentyFourHoursForecastModel
+                            models: twentyFourHoursForecastModel
                         )
                     )
                 }
@@ -38,7 +37,7 @@ struct LocationWeatherView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
-                        onDismissSearch()
+                        onCancel()
                     } label: {
                         Text("Cancel")
                             .foregroundStyle(.accent)
@@ -50,7 +49,7 @@ struct LocationWeatherView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         viewModel.addNewLocation()
-                        onDismissSearch()
+                        onCancel()
                     } label: {
                         Text("Add")
                             .foregroundStyle(.accent)
@@ -63,9 +62,8 @@ struct LocationWeatherView: View {
             .disabled(isToolbarDisabled)
         }
         .overlay {
-            if viewModel.isLoading {
-                ProgressView()
-            }
+            ProgressView()
+                .opacity(viewModel.isLoading ? 1.0 : 0.0)
         }
         .onAppear {
             viewModel.startSearchRequest()
@@ -73,7 +71,7 @@ struct LocationWeatherView: View {
         }
         .onChange(of: viewModel.isLoading) {
             withAnimation(.easeInOut(duration: 0.5)) {
-                opacity = viewModel.isLoading == true ? 0.0 : 1.0
+                opacity = viewModel.isLoading ? 0.0 : 1.0
                 isToolbarDisabled = viewModel.isLoading
             }
         }
@@ -88,8 +86,21 @@ struct LocationWeatherView: View {
 }
 
 #Preview {
-    LocationWeatherView(viewModel: .init(searchCompletion: MKLocalSearchCompletion()),
-                        onDismissSearch: {
-    }
+    SearchedLocationWeatherView(
+        viewModel: SearchedLocationWeatherViewViewModel(
+            searchedLocation: MKLocalSearchCompletion(),
+            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            databaseManager: RealmManager.shared,
+            appStoreReviewCenter: ReviewNotificationCenter(),
+            locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
+            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+        ),
+        cardViewModel: CurrentWeatherCardViewModel(
+            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            temperatureRenderer: TemperatureRenderer(),
+            speedRenderer: SpeedRenderer(),
+            measurementSystemNotification: MeasurementSystemNotification()
+        ),
+        onCancel: {}
     )
 }

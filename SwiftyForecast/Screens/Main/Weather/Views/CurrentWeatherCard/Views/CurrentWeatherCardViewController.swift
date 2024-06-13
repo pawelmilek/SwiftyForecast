@@ -10,8 +10,17 @@ import UIKit
 import SwiftUI
 
 final class CurrentWeatherCardViewController: UIViewController {
-    private let viewModel = CurrentWeatherCardViewModel()
     private var hostingViewController: UIHostingController<CurrentWeatherCard>!
+    private let viewModel: CurrentWeatherCardViewModel
+
+    init(viewModel: CurrentWeatherCardViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

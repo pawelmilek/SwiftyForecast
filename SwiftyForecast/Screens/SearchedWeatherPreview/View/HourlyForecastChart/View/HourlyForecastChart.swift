@@ -11,6 +11,7 @@ import Charts
 
 struct HourlyForecastChart: View {
     @ObservedObject var viewModel: HourlyForecastChartViewModel
+    
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [

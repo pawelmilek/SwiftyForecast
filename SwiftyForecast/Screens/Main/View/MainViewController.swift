@@ -4,70 +4,27 @@ import CoreLocation
 import Combine
 
 final class MainViewController: UIViewController {
-    private lazy var infoBarButton: UIButton = {
-        var configuration = UIButton.Configuration.bordered()
-        configuration.image = UIImage(systemName: "info")
-        configuration.buttonSize = .small
-        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.openInfoBarButtonTapped()
-           })
-        return button
+    private lazy var aboutBarButton: UIBarButtonItem = {
+        aboutBarButtonItem()
     }()
 
-    private lazy var appearanceBarButton: UIButton = {
-        var configuration = UIButton.Configuration.bordered()
-        configuration.image = UIImage(systemName: "paintpalette.fill")
-        configuration.buttonSize = .small
-        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.openAppearanceBarButtonTapped()
-           })
-        return button
+    private lazy var appearanceBarButton: UIBarButtonItem = {
+        appearanceBarButtonItem()
     }()
 
-    private lazy var leftBarButtonHorizontalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [infoBarButton, appearanceBarButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.alignment = .center
-        stackView.spacing = 8
-        return stackView
-    }()
-
-    private lazy var locationBarButton: UIButton = {
-        var configuration = UIButton.Configuration.bordered()
-        configuration.image = UIImage(systemName: "location.fill")
-        configuration.buttonSize = .small
-        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.openLocationListBarButtonTapped()
-           })
-        return button
+    private lazy var locationBarButton: UIBarButtonItem = {
+        locationBarButtonItem()
     }()
 
     private lazy var notationSegmentedControl: UISegmentedControl = {
-        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems)
-        control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
-        control.addAction( UIAction { [weak self] action in
-            guard let sender = action.sender as? UISegmentedControl else { return }
-            self?.viewModel.onSegmentedControlDidChange(sender.selectedSegmentIndex)
-            UIImpactFeedbackGenerator().impactOccurred()
-        }, for: .valueChanged)
-
-        return control
+        segmentedControl()
     }()
 
     private let pageViewController = MainPageViewController(
-        transitionStyle: .scroll,
-        navigationOrientation: .horizontal
+        currentIndex: 0,
+        feedbackGenerator: UIImpactFeedbackGenerator(style: .light)
     )
 
-    private let reviewManager = ReviewManager(
-        bundle: .main,
-        storage: .standard,
-        configuration: DecodedPlist(
-            name: "ReviewDesirableMomentConfig",
-            bundle: .main
-        )
-    )
     private let informationTip = InformationTip()
     private let appearanceTip = AppearanceTip()
 
@@ -131,7 +88,15 @@ private extension MainViewController {
 
         viewModel.$currentWeatherViewModels
             .filter { !$0.isEmpty }
-            .map { $0.map { WeatherViewController.make(viewModel: $0) } }
+            .map { $0.map { WeatherViewController.make(
+                viewModel: $0,
+                cardViewModel: CurrentWeatherCardViewModel(
+                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    temperatureRenderer: TemperatureRenderer(),
+                    speedRenderer: SpeedRenderer(),
+                    measurementSystemNotification: MeasurementSystemNotification()
+                )
+            ) } }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] viewControllers in
                 guard let self else { return }
@@ -163,26 +128,24 @@ private extension MainViewController {
     }
 
     func setupLeftBarButtonItem() {
-        let leftBarButtonItem = UIBarButtonItem(customView: leftBarButtonHorizontalStackView)
-        navigationItem.leftBarButtonItem = leftBarButtonItem
+        navigationItem.leftBarButtonItems = [aboutBarButton, appearanceBarButton]
     }
 
     func setupRightBarButtonItem() {
-        let rightBarButtonItem = UIBarButtonItem(customView: locationBarButton)
-        navigationItem.rightBarButtonItem = rightBarButtonItem
+        navigationItem.rightBarButtonItem = locationBarButton
     }
 
     @objc
-    func openInfoBarButtonTapped() {
+    func onAboutBarButtonTapped() {
         coordinator.openAbout()
     }
 
     @objc
-    func openAppearanceBarButtonTapped() {
+    func onAppearanceBarButtonTapped() {
         coordinator.openAppearanceSwitch()
     }
 
-    @objc func openLocationListBarButtonTapped() {
+    @objc func onLocationListBarButtonTapped() {
         coordinator.openLocations()
     }
 
@@ -212,7 +175,7 @@ private extension MainViewController {
                 if shouldDisplay {
                     let popoverController = TipUIPopoverViewController(
                         informationTip,
-                        sourceItem: infoBarButton
+                        sourceItem: aboutBarButton
                     )
                     popoverController.view.tintColor = .customPrimary
                     present(popoverController, animated: true)
@@ -253,9 +216,58 @@ private extension MainViewController {
     func stopTipObservationTasks() {
         informationTipObservationTask?.cancel()
         informationTipObservationTask = nil
-
         appearanceTipObservationTask?.cancel()
         appearanceTipObservationTask = nil
+    }
+
+    private func pageTransition(at index: Int) {
+        pageViewController.transition(at: index)
+    }
+}
+
+// MARK: - Private - Navigation bar button items
+private extension MainViewController {
+    func aboutBarButtonItem() -> UIBarButtonItem {
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "info")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.onAboutBarButtonTapped()
+        })
+
+        return UIBarButtonItem(customView: button)
+    }
+
+    func appearanceBarButtonItem() -> UIBarButtonItem {
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "paintpalette.fill")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.onAppearanceBarButtonTapped()
+        })
+        return UIBarButtonItem(customView: button)
+    }
+
+    func locationBarButtonItem() -> UIBarButtonItem {
+        var configuration = UIButton.Configuration.bordered()
+        configuration.image = UIImage(systemName: "location.fill")
+        configuration.buttonSize = .small
+        let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
+            self?.onLocationListBarButtonTapped()
+        })
+        return UIBarButtonItem(customView: button)
+    }
+
+    func segmentedControl() -> UISegmentedControl {
+        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems)
+        control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
+        control.addAction( UIAction { [weak self] action in
+            guard let sender = action.sender as? UISegmentedControl else { return }
+            self?.viewModel.onSegmentedControlDidChange(sender.selectedSegmentIndex)
+            UIImpactFeedbackGenerator().impactOccurred()
+        }, for: .valueChanged)
+
+        return control
     }
 }
 
@@ -269,15 +281,12 @@ extension MainViewController: LocationSearchViewControllerDelegate {
         pageTransition(at: index)
         coordinator.dismiss()
     }
-
-    private func pageTransition(at index: Int) {
-        pageViewController.transition(at: index)
-    }
 }
 
 // MARK: - AppStoreReviewObserverEventResponder
 extension MainViewController: ReviewObserverEventResponder {
     func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
-        reviewManager.requestReview(for: desirableMoment)
+        viewModel.requestReview(for: desirableMoment)
     }
 }
+

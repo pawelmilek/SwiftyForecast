@@ -30,9 +30,22 @@ struct LocationSearchResultList: View {
             }
         }
         .sheet(isPresented: $searchResultConfig.showSheet) {
-            LocationWeatherView(
-                viewModel: .init(searchCompletion: searchResultConfig.searchCompletion),
-                onDismissSearch: dismiss
+            SearchedLocationWeatherView(
+                viewModel: SearchedLocationWeatherViewViewModel(
+                    searchedLocation: searchResultConfig.searchCompletion,
+                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    databaseManager: RealmManager.shared,
+                    appStoreReviewCenter: ReviewNotificationCenter(),
+                    locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
+                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+                ),
+                cardViewModel: CurrentWeatherCardViewModel(
+                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    temperatureRenderer: TemperatureRenderer(),
+                    speedRenderer: SpeedRenderer(),
+                    measurementSystemNotification: MeasurementSystemNotification()
+                ),
+                onCancel: dismiss
             )
         }
         .onAppear {

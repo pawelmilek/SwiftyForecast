@@ -17,6 +17,7 @@ enum WeatherCondition: Identifiable, CaseIterable {
     case atmosphere
     case clear
     case clouds
+    case none
 
     init(code: Int) {
         switch code {
@@ -35,7 +36,7 @@ enum WeatherCondition: Identifiable, CaseIterable {
         case 801...804:
             self = .clouds
         default:
-            self = .clear
+            self = .none
         }
     }
 
@@ -58,6 +59,8 @@ enum WeatherCondition: Identifiable, CaseIterable {
             return 800...800
         case .clouds:
             return 801...804
+        case .none:
+            return 0...0
         }
     }
 
@@ -84,6 +87,8 @@ enum WeatherCondition: Identifiable, CaseIterable {
         case .clouds:
             .clouds
 
+        case .none:
+            VortexSystem(tags: ["none"])
         }
     }
 }

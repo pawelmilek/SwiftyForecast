@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X8d-4m-SuV">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
         <!--Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="WeatherViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="WeatherViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WeatherViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="WeatherViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,13 +25,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="260" id="aee-ju-mxE"/>
                                         </constraints>
-                                        <connections>
-                                            <segue destination="tX6-iK-14z" kind="embed" identifier="ContainerViewSegue" id="ALj-Pz-rNg"/>
-                                        </connections>
                                     </containerView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="999" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SEl-7v-jxS" userLabel="Hourly Collection View">
                                         <rect key="frame" x="0.0" y="265" width="349" height="90"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="AccentColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="9Zw-40-zvy"/>
                                         </constraints>
@@ -63,6 +61,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="cardView" destination="qE3-vJ-lQj" id="K1e-ka-aa2"/>
                         <outlet property="dailyTableView" destination="mn2-1W-q0r" id="Tck-4b-2EV"/>
                         <outlet property="hourlyCollectionView" destination="SEl-7v-jxS" id="Enf-Jq-FYj"/>
                     </connections>
@@ -74,7 +73,7 @@
         <!--Main View Controller-->
         <scene sceneID="An9-LC-vHt">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="MainViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" title="Main View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BiV-X8-6kw" customClass="MainViewController" customModule="Swifty_Forecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pHi-4T-aQk">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,23 +104,11 @@
             </objects>
             <point key="canvasLocation" x="478" y="-587"/>
         </scene>
-        <!--Current Weather Card View Controller-->
-        <scene sceneID="cKb-7f-wc9">
-            <objects>
-                <viewController storyboardIdentifier="CurrentWeatherCardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tX6-iK-14z" customClass="CurrentWeatherCardViewController" customModule="SwiftyForecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="C9B-hy-LQA">
-                        <rect key="frame" x="0.0" y="0.0" width="349" height="260"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="GEU-pS-myu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hVg-k3-Bhz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2624" y="-796"/>
-        </scene>
     </scenes>
     <resources>
+        <namedColor name="AccentColor">
+            <color red="1" green="0.79199999570846558" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

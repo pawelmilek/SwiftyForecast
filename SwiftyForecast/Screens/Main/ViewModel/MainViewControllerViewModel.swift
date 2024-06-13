@@ -13,23 +13,26 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var isRequestingLocation = true
     @Published private(set) var locationError: Error?
 
-    private let geocodeLocation: GeocodeLocationProtocol
+    private let geocodeLocation: LocationPlaceable
     private let notationSystemStore: NotationSystemStore
     private let measurementSystemNotification: MeasurementSystemNotification
     private let currentLocationRecord: CurrentLocationRecordProtocol
     private let databaseManager: DatabaseManager
-    private let analyticsManager: AnalyticsManager
     private let locationManager: LocationManager
+    private let reviewManager: ReviewManager
+    private let analyticsManager: AnalyticsManager
+
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
     init(
-        geocodeLocation: GeocodeLocationProtocol,
+        geocodeLocation: LocationPlaceable,
         notationSystemStore: NotationSystemStore,
         measurementSystemNotification: MeasurementSystemNotification,
         currentLocationRecord: CurrentLocationRecordProtocol,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
+        reviewManager: ReviewManager,
         analyticsManager: AnalyticsManager
     ) {
         self.geocodeLocation = geocodeLocation
@@ -38,6 +41,7 @@ final class MainViewControllerViewModel: ObservableObject {
         self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
         self.locationManager = locationManager
+        self.reviewManager = reviewManager
         self.analyticsManager = analyticsManager
         self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
         self.notationSegmentedControlItems = [
@@ -56,6 +60,10 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     func onViewDidAppear() {
+    }
+
+    func requestReview(for moment: ReviewDesirableMomentType) {
+        reviewManager.requestReview(for: moment)
     }
 
     private func subscirbePublishers() {
@@ -121,7 +129,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private func insertCurrentLocation(_ location: CLLocation) {
         Task(priority: .userInitiated) {
             do {
-                let placemark = try await geocodeLocation.requestPlacemark(at: location)
+                let placemark = try await geocodeLocation.placemark(at: location)
                 currentLocationRecord.insert(
                     LocationModel(
                         placemark: placemark,

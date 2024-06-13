@@ -1,5 +1,5 @@
 //
-//  Geocoder.swift
+//  GeocodedLocation.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/18/23.
@@ -9,18 +9,19 @@
 import Foundation
 import CoreLocation
 
-protocol GeocodeLocationProtocol {
-    func requestPlacemark(at location: CLLocation) async throws -> CLPlacemark
+protocol LocationPlaceable {
+    func placemark(at location: CLLocation) async throws -> CLPlacemark
 }
 
-final class GeocodeLocation: GeocodeLocationProtocol {
+final class GeocodedLocation: LocationPlaceable {
     private let geocoder: CLGeocoder
 
     init(geocoder: CLGeocoder) {
         self.geocoder = geocoder
     }
 
-    func requestPlacemark(at location: CLLocation) async throws -> CLPlacemark {
+    @MainActor
+    func placemark(at location: CLLocation) async throws -> CLPlacemark {
         let placemarks = try await geocoder.reverseGeocodeLocation(location)
         if let placemark = placemarks.first {
             return placemark

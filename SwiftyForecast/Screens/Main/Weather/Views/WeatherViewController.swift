@@ -8,9 +8,13 @@ final class WeatherViewController: UIViewController {
         static let hourlySizeForItem = CGSize(width: 77, height: 65)
     }
 
+    @IBOutlet private weak var cardView: UIView!
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
     @IBOutlet private weak var dailyTableView: UITableView!
-    private var weatherCardViewController: CurrentWeatherCardViewController!
+    private lazy var weatherCardViewController: CurrentWeatherCardViewController = {
+        CurrentWeatherCardViewController(viewModel: cardViewModel)
+    }()
+
     private let dailyForecastDataSource = DailyForecastDataSource()
     private let hourlyForcecastDataSource = HourlyForcecastDataSource()
     private let hourlyForecastFlowLayout = HourlyForecastFlowLayout(
@@ -19,9 +23,15 @@ final class WeatherViewController: UIViewController {
     )
     private var cancellables = Set<AnyCancellable>()
     let viewModel: WeatherViewControllerViewModel
+    private let cardViewModel: CurrentWeatherCardViewModel
 
-    init?(viewModel: WeatherViewControllerViewModel, coder: NSCoder) {
+    init?(
+        viewModel: WeatherViewControllerViewModel,
+        cardViewModel: CurrentWeatherCardViewModel,
+        coder: NSCoder
+    ) {
         self.viewModel = viewModel
+        self.cardViewModel = cardViewModel
         super.init(coder: coder)
     }
 
@@ -32,14 +42,16 @@ final class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        displayWeatherCardViewController()
         setup()
         loadData()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ContainerViewSegue" {
-            weatherCardViewController = segue.destination as? CurrentWeatherCardViewController
-        }
+    private func displayWeatherCardViewController() {
+        self.addChild(weatherCardViewController)
+        weatherCardViewController.view.frame = cardView.frame
+        cardView.addSubview(weatherCardViewController.view)
+        weatherCardViewController.didMove(toParent: self)
     }
 
     private func loadData() {
@@ -191,13 +203,17 @@ private extension WeatherViewController {
 
 // MARK: - Factory method
 extension WeatherViewController {
-    static func make(viewModel: WeatherViewControllerViewModel) -> WeatherViewController {
+    static func make(
+        viewModel: WeatherViewControllerViewModel,
+        cardViewModel: CurrentWeatherCardViewModel
+    ) -> WeatherViewController {
         let storyboard = UIStoryboard(storyboard: .main)
         let viewController = storyboard.instantiateViewController(
             identifier: WeatherViewController.storyboardIdentifier
         ) { coder in
             WeatherViewController(
                 viewModel: viewModel,
+                cardViewModel: cardViewModel,
                 coder: coder
             )
         }

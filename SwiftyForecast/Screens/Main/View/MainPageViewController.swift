@@ -9,10 +9,23 @@
 import UIKit
 
 class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    private var weatherViewControllers = [WeatherViewController]()
-    private let generator = UIImpactFeedbackGenerator(style: .light)
-    private var currentIndex = 0
-    var onDidChangePageNavigation: ((Int) -> Void)?
+    private let feedbackGenerator: UIImpactFeedbackGenerator
+    private var weatherViewControllers: [WeatherViewController]
+    private var currentIndex: Int
+
+    init(
+        currentIndex: Int,
+        feedbackGenerator: UIImpactFeedbackGenerator
+    ) {
+        self.weatherViewControllers = []
+        self.currentIndex = currentIndex
+        self.feedbackGenerator = feedbackGenerator
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +38,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
     }
 
     func transition(at index: Int) {
-
         setViewControllers(
             [weatherViewControllers[index]],
             direction: .forward,
@@ -106,13 +118,12 @@ extension MainPageViewController {
            let visibleViewController = pageViewController.viewControllers?.first as? WeatherViewController,
            let currentIndex = weatherViewControllers.firstIndex(of: visibleViewController) {
             self.currentIndex = currentIndex
-            onDidChangePageNavigation?(currentIndex)
             triggerPageTransitionCompletedFeedback()
         }
     }
 
     private func triggerPageTransitionCompletedFeedback() {
-        generator.prepare()
-        generator.impactOccurred()
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
 }

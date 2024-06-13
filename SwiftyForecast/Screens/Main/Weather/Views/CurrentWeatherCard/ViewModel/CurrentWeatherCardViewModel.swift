@@ -24,7 +24,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private(set) var sunset = Twilight.sunset(time: "")
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
-    @Published private(set) var condition: WeatherCondition = .clear
+    @Published private(set) var condition: WeatherCondition
     @Published private var model: CurrentWeatherModel?
     @Published private var locationModel: LocationModel?
 
@@ -33,15 +33,6 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
-
-    convenience init() {
-        self.init(
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
-            temperatureRenderer: TemperatureRenderer(),
-            speedRenderer: SpeedRenderer(),
-            measurementSystemNotification: MeasurementSystemNotification()
-        )
-    }
 
     init(
         service: WeatherService,
@@ -53,7 +44,7 @@ final class CurrentWeatherCardViewModel: ObservableObject {
         self.temperatureRenderer = temperatureRenderer
         self.speedRenderer = speedRenderer
         self.measurementSystemNotification = measurementSystemNotification
-
+        self.condition = .none
         subscribeToPublisher()
         registerMeasurementSystemObserver()
     }

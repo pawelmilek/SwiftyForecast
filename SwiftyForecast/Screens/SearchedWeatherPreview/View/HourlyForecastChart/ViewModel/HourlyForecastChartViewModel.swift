@@ -19,13 +19,9 @@ final class HourlyForecastChartViewModel: ObservableObject {
     var numberOfHours: Int { dataSource.count }
 
     private let models: [HourlyForecastModel]
-    private let notationController: NotationSystemStore
-    init(
-        models: [HourlyForecastModel],
-        notationController: NotationSystemStore = NotationSystemStore()
-    ) {
-        self.models = Array(models.prefix(upTo: Self.numberOfThreeHoursForecastItems))
-        self.notationController = notationController
+
+    init(models: [HourlyForecastModel]) {
+        self.models = models
         createChartDataSource()
         calculateChartYScaleRange()
     }

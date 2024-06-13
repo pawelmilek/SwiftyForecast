@@ -21,12 +21,20 @@ final class MainCoordinator: Coordinator {
         let viewController = storyboard.instantiateViewController(identifier: MainViewController.storyboardIdentifier) { coder in
             MainViewController(
                 viewModel: MainViewControllerViewModel(
-                    geocodeLocation: GeocodeLocation(geocoder: CLGeocoder()),
+                    geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
                     notationSystemStore: NotationSystemStore(),
                     measurementSystemNotification: MeasurementSystemNotification(),
                     currentLocationRecord: CurrentLocationRecord(databaseManager: RealmManager.shared),
                     databaseManager: RealmManager.shared,
                     locationManager: LocationManager(),
+                    reviewManager: ReviewManager(
+                        bundle: .main,
+                        storage: .standard,
+                        configuration: DecodedPlist(
+                            name: "ReviewDesirableMomentConfig",
+                            bundle: .main
+                        )
+                    ),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 coordinator: self,

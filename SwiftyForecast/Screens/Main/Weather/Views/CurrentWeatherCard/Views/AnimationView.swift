@@ -34,6 +34,8 @@ struct AnimationView: View {
             clearView
         case .clouds:
             cloudsView
+        default:
+            Color.customPrimary
         }
     }
 

@@ -78,8 +78,8 @@ final class WeatherProviderDataSource {
 
     private func requestPlacemark(at location: CLLocation) async -> CLPlacemark {
         do {
-            let geocodeLocation = GeocodeLocation(geocoder: CLGeocoder())
-            let placemark = try await geocodeLocation.requestPlacemark(at: location)
+            let geocodeLocation = GeocodedLocation(geocoder: CLGeocoder())
+            let placemark = try await geocodeLocation.placemark(at: location)
             return placemark
         } catch {
             fatalError(error.localizedDescription)
