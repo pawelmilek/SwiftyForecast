@@ -42,6 +42,7 @@ struct LocationSearchResults: View {
                     databaseManager: RealmManager.shared,
                     appStoreReviewCenter: ReviewNotificationCenter(),
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
+                    parser: ResponseParser(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 cardViewModel: CurrentWeatherCardViewModel(
@@ -52,6 +53,7 @@ struct LocationSearchResults: View {
                 ),
                 onCancel: dismiss
             )
+            .interactiveDismissDisabled()
         }
         .onAppear {
             logScreenViewed()

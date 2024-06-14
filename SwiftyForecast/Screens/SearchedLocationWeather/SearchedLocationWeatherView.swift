@@ -40,7 +40,7 @@ struct SearchedLocationWeatherView: View {
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        viewModel.addNewLocation()
+                        viewModel.addLocation()
                         onCancel()
                     } label: {
                         Text("Add")
@@ -74,10 +74,10 @@ struct SearchedLocationWeatherView: View {
 
     @ViewBuilder
     private var hourlyForecastChartView: some View {
-        if let twentyFourHoursForecastModel = viewModel.twentyFourHoursForecastModel {
+        if let twentyFourHoursForecast = viewModel.twentyFourHoursForecast {
             HourlyForecastChart(
                 viewModel: HourlyForecastChartViewModel(
-                    models: twentyFourHoursForecastModel
+                    models: twentyFourHoursForecast
                 )
             )
         } else {
@@ -94,6 +94,7 @@ struct SearchedLocationWeatherView: View {
             databaseManager: RealmManager.shared,
             appStoreReviewCenter: ReviewNotificationCenter(),
             locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
+            parser: ResponseParser(),
             analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         ),
         cardViewModel: CurrentWeatherCardViewModel(

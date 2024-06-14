@@ -882,7 +882,7 @@
 			children = (
 				E262B34724F8878D00BD7A2A /* Main */,
 				E21ABD422AE82FF900F93F01 /* LocationSearch */,
-				E2A567522B0763EB000324C0 /* SearchedWeatherPreview */,
+				E2A567522B0763EB000324C0 /* SearchedLocationWeather */,
 				E2BC4DAF2B4429F600D05F54 /* Appearance */,
 				E249ABBA2B3475FA0020B88D /* About */,
 			);
@@ -1071,14 +1071,14 @@
 			path = ReviewObserver;
 			sourceTree = "<group>";
 		};
-		E2A567522B0763EB000324C0 /* SearchedWeatherPreview */ = {
+		E2A567522B0763EB000324C0 /* SearchedLocationWeather */ = {
 			isa = PBXGroup;
 			children = (
 				E2D430B82BB4D954003F26EE /* SearchedLocationWeatherView.swift */,
 				E2D430BA2BB4D954003F26EE /* View */,
 				E20A433B2C1B75290052AFA4 /* ViewModel */,
 			);
-			path = SearchedWeatherPreview;
+			path = SearchedLocationWeather;
 			sourceTree = "<group>";
 		};
 		E2A5675E2B077B1A000324C0 /* LottieAnimationView */ = {
