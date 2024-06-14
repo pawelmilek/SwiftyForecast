@@ -45,14 +45,16 @@ struct LocationList: View {
         .listStyle(.plain)
         .overlay {
             if isSearching && !searchText.isEmpty {
-                LocationSearchResultList()
+                LocationSearchResults()
             }
         }
     }
 
     private func logLocationSelected(_ name: String) {
         analyticsManager.send(
-            event: LocationListEvent.locationSelected(name: name)
+            event: LocationListEvent.locationSelected(
+                name: name
+            )
         )
     }
 }

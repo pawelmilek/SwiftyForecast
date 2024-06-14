@@ -33,6 +33,7 @@ struct ActionAboutRow: View {
             }
             Text(title)
                 .font(.footnote)
+                .fontDesign(.monospaced)
                 .foregroundStyle(Color(.label))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

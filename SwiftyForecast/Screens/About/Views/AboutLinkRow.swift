@@ -36,6 +36,7 @@ struct AboutLinkRow: View {
             Text(title)
                 .font(.footnote)
                 .foregroundStyle(Color(.label))
+                .fontDesign(.monospaced)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

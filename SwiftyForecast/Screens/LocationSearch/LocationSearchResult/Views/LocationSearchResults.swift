@@ -1,5 +1,5 @@
 //
-//  LocationSearchResultList.swift
+//  LocationSearchResults.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/19/23.
@@ -9,30 +9,35 @@
 import SwiftUI
 import MapKit
 
-struct LocationSearchResultList: View {
+struct LocationSearchResults: View {
     @Environment(\.dismissSearch) private var dismissSearch
     @EnvironmentObject private var locationSearchCompleter: LocationSearchCompleter
-    @StateObject private var searchResultConfig = LocationSearchResultConfiguration()
-    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
+    @StateObject private var searchResultConfig = LocationSearchResultConfiguration(
+        localSearch: MKLocalSearchCompletion()
+    )
+    @StateObject private var analyticsManager = AnalyticsManager(
+        service: FirebaseAnalyticsService()
+    )
 
     var body: some View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in
-            LocationSearchResultRow(result: item) { result in
+            LocationSearchRow(result: item) { result in
                 searchResultConfig.select(result)
             }
         }
+        .scrollDismissesKeyboard(.interactively)
         .background(.background)
         .listStyle(.plain)
         .overlay {
-            if shouldShowContentUnavailableView {
-                ContentUnavailableView.search(text: locationSearchCompleter.searchText)
-                    .background(.background)
-            }
+            ContentUnavailableView
+                .search(text: locationSearchCompleter.searchText)
+                .background(.background)
+                .opacity(shouldShowContentUnavailableView ? 1.0 : 0.0)
         }
-        .sheet(isPresented: $searchResultConfig.showSheet) {
+        .sheet(isPresented: $searchResultConfig.showSearchedLocationForecast) {
             SearchedLocationWeatherView(
                 viewModel: SearchedLocationWeatherViewViewModel(
-                    searchedLocation: searchResultConfig.searchCompletion,
+                    searchedLocation: searchResultConfig.localSearch,
                     service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
                     databaseManager: RealmManager.shared,
                     appStoreReviewCenter: ReviewNotificationCenter(),
@@ -75,6 +80,6 @@ struct LocationSearchResultList: View {
 }
 
 #Preview {
-    LocationSearchResultList()
+    LocationSearchResults()
         .environmentObject(LocationSearchCompleter())
 }

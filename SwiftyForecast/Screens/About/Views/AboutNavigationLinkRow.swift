@@ -35,6 +35,7 @@ struct AboutNavigationLinkRow<Content: View>: View {
             }
             Text(title)
                 .font(.footnote)
+                .fontDesign(.monospaced)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

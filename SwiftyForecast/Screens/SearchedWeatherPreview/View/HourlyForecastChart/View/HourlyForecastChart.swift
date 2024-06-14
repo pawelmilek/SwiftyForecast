@@ -11,7 +11,7 @@ import Charts
 
 struct HourlyForecastChart: View {
     @ObservedObject var viewModel: HourlyForecastChartViewModel
-    
+
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -95,8 +95,12 @@ struct HourlyForecastChart: View {
                     }
                 }
                 .chartYAxis(.hidden)
-                .chartYScale(domain: viewModel.chartYScaleRange.lowerBound...viewModel.chartYScaleRange.upperBound)
-                .frame(width: HourlyForecastChartViewModel.dataPointWidth * CGFloat(viewModel.numberOfHours))
+                .chartYScale(
+                    domain: viewModel.chartYScaleRange.lowerBound...viewModel.chartYScaleRange.upperBound
+                )
+                .frame(
+                    width: HourlyForecastChartViewModel.dataPointWidth * CGFloat(viewModel.numberOfHours)
+                )
             }
         } label: {
             headerView

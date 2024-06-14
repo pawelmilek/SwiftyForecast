@@ -13,13 +13,13 @@ import Combine
 @MainActor
 final class SearchedLocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
-    @Published private(set) var isLoading = false
-    @Published private(set) var isExistingLocation = true
+    @Published private(set) var isLoading = true
+    @Published private(set) var addButtonDisabled = true
     @Published private(set) var location: LocationModel?
     @Published private(set) var forecastModel: ForecastWeatherModel?
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]?
 
-    private let threeHoursForecastItems = 8
+    private let threeHoursForecastItems = 7
     private var cancellables = Set<AnyCancellable>()
     private let searchedLocation: MKLocalSearchCompletion
     private let service: WeatherService
@@ -50,14 +50,14 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] location in
-                self?.verifyLocationExistanceInDatabase(location)
-                self?.loadData(location)
+                self?.disableAddButtonWhenExist(location: location)
+                self?.fetchForecast(location)
             }
             .store(in: &cancellables)
 
         $forecastModel
             .compactMap { $0?.hourly[...self.threeHoursForecastItems] }
-            .map {  Array($0.prefix(upTo: self.threeHoursForecastItems)) }
+            .map { Array($0) }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] twentyFourHoursForecastModel in
                 self?.twentyFourHoursForecastModel = twentyFourHoursForecastModel
@@ -65,38 +65,37 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func verifyLocationExistanceInDatabase(_ location: LocationModel) {
-        do {
-            isExistingLocation = try databaseManager.readBy(primaryKey: location.compoundKey) != nil
-        } catch {
-            self.error = error
-        }
+    private func disableAddButtonWhenExist(location: LocationModel) {
+        addButtonDisabled = (
+            try? databaseManager.readBy(
+                primaryKey: location.compoundKey
+            ) != nil
+        ) ?? true
     }
 
-    func startSearchRequest() {
-        Task(priority: .userInitiated) {
+    func loadData() async {
+        do {
             isLoading = true
-            await fetchPlacemark()
+            try await fetchLocation()
             isLoading = false
-        }
-    }
-
-    private func fetchPlacemark() async {
-        let searchRequest = MKLocalSearch.Request(completion: searchedLocation)
-        let search = MKLocalSearch(request: searchRequest)
-
-        do {
-            let response = try await search.start()
-            if let foundLocation = response.mapItems.first?.placemark.location {
-                try await geocode(location: foundLocation)
-            } else {
-                fatalError()
-            }
-
         } catch {
             isLoading = false
             self.error = error
-            debugPrint(error.localizedDescription)
+        }
+    }
+
+    private func fetchLocation() async throws {
+        let searchRequest = MKLocalSearch(
+            request: MKLocalSearch.Request(
+                completion: searchedLocation
+            )
+        )
+
+        let response = try await searchRequest.start()
+        if let location = response.mapItems.first?.placemark.location {
+            try await geocode(location: location)
+        } else {
+            throw LocalSearchError.notFound
         }
     }
 
@@ -105,11 +104,9 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         self.location = LocationModel(placemark: placemark, isUserLocation: false)
     }
 
-    func loadData(_ location: LocationModel) {
-        guard !isLoading else { return }
+    func fetchForecast(_ location: LocationModel) {
         isLoading = true
-
-        Task(priority: .userInitiated) {
+        Task {
             do {
                 let forecast = try await service.fetchForecast(
                     latitude: location.latitude,
@@ -135,7 +132,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         }
         donateAddFavoriteEvent()
         postAppStoreReviewEvent()
-        logAddNewLocation(name: location.name + ", " + location.country)
+        logNewLocationAdded(name: location.name + ", " + location.country)
     }
 
     private func donateAddFavoriteEvent() {
@@ -148,9 +145,11 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         appStoreReviewCenter.post(.locationAdded)
     }
 
-    private func logAddNewLocation(name: String) {
+    private func logNewLocationAdded(name: String) {
         analyticsManager.send(
-            event: LocationWeatherViewEvent.newLocationAdded(name: name)
+            event: LocationWeatherViewEvent.newLocationAdded(
+                name: name
+            )
         )
     }
 

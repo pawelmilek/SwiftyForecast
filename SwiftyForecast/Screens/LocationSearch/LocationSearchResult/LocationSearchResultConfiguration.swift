@@ -10,20 +10,20 @@ import Foundation
 import MapKit
 
 class LocationSearchResultConfiguration: ObservableObject {
-    @Published var showSheet = false
-    private(set) var searchCompletion: MKLocalSearchCompletion
+    @Published var showSearchedLocationForecast = false
+    private(set) var localSearch: MKLocalSearchCompletion
 
-    init(searchCompletion: MKLocalSearchCompletion = MKLocalSearchCompletion()) {
-        self.searchCompletion = searchCompletion
-        self.showSheet = showSheet
+    init(localSearch: MKLocalSearchCompletion) {
+        self.localSearch = localSearch
+        self.showSearchedLocationForecast = showSearchedLocationForecast
     }
 
     func select(_ localSearchCompletion: MKLocalSearchCompletion) {
-        searchCompletion = localSearchCompletion
-        showSheet.toggle()
+        localSearch = localSearchCompletion
+        showSearchedLocationForecast.toggle()
     }
 
     func hideSheet() {
-        showSheet.toggle()
+        showSearchedLocationForecast.toggle()
     }
 }

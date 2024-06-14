@@ -36,7 +36,10 @@ final class LocationSearchViewController: UIViewController {
 
         let locationSearchView = LocationSearchView { [weak self] selectedLocation in
             guard let self else { return }
-            delegate?.locationListViewController(self, didSelectLocation: selectedLocation)
+            delegate?.locationListViewController(
+                self,
+                didSelectLocation: selectedLocation
+            )
         }
 
         hostingViewController = UIHostingController(rootView: locationSearchView)

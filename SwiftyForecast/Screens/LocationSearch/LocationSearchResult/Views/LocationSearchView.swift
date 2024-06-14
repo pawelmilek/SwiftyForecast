@@ -19,7 +19,7 @@ struct LocationSearchView: View {
                 onSelectRow: onDidSelectLocation
             )
             .environmentObject(locationSearchCompleter)
-            .navigationTitle(Text("Locations"))
+            .navigationTitle("Locations")
         }
         .searchable(
             text: $locationSearchCompleter.searchText,

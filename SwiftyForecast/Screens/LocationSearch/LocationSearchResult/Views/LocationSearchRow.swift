@@ -1,5 +1,5 @@
 //
-//  LocationSearchResultRow.swift
+//  LocationSearchRow.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/24/23.
@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 
-struct LocationSearchResultRow: View {
+struct LocationSearchRow: View {
     let result: MKLocalSearchCompletion
     var onAction: (MKLocalSearchCompletion) -> Void
 
@@ -32,7 +32,7 @@ struct LocationSearchResultRow: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    LocationSearchResultRow(
+    LocationSearchRow(
         result: MKLocalSearchCompletion(),
         onAction: { _ in }
     )

@@ -125,9 +125,13 @@ struct AboutScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
+                    Button {
                         dismiss()
                         viewModel.donateDidAppBecomeActiveEvent()
+                    } label: {
+                        Text("Done")
+                            .fontDesign(.monospaced)
+                            .fontWeight(.semibold)
                     }
                     .tint(.accent)
                     .buttonStyle(.bordered)

@@ -26,7 +26,7 @@ extension TemperatureValueDisplayable {
         formatter.unitStyle = .short
         formatter.unitOptions = [.temperatureWithoutUnit, .providedUnit]
         formatter.numberFormatter.maximumFractionDigits = 0
-        formatter.numberFormatter.roundingMode = .up
+        formatter.numberFormatter.roundingMode = .floor
 
         return formatter.string(from: measurement)
     }

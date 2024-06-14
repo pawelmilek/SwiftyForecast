@@ -23,9 +23,10 @@ struct AboutRow: View {
 
     private var contentView: some View {
         Text(content)
-            .foregroundStyle(.accent)
-            .fontWeight(.heavy)
             .font(.footnote)
+            .fontWeight(.heavy)
+            .fontDesign(.monospaced)
+            .foregroundStyle(.accent)
     }
 
     private var labelView: some View {
@@ -41,6 +42,7 @@ struct AboutRow: View {
             Text(title)
                 .font(.footnote)
                 .foregroundStyle(Color(.label))
+                .fontDesign(.monospaced)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }

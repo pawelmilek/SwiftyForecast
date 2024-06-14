@@ -10,25 +10,18 @@ import Foundation
 
 @MainActor
 final class HourlyForecastChartViewModel: ObservableObject {
-    static let numberOfThreeHoursForecastItems = 8
     static let chartHeight: CGFloat = 280
     static let dataPointWidth: CGFloat = 65
 
-    @Published var dataSource: [HourlyForecastChartDataSource] = []
+    @Published var dataSource = [HourlyForecastChartDataSource]()
     @Published var chartYScaleRange: ClosedRange<Int> = 0...0
     var numberOfHours: Int { dataSource.count }
 
-    private let models: [HourlyForecastModel]
-
     init(models: [HourlyForecastModel]) {
-        self.models = models
-        createChartDataSource()
+        dataSource = models.compactMap {
+            .init(model: $0, temperatureRenderer: TemperatureRenderer())
+        }
         calculateChartYScaleRange()
-    }
-
-    private func createChartDataSource() {
-        guard !models.isEmpty else { return }
-        self.dataSource = models.compactMap { .init(model: $0) }
     }
 
     private func calculateChartYScaleRange() {

@@ -34,6 +34,7 @@ struct AboutShareRow: View {
                 .foregroundStyle(Color(UIColor.label))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .fontDesign(.monospaced)
         .font(.footnote)
     }
 }

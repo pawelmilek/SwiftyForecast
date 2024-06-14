@@ -3,7 +3,7 @@ import CoreLocation
 import Combine
 
 @MainActor
-final class WeatherViewControllerViewModel: ObservableObject, Equatable {
+final class WeatherViewControllerViewModel: ObservableObject {
     static let numberOfThreeHoursForecastItems = 7
 
     var compoundKey: String { locationModel?.compoundKey ?? "" }
@@ -124,9 +124,5 @@ final class WeatherViewControllerViewModel: ObservableObject, Equatable {
 
     private func postAppStoreReviewRequest() {
         appStoreReviewCenter.post(.enjoyableTemperatureReached)
-    }
-
-    static func == (lhs: WeatherViewControllerViewModel, rhs: WeatherViewControllerViewModel) -> Bool {
-        lhs.locationModel?.compoundKey == rhs.locationModel?.compoundKey
     }
 }

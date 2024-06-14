@@ -14,37 +14,29 @@ struct SearchedLocationWeatherView: View {
     @ObservedObject var cardViewModel: CurrentWeatherCardViewModel
     var onCancel: () -> Void
 
-    @State private var opacity = 0.0
-    @State private var toolbarAddItemOpacity = 0.0
-    @State private var isToolbarDisabled = false
-
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
                 CurrentWeatherCard(viewModel: cardViewModel)
-                if let twentyFourHoursForecastModel = viewModel.twentyFourHoursForecastModel {
-                    HourlyForecastChart(
-                        viewModel: HourlyForecastChartViewModel(
-                            models: twentyFourHoursForecastModel
-                        )
-                    )
-                }
+                hourlyForecastChartView
                 Spacer()
             }
             .padding(.top, 15)
             .padding(.horizontal, 22.5)
-            .opacity(opacity)
+            .opacity(viewModel.isLoading ? 0.0 : 1.0)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         onCancel()
                     } label: {
                         Text("Cancel")
-                            .foregroundStyle(.accent)
                             .font(.subheadline)
                             .fontDesign(.monospaced)
                             .fontWeight(.semibold)
+                            .foregroundStyle(.accent)
                     }
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -52,35 +44,44 @@ struct SearchedLocationWeatherView: View {
                         onCancel()
                     } label: {
                         Text("Add")
-                            .foregroundStyle(.accent)
+                            .font(.subheadline)
                             .fontDesign(.monospaced)
                             .fontWeight(.semibold)
+                            .foregroundStyle(.accent)
                     }
-                    .opacity(toolbarAddItemOpacity)
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
+                    .disabled(viewModel.addButtonDisabled)
+                    .opacity(viewModel.addButtonDisabled ? 0.5 : 1.0)
                 }
             }
-            .disabled(isToolbarDisabled)
+            .disabled(viewModel.isLoading)
         }
         .overlay {
             ProgressView()
                 .opacity(viewModel.isLoading ? 1.0 : 0.0)
         }
-        .onAppear {
-            viewModel.startSearchRequest()
+        .animation(.easeIn, value: viewModel.isLoading)
+        .task {
+            await viewModel.loadData()
             viewModel.logScreenViewed(className: "\(type(of: self))")
-        }
-        .onChange(of: viewModel.isLoading) {
-            withAnimation(.easeInOut(duration: 0.5)) {
-                opacity = viewModel.isLoading ? 0.0 : 1.0
-                isToolbarDisabled = viewModel.isLoading
-            }
         }
         .onChange(of: viewModel.location) {
             guard let location = viewModel.location else { return }
             cardViewModel.setLocationModel(location)
         }
-        .onChange(of: viewModel.isExistingLocation) {
-            toolbarAddItemOpacity = viewModel.isExistingLocation == true ? 0.0 : 1.0
+    }
+
+    @ViewBuilder
+    private var hourlyForecastChartView: some View {
+        if let twentyFourHoursForecastModel = viewModel.twentyFourHoursForecastModel {
+            HourlyForecastChart(
+                viewModel: HourlyForecastChartViewModel(
+                    models: twentyFourHoursForecastModel
+                )
+            )
+        } else {
+            EmptyView()
         }
     }
 }
