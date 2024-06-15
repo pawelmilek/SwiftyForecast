@@ -6,41 +6,34 @@ import Combine
 final class WeatherViewControllerViewModel: ObservableObject {
     static let numberOfThreeHoursForecastItems = 7
 
-    var compoundKey: String { locationModel?.compoundKey ?? "" }
+    var compoundKey: String { locationModel.compoundKey }
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
     @Published private(set) var locationName = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel] = []
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel] = []
     @Published private(set) var weatherModel: ForecastWeatherModel?
-    @Published private(set) var locationModel: LocationModel?
 
     private var cancellables = Set<AnyCancellable>()
-    private let service: WeatherService
+    var locationModel: LocationModel
+    private let client: WeatherClient
     private let measurementSystemNotification: MeasurementSystemNotification
     private let appStoreReviewCenter: ReviewNotificationCenter
 
-    convenience init(locationModel: LocationModel) {
-        self.init(
-            locationModel: locationModel,
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
-            measurementSystemNotification: MeasurementSystemNotification(),
-            appStoreReviewCenter: ReviewNotificationCenter()
-        )
-    }
-
     init(
         locationModel: LocationModel,
-        service: WeatherService,
+        client: WeatherClient,
         measurementSystemNotification: MeasurementSystemNotification,
         appStoreReviewCenter: ReviewNotificationCenter
     ) {
-        self.service = service
+        self.locationModel = locationModel
+        self.client = client
         self.measurementSystemNotification = measurementSystemNotification
         self.appStoreReviewCenter = appStoreReviewCenter
+        self.locationName = locationModel.name
         subscriteToPublishers()
         addMeasurementSystemObserver()
-        self.locationModel = locationModel
+
     }
 
     private func addMeasurementSystemObserver() {
@@ -56,14 +49,14 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     private func subscriteToPublishers() {
-        $locationModel
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] location in
-                self?.locationName = location.name
-                self?.loadData()
-            }
-            .store(in: &cancellables)
+//        $locationModel
+//            .compactMap { $0 }
+//            .receive(on: DispatchQueue.main)
+//            .sink { [weak self] location in
+//                self?.locationName = location.name
+//                self?.loadData()
+//            }
+//            .store(in: &cancellables)
 
         $weatherModel
             .compactMap { $0 }
@@ -76,25 +69,24 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     func reloadCurrentLocation() {
-        guard locationModel != nil else { return }
-        do {
-            self.locationModel = try RealmManager.shared.readAllSorted().first(where: { $0.name == locationName })
-        } catch {
-            fatalError(error.localizedDescription)
+        if let location = try? RealmManager.shared.readAllSorted().first(where: { $0.name == locationName }) {
+            locationModel = location
+            loadData()
+        } else {
+            fatalError()
         }
     }
 
     func loadData() {
-        guard let locationModel else { return }
         guard !isLoading else { return }
         isLoading = true
 
-        let latitude = locationModel.latitude
-        let longitude = locationModel.longitude
-
         Task(priority: .userInitiated) {
             do {
-                let forecast = try await service.fetchForecast(latitude: latitude, longitude: longitude)
+                let forecast = try await client.fetchForecast(
+                    latitude: locationModel.latitude,
+                    longitude: locationModel.longitude
+                )
                 let data = ResponseParser().parse(forecast: forecast)
                 weatherModel = data
                 isLoading = false

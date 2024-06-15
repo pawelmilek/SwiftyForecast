@@ -1,5 +1,5 @@
 //
-//  WeatherService.swift
+//  WeatherClient.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol WeatherService {
+protocol WeatherClient {
     func fetchCurrent(
         latitude: Double,
         longitude: Double

@@ -1,5 +1,5 @@
 //
-//  LocationSearchView.swift
+//  FavoriteLocationSearchView.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/24/23.
@@ -8,21 +8,23 @@
 
 import SwiftUI
 
-struct LocationSearchView: View {
-    @StateObject private var locationSearchCompleter = LocationSearchCompleter()
+struct FavoriteLocationSearchView: View {
+    @StateObject private var searchCompleter = LocationSearchCompleter()
     var onDidSelectLocation: (LocationModel) -> Void
 
     var body: some View {
         NavigationStack {
             LocationList(
-                searchText: $locationSearchCompleter.searchText,
+                searchText: $searchCompleter.searchText,
+                temperatureRenderer: TemperatureRenderer(),
+                measurementSystemNotification: MeasurementSystemNotification(),
                 onSelectRow: onDidSelectLocation
             )
-            .environmentObject(locationSearchCompleter)
+            .environment(\.locationSearchCompleter, searchCompleter)
             .navigationTitle("Locations")
         }
         .searchable(
-            text: $locationSearchCompleter.searchText,
+            text: $searchCompleter.searchText,
             placement: .navigationBarDrawer(displayMode: .always),
             prompt: Text("Search for a city or address")
         )
@@ -31,5 +33,5 @@ struct LocationSearchView: View {
 }
 
 #Preview {
-    LocationSearchView { _ in }
+    FavoriteLocationSearchView { _ in }
 }

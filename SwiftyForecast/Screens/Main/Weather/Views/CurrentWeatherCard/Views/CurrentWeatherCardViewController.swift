@@ -27,13 +27,18 @@ final class CurrentWeatherCardViewController: UIViewController {
         setup()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.loadData()
+    }
+
     func reloadCurrentLocation() {
         viewModel.reloadCurrentLocation()
     }
 
-    func loadData(at location: LocationModel) {
-        viewModel.loadData(at: location)
-    }
+//    func loadData() {
+//        viewModel.loadData()
+//    }
 
     private func setup() {
         let currentWeatherCard = CurrentWeatherCard(viewModel: viewModel)

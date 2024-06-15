@@ -25,40 +25,15 @@ struct SearchedLocationWeatherView: View {
             .padding(.horizontal, 22.5)
             .opacity(viewModel.isLoading ? 0.0 : 1.0)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        onCancel()
-                    } label: {
-                        Text("Cancel")
-                            .font(.subheadline)
-                            .fontDesign(.monospaced)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.accent)
-                    }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.capsule)
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        viewModel.addLocation()
-                        onCancel()
-                    } label: {
-                        Text("Add")
-                            .font(.subheadline)
-                            .fontDesign(.monospaced)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.accent)
-                    }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.capsule)
-                    .disabled(viewModel.addButtonDisabled)
-                    .opacity(viewModel.addButtonDisabled ? 0.5 : 1.0)
-                }
+                cancelToolbarItem
+                addToolbarItem
             }
             .disabled(viewModel.isLoading)
         }
         .overlay {
             ProgressView()
+                .controlSize(.extraLarge)
+                .tint(.customPrimary)
                 .opacity(viewModel.isLoading ? 1.0 : 0.0)
         }
         .animation(.easeIn, value: viewModel.isLoading)
@@ -66,9 +41,45 @@ struct SearchedLocationWeatherView: View {
             await viewModel.loadData()
             viewModel.logScreenViewed(className: "\(type(of: self))")
         }
-        .onChange(of: viewModel.location) {
-            guard let location = viewModel.location else { return }
+        .onReceive(viewModel.$location.compactMap { $0 }) { location in
             cardViewModel.setLocationModel(location)
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var cancelToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button {
+                onCancel()
+            } label: {
+                Text("Cancel")
+                    .font(.subheadline)
+                    .fontDesign(.monospaced)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.accent)
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var addToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button {
+                viewModel.addLocation()
+                onCancel()
+            } label: {
+                Text("Add")
+                    .font(.subheadline)
+                    .fontDesign(.monospaced)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.accent)
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+            .disabled(viewModel.addButtonDisabled)
+            .opacity(viewModel.addButtonDisabled ? 0.5 : 1.0)
         }
     }
 
@@ -90,7 +101,7 @@ struct SearchedLocationWeatherView: View {
     SearchedLocationWeatherView(
         viewModel: SearchedLocationWeatherViewViewModel(
             searchedLocation: MKLocalSearchCompletion(),
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            service: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             databaseManager: RealmManager.shared,
             appStoreReviewCenter: ReviewNotificationCenter(),
             locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
@@ -98,7 +109,8 @@ struct SearchedLocationWeatherView: View {
             analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         ),
         cardViewModel: CurrentWeatherCardViewModel(
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            location: LocationModel.examples.first!,
+            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             temperatureRenderer: TemperatureRenderer(),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()

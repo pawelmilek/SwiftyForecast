@@ -18,7 +18,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var twentyFourHoursForecast: [HourlyForecastModel]?
 
     private let searchedLocation: MKLocalSearchCompletion
-    private let service: WeatherService
+    private let service: WeatherClient
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
     private let locationPlace: LocationPlaceable
@@ -27,7 +27,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
 
     init(
         searchedLocation: MKLocalSearchCompletion,
-        service: WeatherService,
+        service: WeatherClient,
         databaseManager: DatabaseManager,
         appStoreReviewCenter: ReviewNotificationCenter,
         locationPlace: LocationPlaceable,

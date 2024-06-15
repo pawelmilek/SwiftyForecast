@@ -5,7 +5,7 @@ import Combine
 
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
-    static let currentLocationIndex = 0
+    static let firstIndex = 0
     @Published private(set) var currentWeatherViewModels = [WeatherViewControllerViewModel]()
     @Published private(set) var notationSegmentedControlItems: [String]
     @Published private(set) var notationSegmentedControlIndex: Int
@@ -57,9 +57,6 @@ final class MainViewControllerViewModel: ObservableObject {
 
     func onViewDidLoad() {
         subscirbePublishers()
-    }
-
-    func onViewDidAppear() {
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {
@@ -118,11 +115,17 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     private func setCurrentWeatherViewModels() {
+        currentWeatherViewModels.removeAll()
+
         if let allSorted = try? databaseManager.readAllSorted() {
-            currentWeatherViewModels.removeAll()
-            currentWeatherViewModels = allSorted.compactMap { .init(locationModel: $0) }
-        } else {
-            currentWeatherViewModels.removeAll()
+            currentWeatherViewModels = allSorted.compactMap {
+                WeatherViewControllerViewModel(
+                    locationModel: $0,
+                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    measurementSystemNotification: MeasurementSystemNotification(),
+                    appStoreReviewCenter: ReviewNotificationCenter()
+                )
+            }
         }
     }
 
@@ -161,6 +164,7 @@ final class MainViewControllerViewModel: ObservableObject {
         notationSegmentedControlIndex = temperatureNotation.rawValue
         measurementSystemNotification.post()
         reloadWidgetTimeline()
+
         analyticsManager.send(
             event: MainViewControllerEvent.temperatureNotationSwitched(
                 notation: temperatureNotation.name

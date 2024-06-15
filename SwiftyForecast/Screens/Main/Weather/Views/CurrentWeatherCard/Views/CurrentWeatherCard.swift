@@ -142,7 +142,8 @@ private extension CurrentWeatherCard {
 #Preview(traits: .sizeThatFitsLayout) {
     CurrentWeatherCard(
         viewModel: CurrentWeatherCardViewModel(
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+            location: LocationModel.examples.first!,
+            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             temperatureRenderer: TemperatureRenderer(),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()

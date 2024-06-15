@@ -44,6 +44,11 @@ final class WeatherViewController: UIViewController {
         super.viewDidLoad()
         displayWeatherCardViewController()
         setup()
+//        loadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadData()
     }
 
@@ -115,13 +120,13 @@ private extension WeatherViewController {
     }
 
     func subscribeWeatherPublisher() {
-        viewModel.$locationModel
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { [self] locationModel in
-                weatherCardViewController.loadData(at: locationModel)
-            }
-            .store(in: &cancellables)
+//        viewModel.$locationModel
+//            .compactMap { $0 }
+//            .receive(on: DispatchQueue.main)
+//            .sink { [self] locationModel in
+//                weatherCardViewController.loadData(at: locationModel)
+//            }
+//            .store(in: &cancellables)
     }
 
     func subscriberLoadingAndErrorPublishers() {

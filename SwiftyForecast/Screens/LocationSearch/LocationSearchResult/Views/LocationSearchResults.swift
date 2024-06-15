@@ -11,18 +11,16 @@ import MapKit
 
 struct LocationSearchResults: View {
     @Environment(\.dismissSearch) private var dismissSearch
-    @EnvironmentObject private var locationSearchCompleter: LocationSearchCompleter
+    @Environment(\.analyticsManager) private var analyticsManager
+    @Environment(\.locationSearchCompleter) private var locationSearchCompleter
     @StateObject private var searchResultConfig = LocationSearchResultConfiguration(
         localSearch: MKLocalSearchCompletion()
-    )
-    @StateObject private var analyticsManager = AnalyticsManager(
-        service: FirebaseAnalyticsService()
     )
 
     var body: some View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in
             LocationSearchRow(result: item) { result in
-                searchResultConfig.select(result)
+                searchResultConfig.select(result) // TODO: Execute fetech location here!
             }
         }
         .scrollDismissesKeyboard(.interactively)
@@ -38,7 +36,7 @@ struct LocationSearchResults: View {
             SearchedLocationWeatherView(
                 viewModel: SearchedLocationWeatherViewViewModel(
                     searchedLocation: searchResultConfig.localSearch,
-                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    service: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     databaseManager: RealmManager.shared,
                     appStoreReviewCenter: ReviewNotificationCenter(),
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
@@ -46,7 +44,8 @@ struct LocationSearchResults: View {
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 cardViewModel: CurrentWeatherCardViewModel(
-                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    location: LocationModel.examples.first!, // TODO: remove after refactored
+                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     temperatureRenderer: TemperatureRenderer(),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()
@@ -83,5 +82,4 @@ struct LocationSearchResults: View {
 
 #Preview {
     LocationSearchResults()
-        .environmentObject(LocationSearchCompleter())
 }

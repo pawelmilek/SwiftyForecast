@@ -91,7 +91,10 @@ struct AppearanceView: View {
 
     private func setCircleOffset(isDark: Bool) {
         withAnimation(.bouncy) {
-            circleOffset = CGSize(width: isDark ? 30 : 150, height: isDark ? -25 : -150)
+            circleOffset = CGSize(
+                width: isDark ? 30 : 150,
+                height: isDark ? -25 : -150
+            )
         }
     }
 

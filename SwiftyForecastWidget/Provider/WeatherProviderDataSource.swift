@@ -11,10 +11,10 @@ import SwiftUI
 import CoreLocation
 
 final class WeatherProviderDataSource {
-    private let service: WeatherService
+    private let service: WeatherClient
     private var location: CLLocation?
 
-    init(service: WeatherService) {
+    init(service: WeatherClient) {
         self.service = service
     }
 

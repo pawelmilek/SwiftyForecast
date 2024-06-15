@@ -62,7 +62,6 @@ final class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupTipObservationTasks()
-        viewModel.onViewDidAppear()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -91,7 +90,8 @@ private extension MainViewController {
             .map { $0.map { WeatherViewController.make(
                 viewModel: $0,
                 cardViewModel: CurrentWeatherCardViewModel(
-                    service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
+                    location: $0.locationModel,
+                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     temperatureRenderer: TemperatureRenderer(),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()
@@ -101,7 +101,7 @@ private extension MainViewController {
             .sink { [weak self] viewControllers in
                 guard let self else { return }
                 pageViewController.set(viewControllers)
-                pageTransition(at: MainViewControllerViewModel.currentLocationIndex)
+                pageTransition(at: MainViewControllerViewModel.firstIndex)
             }
             .store(in: &cancellables)
 

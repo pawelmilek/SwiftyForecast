@@ -11,7 +11,19 @@ import SwiftUI
 
 class AppearanceViewController: UIViewController {
     weak var coordinator: Coordinator?
+    private let notificationCenter: NotificationCenter
     private var hostingViewController: UIHostingController<AppearanceView>!
+
+
+    init(coordinator: Coordinator, notificationCenter: NotificationCenter) {
+        self.coordinator = coordinator
+        self.notificationCenter = notificationCenter
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,8 +31,8 @@ class AppearanceViewController: UIViewController {
     }
 
     private func setup() {
-        let appearanceView = AppearanceView {
-            NotificationCenter.default.post(name: .didChangeAppearance, object: nil)
+        let appearanceView = AppearanceView { [weak self] in
+            self?.notificationCenter.post(name: .didChangeAppearance, object: nil)
         }
 
         hostingViewController = UIHostingController(rootView: appearanceView)

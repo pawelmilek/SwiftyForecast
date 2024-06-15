@@ -1,5 +1,5 @@
 //
-//  OpenWeatherMapService.swift
+//  OpenWeatherMapClient.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -9,7 +9,7 @@
 import Kingfisher
 import UIKit
 
-struct OpenWeatherMapService: WeatherService, HTTPClient {
+struct OpenWeatherMapClient: WeatherClient, HTTPClient {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder) {

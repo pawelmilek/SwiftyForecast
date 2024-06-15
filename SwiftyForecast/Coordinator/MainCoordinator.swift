@@ -56,8 +56,10 @@ final class MainCoordinator: Coordinator {
     }
 
     func openAppearanceSwitch() {
-        let appearanceViewController = AppearanceViewController()
-        appearanceViewController.coordinator = self
+        let appearanceViewController = AppearanceViewController(
+            coordinator: self,
+            notificationCenter: .default
+        )
         navigationController.present(appearanceViewController, animated: true)
     }
 

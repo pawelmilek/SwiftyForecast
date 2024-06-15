@@ -10,15 +10,10 @@ import SwiftUI
 import MapKit
 
 struct LocationRow: View {
-    @StateObject var viewModel: LocationRowViewModel
+    @StateObject private var viewModel: LocationRowViewModel
 
-    init(location: LocationModel) {
-        _viewModel = StateObject(wrappedValue: LocationRowViewModel(
-            location: location,
-            service: OpenWeatherMapService(decoder: JSONSnakeCaseDecoded()),
-            temperatureRenderer: TemperatureRenderer(),
-            measurementSystemNotification: MeasurementSystemNotification()
-        ))
+    init(viewModel: LocationRowViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
@@ -30,6 +25,9 @@ struct LocationRow: View {
         .frame(minHeight: 145, maxHeight: 145)
         .fixedSize(horizontal: false, vertical: true)
         .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+        .task {
+            await viewModel.loadData()
+        }
     }
 }
 
@@ -37,7 +35,7 @@ private extension LocationRow {
     var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
-                Text(viewModel.locationCurrentTimeFormatted)
+                Text(viewModel.time)
                     .font(Style.LocationRow.timeFont)
                     .foregroundStyle(.customPrimary)
                 Text(viewModel.name)
@@ -83,5 +81,13 @@ private extension LocationRow {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    LocationRow(location: LocationModel.examples.first!)
+    LocationRow(
+        viewModel: LocationRowViewModel(
+            location: LocationModel.examples.first!,
+            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            parser: ResponseParser(),
+            temperatureRenderer: TemperatureRenderer(),
+            measurementSystemNotification: MeasurementSystemNotification()
+        )
+    )
 }

@@ -26,42 +26,37 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private(set) var humidity = Humidity(value: "")
     @Published private(set) var condition: WeatherCondition
     @Published private var model: CurrentWeatherModel?
-    @Published private var locationModel: LocationModel?
 
     private var cancellables = Set<AnyCancellable>()
-    private let service: WeatherService
+    private var location: LocationModel
+    private let client: WeatherClient
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
 
     init(
-        service: WeatherService,
+        location: LocationModel,
+        client: WeatherClient,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification
     ) {
-        self.service = service
+        self.location = location
+        self.client = client
         self.temperatureRenderer = temperatureRenderer
         self.speedRenderer = speedRenderer
         self.measurementSystemNotification = measurementSystemNotification
         self.condition = .none
+        self.locationName = location.name
         subscribeToPublisher()
         registerMeasurementSystemObserver()
     }
 
-    func setLocationModel(_ locationModel: LocationModel) {
-        self.locationModel = locationModel
+    func setLocationModel(_ location: LocationModel) {
+        self.location = location
     }
 
     private func subscribeToPublisher() {
-        $locationModel
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { [self] locationModel in
-                loadData(at: locationModel)
-            }
-            .store(in: &cancellables)
-
         $model
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
@@ -105,27 +100,28 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     }
 
     func reloadCurrentLocation() {
-        guard locationModel != nil else { return }
-        do {
-            self.locationModel = try RealmManager.shared.readAllSorted().first(where: { $0.name == locationName })
-        } catch {
-            fatalError(error.localizedDescription)
+        if let location = try? RealmManager.shared.readAllSorted().first(where: { $0.name == locationName }) {
+            self.location = location
+            self.loadData()
+        } else {
+            fatalError()
         }
     }
 
-    func loadData(at locationModel: LocationModel) {
+    func loadData() {
         guard !isLoading else { return }
         isLoading = true
 
-        locationName = locationModel.name
-        let latitude = locationModel.latitude
-        let longitude = locationModel.longitude
-
         Task(priority: .userInitiated) {
             do {
-                let response = try await service.fetchCurrent(latitude: latitude, longitude: longitude)
+                let response = try await client.fetchCurrent(
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                )
                 let dataModel = ResponseParser().parse(current: response)
-                let largeIcon = try await service.fetchLargeIcon(symbol: dataModel.condition.iconCode)
+                let largeIcon = try await client.fetchLargeIcon(
+                    symbol: dataModel.condition.iconCode
+                )
                 icon = Image(uiImage: largeIcon)
                 model = dataModel
                 isLoading = false

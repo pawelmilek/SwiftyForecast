@@ -11,14 +11,13 @@ import RealmSwift
 import TipKit
 
 struct LocationList: View {
-    @Environment(\.isSearching) private var isSearching: Bool
-    @StateObject private var analyticsManager = AnalyticsManager(
-        service: FirebaseAnalyticsService()
-    )
-
+    @Environment(\.isSearching) private var isSearching
+    @Environment(\.analyticsManager) private var analyticsManager
+    @Environment(\.weatherClient) private var weatherClient
     @Binding var searchText: String
+    let temperatureRenderer: TemperatureRenderer
+    let measurementSystemNotification: MeasurementSystemNotification
     var onSelectRow: (LocationModel) -> Void
-    private let locationsTip = LocationsTip()
 
     @ObservedResults(
         LocationModel.self,
@@ -28,17 +27,25 @@ struct LocationList: View {
 
     var body: some View {
         List {
-            TipView(locationsTip)
-                .tint(Color(.customPrimary))
+            TipView(LocationsTip())
+                .tint(.customPrimary)
                 .listRowSeparator(.hidden)
             ForEach(locations) { location in
-                LocationRow(location: location)
-                    .listRowSeparator(.hidden)
-                    .deleteDisabled(location.isUserLocation)
-                    .onTapGesture {
-                        onSelectRow(location)
-                        logLocationSelected(location.name + ", " + location.country)
-                    }
+                LocationRow(
+                    viewModel: LocationRowViewModel(
+                        location: location,
+                        client: weatherClient,
+                        parser: ResponseParser(),
+                        temperatureRenderer: temperatureRenderer,
+                        measurementSystemNotification: measurementSystemNotification
+                    )
+                )
+                .listRowSeparator(.hidden)
+                .deleteDisabled(location.isUserLocation)
+                .onTapGesture {
+                    onSelectRow(location)
+                    logLocationSelected(location.name + ", " + location.country)
+                }
             }
             .onDelete(perform: $locations.remove)
         }
@@ -60,12 +67,17 @@ struct LocationList: View {
 }
 
 #Preview {
-    LocationList(searchText: .constant("Search Text"), onSelectRow: {_ in })
-        .task {
-            try? Tips.resetDatastore()
-            try? Tips.configure([
-                .displayFrequency(.immediate),
-                .datastoreLocation(.applicationDefault)
-            ])
-        }
+    LocationList(
+        searchText: .constant("Search Text"),
+        temperatureRenderer: TemperatureRenderer(),
+        measurementSystemNotification: MeasurementSystemNotification(),
+        onSelectRow: {_ in }
+    )
+    .task {
+        try? Tips.resetDatastore()
+        try? Tips.configure([
+            .displayFrequency(.immediate),
+            .datastoreLocation(.applicationDefault)
+        ])
+    }
 }
