@@ -44,7 +44,6 @@ final class WeatherViewController: UIViewController {
         super.viewDidLoad()
         displayWeatherCardViewController()
         setup()
-//        loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,14 +60,6 @@ final class WeatherViewController: UIViewController {
 
     private func loadData() {
         viewModel.loadData()
-    }
-
-    private func loadHourlyData() {
-        hourlyCollectionView.reloadData()
-    }
-
-    private func loadDailyData() {
-        dailyTableView.reloadData()
     }
 }
 
@@ -173,8 +164,8 @@ private extension WeatherViewController {
                 hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
                 dailyForecastDataSource.set(viewModeles: dailyViewModels)
 
-                loadHourlyData()
-                loadDailyData()
+                hourlyCollectionView.reloadData()
+                dailyTableView.reloadData()
             }
             .store(in: &cancellables)
     }

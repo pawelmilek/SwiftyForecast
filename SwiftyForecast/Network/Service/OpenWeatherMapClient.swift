@@ -6,8 +6,7 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import Kingfisher
-import UIKit
+import Foundation
 
 struct OpenWeatherMapClient: WeatherClient, HTTPClient {
     private let decoder: JSONDecoder
@@ -32,59 +31,15 @@ struct OpenWeatherMapClient: WeatherClient, HTTPClient {
         )
     }
 
-    func fetchIcon(symbol: String) async throws -> UIImage {
-        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<UIImage, Error>) in
-            let endpoint = WeatherEndpoint.icon(symbol: symbol)
-            guard let url = endpoint.url else {
-                let error = RequestError.invalidURL(url: endpoint.url?.absoluteString ?? "unknown")
-                continuation.resume(throwing: error)
-                return
-            }
-
-            retrieveImage(withURL: url) { result in
-                switch result {
-                case .success(let image):
-                    continuation.resume(returning: image)
-
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
+    func fetchIcon(symbol: String) async throws -> Data {
+        return try await sendRequest(
+            endpoint: WeatherEndpoint.icon(symbol: symbol)
+        )
     }
 
-    func fetchLargeIcon(symbol: String) async throws -> UIImage {
-        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<UIImage, Error>) in
-            let endpoint = WeatherEndpoint.iconLarge(symbol: symbol)
-
-            guard let url = endpoint.url else {
-                let error = RequestError.invalidURL(url: endpoint.url?.absoluteString ?? "unknown")
-                continuation.resume(throwing: error)
-                return
-            }
-
-            retrieveImage(withURL: url) { result in
-                switch result {
-                case .success(let image):
-                    continuation.resume(returning: image)
-
-                case .failure(let error):
-                    continuation.resume(throwing: error)
-                }
-            }
-        }
-    }
-
-    private func retrieveImage(withURL url: URL, completionHandler: @escaping (Result<UIImage, Error>) -> Void) {
-        let resource = KF.ImageResource(downloadURL: url)
-        KingfisherManager.shared.retrieveImage(with: resource) { result in
-            switch result {
-            case .success(let value):
-                completionHandler(.success(value.image))
-
-            case .failure(let error):
-                completionHandler(.failure(error))
-            }
-        }
+    func fetchLargeIcon(symbol: String) async throws -> Data {
+        return try await sendRequest(
+            endpoint: WeatherEndpoint.iconLarge(symbol: symbol)
+        )
     }
 }

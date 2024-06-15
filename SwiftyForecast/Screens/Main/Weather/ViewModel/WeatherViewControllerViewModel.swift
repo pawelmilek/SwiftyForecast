@@ -49,15 +49,6 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     private func subscriteToPublishers() {
-//        $locationModel
-//            .compactMap { $0 }
-//            .receive(on: DispatchQueue.main)
-//            .sink { [weak self] location in
-//                self?.locationName = location.name
-//                self?.loadData()
-//            }
-//            .store(in: &cancellables)
-
         $weatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)

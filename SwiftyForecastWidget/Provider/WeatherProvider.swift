@@ -14,13 +14,7 @@ struct WeatherProvider: TimelineProvider {
     private let locationManager = WidgetLocationManager()
     private let dataSource: WeatherProviderDataSource
 
-    init(
-        dataSource: WeatherProviderDataSource = WeatherProviderDataSource(
-            service: OpenWeatherMapClient(
-                decoder: JSONSnakeCaseDecoded()
-            )
-        )
-    ) {
+    init(dataSource: WeatherProviderDataSource) {
         self.dataSource = dataSource
     }
 

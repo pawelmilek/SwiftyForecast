@@ -11,11 +11,11 @@ import SwiftUI
 import CoreLocation
 
 final class WeatherProviderDataSource {
-    private let service: WeatherClient
+    private let client: WeatherClient
     private var location: CLLocation?
 
-    init(service: WeatherClient) {
-        self.service = service
+    init(client: WeatherClient) {
+        self.client = client
     }
 
     func loadEntryData(for location: CLLocation) async -> WeatherEntry {
@@ -92,7 +92,7 @@ final class WeatherProviderDataSource {
         }
 
         do {
-            let response = try await service.fetchCurrent(
+            let response = try await client.fetchCurrent(
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )
@@ -105,9 +105,13 @@ final class WeatherProviderDataSource {
 
     private func fetchIcon(with symbol: String) async -> Image {
         do {
-            let result = try await service.fetchLargeIcon(symbol: symbol)
-            let image = Image(uiImage: result)
-            return image
+            let result = try await client.fetchLargeIcon(symbol: symbol)
+            if let uiImage = UIImage(data: result) {
+                return Image(uiImage: uiImage)
+            } else {
+                fatalError()
+            }
+
         } catch {
             fatalError(error.localizedDescription)
         }
@@ -134,7 +138,7 @@ final class WeatherProviderDataSource {
             fatalError("Location coordinate unavailable")
         }
         do {
-            let forecast = try await service.fetchForecast(
+            let forecast = try await client.fetchForecast(
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )

@@ -24,7 +24,13 @@ struct SwiftyForecastWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: Constant.kind,
-            provider: WeatherProvider()
+            provider: WeatherProvider(
+                dataSource: WeatherProviderDataSource(
+                    client: OpenWeatherMapClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                )
+            )
         ) { entry in
             WeatherWidgetEntryView(entry: entry)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

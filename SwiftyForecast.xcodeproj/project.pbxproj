@@ -664,9 +664,9 @@
 		E21ABD3F2AE8269900F93F01 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				E296B6162C1CF461001F7C57 /* EnvironmentValues */,
-				E20A43372C1B28880052AFA4 /* DependencyContainer */,
 				E2CAC9E02C04308B00E573D2 /* Analytics */,
+				E20A43372C1B28880052AFA4 /* DependencyContainer */,
+				E296B6162C1CF461001F7C57 /* EnvironmentValues */,
 				E2A32F25254459DF000ACEFE /* AppStoreReview */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DD20E84158007D8CE4 /* Extensions */,

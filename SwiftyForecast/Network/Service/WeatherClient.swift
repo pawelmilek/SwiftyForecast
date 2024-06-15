@@ -6,7 +6,7 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 protocol WeatherClient {
     func fetchCurrent(
@@ -19,6 +19,6 @@ protocol WeatherClient {
         longitude: Double
     ) async throws -> ForecastWeatherResponse
 
-    func fetchIcon(symbol: String) async throws -> UIImage
-    func fetchLargeIcon(symbol: String) async throws -> UIImage
+    func fetchIcon(symbol: String) async throws -> Data
+    func fetchLargeIcon(symbol: String) async throws -> Data
 }

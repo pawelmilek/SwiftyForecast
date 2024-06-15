@@ -119,10 +119,12 @@ final class CurrentWeatherCardViewModel: ObservableObject {
                     longitude: location.longitude
                 )
                 let dataModel = ResponseParser().parse(current: response)
-                let largeIcon = try await client.fetchLargeIcon(
+                let largeIconData = try await client.fetchLargeIcon(
                     symbol: dataModel.condition.iconCode
                 )
-                icon = Image(uiImage: largeIcon)
+                if let image = UIImage(data: largeIconData) {
+                    icon = Image(uiImage: image)
+                }
                 model = dataModel
                 isLoading = false
             } catch {
