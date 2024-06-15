@@ -122,6 +122,7 @@ final class MainViewControllerViewModel: ObservableObject {
                 WeatherViewControllerViewModel(
                     locationModel: $0,
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    parser: ResponseParser(),
                     measurementSystemNotification: MeasurementSystemNotification(),
                     appStoreReviewCenter: ReviewNotificationCenter()
                 )

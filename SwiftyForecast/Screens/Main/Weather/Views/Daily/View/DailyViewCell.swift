@@ -1,10 +1,12 @@
 import UIKit
 import Combine
+import Kingfisher
 
 final class DailyViewCell: UITableViewCell {
     @IBOutlet private weak var dateLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var temperatureLabel: UILabel!
+
     private var cancellables = Set<AnyCancellable>()
     private var viewModel: DailyViewCellViewModel? {
         didSet {

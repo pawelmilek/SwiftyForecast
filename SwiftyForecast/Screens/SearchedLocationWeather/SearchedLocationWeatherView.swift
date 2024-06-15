@@ -11,13 +11,13 @@ import MapKit
 
 struct SearchedLocationWeatherView: View {
     @ObservedObject var viewModel: SearchedLocationWeatherViewViewModel
-    @ObservedObject var cardViewModel: CurrentWeatherCardViewModel
+    @ObservedObject var cardViewModel: WeatherCardViewViewModel
     var onCancel: () -> Void
 
     var body: some View {
         NavigationStack {
             VStack(spacing: 15) {
-                CurrentWeatherCard(viewModel: cardViewModel)
+                WeatherCardView(viewModel: cardViewModel)
                 hourlyForecastChartView
                 Spacer()
             }
@@ -40,9 +40,6 @@ struct SearchedLocationWeatherView: View {
         .task {
             await viewModel.loadData()
             viewModel.logScreenViewed(className: "\(type(of: self))")
-        }
-        .onReceive(viewModel.$location.compactMap { $0 }) { location in
-            cardViewModel.setLocationModel(location)
         }
     }
 
@@ -100,17 +97,17 @@ struct SearchedLocationWeatherView: View {
 #Preview {
     SearchedLocationWeatherView(
         viewModel: SearchedLocationWeatherViewViewModel(
-            searchedLocation: MKLocalSearchCompletion(),
-            service: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
-            databaseManager: RealmManager.shared,
-            appStoreReviewCenter: ReviewNotificationCenter(),
-            locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
-            parser: ResponseParser(),
-            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
-        ),
-        cardViewModel: CurrentWeatherCardViewModel(
             location: LocationModel.examples.first!,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            parser: ResponseParser(),
+            databaseManager: RealmManager.shared,
+            appStoreReviewCenter: ReviewNotificationCenter(),
+            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+        ),
+        cardViewModel: WeatherCardViewViewModel(
+            location: LocationModel.examples.first!,
+            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            parser: ResponseParser(),
             temperatureRenderer: TemperatureRenderer(),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()

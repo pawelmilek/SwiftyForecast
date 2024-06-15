@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherCardViewController.swift
+//  WeatherCardViewController.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/28/23.
@@ -8,12 +8,14 @@
 
 import UIKit
 import SwiftUI
+import Combine
 
-final class CurrentWeatherCardViewController: UIViewController {
-    private var hostingViewController: UIHostingController<CurrentWeatherCard>!
-    private let viewModel: CurrentWeatherCardViewModel
+final class WeatherCardViewController: UIViewController {
+    private var cancellables = Set<AnyCancellable>()
+    private var hostingViewController: UIHostingController<WeatherCardView>!
+    private let viewModel: WeatherCardViewViewModel
 
-    init(viewModel: CurrentWeatherCardViewModel) {
+    init(viewModel: WeatherCardViewViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,25 +29,29 @@ final class CurrentWeatherCardViewController: UIViewController {
         setup()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.loadData()
-    }
-
-    func reloadCurrentLocation() {
-        viewModel.reloadCurrentLocation()
-    }
-
-//    func loadData() {
-//        viewModel.loadData()
-//    }
-
     private func setup() {
-        let currentWeatherCard = CurrentWeatherCard(viewModel: viewModel)
+        subscribeNotificationCenterPublisher()
+        let currentWeatherCard = WeatherCardView(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: currentWeatherCard)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)
         setupAutolayoutConstraints()
+    }
+
+    private func subscribeNotificationCenterPublisher() {
+        NotificationCenter.default
+            .publisher(for: UIApplication.willEnterForegroundNotification)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.loadWeatherData()
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func loadWeatherData() {
+        Task {
+            await viewModel.loadData()
+        }
     }
 
     private func setupAutolayoutConstraints() {

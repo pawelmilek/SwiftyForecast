@@ -4,33 +4,36 @@ import Combine
 
 @MainActor
 final class WeatherViewControllerViewModel: ObservableObject {
-    static let numberOfThreeHoursForecastItems = 7
-
     var compoundKey: String { locationModel.compoundKey }
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
     @Published private(set) var locationName = ""
-    @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel] = []
-    @Published private(set) var fiveDaysForecastModel: [DailyForecastModel] = []
+    @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
+    @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
     @Published private(set) var weatherModel: ForecastWeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
-    var locationModel: LocationModel
+    let locationModel: LocationModel
     private let client: WeatherClient
+    private let parser: ResponseParser
     private let measurementSystemNotification: MeasurementSystemNotification
     private let appStoreReviewCenter: ReviewNotificationCenter
 
     init(
         locationModel: LocationModel,
         client: WeatherClient,
+        parser: ResponseParser,
         measurementSystemNotification: MeasurementSystemNotification,
         appStoreReviewCenter: ReviewNotificationCenter
     ) {
         self.locationModel = locationModel
         self.client = client
+        self.parser = parser
         self.measurementSystemNotification = measurementSystemNotification
         self.appStoreReviewCenter = appStoreReviewCenter
         self.locationName = locationModel.name
+        self.twentyFourHoursForecastModel = HourlyForecastModel.initialData
+        self.fiveDaysForecastModel = DailyForecastModel.initialData
         subscriteToPublishers()
         addMeasurementSystemObserver()
 
@@ -59,36 +62,22 @@ final class WeatherViewControllerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func reloadCurrentLocation() {
-        if let location = try? RealmManager.shared.readAllSorted().first(where: { $0.name == locationName }) {
-            locationModel = location
-            loadData()
-        } else {
-            fatalError()
-        }
-    }
-
-    func loadData() {
-        guard !isLoading else { return }
+    func loadData() async {
+        defer { isLoading = false }
         isLoading = true
-
-        Task(priority: .userInitiated) {
-            do {
-                let forecast = try await client.fetchForecast(
-                    latitude: locationModel.latitude,
-                    longitude: locationModel.longitude
-                )
-                let data = ResponseParser().parse(forecast: forecast)
-                weatherModel = data
-                isLoading = false
-
-            } catch {
-                weatherModel = nil
-                twentyFourHoursForecastModel = []
-                fiveDaysForecastModel = []
-                self.error = error
-                isLoading = false
-            }
+        do {
+            let forecast = try await client.fetchForecast(
+                latitude: locationModel.latitude,
+                longitude: locationModel.longitude
+            )
+            let data = parser.parse(forecast: forecast)
+            weatherModel = data
+        } catch {
+            weatherModel = nil
+            twentyFourHoursForecastModel = []
+            fiveDaysForecastModel = []
+            self.error = error
+            isLoading = false
         }
     }
 
@@ -101,8 +90,9 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     private func setTwentyFourHoursForecastModel(_ hourly: [HourlyForecastModel]) {
-        guard hourly.count >= Self.numberOfThreeHoursForecastItems else { return }
-        twentyFourHoursForecastModel = Array(hourly[...Self.numberOfThreeHoursForecastItems])
+        let numberOfThreeHoursForecastItems = 7
+        guard hourly.count >= numberOfThreeHoursForecastItems else { return }
+        twentyFourHoursForecastModel = Array(hourly[...numberOfThreeHoursForecastItems])
     }
 
     private func postAppStoreReviewRequest() {

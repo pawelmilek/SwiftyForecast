@@ -38,7 +38,6 @@ struct ResponseParser {
             HourlyForecastModel(
                 date: Date(timeIntervalSince1970: TimeInterval($0.dateTimeUnix)),
                 temperature: $0.main.temp,
-                description: $0.conditions.first?.description ?? InvalidReference.undefined,
                 icon: $0.conditions.first!.icon
             )
         }

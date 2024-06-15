@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherCardViewModel.swift
+//  WeatherCardViewViewModel.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/28/23.
@@ -11,7 +11,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-final class CurrentWeatherCardViewModel: ObservableObject {
+final class WeatherCardViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = false
     @Published private(set) var locationName = ""
@@ -25,24 +25,28 @@ final class CurrentWeatherCardViewModel: ObservableObject {
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
     @Published private(set) var condition: WeatherCondition
-    @Published private var model: CurrentWeatherModel?
+    @Published private var currentWeatherModel: CurrentWeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
+
     private var location: LocationModel
     private let client: WeatherClient
-    private let measurementSystemNotification: MeasurementSystemNotification
+    private let parser: ResponseParser
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
+    private let measurementSystemNotification: MeasurementSystemNotification
 
     init(
         location: LocationModel,
         client: WeatherClient,
+        parser: ResponseParser,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification
     ) {
         self.location = location
         self.client = client
+        self.parser = parser
         self.temperatureRenderer = temperatureRenderer
         self.speedRenderer = speedRenderer
         self.measurementSystemNotification = measurementSystemNotification
@@ -52,37 +56,33 @@ final class CurrentWeatherCardViewModel: ObservableObject {
         registerMeasurementSystemObserver()
     }
 
-    func setLocationModel(_ location: LocationModel) {
-        self.location = location
-    }
-
     private func subscribeToPublisher() {
-        $model
+        $currentWeatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [self] model in
+            .sink { [self] currentWeatherModel in
                 setTemperatureAccordingToUnitNotation()
                 setWindSpeedAccordingToMeasurementSystem()
-                description = model.condition.description
-                daytimeDescription = model.condition.state.description
-                humidity.value = "\(model.humidity)\("%")"
-                sunrise = .sunrise(time: model.sunrise.formatted(date: .omitted, time: .shortened))
-                sunset = .sunset(time: model.sunset.formatted(date: .omitted, time: .shortened))
-                condition = WeatherCondition(code: model.condition.id)
+                description = currentWeatherModel.condition.description
+                daytimeDescription = currentWeatherModel.condition.state.description
+                humidity.value = "\(currentWeatherModel.humidity)\("%")"
+                sunrise = .sunrise(time: currentWeatherModel.sunrise.formatted(date: .omitted, time: .shortened))
+                sunset = .sunset(time: currentWeatherModel.sunset.formatted(date: .omitted, time: .shortened))
+                condition = WeatherCondition(code: currentWeatherModel.condition.id)
             }
             .store(in: &cancellables)
     }
 
     private func setTemperatureAccordingToUnitNotation() {
-        guard let model else { return }
-        let rendered = temperatureRenderer.render(model.temperature)
+        guard let currentWeatherModel else { return }
+        let rendered = temperatureRenderer.render(currentWeatherModel.temperature)
         temperature = rendered.currentFormatted
         temperatureMaxMin = rendered.maxMinFormatted
     }
 
     private func setWindSpeedAccordingToMeasurementSystem() {
-        guard let model else { return }
-        let rendered = speedRenderer.render(model.windSpeed)
+        guard let currentWeatherModel else { return }
+        let rendered = speedRenderer.render(currentWeatherModel.windSpeed)
         windSpeed.value = rendered
     }
 
@@ -99,40 +99,28 @@ final class CurrentWeatherCardViewModel: ObservableObject {
         setWindSpeedAccordingToMeasurementSystem()
     }
 
-    func reloadCurrentLocation() {
-        if let location = try? RealmManager.shared.readAllSorted().first(where: { $0.name == locationName }) {
-            self.location = location
-            self.loadData()
-        } else {
-            fatalError()
-        }
-    }
-
-    func loadData() {
-        guard !isLoading else { return }
+    func loadData() async {
+        defer { isLoading = false }
         isLoading = true
 
-        Task(priority: .userInitiated) {
-            do {
-                let response = try await client.fetchCurrent(
-                    latitude: location.latitude,
-                    longitude: location.longitude
-                )
-                let dataModel = ResponseParser().parse(current: response)
-                let largeIconData = try await client.fetchLargeIcon(
-                    symbol: dataModel.condition.iconCode
-                )
-                if let image = UIImage(data: largeIconData) {
-                    icon = Image(uiImage: image)
-                }
-                model = dataModel
-                isLoading = false
-            } catch {
-                icon = nil
-                model = nil
-                self.error = error
-                isLoading = false
+        do {
+            let response = try await client.fetchCurrent(
+                latitude: location.latitude,
+                longitude: location.longitude
+            )
+            let dataModel = parser.parse(current: response)
+            let largeIconData = try await client.fetchLargeIcon(
+                symbol: dataModel.condition.iconCode
+            )
+            if let image = UIImage(data: largeIconData) {
+                icon = Image(uiImage: image)
             }
+            currentWeatherModel = dataModel
+        } catch {
+            icon = nil
+            currentWeatherModel = nil
+            self.error = error
+            isLoading = false
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherCard.swift
+//  WeatherCardView.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/28/23.
@@ -8,8 +8,8 @@
 
 import SwiftUI
 
-struct CurrentWeatherCard: View {
-    @ObservedObject var viewModel: CurrentWeatherCardViewModel
+struct WeatherCardView: View {
+    @ObservedObject var viewModel: WeatherCardViewViewModel
 
     var body: some View {
         GeometryReader { proxy in
@@ -43,10 +43,13 @@ struct CurrentWeatherCard: View {
             )
         }
         .frame(maxHeight: 250)
+        .task {
+            await viewModel.loadData()
+        }
     }
 }
 
-private extension CurrentWeatherCard {
+private extension WeatherCardView {
 
     var locationNameView: some View {
         Text(viewModel.locationName)
@@ -140,10 +143,11 @@ private extension CurrentWeatherCard {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    CurrentWeatherCard(
-        viewModel: CurrentWeatherCardViewModel(
+    WeatherCardView(
+        viewModel: WeatherCardViewViewModel(
             location: LocationModel.examples.first!,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            parser: ResponseParser(),
             temperatureRenderer: TemperatureRenderer(),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()

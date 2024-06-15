@@ -11,8 +11,9 @@ final class WeatherViewController: UIViewController {
     @IBOutlet private weak var cardView: UIView!
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
     @IBOutlet private weak var dailyTableView: UITableView!
-    private lazy var weatherCardViewController: CurrentWeatherCardViewController = {
-        CurrentWeatherCardViewController(viewModel: cardViewModel)
+    private lazy var weatherCardViewController: WeatherCardViewController = {
+        let viewController = WeatherCardViewController(viewModel: cardViewModel)
+        return viewController
     }()
 
     private let dailyForecastDataSource = DailyForecastDataSource()
@@ -23,11 +24,11 @@ final class WeatherViewController: UIViewController {
     )
     private var cancellables = Set<AnyCancellable>()
     let viewModel: WeatherViewControllerViewModel
-    private let cardViewModel: CurrentWeatherCardViewModel
+    private let cardViewModel: WeatherCardViewViewModel
 
     init?(
         viewModel: WeatherViewControllerViewModel,
-        cardViewModel: CurrentWeatherCardViewModel,
+        cardViewModel: WeatherCardViewViewModel,
         coder: NSCoder
     ) {
         self.viewModel = viewModel
@@ -42,24 +43,20 @@ final class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayWeatherCardViewController()
         setup()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
+        loadForecastDataWithAnimation()
     }
 
-    private func displayWeatherCardViewController() {
-        self.addChild(weatherCardViewController)
-        weatherCardViewController.view.frame = cardView.frame
-        cardView.addSubview(weatherCardViewController.view)
-        weatherCardViewController.didMove(toParent: self)
-    }
-
-    private func loadData() {
-        viewModel.loadData()
+    private func loadForecastDataWithAnimation() {
+        Task {
+            defer { showContent() }
+            hideContent()
+            await viewModel.loadData()
+        }
     }
 }
 
@@ -67,11 +64,18 @@ final class WeatherViewController: UIViewController {
 private extension WeatherViewController {
 
     func setup() {
+        addChildWeatherCardViewController()
         setupAppearance()
         setupHourlyCollectionView()
         setupWeekTableView()
         subscriberPublishers()
-        subscribeNotificationCenterPublisher()
+    }
+
+    private func addChildWeatherCardViewController() {
+        self.addChild(weatherCardViewController)
+        weatherCardViewController.view.frame = cardView.frame
+        cardView.addSubview(weatherCardViewController.view)
+        weatherCardViewController.didMove(toParent: self)
     }
 
     func setupAppearance() {
@@ -105,44 +109,8 @@ private extension WeatherViewController {
 private extension WeatherViewController {
 
     func subscriberPublishers() {
-        subscribeWeatherPublisher()
-        subscriberLoadingAndErrorPublishers()
-        subscribeForecastPublishers()
-    }
+        subscribeNotificationCenterPublisher()
 
-    func subscribeWeatherPublisher() {
-//        viewModel.$locationModel
-//            .compactMap { $0 }
-//            .receive(on: DispatchQueue.main)
-//            .sink { [self] locationModel in
-//                weatherCardViewController.loadData(at: locationModel)
-//            }
-//            .store(in: &cancellables)
-    }
-
-    func subscriberLoadingAndErrorPublishers() {
-        viewModel.$isLoading
-            .receive(on: DispatchQueue.main)
-            .sink { [self] isLoading in
-                if isLoading {
-                    hideContent()
-
-                } else {
-                    showContent()
-                }
-            }
-            .store(in: &cancellables)
-
-        viewModel.$error
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { error in
-                debugPrint(error.localizedDescription)
-            }
-            .store(in: &cancellables)
-    }
-
-    func subscribeForecastPublishers() {
         viewModel.$twentyFourHoursForecastModel
             .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
@@ -160,12 +128,19 @@ private extension WeatherViewController {
                     )
                 })
             }
-            .sink { [self] (hourlyViewModels, dailyViewModels) in
+            .sink { [self] hourlyViewModels, dailyViewModels in
                 hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
                 dailyForecastDataSource.set(viewModeles: dailyViewModels)
 
                 hourlyCollectionView.reloadData()
                 dailyTableView.reloadData()
+            }
+            .store(in: &cancellables)
+
+        viewModel.$error
+            .compactMap { $0 }
+            .sink { error in
+                debugPrint(error.localizedDescription)
             }
             .store(in: &cancellables)
     }
@@ -175,24 +150,28 @@ private extension WeatherViewController {
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                guard let self else { return }
-                viewModel.reloadCurrentLocation()
-                weatherCardViewController.reloadCurrentLocation()
+                self?.loadForecastData()
             }
             .store(in: &cancellables)
     }
 
+    func loadForecastData() {
+        Task {
+            await viewModel.loadData()
+        }
+    }
+
     func showContent() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) { [self] in
-            hourlyCollectionView.alpha = 1.0
-            dailyTableView.alpha = 1.0
+//            hourlyCollectionView.alpha = 1.0
+//            dailyTableView.alpha = 1.0
         }
     }
 
     func hideContent() {
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) { [self] in
-            hourlyCollectionView.alpha = 0.0
-            dailyTableView.alpha = 0.0
+//            hourlyCollectionView.alpha = 0.0
+//            dailyTableView.alpha = 0.0
         }
     }
 }
@@ -201,7 +180,7 @@ private extension WeatherViewController {
 extension WeatherViewController {
     static func make(
         viewModel: WeatherViewControllerViewModel,
-        cardViewModel: CurrentWeatherCardViewModel
+        cardViewModel: WeatherCardViewViewModel
     ) -> WeatherViewController {
         let storyboard = UIStoryboard(storyboard: .main)
         let viewController = storyboard.instantiateViewController(

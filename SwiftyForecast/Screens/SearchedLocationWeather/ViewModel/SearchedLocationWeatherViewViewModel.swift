@@ -14,39 +14,34 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = true
     @Published private(set) var addButtonDisabled = true
-    @Published private(set) var location: LocationModel?
     @Published private(set) var twentyFourHoursForecast: [HourlyForecastModel]?
 
-    private let searchedLocation: MKLocalSearchCompletion
-    private let service: WeatherClient
+    private let location: LocationModel
+    private let client: WeatherClient
+    private let parser: ResponseParser
     private let databaseManager: DatabaseManager
     private let appStoreReviewCenter: ReviewNotificationCenter
-    private let locationPlace: LocationPlaceable
-    private let parser: ResponseParser
     private let analyticsManager: AnalyticsManager
 
     init(
-        searchedLocation: MKLocalSearchCompletion,
-        service: WeatherClient,
+        location: LocationModel,
+        client: WeatherClient,
+        parser: ResponseParser,
         databaseManager: DatabaseManager,
         appStoreReviewCenter: ReviewNotificationCenter,
-        locationPlace: LocationPlaceable,
-        parser: ResponseParser,
         analyticsManager: AnalyticsManager
     ) {
-        self.searchedLocation = searchedLocation
-        self.service = service
+        self.location = location
+        self.client = client
+        self.parser = parser
         self.databaseManager = databaseManager
         self.appStoreReviewCenter = appStoreReviewCenter
-        self.locationPlace = locationPlace
-        self.parser = parser
         self.analyticsManager = analyticsManager
     }
 
     func loadData() async {
         isLoading = true
         do {
-            try await fetchLocation()
             try await fetchLocationHourlyForecast()
             checkLocationExistance()
             isLoading = false
@@ -57,8 +52,6 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     func addLocation() {
-        guard let location else { fatalError() }
-
         do {
             try databaseManager.create(location)
         } catch {
@@ -70,30 +63,8 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         logLocationAdded(name: location.name + ", " + location.country)
     }
 
-    private func fetchLocation() async throws {
-        let searchRequest = MKLocalSearch(
-            request: MKLocalSearch.Request(
-                completion: searchedLocation
-            )
-        )
-
-        let response = try await searchRequest.start()
-        if let responseLocation = response.mapItems.first?.placemark.location {
-            location = try await geocode(location: responseLocation)
-        } else {
-            throw LocalSearchError.notFound
-        }
-    }
-
-    private func geocode(location: CLLocation) async throws -> LocationModel {
-        let placemark = try await locationPlace.placemark(at: location)
-        return LocationModel(placemark: placemark, isUserLocation: false)
-    }
-
     private func fetchLocationHourlyForecast() async throws {
-        guard let location else { fatalError() }
-
-        let forecast = try await service.fetchForecast(
+        let forecast = try await client.fetchForecast(
             latitude: location.latitude,
             longitude: location.longitude
         )
@@ -106,7 +77,6 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     private func checkLocationExistance() {
-        guard let location else { fatalError() }
         addButtonDisabled = (
             try? databaseManager.readBy(
                 primaryKey: location.compoundKey

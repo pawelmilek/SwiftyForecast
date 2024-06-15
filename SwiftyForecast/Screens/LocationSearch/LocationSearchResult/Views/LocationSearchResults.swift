@@ -13,14 +13,17 @@ struct LocationSearchResults: View {
     @Environment(\.dismissSearch) private var dismissSearch
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.locationSearchCompleter) private var locationSearchCompleter
-    @StateObject private var searchResultConfig = LocationSearchResultConfiguration(
-        localSearch: MKLocalSearchCompletion()
+    @Environment(\.weatherClient) private var weatherClient
+    @StateObject private var searchLocationStore = SearchLocationStore(
+        locationPlace: GeocodedLocation(geocoder: CLGeocoder())
     )
 
     var body: some View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in
             LocationSearchRow(result: item) { result in
-                searchResultConfig.select(result) // TODO: Execute fetech location here!
+                Task {
+                    await searchLocationStore.select(result)
+                }
             }
         }
         .scrollDismissesKeyboard(.interactively)
@@ -32,20 +35,20 @@ struct LocationSearchResults: View {
                 .background(.background)
                 .opacity(shouldShowContentUnavailableView ? 1.0 : 0.0)
         }
-        .sheet(isPresented: $searchResultConfig.showSearchedLocationForecast) {
+        .sheet(item: $searchLocationStore.foundLocation) { foundLocation in
             SearchedLocationWeatherView(
                 viewModel: SearchedLocationWeatherViewViewModel(
-                    searchedLocation: searchResultConfig.localSearch,
-                    service: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    location: foundLocation,
+                    client: weatherClient,
+                    parser: ResponseParser(),
                     databaseManager: RealmManager.shared,
                     appStoreReviewCenter: ReviewNotificationCenter(),
-                    locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
-                    parser: ResponseParser(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
-                cardViewModel: CurrentWeatherCardViewModel(
-                    location: LocationModel.examples.first!, // TODO: remove after refactored
-                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                cardViewModel: WeatherCardViewViewModel(
+                    location: foundLocation,
+                    client: weatherClient,
+                    parser: ResponseParser(),
                     temperatureRenderer: TemperatureRenderer(),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()
@@ -75,7 +78,7 @@ struct LocationSearchResults: View {
 
     private func dismiss() {
         dismissSearch()
-        searchResultConfig.hideSheet()
+        searchLocationStore.clearFoundLocation()
         locationSearchCompleter.removeAllResults()
     }
 }

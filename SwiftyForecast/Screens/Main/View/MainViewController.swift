@@ -89,9 +89,10 @@ private extension MainViewController {
             .filter { !$0.isEmpty }
             .map { $0.map { WeatherViewController.make(
                 viewModel: $0,
-                cardViewModel: CurrentWeatherCardViewModel(
+                cardViewModel: WeatherCardViewViewModel(
                     location: $0.locationModel,
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    parser: ResponseParser(),
                     temperatureRenderer: TemperatureRenderer(),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()
