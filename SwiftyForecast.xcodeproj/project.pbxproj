@@ -665,6 +665,9 @@
 			isa = PBXGroup;
 			children = (
 				E2CAC9E02C04308B00E573D2 /* Analytics */,
+				E270891824CE5904003F7587 /* Coordinator */,
+				E23997DF20E84371007D8CE4 /* Network */,
+				E283573B2B2728AA00E3807A /* RealmManager */,
 				E20A43372C1B28880052AFA4 /* DependencyContainer */,
 				E296B6162C1CF461001F7C57 /* EnvironmentValues */,
 				E2A32F25254459DF000ACEFE /* AppStoreReview */,
@@ -1047,9 +1050,6 @@
 				E23997DC20E84129007D8CE4 /* Application */,
 				E24E90572ADA7DF8009255C8 /* Screens */,
 				E21ABD3F2AE8269900F93F01 /* Shared */,
-				E270891824CE5904003F7587 /* Coordinator */,
-				E23997DF20E84371007D8CE4 /* Network */,
-				E283573B2B2728AA00E3807A /* RealmManager */,
 				E23997D820E840C1007D8CE4 /* Resources */,
 				E23997D720E84094007D8CE4 /* Storyboards */,
 			);
