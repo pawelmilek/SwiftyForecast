@@ -22,7 +22,7 @@ struct LocationSearchResults: View {
         List(locationSearchCompleter.searchResults, id: \.self) { item in
             LocationSearchRow(result: item) { result in
                 Task {
-                    await searchLocationStore.select(result)
+                    await searchLocationStore.fetchLocation(result)
                 }
             }
         }

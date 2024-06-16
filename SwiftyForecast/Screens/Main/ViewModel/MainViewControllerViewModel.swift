@@ -5,13 +5,13 @@ import Combine
 
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
-    static let firstIndex = 0
-    @Published private(set) var currentWeatherViewModels = [WeatherViewControllerViewModel]()
+    @Published private(set) var locations = [LocationModel]()
     @Published private(set) var notationSegmentedControlItems: [String]
     @Published private(set) var notationSegmentedControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var isRequestingLocation = true
     @Published private(set) var locationError: Error?
+    @Published private(set) var selectedIndex: Int?
 
     private let geocodeLocation: LocationPlaceable
     private let notationSystemStore: NotationSystemStore
@@ -21,7 +21,6 @@ final class MainViewControllerViewModel: ObservableObject {
     private let locationManager: LocationManager
     private let reviewManager: ReviewManager
     private let analyticsManager: AnalyticsManager
-
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -48,15 +47,16 @@ final class MainViewControllerViewModel: ObservableObject {
             TemperatureNotation.fahrenheit.description,
             TemperatureNotation.celsius.description
         ]
-        registerRealmCollectionNotificationToken()
+        registerRealmNotificationToken()
+        subscirbePublishers()
     }
 
     deinit {
         token?.invalidate()
     }
 
-    func onViewDidLoad() {
-        subscirbePublishers()
+    func onSelectIndex(_ index: Int) {
+        selectedIndex = index
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {
@@ -96,17 +96,17 @@ final class MainViewControllerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func registerRealmCollectionNotificationToken() {
+    private func registerRealmNotificationToken() {
         token = try? databaseManager.readAll().observe { [weak self] changes in
             switch changes {
             case .initial:
-                self?.setCurrentWeatherViewModels()
+                self?.setSortedLocations()
 
             case .update(_, let deletions, let insertions, let modifications):
                 debugPrint("deletions: \(deletions)")
                 debugPrint("insertions: \(insertions)")
                 debugPrint("modifications: \(modifications)")
-                self?.setCurrentWeatherViewModels()
+                self?.setSortedLocations()
 
             case .error(let error):
                 fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
@@ -114,19 +114,11 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    private func setCurrentWeatherViewModels() {
-        currentWeatherViewModels.removeAll()
-
-        if let allSorted = try? databaseManager.readAllSorted() {
-            currentWeatherViewModels = allSorted.compactMap {
-                WeatherViewControllerViewModel(
-                    locationModel: $0,
-                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
-                    parser: ResponseParser(),
-                    measurementSystemNotification: MeasurementSystemNotification(),
-                    appStoreReviewCenter: ReviewNotificationCenter()
-                )
-            }
+    private func setSortedLocations() {
+        if let allSortedLocations = try? databaseManager.readAllSorted() {
+            locations = allSortedLocations.compactMap { $0 }
+        } else {
+            locations = []
         }
     }
 
@@ -148,9 +140,10 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     func index(of location: LocationModel) -> Int? {
-        guard let index = try? databaseManager
-            .readAllSorted()
-            .firstIndex(where: { $0.compoundKey == location.compoundKey }) else { return nil }
+        guard let index = try? databaseManager.readAllSorted()
+            .firstIndex(where: { $0.compoundKey == location.compoundKey }) else {
+            return nil
+        }
         return index
     }
 

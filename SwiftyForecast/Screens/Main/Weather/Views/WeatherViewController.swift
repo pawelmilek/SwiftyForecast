@@ -49,6 +49,7 @@ final class WeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadForecastDataWithAnimation()
+        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
     private func loadForecastDataWithAnimation() {

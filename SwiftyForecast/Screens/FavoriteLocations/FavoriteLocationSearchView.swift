@@ -10,11 +10,11 @@ import SwiftUI
 
 struct FavoriteLocationSearchView: View {
     @StateObject private var searchCompleter = LocationSearchCompleter()
-    var onDidSelectLocation: (LocationModel) -> Void
+    var onDidSelectLocation: (Int) -> Void
 
     var body: some View {
         NavigationStack {
-            LocationList(
+            FavoriteLocationList(
                 searchText: $searchCompleter.searchText,
                 temperatureRenderer: TemperatureRenderer(),
                 measurementSystemNotification: MeasurementSystemNotification(),

@@ -10,7 +10,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     @Published private(set) var locationName = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
-    @Published private(set) var weatherModel: ForecastWeatherModel?
+    @Published private(set) var forecastWeatherModel: ForecastWeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
     let locationModel: LocationModel
@@ -52,7 +52,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     private func subscriteToPublishers() {
-        $weatherModel
+        $forecastWeatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] weatherModel in
@@ -71,9 +71,9 @@ final class WeatherViewControllerViewModel: ObservableObject {
                 longitude: locationModel.longitude
             )
             let data = parser.parse(forecast: forecast)
-            weatherModel = data
+            forecastWeatherModel = data
         } catch {
-            weatherModel = nil
+            forecastWeatherModel = nil
             twentyFourHoursForecastModel = []
             fiveDaysForecastModel = []
             self.error = error
@@ -82,8 +82,8 @@ final class WeatherViewControllerViewModel: ObservableObject {
     }
 
     func reloadData() {
-        if let hourly = weatherModel?.hourly,
-           let daily = weatherModel?.daily {
+        if let hourly = forecastWeatherModel?.hourly,
+           let daily = forecastWeatherModel?.daily {
             setTwentyFourHoursForecastModel(hourly)
             fiveDaysForecastModel = daily
         }

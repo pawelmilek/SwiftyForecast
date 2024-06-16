@@ -59,13 +59,12 @@ final class LocationRowViewModel: ObservableObject {
 
     func loadData() async {
         isLoading = true
-
         do {
             let response = try await client.fetchCurrent(
                 latitude: location.latitude,
                 longitude: location.longitude
             )
-            let model = ResponseParser().parse(current: response)
+            let model = parser.parse(current: response)
             setTemperature(value: model.temperature)
             isLoading = false
         } catch {

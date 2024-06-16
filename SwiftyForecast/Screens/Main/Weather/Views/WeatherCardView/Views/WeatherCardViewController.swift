@@ -29,6 +29,11 @@ final class WeatherCardViewController: UIViewController {
         setup()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
+    }
+
     private func setup() {
         subscribeNotificationCenterPublisher()
         let currentWeatherCard = WeatherCardView(viewModel: viewModel)

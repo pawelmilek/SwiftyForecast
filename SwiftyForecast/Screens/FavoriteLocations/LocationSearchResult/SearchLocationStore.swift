@@ -18,15 +18,11 @@ class SearchLocationStore: ObservableObject {
         self.locationPlace = locationPlace
     }
 
-    func select(_ localSearch: MKLocalSearchCompletion) async {
-        await fetchLocation(localSearch)
-    }
-
     func clearFoundLocation() {
         foundLocation = nil
     }
 
-    private func fetchLocation(_ localSearch: MKLocalSearchCompletion) async {
+    func fetchLocation(_ localSearch: MKLocalSearchCompletion) async {
         let searchRequest = MKLocalSearch(
             request: MKLocalSearch.Request(
                 completion: localSearch

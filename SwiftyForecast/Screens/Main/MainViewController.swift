@@ -55,8 +55,6 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        viewModel.onViewDidLoad()
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -85,24 +83,38 @@ private extension MainViewController {
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
-        viewModel.$currentWeatherViewModels
+        viewModel.$locations
             .filter { !$0.isEmpty }
-            .map { $0.map { WeatherViewController.make(
-                viewModel: $0,
-                cardViewModel: WeatherCardViewViewModel(
-                    location: $0.locationModel,
-                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
-                    parser: ResponseParser(),
-                    temperatureRenderer: TemperatureRenderer(),
-                    speedRenderer: SpeedRenderer(),
-                    measurementSystemNotification: MeasurementSystemNotification()
-                )
-            ) } }
+            .map { lcoations -> [WeatherViewControllerViewModel] in
+                lcoations.map {
+                    WeatherViewControllerViewModel(
+                        locationModel: $0,
+                        client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                        parser: ResponseParser(),
+                        measurementSystemNotification: MeasurementSystemNotification(),
+                        appStoreReviewCenter: ReviewNotificationCenter()
+                    )
+                }
+            }
+            .map { viewModels -> [WeatherViewController] in
+                viewModels.map {
+                    WeatherViewController.make(
+                        viewModel: $0,
+                        cardViewModel: WeatherCardViewViewModel(
+                            location: $0.locationModel,
+                            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                            parser: ResponseParser(),
+                            temperatureRenderer: TemperatureRenderer(),
+                            speedRenderer: SpeedRenderer(),
+                            measurementSystemNotification: MeasurementSystemNotification()
+                        )
+                    )
+                }
+            }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] viewControllers in
-                guard let self else { return }
-                pageViewController.set(viewControllers)
-                pageTransition(at: MainViewControllerViewModel.firstIndex)
+                self?.pageViewController.set(viewControllers)
+                self?.selectInitialPageViewController()
             }
             .store(in: &cancellables)
 
@@ -113,13 +125,18 @@ private extension MainViewController {
             }
             .store(in: &cancellables)
 
-        viewModel.$locationError
+        viewModel.$selectedIndex
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { locationError in
-                guard let locationError else { return }
-                debugPrint(locationError.localizedDescription)
+            .sink { [weak self] selectedIndex in
+                self?.pageTransition(at: selectedIndex)
             }
             .store(in: &cancellables)
+    }
+
+    func selectInitialPageViewController() {
+        guard viewModel.selectedIndex == nil else { return }
+        viewModel.onSelectIndex(0)
     }
 
     func setupNavigationItems() {
@@ -274,14 +291,14 @@ private extension MainViewController {
 
 // MARK: - LocationListSelectionViewControllerDelegate
 extension MainViewController: LocationSearchViewControllerDelegate {
-    func locationListViewController(
+    func locationSearchViewController(
         _ view: LocationSearchViewController,
-        didSelectLocation location: LocationModel
+        didSelectLocation index: Int
     ) {
-        guard let index = viewModel.index(of: location) else { return }
-        pageTransition(at: index)
+        viewModel.onSelectIndex(index)
         coordinator.dismiss()
     }
+
 }
 
 // MARK: - AppStoreReviewObserverEventResponder
@@ -290,4 +307,3 @@ extension MainViewController: ReviewObserverEventResponder {
         viewModel.requestReview(for: desirableMoment)
     }
 }
-

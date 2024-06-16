@@ -1,5 +1,5 @@
 //
-//  LocationList.swift
+//  FavoriteLocationList.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/21/23.
@@ -10,14 +10,14 @@ import SwiftUI
 import RealmSwift
 import TipKit
 
-struct LocationList: View {
+struct FavoriteLocationList: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.weatherClient) private var weatherClient
     @Binding var searchText: String
     let temperatureRenderer: TemperatureRenderer
     let measurementSystemNotification: MeasurementSystemNotification
-    var onSelectRow: (LocationModel) -> Void
+    var onSelectRow: (Int) -> Void
 
     @ObservedResults(
         LocationModel.self,
@@ -30,8 +30,8 @@ struct LocationList: View {
             TipView(LocationsTip())
                 .tint(.customPrimary)
                 .listRowSeparator(.hidden)
-            ForEach(locations) { location in
-                LocationRow(
+            ForEach(Array(zip(locations.indices, locations)), id: \.0) { index, location in
+                FavoriteLocationRow(
                     viewModel: LocationRowViewModel(
                         location: location,
                         client: weatherClient,
@@ -43,7 +43,7 @@ struct LocationList: View {
                 .listRowSeparator(.hidden)
                 .deleteDisabled(location.isUserLocation)
                 .onTapGesture {
-                    onSelectRow(location)
+                    onSelectRow(index)
                     logLocationSelected(location.name + ", " + location.country)
                 }
             }
@@ -67,7 +67,7 @@ struct LocationList: View {
 }
 
 #Preview {
-    LocationList(
+    FavoriteLocationList(
         searchText: .constant("Search Text"),
         temperatureRenderer: TemperatureRenderer(),
         measurementSystemNotification: MeasurementSystemNotification(),

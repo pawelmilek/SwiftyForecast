@@ -11,7 +11,7 @@ import UIKit
 class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     private let feedbackGenerator: UIImpactFeedbackGenerator
     private var weatherViewControllers: [WeatherViewController]
-    private var currentIndex: Int
+    private(set) var currentIndex: Int
 
     init(
         currentIndex: Int,
@@ -45,7 +45,6 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
             completion: { isCompleted in
                 if isCompleted {
                     self.currentIndex = index
-                    debugPrint("currentIndex: \(self.currentIndex)")
                 }
             }
         )

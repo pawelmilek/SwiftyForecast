@@ -1,5 +1,5 @@
 //
-//  LocationRow.swift
+//  FavoriteLocationRow.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/24/23.
@@ -9,7 +9,7 @@
 import SwiftUI
 import MapKit
 
-struct LocationRow: View {
+struct FavoriteLocationRow: View {
     @StateObject private var viewModel: LocationRowViewModel
 
     init(viewModel: LocationRowViewModel) {
@@ -31,7 +31,7 @@ struct LocationRow: View {
     }
 }
 
-private extension LocationRow {
+private extension FavoriteLocationRow {
     var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
@@ -81,7 +81,7 @@ private extension LocationRow {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    LocationRow(
+    FavoriteLocationRow(
         viewModel: LocationRowViewModel(
             location: LocationModel.examples.first!,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
