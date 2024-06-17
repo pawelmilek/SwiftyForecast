@@ -33,5 +33,5 @@ struct FavoriteLocationSearchView: View {
 }
 
 #Preview {
-    FavoriteLocationSearchView { _ in }
+    FavoriteLocationSearchView() { _ in }
 }

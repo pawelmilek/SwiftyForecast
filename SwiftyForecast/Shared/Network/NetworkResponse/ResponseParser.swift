@@ -1,7 +1,7 @@
 import Foundation
 
 struct ResponseParser {
-    func parse(current: CurrentWeatherResponse) -> CurrentWeatherModel {
+    func parse(current: CurrentWeatherResponse) -> WeatherModel {
         guard let currentCondition = current.conditions.first else { fatalError() }
 
         let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
@@ -19,7 +19,7 @@ struct ResponseParser {
             description: currentCondition.description
         )
 
-        let currentWeatherModel = CurrentWeatherModel(
+        let currentWeatherModel = WeatherModel(
             date: currentDate,
             temperature: temperatureValue,
             condition: condition,

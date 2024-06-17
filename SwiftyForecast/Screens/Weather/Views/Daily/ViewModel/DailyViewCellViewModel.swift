@@ -3,7 +3,7 @@ import Foundation
 @MainActor
 final class DailyViewCellViewModel: ObservableObject {
     @Published private(set) var attributedDate = NSAttributedString()
-    @Published private(set) var temperature = ""
+    @Published private(set) var temperature = "--"
     @Published private(set) var iconURL: URL?
     private var model: DailyForecastModel
     private var temperatureRenderer: TemperatureRenderer
@@ -19,7 +19,9 @@ final class DailyViewCellViewModel: ObservableObject {
     func render() {
         attributedDate = renderMonthWeekday(date: model.date)
         iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
-        temperature = temperatureRenderer.render(model.temperature).currentFormatted
+        if let temp = model.temperature {
+            temperature = temperatureRenderer.render(temp).currentFormatted
+        }
     }
 
     private func renderMonthWeekday(date: Date) -> NSAttributedString {

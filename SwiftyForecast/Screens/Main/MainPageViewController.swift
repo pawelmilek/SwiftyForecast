@@ -49,6 +49,14 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
             }
         )
     }
+
+    func firstPageViewController() -> WeatherViewController {
+        guard let initialViewController = weatherViewControllers.first else {
+            fatalError()
+        }
+
+        return initialViewController
+    }
 }
 
 // MARK: - UIPageViewControllerDataSource

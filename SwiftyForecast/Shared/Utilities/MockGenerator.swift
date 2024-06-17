@@ -18,7 +18,7 @@ struct MockGenerator {
         self.parser = parser
     }
 
-    func generateCurrentWeatherModel() -> CurrentWeatherModel {
+    func generateCurrentWeatherModel() -> WeatherModel {
         do {
             let resourceFile = ResourceFile(
                 name: "current_weather_response",

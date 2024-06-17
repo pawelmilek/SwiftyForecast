@@ -12,6 +12,7 @@ import TipKit
 
 struct FavoriteLocationList: View {
     @Environment(\.isSearching) private var isSearching
+    @Environment(\.databaseManager) private var databaseManager
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.weatherClient) private var weatherClient
     @Binding var searchText: String
@@ -21,7 +22,7 @@ struct FavoriteLocationList: View {
 
     @ObservedResults(
         LocationModel.self,
-        configuration: RealmManager.shared.realm.configuration,
+        configuration: RealmManager().realm.configuration,
         sortDescriptor: SortDescriptor(keyPath: "isUserLocation", ascending: false)
     ) private var locations
 

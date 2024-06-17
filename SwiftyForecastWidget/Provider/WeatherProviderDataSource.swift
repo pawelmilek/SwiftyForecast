@@ -54,7 +54,7 @@ final class WeatherProviderDataSource {
         return result
     }
 
-    private func fetchLocationNameAndCurrentWeather() async -> (name: String, model: CurrentWeatherModel) {
+    private func fetchLocationNameAndCurrentWeather() async -> (name: String, model: WeatherModel) {
         async let nameResult = fetchLocationName()
         async let modelResult = fetchCurrentWeather()
         let (name, model) = await (nameResult, modelResult)
@@ -86,7 +86,7 @@ final class WeatherProviderDataSource {
         }
     }
 
-    private func fetchCurrentWeather() async -> CurrentWeatherModel {
+    private func fetchCurrentWeather() async -> WeatherModel {
         guard let coordinate = location?.coordinate else {
             fatalError("Location coordinate unavailable")
         }
@@ -123,12 +123,14 @@ final class WeatherProviderDataSource {
         var hourlyEntry = [HourlyEntry]()
         for model in models {
             let icon = await fetchIcon(with: model.icon)
-            let data = HourlyEntry(
-                icon: icon,
-                time: model.date.formatted(date: .omitted, time: .shortened),
-                temperatureValue: TemperatureValue(current: model.temperature)
-            )
-            hourlyEntry.append(data)
+            if let temperature = model.temperature {
+                let data = HourlyEntry(
+                    icon: icon,
+                    time: model.date.formatted(date: .omitted, time: .shortened),
+                    temperatureValue: TemperatureValue(current: temperature)
+                )
+                hourlyEntry.append(data)
+            }
         }
         return hourlyEntry
     }

@@ -5,13 +5,14 @@ import Combine
 
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
-    @Published private(set) var locations = [LocationModel]()
+    @Published private(set) var weatherViewModels: [WeatherViewControllerViewModel]
     @Published private(set) var notationSegmentedControlItems: [String]
     @Published private(set) var notationSegmentedControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var isRequestingLocation = true
     @Published private(set) var locationError: Error?
     @Published private(set) var selectedIndex: Int?
+    private var locations: Results<LocationModel>?
 
     private let geocodeLocation: LocationPlaceable
     private let notationSystemStore: NotationSystemStore
@@ -21,6 +22,9 @@ final class MainViewControllerViewModel: ObservableObject {
     private let locationManager: LocationManager
     private let reviewManager: ReviewManager
     private let analyticsManager: AnalyticsManager
+    private let client: OpenWeatherMapClient
+    private let parser: ResponseParser
+    private let appStoreReviewCenter: ReviewNotificationCenter
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -32,7 +36,10 @@ final class MainViewControllerViewModel: ObservableObject {
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         reviewManager: ReviewManager,
-        analyticsManager: AnalyticsManager
+        analyticsManager: AnalyticsManager,
+        client: OpenWeatherMapClient,
+        parser: ResponseParser,
+        appStoreReviewCenter: ReviewNotificationCenter
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSystemStore = notationSystemStore
@@ -42,17 +49,30 @@ final class MainViewControllerViewModel: ObservableObject {
         self.locationManager = locationManager
         self.reviewManager = reviewManager
         self.analyticsManager = analyticsManager
+        self.client = client
+        self.parser = parser
+        self.appStoreReviewCenter = appStoreReviewCenter
         self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
         self.notationSegmentedControlItems = [
             TemperatureNotation.fahrenheit.description,
             TemperatureNotation.celsius.description
         ]
-        registerRealmNotificationToken()
+
+        self.weatherViewModels = []
+        registerLocationNotificationToken()
         subscirbePublishers()
     }
 
     deinit {
         token?.invalidate()
+    }
+
+    func onViewDidLoad() {
+        loadLocations()
+    }
+
+    func onViewDidAppear() {
+
     }
 
     func onSelectIndex(_ index: Int) {
@@ -80,10 +100,10 @@ final class MainViewControllerViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        locationManager.$currentLocation
+        locationManager.$location
             .compactMap { $0 }
             .sink { [self] currentLocation in
-                insertCurrentLocation(currentLocation)
+                updateLocation(currentLocation)
             }
             .store(in: &cancellables)
 
@@ -96,17 +116,19 @@ final class MainViewControllerViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func registerRealmNotificationToken() {
-        token = try? databaseManager.readAll().observe { [weak self] changes in
+    private func registerLocationNotificationToken() {
+        token = try? databaseManager.readAllSorted().observe { [weak self] changes in
             switch changes {
             case .initial:
-                self?.setSortedLocations()
+                self?.invalidateWeatherViewModels()
 
             case .update(_, let deletions, let insertions, let modifications):
                 debugPrint("deletions: \(deletions)")
                 debugPrint("insertions: \(insertions)")
                 debugPrint("modifications: \(modifications)")
-                self?.setSortedLocations()
+                debugPrint(self?.locations?.description)
+                self?.invalidateWeatherViewModels()
+                self?.invalidateMainPageData(insertions: insertions)
 
             case .error(let error):
                 fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
@@ -114,16 +136,35 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    private func setSortedLocations() {
-        if let allSortedLocations = try? databaseManager.readAllSorted() {
-            locations = allSortedLocations.compactMap { $0 }
-        } else {
-            locations = []
+    private func invalidateMainPageData(insertions: [Int]) {
+        for index in insertions where locations?[index].isUserLocation ?? false {
+            selectedIndex = 0
+            break
         }
     }
 
-    private func insertCurrentLocation(_ location: CLLocation) {
-        Task(priority: .userInitiated) {
+    private func invalidateWeatherViewModels() {
+        weatherViewModels = locations?.map {
+            WeatherViewControllerViewModel(
+                location: $0,
+                client: client,
+                parser: parser,
+                measurementSystemNotification: measurementSystemNotification,
+                appStoreReviewCenter: appStoreReviewCenter
+            )
+        } ?? []
+    }
+
+    private func loadLocations() {
+        do {
+            locations = try databaseManager.readAllSorted()
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    private func updateLocation(_ location: CLLocation) {
+        Task { @MainActor in
             do {
                 let placemark = try await geocodeLocation.placemark(at: location)
                 currentLocationRecord.insert(

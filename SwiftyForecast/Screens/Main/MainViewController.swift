@@ -55,6 +55,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        viewModel.onViewDidLoad()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -72,36 +73,25 @@ final class MainViewController: UIViewController {
 private extension MainViewController {
 
     func setup() {
-        subscribeToViewModel()
-        setupChildaPageViewController()
+        subscribePublishers()
+        setupChildPageViewController()
         setupNavigationItems()
         setupAppearance()
     }
 
-    func subscribeToViewModel() {
+    func subscribePublishers() {
         viewModel.$notationSegmentedControlIndex
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
-        viewModel.$locations
+        viewModel.$weatherViewModels
             .filter { !$0.isEmpty }
-            .map { lcoations -> [WeatherViewControllerViewModel] in
-                lcoations.map {
-                    WeatherViewControllerViewModel(
-                        locationModel: $0,
-                        client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
-                        parser: ResponseParser(),
-                        measurementSystemNotification: MeasurementSystemNotification(),
-                        appStoreReviewCenter: ReviewNotificationCenter()
-                    )
-                }
-            }
             .map { viewModels -> [WeatherViewController] in
                 viewModels.map {
                     WeatherViewController.make(
                         viewModel: $0,
                         cardViewModel: WeatherCardViewViewModel(
-                            location: $0.locationModel,
+                            location: $0.location,
                             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                             parser: ResponseParser(),
                             temperatureRenderer: TemperatureRenderer(),
@@ -171,7 +161,7 @@ private extension MainViewController {
         navigationItem.titleView = notationSegmentedControl
     }
 
-    func setupChildaPageViewController() {
+    func setupChildPageViewController() {
         add(pageViewController)
     }
 

@@ -1,5 +1,5 @@
 //
-//  CurrentWeatherModel.swift
+//  WeatherModel.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/18/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CurrentWeatherModel {
+struct WeatherModel {
     let date: Date
     let temperature: TemperatureValue
     let condition: ConditionModel
@@ -19,8 +19,8 @@ struct CurrentWeatherModel {
     let sunset: Date
 }
 
-extension CurrentWeatherModel {
-    static let example = CurrentWeatherModel(
+extension WeatherModel {
+    static let example = WeatherModel(
         date: Date(timeIntervalSinceReferenceDate: 724103328.0),
         temperature: TemperatureValue(current: 276.14, min: 275.55, max: 276.14),
         condition: ConditionModel(id: 800, iconCode: "01d", name: "Clear", description: "clear sky"),

@@ -12,7 +12,7 @@ import CoreLocation
 final class LocationManager: NSObject {
     @Published var authorizationStatus: CLAuthorizationStatus
     @Published var accuracyAuthorizationStatus: CLAccuracyAuthorization
-    @Published var currentLocation: CLLocation?
+    @Published var location: CLLocation?
     @Published var error: Error?
     @Published var isRequestingLocation = false
 
@@ -76,7 +76,7 @@ extension LocationManager: CLLocationManagerDelegate {
         guard let lastLocation = locations.last else { return }
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)", lastLocation)
         self.isRequestingLocation = false
-        self.currentLocation = lastLocation
+        self.location = lastLocation
     }
 
     func locationManager(

@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearanceTheme()
         setupAppearanceThemeNotificationCenter()
         setupReviewObserver()
-        debugPrintRealmFileURL()
         return true
     }
 
@@ -48,7 +47,10 @@ private extension AppDelegate {
     }
 
     func setupCoordinator() {
-        coordinator = MainCoordinator(navigationController: UINavigationController())
+        coordinator = MainCoordinator(
+            navigationController: UINavigationController(),
+            databaseManager: RealmManager()
+        )
         coordinator?.start()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = coordinator?.navigationController
@@ -132,9 +134,5 @@ private extension AppDelegate {
         case .systemDefault:
             window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
         }
-    }
-
-    func debugPrintRealmFileURL() {
-        RealmManager.shared.debugPrintRealmFileURL()
     }
 }

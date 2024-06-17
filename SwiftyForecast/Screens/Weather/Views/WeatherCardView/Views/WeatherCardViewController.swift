@@ -35,15 +35,15 @@ final class WeatherCardViewController: UIViewController {
     }
 
     private func setup() {
-        subscribeNotificationCenterPublisher()
         let currentWeatherCard = WeatherCardView(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: currentWeatherCard)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)
         setupAutolayoutConstraints()
+        subscribePublishers()
     }
 
-    private func subscribeNotificationCenterPublisher() {
+    private func subscribePublishers() {
         NotificationCenter.default
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .receive(on: DispatchQueue.main)
@@ -52,7 +52,7 @@ final class WeatherCardViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     private func loadWeatherData() {
         Task {
             await viewModel.loadData()

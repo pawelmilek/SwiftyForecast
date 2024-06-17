@@ -91,4 +91,25 @@ enum WeatherCondition: Identifiable, CaseIterable {
             VortexSystem(tags: ["none"])
         }
     }
+
+    var icon: String {
+        switch self {
+        case .thunderstorm:
+            "11d"
+        case .drizzle:
+            "09d"
+        case .rain:
+            "10d"
+        case .snow:
+            "13d"
+        case .atmosphere:
+            "50d"
+        case .clear:
+            "01d"
+        case .clouds:
+            "02d"
+        case .none:
+            "01d"
+        }
+    }
 }

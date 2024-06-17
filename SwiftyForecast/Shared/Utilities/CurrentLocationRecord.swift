@@ -13,7 +13,6 @@ protocol CurrentLocationRecordProtocol {
     func insert(_ entry: LocationModel)
 }
 
-
 struct CurrentLocationRecord: CurrentLocationRecordProtocol {
     private let databaseManager: DatabaseManager
 
@@ -22,10 +21,25 @@ struct CurrentLocationRecord: CurrentLocationRecordProtocol {
     }
 
     func insert(_ entry: LocationModel) {
-        if let stored = stored() {
-            delete(stored)
+        guard let stored = stored() else {
+            create(entry)
+            return
         }
-        create(entry)
+
+        if stored.compoundKey == entry.compoundKey {
+            update(stored)
+        } else {
+            delete(stored)
+            create(entry)
+        }
+    }
+
+    private func update(_ location: LocationModel) {
+        do {
+            try databaseManager.update(location)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
     }
 
     private func create(_ location: LocationModel) {

@@ -61,6 +61,9 @@ final class LocationSearchViewController: UIViewController {
 
 #Preview {
     LocationSearchViewController(
-        coordinator: MainCoordinator(navigationController: .init())
+        coordinator: MainCoordinator(
+            navigationController: .init(),
+            databaseManager: PreviewRealmManager()
+        )
     )
 }

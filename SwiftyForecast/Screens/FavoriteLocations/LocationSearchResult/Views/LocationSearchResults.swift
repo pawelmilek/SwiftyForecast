@@ -14,6 +14,7 @@ struct LocationSearchResults: View {
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.locationSearchCompleter) private var locationSearchCompleter
     @Environment(\.weatherClient) private var weatherClient
+    @Environment(\.databaseManager) private var databaseManager
     @StateObject private var searchLocationStore = SearchLocationStore(
         locationPlace: GeocodedLocation(geocoder: CLGeocoder())
     )
@@ -41,7 +42,7 @@ struct LocationSearchResults: View {
                     location: foundLocation,
                     client: weatherClient,
                     parser: ResponseParser(),
-                    databaseManager: RealmManager.shared,
+                    databaseManager: databaseManager,
                     appStoreReviewCenter: ReviewNotificationCenter(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),

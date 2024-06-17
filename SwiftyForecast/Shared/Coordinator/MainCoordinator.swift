@@ -11,9 +11,11 @@ final class MainCoordinator: Coordinator {
     }
 
     var navigationController: UINavigationController
+    let databaseManager: DatabaseManager
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, databaseManager: DatabaseManager) {
         self.navigationController = navigationController
+        self.databaseManager = databaseManager
     }
 
     func start() {
@@ -24,8 +26,8 @@ final class MainCoordinator: Coordinator {
                     geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
                     notationSystemStore: NotationSystemStore(),
                     measurementSystemNotification: MeasurementSystemNotification(),
-                    currentLocationRecord: CurrentLocationRecord(databaseManager: RealmManager.shared),
-                    databaseManager: RealmManager.shared,
+                    currentLocationRecord: CurrentLocationRecord(databaseManager: self.databaseManager),
+                    databaseManager: self.databaseManager,
                     locationManager: LocationManager(),
                     reviewManager: ReviewManager(
                         bundle: .main,
@@ -35,7 +37,10 @@ final class MainCoordinator: Coordinator {
                             bundle: .main
                         )
                     ),
-                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService()),
+                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    parser: ResponseParser(),
+                    appStoreReviewCenter: ReviewNotificationCenter()
                 ),
                 coordinator: self,
                 coder: coder
@@ -43,6 +48,7 @@ final class MainCoordinator: Coordinator {
         }
 
         navigationController.pushViewController(viewController, animated: false)
+        debugPrint(databaseManager.description)
     }
 
     func openAbout() {

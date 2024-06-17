@@ -25,11 +25,11 @@ final class WeatherCardViewViewModel: ObservableObject {
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
     @Published private(set) var condition: WeatherCondition
-    @Published private var currentWeatherModel: CurrentWeatherModel?
+    @Published private(set) var location: LocationModel
+    @Published private var weatherModel: WeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
 
-    private var location: LocationModel
     private let client: WeatherClient
     private let parser: ResponseParser
     private let temperatureRenderer: TemperatureRenderer
@@ -57,7 +57,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     }
 
     private func subscribeToPublisher() {
-        $currentWeatherModel
+        $weatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [self] currentWeatherModel in
@@ -74,15 +74,15 @@ final class WeatherCardViewViewModel: ObservableObject {
     }
 
     private func setTemperatureAccordingToUnitNotation() {
-        guard let currentWeatherModel else { return }
-        let rendered = temperatureRenderer.render(currentWeatherModel.temperature)
+        guard let weatherModel else { return }
+        let rendered = temperatureRenderer.render(weatherModel.temperature)
         temperature = rendered.currentFormatted
         temperatureMaxMin = rendered.maxMinFormatted
     }
 
     private func setWindSpeedAccordingToMeasurementSystem() {
-        guard let currentWeatherModel else { return }
-        let rendered = speedRenderer.render(currentWeatherModel.windSpeed)
+        guard let weatherModel else { return }
+        let rendered = speedRenderer.render(weatherModel.windSpeed)
         windSpeed.value = rendered
     }
 
@@ -103,10 +103,12 @@ final class WeatherCardViewViewModel: ObservableObject {
         defer { isLoading = false }
         isLoading = true
 
+        let latitude = location.latitude
+        let longitude = location.longitude
         do {
             let response = try await client.fetchCurrent(
-                latitude: location.latitude,
-                longitude: location.longitude
+                latitude: latitude,
+                longitude: longitude
             )
             let dataModel = parser.parse(current: response)
             let largeIconData = try await client.fetchLargeIcon(
@@ -115,10 +117,10 @@ final class WeatherCardViewViewModel: ObservableObject {
             if let image = UIImage(data: largeIconData) {
                 icon = Image(uiImage: image)
             }
-            currentWeatherModel = dataModel
+            weatherModel = dataModel
         } catch {
             icon = nil
-            currentWeatherModel = nil
+            weatherModel = nil
             self.error = error
             isLoading = false
         }

@@ -58,11 +58,11 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-FIRAnalyticsDebugEnabled"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-FIRAnalyticsVerboseLoggingEnabled"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

@@ -2,6 +2,9 @@ import Foundation
 import RealmSwift
 
 protocol DatabaseManager {
+    var realm: Realm { get }
+    var description: String { get }
+
     func create(_ location: LocationModel) throws
     func readBy(primaryKey: String) throws -> LocationModel?
     func readAll() throws -> Results<LocationModel>
@@ -13,33 +16,40 @@ protocol DatabaseManager {
 }
 
 final class RealmManager: DatabaseManager {
-    @MainActor
-    static let shared = RealmManager(
-        name: "swifty.forecast",
-        fileManager: FileManager.default
-    )
-
-    private(set) var realm: Realm!
-    private let fileManager: FileManager
-
-    private init(name: String, fileManager: FileManager) {
-        self.fileManager = fileManager
-        setupScheme(with: name)
-    }
-
-    private func setupScheme(with name: String) {
+    var realm: Realm {
         do {
-            let fileURL = try documentDirectory().appendingPathComponent("\(name).realm")
-            let configuration = Realm.Configuration(
-                fileURL: fileURL,
-                schemaVersion: 1,
-                deleteRealmIfMigrationNeeded: false
-            )
-
-            self.realm = try Realm(configuration: configuration)
+            let configuration = try realmConfiguration()
+            return try Realm(configuration: configuration)
         } catch {
             fatalError(error.localizedDescription)
         }
+    }
+
+    var description: String {
+        realm.configuration.fileURL?.absoluteString ?? "Invalid URL"
+    }
+
+    private let name: String
+    private let fileManager: FileManager
+
+    convenience init() {
+        self.init(name: "swifty.forecast", fileManager: .default)
+    }
+    
+    init(name: String, fileManager: FileManager) {
+        self.name = name
+        self.fileManager = fileManager
+    }
+
+    private func realmConfiguration() throws -> Realm.Configuration {
+        let fileURL = try documentDirectory().appendingPathComponent("\(name).realm")
+        let configuration = Realm.Configuration(
+            fileURL: fileURL,
+            schemaVersion: 1,
+            deleteRealmIfMigrationNeeded: false
+        )
+
+        return configuration
     }
 
     private func documentDirectory() throws -> URL {
@@ -50,11 +60,6 @@ final class RealmManager: DatabaseManager {
             throw CocoaError.error(.fileReadUnsupportedScheme)
         }
         return directory
-    }
-
-    func debugPrintRealmFileURL() {
-        let realmURLAbsoluteString = realm?.configuration.fileURL?.absoluteString ?? "Invalid URL"
-        debugPrint("Realm URL: \(realmURLAbsoluteString)")
     }
 }
 
