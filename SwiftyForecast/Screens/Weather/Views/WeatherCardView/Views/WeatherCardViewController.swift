@@ -31,6 +31,7 @@ final class WeatherCardViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadWeatherData()
         debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
@@ -53,7 +54,7 @@ final class WeatherCardViewController: UIViewController {
             .store(in: &cancellables)
     }
 
-    private func loadWeatherData() {
+    func loadWeatherData() {
         Task {
             await viewModel.loadData()
         }

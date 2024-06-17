@@ -145,7 +145,9 @@ private extension WeatherCardView {
 #Preview(traits: .sizeThatFitsLayout) {
     WeatherCardView(
         viewModel: WeatherCardViewViewModel(
-            location: LocationModel.examples.first!,
+            latitude: LocationModel.examples.first!.latitude,
+            longitude: LocationModel.examples.first!.longitude,
+            locationName: LocationModel.examples.first!.name,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureRenderer: TemperatureRenderer(),

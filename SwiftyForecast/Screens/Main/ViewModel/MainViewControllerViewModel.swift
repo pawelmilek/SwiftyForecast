@@ -10,6 +10,7 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var notationSegmentedControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var isRequestingLocation = true
+    @Published private(set) var reloadCurrentLocationPage = false
     @Published private(set) var locationError: Error?
     @Published private(set) var selectedIndex: Int?
     private var locations: Results<LocationModel>?
@@ -138,7 +139,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
     private func invalidateMainPageData(insertions: [Int]) {
         for index in insertions where locations?[index].isUserLocation ?? false {
-            selectedIndex = 0
+            reloadCurrentLocationPage = true
             break
         }
     }
@@ -146,7 +147,10 @@ final class MainViewControllerViewModel: ObservableObject {
     private func invalidateWeatherViewModels() {
         weatherViewModels = locations?.map {
             WeatherViewControllerViewModel(
-                location: $0,
+                compoundKey: $0.compoundKey,
+                latitude: $0.latitude,
+                longitude: $0.longitude,
+                locationName: $0.name,
                 client: client,
                 parser: parser,
                 measurementSystemNotification: measurementSystemNotification,
@@ -164,7 +168,7 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     private func updateLocation(_ location: CLLocation) {
-        Task { @MainActor in
+        Task {
             do {
                 let placemark = try await geocodeLocation.placemark(at: location)
                 currentLocationRecord.insert(
@@ -174,6 +178,7 @@ final class MainViewControllerViewModel: ObservableObject {
                     )
                 )
                 reloadWidgetTimeline()
+
             } catch {
                 fatalError(error.localizedDescription)
             }

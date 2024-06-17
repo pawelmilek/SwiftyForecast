@@ -47,7 +47,9 @@ struct LocationSearchResults: View {
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 cardViewModel: WeatherCardViewViewModel(
-                    location: foundLocation,
+                    latitude: foundLocation.latitude,
+                    longitude: foundLocation.longitude,
+                    locationName: foundLocation.name,
                     client: weatherClient,
                     parser: ResponseParser(),
                     temperatureRenderer: TemperatureRenderer(),

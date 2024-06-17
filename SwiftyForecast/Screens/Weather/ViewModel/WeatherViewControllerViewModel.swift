@@ -1,37 +1,45 @@
 import UIKit
 import CoreLocation
 import Combine
+import RealmSwift
 
 @MainActor
 final class WeatherViewControllerViewModel: ObservableObject {
-    var compoundKey: String { location.compoundKey }
+
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
     @Published private(set) var locationName = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
     @Published private(set) var forecastWeatherModel: ForecastWeatherModel?
-    @Published private(set) var location: LocationModel
 
     private var cancellables = Set<AnyCancellable>()
+    let compoundKey: String
+    let latitude: Double
+    let longitude: Double
     private let client: WeatherClient
     private let parser: ResponseParser
     private let measurementSystemNotification: MeasurementSystemNotification
     private let appStoreReviewCenter: ReviewNotificationCenter
 
     init(
-        location: LocationModel,
+        compoundKey: String,
+        latitude: Double,
+        longitude: Double,
+        locationName: String,
         client: WeatherClient,
         parser: ResponseParser,
         measurementSystemNotification: MeasurementSystemNotification,
         appStoreReviewCenter: ReviewNotificationCenter
     ) {
-        self.location = location
+        self.compoundKey = compoundKey
+        self.latitude = latitude
+        self.longitude = longitude
+        self.locationName = locationName
         self.client = client
         self.parser = parser
         self.measurementSystemNotification = measurementSystemNotification
         self.appStoreReviewCenter = appStoreReviewCenter
-        self.locationName = location.name
         self.twentyFourHoursForecastModel = HourlyForecastModel.initialData
         self.fiveDaysForecastModel = DailyForecastModel.initialData
         subscriteToPublishers()
@@ -65,10 +73,6 @@ final class WeatherViewControllerViewModel: ObservableObject {
     func loadData() async {
         defer { isLoading = false }
         isLoading = true
-        
-        let latitude = location.latitude
-        let longitude = location.longitude
-
         do {
             let forecast = try await client.fetchForecast(
                 latitude: latitude,

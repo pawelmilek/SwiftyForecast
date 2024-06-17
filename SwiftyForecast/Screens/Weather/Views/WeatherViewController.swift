@@ -52,6 +52,11 @@ final class WeatherViewController: UIViewController {
         debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
+    func loadData() {
+        weatherCardViewController.loadWeatherData()
+        loadForecastDataWithAnimation()
+    }
+
     private func loadForecastDataWithAnimation() {
         Task {
             defer { showContent() }
@@ -163,16 +168,16 @@ private extension WeatherViewController {
     }
 
     func showContent() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn) { [self] in
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [self] in
 //            hourlyCollectionView.alpha = 1.0
 //            dailyTableView.alpha = 1.0
         }
     }
 
     func hideContent() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseOut) { [self] in
-//            hourlyCollectionView.alpha = 0.0
-//            dailyTableView.alpha = 0.0
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
+//            hourlyCollectionView.alpha = 0.4
+//            dailyTableView.alpha = 0.4
         }
     }
 }

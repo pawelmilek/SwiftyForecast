@@ -13,7 +13,7 @@ protocol CurrentLocationRecordProtocol {
     func insert(_ entry: LocationModel)
 }
 
-struct CurrentLocationRecord: CurrentLocationRecordProtocol {
+final class CurrentLocationRecord: CurrentLocationRecordProtocol {
     private let databaseManager: DatabaseManager
 
     init(databaseManager: DatabaseManager) {
@@ -21,7 +21,8 @@ struct CurrentLocationRecord: CurrentLocationRecordProtocol {
     }
 
     func insert(_ entry: LocationModel) {
-        guard let stored = stored() else {
+        @ThreadSafe var stored = stored()
+        guard let stored else {
             create(entry)
             return
         }

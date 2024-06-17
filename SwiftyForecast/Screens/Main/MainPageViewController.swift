@@ -50,7 +50,7 @@ class MainPageViewController: UIPageViewController, UIPageViewControllerDataSour
         )
     }
 
-    func firstPageViewController() -> WeatherViewController {
+    func firstPage() -> WeatherViewController {
         guard let initialViewController = weatherViewControllers.first else {
             fatalError()
         }

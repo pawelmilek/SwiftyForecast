@@ -91,7 +91,9 @@ private extension MainViewController {
                     WeatherViewController.make(
                         viewModel: $0,
                         cardViewModel: WeatherCardViewViewModel(
-                            location: $0.location,
+                            latitude: $0.latitude,
+                            longitude: $0.longitude,
+                            locationName: $0.locationName,
                             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                             parser: ResponseParser(),
                             temperatureRenderer: TemperatureRenderer(),
@@ -120,6 +122,16 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] selectedIndex in
                 self?.pageTransition(at: selectedIndex)
+            }
+            .store(in: &cancellables)
+
+        viewModel.$reloadCurrentLocationPage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] reloadCurrentLocationPage in
+                if reloadCurrentLocationPage {
+                    let firstPage = self?.pageViewController.firstPage()
+                    firstPage?.loadData()
+                }
             }
             .store(in: &cancellables)
     }

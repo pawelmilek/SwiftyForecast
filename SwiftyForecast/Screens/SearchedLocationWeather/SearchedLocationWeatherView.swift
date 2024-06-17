@@ -105,7 +105,9 @@ struct SearchedLocationWeatherView: View {
             analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         ),
         cardViewModel: WeatherCardViewViewModel(
-            location: LocationModel.examples.first!,
+            latitude: LocationModel.examples.first!.latitude,
+            longitude: LocationModel.examples.first!.longitude,
+            locationName: LocationModel.examples.first!.name,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureRenderer: TemperatureRenderer(),

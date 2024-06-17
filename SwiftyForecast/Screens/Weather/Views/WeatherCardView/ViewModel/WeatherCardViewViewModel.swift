@@ -25,11 +25,11 @@ final class WeatherCardViewViewModel: ObservableObject {
     @Published private(set) var windSpeed = WindSpeed(value: "")
     @Published private(set) var humidity = Humidity(value: "")
     @Published private(set) var condition: WeatherCondition
-    @Published private(set) var location: LocationModel
     @Published private var weatherModel: WeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
-
+    private let latitude: Double
+    private let longitude: Double
     private let client: WeatherClient
     private let parser: ResponseParser
     private let temperatureRenderer: TemperatureRenderer
@@ -37,21 +37,24 @@ final class WeatherCardViewViewModel: ObservableObject {
     private let measurementSystemNotification: MeasurementSystemNotification
 
     init(
-        location: LocationModel,
+        latitude: Double,
+        longitude: Double,
+        locationName: String,
         client: WeatherClient,
         parser: ResponseParser,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification
     ) {
-        self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
+        self.locationName = locationName
         self.client = client
         self.parser = parser
         self.temperatureRenderer = temperatureRenderer
         self.speedRenderer = speedRenderer
         self.measurementSystemNotification = measurementSystemNotification
         self.condition = .none
-        self.locationName = location.name
         subscribeToPublisher()
         registerMeasurementSystemObserver()
     }
@@ -102,9 +105,6 @@ final class WeatherCardViewViewModel: ObservableObject {
     func loadData() async {
         defer { isLoading = false }
         isLoading = true
-
-        let latitude = location.latitude
-        let longitude = location.longitude
         do {
             let response = try await client.fetchCurrent(
                 latitude: latitude,
