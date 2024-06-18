@@ -110,13 +110,6 @@ private extension MainViewController {
             }
             .store(in: &cancellables)
 
-        viewModel.$isRequestingLocation
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] isRequestingLocation in
-                self?.coordinator.presentLocationAnimation(isLoading: isRequestingLocation)
-            }
-            .store(in: &cancellables)
-
         viewModel.$selectedIndex
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
@@ -125,13 +118,11 @@ private extension MainViewController {
             }
             .store(in: &cancellables)
 
-        viewModel.$reloadCurrentLocationPage
+        NotificationCenter.default
+            .publisher(for: UIApplication.willEnterForegroundNotification)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] reloadCurrentLocationPage in
-                if reloadCurrentLocationPage {
-                    let firstPage = self?.pageViewController.firstPage()
-                    firstPage?.loadData()
-                }
+            .sink { [weak self] _ in
+                self?.viewModel.requestLocation()
             }
             .store(in: &cancellables)
     }

@@ -9,8 +9,6 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var notationSegmentedControlItems: [String]
     @Published private(set) var notationSegmentedControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
-    @Published private(set) var isRequestingLocation = true
-    @Published private(set) var reloadCurrentLocationPage = false
     @Published private(set) var locationError: Error?
     @Published private(set) var selectedIndex: Int?
     private var locations: Results<LocationModel>?
@@ -18,7 +16,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let geocodeLocation: LocationPlaceable
     private let notationSystemStore: NotationSystemStore
     private let measurementSystemNotification: MeasurementSystemNotification
-    private let currentLocationRecord: CurrentLocationRecordProtocol
+    private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
     private let reviewManager: ReviewManager
@@ -33,7 +31,7 @@ final class MainViewControllerViewModel: ObservableObject {
         geocodeLocation: LocationPlaceable,
         notationSystemStore: NotationSystemStore,
         measurementSystemNotification: MeasurementSystemNotification,
-        currentLocationRecord: CurrentLocationRecordProtocol,
+        currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         reviewManager: ReviewManager,
@@ -72,12 +70,12 @@ final class MainViewControllerViewModel: ObservableObject {
         loadLocations()
     }
 
-    func onViewDidAppear() {
-
-    }
-
     func onSelectIndex(_ index: Int) {
         selectedIndex = index
+    }
+
+    func requestLocation() {
+        locationManager.requestLocation()
     }
 
     func requestReview(for moment: ReviewDesirableMomentType) {
@@ -104,12 +102,8 @@ final class MainViewControllerViewModel: ObservableObject {
         locationManager.$location
             .compactMap { $0 }
             .sink { [self] currentLocation in
-                updateLocation(currentLocation)
+                updateLocationRecord(currentLocation)
             }
-            .store(in: &cancellables)
-
-        locationManager.$isRequestingLocation
-            .assign(to: \.isRequestingLocation, on: self)
             .store(in: &cancellables)
 
         locationManager.$error
@@ -127,9 +121,9 @@ final class MainViewControllerViewModel: ObservableObject {
                 debugPrint("deletions: \(deletions)")
                 debugPrint("insertions: \(insertions)")
                 debugPrint("modifications: \(modifications)")
-                debugPrint(self?.locations?.description)
+                debugPrint(self!.locations!.description)
                 self?.invalidateWeatherViewModels()
-                self?.invalidateMainPageData(insertions: insertions)
+                self?.invalidateMainPageData(insertions: insertions, modifications: modifications)
 
             case .error(let error):
                 fatalError("File: \(#file), Function: \(#function), line: \(#line) \(error)")
@@ -137,10 +131,15 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    private func invalidateMainPageData(insertions: [Int]) {
+    private func invalidateMainPageData(insertions: [Int], modifications: [Int]) {
         for index in insertions where locations?[index].isUserLocation ?? false {
-            reloadCurrentLocationPage = true
-            break
+            selectedIndex = 0
+            return
+        }
+
+        for index in modifications where locations?[index].isUserLocation ?? false {
+            selectedIndex = 0
+            return
         }
     }
 
@@ -167,7 +166,7 @@ final class MainViewControllerViewModel: ObservableObject {
         }
     }
 
-    private func updateLocation(_ location: CLLocation) {
+    private func updateLocationRecord(_ location: CLLocation) {
         Task {
             do {
                 let placemark = try await geocodeLocation.placemark(at: location)
@@ -177,8 +176,8 @@ final class MainViewControllerViewModel: ObservableObject {
                         isUserLocation: true
                     )
                 )
-                reloadWidgetTimeline()
 
+                reloadWidgetTimeline()
             } catch {
                 fatalError(error.localizedDescription)
             }

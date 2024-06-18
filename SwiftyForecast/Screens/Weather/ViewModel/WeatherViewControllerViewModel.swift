@@ -11,7 +11,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     @Published private(set) var locationName = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
-    @Published private(set) var forecastWeatherModel: ForecastWeatherModel?
+    @Published private var forecastWeatherModel: ForecastWeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
     let compoundKey: String
@@ -63,9 +63,9 @@ final class WeatherViewControllerViewModel: ObservableObject {
         $forecastWeatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] weatherModel in
-                setTwentyFourHoursForecastModel(weatherModel.hourly)
-                fiveDaysForecastModel = weatherModel.daily
+            .sink { [weak self] weatherModel in
+                self?.setTwentyFourHoursForecastModel(weatherModel.hourly)
+                self?.fiveDaysForecastModel = weatherModel.daily
             }
             .store(in: &cancellables)
     }

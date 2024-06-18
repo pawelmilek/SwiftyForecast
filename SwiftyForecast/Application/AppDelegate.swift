@@ -71,9 +71,9 @@ private extension AppDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in
                 if hasNetworkConnection {
-                    self?.coordinator?.popOffline()
+                    self?.coordinator?.dismissOfflineView()
                 } else {
-                    self?.coordinator?.pushOffline()
+                    self?.coordinator?.presentOfflineView()
                 }
             }
             .store(in: &cancellables)

@@ -35,7 +35,7 @@ final class RealmManager: DatabaseManager {
     convenience init() {
         self.init(name: "swifty.forecast", fileManager: .default)
     }
-    
+
     init(name: String, fileManager: FileManager) {
         self.name = name
         self.fileManager = fileManager

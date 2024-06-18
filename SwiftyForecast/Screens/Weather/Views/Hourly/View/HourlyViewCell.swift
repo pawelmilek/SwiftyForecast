@@ -48,6 +48,7 @@ private extension HourlyViewCell {
         temperatureLabel.font = Style.HourlyCell.temperatureFont
         temperatureLabel.textColor = Style.HourlyCell.temperatureColor
         temperatureLabel.textAlignment = Style.HourlyCell.temperatureAlignment
+
         contentView.backgroundColor = .customPrimary
         setRoundedCornersAndBorder()
         registerTraitUserInterfaceStyleObserver()
@@ -79,18 +80,41 @@ private extension HourlyViewCell {
         guard let viewModel else { return }
 
         viewModel.$time
-            .assign(to: \.text!, on: timeLabel)
+            .sink { [weak self] time in
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
+                    self?.timeLabel.alpha = 0.3
+                }
+
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                    self?.timeLabel.text = time
+                    self?.timeLabel.alpha = 1.0
+                }
+            }
             .store(in: &cancellables)
 
         viewModel.$iconURL
             .compactMap { $0 }
             .sink { [weak self] iconURL in
-                self?.iconImageView.kf.setImage(with: iconURL)
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
+                    self?.iconImageView.alpha = 0.3
+                }
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                    self?.iconImageView.kf.setImage(with: iconURL)
+                    self?.iconImageView.alpha = 1.0
+                }
             }
             .store(in: &cancellables)
 
         viewModel.$temperature
-            .assign(to: \.text!, on: temperatureLabel)
+            .sink { [weak self] temperature in
+                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
+                    self?.temperatureLabel.alpha = 0.3
+                }
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                    self?.temperatureLabel.text = temperature
+                    self?.temperatureLabel.alpha = 1.0
+                }
+            }
             .store(in: &cancellables)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  LocationRecord.swift
+//  CurrentLocationRecord.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/9/23.
@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-protocol CurrentLocationRecordProtocol {
+protocol LocationRecord {
     func insert(_ entry: LocationModel)
 }
 
-final class CurrentLocationRecord: CurrentLocationRecordProtocol {
+final class CurrentLocationRecord: LocationRecord {
     private let databaseManager: DatabaseManager
 
     init(databaseManager: DatabaseManager) {
@@ -22,16 +22,27 @@ final class CurrentLocationRecord: CurrentLocationRecordProtocol {
 
     func insert(_ entry: LocationModel) {
         @ThreadSafe var stored = stored()
+
         guard let stored else {
             create(entry)
             return
         }
 
         if stored.compoundKey == entry.compoundKey {
-            update(stored)
+            update(entry)
         } else {
-            delete(stored)
-            create(entry)
+            replace(existing: stored, with: entry)
+        }
+    }
+
+    private func replace(existing: LocationModel, with entry: LocationModel) {
+        do {
+            try databaseManager.realm.write {
+                databaseManager.realm.delete(existing)
+                databaseManager.realm.add(entry, update: .all)
+            }
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 

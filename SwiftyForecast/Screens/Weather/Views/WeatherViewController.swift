@@ -11,7 +11,7 @@ final class WeatherViewController: UIViewController {
     @IBOutlet private weak var cardView: UIView!
     @IBOutlet private weak var hourlyCollectionView: UICollectionView!
     @IBOutlet private weak var dailyTableView: UITableView!
-    private lazy var weatherCardViewController: WeatherCardViewController = {
+    private lazy var cardViewController: WeatherCardViewController = {
         let viewController = WeatherCardViewController(viewModel: cardViewModel)
         return viewController
     }()
@@ -44,24 +44,17 @@ final class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadForecastDataWithAnimation()
         debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
-    func loadData() {
-        weatherCardViewController.loadWeatherData()
-        loadForecastDataWithAnimation()
-    }
-
-    private func loadForecastDataWithAnimation() {
+    private func loadData() {
         Task {
-            defer { showContent() }
-            hideContent()
-            await viewModel.loadData()
+            await self.viewModel.loadData()
         }
     }
 }
@@ -78,10 +71,10 @@ private extension WeatherViewController {
     }
 
     private func addChildWeatherCardViewController() {
-        self.addChild(weatherCardViewController)
-        weatherCardViewController.view.frame = cardView.frame
-        cardView.addSubview(weatherCardViewController.view)
-        weatherCardViewController.didMove(toParent: self)
+        self.addChild(cardViewController)
+        cardViewController.view.frame = cardView.frame
+        cardView.addSubview(cardViewController.view)
+        cardViewController.didMove(toParent: self)
     }
 
     func setupAppearance() {
@@ -115,30 +108,20 @@ private extension WeatherViewController {
 private extension WeatherViewController {
 
     func subscriberPublishers() {
-        subscribeNotificationCenterPublisher()
-
         viewModel.$twentyFourHoursForecastModel
-            .combineLatest(viewModel.$fiveDaysForecastModel)
             .receive(on: DispatchQueue.main)
-            .map {
-                ($0.0.map {
-                    HourlyViewCellViewModel(
-                        model: $0,
-                        temperatureRenderer: .init()
-                    )
-                },
-                 $0.1.map {
-                    DailyViewCellViewModel(
-                        model: $0,
-                        temperatureRenderer: .init()
-                    )
-                })
-            }
-            .sink { [self] hourlyViewModels, dailyViewModels in
+            .map { $0.map { HourlyViewCellViewModel(model: $0, temperatureRenderer: .init()) } }
+            .sink { [self] hourlyViewModels in
                 hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
-                dailyForecastDataSource.set(viewModeles: dailyViewModels)
-
                 hourlyCollectionView.reloadData()
+            }
+            .store(in: &cancellables)
+
+        viewModel.$fiveDaysForecastModel
+            .receive(on: DispatchQueue.main)
+            .map { $0.map { DailyViewCellViewModel(model: $0, temperatureRenderer: .init()) } }
+            .sink { [self] dailyViewModels in
+                dailyForecastDataSource.set(viewModeles: dailyViewModels)
                 dailyTableView.reloadData()
             }
             .store(in: &cancellables)
@@ -151,33 +134,9 @@ private extension WeatherViewController {
             .store(in: &cancellables)
     }
 
-    func subscribeNotificationCenterPublisher() {
-        NotificationCenter.default
-            .publisher(for: UIApplication.willEnterForegroundNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.loadForecastData()
-            }
-            .store(in: &cancellables)
-    }
-
     func loadForecastData() {
         Task {
             await viewModel.loadData()
-        }
-    }
-
-    func showContent() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [self] in
-//            hourlyCollectionView.alpha = 1.0
-//            dailyTableView.alpha = 1.0
-        }
-    }
-
-    func hideContent() {
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
-//            hourlyCollectionView.alpha = 0.4
-//            dailyTableView.alpha = 0.4
         }
     }
 }

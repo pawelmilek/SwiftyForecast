@@ -31,7 +31,6 @@ final class WeatherCardViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadWeatherData()
         debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
     }
 
@@ -41,23 +40,6 @@ final class WeatherCardViewController: UIViewController {
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)
         setupAutolayoutConstraints()
-        subscribePublishers()
-    }
-
-    private func subscribePublishers() {
-        NotificationCenter.default
-            .publisher(for: UIApplication.willEnterForegroundNotification)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.loadWeatherData()
-            }
-            .store(in: &cancellables)
-    }
-
-    func loadWeatherData() {
-        Task {
-            await viewModel.loadData()
-        }
     }
 
     private func setupAutolayoutConstraints() {

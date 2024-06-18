@@ -4,8 +4,6 @@ import SafariServices
 
 @MainActor
 final class MainCoordinator: Coordinator {
-    var childCoordinators: [Coordinator] = []
-
     var topViewController: UIViewController? {
         navigationController.topViewController
     }
@@ -83,11 +81,7 @@ final class MainCoordinator: Coordinator {
         navigationController.dismiss(animated: true)
     }
 
-    func popTop() {
-        navigationController.popViewController(animated: true)
-    }
-
-    func pushOffline() {
+    func presentOfflineView() {
         guard !navigationController.viewControllers
             .contains(where: { $0.view.tag == OfflineViewController.identifier }) else {
             return
@@ -95,7 +89,7 @@ final class MainCoordinator: Coordinator {
         navigationController.pushViewController(OfflineViewController(), animated: false)
     }
 
-    func popOffline() {
+    func dismissOfflineView() {
         guard let offlineVCIndex = navigationController.viewControllers
             .firstIndex(where: { $0.view.tag == OfflineViewController.identifier }) else {
             return

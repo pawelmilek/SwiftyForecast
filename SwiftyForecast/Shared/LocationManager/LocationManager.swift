@@ -25,12 +25,11 @@ final class LocationManager: NSObject {
 
         super.init()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyReduced
-        manager.distanceFilter = kCLLocationAccuracyThreeKilometers
-        manager.pausesLocationUpdatesAutomatically = true
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
+//        manager.pausesLocationUpdatesAutomatically = true
         manager.showsBackgroundLocationIndicator = true
         manager.activityType = .otherNavigation
-
     }
 
     func requestLocation() {
