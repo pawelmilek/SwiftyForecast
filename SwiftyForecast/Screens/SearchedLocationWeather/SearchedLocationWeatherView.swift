@@ -101,7 +101,6 @@ struct SearchedLocationWeatherView: View {
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             databaseManager: PreviewRealmManager(),
-            appStoreReviewCenter: ReviewNotificationCenter(),
             analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         ),
         cardViewModel: WeatherCardViewViewModel(

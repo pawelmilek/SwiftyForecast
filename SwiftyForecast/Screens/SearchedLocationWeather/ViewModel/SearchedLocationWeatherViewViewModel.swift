@@ -20,7 +20,6 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     private let client: WeatherClient
     private let parser: ResponseParser
     private let databaseManager: DatabaseManager
-    private let appStoreReviewCenter: ReviewNotificationCenter
     private let analyticsManager: AnalyticsManager
 
     init(
@@ -28,14 +27,12 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         client: WeatherClient,
         parser: ResponseParser,
         databaseManager: DatabaseManager,
-        appStoreReviewCenter: ReviewNotificationCenter,
         analyticsManager: AnalyticsManager
     ) {
         self.location = location
         self.client = client
         self.parser = parser
         self.databaseManager = databaseManager
-        self.appStoreReviewCenter = appStoreReviewCenter
         self.analyticsManager = analyticsManager
     }
 
@@ -91,7 +88,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     private func postAppStoreReviewEvent() {
-        appStoreReviewCenter.post(.locationAdded)
+        // TODO: - implement new app store review manager
     }
 
     private func logLocationAdded(name: String) {

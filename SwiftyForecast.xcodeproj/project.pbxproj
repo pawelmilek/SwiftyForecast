@@ -156,16 +156,8 @@
 		E29947B82B30E33300EBA3D1 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29947B72B30E33300EBA3D1 /* LocationView.swift */; };
 		E29947BA2B30E3AE00EBA3D1 /* ConditionDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29947B92B30E3AE00EBA3D1 /* ConditionDescriptionView.swift */; };
 		E29947BC2B30E49C00EBA3D1 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */; };
-		E2A32F27254459FB000ACEFE /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F26254459FB000ACEFE /* ReviewManager.swift */; };
-		E2A32F3E2544774F000ACEFE /* ReviewDesirableMomentConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F3D2544774F000ACEFE /* ReviewDesirableMomentConfig.plist */; };
-		E2A32F42254479B9000ACEFE /* ReviewDesirableMomentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F41254479B9000ACEFE /* ReviewDesirableMomentType.swift */; };
+		E2A32F27254459FB000ACEFE /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F26254459FB000ACEFE /* AppStoreReviewManager.swift */; };
 		E2A32F4825447A05000ACEFE /* DecodedPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4725447A05000ACEFE /* DecodedPlist.swift */; };
-		E2A32F4E25448C52000ACEFE /* ReviewDesirableMomentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4D25448C52000ACEFE /* ReviewDesirableMomentConfig.swift */; };
-		E2A32F5225448CD9000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */; };
-		E2A32F5B25448DC5000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */; };
-		E2A32F6B25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */; };
-		E2A32F7025449DA3000ACEFE /* ReviewObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */; };
-		E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */; };
 		E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
 		E2A567512B075139000324C0 /* SearchLocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567502B075139000324C0 /* SearchLocationStore.swift */; };
 		E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567562B077413000324C0 /* UIView+ReusableView.swift */; };
@@ -196,7 +188,6 @@
 		E2AD32702B23779000F46FBE /* BuildConfigurationFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E62AD6F49D001BFADB /* BuildConfigurationFile.swift */; };
 		E2AD32712B23779800F46FBE /* ForecastWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */; };
 		E2AD32732B23791E00F46FBE /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E2AD32722B23791E00F46FBE /* Kingfisher */; };
-		E2AD32742B237B5E00F46FBE /* ReviewDesirableMomentConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2A32F3D2544774F000ACEFE /* ReviewDesirableMomentConfig.plist */; };
 		E2AD32792B23833A00F46FBE /* WidgetLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2AD32772B2381CD00F46FBE /* WidgetLocationManager.swift */; };
 		E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B035692500700000DC0E77 /* ResponseParser.swift */; };
 		E2B035782500883E00DC0E77 /* HourlyForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B035772500883E00DC0E77 /* HourlyForecastModel.swift */; };
@@ -216,10 +207,8 @@
 		E2CAC9E72C04321A00E573D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */; };
 		E2CAC9FA2C044B4F00E573D2 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
 		E2CAC9FB2C044C4900E573D2 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
-		E2CAC9FC2C04BF0700E573D2 /* ReviewDesirableMomentConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4D25448C52000ACEFE /* ReviewDesirableMomentConfig.swift */; };
 		E2CAC9FD2C04BF0E00E573D2 /* DecodedPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4725447A05000ACEFE /* DecodedPlist.swift */; };
 		E2CC9A012B6150E80044634E /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CC9A002B6150E80044634E /* AboutViewModel.swift */; };
-		E2CCCEFB250B0D5800109D6D /* URLSessionDataTaskMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */; };
 		E2CF4D76226E7A4100062E36 /* WeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* WeatherClient.swift */; };
 		E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */; };
 		E2CF4D7E226E838E00062E36 /* HourlyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */; };
@@ -248,15 +237,12 @@
 		E2D430DF2BB4DB38003F26EE /* Humidity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450672B9F3F9800F14BAA /* Humidity.swift */; };
 		E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */; };
 		E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */; };
-		E2D430E22BB4DB56003F26EE /* ReviewNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */; };
 		E2D430E42BB4DB6C003F26EE /* WeatherViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */; };
 		E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
 		E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
 		E2D430E72BB4DB89003F26EE /* SpeedValueDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */; };
 		E2D430E82BB4DB94003F26EE /* SpeedFormatterMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */; };
-		E2D430E92BB4DBA6003F26EE /* ReviewDesirableMomentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F41254479B9000ACEFE /* ReviewDesirableMomentType.swift */; };
 		E2D430EA2BB4DBAF003F26EE /* SpeedFormatterImperial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */; };
-		E2D430EB2BB4DBBA003F26EE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */; };
 		E2D430EC2BB4DBC8003F26EE /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
 		E2D430EF2BB4DC0F003F26EE /* WeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506D2B9F3F9800F14BAA /* WeatherCardView.swift */; };
 		E2D430F02BB4DC14003F26EE /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AE2BB4D954003F26EE /* HourlyForecastChart.swift */; };
@@ -472,15 +458,8 @@
 		E29947B72B30E33300EBA3D1 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		E29947B92B30E3AE00EBA3D1 /* ConditionDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionDescriptionView.swift; sourceTree = "<group>"; };
 		E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
-		E2A32F26254459FB000ACEFE /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
-		E2A32F3D2544774F000ACEFE /* ReviewDesirableMomentConfig.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ReviewDesirableMomentConfig.plist; sourceTree = "<group>"; };
-		E2A32F41254479B9000ACEFE /* ReviewDesirableMomentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDesirableMomentType.swift; sourceTree = "<group>"; };
+		E2A32F26254459FB000ACEFE /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		E2A32F4725447A05000ACEFE /* DecodedPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedPlist.swift; sourceTree = "<group>"; };
-		E2A32F4D25448C52000ACEFE /* ReviewDesirableMomentConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDesirableMomentConfig.swift; sourceTree = "<group>"; };
-		E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ReviewDesirableMomentConfig_Test.plist; sourceTree = "<group>"; };
-		E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReviewNotificationName+DidRequestAppStoreReview.swift"; sourceTree = "<group>"; };
-		E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewObserver.swift; sourceTree = "<group>"; };
-		E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewNotificationCenter.swift; sourceTree = "<group>"; };
 		E2A42E392151BC7D00F9A79A /* GeocoderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderError.swift; sourceTree = "<group>"; };
 		E2A567502B075139000324C0 /* SearchLocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationStore.swift; sourceTree = "<group>"; };
 		E2A567542B0773C0000324C0 /* Registrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registrable.swift; sourceTree = "<group>"; };
@@ -503,7 +482,6 @@
 		E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
 		E2CC9A002B6150E80044634E /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
-		E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskMock.swift; sourceTree = "<group>"; };
 		E2CF4D75226E7A4100062E36 /* WeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherClient.swift; sourceTree = "<group>"; };
 		E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCellViewModel.swift; sourceTree = "<group>"; };
 		E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -787,7 +765,6 @@
 				E2A567652B0785A9000324C0 /* lottie_location_animation.json */,
 				E27E2FDA1DA057C100B3EABF /* Info.plist */,
 				E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */,
-				E2A32F3D2544774F000ACEFE /* ReviewDesirableMomentConfig.plist */,
 				E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */,
 				E296A7E52AD6EE8C001BFADB /* Config.xcconfig */,
 				E20C6B052BE64EFA00DDB57A /* PrivacyInfo.xcprivacy */,
@@ -1077,22 +1054,9 @@
 		E2A32F25254459DF000ACEFE /* AppStoreReview */ = {
 			isa = PBXGroup;
 			children = (
-				E2A32F26254459FB000ACEFE /* ReviewManager.swift */,
-				E2A32F812544D389000ACEFE /* ReviewNotificationCenter.swift */,
-				E2A32F4D25448C52000ACEFE /* ReviewDesirableMomentConfig.swift */,
-				E2A32F41254479B9000ACEFE /* ReviewDesirableMomentType.swift */,
-				E2A32F6E25449D78000ACEFE /* ReviewObserver */,
+				E2A32F26254459FB000ACEFE /* AppStoreReviewManager.swift */,
 			);
 			path = AppStoreReview;
-			sourceTree = "<group>";
-		};
-		E2A32F6E25449D78000ACEFE /* ReviewObserver */ = {
-			isa = PBXGroup;
-			children = (
-				E2A32F6A25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift */,
-				E2A32F6F25449DA3000ACEFE /* ReviewObserver.swift */,
-			);
-			path = ReviewObserver;
 			sourceTree = "<group>";
 		};
 		E2A567522B0763EB000324C0 /* SearchedLocationWeather */ = {
@@ -1127,7 +1091,6 @@
 		E2B035AA2509B24B00DC0E77 /* Doubles */ = {
 			isa = PBXGroup;
 			children = (
-				E2CCCEFA250B0D5800109D6D /* URLSessionDataTaskMock.swift */,
 			);
 			path = Doubles;
 			sourceTree = "<group>";
@@ -1328,7 +1291,6 @@
 		E2CF4D9F2274F8B600062E36 /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
-				E2A32F5125448CD8000ACEFE /* ReviewDesirableMomentConfig_Test.plist */,
 				E21ABD4E2AE9735F00F93F01 /* current_weather_response.json */,
 				E21ABD4D2AE9735F00F93F01 /* five_days_forecast_weather_response.json */,
 			);
@@ -1581,9 +1543,7 @@
 				E20C6B192BE85BD800DDB57A /* CHANGELOG.md in Resources */,
 				E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */,
 				E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */,
-				E2A32F5B25448DC5000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */,
 				E21ABD512AE9735F00F93F01 /* current_weather_response.json in Resources */,
-				E2A32F3E2544774F000ACEFE /* ReviewDesirableMomentConfig.plist in Resources */,
 				E28CEC0A2B39C5AB003DB3A6 /* packages_license.html in Resources */,
 				E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */,
 				E28179122B385F8800D06917 /* device_types.json in Resources */,
@@ -1594,7 +1554,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2A32F5225448CD9000ACEFE /* ReviewDesirableMomentConfig_Test.plist in Resources */,
 				E21ABD522AE9735F00F93F01 /* current_weather_response.json in Resources */,
 				E21ABD502AE9735F00F93F01 /* five_days_forecast_weather_response.json in Resources */,
 			);
@@ -1604,7 +1563,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2AD32742B237B5E00F46FBE /* ReviewDesirableMomentConfig.plist in Resources */,
 				E2C916F62B4972C200903619 /* Assets.xcassets in Resources */,
 				E2FDBD6F2B2079E00012D7C4 /* Assets.xcassets in Resources */,
 				E20C6B1A2BE85BD800DDB57A /* CHANGELOG.md in Resources */,
@@ -1706,7 +1664,6 @@
 				E2255A422C10206D00C6F3AD /* AppearanceViewEvent.swift in Sources */,
 				E296B61C2C1CF872001F7C57 /* LocationSearchCompleterEnvironment.swift in Sources */,
 				E2BC4DB12B442A0C00D05F54 /* AppearanceViewController.swift in Sources */,
-				E2A32F4E25448C52000ACEFE /* ReviewDesirableMomentConfig.swift in Sources */,
 				E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */,
 				E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */,
 				E281791A2B38770B00D06917 /* LicenseReader.swift in Sources */,
@@ -1727,7 +1684,6 @@
 				E2255A4C2C1020CE00C6F3AD /* LocationWeatherViewEvent.swift in Sources */,
 				E21E386E2B37576A00513B26 /* AboutRow.swift in Sources */,
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
-				E2A32F6B25449B54000ACEFE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */,
 				E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */,
 				E2B0357B2500885100DC0E77 /* DailyForecastModel.swift in Sources */,
 				E224507C2B9F402300F14BAA /* DayNightState.swift in Sources */,
@@ -1748,7 +1704,6 @@
 				E2227E872ADD54B8000C3886 /* TemperatureValueDisplayable.swift in Sources */,
 				E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */,
 				E22450772B9F3F9800F14BAA /* WindSpeed.swift in Sources */,
-				E2A32F822544D389000ACEFE /* ReviewNotificationCenter.swift in Sources */,
 				E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */,
 				E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */,
 				E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */,
@@ -1785,9 +1740,8 @@
 				E28179182B38768A00D06917 /* LicenseView.swift in Sources */,
 				E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */,
 				E296A7F22AD7EA46001BFADB /* Condition.swift in Sources */,
-				E2A32F27254459FB000ACEFE /* ReviewManager.swift in Sources */,
+				E2A32F27254459FB000ACEFE /* AppStoreReviewManager.swift in Sources */,
 				E290F24F2ADD8BEE001B3276 /* SpeedFormatterImperial.swift in Sources */,
-				E2A32F42254479B9000ACEFE /* ReviewDesirableMomentType.swift in Sources */,
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
 				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
@@ -1798,7 +1752,6 @@
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
 				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
-				E2A32F7025449DA3000ACEFE /* ReviewObserver.swift in Sources */,
 				E2A567602B077B38000324C0 /* LottieAnimationView.swift in Sources */,
 				E21ABD562AE9740F00F93F01 /* MockGenerator.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */,
@@ -1829,7 +1782,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2CCCEFB250B0D5800109D6D /* URLSessionDataTaskMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1880,12 +1832,10 @@
 				E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */,
 				E2AD32682B23774400F46FBE /* WeatherEndpoint.swift in Sources */,
 				E224507E2B9F403E00F14BAA /* WeatherModel.swift in Sources */,
-				E2D430E92BB4DBA6003F26EE /* ReviewDesirableMomentType.swift in Sources */,
 				E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */,
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E2117B492B29D48E00F91ADB /* TemperatureRenderer.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
-				E2CAC9FC2C04BF0700E573D2 /* ReviewDesirableMomentConfig.swift in Sources */,
 				E2F671162B234EAE00B791A0 /* TemperatureValueDisplayable.swift in Sources */,
 				E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */,
 				E2F6711A2B2350AD00B791A0 /* TemperatureCelsiusFormatter.swift in Sources */,
@@ -1910,7 +1860,6 @@
 				E2AD325B2B23719100F46FBE /* WeatherClient.swift in Sources */,
 				E2644E352C0AD79E00B67E18 /* WeatherCondition.swift in Sources */,
 				E2F671152B234EA600B791A0 /* TemperatureNotation.swift in Sources */,
-				E2D430EB2BB4DBBA003F26EE /* ReviewNotificationName+DidRequestAppStoreReview.swift in Sources */,
 				E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */,
 				E2D430D02BB4D954003F26EE /* SearchedLocationWeatherView.swift in Sources */,
 				E2AD32612B23729600F46FBE /* CloudCoverage.swift in Sources */,
@@ -1927,7 +1876,6 @@
 				E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */,
 				E2AD325C2B23719C00F46FBE /* OpenWeatherMapClient.swift in Sources */,
 				E2AD32602B23729200F46FBE /* Condition.swift in Sources */,
-				E2D430E22BB4DB56003F26EE /* ReviewNotificationCenter.swift in Sources */,
 				E2255A502C10211100C6F3AD /* AnalyticsService.swift in Sources */,
 				E20C6B1C2BE9ABC800DDB57A /* ConditionModel.swift in Sources */,
 				E2416FF52B331F52009C8F81 /* SmallWidgetView.swift in Sources */,

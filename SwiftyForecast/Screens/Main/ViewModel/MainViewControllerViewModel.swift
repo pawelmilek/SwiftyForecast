@@ -19,11 +19,9 @@ final class MainViewControllerViewModel: ObservableObject {
     private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
-    private let reviewManager: ReviewManager
     private let analyticsManager: AnalyticsManager
     private let client: OpenWeatherMapClient
     private let parser: ResponseParser
-    private let appStoreReviewCenter: ReviewNotificationCenter
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -34,11 +32,9 @@ final class MainViewControllerViewModel: ObservableObject {
         currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
-        reviewManager: ReviewManager,
         analyticsManager: AnalyticsManager,
         client: OpenWeatherMapClient,
-        parser: ResponseParser,
-        appStoreReviewCenter: ReviewNotificationCenter
+        parser: ResponseParser
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSystemStore = notationSystemStore
@@ -46,11 +42,9 @@ final class MainViewControllerViewModel: ObservableObject {
         self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
         self.locationManager = locationManager
-        self.reviewManager = reviewManager
         self.analyticsManager = analyticsManager
         self.client = client
         self.parser = parser
-        self.appStoreReviewCenter = appStoreReviewCenter
         self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
         self.notationSegmentedControlItems = [
             TemperatureNotation.fahrenheit.description,
@@ -76,10 +70,6 @@ final class MainViewControllerViewModel: ObservableObject {
 
     func requestLocation() {
         locationManager.requestLocation()
-    }
-
-    func requestReview(for moment: ReviewDesirableMomentType) {
-        reviewManager.requestReview(for: moment)
     }
 
     private func subscirbePublishers() {
@@ -152,8 +142,7 @@ final class MainViewControllerViewModel: ObservableObject {
                 locationName: $0.name,
                 client: client,
                 parser: parser,
-                measurementSystemNotification: measurementSystemNotification,
-                appStoreReviewCenter: appStoreReviewCenter
+                measurementSystemNotification: measurementSystemNotification
             )
         } ?? []
     }

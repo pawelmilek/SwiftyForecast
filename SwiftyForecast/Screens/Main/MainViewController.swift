@@ -293,10 +293,3 @@ extension MainViewController: LocationSearchViewControllerDelegate {
     }
 
 }
-
-// MARK: - AppStoreReviewObserverEventResponder
-extension MainViewController: ReviewObserverEventResponder {
-    func reviewDesirableMomentDidHappen(_ desirableMoment: ReviewDesirableMomentType) {
-        viewModel.requestReview(for: desirableMoment)
-    }
-}

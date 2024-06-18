@@ -27,18 +27,9 @@ final class MainCoordinator: Coordinator {
                     currentLocationRecord: CurrentLocationRecord(databaseManager: self.databaseManager),
                     databaseManager: self.databaseManager,
                     locationManager: LocationManager(),
-                    reviewManager: ReviewManager(
-                        bundle: .main,
-                        storage: .standard,
-                        configuration: DecodedPlist(
-                            name: "ReviewDesirableMomentConfig",
-                            bundle: .main
-                        )
-                    ),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService()),
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
-                    parser: ResponseParser(),
-                    appStoreReviewCenter: ReviewNotificationCenter()
+                    parser: ResponseParser()
                 ),
                 coordinator: self,
                 coder: coder

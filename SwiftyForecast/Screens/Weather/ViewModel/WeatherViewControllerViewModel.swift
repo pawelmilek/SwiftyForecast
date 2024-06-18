@@ -20,7 +20,6 @@ final class WeatherViewControllerViewModel: ObservableObject {
     private let client: WeatherClient
     private let parser: ResponseParser
     private let measurementSystemNotification: MeasurementSystemNotification
-    private let appStoreReviewCenter: ReviewNotificationCenter
 
     init(
         compoundKey: String,
@@ -29,8 +28,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
         locationName: String,
         client: WeatherClient,
         parser: ResponseParser,
-        measurementSystemNotification: MeasurementSystemNotification,
-        appStoreReviewCenter: ReviewNotificationCenter
+        measurementSystemNotification: MeasurementSystemNotification
     ) {
         self.compoundKey = compoundKey
         self.latitude = latitude
@@ -39,7 +37,6 @@ final class WeatherViewControllerViewModel: ObservableObject {
         self.client = client
         self.parser = parser
         self.measurementSystemNotification = measurementSystemNotification
-        self.appStoreReviewCenter = appStoreReviewCenter
         self.twentyFourHoursForecastModel = HourlyForecastModel.initialData
         self.fiveDaysForecastModel = DailyForecastModel.initialData
         subscriteToPublishers()
@@ -101,9 +98,5 @@ final class WeatherViewControllerViewModel: ObservableObject {
         let numberOfThreeHoursForecastItems = 7
         guard hourly.count >= numberOfThreeHoursForecastItems else { return }
         twentyFourHoursForecastModel = Array(hourly[...numberOfThreeHoursForecastItems])
-    }
-
-    private func postAppStoreReviewRequest() {
-        appStoreReviewCenter.post(.enjoyableTemperatureReached)
     }
 }

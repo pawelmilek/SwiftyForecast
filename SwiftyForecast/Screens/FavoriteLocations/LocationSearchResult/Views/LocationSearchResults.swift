@@ -43,7 +43,6 @@ struct LocationSearchResults: View {
                     client: weatherClient,
                     parser: ResponseParser(),
                     databaseManager: databaseManager,
-                    appStoreReviewCenter: ReviewNotificationCenter(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
                 ),
                 cardViewModel: WeatherCardViewViewModel(

@@ -9,7 +9,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private var coordinator: MainCoordinator?
-    private var reviewObserver: ReviewObserver?
     private var networkMonitor: NetworkMonitor?
     private var cancellables = Set<AnyCancellable>()
 
@@ -24,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNavigationBarStyle()
         setupAppearanceTheme()
         setupAppearanceThemeNotificationCenter()
-        setupReviewObserver()
         return true
     }
 
@@ -77,18 +75,6 @@ private extension AppDelegate {
                 }
             }
             .store(in: &cancellables)
-    }
-
-    func setupReviewObserver() {
-        if let mainVC = coordinator?.topViewController as? ReviewObserverEventResponder {
-            reviewObserver = ReviewObserver(
-                eventResponder: mainVC,
-                notificationCenter: .default
-            )
-            reviewObserver?.start()
-        } else {
-            reviewObserver?.stop()
-        }
     }
 
     func setupNavigationBarStyle() {
