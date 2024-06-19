@@ -13,7 +13,7 @@ struct SmallWidgetView: View {
 
     var body: some View {
         GeometryReader { proxy in
-            ConditionView(icon: entry.icon)
+            ConditionView(icon: Image(uiImage: .init(data: entry.icon) ?? UIImage(resource: .clearDay)))
                 .frame(maxWidth: proxy.size.width * 0.5)
 
             TemperatureView(

@@ -8,6 +8,7 @@
 
 import WidgetKit
 import SwiftUI
+import CoreLocation
 
 struct SwiftyForecastWidget: Widget {
     private enum Constant {
@@ -25,10 +26,11 @@ struct SwiftyForecastWidget: Widget {
         StaticConfiguration(
             kind: Constant.kind,
             provider: WeatherProvider(
+                locationManager: WidgetLocationManager(),
                 dataSource: WeatherProviderDataSource(
-                    client: OpenWeatherMapClient(
-                        decoder: JSONSnakeCaseDecoded()
-                    )
+                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
+                    parser: ResponseParser()
                 )
             )
         ) { entry in

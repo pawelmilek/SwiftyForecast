@@ -14,8 +14,7 @@ final class WidgetLocationManager: NSObject {
     var isGettingExactLocation = false
     var authorizationStatus: CLAuthorizationStatus
     var accuracyAuthorizationStatus: CLAccuracyAuthorization
-    var currentLocation: CLLocation?
-    var isObtainingLocation = false
+    var location: CLLocation?
 
     private let manager: CLLocationManager
     private var completionHandler: ((CLLocation) -> Void)?
@@ -27,17 +26,20 @@ final class WidgetLocationManager: NSObject {
 
         super.init()
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyReduced
-        manager.distanceFilter = kCLLocationAccuracyThreeKilometers
-        manager.pausesLocationUpdatesAutomatically = true
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.distanceFilter = kCLDistanceFilterNone
         manager.showsBackgroundLocationIndicator = true
         manager.activityType = .otherNavigation
     }
 
-    func startUpdatingLocation() async -> CLLocation {
-        await withCheckedContinuation { continuation in
+    func startUpdatingLocation() -> AsyncStream<CLLocation> {
+        AsyncStream { continuation in
             self.requestLocation { location in
-                continuation.resume(returning: location)
+                continuation.yield(location)
+            }
+
+            continuation.onTermination = { @Sendable _ in
+                self.stopUpdatingLocation()
             }
         }
     }
@@ -49,7 +51,7 @@ final class WidgetLocationManager: NSObject {
     private func requestLocation(completionHandler: @escaping (CLLocation) -> Void) {
         debugPrint("\(Date.now.formatted(date: .omitted, time: .standard)) \(#function)")
         self.completionHandler = completionHandler
-        manager.requestLocation()
+        manager.startUpdatingLocation()
     }
 }
 

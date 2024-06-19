@@ -45,7 +45,7 @@ private extension MediumWidgetView {
                     .font(.caption2)
                     .fontWeight(.heavy)
                     .foregroundStyle(.accent)
-                ConditionView(icon: entry.icon)
+                ConditionView(icon: Image(uiImage: .init(data: entry.icon) ?? UIImage(resource: .clearDay)))
                     .frame(maxWidth: 40)
             }
             ConditionDescriptionView(description: entry.description)
@@ -66,7 +66,7 @@ private extension MediumWidgetView {
                             .fontWeight(.heavy)
                             .fontDesign(.monospaced)
                             .foregroundStyle(.accent)
-                        ConditionView(icon: item.icon)
+                        ConditionView(icon: Image(uiImage: .init(data: entry.icon) ?? UIImage(resource: .clearDay)))
                             .frame(maxWidth: 40)
                     }
                     Text(item.time)

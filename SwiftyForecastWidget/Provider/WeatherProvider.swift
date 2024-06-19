@@ -9,12 +9,15 @@
 import WidgetKit
 import SwiftUI
 import CoreLocation
+import Combine
 
 struct WeatherProvider: TimelineProvider {
-    private let locationManager = WidgetLocationManager()
+    private let locationManager: WidgetLocationManager
     private let dataSource: WeatherProviderDataSource
+    private var cancellables = Set<AnyCancellable>()
 
-    init(dataSource: WeatherProviderDataSource) {
+    init(locationManager: WidgetLocationManager, dataSource: WeatherProviderDataSource) {
+        self.locationManager = locationManager
         self.dataSource = dataSource
     }
 
@@ -23,41 +26,47 @@ struct WeatherProvider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (WeatherEntry) -> Void) {
+        locationManager.stopUpdatingLocation()
+
         Task(priority: .userInitiated) {
-            locationManager.stopUpdatingLocation()
-            let location = await locationManager.startUpdatingLocation()
+            for await location in locationManager.startUpdatingLocation() {
+                if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
+                    let entry = await dataSource.loadEntryData(for: location)
+                    completion(entry)
+                    return
+                }
 
-            if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                let entry = await loadWeatherData(for: location)
-                completion(entry)
-            }
-
-            if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                let entry = await loadWeatherDataWithHourlyForecast(for: location)
-                completion(entry)
+                if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
+                    let entry = await dataSource.loadEntryDataWithHourlyForecast(for: location)
+                    completion(entry)
+                    return
+                }
             }
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WeatherEntry>) -> Void) {
+        locationManager.stopUpdatingLocation()
+
         Task(priority: .userInitiated) {
-            locationManager.stopUpdatingLocation()
-            let location = await locationManager.startUpdatingLocation()
-            var entries = [WeatherEntry]()
+            for await location in locationManager.startUpdatingLocation() {
+                var entries = [WeatherEntry]()
 
-            if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                let entry = await loadWeatherData(for: location)
-                entries.append(entry)
+                if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
+                    let entry = await dataSource.loadEntryData(for: location)
+                    entries.append(entry)
+                }
+
+                if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
+                    let entry = await dataSource.loadEntryDataWithHourlyForecast(for: location)
+                    entries.append(entry)
+                }
+
+                let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: .now)!
+                let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
+                completion(timeline)
+                return
             }
-
-            if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                let entry = await loadWeatherDataWithHourlyForecast(for: location)
-                entries.append(entry)
-            }
-
-            let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: .now)!
-            let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
-            completion(timeline)
         }
     }
 
@@ -70,15 +79,5 @@ struct WeatherProvider: TimelineProvider {
 
     private func checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(_ family: WidgetFamily) -> Bool {
         family == .systemMedium
-    }
-
-    private func loadWeatherData(for location: CLLocation) async -> WeatherEntry {
-        let result = await dataSource.loadEntryData(for: location)
-        return result
-    }
-
-    private func loadWeatherDataWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
-        let result = await dataSource.loadEntryDataWithHourlyForecast(for: location)
-        return result
     }
 }

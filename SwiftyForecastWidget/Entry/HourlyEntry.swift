@@ -6,20 +6,20 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 
 struct HourlyEntry {
     var temperature: String {
         temperatureRenderer.render(temperatureValue).currentFormatted
     }
 
-    let icon: Image
+    let icon: Data
     let time: String
     let temperatureValue: TemperatureValue
     private let temperatureRenderer: TemperatureRenderer
 
     init(
-        icon: Image,
+        icon: Data,
         time: String,
         temperatureValue: TemperatureValue,
         temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
