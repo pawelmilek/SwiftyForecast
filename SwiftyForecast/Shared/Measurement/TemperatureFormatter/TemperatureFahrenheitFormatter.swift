@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TemperatureFahrenheitFormatter: TemperatureValueDisplayable {
+struct TemperatureFahrenheitFormatter: temperatureDisplayable {
     private let currentInKelvin: Double
     private let minInKelvin: Double
     private let maxInKelvin: Double

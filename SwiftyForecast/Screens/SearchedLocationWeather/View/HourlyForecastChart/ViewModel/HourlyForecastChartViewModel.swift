@@ -26,12 +26,12 @@ final class HourlyForecastChartViewModel: ObservableObject {
 
     private func calculateChartYScaleRange() {
         let minValue = dataSource.min { leftHand, rightHand in
-            return leftHand.temperatureValue < rightHand.temperatureValue
-        }?.temperatureValue ?? 0
+            return leftHand.currentTemperature < rightHand.currentTemperature
+        }?.currentTemperature ?? 0
 
         let maxValue = dataSource.max { leftHand, rightHand in
-            return leftHand.temperatureValue < rightHand.temperatureValue
-        }?.temperatureValue ?? 0
+            return leftHand.currentTemperature < rightHand.currentTemperature
+        }?.currentTemperature ?? 0
 
         let absoluteValue: Double = {
             let value = maxValue == 0 ? 10 : maxValue

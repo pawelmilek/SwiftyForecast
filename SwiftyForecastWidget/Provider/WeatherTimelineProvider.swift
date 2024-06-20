@@ -1,5 +1,5 @@
 //
-//  WeatherProvider.swift
+//  WeatherTimelineProvider.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 12/8/23.
@@ -11,14 +11,14 @@ import SwiftUI
 import CoreLocation
 import Combine
 
-struct WeatherProvider: TimelineProvider {
+struct WeatherTimelineProvider: TimelineProvider {
     private let locationManager: WidgetLocationManager
-    private let dataSource: WeatherProviderDataSource
+    private let entryDataSource: WeatherEntryRepository
     private var cancellables = Set<AnyCancellable>()
 
-    init(locationManager: WidgetLocationManager, dataSource: WeatherProviderDataSource) {
+    init(locationManager: WidgetLocationManager, entryDataSource: WeatherEntryRepository) {
         self.locationManager = locationManager
-        self.dataSource = dataSource
+        self.entryDataSource = entryDataSource
     }
 
     func placeholder(in context: Context) -> WeatherEntry {
@@ -31,13 +31,13 @@ struct WeatherProvider: TimelineProvider {
         Task(priority: .userInitiated) {
             for await location in locationManager.startUpdatingLocation() {
                 if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                    let entry = await dataSource.loadEntryData(for: location)
+                    let entry = await entryDataSource.load(for: location)
                     completion(entry)
                     return
                 }
 
                 if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                    let entry = await dataSource.loadEntryDataWithHourlyForecast(for: location)
+                    let entry = await entryDataSource.loadWithHourlyForecast(for: location)
                     completion(entry)
                     return
                 }
@@ -53,12 +53,12 @@ struct WeatherProvider: TimelineProvider {
                 var entries = [WeatherEntry]()
 
                 if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                    let entry = await dataSource.loadEntryData(for: location)
+                    let entry = await entryDataSource.load(for: location)
                     entries.append(entry)
                 }
 
                 if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                    let entry = await dataSource.loadEntryDataWithHourlyForecast(for: location)
+                    let entry = await entryDataSource.loadWithHourlyForecast(for: location)
                     entries.append(entry)
                 }
 

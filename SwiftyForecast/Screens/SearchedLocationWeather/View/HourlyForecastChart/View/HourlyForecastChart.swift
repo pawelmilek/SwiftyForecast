@@ -31,14 +31,14 @@ struct HourlyForecastChart: View {
                     ForEach(viewModel.dataSource) { item in
                         AreaMark(
                             x: .value("Hour", item.hour),
-                            y: .value("Temperature", item.temperatureValue)
+                            y: .value("Temperature", item.currentTemperature)
                         )
                         .foregroundStyle(curGradient)
                         .interpolationMethod(.catmullRom)
 
                         LineMark(
                             x: .value("Hour", item.hour),
-                            y: .value("Temperature", item.temperatureValue)
+                            y: .value("Temperature", item.currentTemperature)
                         )
                         .foregroundStyle(Color(.customPrimary))
                         .interpolationMethod(.catmullRom)

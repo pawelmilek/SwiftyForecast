@@ -1,5 +1,5 @@
 //
-//  TemperatureValueDisplayable.swift
+//  temperatureDisplayable.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/16/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol TemperatureValueDisplayable {
+protocol temperatureDisplayable {
     var currentFormatted: String { get }
     var minFormatted: String { get }
     var maxFormatted: String { get }
@@ -19,7 +19,7 @@ protocol TemperatureValueDisplayable {
 
 }
 
-extension TemperatureValueDisplayable {
+extension temperatureDisplayable {
 
     func formantted(_ measurement: Measurement<UnitTemperature>) -> String {
         let formatter = MeasurementFormatter()

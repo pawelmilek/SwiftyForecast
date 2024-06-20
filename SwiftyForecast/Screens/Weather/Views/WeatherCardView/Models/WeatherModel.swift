@@ -10,7 +10,7 @@ import Foundation
 
 struct WeatherModel {
     let date: Date
-    let temperature: TemperatureValue
+    let temperature: Temperature
     let condition: ConditionModel
     let humidity: Int
     let pressure: Int
@@ -22,7 +22,7 @@ struct WeatherModel {
 extension WeatherModel {
     static let example = WeatherModel(
         date: Date(timeIntervalSinceReferenceDate: 724103328.0),
-        temperature: TemperatureValue(current: 276.14, min: 275.55, max: 276.14),
+        temperature: Temperature(current: 276.14, min: 275.55, max: 276.14),
         condition: ConditionModel(id: 800, iconCode: "01d", name: "Clear", description: "clear sky"),
         humidity: 87,
         pressure: 1009,

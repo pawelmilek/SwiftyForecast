@@ -16,28 +16,28 @@ extension WeatherEntry {
             locationName: "Cupertino",
             icon: UIImage(resource: .cloudyDay).pngData()!,
             description: "light intensity shower rain",
-            temperatureValue: TemperatureValue(current: 281, min: 278.67, max: 281),
+            temperature: Temperature(current: 281, min: 278.67, max: 281),
             dayNightState: .day,
             hourly: [
                 HourlyEntry(
                     icon: UIImage(resource: .rainyDay).pngData()!,
-                    time: "7:00 PM",
-                    temperatureValue: TemperatureValue(current: 276.46)
+                    date: .now,
+                    temperature: Temperature(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
-                    time: "10:00 PM",
-                    temperatureValue: TemperatureValue(current: 276.46)
+                    date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
+                    temperature: Temperature(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .thunderDay).pngData()!,
-                    time: "1:00 AM",
-                    temperatureValue: TemperatureValue(current: 276.46)
+                    date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
+                    temperature: Temperature(current: 276.46)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .clearDay).pngData()!,
-                    time: "4:00 AM",
-                    temperatureValue: TemperatureValue(current: 276.46)
+                    date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
+                    temperature: Temperature(current: 276.46)
                 )
             ],
             temperatureRenderer: TemperatureRenderer()
@@ -47,28 +47,28 @@ extension WeatherEntry {
             locationName: "Chicago",
             icon: UIImage(resource: .clearDay).pngData()!,
             description: "scattered clouds",
-            temperatureValue: TemperatureValue(current: 278.93, min: 277.32, max: 278.93),
+            temperature: Temperature(current: 278.93, min: 277.32, max: 278.93),
             dayNightState: .night,
             hourly: [
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyDay).pngData()!,
-                    time: "7:00 PM",
-                    temperatureValue: TemperatureValue(current: 278.93)
+                    date: .now,
+                    temperature: Temperature(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
-                    time: "10:00 PM",
-                    temperatureValue: TemperatureValue(current: 278.93)
+                    date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
+                    temperature: Temperature(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
-                    time: "1:00 AM",
-                    temperatureValue: TemperatureValue(current: 278.93)
+                    date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
+                    temperature: Temperature(current: 278.93)
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .thunderDay).pngData()!,
-                    time: "4:00 AM",
-                    temperatureValue: TemperatureValue(current: 278.93)
+                    date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
+                    temperature: Temperature(current: 278.93)
                 )
             ],
             temperatureRenderer: TemperatureRenderer()

@@ -9,24 +9,28 @@
 import Foundation
 
 struct HourlyEntry {
-    var temperature: String {
-        temperatureRenderer.render(temperatureValue).currentFormatted
-    }
-
     let icon: Data
-    let time: String
-    let temperatureValue: TemperatureValue
+    let date: Date
+    let temperature: Temperature
     private let temperatureRenderer: TemperatureRenderer
 
     init(
         icon: Data,
-        time: String,
-        temperatureValue: TemperatureValue,
+        date: Date,
+        temperature: Temperature,
         temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
     ) {
         self.icon = icon
-        self.time = time
-        self.temperatureValue = temperatureValue
+        self.date = date
+        self.temperature = temperature
         self.temperatureRenderer = temperatureRenderer
+    }
+
+    var formattedTemperature: String {
+        temperatureRenderer.render(temperature).currentFormatted
+    }
+
+    var time: String {
+        date.formatted(date: .omitted, time: .shortened)
     }
 }

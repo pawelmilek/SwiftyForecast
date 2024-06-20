@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SmallWidgetView: View {
-    let entry: WeatherProvider.Entry
+    let entry: WeatherTimelineProvider.Entry
 
     var body: some View {
         GeometryReader { proxy in
@@ -17,8 +17,8 @@ struct SmallWidgetView: View {
                 .frame(maxWidth: proxy.size.width * 0.5)
 
             TemperatureView(
-                current: entry.temperatureFormatted,
-                maxMin: entry.temperatureMaxMinFormatted
+                current: entry.formattedTemperature,
+                maxMin: entry.formattedTemperatureMaxMin
             )
             .frame(maxWidth: proxy.size.width)
             .offset(y: 30)

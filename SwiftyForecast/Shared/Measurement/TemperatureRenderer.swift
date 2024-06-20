@@ -28,7 +28,7 @@ struct TemperatureRenderer {
         self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
-    func render(_ source: TemperatureValue) -> ReadyForDisplay {
+    func render(_ source: Temperature) -> ReadyForDisplay {
         let value = temperatureFormatterFactory.make(
             by: notationController.temperatureNotation,
             valueInKelvin: source

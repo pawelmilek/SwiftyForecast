@@ -25,12 +25,13 @@ struct SwiftyForecastWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: Constant.kind,
-            provider: WeatherProvider(
+            provider: WeatherTimelineProvider(
                 locationManager: WidgetLocationManager(),
-                dataSource: WeatherProviderDataSource(
+                entryDataSource: WeatherEntryRepository(
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
-                    parser: ResponseParser()
+                    parser: ResponseParser(),
+                    temperatureRenderer: TemperatureRenderer()
                 )
             )
         ) { entry in

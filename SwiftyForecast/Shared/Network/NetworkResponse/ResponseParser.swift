@@ -7,7 +7,7 @@ struct ResponseParser {
         let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
         let sunriseDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunrise))
         let sunsetDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunset))
-        let temperatureValue = TemperatureValue(
+        let temperature = Temperature(
             current: current.main.temp,
             min: current.main.tempMin,
             max: current.main.tempMax
@@ -21,7 +21,7 @@ struct ResponseParser {
 
         let currentWeatherModel = WeatherModel(
             date: currentDate,
-            temperature: temperatureValue,
+            temperature: temperature,
             condition: condition,
             humidity: current.main.humidity,
             pressure: current.main.pressure,

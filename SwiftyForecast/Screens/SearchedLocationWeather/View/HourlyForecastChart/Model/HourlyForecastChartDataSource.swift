@@ -12,7 +12,7 @@ import Foundation
 struct HourlyForecastChartDataSource: Identifiable, Equatable {
     let id = UUID().uuidString
     let hour: String
-    let temperatureValue: Int
+    let currentTemperature: Int
     let temperatureFormatted: String
     let iconURL: URL?
 
@@ -25,10 +25,10 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
         if let temperature = model.temperature {
             let rendered = temperatureRenderer.render(temperature)
 
-            temperatureValue = rendered.currentValue
+            currentTemperature = rendered.currentValue
             temperatureFormatted = rendered.currentFormatted
         } else {
-            temperatureValue = 0
+            currentTemperature = 0
             temperatureFormatted = "--"
         }
 

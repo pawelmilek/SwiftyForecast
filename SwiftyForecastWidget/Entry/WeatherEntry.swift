@@ -9,31 +9,11 @@
 import WidgetKit
 
 struct WeatherEntry: TimelineEntry {
-    var temperatureCurrentValue: Int {
-        temperatureRenderer.render(temperatureValue).currentValue
-    }
-
-    var temperatureMinValue: Int {
-        temperatureRenderer.render(temperatureValue).minValue
-    }
-
-    var temperatureMaxValue: Int {
-        temperatureRenderer.render(temperatureValue).maxValue
-    }
-
-    var temperatureFormatted: String {
-        temperatureRenderer.render(temperatureValue).currentFormatted
-    }
-
-    var temperatureMaxMinFormatted: String {
-        temperatureRenderer.render(temperatureValue).maxMinFormatted
-    }
-
     let date: Date
     let locationName: String
     let icon: Data
     let description: String
-    let temperatureValue: TemperatureValue
+    private let temperature: Temperature
     let dayNightState: DayNightState
     let hourly: [HourlyEntry]
     private let temperatureRenderer: TemperatureRenderer
@@ -43,7 +23,7 @@ struct WeatherEntry: TimelineEntry {
         locationName: String,
         icon: Data,
         description: String,
-        temperatureValue: TemperatureValue,
+        temperature: Temperature,
         dayNightState: DayNightState,
         hourly: [HourlyEntry],
         temperatureRenderer: TemperatureRenderer
@@ -52,9 +32,29 @@ struct WeatherEntry: TimelineEntry {
         self.locationName = locationName
         self.description = description
         self.icon = icon
-        self.temperatureValue = temperatureValue
+        self.temperature = temperature
         self.dayNightState = dayNightState
         self.hourly = hourly
         self.temperatureRenderer = temperatureRenderer
+    }
+
+    var currentTemperature: Int {
+        temperatureRenderer.render(temperature).currentValue
+    }
+
+    var minTemperature: Int {
+        temperatureRenderer.render(temperature).minValue
+    }
+
+    var maxTemperature: Int {
+        temperatureRenderer.render(temperature).maxValue
+    }
+
+    var formattedTemperature: String {
+        temperatureRenderer.render(temperature).currentFormatted
+    }
+
+    var formattedTemperatureMaxMin: String {
+        temperatureRenderer.render(temperature).maxMinFormatted
     }
 }

@@ -73,7 +73,7 @@ final class LocationRowViewModel: ObservableObject {
         }
     }
 
-    private func setTemperature(value: TemperatureValue) {
+    private func setTemperature(value: Temperature) {
         let rendered = temperatureRenderer.render(value)
         temperature = rendered.currentFormatted
     }

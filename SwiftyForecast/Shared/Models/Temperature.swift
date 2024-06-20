@@ -1,5 +1,5 @@
 //
-//  TemperatureValue.swift
+//  Temperature.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/25/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct TemperatureValue {
+struct Temperature {
     let current: Double
     let min: Double
     let max: Double

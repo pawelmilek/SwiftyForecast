@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WeatherWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
-    var entry: WeatherProvider.Entry
+    var entry: WeatherTimelineProvider.Entry
 
     var body: some View {
         switch family {
@@ -22,21 +22,21 @@ struct WeatherWidgetEntryView: View {
 
         case .accessoryInline:
             InlineWidgetView(
-                temperature: entry.temperatureFormatted,
+                temperature: entry.formattedTemperature,
                 location: entry.locationName
             )
 
         case .accessoryCircular:
             CircularWidgetView(
-                current: entry.temperatureCurrentValue,
-                min: entry.temperatureMinValue,
-                max: entry.temperatureMaxValue
+                current: entry.currentTemperature,
+                min: entry.minTemperature,
+                max: entry.maxTemperature
             )
 
         case .accessoryRectangular:
             RectangularWidgetView(
-                currentFormatted: entry.temperatureFormatted,
-                maxMinFormatted: entry.temperatureMaxMinFormatted,
+                currentFormatted: entry.formattedTemperature,
+                maxMinFormatted: entry.formattedTemperatureMaxMin,
                 conditionDescription: entry.description,
                 dayNightState: entry.dayNightState
             )

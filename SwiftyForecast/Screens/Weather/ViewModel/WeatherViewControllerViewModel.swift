@@ -1,11 +1,9 @@
-import UIKit
 import CoreLocation
 import Combine
 import RealmSwift
 
 @MainActor
 final class WeatherViewControllerViewModel: ObservableObject {
-
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
     @Published private(set) var locationName = ""
@@ -13,13 +11,13 @@ final class WeatherViewControllerViewModel: ObservableObject {
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
     @Published private var forecastWeatherModel: ForecastWeatherModel?
 
-    private var cancellables = Set<AnyCancellable>()
     let compoundKey: String
     let latitude: Double
     let longitude: Double
     private let client: WeatherClient
     private let parser: ResponseParser
     private let measurementSystemNotification: MeasurementSystemNotification
+    private var cancellables = Set<AnyCancellable>()
 
     init(
         compoundKey: String,
@@ -41,7 +39,6 @@ final class WeatherViewControllerViewModel: ObservableObject {
         self.fiveDaysForecastModel = DailyForecastModel.initialData
         subscriteToPublishers()
         addMeasurementSystemObserver()
-
     }
 
     private func addMeasurementSystemObserver() {

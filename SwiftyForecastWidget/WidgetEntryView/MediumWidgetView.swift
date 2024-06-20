@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct MediumWidgetView: View {
-    var entry: WeatherProvider.Entry
+    var entry: WeatherTimelineProvider.Entry
 
     var body: some View {
         GeometryReader { proxy in
@@ -31,7 +31,7 @@ private extension MediumWidgetView {
     var locationAndTemperature: some View {
         VStack(spacing: 0) {
             LocationView(name: entry.locationName)
-            Text(entry.temperatureFormatted)
+            Text(entry.formattedTemperature)
                 .font(.system(size: 60, weight: .heavy, design: .monospaced))
                 .foregroundStyle(.accent)
                 .modifier(TextScaledModifier())
@@ -41,7 +41,7 @@ private extension MediumWidgetView {
     var temperatureMaxMinAndCondition: some View {
         VStack(alignment: .trailing, spacing: 5) {
             HStack(alignment: .bottom, spacing: 0) {
-                Text(entry.temperatureMaxMinFormatted)
+                Text(entry.formattedTemperatureMaxMin)
                     .font(.caption2)
                     .fontWeight(.heavy)
                     .foregroundStyle(.accent)
@@ -61,7 +61,7 @@ private extension MediumWidgetView {
                 VStack(spacing: 5) {
                     HStack(alignment: .bottom, spacing: 0) {
                         Spacer()
-                        Text(item.temperature)
+                        Text(item.formattedTemperature)
                             .font(.footnote)
                             .fontWeight(.heavy)
                             .fontDesign(.monospaced)

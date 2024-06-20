@@ -12,12 +12,12 @@ protocol TemperatureFormatterFactoryProtocol {
     func make(
         by notation: TemperatureNotation,
         valueInKelvin current: Double
-    ) -> TemperatureValueDisplayable
+    ) -> temperatureDisplayable
 
     func make(
         by notation: TemperatureNotation,
-        valueInKelvin: TemperatureValue
-    ) -> TemperatureValueDisplayable
+        valueInKelvin: Temperature
+    ) -> temperatureDisplayable
 }
 
 struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
@@ -25,15 +25,15 @@ struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
     func make(
         by notation: TemperatureNotation,
         valueInKelvin current: Double
-    ) -> TemperatureValueDisplayable {
-        let value = TemperatureValue(current: current)
+    ) -> temperatureDisplayable {
+        let value = Temperature(current: current)
         return make(by: notation, valueInKelvin: value)
     }
 
     func make(
         by notation: TemperatureNotation,
-        valueInKelvin: TemperatureValue
-    ) -> TemperatureValueDisplayable {
+        valueInKelvin: Temperature
+    ) -> temperatureDisplayable {
         switch notation {
         case .celsius:
             return TemperatureCelsiusFormatter(
