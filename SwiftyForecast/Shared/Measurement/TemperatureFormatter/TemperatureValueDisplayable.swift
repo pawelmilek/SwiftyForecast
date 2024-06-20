@@ -21,7 +21,7 @@ protocol temperatureDisplayable {
 
 extension temperatureDisplayable {
 
-    func formantted(_ measurement: Measurement<UnitTemperature>) -> String {
+    func formatted(_ measurement: Measurement<UnitTemperature>) -> String {
         let formatter = MeasurementFormatter()
         formatter.unitStyle = .short
         formatter.unitOptions = [.temperatureWithoutUnit, .providedUnit]

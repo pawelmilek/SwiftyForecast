@@ -21,19 +21,19 @@ struct TemperatureFahrenheitFormatter: temperatureDisplayable {
 
     var currentFormatted: String {
         let temperature = toFahrenheit(currentInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 
     var minFormatted: String {
         let temperature = toFahrenheit(minInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 
     var maxFormatted: String {
         let temperature = toFahrenheit(maxInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 

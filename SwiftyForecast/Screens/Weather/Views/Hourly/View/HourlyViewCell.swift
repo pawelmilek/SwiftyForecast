@@ -18,13 +18,6 @@ final class HourlyViewCell: UICollectionViewCell {
         setup()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        timeLabel.text = ""
-        iconImageView.image = UIImage()
-        temperatureLabel.text = ""
-    }
-
     func set(viewModel: HourlyViewCellViewModel) {
         self.viewModel = viewModel
     }
@@ -81,11 +74,8 @@ private extension HourlyViewCell {
 
         viewModel.$time
             .sink { [weak self] time in
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
-                    self?.timeLabel.alpha = 0.3
-                }
-
-                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
+                    self?.timeLabel.alpha = 0.4
                     self?.timeLabel.text = time
                     self?.timeLabel.alpha = 1.0
                 }
@@ -95,10 +85,8 @@ private extension HourlyViewCell {
         viewModel.$iconURL
             .compactMap { $0 }
             .sink { [weak self] iconURL in
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
-                    self?.iconImageView.alpha = 0.3
-                }
-                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
+                    self?.iconImageView.alpha = 0.4
                     self?.iconImageView.kf.setImage(with: iconURL)
                     self?.iconImageView.alpha = 1.0
                 }
@@ -107,10 +95,8 @@ private extension HourlyViewCell {
 
         viewModel.$temperature
             .sink { [weak self] temperature in
-                UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [self] in
-                    self?.temperatureLabel.alpha = 0.3
-                }
-                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn) { [self] in
+                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
+                    self?.temperatureLabel.alpha = 0.4
                     self?.temperatureLabel.text = temperature
                     self?.temperatureLabel.alpha = 1.0
                 }

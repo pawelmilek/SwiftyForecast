@@ -77,16 +77,17 @@ extension VortexSystem {
         VortexSystem(
             tags: ["atmosphere"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.4),
-            birthRate: 3,
-            burstCount: 5,
-            lifespan: 6,
+            shape: .point,
+            birthRate: 2,
+            idleDuration: 1,
+            burstCount: 6,
+            lifespan: 9,
+            lifespanVariation: 0.5,
             angleRange: .degrees(360),
-            dampingFactor: 80,
-            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .white.opacity(0.3), .white.opacity(0)),
-            size: 2,
-            sizeVariation: 2,
-            sizeMultiplierAtDeath: 2
+            dampingFactor: 110,
+            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
+            size: 1.25,
+            sizeMultiplierAtDeath: 3
         )
     }()
 
@@ -94,16 +95,17 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.4),
-            birthRate: 3,
-            burstCount: 5,
-            lifespan: 6,
+            shape: .point,
+            birthRate: 2,
+            idleDuration: 1,
+            burstCount: 6,
+            lifespan: 9,
+            lifespanVariation: 0.5,
             angleRange: .degrees(360),
-            dampingFactor: 80,
-            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .white.opacity(0.3), .white.opacity(0)),
-            size: 2,
-            sizeVariation: 2,
-            sizeMultiplierAtDeath: 2
+            dampingFactor: 110,
+            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
+            size: 1.25,
+            sizeMultiplierAtDeath: 3
         )
     }()
 
@@ -111,16 +113,17 @@ extension VortexSystem {
         VortexSystem(
             tags: ["clouds"],
             position: [0.3, 0.45],
-            shape: .ellipse(radius: 0.1),
-            birthRate: 3,
-            burstCount: 5,
-            lifespan: 6,
+            shape: .point,
+            birthRate: 2,
+            idleDuration: 1,
+            burstCount: 6,
+            lifespan: 9,
+            lifespanVariation: 0.5,
             angleRange: .degrees(360),
-            dampingFactor: 80,
-            colors: .ramp(.white.opacity(0), .white.opacity(0.6), .white.opacity(0.5), .black.opacity(0.3), .black.opacity(0)),
-            size: 2,
-            sizeVariation: 2,
-            sizeMultiplierAtDeath: 2
+            dampingFactor: 110,
+            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .black.opacity(0.3), .black.opacity(0)),
+            size: 1.25,
+            sizeMultiplierAtDeath: 3
         )
     }()
 

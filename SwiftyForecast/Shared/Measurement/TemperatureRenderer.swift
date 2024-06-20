@@ -17,20 +17,20 @@ struct TemperatureRenderer {
         let maxMinFormatted: String
     }
 
-    private let notationController: NotationSystemStore
-    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
+    private let notationSystemStore: NotationSystemStore
+    private let formatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        notationController: NotationSystemStore = NotationSystemStore(),
-        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory()
+        notationSystemStore: NotationSystemStore = NotationSystemStore(),
+        formatterFactory: TemperatureFormatterFactoryProtocol = TemperatureFormatterFactory()
     ) {
-        self.notationController = notationController
-        self.temperatureFormatterFactory = temperatureFormatterFactory
+        self.notationSystemStore = notationSystemStore
+        self.formatterFactory = formatterFactory
     }
 
     func render(_ source: Temperature) -> ReadyForDisplay {
-        let value = temperatureFormatterFactory.make(
-            by: notationController.temperatureNotation,
+        let value = formatterFactory.make(
+            by: notationSystemStore.temperatureNotation,
             valueInKelvin: source
         )
 
@@ -44,8 +44,8 @@ struct TemperatureRenderer {
     }
 
     func render(_ source: Double) -> ReadyForDisplay {
-        let value = temperatureFormatterFactory.make(
-            by: notationController.temperatureNotation,
+        let value = formatterFactory.make(
+            by: notationSystemStore.temperatureNotation,
             valueInKelvin: source
         )
 

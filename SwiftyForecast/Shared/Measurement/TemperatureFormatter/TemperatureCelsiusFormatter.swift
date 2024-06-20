@@ -21,19 +21,19 @@ struct TemperatureCelsiusFormatter: temperatureDisplayable {
 
     var currentFormatted: String {
         let temperature = toCelsius(currentInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 
     var minFormatted: String {
         let temperature = toCelsius(minInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 
     var maxFormatted: String {
         let temperature = toCelsius(maxInKelvin)
-        let result = formantted(temperature)
+        let result = formatted(temperature)
         return result
     }
 
