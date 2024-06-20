@@ -1,24 +1,24 @@
 //
-//  WeatherEntryRepository.swift
+//  ForecastEntryRepository.swift
 //  SwiftyForecastWidgetExtension
 //
-//  Created by Pawel Milek on 12/13/23.
-//  Copyright © 2023 Pawel Milek. All rights reserved.
+//  Created by Pawel Milek on 6/20/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 import CoreLocation
 
-final class WeatherEntryRepository {
+final class ForecastEntryRepository: WeatherEntryRepository {
     private let client: WeatherClient
     private let locationPlace: LocationPlaceable
-    private let parser: ResponseParser
+    private let parser: WeatherParser
     private let temperatureRenderer: TemperatureRenderer
 
     init(
         client: WeatherClient,
         locationPlace: LocationPlaceable,
-        parser: ResponseParser,
+        parser: WeatherParser,
         temperatureRenderer: TemperatureRenderer
     ) {
         self.client = client
@@ -29,15 +29,6 @@ final class WeatherEntryRepository {
 
     func load(for location: CLLocation) async -> WeatherEntry {
         async let name = fetchPlaceName(at: location)
-        async let model = fetchWeather(coordinate: location.coordinate)
-        let (nameResult, weatherResult) = await (name, model)
-
-        let icon = await fetchIcon(with: model.condition.iconCode)
-        return entry(name: nameResult, icon: icon, weather: weatherResult, hourly: [])
-    }
-
-    func loadWithHourlyForecast(for location: CLLocation) async -> WeatherEntry {
-        async let name = fetchPlaceName(at: location)
         async let weather = fetchWeather(coordinate: location.coordinate)
         async let hourlyForecast = fetchHourlyForecast(coordinate: location.coordinate)
         let (nameResult, weatherResult, hourlyForecastResult) = await (name, weather, hourlyForecast)
@@ -45,23 +36,14 @@ final class WeatherEntryRepository {
         async let icon = fetchIcon(with: weatherResult.condition.iconCode)
         async let hourlyEntries = hourlyEntries(hourlyForecastResult)
         let (iconResult, hourlyEntriesResult) = await (icon, hourlyEntries)
-        return entry(name: nameResult, icon: iconResult, weather: weatherResult, hourly: hourlyEntriesResult)
-    }
-
-    private func entry(
-        name: String,
-        icon: Data,
-        weather: WeatherModel,
-        hourly: [HourlyEntry]
-    ) -> WeatherEntry {
-        WeatherEntry(
+        return WeatherEntry(
             date: .now,
-            locationName: name,
-            icon: icon,
-            description: weather.condition.description,
-            temperature: weather.temperature,
-            dayNightState: weather.condition.state,
-            hourly: hourly,
+            locationName: nameResult,
+            icon: iconResult,
+            description: weatherResult.condition.description,
+            temperature: weatherResult.temperature,
+            dayNightState: weatherResult.condition.state,
+            hourly: hourlyEntriesResult,
             temperatureRenderer: temperatureRenderer
         )
     }

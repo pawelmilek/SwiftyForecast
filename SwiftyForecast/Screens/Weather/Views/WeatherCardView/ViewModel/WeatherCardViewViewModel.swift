@@ -31,7 +31,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     private let latitude: Double
     private let longitude: Double
     private let client: WeatherClient
-    private let parser: ResponseParser
+    private let parser: WeatherParser
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
     private let measurementSystemNotification: MeasurementSystemNotification
@@ -41,7 +41,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         longitude: Double,
         locationName: String,
         client: WeatherClient,
-        parser: ResponseParser,
+        parser: WeatherParser,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification

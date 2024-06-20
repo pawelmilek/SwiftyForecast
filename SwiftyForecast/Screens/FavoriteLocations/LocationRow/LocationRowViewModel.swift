@@ -23,7 +23,7 @@ final class LocationRowViewModel: ObservableObject {
 
     private let location: LocationModel
     private let client: WeatherClient
-    private let parser: ResponseParser
+    private let parser: WeatherParser
     private let measurementSystemNotification: MeasurementSystemNotification
     private let temperatureRenderer: TemperatureRenderer
     private var cancellables = Set<AnyCancellable>()
@@ -32,7 +32,7 @@ final class LocationRowViewModel: ObservableObject {
     init(
         location: LocationModel,
         client: WeatherClient,
-        parser: ResponseParser,
+        parser: WeatherParser,
         temperatureRenderer: TemperatureRenderer,
         measurementSystemNotification: MeasurementSystemNotification
     ) {

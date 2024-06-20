@@ -13,12 +13,12 @@ import Combine
 
 struct WeatherTimelineProvider: TimelineProvider {
     private let locationManager: WidgetLocationManager
-    private let entryDataSource: WeatherEntryRepository
+    private let repositoryFactory: EntryRepositoryFactory
     private var cancellables = Set<AnyCancellable>()
 
-    init(locationManager: WidgetLocationManager, entryDataSource: WeatherEntryRepository) {
+    init(locationManager: WidgetLocationManager, repositoryFactory: EntryRepositoryFactory) {
         self.locationManager = locationManager
-        self.entryDataSource = entryDataSource
+        self.repositoryFactory = repositoryFactory
     }
 
     func placeholder(in context: Context) -> WeatherEntry {
@@ -27,40 +27,25 @@ struct WeatherTimelineProvider: TimelineProvider {
 
     func getSnapshot(in context: Context, completion: @escaping (WeatherEntry) -> Void) {
         locationManager.stopUpdatingLocation()
+        let repository = repositoryFactory.make(isSystemMediumFamily(context.family))
 
         Task(priority: .userInitiated) {
             for await location in locationManager.startUpdatingLocation() {
-                if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                    let entry = await entryDataSource.load(for: location)
-                    completion(entry)
-                    return
-                }
-
-                if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                    let entry = await entryDataSource.loadWithHourlyForecast(for: location)
-                    completion(entry)
-                    return
-                }
+                let entry = await repository.load(for: location)
+                completion(entry)
             }
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<WeatherEntry>) -> Void) {
         locationManager.stopUpdatingLocation()
+        let repository = repositoryFactory.make(isSystemMediumFamily(context.family))
 
         Task(priority: .userInitiated) {
             for await location in locationManager.startUpdatingLocation() {
                 var entries = [WeatherEntry]()
-
-                if checkIfWidgetFamilyNeedCurrentWeatherOnly(context.family) {
-                    let entry = await entryDataSource.load(for: location)
-                    entries.append(entry)
-                }
-
-                if checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(context.family) {
-                    let entry = await entryDataSource.loadWithHourlyForecast(for: location)
-                    entries.append(entry)
-                }
+                let entry = await repository.load(for: location)
+                entries.append(entry)
 
                 let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: .now)!
                 let timeline = Timeline(entries: entries, policy: .after(nextUpdate))
@@ -70,14 +55,7 @@ struct WeatherTimelineProvider: TimelineProvider {
         }
     }
 
-    private func checkIfWidgetFamilyNeedCurrentWeatherOnly(_ family: WidgetFamily) -> Bool {
-        family == .systemSmall
-        || family == .accessoryInline
-        || family == .accessoryRectangular
-        || family == .accessoryCircular
-    }
-
-    private func checkIfWidgetFamilyNeedCurrentAndHourlyWeatherForecast(_ family: WidgetFamily) -> Bool {
+    private func isSystemMediumFamily(_ family: WidgetFamily) -> Bool {
         family == .systemMedium
     }
 }

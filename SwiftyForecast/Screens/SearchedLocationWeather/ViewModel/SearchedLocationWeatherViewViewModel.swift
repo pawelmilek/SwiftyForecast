@@ -18,14 +18,14 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
 
     private let location: LocationModel
     private let client: WeatherClient
-    private let parser: ResponseParser
+    private let parser: WeatherParser
     private let databaseManager: DatabaseManager
     private let analyticsManager: AnalyticsManager
 
     init(
         location: LocationModel,
         client: WeatherClient,
-        parser: ResponseParser,
+        parser: WeatherParser,
         databaseManager: DatabaseManager,
         analyticsManager: AnalyticsManager
     ) {

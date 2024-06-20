@@ -27,7 +27,7 @@ struct SwiftyForecastWidget: Widget {
             kind: Constant.kind,
             provider: WeatherTimelineProvider(
                 locationManager: WidgetLocationManager(),
-                entryDataSource: WeatherEntryRepository(
+                repositoryFactory: WeatherEntryRepositoryFactory(
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
                     parser: ResponseParser(),

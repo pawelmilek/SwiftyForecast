@@ -1,6 +1,11 @@
 import Foundation
 
-struct ResponseParser {
+protocol WeatherParser {
+    func parse(current: CurrentWeatherResponse) -> WeatherModel
+    func parse(forecast: ForecastWeatherResponse) -> ForecastWeatherModel
+}
+
+struct ResponseParser: WeatherParser {
     func parse(current: CurrentWeatherResponse) -> WeatherModel {
         guard let currentCondition = current.conditions.first else { fatalError() }
 
