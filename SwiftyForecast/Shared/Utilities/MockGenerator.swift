@@ -11,9 +11,9 @@ import CoreLocation
 
 struct MockGenerator {
     private let decoder: JSONDecoder
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
 
-    init(decoder: JSONDecoder, parser: WeatherParser) {
+    init(decoder: JSONDecoder, parser: WeatherResponseParser) {
         self.decoder = decoder
         self.parser = parser
     }
@@ -27,7 +27,7 @@ struct MockGenerator {
             )
             let data = try resourceFile.data()
             let currentResponse = try decoder.decode(CurrentWeatherResponse.self, from: data)
-            let model = parser.parse(current: currentResponse)
+            let model = parser.weather(response: currentResponse)
             return model
         } catch {
             fatalError(error.localizedDescription)
@@ -43,7 +43,7 @@ struct MockGenerator {
             )
             let data = try resourceFile.data()
             let forecastResponse = try decoder.decode(ForecastWeatherResponse.self, from: data)
-            let model = parser.parse(forecast: forecastResponse)
+            let model = parser.forecast(response: forecastResponse)
             return model
         } catch {
             fatalError(error.localizedDescription)

@@ -12,13 +12,13 @@ import CoreLocation
 final class ForecastEntryRepository: WeatherEntryRepository {
     private let client: WeatherClient
     private let locationPlace: LocationPlaceable
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
     private let temperatureRenderer: TemperatureRenderer
 
     init(
         client: WeatherClient,
         locationPlace: LocationPlaceable,
-        parser: WeatherParser,
+        parser: WeatherResponseParser,
         temperatureRenderer: TemperatureRenderer
     ) {
         self.client = client
@@ -79,7 +79,7 @@ final class ForecastEntryRepository: WeatherEntryRepository {
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )
-            let model = parser.parse(current: response)
+            let model = parser.weather(response: response)
             return model
         } catch {
             fatalError(error.localizedDescription)
@@ -92,7 +92,7 @@ final class ForecastEntryRepository: WeatherEntryRepository {
                 latitude: coordinate.latitude,
                 longitude: coordinate.longitude
             )
-            let forecast = parser.parse(forecast: response)
+            let forecast = parser.forecast(response: response)
             return forecast.hourly
         } catch {
             fatalError(error.localizedDescription)

@@ -1,21 +1,21 @@
 import Foundation
 
-protocol WeatherParser {
-    func parse(current: CurrentWeatherResponse) -> WeatherModel
-    func parse(forecast: ForecastWeatherResponse) -> ForecastWeatherModel
+protocol WeatherResponseParser {
+    func weather(response: CurrentWeatherResponse) -> WeatherModel
+    func forecast(response: ForecastWeatherResponse) -> ForecastWeatherModel
 }
 
-struct ResponseParser: WeatherParser {
-    func parse(current: CurrentWeatherResponse) -> WeatherModel {
-        guard let currentCondition = current.conditions.first else { fatalError() }
+struct ResponseParser: WeatherResponseParser {
+    func weather(response: CurrentWeatherResponse) -> WeatherModel {
+        guard let currentCondition = response.conditions.first else { fatalError() }
 
-        let currentDate = Date(timeIntervalSince1970: TimeInterval(current.dateTimeUnix))
-        let sunriseDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunrise))
-        let sunsetDate = Date(timeIntervalSince1970: TimeInterval(current.metadata.sunset))
+        let currentDate = Date(timeIntervalSince1970: TimeInterval(response.dateTimeUnix))
+        let sunriseDate = Date(timeIntervalSince1970: TimeInterval(response.metadata.sunrise))
+        let sunsetDate = Date(timeIntervalSince1970: TimeInterval(response.metadata.sunset))
         let temperature = Temperature(
-            current: current.main.temp,
-            min: current.main.tempMin,
-            max: current.main.tempMax
+            current: response.main.temp,
+            min: response.main.tempMin,
+            max: response.main.tempMax
         )
         let condition = ConditionModel(
             id: currentCondition.id,
@@ -28,9 +28,9 @@ struct ResponseParser: WeatherParser {
             date: currentDate,
             temperature: temperature,
             condition: condition,
-            humidity: current.main.humidity,
-            pressure: current.main.pressure,
-            windSpeed: current.wind.speed,
+            humidity: response.main.humidity,
+            pressure: response.main.pressure,
+            windSpeed: response.wind.speed,
             sunrise: sunriseDate,
             sunset: sunsetDate
         )
@@ -38,8 +38,8 @@ struct ResponseParser: WeatherParser {
         return currentWeatherModel
     }
 
-    func parse(forecast: ForecastWeatherResponse) -> ForecastWeatherModel {
-        let hourlyForecastModels = forecast.data.map {
+    func forecast(response: ForecastWeatherResponse) -> ForecastWeatherModel {
+        let hourlyForecastModels = response.data.map {
             HourlyForecastModel(
                 date: Date(timeIntervalSince1970: TimeInterval($0.dateTimeUnix)),
                 temperature: $0.main.temp,
@@ -47,7 +47,7 @@ struct ResponseParser: WeatherParser {
             )
         }
 
-        let dailyForecastModels = groupAndFilterOutTodayDate(forecast: forecast)
+        let dailyForecastModels = groupAndFilterOutTodayDate(forecast: response)
         let forecastWeatherModel = ForecastWeatherModel(
             hourly: hourlyForecastModels,
             daily: dailyForecastModels

@@ -11,13 +11,13 @@ import Foundation
 struct WeatherEntryRepositoryFactory: EntryRepositoryFactory {
     private let client: WeatherClient
     private let locationPlace: LocationPlaceable
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
     private let temperatureRenderer: TemperatureRenderer
 
     init(
         client: WeatherClient,
         locationPlace: LocationPlaceable,
-        parser: WeatherParser,
+        parser: WeatherResponseParser,
         temperatureRenderer: TemperatureRenderer
     ) {
         self.client = client

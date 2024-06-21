@@ -31,7 +31,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     private let latitude: Double
     private let longitude: Double
     private let client: WeatherClient
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
     private let temperatureRenderer: TemperatureRenderer
     private let speedRenderer: SpeedRenderer
     private let measurementSystemNotification: MeasurementSystemNotification
@@ -41,7 +41,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         longitude: Double,
         locationName: String,
         client: WeatherClient,
-        parser: WeatherParser,
+        parser: WeatherResponseParser,
         temperatureRenderer: TemperatureRenderer,
         speedRenderer: SpeedRenderer,
         measurementSystemNotification: MeasurementSystemNotification
@@ -110,7 +110,7 @@ final class WeatherCardViewViewModel: ObservableObject {
                 latitude: latitude,
                 longitude: longitude
             )
-            let dataModel = parser.parse(current: response)
+            let dataModel = parser.weather(response: response)
             let largeIconData = try await client.fetchLargeIcon(
                 symbol: dataModel.condition.iconCode
             )

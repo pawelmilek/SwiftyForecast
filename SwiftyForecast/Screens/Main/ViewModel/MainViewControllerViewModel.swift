@@ -21,7 +21,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let locationManager: LocationManager
     private let analyticsManager: AnalyticsManager
     private let client: OpenWeatherMapClient
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -34,7 +34,7 @@ final class MainViewControllerViewModel: ObservableObject {
         locationManager: LocationManager,
         analyticsManager: AnalyticsManager,
         client: OpenWeatherMapClient,
-        parser: WeatherParser
+        parser: WeatherResponseParser
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSystemStore = notationSystemStore

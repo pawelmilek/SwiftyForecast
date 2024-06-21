@@ -18,14 +18,14 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
 
     private let location: LocationModel
     private let client: WeatherClient
-    private let parser: WeatherParser
+    private let parser: WeatherResponseParser
     private let databaseManager: DatabaseManager
     private let analyticsManager: AnalyticsManager
 
     init(
         location: LocationModel,
         client: WeatherClient,
-        parser: WeatherParser,
+        parser: WeatherResponseParser,
         databaseManager: DatabaseManager,
         analyticsManager: AnalyticsManager
     ) {
@@ -65,7 +65,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
             latitude: location.latitude,
             longitude: location.longitude
         )
-        setHourlyForecastItems(parser.parse(forecast: forecast))
+        setHourlyForecastItems(parser.forecast(response: forecast))
     }
 
     private func setHourlyForecastItems(_ forecastModel: ForecastWeatherModel) {
