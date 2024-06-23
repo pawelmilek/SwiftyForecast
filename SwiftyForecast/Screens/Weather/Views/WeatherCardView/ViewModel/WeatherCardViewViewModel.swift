@@ -33,7 +33,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     private let client: WeatherClient
     private let parser: WeatherResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
-    private let speedRenderer: SpeedRenderer
+    private let speedFormatterFactory: SpeedFormatterFactoryProtocol
     private let measurementSystemNotification: MeasurementSystemNotification
 
     init(
@@ -43,7 +43,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         client: WeatherClient,
         parser: WeatherResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol,
-        speedRenderer: SpeedRenderer,
+        speedFormatterFactory: SpeedFormatterFactoryProtocol,
         measurementSystemNotification: MeasurementSystemNotification
     ) {
         self.latitude = latitude
@@ -52,7 +52,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         self.client = client
         self.parser = parser
         self.temperatureFormatterFactory = temperatureFormatterFactory
-        self.speedRenderer = speedRenderer
+        self.speedFormatterFactory = speedFormatterFactory
         self.measurementSystemNotification = measurementSystemNotification
         self.condition = .none
         subscribeToPublisher()
@@ -85,8 +85,8 @@ final class WeatherCardViewViewModel: ObservableObject {
 
     private func setWindSpeedAccordingToMeasurementSystem() {
         guard let weatherModel else { return }
-        let rendered = speedRenderer.render(weatherModel.windSpeed)
-        windSpeed.value = rendered
+        let formatter = speedFormatterFactory.make(value: weatherModel.windSpeed)
+        windSpeed.value = formatter.current()
     }
 
     private func registerMeasurementSystemObserver() {

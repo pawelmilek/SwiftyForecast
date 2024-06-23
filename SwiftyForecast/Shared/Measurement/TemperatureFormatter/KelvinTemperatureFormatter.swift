@@ -14,7 +14,12 @@ struct KelvinTemperatureFormatter: TemperatureFormatter {
     private let maxValue: Double
     private let converter: TemperatureConvertible
 
-    init(currentValue: Double, minValue: Double, maxValue: Double, converter: TemperatureConvertible) {
+    init(
+        currentValue: Double,
+        minValue: Double,
+        maxValue: Double,
+        converter: TemperatureConvertible
+    ) {
         self.currentValue = currentValue
         self.minValue = minValue
         self.maxValue = maxValue

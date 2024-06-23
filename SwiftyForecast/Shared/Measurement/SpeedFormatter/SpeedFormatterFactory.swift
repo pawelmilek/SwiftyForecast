@@ -9,23 +9,22 @@
 import Foundation
 
 protocol SpeedFormatterFactoryProtocol {
-    func make(
-        by measurementSystem: MeasurementSystem,
-        valueInMetersPerSec: Double
-    ) -> SpeedValueDisplayable
+    func make(value: Double) -> SpeedFormatter
 }
 
 struct SpeedFormatterFactory: SpeedFormatterFactoryProtocol {
-    func make(
-        by measurementSystem: MeasurementSystem,
-        valueInMetersPerSec: Double
-    ) -> SpeedValueDisplayable {
-        switch measurementSystem {
-        case .metric:
-            return SpeedFormatterMetric(value: valueInMetersPerSec)
+    private let notationStorage: NotationSystemStorage
 
-        case .imperial:
-            return SpeedFormatterImperial(value: valueInMetersPerSec)
-        }
+    init(notationStorage: NotationSystemStorage) {
+        self.notationStorage = notationStorage
+    }
+
+    func make(value: Double) -> SpeedFormatter {
+        MetersPerSecSpeedFormatter(
+            value: value,
+            converter: notationStorage.measurementSystem == .metric
+            ? ConvertedMetersPerSecond()
+            : ConvertedMilesPerHour()
+        )
     }
 }

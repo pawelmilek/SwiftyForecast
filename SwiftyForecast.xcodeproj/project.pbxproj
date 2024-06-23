@@ -21,7 +21,6 @@
 		E20C6B1C2BE9ABC800DDB57A /* ConditionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225B4D92BE437DF00AD8906 /* ConditionModel.swift */; };
 		E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkMonitor.swift */; };
 		E2117B462B29B9F500F91ADB /* WeatherEntryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B452B29B9F500F91ADB /* WeatherEntryRepository.swift */; };
-		E2117B4B2B29D69700F91ADB /* SpeedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */; };
 		E2126F4B2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
 		E2126F4C2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
 		E2126F4E2C27A902001111E0 /* ConvertedFahrenheit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4D2C27A902001111E0 /* ConvertedFahrenheit.swift */; };
@@ -34,6 +33,16 @@
 		E2126F582C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F562C27A933001111E0 /* KelvinTemperatureFormatter.swift */; };
 		E2126F742C286914001111E0 /* UnitTemperature+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F732C286914001111E0 /* UnitTemperature+Locale.swift */; };
 		E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F732C286914001111E0 /* UnitTemperature+Locale.swift */; };
+		E2126F772C2885B3001111E0 /* SpeedFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F762C2885B3001111E0 /* SpeedFormatter.swift */; };
+		E2126F782C2885BA001111E0 /* SpeedFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F762C2885B3001111E0 /* SpeedFormatter.swift */; };
+		E2126F7A2C288886001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F792C288886001111E0 /* MetersPerSecSpeedFormatter.swift */; };
+		E2126F7C2C288892001111E0 /* SpeedConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7B2C288892001111E0 /* SpeedConvertible.swift */; };
+		E2126F7E2C2888AF001111E0 /* ConvertedMilesPerHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7D2C2888AF001111E0 /* ConvertedMilesPerHour.swift */; };
+		E2126F802C2888B9001111E0 /* ConvertedMetersPerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7F2C2888B9001111E0 /* ConvertedMetersPerSecond.swift */; };
+		E2126F812C288CB5001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F792C288886001111E0 /* MetersPerSecSpeedFormatter.swift */; };
+		E2126F822C288CB8001111E0 /* SpeedConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7B2C288892001111E0 /* SpeedConvertible.swift */; };
+		E2126F832C288CC2001111E0 /* ConvertedMetersPerSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7F2C2888B9001111E0 /* ConvertedMetersPerSecond.swift */; };
+		E2126F842C288CC4001111E0 /* ConvertedMilesPerHour.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F7D2C2888AF001111E0 /* ConvertedMilesPerHour.swift */; };
 		E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2192258214483AA0093FEBD /* OfflineViewController.swift */; };
 		E21ABD072AE5A0DF00F93F01 /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
 		E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD402AE82F3700F93F01 /* LocationSearchRow.swift */; };
@@ -48,7 +57,6 @@
 		E21E4A3A25143D0700066401 /* WeatherViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */; };
 		E2227E842ADD5439000C3886 /* TemperatureFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */; };
 		E2227E8E2ADD5DD9000C3886 /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
-		E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */; };
 		E22450722B9F3F9800F14BAA /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450642B9F3F9800F14BAA /* WeatherModel.swift */; };
 		E22450752B9F3F9800F14BAA /* Humidity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450672B9F3F9800F14BAA /* Humidity.swift */; };
 		E22450762B9F3F9800F14BAA /* Twilight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450682B9F3F9800F14BAA /* Twilight.swift */; };
@@ -141,8 +149,6 @@
 		E28CEC0A2B39C5AB003DB3A6 /* packages_license.html in Resources */ = {isa = PBXBuildFile; fileRef = E28CEC092B39C5AB003DB3A6 /* packages_license.html */; };
 		E28CEC0D2B3EB768003DB3A6 /* InformationTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */; };
 		E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
-		E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */; };
-		E290F24F2ADD8BEE001B3276 /* SpeedFormatterImperial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */; };
 		E290F2542ADDAF55001B3276 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E290F2532ADDAF55001B3276 /* Kingfisher */; };
 		E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */; };
 		E296A7E22AD6E3F2001BFADB /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E12AD6E3F2001BFADB /* HTTPMethod.swift */; };
@@ -244,13 +250,9 @@
 		E2D430DE2BB4DB33003F26EE /* WindSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450692B9F3F9800F14BAA /* WindSpeed.swift */; };
 		E2D430DF2BB4DB38003F26EE /* Humidity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450672B9F3F9800F14BAA /* Humidity.swift */; };
 		E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */; };
-		E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */; };
 		E2D430E42BB4DB6C003F26EE /* WeatherViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */; };
 		E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
 		E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
-		E2D430E72BB4DB89003F26EE /* SpeedValueDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */; };
-		E2D430E82BB4DB94003F26EE /* SpeedFormatterMetric.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */; };
-		E2D430EA2BB4DBAF003F26EE /* SpeedFormatterImperial.swift in Sources */ = {isa = PBXBuildFile; fileRef = E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */; };
 		E2D430EC2BB4DBC8003F26EE /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
 		E2D430EF2BB4DC0F003F26EE /* WeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506D2B9F3F9800F14BAA /* WeatherCardView.swift */; };
 		E2D430F02BB4DC14003F26EE /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AE2BB4D954003F26EE /* HourlyForecastChart.swift */; };
@@ -357,13 +359,17 @@
 		E20C6B182BE85BD800DDB57A /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		E20DA45A214348AD0047491B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E2117B452B29B9F500F91ADB /* WeatherEntryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEntryRepository.swift; sourceTree = "<group>"; };
-		E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedRenderer.swift; sourceTree = "<group>"; };
 		E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConvertible.swift; sourceTree = "<group>"; };
 		E2126F4D2C27A902001111E0 /* ConvertedFahrenheit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedFahrenheit.swift; sourceTree = "<group>"; };
 		E2126F502C27A90D001111E0 /* ConvertedCelsius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCelsius.swift; sourceTree = "<group>"; };
 		E2126F532C27A923001111E0 /* TemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatter.swift; sourceTree = "<group>"; };
 		E2126F562C27A933001111E0 /* KelvinTemperatureFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KelvinTemperatureFormatter.swift; sourceTree = "<group>"; };
 		E2126F732C286914001111E0 /* UnitTemperature+Locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UnitTemperature+Locale.swift"; sourceTree = "<group>"; };
+		E2126F762C2885B3001111E0 /* SpeedFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatter.swift; sourceTree = "<group>"; };
+		E2126F792C288886001111E0 /* MetersPerSecSpeedFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetersPerSecSpeedFormatter.swift; sourceTree = "<group>"; };
+		E2126F7B2C288892001111E0 /* SpeedConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedConvertible.swift; sourceTree = "<group>"; };
+		E2126F7D2C2888AF001111E0 /* ConvertedMilesPerHour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedMilesPerHour.swift; sourceTree = "<group>"; };
+		E2126F7F2C2888B9001111E0 /* ConvertedMetersPerSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedMetersPerSecond.swift; sourceTree = "<group>"; };
 		E2192258214483AA0093FEBD /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchCompleter.swift; sourceTree = "<group>"; };
 		E21ABD402AE82F3700F93F01 /* LocationSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchRow.swift; sourceTree = "<group>"; };
@@ -374,7 +380,6 @@
 		E21E386D2B37576A00513B26 /* AboutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRow.swift; sourceTree = "<group>"; };
 		E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatterFactory.swift; sourceTree = "<group>"; };
 		E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterFactory.swift; sourceTree = "<group>"; };
-		E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedValueDisplayable.swift; sourceTree = "<group>"; };
 		E224416321618EA4009D409F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E22450642B9F3F9800F14BAA /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		E22450652B9F3F9800F14BAA /* DayNightState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayNightState.swift; sourceTree = "<group>"; };
@@ -447,8 +452,6 @@
 		E28CEC092B39C5AB003DB3A6 /* packages_license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = packages_license.html; sourceTree = "<group>"; };
 		E28CEC0C2B3EB768003DB3A6 /* InformationTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationTip.swift; sourceTree = "<group>"; };
 		E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsTip.swift; sourceTree = "<group>"; };
-		E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterMetric.swift; sourceTree = "<group>"; };
-		E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterImperial.swift; sourceTree = "<group>"; };
 		E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		E296A7E12AD6E3F2001BFADB /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		E296A7E32AD6E797001BFADB /* WeatherEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEndpoint.swift; sourceTree = "<group>"; };
@@ -709,10 +712,12 @@
 		E2227E8C2ADD5DB8000C3886 /* SpeedFormatter */ = {
 			isa = PBXGroup;
 			children = (
+				E2126F7F2C2888B9001111E0 /* ConvertedMetersPerSecond.swift */,
+				E2126F7D2C2888AF001111E0 /* ConvertedMilesPerHour.swift */,
+				E2126F792C288886001111E0 /* MetersPerSecSpeedFormatter.swift */,
+				E2126F7B2C288892001111E0 /* SpeedConvertible.swift */,
+				E2126F762C2885B3001111E0 /* SpeedFormatter.swift */,
 				E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */,
-				E290F24E2ADD8BEE001B3276 /* SpeedFormatterImperial.swift */,
-				E290F24C2ADD8BDE001B3276 /* SpeedFormatterMetric.swift */,
-				E2227E8F2ADD5E51000C3886 /* SpeedValueDisplayable.swift */,
 			);
 			path = SpeedFormatter;
 			sourceTree = "<group>";
@@ -868,7 +873,6 @@
 				E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */,
 				E28550012290F26E00CD7554 /* MeasurementSystem.swift */,
 				E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */,
-				E2117B4A2B29D69700F91ADB /* SpeedRenderer.swift */,
 				E2227E8C2ADD5DB8000C3886 /* SpeedFormatter */,
 				E2227E852ADD54AD000C3886 /* TemperatureFormatter */,
 			);
@@ -1685,10 +1689,12 @@
 				E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */,
 				E2E4BA4F2C1754A800734382 /* HourlyForcecastDataSource.swift in Sources */,
 				E2D430FA2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
+				E2126F7E2C2888AF001111E0 /* ConvertedMilesPerHour.swift in Sources */,
 				E2D430BD2BB4D954003F26EE /* HourlyForecastChartDataSource.swift in Sources */,
 				E2D430D12BB4D954003F26EE /* SearchedLocationWeatherViewViewModel.swift in Sources */,
 				E2DC149524955C8D00D1A329 /* MainViewControllerViewModel.swift in Sources */,
 				E2255A442C10208600C6F3AD /* MainViewControllerEvent.swift in Sources */,
+				E2126F772C2885B3001111E0 /* SpeedFormatter.swift in Sources */,
 				E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */,
 				E20A433D2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */,
 				E2255A422C10206D00C6F3AD /* AppearanceViewEvent.swift in Sources */,
@@ -1728,7 +1734,6 @@
 				E2255A4A2C1020B400C6F3AD /* LocationListEvent.swift in Sources */,
 				E2E6C7032C0EAD2C00500EE8 /* AboutShareRow.swift in Sources */,
 				E28CEC082B39BB82003DB3A6 /* HTMLView.swift in Sources */,
-				E2117B4B2B29D69700F91ADB /* SpeedRenderer.swift in Sources */,
 				E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */,
 				E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */,
 				E22450722B9F3F9800F14BAA /* WeatherModel.swift in Sources */,
@@ -1738,7 +1743,6 @@
 				E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */,
 				E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */,
 				E2B0356A2500700000DC0E77 /* ResponseParser.swift in Sources */,
-				E2227E902ADD5E51000C3886 /* SpeedValueDisplayable.swift in Sources */,
 				E22450752B9F3F9800F14BAA /* Humidity.swift in Sources */,
 				E28CEC0D2B3EB768003DB3A6 /* InformationTip.swift in Sources */,
 				E28357392B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift in Sources */,
@@ -1773,9 +1777,7 @@
 				E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */,
 				E296A7F22AD7EA46001BFADB /* Condition.swift in Sources */,
 				E2A32F27254459FB000ACEFE /* AppStoreReviewManager.swift in Sources */,
-				E290F24F2ADD8BEE001B3276 /* SpeedFormatterImperial.swift in Sources */,
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
-				E290F24D2ADD8BDE001B3276 /* SpeedFormatterMetric.swift in Sources */,
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
 				E2E6C7062C0EB0FA00500EE8 /* AboutScreen.swift in Sources */,
 				E2126F572C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */,
@@ -1783,6 +1785,7 @@
 				E20A43392C1B28B20052AFA4 /* DependencyContainer.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
+				E2126F7C2C288892001111E0 /* SpeedConvertible.swift in Sources */,
 				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
 				E2A567602B077B38000324C0 /* LottieAnimationView.swift in Sources */,
@@ -1791,6 +1794,7 @@
 				E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */,
 				E20C6B132BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */,
+				E2126F7A2C288886001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */,
 				E2D430CF2BB4D954003F26EE /* SearchedLocationWeatherView.swift in Sources */,
 				E224507B2B9F3F9800F14BAA /* AnimationView.swift in Sources */,
 				E296A7EE2AD7EA1A001BFADB /* CloudCoverage.swift in Sources */,
@@ -1799,6 +1803,7 @@
 				E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */,
 				E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */,
 				E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
+				E2126F802C2888B9001111E0 /* ConvertedMetersPerSecond.swift in Sources */,
 				E2CAC9FA2C044B4F00E573D2 /* ResourceFile.swift in Sources */,
 				E270891A24CE5ADA003F7587 /* MainCoordinator.swift in Sources */,
 				E22450782B9F3F9800F14BAA /* WeatherCardViewViewModel.swift in Sources */,
@@ -1829,10 +1834,8 @@
 				E283572B2B23894800E3807A /* GeocodedLocation.swift in Sources */,
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2CFA7AB2B309E63001DE3E8 /* MockGenerator.swift in Sources */,
-				E2D430E82BB4DB94003F26EE /* SpeedFormatterMetric.swift in Sources */,
 				E2255A572C10215700C6F3AD /* FirebaseAnalyticsService.swift in Sources */,
 				E2D786D82C24AF79001E4DE8 /* EntryRepositoryFactory.swift in Sources */,
-				E2D430E72BB4DB89003F26EE /* SpeedValueDisplayable.swift in Sources */,
 				E2126F552C27A923001111E0 /* TemperatureFormatter.swift in Sources */,
 				E2F671232B23682F00B791A0 /* WeatherTimelineProvider.swift in Sources */,
 				E2416FF22B331E06009C8F81 /* MediumWidgetView.swift in Sources */,
@@ -1853,11 +1856,12 @@
 				E296B61D2C20867C001F7C57 /* PreviewRealmManager.swift in Sources */,
 				E2D430DB2BB4DB1B003F26EE /* WeatherCardViewViewModel.swift in Sources */,
 				E2255A3A2C0FC50700C6F3AD /* AnalyticsManager.swift in Sources */,
-				E2D430EA2BB4DBAF003F26EE /* SpeedFormatterImperial.swift in Sources */,
 				E2126F522C27A90D001111E0 /* ConvertedCelsius.swift in Sources */,
+				E2126F832C288CC2001111E0 /* ConvertedMetersPerSecond.swift in Sources */,
 				E2255A552C10214000C6F3AD /* MainViewControllerEvent.swift in Sources */,
 				E2D430DF2BB4DB38003F26EE /* Humidity.swift in Sources */,
 				E2FDBD6B2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift in Sources */,
+				E2126F782C2885BA001111E0 /* SpeedFormatter.swift in Sources */,
 				E2D430F42BB4DC30003F26EE /* AnimationView.swift in Sources */,
 				E2AD32672B23774400F46FBE /* Coordinate.swift in Sources */,
 				E2F671172B234EB600B791A0 /* Temperature.swift in Sources */,
@@ -1875,7 +1879,6 @@
 				E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */,
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
-				E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */,
 				E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */,
 				E2AD32702B23779000F46FBE /* BuildConfigurationFile.swift in Sources */,
 				E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */,
@@ -1888,6 +1891,8 @@
 				E2644E362C0AD7BD00B67E18 /* VortexSystem+Condition.swift in Sources */,
 				E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */,
 				E2AD32792B23833A00F46FBE /* WidgetLocationManager.swift in Sources */,
+				E2126F812C288CB5001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */,
+				E2126F822C288CB8001111E0 /* SpeedConvertible.swift in Sources */,
 				E2AD32622B23729900F46FBE /* Wind.swift in Sources */,
 				E2D430EF2BB4DC0F003F26EE /* WeatherCardView.swift in Sources */,
 				E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */,
@@ -1913,6 +1918,7 @@
 				E2F671142B234EA200B791A0 /* TemperatureFormatterFactory.swift in Sources */,
 				E224507D2B9F403100F14BAA /* DayNightState.swift in Sources */,
 				E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */,
+				E2126F842C288CC4001111E0 /* ConvertedMilesPerHour.swift in Sources */,
 				E2AD325C2B23719C00F46FBE /* OpenWeatherMapClient.swift in Sources */,
 				E2AD32602B23729200F46FBE /* Condition.swift in Sources */,
 				E2255A502C10211100C6F3AD /* AnalyticsService.swift in Sources */,

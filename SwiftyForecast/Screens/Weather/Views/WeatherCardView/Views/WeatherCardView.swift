@@ -153,7 +153,7 @@ private extension WeatherCardView {
             temperatureFormatterFactory: TemperatureFormatterFactory(
                 notationStorage: NotationSystemStorage()
             ),
-            speedRenderer: SpeedRenderer(),
+            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSystemStorage()),
             measurementSystemNotification: MeasurementSystemNotification()
         )
     )

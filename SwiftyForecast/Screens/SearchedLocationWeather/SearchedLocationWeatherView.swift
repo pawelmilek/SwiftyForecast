@@ -112,7 +112,7 @@ struct SearchedLocationWeatherView: View {
             temperatureFormatterFactory: TemperatureFormatterFactory(
                 notationStorage: NotationSystemStorage()
             ),
-            speedRenderer: SpeedRenderer(),
+            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSystemStorage()),
             measurementSystemNotification: MeasurementSystemNotification()
         ),
         onCancel: {

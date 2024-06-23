@@ -99,7 +99,9 @@ private extension MainViewController {
                             temperatureFormatterFactory: TemperatureFormatterFactory(
                                 notationStorage: NotationSystemStorage()
                             ),
-                            speedRenderer: SpeedRenderer(),
+                            speedFormatterFactory: SpeedFormatterFactory(
+                                notationStorage: NotationSystemStorage()
+                            ),
                             measurementSystemNotification: MeasurementSystemNotification()
                         )
                     )
