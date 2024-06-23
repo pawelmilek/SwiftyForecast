@@ -33,6 +33,7 @@
 		E2126F572C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F562C27A933001111E0 /* KelvinTemperatureFormatter.swift */; };
 		E2126F582C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F562C27A933001111E0 /* KelvinTemperatureFormatter.swift */; };
 		E2126F742C286914001111E0 /* UnitTemperature+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F732C286914001111E0 /* UnitTemperature+Locale.swift */; };
+		E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F732C286914001111E0 /* UnitTemperature+Locale.swift */; };
 		E2192259214483AA0093FEBD /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2192258214483AA0093FEBD /* OfflineViewController.swift */; };
 		E21ABD072AE5A0DF00F93F01 /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
 		E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD402AE82F3700F93F01 /* LocationSearchRow.swift */; };
@@ -1875,6 +1876,7 @@
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2D430E12BB4DB41003F26EE /* SpeedRenderer.swift in Sources */,
+				E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */,
 				E2AD32702B23779000F46FBE /* BuildConfigurationFile.swift in Sources */,
 				E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */,
 				E2F671192B234F3400B791A0 /* MeasurementSystem.swift in Sources */,

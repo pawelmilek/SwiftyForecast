@@ -24,7 +24,6 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
 
         if let temperature = model.temperature {
             let formatter = temperatureFormatterFactory.make(by: Temperature(current: temperature))
-
             currentTemperature = formatter.current()
             temperatureFormatted = formatter.current()
         } else {

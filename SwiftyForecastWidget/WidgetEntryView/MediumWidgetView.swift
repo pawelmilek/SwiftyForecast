@@ -34,7 +34,7 @@ private extension MediumWidgetView {
             Text(entry.formattedTemperature)
                 .font(.system(size: 60, weight: .heavy, design: .monospaced))
                 .foregroundStyle(.accent)
-                .modifier(TextScaledModifier())
+                .textScaled()
         }
     }
 

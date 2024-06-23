@@ -10,10 +10,6 @@ import Foundation
 import SwiftUI
 
 extension WeatherEntry {
-    private static let temperatureFormatterFactory = TemperatureFormatterFactory(
-        notation: NotationSystemStorage().temperatureNotation
-    )
-
     static let sampleTimeline = [
         WeatherEntry(
             date: Date(),
@@ -27,28 +23,38 @@ extension WeatherEntry {
                     icon: UIImage(resource: .rainyDay).pngData()!,
                     date: .now,
                     temperature: Temperature(current: 276.46),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
                     temperature: Temperature(current: 276.46),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .thunderDay).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
                     temperature: Temperature(current: 276.46),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .clearDay).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
                     temperature: Temperature(current: 276.46),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 )
             ],
-            temperatureFormatterFactory: temperatureFormatterFactory
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSystemStorage()
+            )
         ),
         WeatherEntry(
             date: Date(),
@@ -62,28 +68,38 @@ extension WeatherEntry {
                     icon: UIImage(resource: .cloudyDay).pngData()!,
                     date: .now,
                     temperature: Temperature(current: 278.93),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
                     temperature: Temperature(current: 278.93),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .cloudyNight).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
                     temperature: Temperature(current: 278.93),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 ),
                 HourlyEntry(
                     icon: UIImage(resource: .thunderDay).pngData()!,
                     date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
                     temperature: Temperature(current: 278.93),
-                    temperatureFormatterFactory: temperatureFormatterFactory
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notationStorage: NotationSystemStorage()
+                    )
                 )
             ],
-            temperatureFormatterFactory: temperatureFormatterFactory
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSystemStorage()
+            )
         )
     ]
 }

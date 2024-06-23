@@ -49,7 +49,7 @@ struct HourlyForecastChart: View {
                                     .fontWeight(.semibold)
                                     .fontDesign(.monospaced)
                                     .foregroundStyle(.accent)
-                                    .modifier(TextScaledModifier())
+                                    .textScaled()
                                 AsyncImage(url: item.iconURL, content: { image in
                                     image
                                         .resizable()

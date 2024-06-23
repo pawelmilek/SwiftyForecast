@@ -17,7 +17,6 @@ struct FavoriteLocationList: View {
     @Environment(\.weatherClient) private var weatherClient
     @Binding var searchText: String
     let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
-    let measurementSystemNotification: MeasurementSystemNotification
     var onSelectRow: (Int) -> Void
 
     @ObservedResults(
@@ -70,10 +69,11 @@ struct FavoriteLocationList: View {
     FavoriteLocationList(
         searchText: .constant("Search Text"),
         temperatureFormatterFactory: TemperatureFormatterFactory(
-            notation: NotationSystemStorage().temperatureNotation
+            notationStorage: NotationSystemStorage()
         ),
-        measurementSystemNotification: MeasurementSystemNotification(),
-        onSelectRow: {_ in }
+        onSelectRow: {
+            _ in
+        }
     )
     .task {
         try? Tips.resetDatastore()

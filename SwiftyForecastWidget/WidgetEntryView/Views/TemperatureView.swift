@@ -16,7 +16,7 @@ struct TemperatureView: View {
         VStack(spacing: -10) {
             Text(current)
                 .font(.system(size: 50, weight: .heavy, design: .monospaced))
-                .modifier(TextScaledModifier())
+                .textScaled()
             Text(maxMin)
                 .font(.caption2)
                 .fontWeight(.heavy)

@@ -87,7 +87,7 @@ private extension WeatherCardView {
         VStack {
             Text(viewModel.daytimeDescription)
             Text(viewModel.description)
-                .modifier(TextScaledModifier())
+                .textScaled()
         }
         .font(Style.WeatherCard.dayDescriptionFont)
     }
@@ -96,7 +96,7 @@ private extension WeatherCardView {
         VStack(spacing: 0) {
             Text(viewModel.temperature)
                 .font(Style.WeatherCard.temperatureFont)
-                .modifier(TextScaledModifier())
+                .textScaled()
             VStack {
                 Text("")
                 Text(viewModel.temperatureMaxMin)
@@ -150,7 +150,9 @@ private extension WeatherCardView {
             locationName: LocationModel.examples.first!.name,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
-            temperatureFormatterFactory: TemperatureFormatterFactory(notation: NotationSystemStorage().temperatureNotation),
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSystemStorage()
+            ),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()
         )

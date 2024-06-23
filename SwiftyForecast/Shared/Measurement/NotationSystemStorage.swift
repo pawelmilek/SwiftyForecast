@@ -52,7 +52,9 @@ final class NotationSystemStorage {
 
     private func loadTemperatureNotation() -> TemperatureNotation {
         let storedValue = storage.integer(forKey: Constant.temperatureUnit)
-        return TemperatureNotation(rawValue: storedValue) ?? .fahrenheit
+        let locale = UnitTemperature.locale
+        let deviceUnit = TemperatureNotation.allCases.first { $0.symbol == locale.symbol } ?? .fahrenheit
+        return TemperatureNotation(rawValue: storedValue) ?? deviceUnit
     }
 
     private func saveTemperatureNotation(_ value: TemperatureNotation) {

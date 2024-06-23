@@ -13,10 +13,10 @@ protocol TemperatureFormatterFactoryProtocol {
 }
 
 struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
-    private let notation: TemperatureNotation
+    private let notationStorage: NotationSystemStorage
 
-    init(notation: TemperatureNotation) {
-        self.notation = notation
+    init(notationStorage: NotationSystemStorage) {
+        self.notationStorage = notationStorage
     }
 
     func make(by temperature: Temperature) -> TemperatureFormatter {
@@ -24,7 +24,7 @@ struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
             currentValue: temperature.current,
             minValue: temperature.min,
             maxValue: temperature.max,
-            converter: notation == .celsius
+            converter: notationStorage.temperatureNotation == .celsius
                 ? ConvertedCelsius()
                 : ConvertedFahrenheit()
         )

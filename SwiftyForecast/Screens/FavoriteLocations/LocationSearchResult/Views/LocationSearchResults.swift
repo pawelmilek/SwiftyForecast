@@ -52,7 +52,7 @@ struct LocationSearchResults: View {
                     client: weatherClient,
                     parser: ResponseParser(),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notation: NotationSystemStorage().temperatureNotation
+                        notationStorage: NotationSystemStorage()
                     ),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()

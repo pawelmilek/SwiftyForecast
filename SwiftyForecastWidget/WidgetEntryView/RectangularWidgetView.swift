@@ -36,7 +36,7 @@ struct RectangularWidgetView: View {
             }
             .lineLimit(1)
             Text(conditionDescription)
-                .modifier(TextScaledModifier())
+                .textScaled()
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal, 10)

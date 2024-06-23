@@ -13,10 +13,9 @@ struct WeatherEntry: TimelineEntry {
     let locationName: String
     let icon: Data
     let description: String
-    private let temperature: Temperature
     let dayNightState: DayNightState
     let hourly: [HourlyEntry]
-    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
+    private let temperatureFormatter: TemperatureFormatter
 
     init(
         date: Date,
@@ -32,29 +31,28 @@ struct WeatherEntry: TimelineEntry {
         self.locationName = locationName
         self.description = description
         self.icon = icon
-        self.temperature = temperature
         self.dayNightState = dayNightState
         self.hourly = hourly
-        self.temperatureFormatterFactory = temperatureFormatterFactory
+        self.temperatureFormatter = temperatureFormatterFactory.make(by: temperature)
     }
 
     var currentTemperature: Int {
-        temperatureFormatterFactory.make(by: temperature).current()
+        temperatureFormatter.current()
     }
 
     var minTemperature: Int {
-        temperatureFormatterFactory.make(by: temperature).min()
+        temperatureFormatter.min()
     }
 
     var maxTemperature: Int {
-        temperatureFormatterFactory.make(by: temperature).max()
+        temperatureFormatter.max()
     }
 
     var formattedTemperature: String {
-        temperatureFormatterFactory.make(by: temperature).current()
+        temperatureFormatter.current()
     }
 
     var formattedTemperatureMaxMin: String {
-        temperatureFormatterFactory.make(by: temperature).maxMin()
+        temperatureFormatter.maxMin()
     }
 }

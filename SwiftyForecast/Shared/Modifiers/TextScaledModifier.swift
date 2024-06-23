@@ -16,3 +16,9 @@ struct TextScaledModifier: ViewModifier {
             .lineLimit(1)
     }
 }
+
+extension View {
+    func textScaled() -> some View {
+        modifier(TextScaledModifier())
+    }
+}

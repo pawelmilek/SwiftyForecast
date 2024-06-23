@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol MeasurementSystemNotificationProtocol {
+    func post()
+    func addObserver(_ observer: Any, selector: Selector)
+}
+
+
+
+
 struct MeasurementSystemNotification {
     private let didChangeMeasurementSystem = NSNotification.Name("didChangeMeasurementSystem")
     private let notificationCenter: NotificationCenter
@@ -30,9 +38,5 @@ struct MeasurementSystemNotification {
             name: didChangeMeasurementSystem,
             object: nil
         )
-    }
-
-    func removeObserver() {
-        notificationCenter.removeObserver(self)
     }
 }
