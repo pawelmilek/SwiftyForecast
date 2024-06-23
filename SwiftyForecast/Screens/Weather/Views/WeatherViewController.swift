@@ -115,7 +115,7 @@ private extension WeatherViewController {
                     HourlyViewCellViewModel(
                         model: $0,
                         temperatureFormatterFactory: TemperatureFormatterFactory(
-                            notationStorage: NotationSystemStorage()
+                            notationStorage: NotationSettingsStorage()
                         )
                     )
                 }
@@ -132,7 +132,9 @@ private extension WeatherViewController {
                 $0.map {
                     DailyViewCellViewModel(
                         model: $0,
-                        temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSystemStorage())
+                        temperatureFormatterFactory: TemperatureFormatterFactory(
+                            notationStorage: NotationSettingsStorage()
+                        )
                     )
                 }
             }

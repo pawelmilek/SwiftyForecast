@@ -22,7 +22,7 @@ final class MainCoordinator: Coordinator {
             MainViewController(
                 viewModel: MainViewControllerViewModel(
                     geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
-                    notationSystemStore: NotationSystemStorage(),
+                    notationSettings: NotationSettingsStorage(),
                     measurementSystemNotification: MeasurementSystemNotification(),
                     currentLocationRecord: CurrentLocationRecord(databaseManager: self.databaseManager),
                     databaseManager: self.databaseManager,

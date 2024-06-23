@@ -110,9 +110,11 @@ struct SearchedLocationWeatherView: View {
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSystemStorage()
+                notationStorage: NotationSettingsStorage()
             ),
-            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSystemStorage()),
+            speedFormatterFactory: SpeedFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            ),
             measurementSystemNotification: MeasurementSystemNotification()
         ),
         onCancel: {

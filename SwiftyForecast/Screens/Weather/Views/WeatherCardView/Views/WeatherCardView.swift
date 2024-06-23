@@ -151,9 +151,11 @@ private extension WeatherCardView {
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSystemStorage()
+                notationStorage: NotationSettingsStorage()
             ),
-            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSystemStorage()),
+            speedFormatterFactory: SpeedFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            ),
             measurementSystemNotification: MeasurementSystemNotification()
         )
     )

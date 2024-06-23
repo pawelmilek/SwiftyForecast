@@ -52,10 +52,10 @@ struct LocationSearchResults: View {
                     client: weatherClient,
                     parser: ResponseParser(),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     ),
                     speedFormatterFactory: SpeedFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     ),
                     measurementSystemNotification: MeasurementSystemNotification()
                 ),

@@ -13,9 +13,9 @@ protocol TemperatureFormatterFactoryProtocol {
 }
 
 struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
-    private let notationStorage: NotationSystemStorage
+    private let notationStorage: NotationSettings
 
-    init(notationStorage: NotationSystemStorage) {
+    init(notationStorage: NotationSettings) {
         self.notationStorage = notationStorage
     }
 

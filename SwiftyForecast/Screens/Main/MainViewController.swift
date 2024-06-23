@@ -80,7 +80,7 @@ private extension MainViewController {
     }
 
     func subscribePublishers() {
-        viewModel.$notationSegmentedControlIndex
+        viewModel.$notationControlIndex
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
@@ -97,10 +97,10 @@ private extension MainViewController {
                             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                             parser: ResponseParser(),
                             temperatureFormatterFactory: TemperatureFormatterFactory(
-                                notationStorage: NotationSystemStorage()
+                                notationStorage: NotationSettingsStorage()
                             ),
                             speedFormatterFactory: SpeedFormatterFactory(
-                                notationStorage: NotationSystemStorage()
+                                notationStorage: NotationSettingsStorage()
                             ),
                             measurementSystemNotification: MeasurementSystemNotification()
                         )
@@ -274,7 +274,7 @@ private extension MainViewController {
     }
 
     func segmentedControl() -> UISegmentedControl {
-        let control = UISegmentedControl(items: viewModel.notationSegmentedControlItems)
+        let control = UISegmentedControl(items: viewModel.notationControlItems)
         control.frame = CGRect(x: 0, y: 0, width: 100, height: 20)
         control.addAction( UIAction { [weak self] action in
             guard let sender = action.sender as? UISegmentedControl else { return }

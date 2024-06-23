@@ -24,7 +24,7 @@ extension WeatherEntry {
                     date: .now,
                     temperature: Temperature(current: 276.46),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -32,7 +32,7 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
                     temperature: Temperature(current: 276.46),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -40,7 +40,7 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
                     temperature: Temperature(current: 276.46),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -48,12 +48,12 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
                     temperature: Temperature(current: 276.46),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 )
             ],
             temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSystemStorage()
+                notationStorage: NotationSettingsStorage()
             )
         ),
         WeatherEntry(
@@ -69,7 +69,7 @@ extension WeatherEntry {
                     date: .now,
                     temperature: Temperature(current: 278.93),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -77,7 +77,7 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 3, to: .now)!,
                     temperature: Temperature(current: 278.93),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -85,7 +85,7 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 6, to: .now)!,
                     temperature: Temperature(current: 278.93),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 ),
                 HourlyEntry(
@@ -93,12 +93,12 @@ extension WeatherEntry {
                     date: Calendar.current.date(byAdding: .hour, value: 9, to: .now)!,
                     temperature: Temperature(current: 278.93),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSystemStorage()
+                        notationStorage: NotationSettingsStorage()
                     )
                 )
             ],
             temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSystemStorage()
+                notationStorage: NotationSettingsStorage()
             )
         )
     ]

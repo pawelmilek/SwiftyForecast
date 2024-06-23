@@ -6,15 +6,15 @@ import Combine
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var weatherViewModels: [WeatherViewControllerViewModel]
-    @Published private(set) var notationSegmentedControlItems: [String]
-    @Published private(set) var notationSegmentedControlIndex: Int
+    @Published private(set) var notationControlItems: [String]
+    @Published private(set) var notationControlIndex: Int
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var locationError: Error?
     @Published private(set) var selectedIndex: Int?
     private var locations: Results<LocationModel>?
 
     private let geocodeLocation: LocationPlaceable
-    private let notationSystemStore: NotationSystemStorage
+    private var notationSettings: NotationSettings
     private let measurementSystemNotification: MeasurementSystemNotification
     private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
@@ -27,7 +27,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
     init(
         geocodeLocation: LocationPlaceable,
-        notationSystemStore: NotationSystemStorage,
+        notationSettings: NotationSettings,
         measurementSystemNotification: MeasurementSystemNotification,
         currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
@@ -37,7 +37,7 @@ final class MainViewControllerViewModel: ObservableObject {
         parser: WeatherResponseParser
     ) {
         self.geocodeLocation = geocodeLocation
-        self.notationSystemStore = notationSystemStore
+        self.notationSettings = notationSettings
         self.measurementSystemNotification = measurementSystemNotification
         self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
@@ -45,8 +45,8 @@ final class MainViewControllerViewModel: ObservableObject {
         self.analyticsManager = analyticsManager
         self.client = client
         self.parser = parser
-        self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
-        self.notationSegmentedControlItems = [
+        self.notationControlIndex =  notationSettings.temperatureNotation.rawValue
+        self.notationControlItems = [
             TemperatureNotation.fahrenheit.symbol,
             TemperatureNotation.celsius.symbol
         ]
@@ -187,9 +187,9 @@ final class MainViewControllerViewModel: ObservableObject {
             return
         }
 
-        notationSystemStore.measurementSystem = measurementSystem
-        notationSystemStore.temperatureNotation = temperatureNotation
-        notationSegmentedControlIndex = temperatureNotation.rawValue
+        notationSettings.measurementSystem = measurementSystem
+        notationSettings.temperatureNotation = temperatureNotation
+        notationControlIndex = temperatureNotation.rawValue
         measurementSystemNotification.post()
         reloadWidgetTimeline()
 

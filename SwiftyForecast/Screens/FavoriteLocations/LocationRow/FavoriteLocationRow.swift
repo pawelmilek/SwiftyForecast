@@ -87,7 +87,7 @@ private extension FavoriteLocationRow {
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSystemStorage()
+                notationStorage: NotationSettingsStorage()
             )
         )
     )
