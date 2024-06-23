@@ -11,7 +11,7 @@ import SwiftUI
 
 extension WeatherEntry {
     private static let temperatureFormatterFactory = TemperatureFormatterFactory(
-        notation: NotationSystemStore().temperatureNotation
+        notation: NotationSystemStorage().temperatureNotation
     )
 
     static let sampleTimeline = [

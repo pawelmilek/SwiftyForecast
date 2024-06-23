@@ -70,7 +70,7 @@ struct FavoriteLocationList: View {
     FavoriteLocationList(
         searchText: .constant("Search Text"),
         temperatureFormatterFactory: TemperatureFormatterFactory(
-            notation: NotationSystemStore().temperatureNotation
+            notation: NotationSystemStorage().temperatureNotation
         ),
         measurementSystemNotification: MeasurementSystemNotification(),
         onSelectRow: {_ in }

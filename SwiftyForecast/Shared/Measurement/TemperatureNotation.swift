@@ -19,14 +19,4 @@ enum TemperatureNotation: Int, CaseIterable {
             "ºC"
         }
     }
-
-    var name: String {
-        switch self {
-        case .fahrenheit:
-            "fahrenheit"
-
-        case .celsius:
-            "celsius"
-        }
-    }
 }

@@ -22,7 +22,7 @@ final class HourlyForecastChartViewModel: ObservableObject {
             .init(
                 model: $0,
                 temperatureFormatterFactory: TemperatureFormatterFactory(
-                    notation: NotationSystemStore().temperatureNotation
+                    notation: NotationSystemStorage().temperatureNotation
                 )
             )
         }

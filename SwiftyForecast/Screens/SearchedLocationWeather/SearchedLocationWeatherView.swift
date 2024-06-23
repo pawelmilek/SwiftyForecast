@@ -109,7 +109,7 @@ struct SearchedLocationWeatherView: View {
             locationName: LocationModel.examples.first!.name,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
-            temperatureFormatterFactory: TemperatureFormatterFactory(notation: NotationSystemStore().temperatureNotation),
+            temperatureFormatterFactory: TemperatureFormatterFactory(notation: NotationSystemStorage().temperatureNotation),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()
         ),

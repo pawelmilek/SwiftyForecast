@@ -32,7 +32,7 @@ struct SwiftyForecastWidget: Widget {
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
                     parser: ResponseParser(),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notation: NotationSystemStore().temperatureNotation
+                        notation: NotationSystemStorage().temperatureNotation
                     )
                 )
             )

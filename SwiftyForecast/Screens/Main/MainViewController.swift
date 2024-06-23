@@ -97,7 +97,7 @@ private extension MainViewController {
                             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                             parser: ResponseParser(),
                             temperatureFormatterFactory: TemperatureFormatterFactory(
-                                notation: NotationSystemStore().temperatureNotation
+                                notation: NotationSystemStorage().temperatureNotation
                             ),
                             speedRenderer: SpeedRenderer(),
                             measurementSystemNotification: MeasurementSystemNotification()

@@ -14,7 +14,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private var locations: Results<LocationModel>?
 
     private let geocodeLocation: LocationPlaceable
-    private let notationSystemStore: NotationSystemStore
+    private let notationSystemStore: NotationSystemStorage
     private let measurementSystemNotification: MeasurementSystemNotification
     private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
@@ -27,7 +27,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
     init(
         geocodeLocation: LocationPlaceable,
-        notationSystemStore: NotationSystemStore,
+        notationSystemStore: NotationSystemStorage,
         measurementSystemNotification: MeasurementSystemNotification,
         currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
@@ -195,7 +195,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
         analyticsManager.send(
             event: MainViewControllerEvent.temperatureNotationSwitched(
-                notation: temperatureNotation.name
+                notation: temperatureNotation.symbol
             )
         )
     }
