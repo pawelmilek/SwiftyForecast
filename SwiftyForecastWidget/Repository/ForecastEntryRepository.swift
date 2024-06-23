@@ -13,18 +13,18 @@ final class ForecastEntryRepository: WeatherEntryRepository {
     private let client: WeatherClient
     private let locationPlace: LocationPlaceable
     private let parser: WeatherResponseParser
-    private let temperatureRenderer: TemperatureRenderer
+    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
         client: WeatherClient,
         locationPlace: LocationPlaceable,
         parser: WeatherResponseParser,
-        temperatureRenderer: TemperatureRenderer
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.client = client
         self.locationPlace = locationPlace
         self.parser = parser
-        self.temperatureRenderer = temperatureRenderer
+        self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
     func load(for location: CLLocation) async -> WeatherEntry {
@@ -44,7 +44,7 @@ final class ForecastEntryRepository: WeatherEntryRepository {
             temperature: weatherResult.temperature,
             dayNightState: weatherResult.condition.state,
             hourly: hourlyEntriesResult,
-            temperatureRenderer: temperatureRenderer
+            temperatureFormatterFactory: temperatureFormatterFactory
         )
     }
 
@@ -56,7 +56,8 @@ final class ForecastEntryRepository: WeatherEntryRepository {
             let data = HourlyEntry(
                 icon: icon,
                 date: model.date,
-                temperature: Temperature(current: model.temperature ?? 0)
+                temperature: Temperature(current: model.temperature ?? 0),
+                temperatureFormatterFactory: temperatureFormatterFactory
             )
             entires.append(data)
         }

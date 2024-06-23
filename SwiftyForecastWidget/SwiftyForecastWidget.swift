@@ -31,7 +31,9 @@ struct SwiftyForecastWidget: Widget {
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
                     locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
                     parser: ResponseParser(),
-                    temperatureRenderer: TemperatureRenderer()
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notation: NotationSystemStore().temperatureNotation
+                    )
                 )
             )
         ) { entry in

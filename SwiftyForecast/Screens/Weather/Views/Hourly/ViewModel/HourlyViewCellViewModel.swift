@@ -6,21 +6,22 @@ final class HourlyViewCellViewModel: ObservableObject {
     @Published private(set) var iconURL: URL?
     @Published private(set) var temperature = "--"
     private let model: HourlyForecastModel
-    private let temperatureRenderer: TemperatureRenderer
+    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
         model: HourlyForecastModel,
-        temperatureRenderer: TemperatureRenderer
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.model = model
-        self.temperatureRenderer = temperatureRenderer
+        self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
     func render() {
         time = model.date.formatted(date: .omitted, time: .shortened)
         iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
-        if let tmp = model.temperature {
-            temperature = temperatureRenderer.render(tmp).currentFormatted
+        if let current = model.temperature {
+            let formatter = temperatureFormatterFactory.make(by: Temperature(current: current))
+            temperature = formatter.current()
         }
     }
 }

@@ -12,18 +12,18 @@ struct WeatherEntryRepositoryFactory: EntryRepositoryFactory {
     private let client: WeatherClient
     private let locationPlace: LocationPlaceable
     private let parser: WeatherResponseParser
-    private let temperatureRenderer: TemperatureRenderer
+    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
         client: WeatherClient,
         locationPlace: LocationPlaceable,
         parser: WeatherResponseParser,
-        temperatureRenderer: TemperatureRenderer
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.client = client
         self.locationPlace = locationPlace
         self.parser = parser
-        self.temperatureRenderer = temperatureRenderer
+        self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
     func make(_ isSystemMediumFamily: Bool) -> WeatherEntryRepository {
@@ -32,14 +32,14 @@ struct WeatherEntryRepositoryFactory: EntryRepositoryFactory {
                 client: client,
                 locationPlace: locationPlace,
                 parser: parser,
-                temperatureRenderer: temperatureRenderer
+                temperatureFormatterFactory: temperatureFormatterFactory
             )
         } else {
             CurrentEntryRepository(
                 client: client,
                 locationPlace: locationPlace,
                 parser: parser,
-                temperatureRenderer: temperatureRenderer
+                temperatureFormatterFactory: temperatureFormatterFactory
             )
         }
     }

@@ -24,8 +24,7 @@ final class LocationRowViewModel: ObservableObject {
     private let location: LocationModel
     private let client: WeatherClient
     private let parser: WeatherResponseParser
-    private let measurementSystemNotification: MeasurementSystemNotification
-    private let temperatureRenderer: TemperatureRenderer
+    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let emitTimerPublisherInSeconds = TimeInterval(60)
 
@@ -33,14 +32,12 @@ final class LocationRowViewModel: ObservableObject {
         location: LocationModel,
         client: WeatherClient,
         parser: WeatherResponseParser,
-        temperatureRenderer: TemperatureRenderer,
-        measurementSystemNotification: MeasurementSystemNotification
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.location = location
         self.client = client
         self.parser = parser
-        self.temperatureRenderer = temperatureRenderer
-        self.measurementSystemNotification = measurementSystemNotification
+        self.temperatureFormatterFactory = temperatureFormatterFactory
         self.time = timeOnly(location.secondsFromGMT, from: .now)
         self.locationName = location.name
         self.name = location.name + ", " + location.country
@@ -74,8 +71,8 @@ final class LocationRowViewModel: ObservableObject {
     }
 
     private func setTemperature(value: Temperature) {
-        let rendered = temperatureRenderer.render(value)
-        temperature = rendered.currentFormatted
+        let formatter = temperatureFormatterFactory.make(by: value)
+        temperature = formatter.current()
     }
 
     private func subscribeTimerPublisher() {

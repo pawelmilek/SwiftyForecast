@@ -51,7 +51,9 @@ struct LocationSearchResults: View {
                     locationName: foundLocation.name,
                     client: weatherClient,
                     parser: ResponseParser(),
-                    temperatureRenderer: TemperatureRenderer(),
+                    temperatureFormatterFactory: TemperatureFormatterFactory(
+                        notation: NotationSystemStore().temperatureNotation
+                    ),
                     speedRenderer: SpeedRenderer(),
                     measurementSystemNotification: MeasurementSystemNotification()
                 ),

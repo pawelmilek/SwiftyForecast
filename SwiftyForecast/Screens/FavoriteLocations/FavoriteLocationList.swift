@@ -16,7 +16,7 @@ struct FavoriteLocationList: View {
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.weatherClient) private var weatherClient
     @Binding var searchText: String
-    let temperatureRenderer: TemperatureRenderer
+    let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     let measurementSystemNotification: MeasurementSystemNotification
     var onSelectRow: (Int) -> Void
 
@@ -37,8 +37,7 @@ struct FavoriteLocationList: View {
                         location: location,
                         client: weatherClient,
                         parser: ResponseParser(),
-                        temperatureRenderer: temperatureRenderer,
-                        measurementSystemNotification: measurementSystemNotification
+                        temperatureFormatterFactory: temperatureFormatterFactory
                     )
                 )
                 .listRowSeparator(.hidden)
@@ -70,7 +69,9 @@ struct FavoriteLocationList: View {
 #Preview {
     FavoriteLocationList(
         searchText: .constant("Search Text"),
-        temperatureRenderer: TemperatureRenderer(),
+        temperatureFormatterFactory: TemperatureFormatterFactory(
+            notation: NotationSystemStore().temperatureNotation
+        ),
         measurementSystemNotification: MeasurementSystemNotification(),
         onSelectRow: {_ in }
     )

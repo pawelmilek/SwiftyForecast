@@ -110,7 +110,16 @@ private extension WeatherViewController {
     func subscriberPublishers() {
         viewModel.$twentyFourHoursForecastModel
             .receive(on: DispatchQueue.main)
-            .map { $0.map { HourlyViewCellViewModel(model: $0, temperatureRenderer: .init()) } }
+            .map {
+                $0.map {
+                    HourlyViewCellViewModel(
+                        model: $0,
+                        temperatureFormatterFactory: TemperatureFormatterFactory(
+                            notation: NotationSystemStore().temperatureNotation
+                        )
+                    )
+                }
+            }
             .sink { [self] hourlyViewModels in
                 hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
                 hourlyCollectionView.reloadData()
@@ -119,7 +128,16 @@ private extension WeatherViewController {
 
         viewModel.$fiveDaysForecastModel
             .receive(on: DispatchQueue.main)
-            .map { $0.map { DailyViewCellViewModel(model: $0, temperatureRenderer: .init()) } }
+            .map {
+                $0.map {
+                    DailyViewCellViewModel(
+                        model: $0,
+                        temperatureFormatterFactory: TemperatureFormatterFactory(
+                            notation: NotationSystemStore().temperatureNotation
+                        )
+                    )
+                }
+            }
             .sink { [self] dailyViewModels in
                 dailyForecastDataSource.set(viewModeles: dailyViewModels)
                 dailyTableView.reloadData()

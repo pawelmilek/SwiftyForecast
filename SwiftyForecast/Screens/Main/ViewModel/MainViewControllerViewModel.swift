@@ -47,8 +47,8 @@ final class MainViewControllerViewModel: ObservableObject {
         self.parser = parser
         self.notationSegmentedControlIndex =  notationSystemStore.temperatureNotation.rawValue
         self.notationSegmentedControlItems = [
-            TemperatureNotation.fahrenheit.description,
-            TemperatureNotation.celsius.description
+            TemperatureNotation.fahrenheit.symbol,
+            TemperatureNotation.celsius.symbol
         ]
 
         self.weatherViewModels = []

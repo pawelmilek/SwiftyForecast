@@ -9,45 +9,24 @@
 import Foundation
 
 protocol TemperatureFormatterFactoryProtocol {
-    func make(
-        by notation: TemperatureNotation,
-        valueInKelvin current: Double
-    ) -> temperatureDisplayable
-
-    func make(
-        by notation: TemperatureNotation,
-        valueInKelvin: Temperature
-    ) -> temperatureDisplayable
+    func make(by temperature: Temperature) -> TemperatureFormatter
 }
 
 struct TemperatureFormatterFactory: TemperatureFormatterFactoryProtocol {
+    private let notation: TemperatureNotation
 
-    func make(
-        by notation: TemperatureNotation,
-        valueInKelvin current: Double
-    ) -> temperatureDisplayable {
-        let value = Temperature(current: current)
-        return make(by: notation, valueInKelvin: value)
+    init(notation: TemperatureNotation) {
+        self.notation = notation
     }
 
-    func make(
-        by notation: TemperatureNotation,
-        valueInKelvin: Temperature
-    ) -> temperatureDisplayable {
-        switch notation {
-        case .celsius:
-            return TemperatureCelsiusFormatter(
-                currentInKelvin: valueInKelvin.current,
-                minInKelvin: valueInKelvin.min,
-                maxInKelvin: valueInKelvin.max
-            )
-
-        case .fahrenheit:
-            return TemperatureFahrenheitFormatter(
-                currentInKelvin: valueInKelvin.current,
-                minInKelvin: valueInKelvin.min,
-                maxInKelvin: valueInKelvin.max
-            )
-        }
+    func make(by temperature: Temperature) -> TemperatureFormatter {
+        KelvinTemperatureFormatter(
+            currentValue: temperature.current,
+            minValue: temperature.min,
+            maxValue: temperature.max,
+            converter: notation == .celsius
+                ? ConvertedCelsius()
+                : ConvertedFahrenheit()
+        )
     }
 }

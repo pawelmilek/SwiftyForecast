@@ -18,15 +18,15 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
 
     init(
         model: HourlyForecastModel,
-        temperatureRenderer: TemperatureRenderer
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         hour = model.date.formatted(date: .omitted, time: .shortened)
 
         if let temperature = model.temperature {
-            let rendered = temperatureRenderer.render(temperature)
+            let formatter = temperatureFormatterFactory.make(by: Temperature(current: temperature))
 
-            currentTemperature = rendered.currentValue
-            temperatureFormatted = rendered.currentFormatted
+            currentTemperature = formatter.current()
+            temperatureFormatted = formatter.current()
         } else {
             currentTemperature = 0
             temperatureFormatted = "--"

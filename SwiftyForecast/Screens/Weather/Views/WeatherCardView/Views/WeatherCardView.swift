@@ -150,7 +150,7 @@ private extension WeatherCardView {
             locationName: LocationModel.examples.first!.name,
             client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
-            temperatureRenderer: TemperatureRenderer(),
+            temperatureFormatterFactory: TemperatureFormatterFactory(notation: NotationSystemStore().temperatureNotation),
             speedRenderer: SpeedRenderer(),
             measurementSystemNotification: MeasurementSystemNotification()
         )

@@ -19,7 +19,12 @@ final class HourlyForecastChartViewModel: ObservableObject {
 
     init(models: [HourlyForecastModel]) {
         dataSource = models.compactMap {
-            .init(model: $0, temperatureRenderer: TemperatureRenderer())
+            .init(
+                model: $0,
+                temperatureFormatterFactory: TemperatureFormatterFactory(
+                    notation: NotationSystemStore().temperatureNotation
+                )
+            )
         }
         calculateChartYScaleRange()
     }

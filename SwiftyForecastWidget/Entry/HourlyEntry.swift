@@ -12,22 +12,22 @@ struct HourlyEntry {
     let icon: Data
     let date: Date
     let temperature: Temperature
-    private let temperatureRenderer: TemperatureRenderer
+    private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
         icon: Data,
         date: Date,
         temperature: Temperature,
-        temperatureRenderer: TemperatureRenderer = TemperatureRenderer()
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.icon = icon
         self.date = date
         self.temperature = temperature
-        self.temperatureRenderer = temperatureRenderer
+        self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
     var formattedTemperature: String {
-        temperatureRenderer.render(temperature).currentFormatted
+        temperatureFormatterFactory.make(by: temperature).current()
     }
 
     var time: String {

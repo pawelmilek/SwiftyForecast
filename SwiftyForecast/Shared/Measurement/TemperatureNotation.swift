@@ -10,7 +10,7 @@ enum TemperatureNotation: Int, CaseIterable {
     case fahrenheit
     case celsius
 
-    var description: String {
+    var symbol: String {
         switch self {
         case .fahrenheit:
             "ºF"

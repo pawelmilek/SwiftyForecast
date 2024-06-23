@@ -16,7 +16,9 @@ struct FavoriteLocationSearchView: View {
         NavigationStack {
             FavoriteLocationList(
                 searchText: $searchCompleter.searchText,
-                temperatureRenderer: TemperatureRenderer(),
+                temperatureFormatterFactory: TemperatureFormatterFactory(
+                    notation: NotationSystemStore().temperatureNotation
+                ),
                 measurementSystemNotification: MeasurementSystemNotification(),
                 onSelectRow: onDidSelectLocation
             )

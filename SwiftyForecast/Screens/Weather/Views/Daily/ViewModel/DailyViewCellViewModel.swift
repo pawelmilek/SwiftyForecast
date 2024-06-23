@@ -6,21 +6,22 @@ final class DailyViewCellViewModel: ObservableObject {
     @Published private(set) var temperature = "--"
     @Published private(set) var iconURL: URL?
     private var model: DailyForecastModel
-    private var temperatureRenderer: TemperatureRenderer
+    private var temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
         model: DailyForecastModel,
-        temperatureRenderer: TemperatureRenderer
+        temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.model = model
-        self.temperatureRenderer = temperatureRenderer
+        self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
     func render() {
         attributedDate = renderMonthWeekday(date: model.date)
         iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
-        if let temp = model.temperature {
-            temperature = temperatureRenderer.render(temp).currentFormatted
+        if let current = model.temperature {
+            let formatter = temperatureFormatterFactory.make(by: Temperature(current: current))
+            temperature = formatter.current()
         }
     }
 
