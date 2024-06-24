@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 private struct WeatherClientKey: EnvironmentKey {
-    static let defaultValue: WeatherClient = OpenWeatherMapClient(
+    static let defaultValue: WeatherClient = OpenWeatherClient(
         decoder: JSONSnakeCaseDecoded()
     )
 }

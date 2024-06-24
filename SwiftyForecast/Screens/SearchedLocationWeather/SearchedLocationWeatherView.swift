@@ -98,16 +98,21 @@ struct SearchedLocationWeatherView: View {
     SearchedLocationWeatherView(
         viewModel: SearchedLocationWeatherViewViewModel(
             location: LocationModel.examples.first!,
-            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             databaseManager: PreviewRealmManager(),
+            storeReviewManager: StoreReviewManager(
+                store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
+                storage: ReviewedVersionStorageAdapter(adaptee: .standard),
+                bundle: .main
+            ),
             analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
         ),
         cardViewModel: WeatherCardViewViewModel(
             latitude: LocationModel.examples.first!.latitude,
             longitude: LocationModel.examples.first!.longitude,
             locationName: LocationModel.examples.first!.name,
-            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureFormatterFactory: TemperatureFormatterFactory(
                 notationStorage: NotationSettingsStorage()

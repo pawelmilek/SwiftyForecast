@@ -1,5 +1,5 @@
 //
-//  OpenWeatherMapClient.swift
+//  OpenWeatherClient.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OpenWeatherMapClient: WeatherClient, HTTPClient {
+struct OpenWeatherClient: WeatherClient, HTTPClient {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder) {
@@ -17,7 +17,7 @@ struct OpenWeatherMapClient: WeatherClient, HTTPClient {
 
     func fetchCurrent(latitude: Double, longitude: Double) async throws -> CurrentWeatherResponse {
         return try await sendRequest(
-            endpoint: WeatherEndpoint.current(latitude: latitude, longitude: longitude),
+            endpoint: OpenWeatherEndpoint.current(latitude: latitude, longitude: longitude),
             decoder: decoder,
             responseModel: CurrentWeatherResponse.self
         )
@@ -25,7 +25,7 @@ struct OpenWeatherMapClient: WeatherClient, HTTPClient {
 
     func fetchForecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherResponse {
         return try await sendRequest(
-            endpoint: WeatherEndpoint.forecast(latitude: latitude, longitude: longitude),
+            endpoint: OpenWeatherEndpoint.forecast(latitude: latitude, longitude: longitude),
             decoder: decoder,
             responseModel: ForecastWeatherResponse.self
         )
@@ -33,13 +33,13 @@ struct OpenWeatherMapClient: WeatherClient, HTTPClient {
 
     func fetchIcon(symbol: String) async throws -> Data {
         return try await sendRequest(
-            endpoint: WeatherEndpoint.icon(symbol: symbol)
+            endpoint: OpenWeatherEndpoint.icon(symbol: symbol)
         )
     }
 
     func fetchLargeIcon(symbol: String) async throws -> Data {
         return try await sendRequest(
-            endpoint: WeatherEndpoint.iconLarge(symbol: symbol)
+            endpoint: OpenWeatherEndpoint.iconLarge(symbol: symbol)
         )
     }
 }

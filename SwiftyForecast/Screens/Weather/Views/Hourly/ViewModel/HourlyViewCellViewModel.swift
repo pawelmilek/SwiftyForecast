@@ -18,7 +18,7 @@ final class HourlyViewCellViewModel: ObservableObject {
 
     func render() {
         time = model.date.formatted(date: .omitted, time: .shortened)
-        iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
+        iconURL = OpenWeatherEndpoint.iconLarge(symbol: model.icon).url
         if let current = model.temperature {
             let formatter = temperatureFormatterFactory.make(by: Temperature(current: current))
             temperature = formatter.current()

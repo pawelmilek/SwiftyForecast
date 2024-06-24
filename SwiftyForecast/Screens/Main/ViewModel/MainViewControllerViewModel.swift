@@ -20,7 +20,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
     private let analyticsManager: AnalyticsManager
-    private let client: OpenWeatherMapClient
+    private let client: OpenWeatherClient
     private let parser: WeatherResponseParser
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
@@ -33,7 +33,7 @@ final class MainViewControllerViewModel: ObservableObject {
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         analyticsManager: AnalyticsManager,
-        client: OpenWeatherMapClient,
+        client: OpenWeatherClient,
         parser: WeatherResponseParser
     ) {
         self.geocodeLocation = geocodeLocation

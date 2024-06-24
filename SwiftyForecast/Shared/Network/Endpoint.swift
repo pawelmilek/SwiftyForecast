@@ -12,6 +12,14 @@ typealias Header = [String: String]
 typealias Body = [String: String]
 typealias Parameters = [String: String]
 
+enum HTTPMethod: String {
+    case delete = "DELETE"
+    case get = "GET"
+    case patch = "PATCH"
+    case post = "POST"
+    case put = "PUT"
+}
+
 protocol Endpoint {
     var url: URL? { get }
     var scheme: String { get }

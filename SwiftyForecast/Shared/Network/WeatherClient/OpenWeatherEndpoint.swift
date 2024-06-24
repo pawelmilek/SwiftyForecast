@@ -1,5 +1,5 @@
 //
-//  WeatherEndpoint.swift
+//  OpenWeatherEndpoint.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WeatherEndpoint: Endpoint {
+enum OpenWeatherEndpoint: Endpoint {
     case current(latitude: Double, longitude: Double)
     case forecast(latitude: Double, longitude: Double)
     case icon(symbol: String)

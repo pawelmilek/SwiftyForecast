@@ -31,6 +31,6 @@ struct HourlyForecastChartDataSource: Identifiable, Equatable {
             temperatureFormatted = "--"
         }
 
-        iconURL = WeatherEndpoint.icon(symbol: model.icon).url
+        iconURL = OpenWeatherEndpoint.icon(symbol: model.icon).url
     }
 }

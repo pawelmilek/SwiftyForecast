@@ -148,7 +148,7 @@ private extension WeatherCardView {
             latitude: LocationModel.examples.first!.latitude,
             longitude: LocationModel.examples.first!.longitude,
             locationName: LocationModel.examples.first!.name,
-            client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded()),
             parser: ResponseParser(),
             temperatureFormatterFactory: TemperatureFormatterFactory(
                 notationStorage: NotationSettingsStorage()

@@ -20,6 +20,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     private let client: WeatherClient
     private let parser: WeatherResponseParser
     private let databaseManager: DatabaseManager
+    private let storeReviewManager: StoreReviewManager
     private let analyticsManager: AnalyticsManager
 
     init(
@@ -27,12 +28,14 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         client: WeatherClient,
         parser: WeatherResponseParser,
         databaseManager: DatabaseManager,
+        storeReviewManager: StoreReviewManager,
         analyticsManager: AnalyticsManager
     ) {
         self.location = location
         self.client = client
         self.parser = parser
         self.databaseManager = databaseManager
+        self.storeReviewManager = storeReviewManager
         self.analyticsManager = analyticsManager
     }
 
@@ -56,7 +59,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
             fatalError(error.localizedDescription)
         }
         donateAddFavoriteEvent()
-        postAppStoreReviewEvent()
+        storeRequestReview()
         logLocationAdded(name: location.name + ", " + location.country)
     }
 
@@ -87,10 +90,6 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         }
     }
 
-    private func postAppStoreReviewEvent() {
-        // TODO: - implement new app store review manager
-    }
-
     private func logLocationAdded(name: String) {
         analyticsManager.send(
             event: LocationWeatherViewEvent.locationAdded(
@@ -106,5 +105,9 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
                 className: "\(type(of: self))"
             )
         )
+    }
+
+    private func storeRequestReview() {
+        storeReviewManager.requestReview()
     }
 }

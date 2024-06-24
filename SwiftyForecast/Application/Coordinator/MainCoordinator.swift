@@ -26,7 +26,7 @@ final class MainCoordinator: Coordinator {
                     databaseManager: RealmManager(),
                     locationManager: LocationManager(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService()),
-                    client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
+                    client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded()),
                     parser: ResponseParser()
                 ),
                 coordinator: self,

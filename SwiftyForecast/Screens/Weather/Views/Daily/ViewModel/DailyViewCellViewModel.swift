@@ -18,7 +18,7 @@ final class DailyViewCellViewModel: ObservableObject {
 
     func render() {
         attributedDate = renderMonthWeekday(date: model.date)
-        iconURL = WeatherEndpoint.iconLarge(symbol: model.icon).url
+        iconURL = OpenWeatherEndpoint.iconLarge(symbol: model.icon).url
         if let current = model.temperature {
             let formatter = temperatureFormatterFactory.make(by: Temperature(current: current))
             temperature = formatter.current()
