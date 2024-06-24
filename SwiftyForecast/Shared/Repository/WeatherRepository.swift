@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct WeatherRepository: RepositoryProtocol {
-    private let client: WeatherClient
+struct WeatherRepository: Repository {
+    private let client: Client
 
-    init(client: WeatherClient) {
+    init(client: Client) {
         self.client = client
     }
 

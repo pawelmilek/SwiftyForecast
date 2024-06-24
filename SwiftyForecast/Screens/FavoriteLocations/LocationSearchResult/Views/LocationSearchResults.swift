@@ -13,7 +13,7 @@ struct LocationSearchResults: View {
     @Environment(\.dismissSearch) private var dismissSearch
     @Environment(\.analyticsManager) private var analyticsManager
     @Environment(\.locationSearchCompleter) private var locationSearchCompleter
-    @Environment(\.weatherClient) private var weatherClient
+    @Environment(\.client) private var client
     @Environment(\.databaseManager) private var databaseManager
     @StateObject private var searchLocationStore = SearchLocationStore(
         locationPlace: GeocodedLocation(geocoder: CLGeocoder())
@@ -40,8 +40,12 @@ struct LocationSearchResults: View {
             SearchedLocationWeatherView(
                 viewModel: SearchedLocationWeatherViewViewModel(
                     location: foundLocation,
-                    client: weatherClient,
-                    parser: ResponseParser(),
+                    service: WeatherService(
+                        repository: WeatherRepository(
+                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
+                        ),
+                        parse: WeatherResponseParser()
+                    ),
                     databaseManager: databaseManager,
                     storeReviewManager: StoreReviewManager(
                         store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
@@ -54,8 +58,12 @@ struct LocationSearchResults: View {
                     latitude: foundLocation.latitude,
                     longitude: foundLocation.longitude,
                     locationName: foundLocation.name,
-                    client: weatherClient,
-                    parser: ResponseParser(),
+                    service: WeatherService(
+                        repository: WeatherRepository(
+                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
+                        ),
+                        parse: WeatherResponseParser()
+                    ),
                     temperatureFormatterFactory: TemperatureFormatterFactory(
                         notationStorage: NotationSettingsStorage()
                     ),

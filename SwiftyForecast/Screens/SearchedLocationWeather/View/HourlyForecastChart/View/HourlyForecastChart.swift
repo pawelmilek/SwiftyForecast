@@ -129,7 +129,7 @@ private extension HourlyForecastChart {
         viewModel: HourlyForecastChartViewModel(
             models: MockGenerator(
                 decoder: JSONDecoder(),
-                parser: ResponseParser()
+                parser: WeatherResponseParser()
             )
             .generateForecastWeatherModel().hourly
         )

@@ -20,8 +20,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
     private let analyticsManager: AnalyticsManager
-    private let client: OpenWeatherClient
-    private let parser: WeatherResponseParser
+    private let service: WeatherServiceProtocol
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
 
@@ -33,8 +32,7 @@ final class MainViewControllerViewModel: ObservableObject {
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         analyticsManager: AnalyticsManager,
-        client: OpenWeatherClient,
-        parser: WeatherResponseParser
+        service: WeatherServiceProtocol
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSettings = notationSettings
@@ -43,8 +41,7 @@ final class MainViewControllerViewModel: ObservableObject {
         self.databaseManager = databaseManager
         self.locationManager = locationManager
         self.analyticsManager = analyticsManager
-        self.client = client
-        self.parser = parser
+        self.service = service
         self.notationControlIndex = notationSettings.temperatureNotation.rawValue
         self.notationControlItems = TemperatureNotation.allCases.map { $0.symbol }
         self.weatherViewModels = []
@@ -136,8 +133,7 @@ final class MainViewControllerViewModel: ObservableObject {
                 latitude: $0.latitude,
                 longitude: $0.longitude,
                 locationName: $0.name,
-                client: client,
-                parser: parser,
+                service: service,
                 metricSystemNotification: metricSystemNotification
             )
         } ?? []

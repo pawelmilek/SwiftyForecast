@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OpenWeatherClient: WeatherClient, HTTPClient {
+struct OpenWeatherClient: Client, HTTPClient {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder) {

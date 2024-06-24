@@ -11,9 +11,9 @@ import CoreLocation
 
 struct MockGenerator {
     private let decoder: JSONDecoder
-    private let parser: WeatherResponseParser
+    private let parser: ResponseParser
 
-    init(decoder: JSONDecoder, parser: WeatherResponseParser) {
+    init(decoder: JSONDecoder, parser: ResponseParser) {
         self.decoder = decoder
         self.parser = parser
     }

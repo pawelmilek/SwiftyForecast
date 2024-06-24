@@ -30,8 +30,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let latitude: Double
     private let longitude: Double
-    private let client: WeatherClient
-    private let parser: WeatherResponseParser
+    private let service: WeatherServiceProtocol
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     private let speedFormatterFactory: SpeedFormatterFactoryProtocol
     private let metricSystemNotification: MetricSystemNotification
@@ -40,8 +39,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         latitude: Double,
         longitude: Double,
         locationName: String,
-        client: WeatherClient,
-        parser: WeatherResponseParser,
+        service: WeatherServiceProtocol,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol,
         speedFormatterFactory: SpeedFormatterFactoryProtocol,
         metricSystemNotification: MetricSystemNotification
@@ -49,8 +47,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         self.latitude = latitude
         self.longitude = longitude
         self.locationName = locationName
-        self.client = client
-        self.parser = parser
+        self.service = service
         self.temperatureFormatterFactory = temperatureFormatterFactory
         self.speedFormatterFactory = speedFormatterFactory
         self.metricSystemNotification = metricSystemNotification
@@ -103,18 +100,18 @@ final class WeatherCardViewViewModel: ObservableObject {
         isLoading = true
 
         do {
-            let response = try await client.fetchCurrent(
+            weatherModel = try await service.weather(
                 latitude: latitude,
                 longitude: longitude
             )
-            let dataModel = parser.weather(response: response)
-            let largeIconData = try await client.fetchLargeIcon(
-                symbol: dataModel.condition.iconCode
+
+            let largeIconData = try await service.largeIcon(
+                symbol: weatherModel?.condition.iconCode ?? ""
             )
+
             if let image = UIImage(data: largeIconData) {
                 icon = Image(uiImage: image)
             }
-            weatherModel = dataModel
         } catch {
             icon = nil
             weatherModel = nil

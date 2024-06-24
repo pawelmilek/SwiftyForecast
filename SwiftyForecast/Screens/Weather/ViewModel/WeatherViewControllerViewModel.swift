@@ -14,8 +14,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     let compoundKey: String
     let latitude: Double
     let longitude: Double
-    private let client: WeatherClient
-    private let parser: WeatherResponseParser
+    private let service: WeatherServiceProtocol
     private let metricSystemNotification: MetricSystemNotification
     private var cancellables = Set<AnyCancellable>()
 
@@ -24,16 +23,14 @@ final class WeatherViewControllerViewModel: ObservableObject {
         latitude: Double,
         longitude: Double,
         locationName: String,
-        client: WeatherClient,
-        parser: WeatherResponseParser,
+        service: WeatherServiceProtocol,
         metricSystemNotification: MetricSystemNotification
     ) {
         self.compoundKey = compoundKey
         self.latitude = latitude
         self.longitude = longitude
         self.locationName = locationName
-        self.client = client
-        self.parser = parser
+        self.service = service
         self.metricSystemNotification = metricSystemNotification
         self.twentyFourHoursForecastModel = HourlyForecastModel.initialData
         self.fiveDaysForecastModel = DailyForecastModel.initialData
@@ -61,12 +58,10 @@ final class WeatherViewControllerViewModel: ObservableObject {
         defer { isLoading = false }
         isLoading = true
         do {
-            let forecast = try await client.fetchForecast(
+            forecastWeatherModel = try await service.forecast(
                 latitude: latitude,
                 longitude: longitude
             )
-            let data = parser.forecast(response: forecast)
-            forecastWeatherModel = data
         } catch {
             forecastWeatherModel = nil
             twentyFourHoursForecastModel = []

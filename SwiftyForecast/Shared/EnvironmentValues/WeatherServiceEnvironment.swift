@@ -9,21 +9,21 @@
 import Foundation
 import SwiftUI
 
-private struct WeatherClientKey: EnvironmentKey {
-    static let defaultValue: WeatherClient = OpenWeatherClient(
+private struct ClientKey: EnvironmentKey {
+    static let defaultValue: Client = OpenWeatherClient(
         decoder: JSONSnakeCaseDecoded()
     )
 }
 
 extension EnvironmentValues {
-    var weatherClient: WeatherClient {
-        get { self[WeatherClientKey.self] }
-        set { self[WeatherClientKey.self] = newValue }
+    var client: Client {
+        get { self[ClientKey.self] }
+        set { self[ClientKey.self] = newValue }
     }
 }
 
 extension View {
-    func weatherClient(_ value: WeatherClient) -> some View {
-        environment(\.weatherClient, value)
+    func client(_ value: Client) -> some View {
+        environment(\.client, value)
     }
 }

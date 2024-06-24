@@ -17,23 +17,20 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     @Published private(set) var twentyFourHoursForecast: [HourlyForecastModel]?
 
     private let location: LocationModel
-    private let client: WeatherClient
-    private let parser: WeatherResponseParser
+    private let service: WeatherServiceProtocol
     private let databaseManager: DatabaseManager
     private let storeReviewManager: StoreReviewManager
     private let analyticsManager: AnalyticsManager
 
     init(
         location: LocationModel,
-        client: WeatherClient,
-        parser: WeatherResponseParser,
+        service: WeatherServiceProtocol,
         databaseManager: DatabaseManager,
         storeReviewManager: StoreReviewManager,
         analyticsManager: AnalyticsManager
     ) {
         self.location = location
-        self.client = client
-        self.parser = parser
+        self.service = service
         self.databaseManager = databaseManager
         self.storeReviewManager = storeReviewManager
         self.analyticsManager = analyticsManager
@@ -64,11 +61,11 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     private func fetchLocationHourlyForecast() async throws {
-        let forecast = try await client.fetchForecast(
+        let forecast = try await service.forecast(
             latitude: location.latitude,
             longitude: location.longitude
         )
-        setHourlyForecastItems(parser.forecast(response: forecast))
+        setHourlyForecastItems(forecast)
     }
 
     private func setHourlyForecastItems(_ forecastModel: ForecastWeatherModel) {

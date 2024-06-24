@@ -14,7 +14,7 @@ struct FavoriteLocationList: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.databaseManager) private var databaseManager
     @Environment(\.analyticsManager) private var analyticsManager
-    @Environment(\.weatherClient) private var weatherClient
+    @Environment(\.client) private var client
     @Binding var searchText: String
     let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     var onSelectRow: (Int) -> Void
@@ -34,8 +34,12 @@ struct FavoriteLocationList: View {
                 FavoriteLocationRow(
                     viewModel: LocationRowViewModel(
                         location: location,
-                        client: weatherClient,
-                        parser: ResponseParser(),
+                        service: WeatherService(
+                            repository: WeatherRepository(
+                                client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
+                            ),
+                            parse: WeatherResponseParser()
+                        ),
                         temperatureFormatterFactory: temperatureFormatterFactory
                     )
                 )

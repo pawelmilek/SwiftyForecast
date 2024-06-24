@@ -94,8 +94,12 @@ private extension MainViewController {
                             latitude: $0.latitude,
                             longitude: $0.longitude,
                             locationName: $0.locationName,
-                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded()),
-                            parser: ResponseParser(),
+                            service: WeatherService(
+                                repository: WeatherRepository(
+                                    client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
+                                ),
+                                parse: WeatherResponseParser()
+                            ),
                             temperatureFormatterFactory: TemperatureFormatterFactory(
                                 notationStorage: NotationSettingsStorage()
                             ),

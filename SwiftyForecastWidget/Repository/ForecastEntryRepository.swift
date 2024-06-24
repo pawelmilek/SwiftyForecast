@@ -10,15 +10,15 @@ import Foundation
 import CoreLocation
 
 final class ForecastEntryRepository: WeatherEntryRepository {
-    private let client: WeatherClient
+    private let client: Client
     private let locationPlace: LocationPlaceable
-    private let parser: WeatherResponseParser
+    private let parser: ResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        client: WeatherClient,
+        client: Client,
         locationPlace: LocationPlaceable,
-        parser: WeatherResponseParser,
+        parser: ResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.client = client

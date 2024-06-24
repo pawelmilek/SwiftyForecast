@@ -22,21 +22,18 @@ final class LocationRowViewModel: ObservableObject {
     @Published private(set) var name = ""
 
     private let location: LocationModel
-    private let client: WeatherClient
-    private let parser: WeatherResponseParser
+    private let service: WeatherServiceProtocol
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     private var cancellables = Set<AnyCancellable>()
     private let emitTimerPublisherInSeconds = TimeInterval(60)
 
     init(
         location: LocationModel,
-        client: WeatherClient,
-        parser: WeatherResponseParser,
+        service: WeatherServiceProtocol,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.location = location
-        self.client = client
-        self.parser = parser
+        self.service = service
         self.temperatureFormatterFactory = temperatureFormatterFactory
         self.time = timeOnly(location.secondsFromGMT, from: .now)
         self.locationName = location.name
@@ -57,11 +54,10 @@ final class LocationRowViewModel: ObservableObject {
     func loadData() async {
         isLoading = true
         do {
-            let response = try await client.fetchCurrent(
+            let model = try await service.weather(
                 latitude: location.latitude,
                 longitude: location.longitude
             )
-            let model = parser.weather(response: response)
             setTemperature(value: model.temperature)
             isLoading = false
         } catch {
