@@ -15,7 +15,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
     private let geocodeLocation: LocationPlaceable
     private var notationSettings: NotationSettings
-    private let measurementSystemNotification: MeasurementSystemNotification
+    private let metricSystemNotification: MetricSystemNotification
     private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
@@ -28,7 +28,7 @@ final class MainViewControllerViewModel: ObservableObject {
     init(
         geocodeLocation: LocationPlaceable,
         notationSettings: NotationSettings,
-        measurementSystemNotification: MeasurementSystemNotification,
+        metricSystemNotification: MetricSystemNotification,
         currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
@@ -38,19 +38,15 @@ final class MainViewControllerViewModel: ObservableObject {
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSettings = notationSettings
-        self.measurementSystemNotification = measurementSystemNotification
+        self.metricSystemNotification = metricSystemNotification
         self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
         self.locationManager = locationManager
         self.analyticsManager = analyticsManager
         self.client = client
         self.parser = parser
-        self.notationControlIndex =  notationSettings.temperatureNotation.rawValue
-        self.notationControlItems = [
-            TemperatureNotation.fahrenheit.symbol,
-            TemperatureNotation.celsius.symbol
-        ]
-
+        self.notationControlIndex = notationSettings.temperatureNotation.rawValue
+        self.notationControlItems = TemperatureNotation.allCases.map { $0.symbol }
         self.weatherViewModels = []
         registerLocationNotificationToken()
         subscirbePublishers()
@@ -142,7 +138,7 @@ final class MainViewControllerViewModel: ObservableObject {
                 locationName: $0.name,
                 client: client,
                 parser: parser,
-                measurementSystemNotification: measurementSystemNotification
+                metricSystemNotification: metricSystemNotification
             )
         } ?? []
     }
@@ -182,15 +178,15 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     func onSegmentedControlDidChange(_ selectedSegmentIndex: Int) {
-        guard let measurementSystem = MeasurementSystem(rawValue: selectedSegmentIndex),
+        guard let measurementSystem = MetricSystem(rawValue: selectedSegmentIndex),
               let temperatureNotation = TemperatureNotation(rawValue: selectedSegmentIndex) else {
             return
         }
 
-        notationSettings.measurementSystem = measurementSystem
+        notationSettings.metricSystem = measurementSystem
         notationSettings.temperatureNotation = temperatureNotation
         notationControlIndex = temperatureNotation.rawValue
-        measurementSystemNotification.post()
+        metricSystemNotification.post()
         reloadWidgetTimeline()
 
         analyticsManager.send(

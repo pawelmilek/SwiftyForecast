@@ -9,11 +9,9 @@ final class MainCoordinator: Coordinator {
     }
 
     var navigationController: UINavigationController
-    let databaseManager: DatabaseManager
 
-    init(navigationController: UINavigationController, databaseManager: DatabaseManager) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.databaseManager = databaseManager
     }
 
     func start() {
@@ -23,9 +21,9 @@ final class MainCoordinator: Coordinator {
                 viewModel: MainViewControllerViewModel(
                     geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
                     notationSettings: NotationSettingsStorage(),
-                    measurementSystemNotification: MeasurementSystemNotification(),
-                    currentLocationRecord: CurrentLocationRecord(databaseManager: self.databaseManager),
-                    databaseManager: self.databaseManager,
+                    metricSystemNotification: NotificationCenterAdapter(),
+                    currentLocationRecord: CurrentLocationRecord(databaseManager: RealmManager()),
+                    databaseManager: RealmManager(),
                     locationManager: LocationManager(),
                     analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService()),
                     client: OpenWeatherMapClient(decoder: JSONSnakeCaseDecoded()),
@@ -37,7 +35,7 @@ final class MainCoordinator: Coordinator {
         }
 
         navigationController.pushViewController(viewController, animated: false)
-        debugPrint(databaseManager.description)
+        debugPrint(RealmManager().description)
     }
 
     func openAbout() {

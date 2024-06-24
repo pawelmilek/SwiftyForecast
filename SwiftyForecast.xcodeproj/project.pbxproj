@@ -114,6 +114,8 @@
 		E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */; };
 		E25B3EFE2BFA2EB400FFC11A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E25B3EFD2BFA2EB400FFC11A /* RealmSwift */; };
 		E25EF00B20F97CE200E4C115 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
+		E2644CF72C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644CF62C29AE2F00B505A1 /* MetricSystemNotification.swift */; };
+		E2644CF82C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2644CF62C29AE2F00B505A1 /* MetricSystemNotification.swift */; };
 		E2644E352C0AD79E00B67E18 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
 		E2644E362C0AD7BD00B67E18 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E2644E382C0AD7FC00B67E18 /* Vortex in Frameworks */ = {isa = PBXBuildFile; productRef = E2644E372C0AD7FC00B67E18 /* Vortex */; };
@@ -144,7 +146,7 @@
 		E283573A2B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28357382B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift */; };
 		E2854FFA2290F0DB00CD7554 /* NotationSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FF92290F0DB00CD7554 /* NotationSettingsStorage.swift */; };
 		E2854FFE2290F24800CD7554 /* TemperatureNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */; };
-		E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550012290F26E00CD7554 /* MeasurementSystem.swift */; };
+		E28550022290F26E00CD7554 /* MetricSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550012290F26E00CD7554 /* MetricSystem.swift */; };
 		E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28AFC742374FCC100D1D5ED /* RealmManager.swift */; };
 		E28CE3962C230F7B00E8C2F0 /* WeatherEntry+SampleTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CE3952C230F7B00E8C2F0 /* WeatherEntry+SampleTimeline.swift */; };
 		E28CEC082B39BB82003DB3A6 /* HTMLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC072B39BB82003DB3A6 /* HTMLView.swift */; };
@@ -251,7 +253,7 @@
 		E2D430DD2BB4DB2F003F26EE /* Twilight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450682B9F3F9800F14BAA /* Twilight.swift */; };
 		E2D430DE2BB4DB33003F26EE /* WindSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450692B9F3F9800F14BAA /* WindSpeed.swift */; };
 		E2D430DF2BB4DB38003F26EE /* Humidity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22450672B9F3F9800F14BAA /* Humidity.swift */; };
-		E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */; };
+		E2D430E02BB4DB3D003F26EE /* NotificationCenterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* NotificationCenterAdapter.swift */; };
 		E2D430E42BB4DB6C003F26EE /* WeatherViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */; };
 		E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
 		E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
@@ -296,7 +298,7 @@
 		E2F671152B234EA600B791A0 /* TemperatureNotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */; };
 		E2F671172B234EB600B791A0 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD4B2AE93E6E00F93F01 /* Temperature.swift */; };
 		E2F671182B234F2F00B791A0 /* NotationSettingsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2854FF92290F0DB00CD7554 /* NotationSettingsStorage.swift */; };
-		E2F671192B234F3400B791A0 /* MeasurementSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550012290F26E00CD7554 /* MeasurementSystem.swift */; };
+		E2F671192B234F3400B791A0 /* MetricSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28550012290F26E00CD7554 /* MetricSystem.swift */; };
 		E2F671222B23682900B791A0 /* WeatherWidgetEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F6711E2B23680800B791A0 /* WeatherWidgetEntryView.swift */; };
 		E2F671232B23682F00B791A0 /* WeatherTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F671202B23682400B791A0 /* WeatherTimelineProvider.swift */; };
 		E2F6712A2B23691300B791A0 /* WeatherEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F671242B2368F700B791A0 /* WeatherEntry.swift */; };
@@ -307,7 +309,7 @@
 		E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */; };
 		E2FDBD6F2B2079E00012D7C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */; };
 		E2FDBD732B2079E00012D7C4 /* SwiftyForecastWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E2FDBD642B2079DF0012D7C4 /* SwiftyForecastWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E2FEB7BD2B172782009D54B2 /* MeasurementSystemNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */; };
+		E2FEB7BD2B172782009D54B2 /* NotificationCenterAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FEB7BC2B172782009D54B2 /* NotificationCenterAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -423,6 +425,7 @@
 		E24E90742ADA81DF009255C8 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		E24EB89225410010001F5D72 /* MockGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGenerator.swift; sourceTree = "<group>"; };
 		E25EF00A20F97CE200E4C115 /* Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
+		E2644CF62C29AE2F00B505A1 /* MetricSystemNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricSystemNotification.swift; sourceTree = "<group>"; };
 		E2644E3F2C0BC6EB00B67E18 /* ShareRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareRow.swift; sourceTree = "<group>"; };
 		E266227D2B0A110D0010B567 /* LocationSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResults.swift; sourceTree = "<group>"; };
 		E26ACD1A24FF204000AC15A6 /* ForecastWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherModel.swift; sourceTree = "<group>"; };
@@ -448,7 +451,7 @@
 		E28357382B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLAccuracyAuthorization+CustomStringConvertible.swift"; sourceTree = "<group>"; };
 		E2854FF92290F0DB00CD7554 /* NotationSettingsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotationSettingsStorage.swift; sourceTree = "<group>"; };
 		E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureNotation.swift; sourceTree = "<group>"; };
-		E28550012290F26E00CD7554 /* MeasurementSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSystem.swift; sourceTree = "<group>"; };
+		E28550012290F26E00CD7554 /* MetricSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricSystem.swift; sourceTree = "<group>"; };
 		E28AFC742374FCC100D1D5ED /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		E28CE3952C230F7B00E8C2F0 /* WeatherEntry+SampleTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherEntry+SampleTimeline.swift"; sourceTree = "<group>"; };
 		E28CEC072B39BB82003DB3A6 /* HTMLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLView.swift; sourceTree = "<group>"; };
@@ -557,7 +560,7 @@
 		E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyForecastWidget.swift; sourceTree = "<group>"; };
 		E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2FDBD702B2079E00012D7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSystemNotification.swift; sourceTree = "<group>"; };
+		E2FEB7BC2B172782009D54B2 /* NotificationCenterAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -675,7 +678,7 @@
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E28357342B27168400E3807A /* LocationManager */,
 				E2A5675E2B077B1A000324C0 /* LottieAnimationView */,
-				E2435BD322AD6293007589CE /* Measurement */,
+				E2435BD322AD6293007589CE /* MetricSystem */,
 				E23997DA20E84104007D8CE4 /* Models */,
 				E28357332B27150D00E3807A /* Modifiers */,
 				E23997DF20E84371007D8CE4 /* Network */,
@@ -869,18 +872,19 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		E2435BD322AD6293007589CE /* Measurement */ = {
+		E2435BD322AD6293007589CE /* MetricSystem */ = {
 			isa = PBXGroup;
 			children = (
+				E28550012290F26E00CD7554 /* MetricSystem.swift */,
+				E2644CF62C29AE2F00B505A1 /* MetricSystemNotification.swift */,
+				E2126F852C2890EB001111E0 /* NotationSettings.swift */,
 				E2854FF92290F0DB00CD7554 /* NotationSettingsStorage.swift */,
-				E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */,
-				E28550012290F26E00CD7554 /* MeasurementSystem.swift */,
-				E2FEB7BC2B172782009D54B2 /* MeasurementSystemNotification.swift */,
+				E2FEB7BC2B172782009D54B2 /* NotificationCenterAdapter.swift */,
 				E2227E8C2ADD5DB8000C3886 /* SpeedFormatter */,
 				E2227E852ADD54AD000C3886 /* TemperatureFormatter */,
-				E2126F852C2890EB001111E0 /* NotationSettings.swift */,
+				E2854FFD2290F24800CD7554 /* TemperatureNotation.swift */,
 			);
-			path = Measurement;
+			path = MetricSystem;
 			sourceTree = "<group>";
 		};
 		E249ABBA2B3475FA0020B88D /* About */ = {
@@ -1738,7 +1742,7 @@
 				E2255A4A2C1020B400C6F3AD /* LocationListEvent.swift in Sources */,
 				E2E6C7032C0EAD2C00500EE8 /* AboutShareRow.swift in Sources */,
 				E28CEC082B39BB82003DB3A6 /* HTMLView.swift in Sources */,
-				E28550022290F26E00CD7554 /* MeasurementSystem.swift in Sources */,
+				E28550022290F26E00CD7554 /* MetricSystem.swift in Sources */,
 				E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */,
 				E22450722B9F3F9800F14BAA /* WeatherModel.swift in Sources */,
 				E2E6C7052C0EAF3900500EE8 /* ActionAboutRow.swift in Sources */,
@@ -1763,7 +1767,7 @@
 				E296A7E42AD6E797001BFADB /* WeatherEndpoint.swift in Sources */,
 				E2255A4F2C10210E00C6F3AD /* AnalyticsService.swift in Sources */,
 				E2A567582B077610000324C0 /* Registrable.swift in Sources */,
-				E2FEB7BD2B172782009D54B2 /* MeasurementSystemNotification.swift in Sources */,
+				E2FEB7BD2B172782009D54B2 /* NotificationCenterAdapter.swift in Sources */,
 				E26ACD1B24FF204000AC15A6 /* ForecastWeatherModel.swift in Sources */,
 				E2A32F4825447A05000ACEFE /* DecodedPlist.swift in Sources */,
 				E2CF4D76226E7A4100062E36 /* WeatherClient.swift in Sources */,
@@ -1790,6 +1794,7 @@
 				E20A43392C1B28B20052AFA4 /* DependencyContainer.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
+				E2644CF72C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */,
 				E2126F7C2C288892001111E0 /* SpeedConvertible.swift in Sources */,
 				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
@@ -1833,7 +1838,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D430FB2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */,
-				E2D430E02BB4DB3D003F26EE /* MeasurementSystemNotification.swift in Sources */,
+				E2D430E02BB4DB3D003F26EE /* NotificationCenterAdapter.swift in Sources */,
 				E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */,
 				E2117B462B29B9F500F91ADB /* WeatherEntryRepository.swift in Sources */,
 				E283572B2B23894800E3807A /* GeocodedLocation.swift in Sources */,
@@ -1888,7 +1893,8 @@
 				E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */,
 				E2AD32702B23779000F46FBE /* BuildConfigurationFile.swift in Sources */,
 				E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */,
-				E2F671192B234F3400B791A0 /* MeasurementSystem.swift in Sources */,
+				E2F671192B234F3400B791A0 /* MetricSystem.swift in Sources */,
+				E2644CF82C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */,
 				E2255A512C10213400C6F3AD /* LocationWeatherViewEvent.swift in Sources */,
 				E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */,
 				E2D430F02BB4DC14003F26EE /* HourlyForecastChart.swift in Sources */,

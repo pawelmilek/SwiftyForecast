@@ -22,7 +22,7 @@ struct SpeedFormatterFactory: SpeedFormatterFactoryProtocol {
     func make(value: Double) -> SpeedFormatter {
         MetersPerSecSpeedFormatter(
             value: value,
-            converter: notationStorage.measurementSystem == .metric
+            converter: notationStorage.metricSystem == .metric
             ? ConvertedMetersPerSecond()
             : ConvertedMilesPerHour()
         )

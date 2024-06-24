@@ -9,13 +9,13 @@
 import Foundation
 
 final class NotationSettingsStorage: NotationSettings {
-    var measurementSystem: MeasurementSystem {
+    var metricSystem: MetricSystem {
         get {
-            loadMeasurementSystem()
+            loadMetricSystem()
         }
 
         set(newValue) {
-            saveMeasurementSystem(newValue)
+            saveMetricSystem(newValue)
         }
     }
 
@@ -41,12 +41,12 @@ final class NotationSettingsStorage: NotationSettings {
         self.storage = storage
     }
 
-    private func loadMeasurementSystem() -> MeasurementSystem {
+    private func loadMetricSystem() -> MetricSystem {
         let storedValue = storage.integer(forKey: Constant.measurementSystem)
-        return MeasurementSystem(rawValue: storedValue) ?? .imperial
+        return MetricSystem(rawValue: storedValue) ?? .imperial
     }
 
-    private func saveMeasurementSystem(_ value: MeasurementSystem) {
+    private func saveMetricSystem(_ value: MetricSystem) {
         storage.set(value.rawValue, forKey: Constant.measurementSystem)
     }
 

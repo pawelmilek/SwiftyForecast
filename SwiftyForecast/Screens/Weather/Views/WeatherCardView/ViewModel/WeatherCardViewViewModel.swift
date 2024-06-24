@@ -14,17 +14,17 @@ import SwiftUI
 final class WeatherCardViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = false
-    @Published private(set) var locationName = ""
+    @Published private(set) var locationName = "--"
     @Published private(set) var icon: Image?
-    @Published private(set) var description = "-"
-    @Published private(set) var daytimeDescription = "-"
+    @Published private(set) var description = "--"
+    @Published private(set) var daytimeDescription = "--"
     @Published private(set) var temperature = "--"
     @Published private(set) var temperatureMaxMin = "--"
-    @Published private(set) var sunrise = Twilight.sunrise(time: "")
-    @Published private(set) var sunset = Twilight.sunset(time: "")
-    @Published private(set) var windSpeed = WindSpeed(value: "")
-    @Published private(set) var humidity = Humidity(value: "")
-    @Published private(set) var condition: WeatherCondition
+    @Published private(set) var sunrise = Twilight.sunrise(time: "--")
+    @Published private(set) var sunset = Twilight.sunset(time: "--")
+    @Published private(set) var windSpeed = WindSpeed(value: "--")
+    @Published private(set) var humidity = Humidity(value: "--")
+    @Published private(set) var condition: WeatherCondition = .none
     @Published private var weatherModel: WeatherModel?
 
     private var cancellables = Set<AnyCancellable>()
@@ -34,7 +34,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     private let parser: WeatherResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     private let speedFormatterFactory: SpeedFormatterFactoryProtocol
-    private let measurementSystemNotification: MeasurementSystemNotification
+    private let metricSystemNotification: MetricSystemNotification
 
     init(
         latitude: Double,
@@ -44,7 +44,7 @@ final class WeatherCardViewViewModel: ObservableObject {
         parser: WeatherResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol,
         speedFormatterFactory: SpeedFormatterFactoryProtocol,
-        measurementSystemNotification: MeasurementSystemNotification
+        metricSystemNotification: MetricSystemNotification
     ) {
         self.latitude = latitude
         self.longitude = longitude
@@ -53,58 +53,55 @@ final class WeatherCardViewViewModel: ObservableObject {
         self.parser = parser
         self.temperatureFormatterFactory = temperatureFormatterFactory
         self.speedFormatterFactory = speedFormatterFactory
-        self.measurementSystemNotification = measurementSystemNotification
-        self.condition = .none
-        subscribeToPublisher()
-        registerMeasurementSystemObserver()
+        self.metricSystemNotification = metricSystemNotification
+        subscribePublishers()
     }
 
-    private func subscribeToPublisher() {
+    private func subscribePublishers() {
         $weatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
-            .sink { [self] currentWeatherModel in
+            .sink { [self] weatherModel in
                 setTemperatureAccordingToUnitNotation()
                 setWindSpeedAccordingToMeasurementSystem()
-                description = currentWeatherModel.condition.description
-                daytimeDescription = currentWeatherModel.condition.state.description
-                humidity.value = "\(currentWeatherModel.humidity)\("%")"
-                sunrise = .sunrise(time: currentWeatherModel.sunrise.formatted(date: .omitted, time: .shortened))
-                sunset = .sunset(time: currentWeatherModel.sunset.formatted(date: .omitted, time: .shortened))
-                condition = WeatherCondition(code: currentWeatherModel.condition.id)
+                description = weatherModel.condition.description
+                daytimeDescription = weatherModel.condition.state.description
+                humidity.value = "\(weatherModel.humidity)\("%")"
+                sunrise = .sunrise(time: weatherModel.sunrise.formatted(date: .omitted, time: .shortened))
+                sunset = .sunset(time: weatherModel.sunset.formatted(date: .omitted, time: .shortened))
+                condition = WeatherCondition(code: weatherModel.condition.id)
+            }
+            .store(in: &cancellables)
+
+        metricSystemNotification.publisher()
+            .sink { [weak self] _ in
+                self?.metricSystemChanged()
             }
             .store(in: &cancellables)
     }
 
+    private func metricSystemChanged() {
+        setTemperatureAccordingToUnitNotation()
+        setWindSpeedAccordingToMeasurementSystem()
+    }
+
     private func setTemperatureAccordingToUnitNotation() {
-        guard let weatherModel else { return }
-        let formatter = temperatureFormatterFactory.make(by: weatherModel.temperature)
+        guard let temp = weatherModel?.temperature else { return }
+        let formatter = temperatureFormatterFactory.make(by: temp)
         temperature = formatter.current()
         temperatureMaxMin = formatter.maxMin()
     }
 
     private func setWindSpeedAccordingToMeasurementSystem() {
-        guard let weatherModel else { return }
-        let formatter = speedFormatterFactory.make(value: weatherModel.windSpeed)
+        guard let wind = weatherModel?.windSpeed else { return }
+        let formatter = speedFormatterFactory.make(value: wind)
         windSpeed.value = formatter.current()
-    }
-
-    private func registerMeasurementSystemObserver() {
-        measurementSystemNotification.addObserver(
-            self,
-            selector: #selector(measurementSystemChanged)
-        )
-    }
-
-    @objc
-    private func measurementSystemChanged() {
-        setTemperatureAccordingToUnitNotation()
-        setWindSpeedAccordingToMeasurementSystem()
     }
 
     func loadData() async {
         defer { isLoading = false }
         isLoading = true
+
         do {
             let response = try await client.fetchCurrent(
                 latitude: latitude,

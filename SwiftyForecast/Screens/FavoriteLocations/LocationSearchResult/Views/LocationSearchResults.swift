@@ -57,7 +57,7 @@ struct LocationSearchResults: View {
                     speedFormatterFactory: SpeedFormatterFactory(
                         notationStorage: NotationSettingsStorage()
                     ),
-                    measurementSystemNotification: MeasurementSystemNotification()
+                    metricSystemNotification: NotificationCenterAdapter()
                 ),
                 onCancel: dismiss
             )

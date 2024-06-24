@@ -9,6 +9,6 @@
 import Foundation
 
 protocol NotationSettings {
-    var measurementSystem: MeasurementSystem { get set }
+    var metricSystem: MetricSystem { get set }
     var temperatureNotation: TemperatureNotation { get set }
 }

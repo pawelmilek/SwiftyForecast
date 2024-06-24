@@ -2,7 +2,6 @@ import UIKit
 
 protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get set }
-    var databaseManager: DatabaseManager { get }
 
     func start()
     func openAbout()

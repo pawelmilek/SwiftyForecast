@@ -16,7 +16,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     let longitude: Double
     private let client: WeatherClient
     private let parser: WeatherResponseParser
-    private let measurementSystemNotification: MeasurementSystemNotification
+    private let metricSystemNotification: MetricSystemNotification
     private var cancellables = Set<AnyCancellable>()
 
     init(
@@ -26,7 +26,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
         locationName: String,
         client: WeatherClient,
         parser: WeatherResponseParser,
-        measurementSystemNotification: MeasurementSystemNotification
+        metricSystemNotification: MetricSystemNotification
     ) {
         self.compoundKey = compoundKey
         self.latitude = latitude
@@ -34,32 +34,25 @@ final class WeatherViewControllerViewModel: ObservableObject {
         self.locationName = locationName
         self.client = client
         self.parser = parser
-        self.measurementSystemNotification = measurementSystemNotification
+        self.metricSystemNotification = metricSystemNotification
         self.twentyFourHoursForecastModel = HourlyForecastModel.initialData
         self.fiveDaysForecastModel = DailyForecastModel.initialData
-        subscriteToPublishers()
-        addMeasurementSystemObserver()
+        subscritePublishers()
     }
 
-    private func addMeasurementSystemObserver() {
-        measurementSystemNotification.addObserver(
-            self,
-            selector: #selector(measurementSystemChanged)
-        )
-    }
-
-    @objc
-    private func measurementSystemChanged() {
-        reloadData()
-    }
-
-    private func subscriteToPublishers() {
+    private func subscritePublishers() {
         $forecastWeatherModel
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherModel in
                 self?.setTwentyFourHoursForecastModel(weatherModel.hourly)
                 self?.fiveDaysForecastModel = weatherModel.daily
+            }
+            .store(in: &cancellables)
+
+        metricSystemNotification.publisher()
+            .sink { [weak self] _ in
+                self?.reloadData()
             }
             .store(in: &cancellables)
     }

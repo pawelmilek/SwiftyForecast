@@ -6,6 +6,8 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
+import Foundation
+
 enum TemperatureNotation: Int, CaseIterable {
     case fahrenheit
     case celsius
@@ -13,10 +15,10 @@ enum TemperatureNotation: Int, CaseIterable {
     var symbol: String {
         switch self {
         case .fahrenheit:
-            "ºF"
+            UnitTemperature.fahrenheit.symbol
 
         case .celsius:
-            "ºC"
+            UnitTemperature.celsius.symbol
         }
     }
 }

@@ -45,10 +45,7 @@ private extension AppDelegate {
     }
 
     func setupCoordinator() {
-        coordinator = MainCoordinator(
-            navigationController: UINavigationController(),
-            databaseManager: RealmManager()
-        )
+        coordinator = MainCoordinator(navigationController: UINavigationController())
         coordinator?.start()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = coordinator?.navigationController
