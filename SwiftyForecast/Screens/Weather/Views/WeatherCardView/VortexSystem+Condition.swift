@@ -61,15 +61,16 @@ extension VortexSystem {
     static let clear: VortexSystem = {
         VortexSystem(
             tags: ["clear"],
-            shape: .ellipse(radius: 1),
-            birthRate: 70,
+            position: [0.27, 0.44],
+            shape: .point,
+            birthRate: 13,
+            burstCount: 4,
             lifespan: 2,
-            speed: 0,
-            speedVariation: 0.08,
+            speed: 0.02,
             angleRange: .degrees(360),
-            colors: .ramp(.white, .white, .white.opacity(0)),
-            size: 0.01,
-            sizeMultiplierAtDeath: 20
+            colors: .ramp(.white.opacity(1), .white.opacity(0.3), .white.opacity(0.3), .white.opacity(0)),
+            size: 1.25,
+            sizeMultiplierAtDeath: 3
         )
     }()
 
@@ -79,10 +80,11 @@ extension VortexSystem {
             position: [0.3, 0.45],
             shape: .point,
             birthRate: 2,
-            idleDuration: 1,
-            burstCount: 6,
+            idleDuration: 2,
+            burstCount: 3,
             lifespan: 9,
             lifespanVariation: 0.5,
+            speed: 0.01,
             angleRange: .degrees(360),
             dampingFactor: 110,
             colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
@@ -97,13 +99,13 @@ extension VortexSystem {
             position: [0.3, 0.45],
             shape: .point,
             birthRate: 2,
-            idleDuration: 1,
-            burstCount: 6,
+            idleDuration: 2,
+            burstCount: 3,
             lifespan: 9,
             lifespanVariation: 0.5,
+            speed: 0.01,
             angleRange: .degrees(360),
-            dampingFactor: 110,
-            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
+            colors: .ramp(.white.opacity(0.2), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )
@@ -115,13 +117,13 @@ extension VortexSystem {
             position: [0.3, 0.45],
             shape: .point,
             birthRate: 2,
-            idleDuration: 1,
-            burstCount: 6,
+            idleDuration: 2,
+            burstCount: 3,
             lifespan: 9,
             lifespanVariation: 0.5,
+            speed: 0.01,
             angleRange: .degrees(360),
-            dampingFactor: 110,
-            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .black.opacity(0.3), .black.opacity(0)),
+            colors: .ramp(.white.opacity(0.2), .white.opacity(0.6), .white.opacity(0.4), .black.opacity(0.3), .black.opacity(0)),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )

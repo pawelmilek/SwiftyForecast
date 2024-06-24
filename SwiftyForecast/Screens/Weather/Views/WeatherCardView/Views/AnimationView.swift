@@ -103,12 +103,16 @@ struct AnimationView: View {
     }
 
     private var clearView: some View {
-        VortexView(condition.vortexSystem) {
-            Circle()
-                .fill(.white)
-                .blur(radius: 3)
-                .frame(width: 30, height: 30)
-                .tag("clear")
+        VortexViewReader { proxy in
+            VortexView(condition.vortexSystem) {
+                Circle()
+                    .fill(.white)
+                    .frame(width: 30, height: 30)
+                    .tag("clear")
+            }
+            .onAppear {
+                proxy.burst()
+            }
         }
     }
 
