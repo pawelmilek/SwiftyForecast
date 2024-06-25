@@ -34,7 +34,7 @@ struct MockGenerator {
         }
     }
 
-    func generateForecastWeatherModel() -> ForecastWeatherModel {
+    func generateForecastWeatherModel() -> ForecastModel {
         do {
             let resourceFile = ResourceFile(
                 name: "five_days_forecast_weather_response",

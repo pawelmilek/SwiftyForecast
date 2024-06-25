@@ -1,38 +1,41 @@
 //
-//  CurrentEntryRepository.swift
+//  WeatherEntryService.swift
 //  SwiftyForecastWidgetExtension
 //
-//  Created by Pawel Milek on 6/20/24.
+//  Created by Pawel Milek on 6/25/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 import CoreLocation
 
-final class CurrentEntryRepository: WeatherEntryRepository {
-    private let client: Client
+struct WeatherEntryService: EntryService {
+    private let repository: WeatherRepositoryProtocol
     private let locationPlace: LocationPlaceable
     private let parser: ResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        client: Client,
+        repository: WeatherRepositoryProtocol,
         locationPlace: LocationPlaceable,
         parser: ResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
-        self.client = client
+        self.repository = repository
         self.locationPlace = locationPlace
         self.parser = parser
         self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
-    func load(for location: CLLocation) async -> WeatherEntry {
-        async let name = fetchPlaceName(at: location)
-        async let model = fetchWeather(coordinate: location.coordinate)
+    func load(latitude: Double, longitude: Double) async -> WeatherEntry {
+        async let name = fetchPlaceName(at: CLLocation(latitude: latitude, longitude: longitude))
+        async let model = fetchWeather(
+            latitude: latitude,
+            longitude: longitude
+        )
         let (nameResult, weatherResult) = await (name, model)
+        let icon = await fetchIcon(model.condition.iconCode)
 
-        let icon = await fetchIcon(with: model.condition.iconCode)
         return WeatherEntry(
             date: .now,
             locationName: nameResult,
@@ -55,21 +58,18 @@ final class CurrentEntryRepository: WeatherEntryRepository {
         }
     }
 
-    private func fetchWeather(coordinate: CLLocationCoordinate2D) async -> WeatherModel {
+    private func fetchIcon(_ symbol: String) async -> Data {
         do {
-            let response = try await client.fetchCurrent(
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude
-            )
-            return parser.weather(response: response)
+            return try await repository.fetchIcon(symbol: symbol)
         } catch {
             fatalError(error.localizedDescription)
         }
     }
 
-    private func fetchIcon(with symbol: String) async -> Data {
+    private func fetchWeather(latitude: Double, longitude: Double) async -> WeatherModel {
         do {
-            return try await client.fetchLargeIcon(symbol: symbol)
+            let response = try await repository.fetchCurrent(latitude: latitude, longitude: longitude)
+            return parser.weather(response: response)
         } catch {
             fatalError(error.localizedDescription)
         }

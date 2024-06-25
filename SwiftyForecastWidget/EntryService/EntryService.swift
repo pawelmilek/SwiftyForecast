@@ -1,5 +1,5 @@
 //
-//  WeatherEntryService.swift
+//  EntryService.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/24/24.
@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import CoreLocation
 
-protocol WeatherEntryService {
+protocol EntryService {
     func load(latitude: Double, longitude: Double) async -> WeatherEntry
 }

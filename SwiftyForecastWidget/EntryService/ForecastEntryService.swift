@@ -1,41 +1,42 @@
 //
-//  ForecastEntryRepository.swift
+//  ForecastEntryService.swift
 //  SwiftyForecastWidgetExtension
 //
-//  Created by Pawel Milek on 6/20/24.
+//  Created by Pawel Milek on 6/25/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 import CoreLocation
 
-final class ForecastEntryRepository: WeatherEntryRepository {
-    private let client: Client
+struct ForecastEntryService: EntryService {
+    private let repository: WeatherRepositoryProtocol
     private let locationPlace: LocationPlaceable
     private let parser: ResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        client: Client,
+        repository: WeatherRepositoryProtocol,
         locationPlace: LocationPlaceable,
         parser: ResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
-        self.client = client
+        self.repository = repository
         self.locationPlace = locationPlace
         self.parser = parser
         self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
-    func load(for location: CLLocation) async -> WeatherEntry {
-        async let name = fetchPlaceName(at: location)
-        async let weather = fetchWeather(coordinate: location.coordinate)
-        async let hourlyForecast = fetchHourlyForecast(coordinate: location.coordinate)
+    func load(latitude: Double, longitude: Double) async -> WeatherEntry {
+        async let name = fetchPlaceName(at: CLLocation(latitude: latitude, longitude: longitude))
+        async let weather = fetchWeather(latitude: latitude,longitude: longitude)
+        async let hourlyForecast = fetchHourlyForecast(latitude: latitude,longitude: longitude)
         let (nameResult, weatherResult, hourlyForecastResult) = await (name, weather, hourlyForecast)
 
-        async let icon = fetchIcon(with: weatherResult.condition.iconCode)
+        async let icon = fetchIcon(weatherResult.condition.iconCode)
         async let hourlyEntries = hourlyEntries(hourlyForecastResult)
         let (iconResult, hourlyEntriesResult) = await (icon, hourlyEntries)
+
         return WeatherEntry(
             date: .now,
             locationName: nameResult,
@@ -52,7 +53,7 @@ final class ForecastEntryRepository: WeatherEntryRepository {
         var entires = [HourlyEntry]()
 
         for model in Array(hourlyForecast.prefix(upTo: 4)) {
-            let icon = await fetchIcon(with: model.icon)
+            let icon = await fetchIcon(model.icon)
             let data = HourlyEntry(
                 icon: icon,
                 date: model.date,
@@ -74,37 +75,28 @@ final class ForecastEntryRepository: WeatherEntryRepository {
         }
     }
 
-    private func fetchWeather(coordinate: CLLocationCoordinate2D) async -> WeatherModel {
+    private func fetchIcon(_ symbol: String) async -> Data {
         do {
-            let response = try await client.fetchCurrent(
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude
-            )
-            let model = parser.weather(response: response)
-            return model
+            return try await repository.fetchIcon(symbol: symbol)
         } catch {
             fatalError(error.localizedDescription)
         }
     }
 
-    private func fetchHourlyForecast(coordinate: CLLocationCoordinate2D) async -> [HourlyForecastModel] {
+    private func fetchWeather(latitude: Double, longitude: Double) async -> WeatherModel {
         do {
-            let response = try await client.fetchForecast(
-                latitude: coordinate.latitude,
-                longitude: coordinate.longitude
-            )
+            let response = try await repository.fetchCurrent(latitude: latitude, longitude: longitude)
+            return parser.weather(response: response)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+
+    private func fetchHourlyForecast(latitude: Double, longitude: Double) async -> [HourlyForecastModel] {
+        do {
+            let response = try await repository.fetchForecast(latitude: latitude, longitude: longitude)
             let forecast = parser.forecast(response: response)
             return forecast.hourly
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-
-    private func fetchIcon(with symbol: String) async -> Data {
-        do {
-            let result = try await client.fetchLargeIcon(symbol: symbol)
-            return result
-
         } catch {
             fatalError(error.localizedDescription)
         }

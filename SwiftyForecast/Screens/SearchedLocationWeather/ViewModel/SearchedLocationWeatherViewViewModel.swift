@@ -68,7 +68,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
         setHourlyForecastItems(forecast)
     }
 
-    private func setHourlyForecastItems(_ forecastModel: ForecastWeatherModel) {
+    private func setHourlyForecastItems(_ forecastModel: ForecastModel) {
         let threeHoursForecastItems = 7
         twentyFourHoursForecast = Array(forecastModel.hourly[...threeHoursForecastItems])
     }

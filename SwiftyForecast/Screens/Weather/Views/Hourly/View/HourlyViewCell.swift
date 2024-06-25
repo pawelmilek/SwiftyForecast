@@ -74,32 +74,20 @@ private extension HourlyViewCell {
 
         viewModel.$time
             .sink { [weak self] time in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.timeLabel.alpha = 0.4
-                    self?.timeLabel.text = time
-//                    self?.timeLabel.alpha = 1.0
-//                }
+                self?.timeLabel.text = time
             }
             .store(in: &cancellables)
 
         viewModel.$iconURL
             .compactMap { $0 }
             .sink { [weak self] iconURL in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.iconImageView.alpha = 0.4
-                    self?.iconImageView.kf.setImage(with: iconURL)
-//                    self?.iconImageView.alpha = 1.0
-//                }
+                self?.iconImageView.kf.setImage(with: iconURL)
             }
             .store(in: &cancellables)
 
         viewModel.$temperature
             .sink { [weak self] temperature in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.temperatureLabel.alpha = 0.4
-                    self?.temperatureLabel.text = temperature
-//                    self?.temperatureLabel.alpha = 1.0
-//                }
+                self?.temperatureLabel.text = temperature
             }
             .store(in: &cancellables)
     }

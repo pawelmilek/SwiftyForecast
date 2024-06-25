@@ -2,7 +2,7 @@ import Foundation
 
 protocol ResponseParser {
     func weather(response: CurrentWeatherResponse) -> WeatherModel
-    func forecast(response: ForecastWeatherResponse) -> ForecastWeatherModel
+    func forecast(response: ForecastWeatherResponse) -> ForecastModel
 }
 
 struct WeatherResponseParser: ResponseParser {
@@ -38,7 +38,7 @@ struct WeatherResponseParser: ResponseParser {
         return currentWeatherModel
     }
 
-    func forecast(response: ForecastWeatherResponse) -> ForecastWeatherModel {
+    func forecast(response: ForecastWeatherResponse) -> ForecastModel {
         let hourlyForecastModels = response.data.map {
             HourlyForecastModel(
                 date: Date(timeIntervalSince1970: TimeInterval($0.dateTimeUnix)),
@@ -48,7 +48,7 @@ struct WeatherResponseParser: ResponseParser {
         }
 
         let dailyForecastModels = groupAndFilterOutTodayDate(forecast: response)
-        let forecastWeatherModel = ForecastWeatherModel(
+        let forecastWeatherModel = ForecastModel(
             hourly: hourlyForecastModels,
             daily: dailyForecastModels
         )

@@ -1,5 +1,5 @@
 //
-//  Repository.swift
+//  WeatherRepositoryProtocol.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/24/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Repository {
+protocol WeatherRepositoryProtocol {
     func fetchCurrent(latitude: Double, longitude: Double) async throws -> CurrentWeatherResponse
     func fetchForecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherResponse
     func fetchIcon(symbol: String) async throws -> Data

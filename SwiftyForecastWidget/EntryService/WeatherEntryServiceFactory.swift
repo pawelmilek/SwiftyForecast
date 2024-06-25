@@ -1,5 +1,5 @@
 //
-//  EntryRepositoryFactory.swift
+//  WeatherEntryServiceFactory.swift
 //  SwiftyForecastWidgetExtension
 //
 //  Created by Pawel Milek on 6/20/24.
@@ -8,35 +8,35 @@
 
 import Foundation
 
-struct WeatherEntryRepositoryFactory: EntryRepositoryFactory {
-    private let client: Client
+struct WeatherEntryServiceFactory: EntryServiceFactory {
+    private let repository: WeatherRepositoryProtocol
     private let locationPlace: LocationPlaceable
     private let parser: ResponseParser
     private let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
 
     init(
-        client: Client,
+        repository: WeatherRepositoryProtocol,
         locationPlace: LocationPlaceable,
         parser: ResponseParser,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
-        self.client = client
+        self.repository = repository
         self.locationPlace = locationPlace
         self.parser = parser
         self.temperatureFormatterFactory = temperatureFormatterFactory
     }
 
-    func make(_ isSystemMediumFamily: Bool) -> WeatherEntryRepository {
+    func make(_ isSystemMediumFamily: Bool) -> EntryService {
         return if isSystemMediumFamily {
-            ForecastEntryRepository(
-                client: client,
+            ForecastEntryService(
+                repository: repository,
                 locationPlace: locationPlace,
                 parser: parser,
                 temperatureFormatterFactory: temperatureFormatterFactory
             )
         } else {
-            CurrentEntryRepository(
-                client: client,
+            WeatherEntryService(
+                repository: repository,
                 locationPlace: locationPlace,
                 parser: parser,
                 temperatureFormatterFactory: temperatureFormatterFactory

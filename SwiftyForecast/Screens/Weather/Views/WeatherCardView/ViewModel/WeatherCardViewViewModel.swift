@@ -59,40 +59,41 @@ final class WeatherCardViewViewModel: ObservableObject {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [self] weatherModel in
-                setTemperatureAccordingToUnitNotation()
-                setWindSpeedAccordingToMeasurementSystem()
                 description = weatherModel.condition.description
                 daytimeDescription = weatherModel.condition.state.description
                 humidity.value = "\(weatherModel.humidity)\("%")"
                 sunrise = .sunrise(time: weatherModel.sunrise.formatted(date: .omitted, time: .shortened))
                 sunset = .sunset(time: weatherModel.sunset.formatted(date: .omitted, time: .shortened))
                 condition = WeatherCondition(code: weatherModel.condition.id)
+                setupTemperatureFormatting(weatherModel.temperature)
+                setupWindSpeedFormatting(weatherModel.windSpeed)
             }
             .store(in: &cancellables)
 
         metricSystemNotification.publisher()
             .sink { [weak self] _ in
-                self?.metricSystemChanged()
+                self?.updateTemperatureAndWindSpeedFormatting()
             }
             .store(in: &cancellables)
     }
 
-    private func metricSystemChanged() {
-        setTemperatureAccordingToUnitNotation()
-        setWindSpeedAccordingToMeasurementSystem()
+    private func updateTemperatureAndWindSpeedFormatting() {
+        guard let temperature = weatherModel?.temperature else { return }
+        guard let windSpeed = weatherModel?.windSpeed else { return }
+
+        setupTemperatureFormatting(temperature)
+        setupWindSpeedFormatting(windSpeed)
     }
 
-    private func setTemperatureAccordingToUnitNotation() {
-        guard let temp = weatherModel?.temperature else { return }
-        let formatter = temperatureFormatterFactory.make(by: temp)
-        temperature = formatter.current()
-        temperatureMaxMin = formatter.maxMin()
+    private func setupTemperatureFormatting(_ temperature: Temperature) {
+        let formatter = temperatureFormatterFactory.make(by: temperature)
+        self.temperature = formatter.current()
+        self.temperatureMaxMin = formatter.maxMin()
     }
 
-    private func setWindSpeedAccordingToMeasurementSystem() {
-        guard let wind = weatherModel?.windSpeed else { return }
-        let formatter = speedFormatterFactory.make(value: wind)
-        windSpeed.value = formatter.current()
+    private func setupWindSpeedFormatting(_ windSpeed: Double) {
+        let formatter = speedFormatterFactory.make(value: windSpeed)
+        self.windSpeed.value = formatter.current()
     }
 
     func loadData() async {

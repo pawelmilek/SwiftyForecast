@@ -9,7 +9,7 @@ final class WeatherViewControllerViewModel: ObservableObject {
     @Published private(set) var locationName = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
-    @Published private var forecastWeatherModel: ForecastWeatherModel?
+    @Published private var forecastWeatherModel: ForecastModel?
 
     let compoundKey: String
     let latitude: Double

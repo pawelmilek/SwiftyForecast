@@ -1,5 +1,5 @@
 //
-//  OpenWeatherRepository.swift
+//  WeatherRepository.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/24/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherRepository: Repository {
+struct WeatherRepository: WeatherRepositoryProtocol {
     private let client: Client
 
     init(client: Client) {

@@ -30,7 +30,6 @@ private extension DailyViewCell {
 
     func setup() {
         backgroundColor = Style.DailyCell.backgroundColor
-
         dateLabel.textColor = Style.DailyCell.dateColor
         dateLabel.textAlignment = Style.DailyCell.dateAlignment
         dateLabel.numberOfLines = Style.DailyCell.numberOfLines
@@ -63,32 +62,20 @@ private extension DailyViewCell {
 
         viewModel.$attributedDate
             .sink { [weak self] attributedDate in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.dateLabel.alpha = 0.4
-                    self?.dateLabel.attributedText = attributedDate
-//                    self?.dateLabel.alpha = 1.0
-//                }
+                self?.dateLabel.attributedText = attributedDate
             }
             .store(in: &cancellables)
 
         viewModel.$temperature
             .sink { [weak self] temperature in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.temperatureLabel.alpha = 0.4
-                    self?.temperatureLabel.text = temperature
-//                    self?.temperatureLabel.alpha = 1.0
-//                }
+                self?.temperatureLabel.text = temperature
             }
             .store(in: &cancellables)
 
         viewModel.$iconURL
             .compactMap { $0 }
             .sink { [weak self] iconURL in
-//                UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseInOut) { [self] in
-//                    self?.iconImageView.alpha = 0.4
-                    self?.iconImageView.kf.setImage(with: iconURL)
-//                    self?.iconImageView.alpha = 1.0
-//                }
+                self?.iconImageView.kf.setImage(with: iconURL)
             }
             .store(in: &cancellables)
     }

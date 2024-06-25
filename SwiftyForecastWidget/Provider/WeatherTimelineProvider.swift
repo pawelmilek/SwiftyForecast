@@ -13,10 +13,10 @@ import Combine
 
 struct WeatherTimelineProvider: TimelineProvider {
     private let locationManager: WidgetLocationManager
-    private let repositoryFactory: EntryRepositoryFactory
+    private let repositoryFactory: EntryServiceFactory
     private var cancellables = Set<AnyCancellable>()
 
-    init(locationManager: WidgetLocationManager, repositoryFactory: EntryRepositoryFactory) {
+    init(locationManager: WidgetLocationManager, repositoryFactory: EntryServiceFactory) {
         self.locationManager = locationManager
         self.repositoryFactory = repositoryFactory
     }
@@ -31,7 +31,10 @@ struct WeatherTimelineProvider: TimelineProvider {
 
         Task(priority: .userInitiated) {
             for await location in locationManager.startUpdatingLocation() {
-                let entry = await repository.load(for: location)
+                let entry = await repository.load(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude
+                )
                 completion(entry)
             }
         }
@@ -44,7 +47,10 @@ struct WeatherTimelineProvider: TimelineProvider {
         Task(priority: .userInitiated) {
             for await location in locationManager.startUpdatingLocation() {
                 var entries = [WeatherEntry]()
-                let entry = await repository.load(for: location)
+                let entry = await repository.load(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude
+                )
                 entries.append(entry)
 
                 let nextUpdate = Calendar.current.date(byAdding: .minute, value: 45, to: .now)!

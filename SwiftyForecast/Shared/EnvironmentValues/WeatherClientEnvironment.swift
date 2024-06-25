@@ -1,5 +1,5 @@
 //
-//  WeatherServiceEnvironment.swift
+//  WeatherClientEnvironment.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/14/24.

@@ -1,5 +1,5 @@
 //
-//  EntryRepositoryFactory.swift
+//  EntryServiceFactory.swift
 //  SwiftyForecastWidgetExtension
 //
 //  Created by Pawel Milek on 6/20/24.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol EntryRepositoryFactory {
-    func make(_ isSystemMediumFamily: Bool) -> WeatherEntryRepository
+protocol EntryServiceFactory {
+    func make(_ isSystemMediumFamily: Bool) -> EntryService
 }

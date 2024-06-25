@@ -10,7 +10,7 @@ import Foundation
 
 protocol WeatherServiceProtocol {
     func weather(latitude: Double, longitude: Double) async throws -> WeatherModel
-    func forecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherModel
+    func forecast(latitude: Double, longitude: Double) async throws -> ForecastModel
     func icon(symbol: String) async throws -> Data
     func largeIcon(symbol: String) async throws -> Data
 }

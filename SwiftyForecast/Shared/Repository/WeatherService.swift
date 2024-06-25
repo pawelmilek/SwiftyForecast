@@ -8,9 +8,30 @@
 
 import Foundation
 
-protocol WeatherServiceProtocol {
-    func weather(latitude: Double, longitude: Double) async throws -> WeatherModel
-    func forecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherModel
-    func icon(symbol: String) async throws -> Data
-    func largeIcon(symbol: String) async throws -> Data
+struct WeatherService: WeatherServiceProtocol {
+    private let repository: WeatherRepository
+    private let parse: ResponseParser
+
+    init(repository: WeatherRepository, parse: ResponseParser) {
+        self.repository = repository
+        self.parse = parse
+    }
+
+    func weather(latitude: Double, longitude: Double) async throws -> WeatherModel {
+        let response = try await repository.fetchCurrent(latitude: latitude, longitude: longitude)
+        return parse.weather(response: response)
+    }
+
+    func forecast(latitude: Double, longitude: Double) async throws -> ForecastModel {
+        let resposne = try await repository.fetchForecast(latitude: latitude, longitude: longitude)
+        return parse.forecast(response: resposne)
+    }
+
+    func icon(symbol: String) async throws -> Data {
+        try await repository.fetchIcon(symbol: symbol)
+    }
+
+    func largeIcon(symbol: String) async throws -> Data {
+        try await repository.fetchLargeIcon(symbol: symbol)
+    }
 }
