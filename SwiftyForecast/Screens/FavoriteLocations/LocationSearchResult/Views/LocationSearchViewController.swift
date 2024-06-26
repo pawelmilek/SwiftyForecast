@@ -9,6 +9,7 @@
 import UIKit
 import SwiftUI
 
+@MainActor
 protocol LocationSearchViewControllerDelegate: AnyObject {
     func locationSearchViewController(
         _ view: LocationSearchViewController,
@@ -36,7 +37,7 @@ final class LocationSearchViewController: UIViewController {
 
         let locationSearchView = FavoriteLocationSearchView { [weak self] selectedIndex in
             guard let self else { return }
-            delegate?.locationSearchViewController(self,didSelectLocation: selectedIndex)
+            delegate?.locationSearchViewController(self, didSelectLocation: selectedIndex)
         }
 
         hostingViewController = UIHostingController(rootView: locationSearchView)

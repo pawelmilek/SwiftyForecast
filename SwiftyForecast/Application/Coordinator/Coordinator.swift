@@ -1,5 +1,6 @@
 import UIKit
 
+@MainActor
 protocol Coordinator: AnyObject {
     var navigationController: UINavigationController { get set }
 
@@ -10,6 +11,5 @@ protocol Coordinator: AnyObject {
     func dismiss()
     func presentOfflineView()
     func dismissOfflineView()
-    func timedLocationServicesPrompt()
     func presentLocationAnimation(isLoading: Bool)
 }

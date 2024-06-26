@@ -29,8 +29,8 @@ struct ForecastEntryService: EntryService {
 
     func load(latitude: Double, longitude: Double) async -> WeatherEntry {
         async let name = fetchPlaceName(at: CLLocation(latitude: latitude, longitude: longitude))
-        async let weather = fetchWeather(latitude: latitude,longitude: longitude)
-        async let hourlyForecast = fetchHourlyForecast(latitude: latitude,longitude: longitude)
+        async let weather = fetchWeather(latitude: latitude, longitude: longitude)
+        async let hourlyForecast = fetchHourlyForecast(latitude: latitude, longitude: longitude)
         let (nameResult, weatherResult, hourlyForecastResult) = await (name, weather, hourlyForecast)
 
         async let icon = fetchIcon(weatherResult.condition.iconCode)

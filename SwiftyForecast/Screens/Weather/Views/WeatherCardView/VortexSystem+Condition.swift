@@ -9,6 +9,7 @@
 import Foundation
 import Vortex
 
+@MainActor
 extension VortexSystem {
     static let lightSnow: VortexSystem = {
         VortexSystem(
@@ -68,7 +69,12 @@ extension VortexSystem {
             lifespan: 2,
             speed: 0.02,
             angleRange: .degrees(360),
-            colors: .ramp(.white.opacity(1), .white.opacity(0.3), .white.opacity(0.3), .white.opacity(0)),
+            colors: .ramp(
+                .white.opacity(1),
+                .white.opacity(0.3),
+                .white.opacity(0.3),
+                .white.opacity(0)
+            ),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )
@@ -87,7 +93,13 @@ extension VortexSystem {
             speed: 0.01,
             angleRange: .degrees(360),
             dampingFactor: 110,
-            colors: .ramp(.white.opacity(0.1), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
+            colors: .ramp(
+                .white.opacity(0.1),
+                .white.opacity(0.6),
+                .white.opacity(0.4),
+                .white.opacity(0.3),
+                .white.opacity(0)
+            ),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )
@@ -105,7 +117,13 @@ extension VortexSystem {
             lifespanVariation: 0.5,
             speed: 0.01,
             angleRange: .degrees(360),
-            colors: .ramp(.white.opacity(0.2), .white.opacity(0.6), .white.opacity(0.4), .white.opacity(0.3), .white.opacity(0)),
+            colors: .ramp(
+                .white.opacity(0.2),
+                .white.opacity(0.6),
+                .white.opacity(0.4),
+                .white.opacity(0.3),
+                .white.opacity(0)
+            ),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )
@@ -123,7 +141,13 @@ extension VortexSystem {
             lifespanVariation: 0.5,
             speed: 0.01,
             angleRange: .degrees(360),
-            colors: .ramp(.white.opacity(0.2), .white.opacity(0.6), .white.opacity(0.4), .black.opacity(0.3), .black.opacity(0)),
+            colors: .ramp(
+                .white.opacity(0.2),
+                .white.opacity(0.6),
+                .white.opacity(0.4),
+                .black.opacity(0.3),
+                .black.opacity(0)
+            ),
             size: 1.25,
             sizeMultiplierAtDeath: 3
         )

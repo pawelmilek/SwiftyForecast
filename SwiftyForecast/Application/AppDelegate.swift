@@ -5,29 +5,19 @@ import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
-
     var window: UIWindow?
     private var coordinator: MainCoordinator?
-    private var networkMonitor: NetworkMonitor?
     private var cancellables = Set<AnyCancellable>()
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        setupNetworkMonitor()
         setupFirebase()
         setupCoordinator()
         setupTips()
         setupNavigationBarStyle()
-        setupAppearanceTheme()
-        setupAppearanceThemeNotificationCenter()
         return true
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        setupAppearanceTheme()
     }
 }
 
@@ -36,12 +26,6 @@ private extension AppDelegate {
 
     func setupFirebase() {
         FirebaseApp.configure()
-    }
-
-    func setupNetworkMonitor() {
-        networkMonitor = NetworkMonitor()
-        subscribeToNetworkMonitorPublisher()
-        networkMonitor?.start()
     }
 
     func setupCoordinator() {
@@ -58,20 +42,6 @@ private extension AppDelegate {
             .displayFrequency(.immediate),
             .datastoreLocation(.applicationDefault)
         ])
-    }
-
-    func subscribeToNetworkMonitorPublisher() {
-        networkMonitor?.$hasNetworkConnection
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] hasNetworkConnection in
-                if hasNetworkConnection {
-                    self?.coordinator?.dismissOfflineView()
-                } else {
-                    self?.coordinator?.presentOfflineView()
-                }
-            }
-            .store(in: &cancellables)
     }
 
     func setupNavigationBarStyle() {
@@ -94,28 +64,5 @@ private extension AppDelegate {
         setTransparentBackground()
         setTitleTextColor()
         setBarButtonItemColor()
-    }
-
-    func setupAppearanceThemeNotificationCenter() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(setupAppearanceTheme),
-            name: .didChangeAppearance,
-            object: nil
-        )
-    }
-
-    @objc
-    func setupAppearanceTheme() {
-        switch appearanceTheme {
-        case .dark:
-            window?.overrideUserInterfaceStyle = .dark
-
-        case .light:
-            window?.overrideUserInterfaceStyle = .light
-
-        case .systemDefault:
-            window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
-        }
     }
 }

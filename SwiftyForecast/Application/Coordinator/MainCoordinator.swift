@@ -2,12 +2,7 @@ import UIKit
 import CoreLocation
 import SafariServices
 
-@MainActor
 final class MainCoordinator: Coordinator {
-    var topViewController: UIViewController? {
-        navigationController.topViewController
-    }
-
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -16,19 +11,28 @@ final class MainCoordinator: Coordinator {
 
     func start() {
         let storyboard = UIStoryboard(storyboard: .main)
-        let viewController = storyboard.instantiateViewController(identifier: MainViewController.storyboardIdentifier) { coder in
+        let viewController = storyboard.instantiateViewController(
+            identifier: MainViewController.storyboardIdentifier
+        ) { coder in
             MainViewController(
                 viewModel: MainViewControllerViewModel(
                     geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
                     notationSettings: NotationSettingsStorage(),
                     metricSystemNotification: NotificationCenterAdapter(),
-                    currentLocationRecord: CurrentLocationRecord(databaseManager: RealmManager()),
+                    currentLocationRecord: CurrentLocationRecord(
+                        databaseManager: RealmManager()
+                    ),
                     databaseManager: RealmManager(),
                     locationManager: LocationManager(),
-                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService()),
+                    analyticsManager: AnalyticsManager(
+                        service: FirebaseAnalyticsService()
+                    ),
+                    networkMonitor: NetworkMonitor(),
                     service: WeatherService(
                         repository: WeatherRepository(
-                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
+                            client: OpenWeatherClient(
+                                decoder: JSONSnakeCaseDecoded()
+                            )
                         ),
                         parse: WeatherResponseParser()
                     )
@@ -89,18 +93,6 @@ final class MainCoordinator: Coordinator {
         }
 
         navigationController.viewControllers.remove(at: offlineVCIndex)
-    }
-
-    func timedLocationServicesPrompt() {
-        guard let viewController = navigationController.viewControllers.first else { return }
-
-        viewController.navigationItem.prompt = "Please enable location services"
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-            viewController.navigationItem.prompt = nil
-            self?.navigationController.viewIfLoaded?.setNeedsLayout()
-        }
-
-        navigationController.viewIfLoaded?.setNeedsLayout()
     }
 
     func presentLocationAnimation(isLoading: Bool) {

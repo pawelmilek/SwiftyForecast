@@ -4,6 +4,8 @@ import CoreLocation
 import Combine
 
 final class MainViewController: UIViewController {
+    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
+
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()
     }()
@@ -131,8 +133,46 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.viewModel.requestLocation()
+                self?.setupAppearanceTheme()
             }
             .store(in: &cancellables)
+
+        NotificationCenter.default
+            .publisher(for: .didChangeAppearance)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.setupAppearanceTheme()
+            }
+            .store(in: &cancellables)
+
+        viewModel.$hasNetworkConnection
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] hasNetworkConnection in
+                if hasNetworkConnection {
+                    self?.coordinator.dismissOfflineView()
+                } else {
+                    self?.coordinator.presentOfflineView()
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    func setupAppearanceTheme() {
+        let window = Array(UIApplication.shared.connectedScenes)
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first(where: { $0.isKeyWindow })
+
+        switch appearanceTheme {
+        case .dark:
+            window?.overrideUserInterfaceStyle = .dark
+
+        case .light:
+            window?.overrideUserInterfaceStyle = .light
+
+        case .systemDefault:
+            window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
+        }
     }
 
     func selectInitialPageViewController() {
@@ -152,20 +192,6 @@ private extension MainViewController {
 
     func setupRightBarButtonItem() {
         navigationItem.rightBarButtonItem = locationBarButton
-    }
-
-    @objc
-    func onAboutBarButtonTapped() {
-        coordinator.openAbout()
-    }
-
-    @objc
-    func onAppearanceBarButtonTapped() {
-        coordinator.openAppearanceSwitch()
-    }
-
-    @objc func onLocationListBarButtonTapped() {
-        coordinator.openLocations()
     }
 
     func setupNotationSystemSegmentedControl() {
@@ -251,7 +277,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "info")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.onAboutBarButtonTapped()
+            self?.coordinator.openAbout()
         })
 
         return UIBarButtonItem(customView: button)
@@ -262,7 +288,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "paintpalette.fill")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.onAppearanceBarButtonTapped()
+            self?.coordinator.openAppearanceSwitch()
         })
         return UIBarButtonItem(customView: button)
     }
@@ -272,7 +298,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "location.fill")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.onLocationListBarButtonTapped()
+            self?.coordinator.openLocations()
         })
         return UIBarButtonItem(customView: button)
     }

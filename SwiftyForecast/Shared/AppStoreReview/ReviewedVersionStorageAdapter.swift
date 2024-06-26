@@ -19,7 +19,7 @@ struct ReviewedVersionStorageAdapter: ReviewedVersionStorage {
     func version() -> String? {
         adaptee.string(forKey: Self.reviewedVersionKey)
     }
-    
+
     func save(_ version: String) {
         adaptee.set(Self.reviewedVersionKey, forKey: version)
     }

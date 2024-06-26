@@ -75,9 +75,7 @@ struct FavoriteLocationList: View {
         temperatureFormatterFactory: TemperatureFormatterFactory(
             notationStorage: NotationSettingsStorage()
         ),
-        onSelectRow: {
-            _ in
-        }
+        onSelectRow: { _ in }
     )
     .task {
         try? Tips.resetDatastore()

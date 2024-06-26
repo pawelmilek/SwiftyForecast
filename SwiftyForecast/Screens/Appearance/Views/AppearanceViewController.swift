@@ -14,7 +14,6 @@ class AppearanceViewController: UIViewController {
     private let notificationCenter: NotificationCenter
     private var hostingViewController: UIHostingController<AppearanceView>!
 
-
     init(coordinator: Coordinator, notificationCenter: NotificationCenter) {
         self.coordinator = coordinator
         self.notificationCenter = notificationCenter

@@ -5,6 +5,7 @@
 //  Created by Pawel Milek on 6/14/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
+// swiftlint:disable:implicit_getter
 
 import Foundation
 import SwiftUI

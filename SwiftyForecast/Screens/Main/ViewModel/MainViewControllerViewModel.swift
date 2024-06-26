@@ -11,6 +11,8 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var locationAuthorizationStatusDenied = false
     @Published private(set) var locationError: Error?
     @Published private(set) var selectedIndex: Int?
+    @Published private(set) var hasNetworkConnection = true
+
     private var locations: Results<LocationModel>?
 
     private let geocodeLocation: LocationPlaceable
@@ -20,6 +22,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
     private let analyticsManager: AnalyticsManager
+    private let networkMonitor: NetworkMonitor
     private let service: WeatherServiceProtocol
     private var token: NotificationToken?
     private var cancellables = Set<AnyCancellable>()
@@ -32,6 +35,7 @@ final class MainViewControllerViewModel: ObservableObject {
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         analyticsManager: AnalyticsManager,
+        networkMonitor: NetworkMonitor,
         service: WeatherServiceProtocol
     ) {
         self.geocodeLocation = geocodeLocation
@@ -41,6 +45,7 @@ final class MainViewControllerViewModel: ObservableObject {
         self.databaseManager = databaseManager
         self.locationManager = locationManager
         self.analyticsManager = analyticsManager
+        self.networkMonitor = networkMonitor
         self.service = service
         self.notationControlIndex = notationSettings.temperatureNotation.rawValue
         self.notationControlItems = TemperatureNotation.allCases.map { $0.symbol }
@@ -55,6 +60,7 @@ final class MainViewControllerViewModel: ObservableObject {
 
     func onViewDidLoad() {
         loadLocations()
+        networkMonitor.start()
     }
 
     func onSelectIndex(_ index: Int) {
@@ -66,6 +72,11 @@ final class MainViewControllerViewModel: ObservableObject {
     }
 
     private func subscirbePublishers() {
+        networkMonitor.$hasNetworkConnection
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.hasNetworkConnection, on: self)
+            .store(in: &cancellables)
+
         locationManager.$authorizationStatus
             .sink { [weak self] authorizationStatus in
                 guard let self else { return }
