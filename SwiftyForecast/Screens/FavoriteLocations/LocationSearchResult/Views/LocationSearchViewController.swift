@@ -62,7 +62,7 @@ final class LocationSearchViewController: UIViewController {
 
 #Preview {
     LocationSearchViewController(
-        coordinator: MainCoordinator(
+        coordinator: RootCoordinator(
             navigationController: .init()
         )
     )

@@ -21,7 +21,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let currentLocationRecord: LocationRecord
     private let databaseManager: DatabaseManager
     private let locationManager: LocationManager
-    private let analyticsManager: AnalyticsManager
+    private let analyticsService: AnalyticsService
     private let networkMonitor: NetworkMonitor
     private let service: WeatherServiceProtocol
     private var token: NotificationToken?
@@ -34,7 +34,7 @@ final class MainViewControllerViewModel: ObservableObject {
         currentLocationRecord: LocationRecord,
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
-        analyticsManager: AnalyticsManager,
+        analyticsService: AnalyticsService,
         networkMonitor: NetworkMonitor,
         service: WeatherServiceProtocol
     ) {
@@ -44,7 +44,7 @@ final class MainViewControllerViewModel: ObservableObject {
         self.currentLocationRecord = currentLocationRecord
         self.databaseManager = databaseManager
         self.locationManager = locationManager
-        self.analyticsManager = analyticsManager
+        self.analyticsService = analyticsService
         self.networkMonitor = networkMonitor
         self.service = service
         self.notationControlIndex = notationSettings.temperatureNotation.rawValue
@@ -196,7 +196,7 @@ final class MainViewControllerViewModel: ObservableObject {
         metricSystemNotification.post()
         reloadWidgetTimeline()
 
-        analyticsManager.send(
+        analyticsService.send(
             event: MainViewControllerEvent.temperatureNotationSwitched(
                 notation: temperatureNotation.symbol
             )

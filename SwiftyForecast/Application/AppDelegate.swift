@@ -1,3 +1,11 @@
+//
+//  AppDelegate.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/28/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import UIKit
 import TipKit
 import FirebaseCore
@@ -6,7 +14,7 @@ import Combine
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    private var coordinator: MainCoordinator?
+    private var coordinator: RootCoordinator?
     private var cancellables = Set<AnyCancellable>()
 
     func application(
@@ -29,7 +37,7 @@ private extension AppDelegate {
     }
 
     func setupCoordinator() {
-        coordinator = MainCoordinator(navigationController: UINavigationController())
+        coordinator = RootCoordinator(navigationController: UINavigationController())
         coordinator?.start()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = coordinator?.navigationController

@@ -68,13 +68,14 @@ enum OpenWeatherEndpoint: Endpoint {
     var body: Body? { nil }
 
     private func parameterList(latitude: Double, longitude: Double) -> Parameters {
-        let weatherServiceAPIKey = BuildConfigurationFile().weatherServiceAPIKey()
         let parameters = [
             "lat": "\(latitude)",
             "lon": "\(longitude)",
-            "appid": weatherServiceAPIKey,
+            "appid": Self.weatherServiceAPIKey,
             "units": "standard"
         ]
         return parameters
     }
+
+    static private let weatherServiceAPIKey = BuildConfigurationFile(bundle: .main).weatherServiceAPIKey()
 }

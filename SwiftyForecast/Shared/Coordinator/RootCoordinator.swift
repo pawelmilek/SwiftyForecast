@@ -1,8 +1,16 @@
+//
+//  RootCoordinator.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/28/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import UIKit
 import CoreLocation
 import SafariServices
 
-final class MainCoordinator: Coordinator {
+final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -15,41 +23,20 @@ final class MainCoordinator: Coordinator {
             identifier: MainViewController.storyboardIdentifier
         ) { coder in
             MainViewController(
-                viewModel: MainViewControllerViewModel(
-                    geocodeLocation: GeocodedLocation(geocoder: CLGeocoder()),
-                    notationSettings: NotationSettingsStorage(),
-                    metricSystemNotification: NotificationCenterAdapter(),
-                    currentLocationRecord: CurrentLocationRecord(
-                        databaseManager: RealmManager()
-                    ),
-                    databaseManager: RealmManager(),
-                    locationManager: LocationManager(),
-                    analyticsManager: AnalyticsManager(
-                        service: FirebaseAnalyticsService()
-                    ),
-                    networkMonitor: NetworkMonitor(),
-                    service: WeatherService(
-                        repository: WeatherRepository(
-                            client: OpenWeatherClient(
-                                decoder: JSONSnakeCaseDecoded()
-                            )
-                        ),
-                        parse: WeatherResponseParser()
-                    )
-                ),
+                viewModel: CompositionRoot.mainViewModel,
                 coordinator: self,
                 coder: coder
             )
         }
 
         navigationController.pushViewController(viewController, animated: false)
-        debugPrint(RealmManager().description)
+        debugPrint(CompositionRoot.databaseManager.description)
     }
 
     func openAbout() {
         navigationController.present(
             AboutViewController(
-                viewModel: AboutViewModel(),
+                viewModel: CompositionRoot.aboutViewModel,
                 coordinator: self
             ),
             animated: true
@@ -57,11 +44,13 @@ final class MainCoordinator: Coordinator {
     }
 
     func openAppearanceSwitch() {
-        let appearanceViewController = AppearanceViewController(
-            coordinator: self,
-            notificationCenter: .default
+        navigationController.present(
+            AppearanceViewController(
+                viewModel: CompositionRoot.appearanceViewModel,
+                coordinator: self
+            ),
+            animated: true
         )
-        navigationController.present(appearanceViewController, animated: true)
     }
 
     func openLocations() {

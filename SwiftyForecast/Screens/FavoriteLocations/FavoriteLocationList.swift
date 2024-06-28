@@ -13,7 +13,7 @@ import TipKit
 struct FavoriteLocationList: View {
     @Environment(\.isSearching) private var isSearching
     @Environment(\.databaseManager) private var databaseManager
-    @Environment(\.analyticsManager) private var analyticsManager
+    @Environment(\.analyticsService) private var analyticsService
     @Environment(\.client) private var client
     @Binding var searchText: String
     let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
@@ -61,7 +61,7 @@ struct FavoriteLocationList: View {
     }
 
     private func logLocationSelected(_ name: String) {
-        analyticsManager.send(
+        analyticsService.send(
             event: LocationListEvent.locationSelected(
                 name: name
             )

@@ -110,7 +110,7 @@ struct SearchedLocationWeatherView: View {
                 storage: ReviewedVersionStorageAdapter(adaptee: .standard),
                 bundle: .main
             ),
-            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+            analyticsService: FirebaseAnalyticsService()
         ),
         cardViewModel: WeatherCardViewViewModel(
             latitude: LocationModel.examples.first!.latitude,
@@ -128,7 +128,7 @@ struct SearchedLocationWeatherView: View {
             speedFormatterFactory: SpeedFormatterFactory(
                 notationStorage: NotationSettingsStorage()
             ),
-            metricSystemNotification: NotificationCenterAdapter()
+            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
         ),
         onCancel: {
         }

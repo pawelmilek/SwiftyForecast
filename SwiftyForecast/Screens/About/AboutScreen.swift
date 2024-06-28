@@ -158,5 +158,5 @@ struct AboutScreen: View {
 }
 
 #Preview {
-    AboutScreen(viewModel: .init())
+    AboutScreen(viewModel: CompositionRoot.aboutViewModel)
 }

@@ -21,32 +21,23 @@ final class AboutViewModel: ObservableObject {
     @Published private(set) var weatherDataProviderURL: URL?
     @Published private(set) var currentYear = ""
     @Published private var bundle: Bundle
-    @Published private var buildConfigurationFile: BuildConfigurationFile
+    @Published private var buildConfiguration: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
-    private let analyticsManager: AnalyticsManager
+    private let analyticsService: AnalyticsService
     private var cancellables = Set<AnyCancellable>()
     private var appId = 0
     let appStorePreviewTip = AppStorePreviewTip()
 
-    convenience init() {
-        self.init(
-            bundle: .main,
-            buildConfigurationFile: .init(),
-            networkResourceFactory: NetworkResourceFactory(),
-            analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
-        )
-    }
-
     init(
         bundle: Bundle,
-        buildConfigurationFile: BuildConfigurationFile,
+        buildConfiguration: BuildConfigurationFile,
         networkResourceFactory: NetworkResourceFactoryProtocol,
-        analyticsManager: AnalyticsManager
+        analyticsService: AnalyticsService
     ) {
         self.bundle = bundle
-        self.buildConfigurationFile = buildConfigurationFile
+        self.buildConfiguration = buildConfiguration
         self.networkResourceFactory = networkResourceFactory
-        self.analyticsManager = analyticsManager
+        self.analyticsService = analyticsService
         self.currentYear = Date.now.formatted(.dateTime.year())
         subscribeToPublishers()
     }
@@ -67,7 +58,7 @@ final class AboutViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        $buildConfigurationFile
+        $buildConfiguration
             .sink { [weak self] buildConfigurationFile in
                 guard let self else { return }
                 appId = buildConfigurationFile.appId()
@@ -83,7 +74,7 @@ final class AboutViewModel: ObservableObject {
     func reportFeedback(_ openURL: OpenURLAction) {
         let feedbackEmail = SupportEmail(
             bundle: bundle,
-            recipient: buildConfigurationFile.supportEmailAddress(),
+            recipient: buildConfiguration.supportEmailAddress(),
             subject: "[Feedback] \(bundle.applicationName)"
         )
 
@@ -93,7 +84,7 @@ final class AboutViewModel: ObservableObject {
     func reportIssue(_ openURL: OpenURLAction) {
         let bugEmail = SupportEmail(
             bundle: bundle,
-            recipient: buildConfigurationFile.supportEmailAddress(),
+            recipient: buildConfiguration.supportEmailAddress(),
             subject: "[Bug] \(bundle.applicationName)"
         )
         bugEmail.send(openURL: openURL)
@@ -108,7 +99,7 @@ final class AboutViewModel: ObservableObject {
     }
 
     func logEventRowTapped(_ title: String) {
-        analyticsManager.send(
+        analyticsService.send(
             event: AboutScreenEvent.rowTapped(
                 title: title
             )
@@ -116,7 +107,7 @@ final class AboutViewModel: ObservableObject {
     }
 
     func logEventScreen(_ name: String, className: String) {
-        analyticsManager.send(
+        analyticsService.send(
             event: ScreenAnalyticsEvent.screenViewed(
                 name: name,
                 className: className

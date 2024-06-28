@@ -20,20 +20,20 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     private let service: WeatherServiceProtocol
     private let databaseManager: DatabaseManager
     private let storeReviewManager: StoreReviewManager
-    private let analyticsManager: AnalyticsManager
+    private let analyticsService: AnalyticsService
 
     init(
         location: LocationModel,
         service: WeatherServiceProtocol,
         databaseManager: DatabaseManager,
         storeReviewManager: StoreReviewManager,
-        analyticsManager: AnalyticsManager
+        analyticsService: AnalyticsService
     ) {
         self.location = location
         self.service = service
         self.databaseManager = databaseManager
         self.storeReviewManager = storeReviewManager
-        self.analyticsManager = analyticsManager
+        self.analyticsService = analyticsService
     }
 
     func loadData() async {
@@ -88,7 +88,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     private func logLocationAdded(name: String) {
-        analyticsManager.send(
+        analyticsService.send(
             event: LocationWeatherViewEvent.locationAdded(
                 name: name
             )
@@ -96,7 +96,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
     }
 
     func logScreenViewed(className: String) {
-        analyticsManager.send(
+        analyticsService.send(
             event: ScreenAnalyticsEvent.screenViewed(
                 name: "Searched Location Weather Screen",
                 className: "\(type(of: self))"

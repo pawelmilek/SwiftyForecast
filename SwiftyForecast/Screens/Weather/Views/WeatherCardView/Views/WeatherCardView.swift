@@ -160,7 +160,7 @@ private extension WeatherCardView {
             speedFormatterFactory: SpeedFormatterFactory(
                 notationStorage: NotationSettingsStorage()
             ),
-            metricSystemNotification: NotificationCenterAdapter()
+            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
         )
     )
     .padding(22.5)

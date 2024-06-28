@@ -13,11 +13,11 @@ protocol MetricSystemNotification {
     func publisher() -> NotificationCenter.Publisher
 }
 
-struct NotificationCenterAdapter: MetricSystemNotification {
+struct MetricSystemNotificationCenterAdapter: MetricSystemNotification {
     private static let didChangeMetricSystem = NSNotification.Name("didChangeMetricSystem")
     private let notificationCenter: NotificationCenter
 
-    init(notificationCenter: NotificationCenter = .default) {
+    init(notificationCenter: NotificationCenter) {
         self.notificationCenter = notificationCenter
     }
 

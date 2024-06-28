@@ -25,10 +25,6 @@ struct BuildConfigurationFile {
     private let plistKey = "ConfigurationSettings"
     private let bundle: Bundle
 
-    init() {
-        self.init(bundle: .main)
-    }
-
     init(bundle: Bundle) {
         self.bundle = bundle
     }

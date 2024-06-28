@@ -11,12 +11,12 @@ import SwiftUI
 
 class AppearanceViewController: UIViewController {
     weak var coordinator: Coordinator?
-    private let notificationCenter: NotificationCenter
+    private let viewModel: AppearanceViewViewModel
     private var hostingViewController: UIHostingController<AppearanceView>!
 
-    init(coordinator: Coordinator, notificationCenter: NotificationCenter) {
+    init(viewModel: AppearanceViewViewModel, coordinator: Coordinator) {
+        self.viewModel = viewModel
         self.coordinator = coordinator
-        self.notificationCenter = notificationCenter
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,10 +30,7 @@ class AppearanceViewController: UIViewController {
     }
 
     private func setup() {
-        let appearanceView = AppearanceView { [weak self] in
-            self?.notificationCenter.post(name: .didChangeAppearance, object: nil)
-        }
-
+        let appearanceView = AppearanceView(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: appearanceView)
         hostingViewController.view.backgroundColor = .clear
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,8 +41,8 @@ class AppearanceViewController: UIViewController {
 
     private func setupSheetPresentation() {
         if let sheet = presentationController as? UISheetPresentationController {
-            sheet.detents = [.custom(resolver: { _ in
-                return AppearanceView.Constant.height
+            sheet.detents = [.custom(resolver: { [weak self] _ in
+                self?.viewModel.height
             })]
             sheet.prefersGrabberVisible = false
         }

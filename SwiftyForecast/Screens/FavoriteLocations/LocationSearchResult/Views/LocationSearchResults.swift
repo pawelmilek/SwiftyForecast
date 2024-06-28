@@ -11,7 +11,7 @@ import MapKit
 
 struct LocationSearchResults: View {
     @Environment(\.dismissSearch) private var dismissSearch
-    @Environment(\.analyticsManager) private var analyticsManager
+    @Environment(\.analyticsService) private var analyticsService
     @Environment(\.locationSearchCompleter) private var locationSearchCompleter
     @Environment(\.client) private var client
     @Environment(\.databaseManager) private var databaseManager
@@ -52,7 +52,7 @@ struct LocationSearchResults: View {
                         storage: ReviewedVersionStorageAdapter(adaptee: .standard),
                         bundle: .main
                     ),
-                    analyticsManager: AnalyticsManager(service: FirebaseAnalyticsService())
+                    analyticsService: FirebaseAnalyticsService()
                 ),
                 cardViewModel: WeatherCardViewViewModel(
                     latitude: foundLocation.latitude,
@@ -70,7 +70,7 @@ struct LocationSearchResults: View {
                     speedFormatterFactory: SpeedFormatterFactory(
                         notationStorage: NotationSettingsStorage()
                     ),
-                    metricSystemNotification: NotificationCenterAdapter()
+                    metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
                 ),
                 onCancel: dismiss
             )
@@ -82,7 +82,7 @@ struct LocationSearchResults: View {
     }
 
     private func logScreenViewed() {
-        analyticsManager.send(
+        analyticsService.send(
             event: ScreenAnalyticsEvent.screenViewed(
                 name: "Location Search Result",
                 className: "\(type(of: self))"

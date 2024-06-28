@@ -9,38 +9,34 @@
 import SwiftUI
 
 struct AppearanceView: View {
-    @AppStorage("appearanceTheme") private var appearanceTheme: AppearanceTheme = .systemDefault
     @Environment(\.colorScheme) private var colorScheme
-    @StateObject private var analyticsManager = AnalyticsManager(service: FirebaseAnalyticsService())
-    @State private var circleOffset = CGSize.zero
-
-    var onAppearanceChange: () -> Void
+    @ObservedObject var viewModel: AppearanceViewViewModel
 
     var body: some View {
         VStack(spacing: 35) {
-            Circle().fill(appearanceTheme.color(colorScheme).gradient)
+            Circle().fill(viewModel.gradientColor(for: colorScheme))
                 .frame(maxWidth: 150, maxHeight: 150)
                 .mask {
                     Rectangle()
                         .overlay {
                             Circle()
-                                .offset(x: circleOffset.width, y: circleOffset.height)
+                                .offset(x: viewModel.circleOffset.width, y: viewModel.circleOffset.height)
                                 .blendMode(.destinationOut)
                         }
                 }
             VStack(spacing: 10) {
-                Text("Appearance")
+                Text(viewModel.title)
                     .font(.title3)
                     .fontWeight(.bold)
-                Text("Choose a day or night.\nCustomize your interface.")
+                Text(viewModel.subtitle)
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
             }
             .foregroundStyle(.accent)
             .fontDesign(.monospaced)
-            Picker("User Theme Settings", selection: $appearanceTheme) {
-                ForEach(AppearanceTheme.allCases, id: \.self) { item in
+            Picker(viewModel.pickerTitle, selection: $viewModel.selectedTheme) {
+                ForEach(viewModel.themes) { item in
                     Text(item.rawValue)
                         .foregroundStyle(.accent)
                 }
@@ -49,60 +45,23 @@ struct AppearanceView: View {
             .padding(.horizontal, 40)
             .padding(.vertical, 10)
         }
-        .frame(maxWidth: .infinity, maxHeight: Constant.height)
+        .frame(maxWidth: .infinity, maxHeight: viewModel.height)
         .background(Color(.systemBackground))
         .clipShape(.rect(cornerRadius: 30))
         .padding(.horizontal, 15)
         .environment(\.colorScheme, colorScheme)
-        .onAppear {
-            let isDark = colorScheme == .dark
-            setCircleOffset(isDark: isDark)
-        }
         .onChange(of: colorScheme) {
-            let isDark = colorScheme == .dark
-            setCircleOffset(isDark: isDark)
-            logColorShemeSwitched(colorScheme)
+            viewModel.setCircleOffset(isDark: colorScheme == .dark)
+            viewModel.logColorShemeSwitched(colorScheme)
         }
-        .onChange(of: appearanceTheme) {
-            let isDark = appearanceTheme == .dark
-            setCircleOffset(isDark: isDark)
-            onAppearanceChange()
-        }.onAppear {
-            logScreenViewed()
+        .onAppear {
+            viewModel.setCircleOffset(isDark: colorScheme == .dark)
+            viewModel.logScreenViewed()
         }
-    }
-
-    private func logScreenViewed() {
-        analyticsManager.send(
-            event: ScreenAnalyticsEvent.screenViewed(
-                name: "Appearance Screen",
-                className: "\(type(of: self))"
-            )
-        )
-    }
-
-    private func logColorShemeSwitched(_ colorScheme: ColorScheme) {
-        analyticsManager.send(
-            event: AppearanceViewEvent.colorSchemeSwitched(
-                name: String(describing: colorScheme)
-            )
-        )
-    }
-
-    private func setCircleOffset(isDark: Bool) {
-        withAnimation(.bouncy) {
-            circleOffset = CGSize(
-                width: isDark ? 30 : 150,
-                height: isDark ? -25 : -150
-            )
-        }
-    }
-
-    enum Constant {
-        static let height = CGFloat(410)
+        .animation(.bouncy, value: viewModel.circleOffset)
     }
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    AppearanceView { }
+    AppearanceView(viewModel: CompositionRoot.appearanceViewModel)
 }

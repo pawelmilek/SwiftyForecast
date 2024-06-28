@@ -108,7 +108,7 @@ private extension MainViewController {
                             speedFormatterFactory: SpeedFormatterFactory(
                                 notationStorage: NotationSettingsStorage()
                             ),
-                            metricSystemNotification: NotificationCenterAdapter()
+                            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
                         )
                     )
                 }

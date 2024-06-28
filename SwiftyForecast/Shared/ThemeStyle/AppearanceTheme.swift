@@ -9,10 +9,12 @@
 import UIKit
 import SwiftUI
 
-enum AppearanceTheme: String, CaseIterable {
+enum AppearanceTheme: String, CaseIterable, Identifiable {
     case systemDefault = "Default"
     case light = "Light"
     case dark = "Dark"
+
+    var id: Self { self }
 
     func color(_ scheme: ColorScheme) -> Color {
         switch self {
@@ -24,17 +26,6 @@ enum AppearanceTheme: String, CaseIterable {
 
         case .dark:
             return .purple
-        }
-    }
-
-    var colorScheme: ColorScheme? {
-        switch self {
-        case .systemDefault:
-            return .none
-        case .light:
-            return .light
-        case .dark:
-            return .dark
         }
     }
 }
