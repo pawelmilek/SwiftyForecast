@@ -1,5 +1,5 @@
 //
-//  AppearanceViewController.swift
+//  ThemeViewController.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/2/24.
@@ -9,12 +9,12 @@
 import UIKit
 import SwiftUI
 
-class AppearanceViewController: UIViewController {
+final class ThemeViewController: UIViewController {
     weak var coordinator: Coordinator?
-    private let viewModel: AppearanceViewViewModel
-    private var hostingViewController: UIHostingController<AppearanceView>!
+    private let viewModel: ThemeViewViewModel
+    private var hostingViewController: UIHostingController<ThemeView>!
 
-    init(viewModel: AppearanceViewViewModel, coordinator: Coordinator) {
+    init(viewModel: ThemeViewViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -30,7 +30,7 @@ class AppearanceViewController: UIViewController {
     }
 
     private func setup() {
-        let appearanceView = AppearanceView(viewModel: viewModel)
+        let appearanceView = ThemeView(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: appearanceView)
         hostingViewController.view.backgroundColor = .clear
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false

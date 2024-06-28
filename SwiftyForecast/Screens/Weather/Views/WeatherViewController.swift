@@ -1,3 +1,11 @@
+//
+//  WeatherViewController.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/10/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import UIKit
 import Combine
 
@@ -110,16 +118,7 @@ private extension WeatherViewController {
     func subscriberPublishers() {
         viewModel.$twentyFourHoursForecastModel
             .receive(on: DispatchQueue.main)
-            .map {
-                $0.map {
-                    HourlyViewCellViewModel(
-                        model: $0,
-                        temperatureFormatterFactory: TemperatureFormatterFactory(
-                            notationStorage: NotationSettingsStorage()
-                        )
-                    )
-                }
-            }
+            .map { $0.map { CompositionRoot.hourlyViewModel($0) } }
             .sink { [self] hourlyViewModels in
                 hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
                 hourlyCollectionView.reloadData()
@@ -128,16 +127,7 @@ private extension WeatherViewController {
 
         viewModel.$fiveDaysForecastModel
             .receive(on: DispatchQueue.main)
-            .map {
-                $0.map {
-                    DailyViewCellViewModel(
-                        model: $0,
-                        temperatureFormatterFactory: TemperatureFormatterFactory(
-                            notationStorage: NotationSettingsStorage()
-                        )
-                    )
-                }
-            }
+            .map { $0.map { CompositionRoot.dailyViewModel($0) } }
             .sink { [self] dailyViewModels in
                 dailyForecastDataSource.set(viewModeles: dailyViewModels)
                 dailyTableView.reloadData()

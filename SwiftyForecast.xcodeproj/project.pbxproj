@@ -74,7 +74,7 @@
 		E2255A3C2C0FC50F00C6F3AD /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A382C0FBE7900C6F3AD /* AnalyticsEvent.swift */; };
 		E2255A3E2C0FC55C00C6F3AD /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2255A3D2C0FC55C00C6F3AD /* FirebaseAnalytics */; };
 		E2255A402C0FC55C00C6F3AD /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2255A3F2C0FC55C00C6F3AD /* FirebaseCrashlytics */; };
-		E2255A422C10206D00C6F3AD /* AppearanceViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A412C10206D00C6F3AD /* AppearanceViewEvent.swift */; };
+		E2255A422C10206D00C6F3AD /* ThemeViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A412C10206D00C6F3AD /* ThemeViewEvent.swift */; };
 		E2255A442C10208600C6F3AD /* MainViewControllerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A432C10208600C6F3AD /* MainViewControllerEvent.swift */; };
 		E2255A462C10209500C6F3AD /* AboutScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A452C10209500C6F3AD /* AboutScreenEvent.swift */; };
 		E2255A482C1020A600C6F3AD /* ScreenAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A472C1020A600C6F3AD /* ScreenAnalyticsEvent.swift */; };
@@ -87,7 +87,7 @@
 		E2255A532C10213A00C6F3AD /* ScreenAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A472C1020A600C6F3AD /* ScreenAnalyticsEvent.swift */; };
 		E2255A542C10213D00C6F3AD /* AboutScreenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A452C10209500C6F3AD /* AboutScreenEvent.swift */; };
 		E2255A552C10214000C6F3AD /* MainViewControllerEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A432C10208600C6F3AD /* MainViewControllerEvent.swift */; };
-		E2255A562C10214200C6F3AD /* AppearanceViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A412C10206D00C6F3AD /* AppearanceViewEvent.swift */; };
+		E2255A562C10214200C6F3AD /* ThemeViewEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A412C10206D00C6F3AD /* ThemeViewEvent.swift */; };
 		E2255A572C10215700C6F3AD /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225B4D92BE437DF00AD8906 /* ConditionModel.swift */; };
 		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
@@ -100,7 +100,8 @@
 		E23997EF20E84371007D8CE4 /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E720E84371007D8CE4 /* ErrorPresentable.swift */; };
 		E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
 		E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */; };
-		E23A0B8F2C2F4C9900F9A0A4 /* AppearanceViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8E2C2F4C9900F9A0A4 /* AppearanceViewViewModel.swift */; };
+		E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift */; };
+		E23A0B912C2F79CF00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */; };
 		E23CD76020ED950500F0F72A /* HourlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */; };
 		E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */; };
 		E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2416FEB2B331D52009C8F81 /* InlineWidgetView.swift */; };
@@ -228,10 +229,10 @@
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
 		E2B1D65C211FB26C00F0002A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* MainViewController.swift */; };
 		E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */; };
-		E2BC4DB12B442A0C00D05F54 /* AppearanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */; };
+		E2BC4DB12B442A0C00D05F54 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */; };
 		E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
 		E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
-		E2BC4DB82B44304000D05F54 /* AppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* AppearanceView.swift */; };
+		E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* ThemeView.swift */; };
 		E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */; };
 		E2C916F62B4972C200903619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2CAC9E22C04310600E573D2 /* FirebaseAnalytics */; };
@@ -254,7 +255,6 @@
 		E2D430C52BB4D954003F26EE /* HourlyForecastChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B12BB4D954003F26EE /* HourlyForecastChartViewModel.swift */; };
 		E2D430C72BB4D954003F26EE /* FavoriteLocationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B42BB4D954003F26EE /* FavoriteLocationList.swift */; };
 		E2D430C92BB4D954003F26EE /* FavoriteLocationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B52BB4D954003F26EE /* FavoriteLocationRow.swift */; };
-		E2D430CA2BB4D954003F26EE /* FavoriteLocationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B52BB4D954003F26EE /* FavoriteLocationRow.swift */; };
 		E2D430CB2BB4D954003F26EE /* FavoriteLocationSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B62BB4D954003F26EE /* FavoriteLocationSearchView.swift */; };
 		E2D430CD2BB4D954003F26EE /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B72BB4D954003F26EE /* LocationSearchViewController.swift */; };
 		E2D430CF2BB4D954003F26EE /* SearchedLocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B82BB4D954003F26EE /* SearchedLocationWeatherView.swift */; };
@@ -270,7 +270,6 @@
 		E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28CEC0E2B3EB775003DB3A6 /* LocationsTip.swift */; };
 		E2D430E62BB4DB86003F26EE /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
 		E2D430EC2BB4DBC8003F26EE /* LocationSearchCompleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21ABD022AE5A0DF00F93F01 /* LocationSearchCompleter.swift */; };
-		E2D430EF2BB4DC0F003F26EE /* WeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E224506D2B9F3F9800F14BAA /* WeatherCardView.swift */; };
 		E2D430F02BB4DC14003F26EE /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AE2BB4D954003F26EE /* HourlyForecastChart.swift */; };
 		E2D430F12BB4DC18003F26EE /* HourlyForecastChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430B12BB4D954003F26EE /* HourlyForecastChartViewModel.swift */; };
 		E2D430F22BB4DC1C003F26EE /* HourlyForecastChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AB2BB4D954003F26EE /* HourlyForecastChartDataSource.swift */; };
@@ -405,7 +404,7 @@
 		E224506F2B9F3F9800F14BAA /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		E224507F2B9F41BD00F14BAA /* AppStorePreviewTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorePreviewTip.swift; sourceTree = "<group>"; };
 		E2255A382C0FBE7900C6F3AD /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		E2255A412C10206D00C6F3AD /* AppearanceViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewEvent.swift; sourceTree = "<group>"; };
+		E2255A412C10206D00C6F3AD /* ThemeViewEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewEvent.swift; sourceTree = "<group>"; };
 		E2255A432C10208600C6F3AD /* MainViewControllerEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerEvent.swift; sourceTree = "<group>"; };
 		E2255A452C10209500C6F3AD /* AboutScreenEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutScreenEvent.swift; sourceTree = "<group>"; };
 		E2255A472C1020A600C6F3AD /* ScreenAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenAnalyticsEvent.swift; sourceTree = "<group>"; };
@@ -422,7 +421,8 @@
 		E23997E720E84371007D8CE4 /* ErrorPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
 		E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
-		E23A0B8E2C2F4C9900F9A0A4 /* AppearanceViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewViewModel.swift; sourceTree = "<group>"; };
+		E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewViewModel.swift; sourceTree = "<group>"; };
+		E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCell.swift; sourceTree = "<group>"; };
 		E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyViewCell.xib; sourceTree = "<group>"; };
 		E2416FEB2B331D52009C8F81 /* InlineWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineWidgetView.swift; sourceTree = "<group>"; };
@@ -516,9 +516,9 @@
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
 		E2B1D65B211FB26C00F0002A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTip.swift; sourceTree = "<group>"; };
-		E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceViewController.swift; sourceTree = "<group>"; };
+		E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
 		E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTheme.swift; sourceTree = "<group>"; };
-		E2BC4DB72B44304000D05F54 /* AppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceView.swift; sourceTree = "<group>"; };
+		E2BC4DB72B44304000D05F54 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+DidChangeAppearance.swift"; sourceTree = "<group>"; };
 		E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
@@ -657,7 +657,7 @@
 			isa = PBXGroup;
 			children = (
 				E2255A452C10209500C6F3AD /* AboutScreenEvent.swift */,
-				E2255A412C10206D00C6F3AD /* AppearanceViewEvent.swift */,
+				E2255A412C10206D00C6F3AD /* ThemeViewEvent.swift */,
 				E2255A492C1020B400C6F3AD /* LocationListEvent.swift */,
 				E2255A4B2C1020CE00C6F3AD /* LocationWeatherViewEvent.swift */,
 				E2255A432C10208600C6F3AD /* MainViewControllerEvent.swift */,
@@ -884,7 +884,7 @@
 		E23A0B8D2C2F4C8F00F9A0A4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				E23A0B8E2C2F4C9900F9A0A4 /* AppearanceViewViewModel.swift */,
+				E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -933,7 +933,7 @@
 				E2CC9A152B6158BE0044634E /* Weather */,
 				E21ABD422AE82FF900F93F01 /* FavoriteLocations */,
 				E2A567522B0763EB000324C0 /* SearchedLocationWeather */,
-				E2BC4DAF2B4429F600D05F54 /* Appearance */,
+				E2BC4DAF2B4429F600D05F54 /* Theme */,
 				E249ABBA2B3475FA0020B88D /* About */,
 			);
 			path = Screens;
@@ -1168,14 +1168,14 @@
 			path = Doubles;
 			sourceTree = "<group>";
 		};
-		E2BC4DAF2B4429F600D05F54 /* Appearance */ = {
+		E2BC4DAF2B4429F600D05F54 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
 				E23A0B8D2C2F4C8F00F9A0A4 /* ViewModel */,
 				E2CC9A0B2B6156590044634E /* Views */,
 				E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */,
 			);
-			path = Appearance;
+			path = Theme;
 			sourceTree = "<group>";
 		};
 		E2BC4DB62B44300800D05F54 /* ThemeStyle */ = {
@@ -1235,8 +1235,8 @@
 		E2CC9A0B2B6156590044634E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E2BC4DB02B442A0C00D05F54 /* AppearanceViewController.swift */,
-				E2BC4DB72B44304000D05F54 /* AppearanceView.swift */,
+				E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */,
+				E2BC4DB72B44304000D05F54 /* ThemeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1454,6 +1454,7 @@
 		E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */ = {
 			isa = PBXGroup;
 			children = (
+				E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */,
 				E2FDBD6A2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift */,
 				E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */,
 				E2117B442B29B9E200F91ADB /* Provider */,
@@ -1714,7 +1715,7 @@
 				E22450802B9F41BD00F14BAA /* AppStorePreviewTip.swift in Sources */,
 				E2255A482C1020A600C6F3AD /* ScreenAnalyticsEvent.swift in Sources */,
 				E2D430CD2BB4D954003F26EE /* LocationSearchViewController.swift in Sources */,
-				E2BC4DB82B44304000D05F54 /* AppearanceView.swift in Sources */,
+				E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */,
 				E296A7E92AD7DCD8001BFADB /* CurrentWeatherResponse.swift in Sources */,
 				E2FD3756232EFFC40083B383 /* LocationModel.swift in Sources */,
 				E23997EB20E84371007D8CE4 /* HttpClient.swift in Sources */,
@@ -1745,9 +1746,9 @@
 				E2126F772C2885B3001111E0 /* SpeedFormatter.swift in Sources */,
 				E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */,
 				E20A433D2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */,
-				E2255A422C10206D00C6F3AD /* AppearanceViewEvent.swift in Sources */,
+				E2255A422C10206D00C6F3AD /* ThemeViewEvent.swift in Sources */,
 				E296B61C2C1CF872001F7C57 /* LocationSearchCompleterEnvironment.swift in Sources */,
-				E2BC4DB12B442A0C00D05F54 /* AppearanceViewController.swift in Sources */,
+				E2BC4DB12B442A0C00D05F54 /* ThemeViewController.swift in Sources */,
 				E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */,
 				E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */,
 				E281791A2B38770B00D06917 /* LicenseReader.swift in Sources */,
@@ -1847,7 +1848,7 @@
 				E2A567602B077B38000324C0 /* LottieAnimationView.swift in Sources */,
 				E21ABD562AE9740F00F93F01 /* MockGenerator.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */,
-				E23A0B8F2C2F4C9900F9A0A4 /* AppearanceViewViewModel.swift in Sources */,
+				E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift in Sources */,
 				E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */,
 				E20C6B132BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */,
@@ -1894,6 +1895,7 @@
 				E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */,
 				E2CFA7AB2B309E63001DE3E8 /* MockGenerator.swift in Sources */,
 				E2644D082C29EEA300B505A1 /* EntryService.swift in Sources */,
+				E23A0B912C2F79CF00F9A0A4 /* CompositionRoot.swift in Sources */,
 				E2255A572C10215700C6F3AD /* FirebaseAnalyticsService.swift in Sources */,
 				E2D786D82C24AF79001E4DE8 /* EntryServiceFactory.swift in Sources */,
 				E2644D1C2C2A1A3700B505A1 /* WeatherRepositoryProtocol.swift in Sources */,
@@ -1957,11 +1959,9 @@
 				E2126F812C288CB5001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */,
 				E2126F822C288CB8001111E0 /* SpeedConvertible.swift in Sources */,
 				E2AD32622B23729900F46FBE /* Wind.swift in Sources */,
-				E2D430EF2BB4DC0F003F26EE /* WeatherCardView.swift in Sources */,
 				E2D430E52BB4DB75003F26EE /* LocationsTip.swift in Sources */,
 				E2CFA7AF2B30A03B001DE3E8 /* Style.swift in Sources */,
 				E2D786D22C24A558001E4DE8 /* WeatherEntryServiceFactory.swift in Sources */,
-				E2D430CA2BB4D954003F26EE /* FavoriteLocationRow.swift in Sources */,
 				E2AD32712B23779800F46FBE /* ForecastModel.swift in Sources */,
 				E2D430DC2BB4DB28003F26EE /* RealmManager.swift in Sources */,
 				E2AD325B2B23719100F46FBE /* Client.swift in Sources */,
@@ -1974,7 +1974,7 @@
 				E2AD32632B2372AD00F46FBE /* HourlyForecastModel.swift in Sources */,
 				E2D430F22BB4DC1C003F26EE /* HourlyForecastChartDataSource.swift in Sources */,
 				E28357372B2716B500E3807A /* CLAuthorizationStatus+CustomStringConvertible.swift in Sources */,
-				E2255A562C10214200C6F3AD /* AppearanceViewEvent.swift in Sources */,
+				E2255A562C10214200C6F3AD /* ThemeViewEvent.swift in Sources */,
 				E2F671142B234EA200B791A0 /* TemperatureFormatterFactory.swift in Sources */,
 				E224507D2B9F403100F14BAA /* DayNightState.swift in Sources */,
 				E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */,

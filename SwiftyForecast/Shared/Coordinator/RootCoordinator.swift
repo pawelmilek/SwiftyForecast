@@ -45,8 +45,8 @@ final class RootCoordinator: Coordinator {
 
     func openAppearanceSwitch() {
         navigationController.present(
-            AppearanceViewController(
-                viewModel: CompositionRoot.appearanceViewModel,
+            ThemeViewController(
+                viewModel: CompositionRoot.themeViewModel,
                 coordinator: self
             ),
             animated: true
@@ -91,6 +91,7 @@ final class RootCoordinator: Coordinator {
                 return
             }
             navigationController.pushViewController(LottieAnimationViewController(), animated: false)
+
         } else {
             guard let index = navigationController.viewControllers
                 .firstIndex(where: { $0.view.tag == LottieAnimationViewController.identifier }) else {

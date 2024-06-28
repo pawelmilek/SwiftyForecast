@@ -38,39 +38,13 @@ struct LocationSearchResults: View {
         }
         .sheet(item: $searchLocationStore.foundLocation) { foundLocation in
             SearchedLocationWeatherView(
-                viewModel: SearchedLocationWeatherViewViewModel(
-                    location: foundLocation,
-                    service: WeatherService(
-                        repository: WeatherRepository(
-                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                        ),
-                        parse: WeatherResponseParser()
-                    ),
-                    databaseManager: databaseManager,
-                    storeReviewManager: StoreReviewManager(
-                        store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
-                        storage: ReviewedVersionStorageAdapter(adaptee: .standard),
-                        bundle: .main
-                    ),
-                    analyticsService: FirebaseAnalyticsService()
+                viewModel: CompositionRoot.searchedLocationWeatherViewModel(
+                    foundLocation
                 ),
-                cardViewModel: WeatherCardViewViewModel(
+                cardViewModel: CompositionRoot.cardViewModel(
                     latitude: foundLocation.latitude,
                     longitude: foundLocation.longitude,
-                    locationName: foundLocation.name,
-                    service: WeatherService(
-                        repository: WeatherRepository(
-                            client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                        ),
-                        parse: WeatherResponseParser()
-                    ),
-                    temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSettingsStorage()
-                    ),
-                    speedFormatterFactory: SpeedFormatterFactory(
-                        notationStorage: NotationSettingsStorage()
-                    ),
-                    metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
+                    name: foundLocation.name
                 ),
                 onCancel: dismiss
             )

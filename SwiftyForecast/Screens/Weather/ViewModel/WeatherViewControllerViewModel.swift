@@ -6,7 +6,7 @@ import RealmSwift
 final class WeatherViewControllerViewModel: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
-    @Published private(set) var locationName = ""
+    @Published private(set) var name = ""
     @Published private(set) var twentyFourHoursForecastModel: [HourlyForecastModel]
     @Published private(set) var fiveDaysForecastModel: [DailyForecastModel]
     @Published private var forecastWeatherModel: ForecastModel?
@@ -22,14 +22,14 @@ final class WeatherViewControllerViewModel: ObservableObject {
         compoundKey: String,
         latitude: Double,
         longitude: Double,
-        locationName: String,
+        name: String,
         service: WeatherServiceProtocol,
         metricSystemNotification: MetricSystemNotification
     ) {
         self.compoundKey = compoundKey
         self.latitude = latitude
         self.longitude = longitude
-        self.locationName = locationName
+        self.name = name
         self.service = service
         self.metricSystemNotification = metricSystemNotification
         self.twentyFourHoursForecastModel = HourlyForecastModel.initialData

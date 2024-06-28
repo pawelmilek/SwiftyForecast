@@ -1,5 +1,5 @@
 //
-//  AppearanceViewEvent.swift
+//  ThemeViewEvent.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/4/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AppearanceViewEvent: AnalyticsEvent {
+struct ThemeViewEvent: AnalyticsEvent {
     private enum Names {
         static let colorSchemeSwitched = "color_Scheme_Switched"
     }
@@ -22,9 +22,9 @@ struct AppearanceViewEvent: AnalyticsEvent {
     }
 }
 
-extension AppearanceViewEvent {
-    static func colorSchemeSwitched(name: String) -> AppearanceViewEvent {
-        AppearanceViewEvent(
+extension ThemeViewEvent {
+    static func colorSchemeSwitched(name: String) -> ThemeViewEvent {
+        ThemeViewEvent(
             name: Names.colorSchemeSwitched,
             metadata: [
                 "color_scheme": name

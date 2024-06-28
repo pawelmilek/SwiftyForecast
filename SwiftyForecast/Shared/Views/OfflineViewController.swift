@@ -1,3 +1,11 @@
+//
+//  OfflineViewController.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/10/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import UIKit
 
 final class OfflineViewController: UIViewController {

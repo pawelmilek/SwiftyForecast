@@ -25,19 +25,7 @@ struct SwiftyForecastWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: Constant.kind,
-            provider: WeatherTimelineProvider(
-                locationManager: WidgetLocationManager(),
-                repositoryFactory: WeatherEntryServiceFactory(
-                    repository: WeatherRepository(
-                        client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                    ),
-                    locationPlace: GeocodedLocation(geocoder: CLGeocoder()),
-                    parser: WeatherResponseParser(),
-                    temperatureFormatterFactory: TemperatureFormatterFactory(
-                        notationStorage: NotationSettingsStorage()
-                    )
-                )
-            )
+            provider: CompositionRoot.provider
         ) { entry in
             WeatherWidgetEntryView(entry: entry)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

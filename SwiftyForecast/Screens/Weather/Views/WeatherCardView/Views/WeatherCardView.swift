@@ -52,9 +52,9 @@ struct WeatherCardView: View {
 private extension WeatherCardView {
 
     var locationNameView: some View {
-        Text(viewModel.locationName)
+        Text(viewModel.name)
             .font(Style.WeatherCard.locationNameFont)
-            .id(viewModel.locationName)
+            .id(viewModel.name)
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
     }
 
@@ -144,23 +144,10 @@ private extension WeatherCardView {
 
 #Preview(traits: .sizeThatFitsLayout) {
     WeatherCardView(
-        viewModel: WeatherCardViewViewModel(
+        viewModel: CompositionRoot.cardViewModel(
             latitude: LocationModel.examples.first!.latitude,
             longitude: LocationModel.examples.first!.longitude,
-            locationName: LocationModel.examples.first!.name,
-            service: WeatherService(
-                repository: WeatherRepository(
-                    client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                ),
-                parse: WeatherResponseParser()
-            ),
-            temperatureFormatterFactory: TemperatureFormatterFactory(
-                notationStorage: NotationSettingsStorage()
-            ),
-            speedFormatterFactory: SpeedFormatterFactory(
-                notationStorage: NotationSettingsStorage()
-            ),
-            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
+            name: LocationModel.examples.first!.name
         )
     )
     .padding(22.5)

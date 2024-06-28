@@ -1,5 +1,5 @@
 //
-//  AppearanceView.swift
+//  ThemeView.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/2/24.
@@ -8,19 +8,23 @@
 
 import SwiftUI
 
-struct AppearanceView: View {
+struct ThemeView: View {
     @Environment(\.colorScheme) private var colorScheme
-    @ObservedObject var viewModel: AppearanceViewViewModel
+    @ObservedObject var viewModel: ThemeViewViewModel
 
     var body: some View {
         VStack(spacing: 35) {
-            Circle().fill(viewModel.gradientColor(for: colorScheme))
+            Circle()
+                .fill(viewModel.gradientColor(for: colorScheme))
                 .frame(maxWidth: 150, maxHeight: 150)
                 .mask {
                     Rectangle()
                         .overlay {
                             Circle()
-                                .offset(x: viewModel.circleOffset.width, y: viewModel.circleOffset.height)
+                                .offset(
+                                    x: viewModel.circleOffset.width,
+                                    y: viewModel.circleOffset.height
+                                )
                                 .blendMode(.destinationOut)
                         }
                 }
@@ -63,5 +67,5 @@ struct AppearanceView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    AppearanceView(viewModel: CompositionRoot.appearanceViewModel)
+    ThemeView(viewModel: CompositionRoot.themeViewModel)
 }

@@ -57,7 +57,6 @@ final class WidgetLocationManager: NSObject {
 
 // MARK: - CLLocationManagerDelegate
 extension WidgetLocationManager: CLLocationManagerDelegate {
-
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         authorizationStatus = manager.authorizationStatus
         accuracyAuthorizationStatus = manager.accuracyAuthorization

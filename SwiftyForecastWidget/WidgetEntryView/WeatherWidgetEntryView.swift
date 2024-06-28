@@ -23,7 +23,7 @@ struct WeatherWidgetEntryView: View {
         case .accessoryInline:
             InlineWidgetView(
                 temperature: entry.formattedTemperature,
-                location: entry.locationName
+                location: entry.name
             )
 
         case .accessoryCircular:

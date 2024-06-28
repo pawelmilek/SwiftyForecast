@@ -8,10 +8,8 @@
 
 import UIKit
 import SwiftUI
-import Combine
 
 final class WeatherCardViewController: UIViewController {
-    private var cancellables = Set<AnyCancellable>()
     private var hostingViewController: UIHostingController<WeatherCardView>!
     private let viewModel: WeatherCardViewViewModel
 

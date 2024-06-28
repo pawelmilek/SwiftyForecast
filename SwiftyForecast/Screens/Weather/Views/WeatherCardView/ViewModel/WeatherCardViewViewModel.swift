@@ -14,7 +14,7 @@ import SwiftUI
 final class WeatherCardViewViewModel: ObservableObject {
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = false
-    @Published private(set) var locationName = "--"
+    @Published private(set) var name = "--"
     @Published private(set) var icon: Image?
     @Published private(set) var description = "--"
     @Published private(set) var daytimeDescription = "--"
@@ -38,7 +38,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     init(
         latitude: Double,
         longitude: Double,
-        locationName: String,
+        name: String,
         service: WeatherServiceProtocol,
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol,
         speedFormatterFactory: SpeedFormatterFactoryProtocol,
@@ -46,7 +46,7 @@ final class WeatherCardViewViewModel: ObservableObject {
     ) {
         self.latitude = latitude
         self.longitude = longitude
-        self.locationName = locationName
+        self.name = name
         self.service = service
         self.temperatureFormatterFactory = temperatureFormatterFactory
         self.speedFormatterFactory = speedFormatterFactory

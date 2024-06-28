@@ -16,7 +16,6 @@ final class LocationRowViewModel: ObservableObject {
     @Published var position: MapCameraPosition = .automatic
     @Published private(set) var error: Error?
     @Published private(set) var isLoading = false
-    @Published private(set) var locationName = ""
     @Published private(set) var temperature = ""
     @Published private(set) var time = ""
     @Published private(set) var name = ""
@@ -36,7 +35,6 @@ final class LocationRowViewModel: ObservableObject {
         self.service = service
         self.temperatureFormatterFactory = temperatureFormatterFactory
         self.time = timeOnly(location.secondsFromGMT, from: .now)
-        self.locationName = location.name
         self.name = location.name + ", " + location.country
 
         let annotation = MKPointAnnotation()

@@ -28,7 +28,7 @@ struct SmallWidgetView: View {
                 .frame(maxWidth: .infinity)
         }
         .overlay(alignment: .topTrailing) {
-            LocationView(name: entry.locationName)
+            LocationView(name: entry.name)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }

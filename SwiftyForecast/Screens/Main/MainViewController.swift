@@ -1,6 +1,13 @@
+//
+//  MainViewController.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/10/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import UIKit
 import TipKit
-import CoreLocation
 import Combine
 
 final class MainViewController: UIViewController {
@@ -92,23 +99,10 @@ private extension MainViewController {
                 viewModels.map {
                     WeatherViewController.make(
                         viewModel: $0,
-                        cardViewModel: WeatherCardViewViewModel(
+                        cardViewModel: CompositionRoot.cardViewModel(
                             latitude: $0.latitude,
                             longitude: $0.longitude,
-                            locationName: $0.locationName,
-                            service: WeatherService(
-                                repository: WeatherRepository(
-                                    client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                                ),
-                                parse: WeatherResponseParser()
-                            ),
-                            temperatureFormatterFactory: TemperatureFormatterFactory(
-                                notationStorage: NotationSettingsStorage()
-                            ),
-                            speedFormatterFactory: SpeedFormatterFactory(
-                                notationStorage: NotationSettingsStorage()
-                            ),
-                            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
+                            name: $0.name
                         )
                     )
                 }

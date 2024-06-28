@@ -9,7 +9,7 @@
 import UIKit
 import SwiftUI
 
-class AboutViewController: UIViewController {
+final class AboutViewController: UIViewController {
     weak var coordinator: Coordinator?
     private var hostingViewController: UIHostingController<AboutScreen>!
     private let viewModel: AboutViewModel

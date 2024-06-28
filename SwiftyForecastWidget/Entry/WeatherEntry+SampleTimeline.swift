@@ -13,7 +13,7 @@ extension WeatherEntry {
     static let sampleTimeline = [
         WeatherEntry(
             date: Date(),
-            locationName: "Cupertino",
+            name: "Cupertino",
             icon: UIImage(resource: .cloudyDay).pngData()!,
             description: "light intensity shower rain",
             temperature: Temperature(current: 281, min: 278.67, max: 281),
@@ -58,7 +58,7 @@ extension WeatherEntry {
         ),
         WeatherEntry(
             date: Date(),
-            locationName: "Chicago",
+            name: "Chicago",
             icon: UIImage(resource: .clearDay).pngData()!,
             description: "scattered clouds",
             temperature: Temperature(current: 278.93, min: 277.32, max: 278.93),

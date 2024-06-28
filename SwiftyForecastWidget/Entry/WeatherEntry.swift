@@ -10,7 +10,7 @@ import WidgetKit
 
 struct WeatherEntry: TimelineEntry {
     let date: Date
-    let locationName: String
+    let name: String
     let icon: Data
     let description: String
     let dayNightState: DayNightState
@@ -19,7 +19,7 @@ struct WeatherEntry: TimelineEntry {
 
     init(
         date: Date,
-        locationName: String,
+        name: String,
         icon: Data,
         description: String,
         temperature: Temperature,
@@ -28,7 +28,7 @@ struct WeatherEntry: TimelineEntry {
         temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     ) {
         self.date = date
-        self.locationName = locationName
+        self.name = name
         self.description = description
         self.icon = icon
         self.dayNightState = dayNightState

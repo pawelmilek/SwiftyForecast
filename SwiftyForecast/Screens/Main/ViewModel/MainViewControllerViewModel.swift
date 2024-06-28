@@ -1,3 +1,11 @@
+//
+//  MainViewControllerViewModel.swift
+//  Swifty Forecast
+//
+//  Created by Pawel Milek on 6/10/24.
+//  Copyright © 2024 Pawel Milek. All rights reserved.
+//
+
 import WidgetKit
 import RealmSwift
 import CoreLocation
@@ -115,7 +123,6 @@ final class MainViewControllerViewModel: ObservableObject {
                 debugPrint("deletions: \(deletions)")
                 debugPrint("insertions: \(insertions)")
                 debugPrint("modifications: \(modifications)")
-                debugPrint(self!.locations!.description)
                 self?.invalidateWeatherViewModels()
                 self?.invalidateMainPageData(insertions: insertions, modifications: modifications)
 
@@ -143,7 +150,7 @@ final class MainViewControllerViewModel: ObservableObject {
                 compoundKey: $0.compoundKey,
                 latitude: $0.latitude,
                 longitude: $0.longitude,
-                locationName: $0.name,
+                name: $0.name,
                 service: service,
                 metricSystemNotification: metricSystemNotification
             )

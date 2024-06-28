@@ -30,7 +30,7 @@ struct MediumWidgetView: View {
 private extension MediumWidgetView {
     var locationAndTemperature: some View {
         VStack(spacing: 0) {
-            LocationView(name: entry.locationName)
+            LocationView(name: entry.name)
             Text(entry.formattedTemperature)
                 .font(.system(size: 60, weight: .heavy, design: .monospaced))
                 .foregroundStyle(.accent)

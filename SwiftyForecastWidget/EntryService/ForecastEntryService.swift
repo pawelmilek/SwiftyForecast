@@ -39,7 +39,7 @@ struct ForecastEntryService: EntryService {
 
         return WeatherEntry(
             date: .now,
-            locationName: nameResult,
+            name: nameResult,
             icon: iconResult,
             description: weatherResult.condition.description,
             temperature: weatherResult.temperature,

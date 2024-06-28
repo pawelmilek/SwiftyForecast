@@ -12,7 +12,10 @@ struct WeatherService: WeatherServiceProtocol {
     private let repository: WeatherRepository
     private let parse: ResponseParser
 
-    init(repository: WeatherRepository, parse: ResponseParser) {
+    init(
+        repository: WeatherRepository,
+        parse: ResponseParser
+    ) {
         self.repository = repository
         self.parse = parse
     }

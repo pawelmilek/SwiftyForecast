@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+final class MainPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     private let feedbackGenerator: UIImpactFeedbackGenerator
     private var weatherViewControllers: [WeatherViewController]
     private(set) var currentIndex: Int

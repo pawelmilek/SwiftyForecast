@@ -32,16 +32,7 @@ struct FavoriteLocationList: View {
                 .listRowSeparator(.hidden)
             ForEach(Array(zip(locations.indices, locations)), id: \.0) { index, location in
                 FavoriteLocationRow(
-                    viewModel: LocationRowViewModel(
-                        location: location,
-                        service: WeatherService(
-                            repository: WeatherRepository(
-                                client: OpenWeatherClient(decoder: JSONSnakeCaseDecoded())
-                            ),
-                            parse: WeatherResponseParser()
-                        ),
-                        temperatureFormatterFactory: temperatureFormatterFactory
-                    )
+                    viewModel: CompositionRoot.locationRowViewModel(location)
                 )
                 .listRowSeparator(.hidden)
                 .deleteDisabled(location.isUserLocation)
