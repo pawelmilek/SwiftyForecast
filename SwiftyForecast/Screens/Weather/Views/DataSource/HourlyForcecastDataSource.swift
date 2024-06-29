@@ -20,8 +20,8 @@ final class HourlyForcecastDataSource: NSObject, UICollectionViewDataSource {
         self.viewModels = viewModels
     }
 
-    func set(viewModels: [HourlyViewCellViewModel]) {
-        self.viewModels = viewModels
+    func set(data: [HourlyForecastModel]) {
+        self.viewModels = data.map { CompositionRoot.hourlyViewModel($0) }
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

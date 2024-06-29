@@ -9,25 +9,25 @@
 import Foundation
 
 struct WeatherRepository: WeatherRepositoryProtocol {
-    private let client: Client
+    private let client: HttpClient
 
-    init(client: Client) {
+    init(client: HttpClient) {
         self.client = client
     }
 
     func fetchCurrent(latitude: Double, longitude: Double) async throws -> CurrentWeatherResponse {
-        try await client.fetchCurrent(latitude: latitude, longitude: longitude)
+        try await client.requestCurrent(latitude: latitude, longitude: longitude)
     }
 
     func fetchForecast(latitude: Double, longitude: Double) async throws -> ForecastWeatherResponse {
-       try await client.fetchForecast(latitude: latitude, longitude: longitude)
+       try await client.requestForecast(latitude: latitude, longitude: longitude)
     }
 
     func fetchIcon(symbol: String) async throws -> Data {
-        try await client.fetchIcon(symbol: symbol)
+        try await client.requestIcon(symbol: symbol)
     }
 
     func fetchLargeIcon(symbol: String) async throws -> Data {
-        try await client.fetchLargeIcon(symbol: symbol)
+        try await client.requestLargeIcon(symbol: symbol)
     }
 }

@@ -14,10 +14,9 @@ protocol Coordinator: AnyObject {
 
     func start()
     func openAbout()
-    func openAppearanceSwitch()
+    func openTheme()
     func openLocations()
     func dismiss()
     func presentOfflineView()
     func dismissOfflineView()
-    func presentLocationAnimation(isLoading: Bool)
 }

@@ -11,12 +11,11 @@ import RealmSwift
 import TipKit
 
 struct FavoriteLocationList: View {
+    @Environment(\.client) private var client
     @Environment(\.isSearching) private var isSearching
     @Environment(\.databaseManager) private var databaseManager
     @Environment(\.analyticsService) private var analyticsService
-    @Environment(\.client) private var client
     @Binding var searchText: String
-    let temperatureFormatterFactory: TemperatureFormatterFactoryProtocol
     var onSelectRow: (Int) -> Void
 
     @ObservedResults(
@@ -63,9 +62,6 @@ struct FavoriteLocationList: View {
 #Preview {
     FavoriteLocationList(
         searchText: .constant("Search Text"),
-        temperatureFormatterFactory: TemperatureFormatterFactory(
-            notationStorage: NotationSettingsStorage()
-        ),
         onSelectRow: { _ in }
     )
     .task {

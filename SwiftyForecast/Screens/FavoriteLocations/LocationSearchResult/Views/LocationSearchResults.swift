@@ -10,11 +10,11 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchResults: View {
-    @Environment(\.dismissSearch) private var dismissSearch
-    @Environment(\.analyticsService) private var analyticsService
-    @Environment(\.locationSearchCompleter) private var locationSearchCompleter
     @Environment(\.client) private var client
     @Environment(\.databaseManager) private var databaseManager
+    @Environment(\.analyticsService) private var analyticsService
+    @Environment(\.dismissSearch) private var dismissSearch
+    @Environment(\.locationSearchCompleter) private var locationSearchCompleter
     @StateObject private var searchLocationStore = SearchLocationStore(
         locationPlace: GeocodedLocation(geocoder: CLGeocoder())
     )

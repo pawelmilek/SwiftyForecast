@@ -20,8 +20,8 @@ final class DailyForecastDataSource: NSObject, UITableViewDataSource {
         self.viewModeles = viewModeles
     }
 
-    func set(viewModeles: [DailyViewCellViewModel]) {
-        self.viewModeles = viewModeles
+    func set(data: [DailyForecastModel]) {
+        self.viewModeles = data.map { CompositionRoot.dailyViewModel($0) }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

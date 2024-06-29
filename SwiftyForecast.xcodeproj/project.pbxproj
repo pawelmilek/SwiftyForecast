@@ -95,10 +95,7 @@
 		E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
 		E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
-		E23997EB20E84371007D8CE4 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* HttpClient.swift */; };
 		E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* RequestError.swift */; };
-		E23997EF20E84371007D8CE4 /* ErrorPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E720E84371007D8CE4 /* ErrorPresentable.swift */; };
-		E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */; };
 		E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */; };
 		E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift */; };
 		E23A0B912C2F79CF00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */; };
@@ -196,11 +193,7 @@
 		E2A567512B075139000324C0 /* SearchLocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567502B075139000324C0 /* SearchLocationStore.swift */; };
 		E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567562B077413000324C0 /* UIView+ReusableView.swift */; };
 		E2A567582B077610000324C0 /* Registrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567542B0773C0000324C0 /* Registrable.swift */; };
-		E2A5675B2B0779F4000324C0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E2A5675A2B0779F4000324C0 /* Lottie */; };
-		E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A5675C2B077AC9000324C0 /* LottieAnimationViewController.swift */; };
-		E2A567602B077B38000324C0 /* LottieAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A5675F2B077B38000324C0 /* LottieAnimationView.swift */; };
-		E2A567662B0785A9000324C0 /* lottie_location_animation.json in Resources */ = {isa = PBXBuildFile; fileRef = E2A567652B0785A9000324C0 /* lottie_location_animation.json */; };
-		E2AD325B2B23719100F46FBE /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* Client.swift */; };
+		E2AD325B2B23719100F46FBE /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* HttpClient.swift */; };
 		E2AD325C2B23719C00F46FBE /* OpenWeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD522768B3A00062E36 /* OpenWeatherClient.swift */; };
 		E2AD325D2B23727700F46FBE /* ResponseParserR.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B035692500700000DC0E77 /* ResponseParserR.swift */; };
 		E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
@@ -216,7 +209,6 @@
 		E2AD32692B23774400F46FBE /* CurrentWeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E82AD7DCD8001BFADB /* CurrentWeatherResponse.swift */; };
 		E2AD326A2B23774400F46FBE /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E2AD326B2B23774400F46FBE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */; };
-		E2AD326C2B23774400F46FBE /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E220E84371007D8CE4 /* HttpClient.swift */; };
 		E2AD326D2B23774C00F46FBE /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* RequestError.swift */; };
 		E2AD32702B23779000F46FBE /* BuildConfigurationFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E62AD6F49D001BFADB /* BuildConfigurationFile.swift */; };
 		E2AD32712B23779800F46FBE /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastModel.swift */; };
@@ -230,8 +222,8 @@
 		E2B1D65C211FB26C00F0002A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* MainViewController.swift */; };
 		E2BC4DAE2B4428DA00D05F54 /* AppearanceTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */; };
 		E2BC4DB12B442A0C00D05F54 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */; };
-		E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
-		E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */; };
+		E2BC4DB32B442FE600D05F54 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* Theme.swift */; };
+		E2BC4DB52B442FF200D05F54 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* Theme.swift */; };
 		E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* ThemeView.swift */; };
 		E2BC4DBA2B44434200D05F54 /* NotificationName+DidChangeAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */; };
 		E2C916F62B4972C200903619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
@@ -242,7 +234,7 @@
 		E2CAC9FB2C044C4900E573D2 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
 		E2CAC9FD2C04BF0E00E573D2 /* DecodedPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4725447A05000ACEFE /* DecodedPlist.swift */; };
 		E2CC9A012B6150E80044634E /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CC9A002B6150E80044634E /* AboutViewModel.swift */; };
-		E2CF4D76226E7A4100062E36 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* Client.swift */; };
+		E2CF4D76226E7A4100062E36 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* HttpClient.swift */; };
 		E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */; };
 		E2CF4D7E226E838E00062E36 /* HourlyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */; };
 		E2CF4DD822768C3F00062E36 /* OpenWeatherClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DD522768B3A00062E36 /* OpenWeatherClient.swift */; };
@@ -416,10 +408,7 @@
 		E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VortexSystem+Condition.swift"; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
-		E23997E220E84371007D8CE4 /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
-		E23997E720E84371007D8CE4 /* ErrorPresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorPresentable.swift; sourceTree = "<group>"; };
-		E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertViewPresenter.swift; sourceTree = "<group>"; };
 		E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewViewModel.swift; sourceTree = "<group>"; };
 		E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
@@ -505,9 +494,6 @@
 		E2A567502B075139000324C0 /* SearchLocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationStore.swift; sourceTree = "<group>"; };
 		E2A567542B0773C0000324C0 /* Registrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registrable.swift; sourceTree = "<group>"; };
 		E2A567562B077413000324C0 /* UIView+ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ReusableView.swift"; sourceTree = "<group>"; };
-		E2A5675C2B077AC9000324C0 /* LottieAnimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationViewController.swift; sourceTree = "<group>"; };
-		E2A5675F2B077B38000324C0 /* LottieAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimationView.swift; sourceTree = "<group>"; };
-		E2A567652B0785A9000324C0 /* lottie_location_animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottie_location_animation.json; sourceTree = "<group>"; };
 		E2AD32772B2381CD00F46FBE /* WidgetLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetLocationManager.swift; sourceTree = "<group>"; };
 		E2B035692500700000DC0E77 /* ResponseParserR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseParserR.swift; sourceTree = "<group>"; };
 		E2B035772500883E00DC0E77 /* HourlyForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastModel.swift; sourceTree = "<group>"; };
@@ -517,13 +503,13 @@
 		E2B1D65B211FB26C00F0002A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E2BC4DAD2B4428DA00D05F54 /* AppearanceTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTip.swift; sourceTree = "<group>"; };
 		E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
-		E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceTheme.swift; sourceTree = "<group>"; };
+		E2BC4DB22B442FE600D05F54 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		E2BC4DB72B44304000D05F54 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		E2BC4DB92B44434200D05F54 /* NotificationName+DidChangeAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+DidChangeAppearance.swift"; sourceTree = "<group>"; };
 		E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
 		E2CC9A002B6150E80044634E /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
-		E2CF4D75226E7A4100062E36 /* Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		E2CF4D75226E7A4100062E36 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCellViewModel.swift; sourceTree = "<group>"; };
 		E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCellViewModel.swift; sourceTree = "<group>"; };
 		E2CF4D872273C39700062E36 /* SwiftyForecastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyForecastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -590,7 +576,6 @@
 				E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */,
 				E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */,
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
-				E2A5675B2B0779F4000324C0 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,7 +681,6 @@
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
 				E28357342B27168400E3807A /* LocationManager */,
-				E2A5675E2B077B1A000324C0 /* LottieAnimationView */,
 				E2435BD322AD6293007589CE /* MetricSystem */,
 				E23997DA20E84104007D8CE4 /* Models */,
 				E28357332B27150D00E3807A /* Modifiers */,
@@ -810,7 +794,6 @@
 				E283572F2B25BFA200E3807A /* SwiftyForecastWidgetExtension.entitlements */,
 				E283572E2B25BEDE00E3807A /* SwiftyForecast.entitlements */,
 				E28179112B385F8800D06917 /* device_types.json */,
-				E2A567652B0785A9000324C0 /* lottie_location_animation.json */,
 				E27E2FDA1DA057C100B3EABF /* Info.plist */,
 				E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */,
 				E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */,
@@ -861,10 +844,9 @@
 			isa = PBXGroup;
 			children = (
 				E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */,
-				E23997E220E84371007D8CE4 /* HttpClient.swift */,
-				E2CF4D75226E7A4100062E36 /* Client.swift */,
+				E2CF4D75226E7A4100062E36 /* HttpClient.swift */,
 				E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */,
-				E2CF4DD722768B5200062E36 /* WeatherClient */,
+				E2CF4DD722768B5200062E36 /* OpenWeather */,
 				E296A7EC2AD7E639001BFADB /* NetworkResponse */,
 			);
 			path = Network;
@@ -873,7 +855,6 @@
 		E23997E520E84371007D8CE4 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				E23997E720E84371007D8CE4 /* ErrorPresentable.swift */,
 				E2A42E392151BC7D00F9A79A /* GeocoderError.swift */,
 				E20A433C2C1C637B0052AFA4 /* LocalSearchError.swift */,
 				E23997E620E84371007D8CE4 /* RequestError.swift */,
@@ -1142,15 +1123,6 @@
 			path = SearchedLocationWeather;
 			sourceTree = "<group>";
 		};
-		E2A5675E2B077B1A000324C0 /* LottieAnimationView */ = {
-			isa = PBXGroup;
-			children = (
-				E2A5675C2B077AC9000324C0 /* LottieAnimationViewController.swift */,
-				E2A5675F2B077B38000324C0 /* LottieAnimationView.swift */,
-			);
-			path = LottieAnimationView;
-			sourceTree = "<group>";
-		};
 		E2AA6CA82B0B700D00C6E582 /* LocationSearchResult */ = {
 			isa = PBXGroup;
 			children = (
@@ -1181,7 +1153,7 @@
 		E2BC4DB62B44300800D05F54 /* ThemeStyle */ = {
 			isa = PBXGroup;
 			children = (
-				E2BC4DB22B442FE600D05F54 /* AppearanceTheme.swift */,
+				E2BC4DB22B442FE600D05F54 /* Theme.swift */,
 				E25EF00A20F97CE200E4C115 /* Style.swift */,
 			);
 			path = ThemeStyle;
@@ -1312,7 +1284,6 @@
 			isa = PBXGroup;
 			children = (
 				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
-				E23997F220E84389007D8CE4 /* AlertViewPresenter.swift */,
 				E2EF17D72BF9795B00C0D83C /* CopyrightFooterView.swift */,
 			);
 			path = Views;
@@ -1369,13 +1340,13 @@
 			path = Stubs;
 			sourceTree = "<group>";
 		};
-		E2CF4DD722768B5200062E36 /* WeatherClient */ = {
+		E2CF4DD722768B5200062E36 /* OpenWeather */ = {
 			isa = PBXGroup;
 			children = (
 				E296A7E32AD6E797001BFADB /* OpenWeatherEndpoint.swift */,
 				E2CF4DD522768B3A00062E36 /* OpenWeatherClient.swift */,
 			);
-			path = WeatherClient;
+			path = OpenWeather;
 			sourceTree = "<group>";
 		};
 		E2D430AC2BB4D954003F26EE /* Model */ = {
@@ -1502,7 +1473,6 @@
 			name = "Swifty Forecast";
 			packageProductDependencies = (
 				E290F2532ADDAF55001B3276 /* Kingfisher */,
-				E2A5675A2B0779F4000324C0 /* Lottie */,
 				E20C6B162BE859DA00DDB57A /* Vortex */,
 				E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */,
 				E2CAC9E22C04310600E573D2 /* FirebaseAnalytics */,
@@ -1598,7 +1568,6 @@
 			mainGroup = E29911ED1D456EAC0083B484;
 			packageReferences = (
 				E290F2522ADDAF55001B3276 /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				E2A567592B0779F4000324C0 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 				E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
@@ -1622,7 +1591,6 @@
 				E21ABD4F2AE9735F00F93F01 /* five_days_forecast_weather_response.json in Resources */,
 				E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */,
 				E2CAC9E72C04321A00E573D2 /* GoogleService-Info.plist in Resources */,
-				E2A567662B0785A9000324C0 /* lottie_location_animation.json in Resources */,
 				E20C6B062BE64EFA00DDB57A /* PrivacyInfo.xcprivacy in Resources */,
 				E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */,
 				E20C6B192BE85BD800DDB57A /* CHANGELOG.md in Resources */,
@@ -1718,7 +1686,6 @@
 				E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */,
 				E296A7E92AD7DCD8001BFADB /* CurrentWeatherResponse.swift in Sources */,
 				E2FD3756232EFFC40083B383 /* LocationModel.swift in Sources */,
-				E23997EB20E84371007D8CE4 /* HttpClient.swift in Sources */,
 				E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */,
 				E296A7E72AD6F49D001BFADB /* BuildConfigurationFile.swift in Sources */,
 				E2EF17D82BF9795B00C0D83C /* CopyrightFooterView.swift in Sources */,
@@ -1732,7 +1699,6 @@
 				E2ED36E72C04EDC70001C3EF /* NetworkResourceType.swift in Sources */,
 				E24E90752ADA81DF009255C8 /* WeatherViewController.swift in Sources */,
 				E2227E842ADD5439000C3886 /* TemperatureFormatterFactory.swift in Sources */,
-				E23997F420E84389007D8CE4 /* AlertViewPresenter.swift in Sources */,
 				E2A567512B075139000324C0 /* SearchLocationStore.swift in Sources */,
 				E2D430C52BB4D954003F26EE /* HourlyForecastChartViewModel.swift in Sources */,
 				E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */,
@@ -1760,7 +1726,6 @@
 				E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */,
 				E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */,
 				E28092E42AFCC9720019FD7C /* CurrentLocationRecord.swift in Sources */,
-				E23997EF20E84371007D8CE4 /* ErrorPresentable.swift in Sources */,
 				E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */,
 				E2126F4B2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */,
 				E224507A2B9F3F9800F14BAA /* WeatherCardViewController.swift in Sources */,
@@ -1815,7 +1780,7 @@
 				E2FEB7BD2B172782009D54B2 /* MetricSystemNotificationCenterAdapter.swift in Sources */,
 				E26ACD1B24FF204000AC15A6 /* ForecastModel.swift in Sources */,
 				E2A32F4825447A05000ACEFE /* DecodedPlist.swift in Sources */,
-				E2CF4D76226E7A4100062E36 /* Client.swift in Sources */,
+				E2CF4D76226E7A4100062E36 /* HttpClient.swift in Sources */,
 				E296B61A2C1CF576001F7C57 /* WeatherClientEnvironment.swift in Sources */,
 				E296B61F2C2088D6001F7C57 /* DatabaseManagerEnvironment.swift in Sources */,
 				E249ABBE2B3484980020B88D /* AboutViewController.swift in Sources */,
@@ -1843,9 +1808,7 @@
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
 				E2644CF72C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */,
 				E2126F7C2C288892001111E0 /* SpeedConvertible.swift in Sources */,
-				E2A5675D2B077AC9000324C0 /* LottieAnimationViewController.swift in Sources */,
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
-				E2A567602B077B38000324C0 /* LottieAnimationView.swift in Sources */,
 				E21ABD562AE9740F00F93F01 /* MockGenerator.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */,
 				E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewViewModel.swift in Sources */,
@@ -1859,7 +1822,7 @@
 				E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */,
 				E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */,
-				E2BC4DB32B442FE600D05F54 /* AppearanceTheme.swift in Sources */,
+				E2BC4DB32B442FE600D05F54 /* Theme.swift in Sources */,
 				E2644D0C2C2A065E00B505A1 /* ReviewedVersionStorageAdapter.swift in Sources */,
 				E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2126F802C2888B9001111E0 /* ConvertedMetersPerSecond.swift in Sources */,
@@ -1911,7 +1874,6 @@
 				E283573A2B2716D500E3807A /* CLAccuracyAuthorization+CustomStringConvertible.swift in Sources */,
 				E2255A542C10213D00C6F3AD /* AboutScreenEvent.swift in Sources */,
 				E2255A522C10213700C6F3AD /* LocationListEvent.swift in Sources */,
-				E2AD326C2B23774400F46FBE /* HttpClient.swift in Sources */,
 				E2D430DE2BB4DB33003F26EE /* WindSpeed.swift in Sources */,
 				E2126F872C2890F6001111E0 /* NotationSettings.swift in Sources */,
 				E20C6B112BE82DAD00DDB57A /* Device.swift in Sources */,
@@ -1940,7 +1902,7 @@
 				E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */,
 				E2AD32682B23774400F46FBE /* OpenWeatherEndpoint.swift in Sources */,
 				E224507E2B9F403E00F14BAA /* WeatherModel.swift in Sources */,
-				E2BC4DB52B442FF200D05F54 /* AppearanceTheme.swift in Sources */,
+				E2BC4DB52B442FF200D05F54 /* Theme.swift in Sources */,
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */,
@@ -1964,7 +1926,7 @@
 				E2D786D22C24A558001E4DE8 /* WeatherEntryServiceFactory.swift in Sources */,
 				E2AD32712B23779800F46FBE /* ForecastModel.swift in Sources */,
 				E2D430DC2BB4DB28003F26EE /* RealmManager.swift in Sources */,
-				E2AD325B2B23719100F46FBE /* Client.swift in Sources */,
+				E2AD325B2B23719100F46FBE /* HttpClient.swift in Sources */,
 				E2644E352C0AD79E00B67E18 /* WeatherCondition.swift in Sources */,
 				E2F671152B234EA600B791A0 /* TemperatureNotation.swift in Sources */,
 				E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */,
@@ -2433,14 +2395,6 @@
 				minimumVersion = 7.9.1;
 			};
 		};
-		E2A567592B0779F4000324C0 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.3.3;
-			};
-		};
 		E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -2486,11 +2440,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E290F2522ADDAF55001B3276 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		E2A5675A2B0779F4000324C0 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2A567592B0779F4000324C0 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
 		};
 		E2AD32722B23791E00F46FBE /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -55,11 +55,6 @@ final class WeatherViewController: UIViewController {
         loadData()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        debugPrint("File: \(#file), Function: \(#function), line: \(#line)")
-    }
-
     private func loadData() {
         Task {
             await self.viewModel.loadData()
@@ -118,18 +113,16 @@ private extension WeatherViewController {
     func subscriberPublishers() {
         viewModel.$twentyFourHoursForecastModel
             .receive(on: DispatchQueue.main)
-            .map { $0.map { CompositionRoot.hourlyViewModel($0) } }
-            .sink { [self] hourlyViewModels in
-                hourlyForcecastDataSource.set(viewModels: hourlyViewModels)
+            .sink { [self] twentyFourHoursForecastModel in
+                hourlyForcecastDataSource.set(data: twentyFourHoursForecastModel)
                 hourlyCollectionView.reloadData()
             }
             .store(in: &cancellables)
 
         viewModel.$fiveDaysForecastModel
             .receive(on: DispatchQueue.main)
-            .map { $0.map { CompositionRoot.dailyViewModel($0) } }
-            .sink { [self] dailyViewModels in
-                dailyForecastDataSource.set(viewModeles: dailyViewModels)
+            .sink { [self] fiveDaysForecastModel in
+                dailyForecastDataSource.set(data: fiveDaysForecastModel)
                 dailyTableView.reloadData()
             }
             .store(in: &cancellables)
@@ -146,26 +139,5 @@ private extension WeatherViewController {
         Task {
             await viewModel.loadData()
         }
-    }
-}
-
-// MARK: - Factory method
-extension WeatherViewController {
-    static func make(
-        viewModel: WeatherViewControllerViewModel,
-        cardViewModel: WeatherCardViewViewModel
-    ) -> WeatherViewController {
-        let storyboard = UIStoryboard(storyboard: .main)
-        let viewController = storyboard.instantiateViewController(
-            identifier: WeatherViewController.storyboardIdentifier
-        ) { coder in
-            WeatherViewController(
-                viewModel: viewModel,
-                cardViewModel: cardViewModel,
-                coder: coder
-            )
-        }
-
-        return viewController
     }
 }

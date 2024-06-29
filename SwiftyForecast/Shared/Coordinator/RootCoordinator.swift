@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import CoreLocation
-import SafariServices
 
 final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
@@ -18,37 +16,22 @@ final class RootCoordinator: Coordinator {
     }
 
     func start() {
-        let storyboard = UIStoryboard(storyboard: .main)
-        let viewController = storyboard.instantiateViewController(
-            identifier: MainViewController.storyboardIdentifier
-        ) { coder in
-            MainViewController(
-                viewModel: CompositionRoot.mainViewModel,
-                coordinator: self,
-                coder: coder
-            )
-        }
-
-        navigationController.pushViewController(viewController, animated: false)
-        debugPrint(CompositionRoot.databaseManager.description)
+        navigationController.pushViewController(
+            CompositionRoot.mainViewController(coordinator: self),
+            animated: false
+        )
     }
 
     func openAbout() {
         navigationController.present(
-            AboutViewController(
-                viewModel: CompositionRoot.aboutViewModel,
-                coordinator: self
-            ),
+            CompositionRoot.aboutViewController(coordinator: self),
             animated: true
         )
     }
 
-    func openAppearanceSwitch() {
+    func openTheme() {
         navigationController.present(
-            ThemeViewController(
-                viewModel: CompositionRoot.themeViewModel,
-                coordinator: self
-            ),
+            CompositionRoot.themeViewController(coordinator: self),
             animated: true
         )
     }
@@ -82,22 +65,5 @@ final class RootCoordinator: Coordinator {
         }
 
         navigationController.viewControllers.remove(at: offlineVCIndex)
-    }
-
-    func presentLocationAnimation(isLoading: Bool) {
-        if isLoading {
-            guard !navigationController.viewControllers
-                .contains(where: { $0.view.tag == LottieAnimationViewController.identifier }) else {
-                return
-            }
-            navigationController.pushViewController(LottieAnimationViewController(), animated: false)
-
-        } else {
-            guard let index = navigationController.viewControllers
-                .firstIndex(where: { $0.view.tag == LottieAnimationViewController.identifier }) else {
-                return
-            }
-            navigationController.viewControllers.remove(at: index)
-        }
     }
 }

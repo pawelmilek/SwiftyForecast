@@ -11,18 +11,57 @@ import CoreLocation
 
 @MainActor
 enum CompositionRoot {
-    static var mainViewModel: MainViewControllerViewModel {
-        .init(
-            geocodeLocation: geocodeLocation,
-            notationSettings: notationSettings,
-            metricSystemNotification: metricSystemNotification,
-            currentLocationRecord: currentLocationRecord,
-            databaseManager: databaseManager,
-            locationManager: locationManager,
-            analyticsService: analyticsService,
-            networkMonitor: networkMonitor,
-            service: service
-        )
+    static func mainViewController(coordinator: Coordinator) -> MainViewController {
+        let storyboard = UIStoryboard(storyboard: .main)
+        let viewController = storyboard.instantiateViewController(
+            identifier: MainViewController.storyboardIdentifier
+        ) { coder in
+            MainViewController(
+                viewModel: .init(
+                    geocodeLocation: geocodeLocation,
+                    notationSettings: notationSettings,
+                    metricSystemNotification: metricSystemNotification,
+                    currentLocationRecord: currentLocationRecord,
+                    databaseManager: databaseManager,
+                    locationManager: locationManager,
+                    analyticsService: analyticsService,
+                    networkMonitor: networkMonitor
+                ),
+                coordinator: coordinator,
+                coder: coder
+            )
+        }
+
+        return viewController
+    }
+
+    static func weatherViewController(
+        compoundKey: String,
+        latitude: Double,
+        longitude: Double,
+        name: String
+    ) -> WeatherViewController {
+        let storyboard = UIStoryboard(storyboard: .main)
+        let viewController = storyboard.instantiateViewController(
+            identifier: WeatherViewController.storyboardIdentifier
+        ) { coder in
+            WeatherViewController(
+                viewModel: Self.weatherViewModel(
+                    compoundKey: compoundKey,
+                    latitude: latitude,
+                    longitude: longitude,
+                    name: name
+                ),
+                cardViewModel: Self.cardViewModel(
+                    latitude: latitude,
+                    longitude: longitude,
+                    name: name
+                ),
+                coder: coder
+            )
+        }
+
+        return viewController
     }
 
     static func weatherViewModel(
@@ -79,12 +118,26 @@ enum CompositionRoot {
         )
     }
 
+    static func aboutViewController(coordinator: Coordinator) -> AboutViewController {
+        AboutViewController(
+            viewModel: Self.aboutViewModel,
+            coordinator: coordinator
+        )
+    }
+
     static var aboutViewModel: AboutViewModel {
         .init(
             bundle: .main,
             buildConfiguration: buildConfiguration,
             networkResourceFactory: NetworkResourceFactory(),
             analyticsService: analyticsService
+        )
+    }
+
+    static func themeViewController(coordinator: Coordinator) -> ThemeViewController {
+        ThemeViewController(
+            viewModel: Self.themeViewModel,
+            coordinator: coordinator
         )
     }
 

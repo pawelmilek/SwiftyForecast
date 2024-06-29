@@ -1,5 +1,5 @@
 //
-//  AppearanceTheme.swift
+//  Theme.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/2/24.
@@ -10,7 +10,7 @@
 import UIKit
 import SwiftUI
 
-enum AppearanceTheme: String, CaseIterable, Identifiable {
+enum Theme: String, CaseIterable, Identifiable {
     case systemDefault = "Default"
     case light = "Light"
     case dark = "Dark"

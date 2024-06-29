@@ -1,5 +1,5 @@
 //
-//  NotificationName+DidChangeAppearance.swift
+//  NotificationName+DidChangeTheme.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/2/24.
@@ -9,5 +9,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let didChangeAppearance = Notification.Name("didChangeAppearance")
+    static let didChangeTheme = Notification.Name("didChangeTheme")
 }

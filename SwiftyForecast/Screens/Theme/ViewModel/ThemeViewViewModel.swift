@@ -11,9 +11,9 @@ import SwiftUI
 import Combine
 
 final class ThemeViewViewModel: ObservableObject {
-    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
-    @Published var selectedTheme: AppearanceTheme = .systemDefault
-    @Published private(set) var themes = AppearanceTheme.allCases
+    @AppStorage("appearanceTheme") var appearanceTheme: Theme = .systemDefault
+    @Published var selectedTheme: Theme = .systemDefault
+    @Published private(set) var themes = Theme.allCases
     @Published private(set) var title = "Appearance"
     @Published private(set) var subtitle = "Choose a day or night.\nCustomize your interface."
     @Published private(set) var pickerTitle = "Theme Settings"
@@ -44,7 +44,7 @@ final class ThemeViewViewModel: ObservableObject {
     }
 
     private func appearanceChanged() {
-        notificationCenter.post(name: .didChangeAppearance, object: nil)
+        notificationCenter.post(name: .didChangeTheme, object: nil)
     }
 
     func setCircleOffset(isDark: Bool) {

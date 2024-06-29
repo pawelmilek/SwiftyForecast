@@ -1,7 +1,6 @@
 import Foundation
 
 extension URLRequest {
-
     func encode(with parameters: Parameters) -> URLRequest {
         if let URL = url, var components = URLComponents(url: URL, resolvingAgainstBaseURL: false) {
             let queryItems = parameters.map { key, value in
@@ -17,5 +16,4 @@ extension URLRequest {
             return self
         }
     }
-
 }

@@ -11,7 +11,7 @@ import TipKit
 import Combine
 
 final class MainViewController: UIViewController {
-    @AppStorage("appearanceTheme") var appearanceTheme: AppearanceTheme = .systemDefault
+    @AppStorage("appearanceTheme") var appearanceTheme: Theme = .systemDefault
 
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()
@@ -43,7 +43,7 @@ final class MainViewController: UIViewController {
     private weak var appearanceTipPopoverController: TipUIPopoverViewController?
     private var cancellables = Set<AnyCancellable>()
 
-    let coordinator: Coordinator
+    weak var coordinator: Coordinator?
     var viewModel: MainViewControllerViewModel
 
     init?(
@@ -93,17 +93,16 @@ private extension MainViewController {
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
-        viewModel.$weatherViewModels
+        viewModel.$locations
+            .compactMap { $0 }
             .filter { !$0.isEmpty }
-            .map { viewModels -> [WeatherViewController] in
-                viewModels.map {
-                    WeatherViewController.make(
-                        viewModel: $0,
-                        cardViewModel: CompositionRoot.cardViewModel(
-                            latitude: $0.latitude,
-                            longitude: $0.longitude,
-                            name: $0.name
-                        )
+            .map { locations -> [WeatherViewController] in
+                locations.map {
+                    CompositionRoot.weatherViewController(
+                        compoundKey: $0.compoundKey,
+                        latitude: $0.latitude,
+                        longitude: $0.longitude,
+                        name: $0.name
                     )
                 }
             }
@@ -115,6 +114,7 @@ private extension MainViewController {
             .store(in: &cancellables)
 
         viewModel.$selectedIndex
+            .dropFirst()
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] selectedIndex in
@@ -132,7 +132,7 @@ private extension MainViewController {
             .store(in: &cancellables)
 
         NotificationCenter.default
-            .publisher(for: .didChangeAppearance)
+            .publisher(for: .didChangeTheme)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.setupAppearanceTheme()
@@ -143,9 +143,9 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] hasNetworkConnection in
                 if hasNetworkConnection {
-                    self?.coordinator.dismissOfflineView()
+                    self?.coordinator?.dismissOfflineView()
                 } else {
-                    self?.coordinator.presentOfflineView()
+                    self?.coordinator?.presentOfflineView()
                 }
             }
             .store(in: &cancellables)
@@ -170,7 +170,6 @@ private extension MainViewController {
     }
 
     func selectInitialPageViewController() {
-        guard viewModel.selectedIndex == nil else { return }
         viewModel.onSelectIndex(0)
     }
 
@@ -271,7 +270,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "info")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.coordinator.openAbout()
+            self?.coordinator?.openAbout()
         })
 
         return UIBarButtonItem(customView: button)
@@ -282,7 +281,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "paintpalette.fill")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.coordinator.openAppearanceSwitch()
+            self?.coordinator?.openTheme()
         })
         return UIBarButtonItem(customView: button)
     }
@@ -292,7 +291,7 @@ private extension MainViewController {
         configuration.image = UIImage(systemName: "location.fill")
         configuration.buttonSize = .small
         let button = UIButton(configuration: configuration, primaryAction: UIAction() { [weak self] _ in
-            self?.coordinator.openLocations()
+            self?.coordinator?.openLocations()
         })
         return UIBarButtonItem(customView: button)
     }
@@ -317,7 +316,7 @@ extension MainViewController: LocationSearchViewControllerDelegate {
         didSelectLocation index: Int
     ) {
         viewModel.onSelectIndex(index)
-        coordinator.dismiss()
+        coordinator?.dismiss()
     }
 
 }
