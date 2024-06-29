@@ -158,5 +158,12 @@ struct AboutScreen: View {
 }
 
 #Preview {
-    AboutScreen(viewModel: CompositionRoot.aboutViewModel)
+    AboutScreen(
+        viewModel: .init(
+            bundle: .main,
+            buildConfiguration: BuildConfigurationFile(bundle: .main),
+            networkResourceFactory: NetworkResourceFactory(),
+            analyticsService: FirebaseAnalyticsService()
+        )
+    )
 }

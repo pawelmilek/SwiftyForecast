@@ -689,7 +689,6 @@
 				E2BC4DB62B44300800D05F54 /* ThemeStyle */,
 				E28CEC0B2B3EB74C003DB3A6 /* Tips */,
 				E21A0B9420EE88F5006AC409 /* Utilities */,
-				E2CC9A1D2B615A710044634E /* Views */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -870,6 +869,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		E23A0B922C30CC4000F9A0A4 /* Offline */ = {
+			isa = PBXGroup;
+			children = (
+				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
+			);
+			path = Offline;
+			sourceTree = "<group>";
+		};
 		E2416FF32B331F14009C8F81 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +923,7 @@
 				E2A567522B0763EB000324C0 /* SearchedLocationWeather */,
 				E2BC4DAF2B4429F600D05F54 /* Theme */,
 				E249ABBA2B3475FA0020B88D /* About */,
+				E23A0B922C30CC4000F9A0A4 /* Offline */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1195,8 +1203,9 @@
 				E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */,
 				E21E386D2B37576A00513B26 /* AboutRow.swift */,
 				E2E6C7022C0EAD2C00500EE8 /* AboutShareRow.swift */,
-				E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */,
 				E249ABBD2B3484980020B88D /* AboutViewController.swift */,
+				E2E6C7042C0EAF3900500EE8 /* ActionAboutRow.swift */,
+				E2EF17D72BF9795B00C0D83C /* CopyrightFooterView.swift */,
 				E28CEC072B39BB82003DB3A6 /* HTMLView.swift */,
 				E28179172B38768A00D06917 /* LicenseView.swift */,
 				E2644E3F2C0BC6EB00B67E18 /* ShareRow.swift */,
@@ -1278,15 +1287,6 @@
 				E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		E2CC9A1D2B615A710044634E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E2192258214483AA0093FEBD /* OfflineViewController.swift */,
-				E2EF17D72BF9795B00C0D83C /* CopyrightFooterView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		E2CC9A1E2B615A960044634E /* Model */ = {

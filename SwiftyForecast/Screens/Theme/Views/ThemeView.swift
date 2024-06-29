@@ -67,5 +67,10 @@ struct ThemeView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-    ThemeView(viewModel: CompositionRoot.themeViewModel)
+    ThemeView(
+        viewModel: .init(
+            notificationCenter: .default,
+            analyticsService: FirebaseAnalyticsService()
+        )
+    )
 }

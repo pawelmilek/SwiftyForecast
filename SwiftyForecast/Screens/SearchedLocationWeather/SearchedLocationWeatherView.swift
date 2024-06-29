@@ -96,13 +96,39 @@ struct SearchedLocationWeatherView: View {
 
 #Preview {
     SearchedLocationWeatherView(
-        viewModel: CompositionRoot.searchedLocationWeatherViewModel(
-            LocationModel.examples.first!
+        viewModel: .init(
+            location: LocationModel.examples.first!,
+            service: WeatherService(
+                repository: WeatherRepository(
+                    client: OpenWeatherClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                parse: WeatherResponseParser()
+            ),
+            databaseManager: PreviewRealmManager(),
+            storeReviewManager: StoreReviewManager(
+                store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
+                storage: ReviewedVersionStorageAdapter(adaptee: .standard),
+                bundle: .main
+            ),
+            analyticsService: FirebaseAnalyticsService()
         ),
-        cardViewModel: CompositionRoot.cardViewModel(
+        cardViewModel: .init(
             latitude: LocationModel.examples.first!.latitude,
             longitude: LocationModel.examples.first!.longitude,
-            name: LocationModel.examples.first!.name
+            name: LocationModel.examples.first!.name,
+            service: WeatherService(
+                repository: WeatherRepository(
+                    client: OpenWeatherClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                parse: WeatherResponseParser()
+            ),
+            temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage()),
+            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSettingsStorage()),
+            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
         ),
         onCancel: {
         }

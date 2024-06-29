@@ -1,5 +1,5 @@
 //
-//  WeatherClientEnvironment.swift
+//  WeatherServiceEnvironment.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/14/24.
@@ -10,21 +10,26 @@
 import Foundation
 import SwiftUI
 
-private struct ClientKey: EnvironmentKey {
-    static let defaultValue: HttpClient = OpenWeatherClient(
-        decoder: JSONSnakeCaseDecoded()
+private struct WeatherServiceKey: EnvironmentKey {
+    static let defaultValue: WeatherService = WeatherService(
+        repository: WeatherRepository(
+            client: OpenWeatherClient(
+                decoder: JSONSnakeCaseDecoded()
+            )
+        ),
+        parse: WeatherResponseParser()
     )
 }
 
 extension EnvironmentValues {
-    var client: HttpClient {
-        get { self[ClientKey.self] }
-        set { self[ClientKey.self] = newValue }
+    var service: WeatherService {
+        get { self[WeatherServiceKey.self] }
+        set { self[WeatherServiceKey.self] = newValue }
     }
 }
 
 extension View {
-    func client(_ value: HttpClient) -> some View {
-        environment(\.client, value)
+    func service(_ value: WeatherService) -> some View {
+        environment(\.service, value)
     }
 }

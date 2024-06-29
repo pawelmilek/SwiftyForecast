@@ -11,7 +11,7 @@ import RealmSwift
 import TipKit
 
 struct FavoriteLocationList: View {
-    @Environment(\.client) private var client
+    @Environment(\.service) private var service
     @Environment(\.isSearching) private var isSearching
     @Environment(\.databaseManager) private var databaseManager
     @Environment(\.analyticsService) private var analyticsService
@@ -31,7 +31,11 @@ struct FavoriteLocationList: View {
                 .listRowSeparator(.hidden)
             ForEach(Array(zip(locations.indices, locations)), id: \.0) { index, location in
                 FavoriteLocationRow(
-                    viewModel: CompositionRoot.locationRowViewModel(location)
+                    viewModel: .init(
+                        location: location,
+                        service: service,
+                        temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage())
+                    )
                 )
                 .listRowSeparator(.hidden)
                 .deleteDisabled(location.isUserLocation)

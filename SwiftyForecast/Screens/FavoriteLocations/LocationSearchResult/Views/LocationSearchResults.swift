@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchResults: View {
-    @Environment(\.client) private var client
+    @Environment(\.service) private var service
     @Environment(\.databaseManager) private var databaseManager
     @Environment(\.analyticsService) private var analyticsService
     @Environment(\.dismissSearch) private var dismissSearch
@@ -38,13 +38,25 @@ struct LocationSearchResults: View {
         }
         .sheet(item: $searchLocationStore.foundLocation) { foundLocation in
             SearchedLocationWeatherView(
-                viewModel: CompositionRoot.searchedLocationWeatherViewModel(
-                    foundLocation
+                viewModel: .init(
+                    location: foundLocation,
+                    service: service,
+                    databaseManager: databaseManager,
+                    storeReviewManager: StoreReviewManager(
+                        store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
+                        storage: ReviewedVersionStorageAdapter(adaptee: .standard),
+                        bundle: .main
+                    ),
+                    analyticsService: analyticsService
                 ),
-                cardViewModel: CompositionRoot.cardViewModel(
+                cardViewModel: .init(
                     latitude: foundLocation.latitude,
                     longitude: foundLocation.longitude,
-                    name: foundLocation.name
+                    name: foundLocation.name,
+                    service: service,
+                    temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage()),
+                    speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSettingsStorage()),
+                    metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
                 ),
                 onCancel: dismiss
             )

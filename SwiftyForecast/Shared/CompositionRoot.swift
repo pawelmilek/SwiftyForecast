@@ -46,11 +46,13 @@ enum CompositionRoot {
             identifier: WeatherViewController.storyboardIdentifier
         ) { coder in
             WeatherViewController(
-                viewModel: Self.weatherViewModel(
+                viewModel: .init(
                     compoundKey: compoundKey,
                     latitude: latitude,
                     longitude: longitude,
-                    name: name
+                    name: name,
+                    service: service,
+                    metricSystemNotification: metricSystemNotification
                 ),
                 cardViewModel: Self.cardViewModel(
                     latitude: latitude,
@@ -62,22 +64,6 @@ enum CompositionRoot {
         }
 
         return viewController
-    }
-
-    static func weatherViewModel(
-        compoundKey: String,
-        latitude: Double,
-        longitude: Double,
-        name: String
-    ) -> WeatherViewControllerViewModel {
-        .init(
-            compoundKey: compoundKey,
-            latitude: latitude,
-            longitude: longitude,
-            name: name,
-            service: service,
-            metricSystemNotification: metricSystemNotification
-        )
     }
 
     static func cardViewModel(
@@ -120,31 +106,23 @@ enum CompositionRoot {
 
     static func aboutViewController(coordinator: Coordinator) -> AboutViewController {
         AboutViewController(
-            viewModel: Self.aboutViewModel,
+            viewModel: .init(
+                bundle: .main,
+                buildConfiguration: buildConfiguration,
+                networkResourceFactory: NetworkResourceFactory(),
+                analyticsService: analyticsService
+            ),
             coordinator: coordinator
-        )
-    }
-
-    static var aboutViewModel: AboutViewModel {
-        .init(
-            bundle: .main,
-            buildConfiguration: buildConfiguration,
-            networkResourceFactory: NetworkResourceFactory(),
-            analyticsService: analyticsService
         )
     }
 
     static func themeViewController(coordinator: Coordinator) -> ThemeViewController {
         ThemeViewController(
-            viewModel: Self.themeViewModel,
+            viewModel: .init(
+                notificationCenter: .default,
+                analyticsService: analyticsService
+            ),
             coordinator: coordinator
-        )
-    }
-
-    static var themeViewModel: ThemeViewViewModel {
-        .init(
-            notificationCenter: .default,
-            analyticsService: analyticsService
         )
     }
 
