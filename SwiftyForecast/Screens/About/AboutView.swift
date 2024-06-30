@@ -1,5 +1,5 @@
 //
-//  AboutScreen.swift
+//  AboutView.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 12/21/23.
@@ -9,7 +9,7 @@
 import SwiftUI
 import StoreKit
 
-struct AboutScreen: View {
+struct AboutView: View {
     @ObservedObject var viewModel: AboutViewModel
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
@@ -158,7 +158,7 @@ struct AboutScreen: View {
 }
 
 #Preview {
-    AboutScreen(
+    AboutView(
         viewModel: .init(
             bundle: .main,
             buildConfiguration: BuildConfigurationFile(bundle: .main),

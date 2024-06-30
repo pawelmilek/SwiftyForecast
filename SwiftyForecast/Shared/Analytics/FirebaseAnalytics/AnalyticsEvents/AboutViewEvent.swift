@@ -1,5 +1,5 @@
 //
-//  AboutScreenEvent.swift
+//  AboutViewEvent.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 6/4/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AboutScreenEvent: AnalyticsEvent {
+struct AboutViewEvent: AnalyticsEvent {
     private enum Names {
         static let rowTapped = "about_row_tapped"
     }
@@ -22,9 +22,9 @@ struct AboutScreenEvent: AnalyticsEvent {
     }
 }
 
-extension AboutScreenEvent {
-    static func rowTapped(title: String) -> AboutScreenEvent {
-        AboutScreenEvent(
+extension AboutViewEvent {
+    static func rowTapped(title: String) -> AboutViewEvent {
+        AboutViewEvent(
             name: Names.rowTapped,
             metadata: [
                 "row_title": title

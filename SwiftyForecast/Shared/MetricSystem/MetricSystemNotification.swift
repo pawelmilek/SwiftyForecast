@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+protocol MetricSystemNotification {
+    func post()
+    func publisher() -> NotificationCenter.Publisher
+}

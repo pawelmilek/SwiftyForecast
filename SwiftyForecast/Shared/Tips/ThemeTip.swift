@@ -1,5 +1,5 @@
 //
-//  AppearanceTip.swift
+//  ThemeTip.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 1/2/24.
@@ -8,11 +8,11 @@
 
 import TipKit
 
-struct AppearanceTip: Tip {
+struct ThemeTip: Tip {
     static let didAppBecomeActiveEvent = Event(id: "didAppBecomeActiveEvent")
 
     var title: Text {
-        Text("Appearance")
+        Text("Theme")
             .fontWeight(.bold)
             .fontDesign(.monospaced)
     }

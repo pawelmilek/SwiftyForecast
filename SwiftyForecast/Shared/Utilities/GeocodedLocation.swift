@@ -9,10 +9,6 @@
 import Foundation
 import CoreLocation
 
-protocol LocationPlaceable {
-    func placemark(at location: CLLocation) async throws -> CLPlacemark
-}
-
 final class GeocodedLocation: LocationPlaceable {
     private let geocoder: CLGeocoder
 

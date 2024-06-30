@@ -11,14 +11,14 @@ import TipKit
 import Combine
 
 final class MainViewController: UIViewController {
-    @AppStorage("appearanceTheme") var appearanceTheme: Theme = .systemDefault
+    @AppStorage("appearanceTheme") var theme: Theme = .systemDefault
 
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()
     }()
 
-    private lazy var appearanceBarButton: UIBarButtonItem = {
-        appearanceBarButtonItem()
+    private lazy var themeBarButton: UIBarButtonItem = {
+        themeBarButtonItem()
     }()
 
     private lazy var locationBarButton: UIBarButtonItem = {
@@ -35,12 +35,12 @@ final class MainViewController: UIViewController {
     )
 
     private let informationTip = InformationTip()
-    private let appearanceTip = AppearanceTip()
+    private let themeTip = ThemeTip()
 
     private var informationTipObservationTask: Task<Void, Never>?
     private weak var informationTipPopoverController: TipUIPopoverViewController?
-    private var appearanceTipObservationTask: Task<Void, Never>?
-    private weak var appearanceTipPopoverController: TipUIPopoverViewController?
+    private var themeTipObservationTask: Task<Void, Never>?
+    private weak var themeTipPopoverController: TipUIPopoverViewController?
     private var cancellables = Set<AnyCancellable>()
 
     weak var coordinator: Coordinator?
@@ -85,7 +85,7 @@ private extension MainViewController {
         subscribePublishers()
         setupChildPageViewController()
         setupNavigationItems()
-        setupAppearance()
+        setupPageControlAppearance()
     }
 
     func subscribePublishers() {
@@ -127,7 +127,7 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.viewModel.requestLocation()
-                self?.setupAppearanceTheme()
+                self?.setupTheme()
             }
             .store(in: &cancellables)
 
@@ -135,7 +135,7 @@ private extension MainViewController {
             .publisher(for: .didChangeTheme)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.setupAppearanceTheme()
+                self?.setupTheme()
             }
             .store(in: &cancellables)
 
@@ -151,13 +151,13 @@ private extension MainViewController {
             .store(in: &cancellables)
     }
 
-    func setupAppearanceTheme() {
+    func setupTheme() {
         let window = Array(UIApplication.shared.connectedScenes)
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
             .first(where: { $0.isKeyWindow })
 
-        switch appearanceTheme {
+        switch theme {
         case .dark:
             window?.overrideUserInterfaceStyle = .dark
 
@@ -180,7 +180,7 @@ private extension MainViewController {
     }
 
     func setupLeftBarButtonItem() {
-        navigationItem.leftBarButtonItems = [aboutBarButton, appearanceBarButton]
+        navigationItem.leftBarButtonItems = [aboutBarButton, themeBarButton]
     }
 
     func setupRightBarButtonItem() {
@@ -195,7 +195,7 @@ private extension MainViewController {
         add(pageViewController)
     }
 
-    func setupAppearance() {
+    func setupPageControlAppearance() {
         let proxyPageControl = UIPageControl.appearance()
         proxyPageControl.pageIndicatorTintColor = Style.Main.pageIndicatorTintColor
         proxyPageControl.currentPageIndicatorTintColor = .customPrimary
@@ -204,7 +204,7 @@ private extension MainViewController {
 
     func setupTipObservationTasks() {
         setInformationTipObservationTask()
-        setAppearanceTipObservationTask()
+        setThemeTipObservationTask()
     }
 
     func setInformationTipObservationTask() {
@@ -228,23 +228,23 @@ private extension MainViewController {
         }
     }
 
-    func setAppearanceTipObservationTask() {
-        appearanceTipObservationTask = appearanceTipObservationTask ?? Task { @MainActor in
-            for await shouldDisplay in appearanceTip.shouldDisplayUpdates {
+    func setThemeTipObservationTask() {
+        themeTipObservationTask = themeTipObservationTask ?? Task { @MainActor in
+            for await shouldDisplay in themeTip.shouldDisplayUpdates {
                 if shouldDisplay {
                     let popoverController = TipUIPopoverViewController(
-                        appearanceTip,
-                        sourceItem: appearanceBarButton
+                        themeTip,
+                        sourceItem: themeBarButton
                     )
                     popoverController.view.tintColor = .customPrimary
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         self.present(popoverController, animated: true)
-                        self.appearanceTipPopoverController = popoverController
+                        self.themeTipPopoverController = popoverController
                     }
                 } else {
                     if presentedViewController is TipUIPopoverViewController {
                         dismiss(animated: true)
-                        appearanceTipPopoverController = nil
+                        themeTipPopoverController = nil
                     }
                 }
             }
@@ -254,8 +254,8 @@ private extension MainViewController {
     func stopTipObservationTasks() {
         informationTipObservationTask?.cancel()
         informationTipObservationTask = nil
-        appearanceTipObservationTask?.cancel()
-        appearanceTipObservationTask = nil
+        themeTipObservationTask?.cancel()
+        themeTipObservationTask = nil
     }
 
     private func pageTransition(at index: Int) {
@@ -276,7 +276,7 @@ private extension MainViewController {
         return UIBarButtonItem(customView: button)
     }
 
-    func appearanceBarButtonItem() -> UIBarButtonItem {
+    func themeBarButtonItem() -> UIBarButtonItem {
         var configuration = UIButton.Configuration.bordered()
         configuration.image = UIImage(systemName: "paintpalette.fill")
         configuration.buttonSize = .small

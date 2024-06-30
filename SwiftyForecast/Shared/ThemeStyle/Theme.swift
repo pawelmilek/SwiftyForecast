@@ -8,7 +8,6 @@
 // swiftlint:disable:identifier_name
 
 import UIKit
-import SwiftUI
 
 enum Theme: String, CaseIterable, Identifiable {
     case systemDefault = "Default"
@@ -16,17 +15,4 @@ enum Theme: String, CaseIterable, Identifiable {
     case dark = "Dark"
 
     var id: Self { self }
-
-    func color(_ scheme: ColorScheme) -> Color {
-        switch self {
-        case .systemDefault:
-            return scheme == .dark ? .purple : .customPrimary
-
-        case .light:
-            return .customPrimary
-
-        case .dark:
-            return .purple
-        }
-    }
 }

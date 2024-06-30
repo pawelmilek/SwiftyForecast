@@ -11,7 +11,7 @@ import SwiftUI
 
 final class AboutViewController: UIViewController {
     weak var coordinator: Coordinator?
-    private var hostingViewController: UIHostingController<AboutScreen>!
+    private var hostingViewController: UIHostingController<AboutView>!
     private let viewModel: AboutViewModel
 
     init(
@@ -33,7 +33,7 @@ final class AboutViewController: UIViewController {
     }
 
     private func setup() {
-        let informationView = AboutScreen(viewModel: viewModel)
+        let informationView = AboutView(viewModel: viewModel)
         hostingViewController = UIHostingController(rootView: informationView)
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
         add(hostingViewController)

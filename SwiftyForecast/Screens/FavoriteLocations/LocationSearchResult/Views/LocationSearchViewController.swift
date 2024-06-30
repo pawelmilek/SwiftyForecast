@@ -19,7 +19,7 @@ protocol LocationSearchViewControllerDelegate: AnyObject {
 
 final class LocationSearchViewController: UIViewController {
     weak var delegate: LocationSearchViewControllerDelegate?
-    private var hostingViewController: UIHostingController<FavoriteLocationSearchView>!
+    private var hostingViewController: UIHostingController<FavoriteLocationView>!
     private weak var coordinator: Coordinator?
 
     init(coordinator: Coordinator) {
@@ -35,7 +35,7 @@ final class LocationSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let locationSearchView = FavoriteLocationSearchView { [weak self] selectedIndex in
+        let locationSearchView = FavoriteLocationView { [weak self] selectedIndex in
             guard let self else { return }
             delegate?.locationSearchViewController(self, didSelectLocation: selectedIndex)
         }

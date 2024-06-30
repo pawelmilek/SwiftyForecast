@@ -27,7 +27,6 @@ final class LocationManager: NSObject {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.distanceFilter = kCLDistanceFilterNone
-//        manager.pausesLocationUpdatesAutomatically = true
         manager.showsBackgroundLocationIndicator = true
         manager.activityType = .otherNavigation
     }

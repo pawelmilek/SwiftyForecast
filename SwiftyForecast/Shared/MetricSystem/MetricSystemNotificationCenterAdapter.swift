@@ -8,11 +8,6 @@
 
 import Foundation
 
-protocol MetricSystemNotification {
-    func post()
-    func publisher() -> NotificationCenter.Publisher
-}
-
 struct MetricSystemNotificationCenterAdapter: MetricSystemNotification {
     private static let didChangeMetricSystem = NSNotification.Name("didChangeMetricSystem")
     private let notificationCenter: NotificationCenter

@@ -1,5 +1,5 @@
 //
-//  FavoriteLocationSearchView.swift
+//  FavoriteLocationView.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/24/23.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FavoriteLocationSearchView: View {
+struct FavoriteLocationView: View {
     @StateObject private var searchCompleter = LocationSearchCompleter()
     var onDidSelectLocation: (Int) -> Void
 
@@ -31,5 +31,5 @@ struct FavoriteLocationSearchView: View {
 }
 
 #Preview {
-    FavoriteLocationSearchView() { _ in }
+    FavoriteLocationView() { _ in }
 }

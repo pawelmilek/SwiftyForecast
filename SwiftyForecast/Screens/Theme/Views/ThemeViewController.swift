@@ -11,10 +11,10 @@ import SwiftUI
 
 final class ThemeViewController: UIViewController {
     weak var coordinator: Coordinator?
-    private let viewModel: ThemeViewViewModel
+    private let viewModel: ThemeViewModel
     private var hostingViewController: UIHostingController<ThemeView>!
 
-    init(viewModel: ThemeViewViewModel, coordinator: Coordinator) {
+    init(viewModel: ThemeViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
@@ -41,9 +41,7 @@ final class ThemeViewController: UIViewController {
 
     private func setupSheetPresentation() {
         if let sheet = presentationController as? UISheetPresentationController {
-            sheet.detents = [.custom(resolver: { [weak self] _ in
-                self?.viewModel.height
-            })]
+            sheet.detents = [.custom(resolver: { [weak self] _ in self?.viewModel.height })]
             sheet.prefersGrabberVisible = false
         }
     }

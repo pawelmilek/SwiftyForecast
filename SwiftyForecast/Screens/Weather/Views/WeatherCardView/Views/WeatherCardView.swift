@@ -144,10 +144,21 @@ private extension WeatherCardView {
 
 #Preview(traits: .sizeThatFitsLayout) {
     WeatherCardView(
-        viewModel: CompositionRoot.cardViewModel(
+        viewModel: .init(
             latitude: LocationModel.examples.first!.latitude,
             longitude: LocationModel.examples.first!.longitude,
-            name: LocationModel.examples.first!.name
+            name: LocationModel.examples.first!.name,
+            service: WeatherService(
+                repository: WeatherRepository(
+                    client: OpenWeatherClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                parse: WeatherResponseParser()
+            ),
+            temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage()),
+            speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSettingsStorage()),
+            metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
         )
     )
     .padding(22.5)

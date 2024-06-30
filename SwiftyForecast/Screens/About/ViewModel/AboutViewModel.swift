@@ -44,7 +44,7 @@ final class AboutViewModel: ObservableObject {
 
     func donateDidAppBecomeActiveEvent() {
         Task(priority: .userInitiated) {
-            await AppearanceTip.didAppBecomeActiveEvent.donate()
+            await ThemeTip.didAppBecomeActiveEvent.donate()
         }
     }
 
@@ -100,7 +100,7 @@ final class AboutViewModel: ObservableObject {
 
     func logEventRowTapped(_ title: String) {
         analyticsService.send(
-            event: AboutScreenEvent.rowTapped(
+            event: AboutViewEvent.rowTapped(
                 title: title
             )
         )
