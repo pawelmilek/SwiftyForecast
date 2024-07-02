@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol ThemeChangeNotifiable {
+    func notify()
+}
+
 final class ThemeViewModel: ObservableObject {
     @Published private(set) var themes = Theme.allCases
     @Published private(set) var title = "Appearance"
@@ -17,15 +21,15 @@ final class ThemeViewModel: ObservableObject {
     let height = CGFloat(410)
 
     private let analyticsService: AnalyticsService
-    private let notificationCenter: NotificationCenter
+    private let notification: ThemeChangeNotifiable
 
-    init(notificationCenter: NotificationCenter, analyticsService: AnalyticsService) {
-        self.notificationCenter = notificationCenter
+    init(notification: ThemeChangeNotifiable, analyticsService: AnalyticsService) {
+        self.notification = notification
         self.analyticsService = analyticsService
     }
 
     func postThemeChanged() {
-        notificationCenter.post(name: .didChangeTheme, object: nil)
+        notification.notify()
     }
 
     func setLightCircleOffset() {

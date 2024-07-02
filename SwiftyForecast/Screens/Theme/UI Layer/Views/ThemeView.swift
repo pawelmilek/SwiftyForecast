@@ -119,8 +119,14 @@ struct ThemeView: View {
 #Preview(traits: .sizeThatFitsLayout) {
     ThemeView(
         viewModel: .init(
-            notificationCenter: .default,
+            notification: PreviewThemeNotificationChange(),
             analyticsService: FirebaseAnalyticsService()
         )
     )
+}
+
+struct PreviewThemeNotificationChange: ThemeChangeNotifiable {
+    func notify() {
+
+    }
 }

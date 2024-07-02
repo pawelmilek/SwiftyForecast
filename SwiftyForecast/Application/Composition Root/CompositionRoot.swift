@@ -119,7 +119,7 @@ enum CompositionRoot {
     static func themeViewController(coordinator: Coordinator) -> ThemeViewController {
         ThemeViewController(
             viewModel: .init(
-                notificationCenter: .default,
+                notification: NotificationCenterThemeChangeAdapter(notificationCenter: .default),
                 analyticsService: analyticsService
             ),
             coordinator: coordinator
