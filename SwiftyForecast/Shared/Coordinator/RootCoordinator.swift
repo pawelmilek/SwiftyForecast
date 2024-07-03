@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import ThemeFeatureUI
 
 final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
@@ -82,8 +83,7 @@ private extension RootCoordinator {
             ),
             textColor: .accent,
             darkScheme: .purple,
-            lightScheme: .customPrimary,
-            coordinator: self
+            lightScheme: .customPrimary
         )
     }
 }

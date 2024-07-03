@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import ThemeFeatureDomain
 
-struct FirebaseAnalyticsThemeSendableAdapter: AnalyticsThemeSendable {
+struct FirebaseAnalyticsThemeSendableAdapter: ThemeAnalyticsSendable {
     private struct Event: AnalyticsEvent {
         var name: String
-        var metadata: [String : Any]
+        var metadata: [String: Any]
     }
 
     private let service: AnalyticsService

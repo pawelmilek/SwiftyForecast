@@ -7,6 +7,8 @@
 //
 
 import Foundation
+//import ThemeFeatureDomain
+import ThemeFeatureDomain
 
 struct NotificationCenterThemeChangeAdapter: ThemeChangeNotifiable {
     private let notificationCenter: NotificationCenter

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -25,10 +25,7 @@
 		E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkMonitor.swift */; };
 		E20E28462C345D31007834F5 /* NotificationCenterThemeChangeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeChangeAdapter.swift */; };
 		E20E284B2C349742007834F5 /* LocationSearchResultsAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E284A2C349742007834F5 /* LocationSearchResultsAnalyticsEvent.swift */; };
-		E20E284D2C34B0F8007834F5 /* ThemeChangeNotifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E284C2C34B0F8007834F5 /* ThemeChangeNotifiable.swift */; };
-		E20E284F2C34B3F2007834F5 /* AnalyticsThemeSendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E284E2C34B3F2007834F5 /* AnalyticsThemeSendable.swift */; };
 		E20E28512C34B405007834F5 /* FirebaseAnalyticsThemeSendableAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeSendableAdapter.swift */; };
-		E20E28532C34C50A007834F5 /* ThemeAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28522C34C50A007834F5 /* ThemeAnalyticsEvent.swift */; };
 		E2126F4B2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
 		E2126F4C2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
 		E2126F4E2C27A902001111E0 /* ConvertedFahrenheit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4D2C27A902001111E0 /* ConvertedFahrenheit.swift */; };
@@ -99,12 +96,12 @@
 		E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E225B4D92BE437DF00AD8906 /* ConditionModel.swift */; };
 		E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E22A221B2AE004230069A83A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22A221A2AE004230069A83A /* LocationManager.swift */; };
+		E234A6822C35C53900288175 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E234A6812C35C53900288175 /* ThemeFeature */; };
 		E23956A62C0A4E4D0018B542 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */; };
 		E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* RequestError.swift */; };
 		E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */; };
-		E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewModel.swift */; };
 		E23A0B912C2F79CF00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */; };
 		E23CD76020ED950500F0F72A /* HourlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */; };
 		E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */; };
@@ -227,10 +224,6 @@
 		E2B1D65A211E567100F0002A /* UIStoryboard+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */; };
 		E2B1D65C211FB26C00F0002A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B1D65B211FB26C00F0002A /* MainViewController.swift */; };
 		E2BC4DAE2B4428DA00D05F54 /* ThemeTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DAD2B4428DA00D05F54 /* ThemeTip.swift */; };
-		E2BC4DB12B442A0C00D05F54 /* ThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */; };
-		E2BC4DB32B442FE600D05F54 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* Theme.swift */; };
-		E2BC4DB52B442FF200D05F54 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB22B442FE600D05F54 /* Theme.swift */; };
-		E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BC4DB72B44304000D05F54 /* ThemeView.swift */; };
 		E2C916F62B4972C200903619 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */; };
 		E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2CAC9E22C04310600E573D2 /* FirebaseAnalytics */; };
 		E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2CAC9E42C04310600E573D2 /* FirebaseCrashlytics */; };
@@ -308,8 +301,6 @@
 		E2F671232B23682F00B791A0 /* WeatherTimelineProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F671202B23682400B791A0 /* WeatherTimelineProvider.swift */; };
 		E2F6712A2B23691300B791A0 /* WeatherEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F671242B2368F700B791A0 /* WeatherEntry.swift */; };
 		E2FD3756232EFFC40083B383 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FD3755232EFFC40083B383 /* LocationModel.swift */; };
-		E2FDBD662B2079DF0012D7C4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FDBD652B2079DF0012D7C4 /* WidgetKit.framework */; };
-		E2FDBD682B2079DF0012D7C4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2FDBD672B2079DF0012D7C4 /* SwiftUI.framework */; };
 		E2FDBD6B2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDBD6A2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift */; };
 		E2FDBD6D2B2079DF0012D7C4 /* SwiftyForecastWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */; };
 		E2FDBD6F2B2079E00012D7C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */; };
@@ -370,10 +361,7 @@
 		E20DA45A214348AD0047491B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		E20E28452C345D31007834F5 /* NotificationCenterThemeChangeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterThemeChangeAdapter.swift; sourceTree = "<group>"; };
 		E20E284A2C349742007834F5 /* LocationSearchResultsAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsAnalyticsEvent.swift; sourceTree = "<group>"; };
-		E20E284C2C34B0F8007834F5 /* ThemeChangeNotifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeNotifiable.swift; sourceTree = "<group>"; };
-		E20E284E2C34B3F2007834F5 /* AnalyticsThemeSendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsThemeSendable.swift; sourceTree = "<group>"; };
 		E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeSendableAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsThemeSendableAdapter.swift; sourceTree = "<group>"; };
-		E20E28522C34C50A007834F5 /* ThemeAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAnalyticsEvent.swift; sourceTree = "<group>"; };
 		E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConvertible.swift; sourceTree = "<group>"; };
 		E2126F4D2C27A902001111E0 /* ConvertedFahrenheit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedFahrenheit.swift; sourceTree = "<group>"; };
 		E2126F502C27A90D001111E0 /* ConvertedCelsius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedCelsius.swift; sourceTree = "<group>"; };
@@ -396,7 +384,6 @@
 		E21E386D2B37576A00513B26 /* AboutRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutRow.swift; sourceTree = "<group>"; };
 		E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureFormatterFactory.swift; sourceTree = "<group>"; };
 		E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedFormatterFactory.swift; sourceTree = "<group>"; };
-		E224416321618EA4009D409F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		E22450642B9F3F9800F14BAA /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		E22450652B9F3F9800F14BAA /* DayNightState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayNightState.swift; sourceTree = "<group>"; };
 		E22450672B9F3F9800F14BAA /* Humidity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Humidity.swift; sourceTree = "<group>"; };
@@ -421,7 +408,6 @@
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
-		E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewModel.swift; sourceTree = "<group>"; };
 		E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCell.swift; sourceTree = "<group>"; };
 		E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyViewCell.xib; sourceTree = "<group>"; };
@@ -513,9 +499,6 @@
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
 		E2B1D65B211FB26C00F0002A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E2BC4DAD2B4428DA00D05F54 /* ThemeTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTip.swift; sourceTree = "<group>"; };
-		E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeViewController.swift; sourceTree = "<group>"; };
-		E2BC4DB22B442FE600D05F54 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		E2BC4DB72B44304000D05F54 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
 		E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
 		E2CC9A002B6150E80044634E /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
@@ -567,8 +550,6 @@
 		E2F671242B2368F700B791A0 /* WeatherEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEntry.swift; sourceTree = "<group>"; };
 		E2FD3755232EFFC40083B383 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		E2FDBD642B2079DF0012D7C4 /* SwiftyForecastWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SwiftyForecastWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E2FDBD652B2079DF0012D7C4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		E2FDBD672B2079DF0012D7C4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		E2FDBD6A2B2079DF0012D7C4 /* SwiftyForecastWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyForecastWidgetBundle.swift; sourceTree = "<group>"; };
 		E2FDBD6C2B2079DF0012D7C4 /* SwiftyForecastWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyForecastWidget.swift; sourceTree = "<group>"; };
 		E2FDBD6E2B2079E00012D7C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -586,6 +567,7 @@
 				E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */,
 				E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */,
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
+				E234A6822C35C53900288175 /* ThemeFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,24 +587,12 @@
 				E2255A3E2C0FC55C00C6F3AD /* FirebaseAnalytics in Frameworks */,
 				E2255A402C0FC55C00C6F3AD /* FirebaseCrashlytics in Frameworks */,
 				E2AD32732B23791E00F46FBE /* Kingfisher in Frameworks */,
-				E2FDBD682B2079DF0012D7C4 /* SwiftUI.framework in Frameworks */,
-				E2FDBD662B2079DF0012D7C4 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		14FF84B878F0E000118ED0A2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E224416321618EA4009D409F /* NotificationCenter.framework */,
-				E2FDBD652B2079DF0012D7C4 /* WidgetKit.framework */,
-				E2FDBD672B2079DF0012D7C4 /* SwiftUI.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		E20A43372C1B28880052AFA4 /* DependencyContainer */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,34 +617,6 @@
 				E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeSendableAdapter.swift */,
 			);
 			path = "Composition Root";
-			sourceTree = "<group>";
-		};
-		E20E28482C346ED5007834F5 /* ThemeFeatureDomain */ = {
-			isa = PBXGroup;
-			children = (
-				E2BC4DB22B442FE600D05F54 /* Theme.swift */,
-				E20E284C2C34B0F8007834F5 /* ThemeChangeNotifiable.swift */,
-				E20E284E2C34B3F2007834F5 /* AnalyticsThemeSendable.swift */,
-				E20E28522C34C50A007834F5 /* ThemeAnalyticsEvent.swift */,
-			);
-			path = ThemeFeatureDomain;
-			sourceTree = "<group>";
-		};
-		E20E28492C346EE4007834F5 /* ThemeFeatureUI */ = {
-			isa = PBXGroup;
-			children = (
-				E2BC4DB72B44304000D05F54 /* ThemeView.swift */,
-				E2BC4DB02B442A0C00D05F54 /* ThemeViewController.swift */,
-				E23A0B8E2C2F4C9900F9A0A4 /* ThemeViewModel.swift */,
-			);
-			path = ThemeFeatureUI;
-			sourceTree = "<group>";
-		};
-		E20E289A2C34D1A1007834F5 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Packages;
 			sourceTree = "<group>";
 		};
 		E20E28B62C34D402007834F5 /* AboutFeatureUI */ = {
@@ -802,13 +744,6 @@
 				E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */,
 			);
 			path = SpeedFormatter;
-			sourceTree = "<group>";
-		};
-		E22450622B9F3F6100F14BAA /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		E224506A2B9F3F9800F14BAA /* Models */ = {
@@ -987,7 +922,6 @@
 				E2CC9A152B6158BE0044634E /* Weather */,
 				E21ABD422AE82FF900F93F01 /* FavoriteLocations */,
 				E2A567522B0763EB000324C0 /* SearchedLocationWeather */,
-				E2BC4DAF2B4429F600D05F54 /* ThemeFeature */,
 				E249ABBA2B3475FA0020B88D /* AboutFeature */,
 				E23A0B922C30CC4000F9A0A4 /* Offline */,
 			);
@@ -1132,10 +1066,7 @@
 				E29911F81D456EAD0083B484 /* SwiftyForecast */,
 				E2CF4D882273C39700062E36 /* SwiftyForecastTests */,
 				E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */,
-				E20E289A2C34D1A1007834F5 /* Packages */,
 				E29911F71D456EAC0083B484 /* Products */,
-				14FF84B878F0E000118ED0A2 /* Frameworks */,
-				E22450622B9F3F6100F14BAA /* Recovered References */,
 				E20C6B182BE85BD800DDB57A /* CHANGELOG.md */,
 			);
 			sourceTree = "<group>";
@@ -1214,15 +1145,6 @@
 			children = (
 			);
 			path = Doubles;
-			sourceTree = "<group>";
-		};
-		E2BC4DAF2B4429F600D05F54 /* ThemeFeature */ = {
-			isa = PBXGroup;
-			children = (
-				E20E28492C346EE4007834F5 /* ThemeFeatureUI */,
-				E20E28482C346ED5007834F5 /* ThemeFeatureDomain */,
-			);
-			path = ThemeFeature;
 			sourceTree = "<group>";
 		};
 		E2CAC9E02C04308B00E573D2 /* Analytics */ = {
@@ -1516,6 +1438,7 @@
 				E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */,
 				E2CAC9E22C04310600E573D2 /* FirebaseAnalytics */,
 				E2CAC9E42C04310600E573D2 /* FirebaseCrashlytics */,
+				E234A6812C35C53900288175 /* ThemeFeature */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
@@ -1610,6 +1533,7 @@
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 				E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E234A67E2C35C4D400288175 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -1722,7 +1646,6 @@
 				E22450802B9F41BD00F14BAA /* AppStorePreviewTip.swift in Sources */,
 				E2255A482C1020A600C6F3AD /* ScreenAnalyticsEvent.swift in Sources */,
 				E2D430CD2BB4D954003F26EE /* LocationSearchViewController.swift in Sources */,
-				E2BC4DB82B44304000D05F54 /* ThemeView.swift in Sources */,
 				E296A7E92AD7DCD8001BFADB /* CurrentWeatherResponse.swift in Sources */,
 				E2FD3756232EFFC40083B383 /* LocationModel.swift in Sources */,
 				E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */,
@@ -1752,7 +1675,6 @@
 				E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */,
 				E20A433D2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */,
 				E296B61C2C1CF872001F7C57 /* LocationSearchCompleterEnvironment.swift in Sources */,
-				E2BC4DB12B442A0C00D05F54 /* ThemeViewController.swift in Sources */,
 				E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */,
 				E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */,
 				E281791A2B38770B00D06917 /* LicenseReader.swift in Sources */,
@@ -1769,7 +1691,6 @@
 				E224507A2B9F3F9800F14BAA /* WeatherCardViewController.swift in Sources */,
 				E20E28462C345D31007834F5 /* NotificationCenterThemeChangeAdapter.swift in Sources */,
 				E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */,
-				E20E284D2C34B0F8007834F5 /* ThemeChangeNotifiable.swift in Sources */,
 				E22A221B2AE004230069A83A /* LocationManager.swift in Sources */,
 				E2644D052C29ECCE00B505A1 /* WeatherServiceProtocol.swift in Sources */,
 				E2CF4DD822768C3F00062E36 /* OpenWeatherClient.swift in Sources */,
@@ -1835,7 +1756,6 @@
 				E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */,
 				E2126F542C27A923001111E0 /* TemperatureFormatter.swift in Sources */,
 				E28179182B38768A00D06917 /* LicenseView.swift in Sources */,
-				E20E284F2C34B3F2007834F5 /* AnalyticsThemeSendable.swift in Sources */,
 				E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */,
 				E2BC4DAE2B4428DA00D05F54 /* ThemeTip.swift in Sources */,
 				E296A7F22AD7EA46001BFADB /* Condition.swift in Sources */,
@@ -1847,7 +1767,6 @@
 				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
 				E20A43392C1B28B20052AFA4 /* DependencyContainer.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,
-				E20E28532C34C50A007834F5 /* ThemeAnalyticsEvent.swift in Sources */,
 				E2644D102C2A081100B505A1 /* StoreReviewController.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
 				E2644CF72C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */,
@@ -1855,7 +1774,6 @@
 				E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */,
 				E21ABD562AE9740F00F93F01 /* MockGenerator.swift in Sources */,
 				E28AFC752374FCC100D1D5ED /* RealmManager.swift in Sources */,
-				E23A0B8F2C2F4C9900F9A0A4 /* ThemeViewModel.swift in Sources */,
 				E20C6B132BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2ED36E32C04EDA10001C3EF /* NetworkResource.swift in Sources */,
 				E2126F7A2C288886001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */,
@@ -1865,7 +1783,6 @@
 				E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */,
 				E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */,
-				E2BC4DB32B442FE600D05F54 /* Theme.swift in Sources */,
 				E2644D0C2C2A065E00B505A1 /* ReviewedVersionStorageAdapter.swift in Sources */,
 				E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2126F802C2888B9001111E0 /* ConvertedMetersPerSecond.swift in Sources */,
@@ -1946,7 +1863,6 @@
 				E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */,
 				E2AD32682B23774400F46FBE /* OpenWeatherEndpoint.swift in Sources */,
 				E224507E2B9F403E00F14BAA /* WeatherModel.swift in Sources */,
-				E2BC4DB52B442FF200D05F54 /* Theme.swift in Sources */,
 				E29947B62B30E2B400EBA3D1 /* ConditionView.swift in Sources */,
 				E20C6B142BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift in Sources */,
 				E2126F752C287992001111E0 /* UnitTemperature+Locale.swift in Sources */,
@@ -2414,6 +2330,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		E234A67E2C35C4D400288175 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/ThemeFeature;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2464,6 +2387,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		E234A6812C35C53900288175 /* ThemeFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThemeFeature;
 		};
 		E25B3EFB2BFA2E6D00FFC11A /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
