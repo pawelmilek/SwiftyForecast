@@ -239,6 +239,10 @@
 		E2CFA7AB2B309E63001DE3E8 /* MockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24EB89225410010001F5D72 /* MockGenerator.swift */; };
 		E2CFA7AF2B30A03B001DE3E8 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25EF00A20F97CE200E4C115 /* Style.swift */; };
 		E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
+		E2D3B74B2C35CBC7007F8561 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2D3B7452C35CBC7007F8561 /* Preview Assets.xcassets */; };
+		E2D3B74C2C35CBC7007F8561 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2D3B7472C35CBC7007F8561 /* Assets.xcassets */; };
+		E2D3B74D2C35CBC7007F8561 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B7482C35CBC7007F8561 /* ContentView.swift */; };
+		E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */; };
 		E2D430BD2BB4D954003F26EE /* HourlyForecastChartDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AB2BB4D954003F26EE /* HourlyForecastChartDataSource.swift */; };
 		E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AD2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift */; };
 		E2D430C12BB4D954003F26EE /* HourlyForecastChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430AE2BB4D954003F26EE /* HourlyForecastChart.swift */; };
@@ -403,6 +407,7 @@
 		E2255A4E2C10210E00C6F3AD /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
 		E225B4D92BE437DF00AD8906 /* ConditionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionModel.swift; sourceTree = "<group>"; };
 		E22A221A2AE004230069A83A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E234A6882C35CB5E00288175 /* ThemeDevApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThemeDevApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E23956A52C0A4E4D0018B542 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VortexSystem+Condition.swift"; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
@@ -509,6 +514,10 @@
 		E2CF4D8B2273C39700062E36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2CF4DD522768B3A00062E36 /* OpenWeatherClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWeatherClient.swift; sourceTree = "<group>"; };
 		E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewControllerViewModel.swift; sourceTree = "<group>"; };
+		E2D3B7452C35CBC7007F8561 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E2D3B7472C35CBC7007F8561 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E2D3B7482C35CBC7007F8561 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeDevAppApp.swift; sourceTree = "<group>"; };
 		E2D430AB2BB4D954003F26EE /* HourlyForecastChartDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyForecastChartDataSource.swift; sourceTree = "<group>"; };
 		E2D430AD2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundGroupBoxStyle.swift; sourceTree = "<group>"; };
 		E2D430AE2BB4D954003F26EE /* HourlyForecastChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HourlyForecastChart.swift; sourceTree = "<group>"; };
@@ -558,6 +567,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E234A6852C35CB5E00288175 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F31D456EAC0083B484 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -784,6 +800,14 @@
 				E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */,
 			);
 			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
+		E234A6832C35CB1E00288175 /* DevApps */ = {
+			isa = PBXGroup;
+			children = (
+				E2D3B74A2C35CBC7007F8561 /* ThemeDevApp */,
+			);
+			path = DevApps;
 			sourceTree = "<group>";
 		};
 		E23997D720E84094007D8CE4 /* Storyboards */ = {
@@ -1066,6 +1090,7 @@
 				E29911F81D456EAD0083B484 /* SwiftyForecast */,
 				E2CF4D882273C39700062E36 /* SwiftyForecastTests */,
 				E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */,
+				E234A6832C35CB1E00288175 /* DevApps */,
 				E29911F71D456EAC0083B484 /* Products */,
 				E20C6B182BE85BD800DDB57A /* CHANGELOG.md */,
 			);
@@ -1077,6 +1102,7 @@
 				E29911F61D456EAC0083B484 /* Swifty Forecast.app */,
 				E2CF4D872273C39700062E36 /* SwiftyForecastTests.xctest */,
 				E2FDBD642B2079DF0012D7C4 /* SwiftyForecastWidgetExtension.appex */,
+				E234A6882C35CB5E00288175 /* ThemeDevApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1310,6 +1336,25 @@
 			path = OpenWeather;
 			sourceTree = "<group>";
 		};
+		E2D3B7462C35CBC7007F8561 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				E2D3B7452C35CBC7007F8561 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E2D3B74A2C35CBC7007F8561 /* ThemeDevApp */ = {
+			isa = PBXGroup;
+			children = (
+				E2D3B7462C35CBC7007F8561 /* Preview Content */,
+				E2D3B7472C35CBC7007F8561 /* Assets.xcassets */,
+				E2D3B7482C35CBC7007F8561 /* ContentView.swift */,
+				E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */,
+			);
+			path = ThemeDevApp;
+			sourceTree = "<group>";
+		};
 		E2D430AC2BB4D954003F26EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1459,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E234A6872C35CB5E00288175 /* ThemeDevApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E234A6932C35CB5F00288175 /* Build configuration list for PBXNativeTarget "ThemeDevApp" */;
+			buildPhases = (
+				E234A6842C35CB5E00288175 /* Sources */,
+				E234A6852C35CB5E00288175 /* Frameworks */,
+				E234A6862C35CB5E00288175 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThemeDevApp;
+			productName = ThemeDevApp;
+			productReference = E234A6882C35CB5E00288175 /* ThemeDevApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E29911F51D456EAC0083B484 /* Swifty Forecast */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E29912081D456EAD0083B484 /* Build configuration list for PBXNativeTarget "Swifty Forecast" */;
@@ -1493,10 +1555,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1500;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Pawel Milek";
 				TargetAttributes = {
+					E234A6872C35CB5E00288175 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					E29911F51D456EAC0083B484 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1020;
@@ -1542,11 +1607,21 @@
 				E29911F51D456EAC0083B484 /* Swifty Forecast */,
 				E2CF4D862273C39700062E36 /* SwiftyForecastTests */,
 				E2FDBD632B2079DF0012D7C4 /* SwiftyForecastWidgetExtension */,
+				E234A6872C35CB5E00288175 /* ThemeDevApp */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E234A6862C35CB5E00288175 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2D3B74C2C35CBC7007F8561 /* Assets.xcassets in Resources */,
+				E2D3B74B2C35CBC7007F8561 /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F41D456EAC0083B484 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1634,6 +1709,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E234A6842C35CB5E00288175 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2D3B74D2C35CBC7007F8561 /* ContentView.swift in Sources */,
+				E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E29911F21D456EAC0083B484 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1940,6 +2024,86 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		E234A6942C35CB5F00288175 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DevApps/ThemeDevApp/Preview Content\"";
+				DEVELOPMENT_TEAM = N3HG6C68EY;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = milek.pawel.theme.dev.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E234A6952C35CB5F00288175 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DevApps/ThemeDevApp/Preview Content\"";
+				DEVELOPMENT_TEAM = N3HG6C68EY;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = milek.pawel.ThemeDevApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E29912061D456EAD0083B484 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E296A7E52AD6EE8C001BFADB /* Config.xcconfig */;
@@ -2292,6 +2456,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E234A6932C35CB5F00288175 /* Build configuration list for PBXNativeTarget "ThemeDevApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E234A6942C35CB5F00288175 /* Debug */,
+				E234A6952C35CB5F00288175 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E29911F11D456EAC0083B484 /* Build configuration list for PBXProject "SwiftyForecast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
