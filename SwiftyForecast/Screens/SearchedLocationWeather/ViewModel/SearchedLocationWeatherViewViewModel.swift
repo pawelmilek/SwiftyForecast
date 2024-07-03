@@ -97,7 +97,7 @@ final class SearchedLocationWeatherViewViewModel: ObservableObject {
 
     func logScreenViewed(className: String) {
         analyticsService.send(
-            event: ScreenAnalyticsEvent.screenViewed(
+            event: LocationWeatherViewEvent.screenViewed(
                 name: "Searched Location Weather Screen",
                 className: "\(type(of: self))"
             )

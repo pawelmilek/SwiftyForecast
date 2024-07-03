@@ -11,6 +11,7 @@ import Foundation
 struct LocationWeatherViewEvent: AnalyticsEvent {
     private enum Names {
         static let locationAdded = "new_location_added"
+        static let screenViewed = "screen_view"
     }
 
     let name: String
@@ -27,6 +28,16 @@ extension LocationWeatherViewEvent {
         LocationWeatherViewEvent(
             name: Names.locationAdded,
             metadata: ["location": name]
+        )
+    }
+
+    static func screenViewed(name: String, className: String) -> LocationWeatherViewEvent {
+        LocationWeatherViewEvent(
+            name: Names.screenViewed,
+            metadata: [
+                "screen_name": name,
+                "screen_class": className
+            ]
         )
     }
 }

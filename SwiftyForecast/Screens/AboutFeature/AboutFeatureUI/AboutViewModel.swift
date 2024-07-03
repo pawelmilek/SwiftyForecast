@@ -108,7 +108,7 @@ final class AboutViewModel: ObservableObject {
 
     func logEventScreen(_ name: String, className: String) {
         analyticsService.send(
-            event: ScreenAnalyticsEvent.screenViewed(
+            event: AboutViewEvent.screenViewed(
                 name: name,
                 className: className
             )

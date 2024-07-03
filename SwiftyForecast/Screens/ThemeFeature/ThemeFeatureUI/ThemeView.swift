@@ -13,7 +13,11 @@ struct ThemeView: View {
     @AppStorage("appearanceTheme") private var appearanceTheme = Theme.systemDefault
     @Environment(\.colorScheme) private var colorScheme
     @ObservedObject var viewModel: ThemeViewModel
-    @State private var gradientColor = Color.customPrimary.gradient
+    @State private var gradientColor: AnyGradient?
+
+    let textColor: Color
+    let darkScheme: Color
+    let lightScheme: Color
 
     var body: some View {
         VStack(spacing: 35) {
@@ -60,21 +64,21 @@ struct ThemeView: View {
     private func setupGradient() {
         gradientColor = switch appearanceTheme {
         case .systemDefault:
-            colorScheme == .dark 
-            ? Color.purple.gradient
-            : Color.customPrimary.gradient
+            colorScheme == .dark
+            ? darkScheme.gradient
+            : lightScheme.gradient
 
         case .light:
-            Color.customPrimary.gradient
+            lightScheme.gradient
 
         case .dark:
-            Color.purple.gradient
+            darkScheme.gradient
         }
     }
 
     private var circleView: some View {
         Circle()
-            .fill(gradientColor)
+            .fill(gradientColor ?? darkScheme.gradient)
             .frame(maxWidth: 150, maxHeight: 150)
             .mask {
                 Rectangle()
@@ -99,7 +103,7 @@ struct ThemeView: View {
                 .fontWeight(.medium)
                 .multilineTextAlignment(.center)
         }
-        .foregroundStyle(.accent)
+        .foregroundStyle(textColor)
         .fontDesign(.monospaced)
     }
 
@@ -107,7 +111,7 @@ struct ThemeView: View {
         Picker(viewModel.pickerTitle, selection: $appearanceTheme) {
             ForEach(viewModel.themes) { item in
                 Text(item.rawValue)
-                    .foregroundStyle(.accent)
+                    .foregroundStyle(textColor)
             }
         }
         .pickerStyle(.segmented)
@@ -118,15 +122,20 @@ struct ThemeView: View {
 
 #Preview(traits: .sizeThatFitsLayout) {
     ThemeView(
-        viewModel: .init(
+        viewModel: ThemeViewModel(
             notification: PreviewThemeNotificationChange(),
-            analyticsService: FirebaseAnalyticsService()
-        )
+            analytics: PreviewAnalyticsTheme()
+        ),
+        textColor: .black,
+        darkScheme: .red,
+        lightScheme: .green
     )
 }
 
 struct PreviewThemeNotificationChange: ThemeChangeNotifiable {
-    func notify() {
+    func notify() { }
+}
 
-    }
+struct PreviewAnalyticsTheme: AnalyticsThemeSendable {
+    func send(name: String, metadata: [String : Any]) { }
 }

@@ -9,10 +9,10 @@
 
 import UIKit
 
-enum Theme: String, CaseIterable, Identifiable {
+public enum Theme: String, CaseIterable, Identifiable {
     case systemDefault = "Default"
     case light = "Light"
     case dark = "Dark"
 
-    var id: Self { self }
+    public var id: Self { self }
 }

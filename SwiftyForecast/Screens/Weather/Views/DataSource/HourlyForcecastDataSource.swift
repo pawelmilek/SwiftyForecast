@@ -21,7 +21,12 @@ final class HourlyForcecastDataSource: NSObject, UICollectionViewDataSource {
     }
 
     func set(data: [HourlyForecastModel]) {
-        self.viewModels = data.map { CompositionRoot.hourlyViewModel($0) }
+        self.viewModels = data.map { .init(
+            model: $0,
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            )
+        ) }
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {

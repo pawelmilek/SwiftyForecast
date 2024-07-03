@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
@@ -31,7 +32,7 @@ final class RootCoordinator: Coordinator {
 
     func openTheme() {
         navigationController.present(
-            CompositionRoot.themeViewController(coordinator: self),
+            themeViewController,
             animated: true
         )
     }
@@ -65,5 +66,24 @@ final class RootCoordinator: Coordinator {
         }
 
         navigationController.viewControllers.remove(at: offlineVCIndex)
+    }
+}
+
+private extension RootCoordinator {
+    var themeViewController: ThemeViewController {
+        ThemeViewController(
+            viewModel: ThemeViewModel(
+                notification: NotificationCenterThemeChangeAdapter(
+                    notificationCenter: .default
+                ),
+                analytics: FirebaseAnalyticsThemeSendableAdapter(
+                    service: FirebaseAnalyticsService()
+                )
+            ),
+            textColor: .accent,
+            darkScheme: .purple,
+            lightScheme: .customPrimary,
+            coordinator: self
+        )
     }
 }

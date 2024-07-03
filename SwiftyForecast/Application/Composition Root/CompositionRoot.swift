@@ -116,23 +116,6 @@ enum CompositionRoot {
         )
     }
 
-    static func themeViewController(coordinator: Coordinator) -> ThemeViewController {
-        ThemeViewController(
-            viewModel: .init(
-                notification: NotificationCenterThemeChangeAdapter(notificationCenter: .default),
-                analyticsService: analyticsService
-            ),
-            coordinator: coordinator
-        )
-    }
-
-    static func hourlyViewModel(_ model: HourlyForecastModel) -> HourlyViewCellViewModel {
-        .init(
-            model: model,
-            temperatureFormatterFactory: temperatureFormatterFactory
-        )
-    }
-
     static func dailyViewModel(_ model: DailyForecastModel) -> DailyViewCellViewModel {
         .init(
             model: model,

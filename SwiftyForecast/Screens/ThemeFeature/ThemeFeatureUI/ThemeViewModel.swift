@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol ThemeChangeNotifiable {
-    func notify()
-}
-
 final class ThemeViewModel: ObservableObject {
     @Published private(set) var themes = Theme.allCases
     @Published private(set) var title = "Appearance"
@@ -20,12 +16,12 @@ final class ThemeViewModel: ObservableObject {
     @Published private(set) var circleOffset = CGSize.zero
     let height = CGFloat(410)
 
-    private let analyticsService: AnalyticsService
     private let notification: ThemeChangeNotifiable
+    private let analytics: AnalyticsThemeSendable
 
-    init(notification: ThemeChangeNotifiable, analyticsService: AnalyticsService) {
+    init(notification: ThemeChangeNotifiable, analytics: AnalyticsThemeSendable) {
         self.notification = notification
-        self.analyticsService = analyticsService
+        self.analytics = analytics
     }
 
     func postThemeChanged() {
@@ -47,19 +43,17 @@ final class ThemeViewModel: ObservableObject {
     }
 
     func sendScreenViewed() {
-        analyticsService.send(
-            event: ScreenAnalyticsEvent.screenViewed(
-                name: "Appearance Screen",
-                className: "\(type(of: self))"
-            )
+        analytics.send(
+            name: ThemeAnalyticsEvent.screenViewed.name,
+            metadata: ThemeAnalyticsEvent.screenViewed.metadata
         )
     }
 
-    func sendColorSchemeSwitched(_ colorSchemeName: String) {
-        analyticsService.send(
-            event: ThemeViewEvent.colorSchemeSwitched(
-                name: colorSchemeName
-            )
+    func sendColorSchemeSwitched(_ name: String) {
+        let event = ThemeAnalyticsEvent.colorSchemeSwitched(scheme: name)
+        analytics.send(
+            name: event.name,
+            metadata: event.metadata
         )
     }
 }

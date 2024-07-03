@@ -69,7 +69,7 @@ struct LocationSearchResults: View {
 
     private func logScreenViewed() {
         analyticsService.send(
-            event: ScreenAnalyticsEvent.screenViewed(
+            event: LocationSearchResultsAnalyticsEvent.screenViewed(
                 name: "Location Search Result",
                 className: "\(type(of: self))"
             )

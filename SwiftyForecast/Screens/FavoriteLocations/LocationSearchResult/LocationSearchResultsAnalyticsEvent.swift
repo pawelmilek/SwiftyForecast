@@ -1,16 +1,15 @@
 //
-//  AboutViewEvent.swift
+//  LocationSearchResultsAnalyticsEvent.swift
 //  Swifty Forecast
 //
-//  Created by Pawel Milek on 6/4/24.
+//  Created by Pawel Milek on 7/2/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
 import Foundation
 
-struct AboutViewEvent: AnalyticsEvent {
+struct LocationSearchResultsAnalyticsEvent: AnalyticsEvent {
     private enum Names {
-        static let rowTapped = "about_row_tapped"
         static let screenViewed = "screen_view"
     }
 
@@ -23,18 +22,9 @@ struct AboutViewEvent: AnalyticsEvent {
     }
 }
 
-extension AboutViewEvent {
-    static func rowTapped(title: String) -> AboutViewEvent {
-        AboutViewEvent(
-            name: Names.rowTapped,
-            metadata: [
-                "row_title": title
-            ]
-        )
-    }
-
-    static func screenViewed(name: String, className: String) -> AboutViewEvent {
-        AboutViewEvent(
+extension LocationSearchResultsAnalyticsEvent {
+    static func screenViewed(name: String, className: String) -> ScreenAnalyticsEvent {
+        ScreenAnalyticsEvent(
             name: Names.screenViewed,
             metadata: [
                 "screen_name": name,

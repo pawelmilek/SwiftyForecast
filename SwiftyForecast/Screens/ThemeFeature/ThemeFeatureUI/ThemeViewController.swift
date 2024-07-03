@@ -9,13 +9,25 @@
 import UIKit
 import SwiftUI
 
-final class ThemeViewController: UIViewController {
+public final class ThemeViewController: UIViewController {
     weak var coordinator: Coordinator?
     private let viewModel: ThemeViewModel
+    private let textColor: Color
+    private let darkScheme: Color
+    private let lightScheme: Color
     private var hostingViewController: UIHostingController<ThemeView>!
 
-    init(viewModel: ThemeViewModel, coordinator: Coordinator) {
+    init(
+        viewModel: ThemeViewModel,
+        textColor: Color,
+        darkScheme: Color,
+        lightScheme: Color,
+        coordinator: Coordinator
+    ) {
         self.viewModel = viewModel
+        self.textColor = textColor
+        self.darkScheme = darkScheme
+        self.lightScheme = lightScheme
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -24,13 +36,18 @@ final class ThemeViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
 
     private func setup() {
-        let appearanceView = ThemeView(viewModel: viewModel)
+        let appearanceView = ThemeView(
+            viewModel: viewModel,
+            textColor: textColor,
+            darkScheme: darkScheme,
+            lightScheme: lightScheme
+        )
         hostingViewController = UIHostingController(rootView: appearanceView)
         hostingViewController.view.backgroundColor = .clear
         hostingViewController.view.translatesAutoresizingMaskIntoConstraints = false
