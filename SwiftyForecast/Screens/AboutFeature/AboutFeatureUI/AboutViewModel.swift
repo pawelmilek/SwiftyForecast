@@ -20,50 +20,56 @@ final class AboutViewModel: ObservableObject {
     @Published private(set) var privacyPolicyURL: URL?
     @Published private(set) var weatherDataProviderURL: URL?
     @Published private(set) var currentYear = ""
-    @Published private var buildConfiguration: BuildConfigurationContent
+    @Published private var buildConfiguration: BuildConfiguration
     private let appInfo: ApplicationInfo
     private let networkResourceFactory: NetworkResourceFactoryProtocol
     private let analytics: AnalyticsAboutSendable
     private let toolbarInteractive: ToolbarInteractive
+    private let licenseRepository: HtmlPackageLicenseRepository
     private var cancellables = Set<AnyCancellable>()
     private var appId = 0
     let appStorePreviewTip = AppStorePreviewTip()
 
+//    private let packageLicense = PackageLicense(
+//        resourceFile: ResourceFile(
+//            name: "packages_license",
+//            fileExtension: "html",
+//            bundle: .main
+//        )
+//    )
+
     init(
         appInfo: ApplicationInfo,
-        buildConfiguration: BuildConfigurationContent,
+        buildConfiguration: BuildConfiguration,
         networkResourceFactory: NetworkResourceFactoryProtocol,
         analytics: AnalyticsAboutSendable,
-        toolbarInteractive: ToolbarInteractive
+        toolbarInteractive: ToolbarInteractive,
+        licenseRepository: HtmlPackageLicenseRepository
     ) {
         self.appInfo = appInfo
         self.buildConfiguration = buildConfiguration
         self.networkResourceFactory = networkResourceFactory
         self.analytics = analytics
         self.toolbarInteractive = toolbarInteractive
+        self.licenseRepository = licenseRepository
         self.currentYear = Date.now.formatted(.dateTime.year())
         self.appName = appInfo.name
         self.appVersion = appInfo.version
         self.appCompatibility = appInfo.compatibility
-        subscribeToPublishers()
+        self.appId = buildConfiguration.appStoreId()
+        self.appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).contentURL()
+        self.appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).contentURL()
+        self.writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).contentURL()
+        self.privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).contentURL()
+        self.weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).contentURL()
+    }
+
+    func packagesLicense() -> URL {
+        licenseRepository.contentURL()
     }
 
     func doneItemTapped() {
         toolbarInteractive.doneItemTapped()
-    }
-
-    private func subscribeToPublishers() {
-        $buildConfiguration
-            .sink { [weak self] buildConfiguration in
-                guard let self else { return }
-                appId = buildConfiguration.appId()
-                appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).contentURL()
-                appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).contentURL()
-                writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).contentURL()
-                privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).contentURL()
-                weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).contentURL()
-            }
-            .store(in: &cancellables)
     }
 
     func reportFeedback(_ openURL: OpenURLAction) {

@@ -77,5 +77,5 @@ enum OpenWeatherEndpoint: Endpoint {
         return parameters
     }
 
-    static private let weatherServiceAPIKey = BuildConfigurationFile(bundle: .main).weatherServiceAPIKey()
+    static private let weatherServiceAPIKey = FileBuildConfigurationAdapter(bundle: .main).weatherServiceAPIKey()
 }

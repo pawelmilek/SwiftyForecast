@@ -1,5 +1,5 @@
 //
-//  BuildConfigurationFile.swift
+//  FileBuildConfigurationAdapter.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BuildConfigurationFile: BuildConfigurationContent {
+struct FileBuildConfigurationAdapter: BuildConfiguration {
     typealias Configurations = [String: String]
 
     enum Error: Swift.Error {
@@ -45,7 +45,7 @@ struct BuildConfigurationFile: BuildConfigurationContent {
         }
     }
 
-    func appId() -> Int {
+    func appStoreId() -> Int {
         do {
             return try Int(value(with: ConfigurationKey.appId)) ?? 0
         } catch {

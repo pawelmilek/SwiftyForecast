@@ -1,5 +1,5 @@
 //
-//  BuildConfigurationContent.swift
+//  BuildConfiguration.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 7/4/24.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol BuildConfigurationContent {
+protocol BuildConfiguration {
     func weatherServiceAPIKey() -> String
     func supportEmailAddress() -> String
-    func appId() -> Int
+    func appStoreId() -> Int
 }

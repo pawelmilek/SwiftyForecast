@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol ResourceData {
+    func data() throws -> Data
+}
+
+protocol ResourceURL {
+    func url() throws -> URL
+}
+
 struct ResourceFile {
     enum Error: Swift.Error {
         case fileNotFound(name: String)
@@ -32,7 +40,7 @@ struct ResourceFile {
 
     func data() throws -> Data {
         do {
-            let url = try fileURL()
+            let url = try url()
             let data = try Data(contentsOf: url)
             return data
         } catch {
@@ -40,7 +48,7 @@ struct ResourceFile {
         }
     }
 
-    func fileURL() throws -> URL {
+    func url() throws -> URL {
         guard let path = bundle.url(forResource: name, withExtension: fileExtension) else {
             throw Error.fileNotFound(name: name)
         }

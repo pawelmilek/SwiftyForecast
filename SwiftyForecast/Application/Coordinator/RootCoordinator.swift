@@ -91,10 +91,17 @@ private extension RootCoordinator {
         AboutViewController(
             viewModel: AboutViewModel(
                 appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
-                buildConfiguration: BuildConfigurationFile(bundle: .main),
+                buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
                 networkResourceFactory: NetworkResourceFactory(),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
-                toolbarInteractive: ThemeTipToolbarAdapter()
+                toolbarInteractive: ThemeTipToolbarAdapter(),
+                licenseRepository: HtmlPackageLicenseRepository(
+                    resourceFile: ResourceFile(
+                        name: "packages_license",
+                        fileExtension: "html",
+                        bundle: .main
+                    )
+                )
             )
         )
     }

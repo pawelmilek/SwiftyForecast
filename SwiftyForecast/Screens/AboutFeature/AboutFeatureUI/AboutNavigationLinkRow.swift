@@ -5,6 +5,7 @@
 //  Created by Pawel Milek on 6/3/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
+// swiftlint:disable force_try
 
 import SwiftUI
 
@@ -48,13 +49,11 @@ struct AboutNavigationLinkRow<Content: View>: View {
         title: "Website",
         destination: {
             LicenseView(
-                license: PackageLicense(
-                    resourceFile: ResourceFile(
-                        name: "packages_license",
-                        fileExtension: "html",
-                        bundle: .main
-                    )
-                )
+                content: try! ResourceFile(
+                    name: "packages_license",
+                    fileExtension: "html",
+                    bundle: .main
+                ).url()
             )
         }
     )
