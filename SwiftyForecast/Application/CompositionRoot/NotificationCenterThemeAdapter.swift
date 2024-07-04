@@ -1,5 +1,5 @@
 //
-//  NotificationCenterThemeChangeAdapter.swift
+//  NotificationCenterThemeAdapter.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 7/2/24.
@@ -10,7 +10,7 @@ import Foundation
 //import ThemeFeatureDomain
 import ThemeFeatureDomain
 
-struct NotificationCenterThemeChangeAdapter: ThemeChangeNotifiable {
+struct NotificationCenterThemeAdapter: ThemeChangeNotifiable {
     private let notificationCenter: NotificationCenter
 
     init(notificationCenter: NotificationCenter) {

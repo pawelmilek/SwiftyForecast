@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct LicenseView: View {
-    @StateObject private var license = PackageLicense()
+    @ObservedObject var license: PackageLicense
 
     var body: some View {
         HTMLView(fileURL: license.url)
@@ -24,6 +24,14 @@ struct LicenseView: View {
 
 #Preview {
     NavigationStack {
-        LicenseView()
+        LicenseView(
+            license: PackageLicense(
+                resourceFile: ResourceFile(
+                    name: "packages_license",
+                    fileExtension: "html",
+                    bundle: .main
+                )
+            )
+        )
     }
 }

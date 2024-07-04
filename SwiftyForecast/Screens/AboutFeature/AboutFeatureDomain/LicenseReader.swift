@@ -12,16 +12,6 @@ class PackageLicense: ObservableObject {
     @Published private(set) var url: URL?
     private let resourceFile: ResourceFile
 
-    convenience init() {
-        self.init(
-            resourceFile: ResourceFile(
-                name: "packages_license",
-                fileExtension: "html",
-                bundle: .main
-            )
-        )
-    }
-
     init(resourceFile: ResourceFile) {
         self.resourceFile = resourceFile
     }

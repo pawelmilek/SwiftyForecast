@@ -74,10 +74,10 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
-                notification: NotificationCenterThemeChangeAdapter(
+                notification: NotificationCenterThemeAdapter(
                     notificationCenter: .default
                 ),
-                analytics: FirebaseAnalyticsThemeSendableAdapter(
+                analytics: FirebaseAnalyticsThemeAdapter(
                     service: FirebaseAnalyticsService()
                 )
             ),
@@ -90,11 +90,11 @@ private extension RootCoordinator {
     var aboutViewController: AboutViewController {
         AboutViewController(
             viewModel: AboutViewModel(
-                bundle: .main,
+                appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
                 buildConfiguration: BuildConfigurationFile(bundle: .main),
                 networkResourceFactory: NetworkResourceFactory(),
-                analytics: FirebaseAnalyticsAboutSendableAdapter(service: FirebaseAnalyticsService()),
-                toolbarInteractive: ThemeTipToolbarInteractiveAdapter()
+                analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
+                toolbarInteractive: ThemeTipToolbarAdapter()
             )
         )
     }

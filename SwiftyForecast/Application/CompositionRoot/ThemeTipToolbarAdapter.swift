@@ -1,5 +1,5 @@
 //
-//  ThemeTipToolbarInteractiveAdapter.swift
+//  ThemeTipToolbarAdapter.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 7/3/24.
@@ -9,7 +9,7 @@
 import Foundation
 import ThemeFeatureUI
 
-struct ThemeTipToolbarInteractiveAdapter: ToolbarInteractive {
+struct ThemeTipToolbarAdapter: ToolbarInteractive {
 
     func doneItemTapped() {
         Task(priority: .userInitiated) {

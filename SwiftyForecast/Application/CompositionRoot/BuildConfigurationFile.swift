@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct BuildConfigurationFile {
+struct BuildConfigurationFile: BuildConfigurationContent {
     typealias Configurations = [String: String]
 
     enum Error: Swift.Error {

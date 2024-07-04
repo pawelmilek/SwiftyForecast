@@ -18,14 +18,20 @@ enum CompositionRoot {
         ) { coder in
             MainViewController(
                 viewModel: .init(
-                    geocodeLocation: geocodeLocation,
-                    notationSettings: notationSettings,
-                    metricSystemNotification: metricSystemNotification,
-                    currentLocationRecord: currentLocationRecord,
-                    databaseManager: databaseManager,
-                    locationManager: locationManager,
+                    geocodeLocation: GeocodedLocation(
+                        geocoder: CLGeocoder()
+                    ),
+                    notationSettings: NotationSettingsStorage(),
+                    metricSystemNotification: MetricSystemNotificationAdapter(
+                        notificationCenter: .default
+                    ),
+                    currentLocationRecord: CurrentLocationRecord(
+                        databaseManager: RealmManager()
+                    ),
+                    databaseManager: RealmManager(),
+                    locationManager: LocationManager(),
                     analyticsService: FirebaseAnalyticsService(),
-                    networkMonitor: networkMonitor
+                    networkMonitor: NetworkMonitor()
                 ),
                 coordinator: coordinator,
                 coder: coder
@@ -51,8 +57,17 @@ enum CompositionRoot {
                     latitude: latitude,
                     longitude: longitude,
                     name: name,
-                    service: service,
-                    metricSystemNotification: metricSystemNotification
+                    service: WeatherService(
+                        repository: WeatherRepository(
+                            client: OpenWeatherClient(
+                                decoder: JSONSnakeCaseDecoded()
+                            )
+                        ),
+                        parse: WeatherResponseParser()
+                    ),
+                    metricSystemNotification: MetricSystemNotificationAdapter(
+                        notificationCenter: .default
+                    )
                 ),
                 cardViewModel: Self.cardViewModel(
                     latitude: latitude,
@@ -75,10 +90,23 @@ enum CompositionRoot {
             latitude: latitude,
             longitude: longitude,
             name: name,
-            service: service,
-            temperatureFormatterFactory: temperatureFormatterFactory,
-            speedFormatterFactory: speedFormatterFactory,
-            metricSystemNotification: metricSystemNotification
+            service: WeatherService(
+                repository: WeatherRepository(
+                    client: OpenWeatherClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                parse: WeatherResponseParser()
+            ),
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            ),
+            speedFormatterFactory: SpeedFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            ),
+            metricSystemNotification: MetricSystemNotificationAdapter(
+                notificationCenter: .default
+            )
         )
     }
 
@@ -87,9 +115,24 @@ enum CompositionRoot {
     ) -> SearchedLocationWeatherViewViewModel {
         .init(
             location: locationModel,
-            service: service,
-            databaseManager: databaseManager,
-            storeReviewManager: storeReviewManager,
+            service: WeatherService(
+                repository: WeatherRepository(
+                    client: OpenWeatherClient(
+                        decoder: JSONSnakeCaseDecoded()
+                    )
+                ),
+                parse: WeatherResponseParser()
+            ),
+            databaseManager: RealmManager(),
+            storeReviewManager: StoreReviewManager(
+                store: StoreReviewController(
+                    connectedScenes: UIApplication.shared.connectedScenes
+                ),
+                storage: ReviewedVersionStorageAdapter(
+                    adaptee: .standard
+                ),
+                bundle: .main
+            ),
             analyticsService: FirebaseAnalyticsService()
         )
     }
@@ -97,37 +140,10 @@ enum CompositionRoot {
     static func dailyViewModel(_ model: DailyForecastModel) -> DailyViewCellViewModel {
         .init(
             model: model,
-            temperatureFormatterFactory: temperatureFormatterFactory
+            temperatureFormatterFactory: TemperatureFormatterFactory(
+                notationStorage: NotationSettingsStorage()
+            )
         )
     }
 
-    static var databaseManager: DatabaseManager {
-        RealmManager()
-    }
-
-    private static let service = WeatherService(
-        repository: repository,
-        parse: WeatherResponseParser()
-    )
-
-    private static let repository = WeatherRepository(
-        client: OpenWeatherClient(
-            decoder: JSONSnakeCaseDecoded()
-        )
-    )
-
-    private static let storeReviewManager = StoreReviewManager(
-        store: StoreReviewController(connectedScenes: UIApplication.shared.connectedScenes),
-        storage: ReviewedVersionStorageAdapter(adaptee: .standard),
-        bundle: .main
-    )
-
-    private static let geocodeLocation = GeocodedLocation(geocoder: CLGeocoder())
-    private static let currentLocationRecord = CurrentLocationRecord(databaseManager: databaseManager)
-    private static let locationManager = LocationManager()
-    private static let networkMonitor = NetworkMonitor()
-    private static let temperatureFormatterFactory = TemperatureFormatterFactory(notationStorage: notationSettings)
-    private static let speedFormatterFactory = SpeedFormatterFactory(notationStorage: notationSettings)
-    private static let notationSettings = NotationSettingsStorage()
-    private static let metricSystemNotification = MetricSystemNotificationCenterAdapter(notificationCenter: .default)
 }

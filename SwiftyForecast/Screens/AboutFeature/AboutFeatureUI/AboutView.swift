@@ -14,6 +14,14 @@ struct AboutView: View {
     @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
 
+    @StateObject private var license = PackageLicense(
+        resourceFile: ResourceFile(
+            name: "packages_license",
+            fileExtension: "html",
+            bundle: .main
+        )
+    )
+
     var body: some View {
         NavigationStack {
             Form {
@@ -90,7 +98,7 @@ struct AboutView: View {
                         symbol: "doc.plaintext.fill",
                         title: "Licenses",
                         destination: {
-                            LicenseView()
+                            LicenseView(license: license)
                         }
                     )
                     AboutLinkRow(
@@ -159,10 +167,10 @@ struct AboutView: View {
 #Preview {
     AboutView(
         viewModel: AboutViewModel(
-            bundle: .main,
+            appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
             buildConfiguration: BuildConfigurationFile(bundle: .main),
             networkResourceFactory: NetworkResourceFactory(),
-            analytics: FirebaseAnalyticsAboutSendableAdapter(service: FirebaseAnalyticsService()),
+            analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
             toolbarInteractive: PreviewToolbarInteractive()
         )
     )

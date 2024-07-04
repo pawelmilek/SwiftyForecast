@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol NetworkResourceProtocol {
-    func content() throws -> URL
-}
-
 struct NetworkResource: NetworkResourceProtocol {
     enum Error: Swift.Error {
         case invalidURL
@@ -23,9 +19,9 @@ struct NetworkResource: NetworkResourceProtocol {
         self.stringURL = stringURL
     }
 
-    func content() throws -> URL {
-        if let privacyPolicyURL = URL(string: stringURL) {
-            return privacyPolicyURL
+    func contentURL() throws -> URL {
+        if let url = URL(string: stringURL) {
+            return url
         } else {
             throw Error.invalidURL
         }

@@ -20,8 +20,8 @@ final class AboutViewModel: ObservableObject {
     @Published private(set) var privacyPolicyURL: URL?
     @Published private(set) var weatherDataProviderURL: URL?
     @Published private(set) var currentYear = ""
-    @Published private var bundle: Bundle
-    @Published private var buildConfiguration: BuildConfigurationFile
+    @Published private var buildConfiguration: BuildConfigurationContent
+    private let appInfo: ApplicationInfo
     private let networkResourceFactory: NetworkResourceFactoryProtocol
     private let analytics: AnalyticsAboutSendable
     private let toolbarInteractive: ToolbarInteractive
@@ -30,18 +30,21 @@ final class AboutViewModel: ObservableObject {
     let appStorePreviewTip = AppStorePreviewTip()
 
     init(
-        bundle: Bundle,
-        buildConfiguration: BuildConfigurationFile,
+        appInfo: ApplicationInfo,
+        buildConfiguration: BuildConfigurationContent,
         networkResourceFactory: NetworkResourceFactoryProtocol,
         analytics: AnalyticsAboutSendable,
         toolbarInteractive: ToolbarInteractive
     ) {
-        self.bundle = bundle
+        self.appInfo = appInfo
         self.buildConfiguration = buildConfiguration
         self.networkResourceFactory = networkResourceFactory
         self.analytics = analytics
         self.toolbarInteractive = toolbarInteractive
         self.currentYear = Date.now.formatted(.dateTime.year())
+        self.appName = appInfo.name
+        self.appVersion = appInfo.version
+        self.appCompatibility = appInfo.compatibility
         subscribeToPublishers()
     }
 
@@ -50,33 +53,29 @@ final class AboutViewModel: ObservableObject {
     }
 
     private func subscribeToPublishers() {
-        $bundle
-            .sink { [weak self] bundle in
-                guard let self else { return }
-                appName = bundle.applicationName
-                appVersion = "\(bundle.versionNumber) (\(bundle.buildNumber))"
-                appCompatibility = "iOS \(bundle.minimumOSVersion)"
-            }
-            .store(in: &cancellables)
-
         $buildConfiguration
-            .sink { [weak self] buildConfigurationFile in
+            .sink { [weak self] buildConfiguration in
                 guard let self else { return }
-                appId = buildConfigurationFile.appId()
-                appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).content()
-                appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).content()
-                writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).content()
-                privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).content()
-                weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).content()
+                appId = buildConfiguration.appId()
+                appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).contentURL()
+                appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).contentURL()
+                writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).contentURL()
+                privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).contentURL()
+                weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).contentURL()
             }
             .store(in: &cancellables)
     }
 
     func reportFeedback(_ openURL: OpenURLAction) {
         let feedbackEmail = SupportEmail(
-            bundle: bundle,
+            body: SupportEmail.Body(
+                appName: appInfo.name,
+                appVersion: appInfo.version,
+                deviceName: appInfo.device,
+                systemInfo: appInfo.system
+            ),
             recipient: buildConfiguration.supportEmailAddress(),
-            subject: "[Feedback] \(bundle.applicationName)"
+            subject: "[Feedback] \(appInfo.name)"
         )
 
         feedbackEmail.send(openURL: openURL)
@@ -84,18 +83,20 @@ final class AboutViewModel: ObservableObject {
 
     func reportIssue(_ openURL: OpenURLAction) {
         let bugEmail = SupportEmail(
-            bundle: bundle,
+            body: SupportEmail.Body(
+                appName: appInfo.name,
+                appVersion: appInfo.version,
+                deviceName: appInfo.device,
+                systemInfo: appInfo.system
+            ),
             recipient: buildConfiguration.supportEmailAddress(),
-            subject: "[Bug] \(bundle.applicationName)"
+            subject: "[Bug] \(appInfo.name)"
         )
         bugEmail.send(openURL: openURL)
     }
 
     func shareURL() -> URL {
-        guard let url = URL(string: NetworkResourceType.appShare(appId: appId).stringURL) else {
-            fatalError()
-        }
-
+        guard let url = appURL else { fatalError() }
         return url
     }
 

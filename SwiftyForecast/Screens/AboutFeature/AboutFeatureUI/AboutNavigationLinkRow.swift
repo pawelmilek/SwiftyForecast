@@ -47,7 +47,15 @@ struct AboutNavigationLinkRow<Content: View>: View {
         symbol: "globe",
         title: "Website",
         destination: {
-            LicenseView()
+            LicenseView(
+                license: PackageLicense(
+                    resourceFile: ResourceFile(
+                        name: "packages_license",
+                        fileExtension: "html",
+                        bundle: .main
+                    )
+                )
+            )
         }
     )
 }

@@ -56,7 +56,7 @@ struct LocationSearchResults: View {
                     service: service,
                     temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage()),
                     speedFormatterFactory: SpeedFormatterFactory(notationStorage: NotationSettingsStorage()),
-                    metricSystemNotification: MetricSystemNotificationCenterAdapter(notificationCenter: .default)
+                    metricSystemNotification: MetricSystemNotificationAdapter(notificationCenter: .default)
                 ),
                 onCancel: dismiss
             )

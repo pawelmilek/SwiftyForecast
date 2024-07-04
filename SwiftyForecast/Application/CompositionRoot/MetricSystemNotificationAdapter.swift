@@ -1,5 +1,5 @@
 //
-//  NotificationCenterAdapter.swift
+//  MetricSystemNotificationAdapter.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 11/29/23.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MetricSystemNotificationCenterAdapter: MetricSystemNotification {
+struct MetricSystemNotificationAdapter: MetricSystemNotification {
     private static let didChangeMetricSystem = NSNotification.Name("didChangeMetricSystem")
     private let notificationCenter: NotificationCenter
 
