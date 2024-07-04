@@ -24,7 +24,7 @@ enum CompositionRoot {
                     currentLocationRecord: currentLocationRecord,
                     databaseManager: databaseManager,
                     locationManager: locationManager,
-                    analyticsService: analyticsService,
+                    analyticsService: FirebaseAnalyticsService(),
                     networkMonitor: networkMonitor
                 ),
                 coordinator: coordinator,
@@ -82,16 +82,6 @@ enum CompositionRoot {
         )
     }
 
-    static func locationRowViewModel(
-        _ locationModel: LocationModel
-    ) -> LocationRowViewModel {
-        .init(
-            location: locationModel,
-            service: service,
-            temperatureFormatterFactory: temperatureFormatterFactory
-        )
-    }
-
     static func searchedLocationWeatherViewModel(
         _ locationModel: LocationModel
     ) -> SearchedLocationWeatherViewViewModel {
@@ -100,19 +90,7 @@ enum CompositionRoot {
             service: service,
             databaseManager: databaseManager,
             storeReviewManager: storeReviewManager,
-            analyticsService: analyticsService
-        )
-    }
-
-    static func aboutViewController(coordinator: Coordinator) -> AboutViewController {
-        AboutViewController(
-            viewModel: .init(
-                bundle: .main,
-                buildConfiguration: buildConfiguration,
-                networkResourceFactory: NetworkResourceFactory(),
-                analyticsService: analyticsService
-            ),
-            coordinator: coordinator
+            analyticsService: FirebaseAnalyticsService()
         )
     }
 
@@ -147,9 +125,7 @@ enum CompositionRoot {
     private static let geocodeLocation = GeocodedLocation(geocoder: CLGeocoder())
     private static let currentLocationRecord = CurrentLocationRecord(databaseManager: databaseManager)
     private static let locationManager = LocationManager()
-    private static let analyticsService = FirebaseAnalyticsService()
     private static let networkMonitor = NetworkMonitor()
-    private static let buildConfiguration = BuildConfigurationFile(bundle: .main)
     private static let temperatureFormatterFactory = TemperatureFormatterFactory(notationStorage: notationSettings)
     private static let speedFormatterFactory = SpeedFormatterFactory(notationStorage: notationSettings)
     private static let notationSettings = NotationSettingsStorage()

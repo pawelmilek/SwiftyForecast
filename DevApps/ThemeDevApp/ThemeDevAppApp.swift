@@ -7,12 +7,25 @@
 //
 
 import SwiftUI
+import ThemeFeatureUI
 
 @main
 struct ThemeDevAppApp: App {
+    @StateObject private var viewModel = ThemeViewModel(
+        notification: NotificationCenterThemeChangeAdapter(
+            notificationCenter: .default
+        ),
+        analytics: PreviewAnalyticsTheme()
+    )
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(
+                textColor: .accentColor,
+                darkScheme: .purple,
+                lightScheme: .primary
+            )
+            .environmentObject(viewModel)
         }
     }
 }

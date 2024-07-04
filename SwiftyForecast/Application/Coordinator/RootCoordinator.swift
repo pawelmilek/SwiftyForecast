@@ -26,7 +26,7 @@ final class RootCoordinator: Coordinator {
 
     func openAbout() {
         navigationController.present(
-            CompositionRoot.aboutViewController(coordinator: self),
+            aboutViewController,
             animated: true
         )
     }
@@ -84,6 +84,18 @@ private extension RootCoordinator {
             textColor: .accent,
             darkScheme: .purple,
             lightScheme: .customPrimary
+        )
+    }
+
+    var aboutViewController: AboutViewController {
+        AboutViewController(
+            viewModel: AboutViewModel(
+                bundle: .main,
+                buildConfiguration: BuildConfigurationFile(bundle: .main),
+                networkResourceFactory: NetworkResourceFactory(),
+                analytics: FirebaseAnalyticsAboutSendableAdapter(service: FirebaseAnalyticsService()),
+                toolbarInteractive: ThemeTipToolbarInteractiveAdapter()
+            )
         )
     }
 }

@@ -10,16 +10,11 @@ import UIKit
 import SwiftUI
 
 final class AboutViewController: UIViewController {
-    weak var coordinator: Coordinator?
     private var hostingViewController: UIHostingController<AboutView>!
     private let viewModel: AboutViewModel
 
-    init(
-        viewModel: AboutViewModel,
-        coordinator: Coordinator
-    ) {
+    init(viewModel: AboutViewModel) {
         self.viewModel = viewModel
-        self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
 

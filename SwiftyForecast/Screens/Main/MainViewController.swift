@@ -10,6 +10,7 @@ import UIKit
 import TipKit
 import Combine
 import ThemeFeatureDomain
+import ThemeFeatureUI
 
 final class MainViewController: UIViewController {
     @AppStorage("appearanceTheme") var theme: Theme = .systemDefault

@@ -23,7 +23,8 @@ final class AboutViewModel: ObservableObject {
     @Published private var bundle: Bundle
     @Published private var buildConfiguration: BuildConfigurationFile
     private let networkResourceFactory: NetworkResourceFactoryProtocol
-    private let analyticsService: AnalyticsService
+    private let analytics: AnalyticsAboutSendable
+    private let toolbarInteractive: ToolbarInteractive
     private var cancellables = Set<AnyCancellable>()
     private var appId = 0
     let appStorePreviewTip = AppStorePreviewTip()
@@ -32,20 +33,20 @@ final class AboutViewModel: ObservableObject {
         bundle: Bundle,
         buildConfiguration: BuildConfigurationFile,
         networkResourceFactory: NetworkResourceFactoryProtocol,
-        analyticsService: AnalyticsService
+        analytics: AnalyticsAboutSendable,
+        toolbarInteractive: ToolbarInteractive
     ) {
         self.bundle = bundle
         self.buildConfiguration = buildConfiguration
         self.networkResourceFactory = networkResourceFactory
-        self.analyticsService = analyticsService
+        self.analytics = analytics
+        self.toolbarInteractive = toolbarInteractive
         self.currentYear = Date.now.formatted(.dateTime.year())
         subscribeToPublishers()
     }
 
-    func donateDidAppBecomeActiveEvent() {
-        Task(priority: .userInitiated) {
-            await ThemeTip.didAppBecomeActiveEvent.donate()
-        }
+    func doneItemTapped() {
+        toolbarInteractive.doneItemTapped()
     }
 
     private func subscribeToPublishers() {
@@ -98,21 +99,14 @@ final class AboutViewModel: ObservableObject {
         return url
     }
 
-    func logEventRowTapped(_ title: String) {
-        analyticsService.send(
-            event: AboutViewEvent.rowTapped(
-                title: title
-            )
-        )
+    func sendEventRowTapped(_ title: String) {
+        let event = AboutAnalyticsEvent.rowTapped(title: title)
+        analytics.send(name: event.name, metadata: event.metadata)
     }
 
-    func logEventScreen(_ name: String, className: String) {
-        analyticsService.send(
-            event: AboutViewEvent.screenViewed(
-                name: name,
-                className: className
-            )
-        )
+    func sendEventScreen(className: String) {
+        let event = AboutAnalyticsEvent.screenViewed(className: className)
+        analytics.send(name: event.name, metadata: event.metadata)
     }
 
 }

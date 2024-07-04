@@ -51,7 +51,7 @@ struct AboutView: View {
                         url: viewModel.appStorePreviewURL
                     )
                     .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.logEventRowTapped("Apps Preview")
+                        viewModel.sendEventRowTapped("Apps Preview")
                     })
                     .popoverTip(viewModel.appStorePreviewTip, arrowEdge: .bottom)
                     .foregroundStyle(.customPrimary)
@@ -78,7 +78,7 @@ struct AboutView: View {
                         url: viewModel.writeReviewURL
                     )
                     .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.logEventRowTapped("Rate Application")
+                        viewModel.sendEventRowTapped("Rate Application")
                     })
                 } header: {
                     Text("Feedback")
@@ -100,7 +100,7 @@ struct AboutView: View {
                         url: viewModel.privacyPolicyURL
                     )
                     .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.logEventRowTapped("Privacy Policy")
+                        viewModel.sendEventRowTapped("Privacy Policy")
                     })
                 } header: {
                     Text("Documents")
@@ -127,7 +127,7 @@ struct AboutView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         dismiss()
-                        viewModel.donateDidAppBecomeActiveEvent()
+                        viewModel.doneItemTapped()
                     } label: {
                         Text("Done")
                             .fontDesign(.monospaced)
@@ -141,8 +141,7 @@ struct AboutView: View {
             }
         }
         .onAppear {
-            viewModel.logEventScreen(
-                "About Screen",
+            viewModel.sendEventScreen(
                 className: "\(type(of: self))"
             )
         }
@@ -159,11 +158,16 @@ struct AboutView: View {
 
 #Preview {
     AboutView(
-        viewModel: .init(
+        viewModel: AboutViewModel(
             bundle: .main,
             buildConfiguration: BuildConfigurationFile(bundle: .main),
             networkResourceFactory: NetworkResourceFactory(),
-            analyticsService: FirebaseAnalyticsService()
+            analytics: FirebaseAnalyticsAboutSendableAdapter(service: FirebaseAnalyticsService()),
+            toolbarInteractive: PreviewToolbarInteractive()
         )
     )
+}
+
+struct PreviewToolbarInteractive: ToolbarInteractive {
+    func doneItemTapped() { }
 }
