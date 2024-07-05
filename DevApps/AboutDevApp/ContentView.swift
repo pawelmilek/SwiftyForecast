@@ -32,7 +32,6 @@ struct ContentView: View {
     ContentView()
 }
 
-
 class FakeFirebaseAnalyticsService: AnalyticsService {
     func send(event: AnalyticsEvent) {
 

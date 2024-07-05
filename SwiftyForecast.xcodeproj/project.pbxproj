@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E20A43392C1B28B20052AFA4 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20A43382C1B28B20052AFA4 /* DependencyContainer.swift */; };
 		E20A433D2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20A433C2C1C637B0052AFA4 /* LocalSearchError.swift */; };
 		E20A433E2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20A433C2C1C637B0052AFA4 /* LocalSearchError.swift */; };
 		E20C6B062BE64EFA00DDB57A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E20C6B052BE64EFA00DDB57A /* PrivacyInfo.xcprivacy */; };
@@ -140,8 +139,7 @@
 		E27E2FD11DA04D1D00B3EABF /* UIView+NibLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27E2FB01DA04D1D00B3EABF /* UIView+NibLoadableView.swift */; };
 		E28092E42AFCC9720019FD7C /* CurrentLocationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */; };
 		E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28092E52AFCF6690019FD7C /* PreviewRealmManager.swift */; };
-		E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+Extension.swift */; };
-		E28179122B385F8800D06917 /* device_types.json in Resources */ = {isa = PBXBuildFile; fileRef = E28179112B385F8800D06917 /* device_types.json */; };
+		E28179102B385C6600D06917 /* UIDevice+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+identifier.swift */; };
 		E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
 		E28357312B2714F000E3807A /* TextScaledModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28357302B2714F000E3807A /* TextScaledModifier.swift */; };
 		E28357322B2714F300E3807A /* TextScaledModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28357302B2714F000E3807A /* TextScaledModifier.swift */; };
@@ -166,16 +164,13 @@
 		E28F2AD72C388D320000908A /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F2AD62C388D320000908A /* Preview.swift */; };
 		E28F2ADD2C38901B0000908A /* ApplicationInfoAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */; };
 		E28F2ADE2C3890250000908A /* Bundle+ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */; };
-		E28F2ADF2C38902B0000908A /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+Extension.swift */; };
-		E28F2AE02C38903B0000908A /* ReleasedDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */; };
-		E28F2AE12C3890440000908A /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
+		E28F2ADF2C38902B0000908A /* UIDevice+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+identifier.swift */; };
 		E28F2AE32C38911E0000908A /* FileBuildConfigurationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E62AD6F49D001BFADB /* FileBuildConfigurationAdapter.swift */; };
 		E28F2AE52C3893220000908A /* FirebaseAnalyticsAboutAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */; };
 		E28F2AE62C3893370000908A /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A4E2C10210E00C6F3AD /* AnalyticsService.swift */; };
 		E28F2AE72C3893390000908A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A382C0FBE7900C6F3AD /* AnalyticsEvent.swift */; };
 		E28F2AE82C3893910000908A /* ThemeTipToolbarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B75F2C362F25007F8561 /* ThemeTipToolbarAdapter.swift */; };
 		E28F2AE92C38939E0000908A /* ThemeTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270BA222C385176000558B2 /* ThemeTip.swift */; };
-		E28F2AEA2C3894080000908A /* device_types.json in Resources */ = {isa = PBXBuildFile; fileRef = E28179112B385F8800D06917 /* device_types.json */; };
 		E28F2AED2C3898C10000908A /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E28F2AEC2C3898C10000908A /* AboutFeature */; };
 		E290F2542ADDAF55001B3276 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E290F2532ADDAF55001B3276 /* Kingfisher */; };
 		E296A7E02AD6E3CA001BFADB /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7DF2AD6E3CA001BFADB /* Endpoint.swift */; };
@@ -198,7 +193,6 @@
 		E29947BA2B30E3AE00EBA3D1 /* ConditionDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29947B92B30E3AE00EBA3D1 /* ConditionDescriptionView.swift */; };
 		E29947BC2B30E49C00EBA3D1 /* TemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */; };
 		E2A32F27254459FB000ACEFE /* StoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F26254459FB000ACEFE /* StoreReviewManager.swift */; };
-		E2A32F4825447A05000ACEFE /* DecodedPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4725447A05000ACEFE /* DecodedPlist.swift */; };
 		E2A42E3A2151BC7D00F9A79A /* GeocoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A42E392151BC7D00F9A79A /* GeocoderError.swift */; };
 		E2A567512B075139000324C0 /* SearchLocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567502B075139000324C0 /* SearchLocationStore.swift */; };
 		E2A567572B077413000324C0 /* UIView+ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A567562B077413000324C0 /* UIView+ReusableView.swift */; };
@@ -234,9 +228,6 @@
 		E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2CAC9E22C04310600E573D2 /* FirebaseAnalytics */; };
 		E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E2CAC9E42C04310600E573D2 /* FirebaseCrashlytics */; };
 		E2CAC9E72C04321A00E573D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */; };
-		E2CAC9FA2C044B4F00E573D2 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
-		E2CAC9FB2C044C4900E573D2 /* ResourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */; };
-		E2CAC9FD2C04BF0E00E573D2 /* DecodedPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A32F4725447A05000ACEFE /* DecodedPlist.swift */; };
 		E2CF4D76226E7A4100062E36 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D75226E7A4100062E36 /* HttpClient.swift */; };
 		E2CF4D7A226E7B6000062E36 /* DailyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */; };
 		E2CF4D7E226E838E00062E36 /* HourlyViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */; };
@@ -299,7 +290,6 @@
 		E2E5EB5E2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
-		E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */; };
 		E2F17C2D20F4097C00068BD2 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */; };
 		E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */; };
 		E2F671142B234EA200B791A0 /* TemperatureFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */; };
@@ -361,7 +351,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E20A43382C1B28B20052AFA4 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 		E20A433C2C1C637B0052AFA4 /* LocalSearchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchError.swift; sourceTree = "<group>"; };
 		E20C6B052BE64EFA00DDB57A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSnakeCaseDecoded.swift; sourceTree = "<group>"; };
@@ -450,8 +439,7 @@
 		E27E2FDA1DA057C100B3EABF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationRecord.swift; sourceTree = "<group>"; };
 		E28092E52AFCF6690019FD7C /* PreviewRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewRealmManager.swift; sourceTree = "<group>"; };
-		E281790F2B385C6600D06917 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
-		E28179112B385F8800D06917 /* device_types.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = device_types.json; sourceTree = "<group>"; };
+		E281790F2B385C6600D06917 /* UIDevice+identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+identifier.swift"; sourceTree = "<group>"; };
 		E283572E2B25BEDE00E3807A /* SwiftyForecast.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftyForecast.entitlements; sourceTree = "<group>"; };
 		E283572F2B25BFA200E3807A /* SwiftyForecastWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftyForecastWidgetExtension.entitlements; sourceTree = "<group>"; };
 		E28357302B2714F000E3807A /* TextScaledModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextScaledModifier.swift; sourceTree = "<group>"; };
@@ -492,7 +480,6 @@
 		E29947B92B30E3AE00EBA3D1 /* ConditionDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionDescriptionView.swift; sourceTree = "<group>"; };
 		E29947BB2B30E49C00EBA3D1 /* TemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureView.swift; sourceTree = "<group>"; };
 		E2A32F26254459FB000ACEFE /* StoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReviewManager.swift; sourceTree = "<group>"; };
-		E2A32F4725447A05000ACEFE /* DecodedPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodedPlist.swift; sourceTree = "<group>"; };
 		E2A42E392151BC7D00F9A79A /* GeocoderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocoderError.swift; sourceTree = "<group>"; };
 		E2A567502B075139000324C0 /* SearchLocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationStore.swift; sourceTree = "<group>"; };
 		E2A567542B0773C0000324C0 /* Registrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Registrable.swift; sourceTree = "<group>"; };
@@ -505,7 +492,6 @@
 		E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Storyboard.swift"; sourceTree = "<group>"; };
 		E2B1D65B211FB26C00F0002A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceFile.swift; sourceTree = "<group>"; };
 		E2CF4D75226E7A4100062E36 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		E2CF4D79226E7B6000062E36 /* DailyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCellViewModel.swift; sourceTree = "<group>"; };
 		E2CF4D7D226E838E00062E36 /* HourlyViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -546,7 +532,6 @@
 		E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+PreferredFont.swift"; sourceTree = "<group>"; };
 		E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleasedDevices.swift; sourceTree = "<group>"; };
 		E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewCell.swift; sourceTree = "<group>"; };
 		E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyViewCell.xib; sourceTree = "<group>"; };
 		E2F6711E2B23680800B791A0 /* WeatherWidgetEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherWidgetEntryView.swift; sourceTree = "<group>"; };
@@ -616,14 +601,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E20A43372C1B28880052AFA4 /* DependencyContainer */ = {
-			isa = PBXGroup;
-			children = (
-				E20A43382C1B28B20052AFA4 /* DependencyContainer.swift */,
-			);
-			path = DependencyContainer;
-			sourceTree = "<group>";
-		};
 		E20A433B2C1B75290052AFA4 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -670,13 +647,10 @@
 			isa = PBXGroup;
 			children = (
 				E28092E32AFCC9720019FD7C /* CurrentLocationRecord.swift */,
-				E2A32F4725447A05000ACEFE /* DecodedPlist.swift */,
 				E2D960802120F34800AE0B6E /* GeocodedLocation.swift */,
 				E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */,
 				E24EB89225410010001F5D72 /* MockGenerator.swift */,
 				E20DA45A214348AD0047491B /* NetworkMonitor.swift */,
-				E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */,
-				E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */,
 				E20C93FB2C31DB4500675CF2 /* LocationPlaceable.swift */,
 			);
 			path = Utilities;
@@ -689,7 +663,6 @@
 				E2644CF92C29E5B400B505A1 /* Repository */,
 				E2CAC9E02C04308B00E573D2 /* Analytics */,
 				E2A32F25254459DF000ACEFE /* AppStoreReview */,
-				E20A43372C1B28880052AFA4 /* DependencyContainer */,
 				E296B6162C1CF461001F7C57 /* EnvironmentValues */,
 				E23997E520E84371007D8CE4 /* Errors */,
 				E23997DD20E84158007D8CE4 /* Extensions */,
@@ -805,7 +778,6 @@
 			children = (
 				E283572F2B25BFA200E3807A /* SwiftyForecastWidgetExtension.entitlements */,
 				E283572E2B25BEDE00E3807A /* SwiftyForecast.entitlements */,
-				E28179112B385F8800D06917 /* device_types.json */,
 				E27E2FDA1DA057C100B3EABF /* Info.plist */,
 				E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */,
 				E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */,
@@ -840,7 +812,7 @@
 				E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */,
 				E2A567542B0773C0000324C0 /* Registrable.swift */,
 				E21ABD492AE9172300F93F01 /* UIApplication+KeyWindow.swift */,
-				E281790F2B385C6600D06917 /* UIDevice+Extension.swift */,
+				E281790F2B385C6600D06917 /* UIDevice+identifier.swift */,
 				E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */,
 				E2B1D659211E567100F0002A /* UIStoryboard+Storyboard.swift */,
 				E27E2FB01DA04D1D00B3EABF /* UIView+NibLoadableView.swift */,
@@ -1623,7 +1595,6 @@
 			files = (
 				E28F2ACE2C388C1F0000908A /* Preview Assets.xcassets in Resources */,
 				E28F2ACB2C388C1F0000908A /* Assets.xcassets in Resources */,
-				E28F2AEA2C3894080000908A /* device_types.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1641,7 +1612,6 @@
 				E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */,
 				E21ABD512AE9735F00F93F01 /* current_weather_response.json in Resources */,
 				E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */,
-				E28179122B385F8800D06917 /* device_types.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1732,13 +1702,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28F2AE02C38903B0000908A /* ReleasedDevices.swift in Sources */,
 				E28F2AE62C3893370000908A /* AnalyticsService.swift in Sources */,
 				E28F2AC92C388C1E0000908A /* ContentView.swift in Sources */,
 				E28F2AE82C3893910000908A /* ThemeTipToolbarAdapter.swift in Sources */,
-				E28F2AE12C3890440000908A /* ResourceFile.swift in Sources */,
 				E28F2AE52C3893220000908A /* FirebaseAnalyticsAboutAdapter.swift in Sources */,
-				E28F2ADF2C38902B0000908A /* UIDevice+Extension.swift in Sources */,
+				E28F2ADF2C38902B0000908A /* UIDevice+identifier.swift in Sources */,
 				E28F2ADD2C38901B0000908A /* ApplicationInfoAdapter.swift in Sources */,
 				E28F2AC72C388C1E0000908A /* AboutDevAppApp.swift in Sources */,
 				E28F2AE92C38939E0000908A /* ThemeTip.swift in Sources */,
@@ -1787,7 +1755,6 @@
 				E20A433D2C1C637B0052AFA4 /* LocalSearchError.swift in Sources */,
 				E296B61C2C1CF872001F7C57 /* LocationSearchCompleterEnvironment.swift in Sources */,
 				E21ABD412AE82F3700F93F01 /* LocationSearchRow.swift in Sources */,
-				E2ED36E12C04D20E0001C3EF /* ReleasedDevices.swift in Sources */,
 				E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */,
 				E2126F512C27A90D001111E0 /* ConvertedCelsius.swift in Sources */,
 				E2126F4E2C27A902001111E0 /* ConvertedFahrenheit.swift in Sources */,
@@ -1806,7 +1773,7 @@
 				E2644D052C29ECCE00B505A1 /* WeatherServiceProtocol.swift in Sources */,
 				E2CF4DD822768C3F00062E36 /* OpenWeatherClient.swift in Sources */,
 				E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */,
-				E28179102B385C6600D06917 /* UIDevice+Extension.swift in Sources */,
+				E28179102B385C6600D06917 /* UIDevice+identifier.swift in Sources */,
 				E2D3B7602C362F25007F8561 /* ThemeTipToolbarAdapter.swift in Sources */,
 				E2255A4C2C1020CE00C6F3AD /* LocationWeatherViewEvent.swift in Sources */,
 				E296A7F02AD7EA30001BFADB /* Coordinate.swift in Sources */,
@@ -1846,7 +1813,6 @@
 				E2A567582B077610000324C0 /* Registrable.swift in Sources */,
 				E2FEB7BD2B172782009D54B2 /* MetricSystemNotificationAdapter.swift in Sources */,
 				E26ACD1B24FF204000AC15A6 /* ForecastModel.swift in Sources */,
-				E2A32F4825447A05000ACEFE /* DecodedPlist.swift in Sources */,
 				E2CF4D76226E7A4100062E36 /* HttpClient.swift in Sources */,
 				E296B61A2C1CF576001F7C57 /* WeatherClientEnvironment.swift in Sources */,
 				E296B61F2C2088D6001F7C57 /* DatabaseManagerEnvironment.swift in Sources */,
@@ -1864,7 +1830,6 @@
 				E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */,
 				E2126F572C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */,
 				E28CEC0F2B3EB775003DB3A6 /* LocationsTip.swift in Sources */,
-				E20A43392C1B28B20052AFA4 /* DependencyContainer.swift in Sources */,
 				E2D430BF2BB4D954003F26EE /* BackgroundGroupBoxStyle.swift in Sources */,
 				E2644D102C2A081100B505A1 /* StoreReviewController.swift in Sources */,
 				E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */,
@@ -1885,7 +1850,6 @@
 				E2644D0C2C2A065E00B505A1 /* ReviewedVersionStorageAdapter.swift in Sources */,
 				E2B1D656211E55F000F0002A /* UIViewController+StoryboardIdentifiable.swift in Sources */,
 				E2126F802C2888B9001111E0 /* ConvertedMetersPerSecond.swift in Sources */,
-				E2CAC9FA2C044B4F00E573D2 /* ResourceFile.swift in Sources */,
 				E270891A24CE5ADA003F7587 /* RootCoordinator.swift in Sources */,
 				E2644D012C29E6E000B505A1 /* WeatherRepository.swift in Sources */,
 				E22450782B9F3F9800F14BAA /* WeatherCardViewViewModel.swift in Sources */,
@@ -1953,7 +1917,6 @@
 				E2AD326B2B23774400F46FBE /* Endpoint.swift in Sources */,
 				E2D430F12BB4DC18003F26EE /* HourlyForecastChartViewModel.swift in Sources */,
 				E2AD32692B23774400F46FBE /* CurrentWeatherResponse.swift in Sources */,
-				E2CAC9FB2C044C4900E573D2 /* ResourceFile.swift in Sources */,
 				E2126F582C27A933001111E0 /* KelvinTemperatureFormatter.swift in Sources */,
 				E2CFA7B02B30A056001DE3E8 /* UIFont+PreferredFont.swift in Sources */,
 				E2AD32682B23774400F46FBE /* OpenWeatherEndpoint.swift in Sources */,
@@ -1987,7 +1950,6 @@
 				E283572C2B23895C00E3807A /* GeocoderError.swift in Sources */,
 				E2AD32612B23729600F46FBE /* CloudCoverage.swift in Sources */,
 				E29947BA2B30E3AE00EBA3D1 /* ConditionDescriptionView.swift in Sources */,
-				E2CAC9FD2C04BF0E00E573D2 /* DecodedPlist.swift in Sources */,
 				E2AD32632B2372AD00F46FBE /* HourlyForecastModel.swift in Sources */,
 				E2D430F22BB4DC1C003F26EE /* HourlyForecastChartDataSource.swift in Sources */,
 				E28357372B2716B500E3807A /* CLAuthorizationStatus+CustomStringConvertible.swift in Sources */,

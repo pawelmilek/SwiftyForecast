@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIDevice {
-    var modelName: String {
+    var identifier: String {
         #if targetEnvironment(simulator)
         let identifier = ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"]!
         #else
@@ -22,14 +22,6 @@ extension UIDevice {
         }
         #endif
 
-        let devices = ReleasedDevices(
-            resourceFile: ResourceFile(
-                name: "device_types",
-                fileExtension: "json",
-                bundle: .main
-            ),
-            decoder: JSONDecoder()
-        )
-        return devices.device(with: identifier).model
+        return identifier
     }
 }

@@ -14,14 +14,14 @@ import AboutFeatureDomain
 struct ApplicationInfoAdapter: ApplicationInfo {
     let name: String
     let version: String
-    let device: String
+    let deviceId: String
     let system: String
     let compatibility: String
 
     init(bundle: Bundle, currentDevice: UIDevice) {
         self.name = bundle.applicationName
         self.version = "\(bundle.versionNumber) (\(bundle.buildNumber))"
-        self.device = currentDevice.modelName
+        self.deviceId = currentDevice.identifier
         self.system = "\(currentDevice.systemName): \(currentDevice.systemVersion)"
         self.compatibility = "iOS \(bundle.minimumOSVersion)"
     }

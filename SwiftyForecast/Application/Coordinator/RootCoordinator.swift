@@ -131,6 +131,10 @@ private extension RootCoordinator {
                 networkResourceFactory: NetworkResourceFactory(),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
+                devicesRepository: ReleasedDevicesRepository(
+                    resourceData: ResourceDataFile(),
+                    decoder: JSONDecoder()
+                ),
                 licenseRepository: HtmlPackageLicenseRepository()
             ),
             tintColor: .customPrimary,
