@@ -9,13 +9,11 @@
 import UIKit
 import TipKit
 import FirebaseCore
-import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var coordinator: RootCoordinator?
-    private var cancellables = Set<AnyCancellable>()
 
     func application(
         _ application: UIApplication,

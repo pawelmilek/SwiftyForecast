@@ -95,6 +95,7 @@ private extension MainViewController {
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
+        // TODO: Move up the WeatherViewController init to Composition Root
         viewModel.$locations
             .compactMap { $0 }
             .filter { !$0.isEmpty }

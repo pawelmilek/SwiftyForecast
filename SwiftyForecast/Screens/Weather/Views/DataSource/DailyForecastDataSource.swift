@@ -20,8 +20,16 @@ final class DailyForecastDataSource: NSObject, UITableViewDataSource {
         self.viewModeles = viewModeles
     }
 
+    // TODO: Move DailyViewCellViewModel dependency up to Composition Root
     func set(data: [DailyForecastModel]) {
-        self.viewModeles = data.map { CompositionRoot.dailyViewModel($0) }
+        self.viewModeles = data.map {
+            DailyViewCellViewModel(
+                model: $0,
+                temperatureFormatterFactory: TemperatureFormatterFactory(
+                    notationStorage: NotationSettingsStorage()
+                )
+            )
+        }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

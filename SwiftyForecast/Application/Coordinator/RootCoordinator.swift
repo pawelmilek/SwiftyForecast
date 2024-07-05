@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import CoreLocation
 import ThemeFeatureUI
 
 final class RootCoordinator: Coordinator {
@@ -18,8 +19,8 @@ final class RootCoordinator: Coordinator {
     }
 
     func start() {
-        navigationController.pushViewController(
-            CompositionRoot.mainViewController(coordinator: self),
+        navigationController.setViewControllers(
+            [mainViewController],
             animated: false
         )
     }
@@ -71,6 +72,36 @@ final class RootCoordinator: Coordinator {
 }
 
 private extension RootCoordinator {
+    var mainViewController: MainViewController {
+        let storyboard = UIStoryboard(storyboard: .main)
+        let viewController = storyboard.instantiateViewController(
+            identifier: MainViewController.storyboardIdentifier
+        ) { coder in
+            MainViewController(
+                viewModel: MainViewControllerViewModel(
+                    geocodeLocation: GeocodedLocation(
+                        geocoder: CLGeocoder()
+                    ),
+                    notationSettings: NotationSettingsStorage(),
+                    metricSystemNotification: MetricSystemNotificationAdapter(
+                        notificationCenter: .default
+                    ),
+                    currentLocationRecord: CurrentLocationRecord(
+                        databaseManager: RealmManager()
+                    ),
+                    databaseManager: RealmManager(),
+                    locationManager: LocationManager(),
+                    analyticsService: FirebaseAnalyticsService(),
+                    networkMonitor: NetworkMonitor()
+                ),
+                coordinator: self,
+                coder: coder
+            )
+        }
+
+        return viewController
+    }
+
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(

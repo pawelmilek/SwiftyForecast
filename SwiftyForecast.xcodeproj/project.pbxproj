@@ -99,7 +99,6 @@
 		E23956A82C0A4E800018B542 /* VortexSystem+Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */; };
 		E23997E920E84371007D8CE4 /* URLRequest+Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */; };
 		E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23997E620E84371007D8CE4 /* RequestError.swift */; };
-		E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */; };
 		E23A0B912C2F79CF00F9A0A4 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */; };
 		E23CD76020ED950500F0F72A /* HourlyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */; };
 		E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */; };
@@ -140,6 +139,7 @@
 		E26ACD1B24FF204000AC15A6 /* ForecastModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E26ACD1A24FF204000AC15A6 /* ForecastModel.swift */; };
 		E270891A24CE5ADA003F7587 /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891924CE5ADA003F7587 /* RootCoordinator.swift */; };
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
+		E270BA212C383632000558B2 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270BA202C383632000558B2 /* CompositionRoot.swift */; };
 		E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2768B542B30ED14004C4994 /* HourlyEntry.swift */; };
 		E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F871DA0487600B3EABF /* Main.storyboard */; };
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
@@ -429,7 +429,6 @@
 		E23956A72C0A4E800018B542 /* VortexSystem+Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VortexSystem+Condition.swift"; sourceTree = "<group>"; };
 		E23997E020E84371007D8CE4 /* URLRequest+Parameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLRequest+Parameters.swift"; sourceTree = "<group>"; };
 		E23997E620E84371007D8CE4 /* RequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
-		E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E23A0B902C2F79CF00F9A0A4 /* CompositionRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E23CD75E20ED950500F0F72A /* HourlyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyViewCell.swift; sourceTree = "<group>"; };
 		E23CD75F20ED950500F0F72A /* HourlyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyViewCell.xib; sourceTree = "<group>"; };
@@ -460,6 +459,7 @@
 		E26ACD1A24FF204000AC15A6 /* ForecastModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastModel.swift; sourceTree = "<group>"; };
 		E270891924CE5ADA003F7587 /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		E270BA202C383632000558B2 /* CompositionRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E2768B542B30ED14004C4994 /* HourlyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyEntry.swift; sourceTree = "<group>"; };
 		E27E2F871DA0487600B3EABF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -658,7 +658,7 @@
 		E20E28472C345E24007834F5 /* CompositionRoot */ = {
 			isa = PBXGroup;
 			children = (
-				E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */,
+				E270BA202C383632000558B2 /* CompositionRoot.swift */,
 				E296A7E62AD6F49D001BFADB /* FileBuildConfigurationAdapter.swift */,
 				E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */,
 				E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */,
@@ -1881,7 +1881,6 @@
 				E225B4DA2BE437DF00AD8906 /* ConditionModel.swift in Sources */,
 				E2126F542C27A923001111E0 /* TemperatureFormatter.swift in Sources */,
 				E28179182B38768A00D06917 /* LicenseView.swift in Sources */,
-				E23A0B8C2C2F166A00F9A0A4 /* CompositionRoot.swift in Sources */,
 				E296A7F22AD7EA46001BFADB /* Condition.swift in Sources */,
 				E2A32F27254459FB000ACEFE /* StoreReviewManager.swift in Sources */,
 				E21ABD4A2AE9172300F93F01 /* UIApplication+KeyWindow.swift in Sources */,
@@ -1904,6 +1903,7 @@
 				E2126F7A2C288886001111E0 /* MetersPerSecSpeedFormatter.swift in Sources */,
 				E2D430CF2BB4D954003F26EE /* SearchedLocationWeatherView.swift in Sources */,
 				E224507B2B9F3F9800F14BAA /* AnimationView.swift in Sources */,
+				E270BA212C383632000558B2 /* CompositionRoot.swift in Sources */,
 				E296A7EE2AD7EA1A001BFADB /* CloudCoverage.swift in Sources */,
 				E28092E62AFCF6690019FD7C /* PreviewRealmManager.swift in Sources */,
 				E23997EE20E84371007D8CE4 /* RequestError.swift in Sources */,
