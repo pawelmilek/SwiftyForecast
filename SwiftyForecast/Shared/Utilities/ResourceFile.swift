@@ -12,9 +12,6 @@ protocol ResourceData {
     func data() throws -> Data
 }
 
-protocol ResourceURL {
-    func url() throws -> URL
-}
 
 struct ResourceFile {
     enum Error: Swift.Error {

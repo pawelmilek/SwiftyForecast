@@ -9,5 +9,5 @@
 import Foundation
 
 protocol PackageLicenseRepository {
-    func contentURL() -> URL
+    func contentURL(for fileName: String) -> URL
 }

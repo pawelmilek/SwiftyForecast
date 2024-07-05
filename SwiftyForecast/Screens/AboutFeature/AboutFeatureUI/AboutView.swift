@@ -164,13 +164,7 @@ struct AboutView: View {
             networkResourceFactory: NetworkResourceFactory(),
             analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
             toolbarInteractive: PreviewToolbarInteractive(),
-            licenseRepository: HtmlPackageLicenseRepository(
-                resourceFile: ResourceFile(
-                    name: "packages_license",
-                    fileExtension: "html",
-                    bundle: .main
-                )
-            )
+            licenseRepository: HtmlPackageLicenseRepository()
         )
     )
 }

@@ -298,6 +298,8 @@
 		E2E5EB632C36EFDB00DA62B6 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB612C36EF2200DA62B6 /* BuildConfiguration.swift */; };
 		E2E5EB652C36FB2D00DA62B6 /* NetworkResourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB642C36FB2D00DA62B6 /* NetworkResourceProtocol.swift */; };
 		E2E5EB672C3727FC00DA62B6 /* PackageLicenseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB662C3727FC00DA62B6 /* PackageLicenseRepository.swift */; };
+		E2E5EB6A2C37646400DA62B6 /* NetworkResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */; };
+		E2E5EB6B2C37651E00DA62B6 /* NetworkResourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB642C36FB2D00DA62B6 /* NetworkResourceProtocol.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E6C6FF2C0EACFD00500EE8 /* AboutLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FE2C0EACFD00500EE8 /* AboutLinkRow.swift */; };
 		E2E6C7012C0EAD1500500EE8 /* AboutNavigationLinkRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C7002C0EAD1500500EE8 /* AboutNavigationLinkRow.swift */; };
@@ -659,10 +661,10 @@
 				E23A0B8B2C2F166A00F9A0A4 /* CompositionRoot.swift */,
 				E296A7E62AD6F49D001BFADB /* FileBuildConfigurationAdapter.swift */,
 				E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */,
+				E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */,
 				E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */,
 				E2D3B75F2C362F25007F8561 /* ThemeTipToolbarAdapter.swift */,
 				E2FEB7BC2B172782009D54B2 /* MetricSystemNotificationAdapter.swift */,
-				E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */,
 				E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */,
 			);
 			path = CompositionRoot;
@@ -695,12 +697,13 @@
 				E2D3B7622C36312A007F8561 /* AnalyticsAboutSendable.swift */,
 				E2E5EB5F2C36EE1400DA62B6 /* ApplicationInfo.swift */,
 				E2E5EB612C36EF2200DA62B6 /* BuildConfiguration.swift */,
+				E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */,
 				E2ED36E42C04EDBA0001C3EF /* NetworkResourceFactory.swift */,
+				E2E5EB642C36FB2D00DA62B6 /* NetworkResourceProtocol.swift */,
 				E2ED36E62C04EDC70001C3EF /* NetworkResourceType.swift */,
+				E2E5EB662C3727FC00DA62B6 /* PackageLicenseRepository.swift */,
 				E281790D2B3856AC00D06917 /* SupportEmail.swift */,
 				E2D3B75D2C362E3B007F8561 /* ToolbarInteractive.swift */,
-				E2E5EB642C36FB2D00DA62B6 /* NetworkResourceProtocol.swift */,
-				E2E5EB662C3727FC00DA62B6 /* PackageLicenseRepository.swift */,
 			);
 			path = AboutFeatureDomain;
 			sourceTree = "<group>";
@@ -742,7 +745,6 @@
 				E20C6B122BE82F8400DDB57A /* JSONSnakeCaseDecoded.swift */,
 				E24EB89225410010001F5D72 /* MockGenerator.swift */,
 				E20DA45A214348AD0047491B /* NetworkMonitor.swift */,
-				E2ED36E22C04EDA10001C3EF /* NetworkResource.swift */,
 				E2ED36E02C04D20D0001C3EF /* ReleasedDevices.swift */,
 				E2CAC9F92C044B4F00E573D2 /* ResourceFile.swift */,
 				E20C93FB2C31DB4500675CF2 /* LocationPlaceable.swift */,
@@ -1947,6 +1949,7 @@
 				E2255A572C10215700C6F3AD /* FirebaseAnalyticsService.swift in Sources */,
 				E2D786D82C24AF79001E4DE8 /* EntryServiceFactory.swift in Sources */,
 				E2644D1C2C2A1A3700B505A1 /* WeatherRepositoryProtocol.swift in Sources */,
+				E2E5EB6B2C37651E00DA62B6 /* NetworkResourceProtocol.swift in Sources */,
 				E2644D212C2B21C400B505A1 /* WeatherEntryService.swift in Sources */,
 				E2126F552C27A923001111E0 /* TemperatureFormatter.swift in Sources */,
 				E2F671232B23682F00B791A0 /* WeatherTimelineProvider.swift in Sources */,
@@ -1993,6 +1996,7 @@
 				E2AD32702B23779000F46FBE /* FileBuildConfigurationAdapter.swift in Sources */,
 				E2AD325E2B23727E00F46FBE /* InvalidReference.swift in Sources */,
 				E2F671192B234F3400B791A0 /* MetricSystem.swift in Sources */,
+				E2E5EB6A2C37646400DA62B6 /* NetworkResource.swift in Sources */,
 				E2644CF82C29AE2F00B505A1 /* MetricSystemNotification.swift in Sources */,
 				E2255A512C10213400C6F3AD /* LocationWeatherViewEvent.swift in Sources */,
 				E2416FEC2B331D52009C8F81 /* InlineWidgetView.swift in Sources */,

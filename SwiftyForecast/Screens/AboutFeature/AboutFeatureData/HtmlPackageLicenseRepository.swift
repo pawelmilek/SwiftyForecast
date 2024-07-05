@@ -9,18 +9,15 @@
 import SwiftUI
 
 struct HtmlPackageLicenseRepository: PackageLicenseRepository {
-    private let resourceFile: ResourceFile
     private let fileExtension = "html"
 
-    init(resourceFile: ResourceFile) {
-        self.resourceFile = resourceFile
+    init() {
     }
 
-    func contentURL() -> URL {
-        do {
-            return try resourceFile.url()
-        } catch {
-            fatalError(error.localizedDescription)
+    func contentURL(for fileName: String) -> URL {
+        guard let htmlURL = Bundle.main.url(forResource: fileName, withExtension: fileExtension) else {
+            fatalError(CocoaError(.fileNoSuchFile).localizedDescription)
         }
+        return htmlURL
     }
 }

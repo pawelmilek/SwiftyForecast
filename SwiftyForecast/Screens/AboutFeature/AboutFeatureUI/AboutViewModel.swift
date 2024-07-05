@@ -27,16 +27,7 @@ final class AboutViewModel: ObservableObject {
     private let toolbarInteractive: ToolbarInteractive
     private let licenseRepository: HtmlPackageLicenseRepository
     private var cancellables = Set<AnyCancellable>()
-    private var appId = 0
     let appStorePreviewTip = AppStorePreviewTip()
-
-//    private let packageLicense = PackageLicense(
-//        resourceFile: ResourceFile(
-//            name: "packages_license",
-//            fileExtension: "html",
-//            bundle: .main
-//        )
-//    )
 
     init(
         appInfo: ApplicationInfo,
@@ -56,16 +47,17 @@ final class AboutViewModel: ObservableObject {
         self.appName = appInfo.name
         self.appVersion = appInfo.version
         self.appCompatibility = appInfo.compatibility
-        self.appId = buildConfiguration.appStoreId()
-        self.appURL = try? networkResourceFactory.make(by: .appShare(appId: appId)).contentURL()
+
+        let appStoreId = buildConfiguration.appStoreId()
+        self.appURL = try? networkResourceFactory.make(by: .appShare(appId: appStoreId)).contentURL()
         self.appStorePreviewURL = try? networkResourceFactory.make(by: .appStorePreview).contentURL()
-        self.writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appId)).contentURL()
+        self.writeReviewURL = try? networkResourceFactory.make(by: .appStoreReview(appId: appStoreId)).contentURL()
         self.privacyPolicyURL = try? networkResourceFactory.make(by: .privacyPolicy).contentURL()
         self.weatherDataProviderURL = try? networkResourceFactory.make(by: .weatherService).contentURL()
     }
 
     func packagesLicense() -> URL {
-        licenseRepository.contentURL()
+        licenseRepository.contentURL(for: "packages_license")
     }
 
     func doneItemTapped() {

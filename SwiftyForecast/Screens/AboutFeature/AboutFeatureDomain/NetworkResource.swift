@@ -9,10 +9,6 @@
 import Foundation
 
 struct NetworkResource: NetworkResourceProtocol {
-    enum Error: Swift.Error {
-        case invalidURL
-    }
-
     private let stringURL: String
 
     init(stringURL: String) {
@@ -20,10 +16,9 @@ struct NetworkResource: NetworkResourceProtocol {
     }
 
     func contentURL() throws -> URL {
-        if let url = URL(string: stringURL) {
-            return url
-        } else {
-            throw Error.invalidURL
+        guard let url = URL(string: stringURL) else {
+            throw CocoaError(.fileReadInvalidFileName)
         }
+        return url
     }
 }
