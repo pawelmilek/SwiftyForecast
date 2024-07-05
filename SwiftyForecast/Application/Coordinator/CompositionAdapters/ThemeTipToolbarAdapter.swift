@@ -8,6 +8,7 @@
 
 import Foundation
 import ThemeFeatureUI
+import AboutFeatureDomain
 
 struct ThemeTipToolbarAdapter: ToolbarInteractive {
 

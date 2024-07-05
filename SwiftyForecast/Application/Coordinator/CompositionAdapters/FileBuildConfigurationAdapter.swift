@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AboutFeatureDomain
 
 struct FileBuildConfigurationAdapter: BuildConfiguration {
     typealias Configurations = [String: String]

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AboutFeatureDomain
 
 struct ReleasedDevices {
     private let decoder: JSONDecoder

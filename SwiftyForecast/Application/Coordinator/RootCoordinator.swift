@@ -11,6 +11,9 @@ import SwiftUI
 import CoreLocation
 import ThemeFeatureUI
 import ThemeFeatureData
+import AboutFeatureUI
+import AboutFeatureData
+import AboutFeatureDomain
 
 final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
@@ -129,7 +132,9 @@ private extension RootCoordinator {
                 analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
                 licenseRepository: HtmlPackageLicenseRepository()
-            )
+            ),
+            tintColor: .customPrimary,
+            accentColor: .accent
         )
     }
 }
