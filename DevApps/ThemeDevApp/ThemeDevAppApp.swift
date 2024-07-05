@@ -8,24 +8,24 @@
 
 import SwiftUI
 import ThemeFeatureUI
+import ThemeFeatureData
 
 @main
 struct ThemeDevAppApp: App {
     @StateObject private var viewModel = ThemeViewModel(
-        notification: NotificationCenterThemeChangeAdapter(
+        repository: UserDefaultsThemeRepository(storage: .standard),
+        notification: NotificationCenterThemeAdapter(
             notificationCenter: .default
         ),
-        analytics: PreviewAnalyticsTheme()
+        analytics: FirebaseAnalyticsThemeAdapter(
+            service: FakeAnalyticsService()
+        )
     )
 
     var body: some Scene {
         WindowGroup {
-            ContentView(
-                textColor: .accentColor,
-                darkScheme: .purple,
-                lightScheme: .primary
-            )
-            .environmentObject(viewModel)
+            ContentView()
+                .environmentObject(viewModel)
         }
     }
 }

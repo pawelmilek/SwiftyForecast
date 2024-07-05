@@ -10,6 +10,7 @@ import UIKit
 import SwiftUI
 import CoreLocation
 import ThemeFeatureUI
+import ThemeFeatureData
 
 final class RootCoordinator: Coordinator {
     var navigationController: UINavigationController
@@ -105,6 +106,7 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
+                repository: UserDefaultsThemeRepository(storage: .standard),
                 notification: NotificationCenterThemeAdapter(
                     notificationCenter: .default
                 ),

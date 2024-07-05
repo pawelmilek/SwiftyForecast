@@ -29,12 +29,16 @@ struct FavoriteLocationList: View {
             TipView(LocationsTip())
                 .tint(.customPrimary)
                 .listRowSeparator(.hidden)
-            ForEach(Array(zip(locations.indices, locations)), id: \.0) { index, location in
+            ForEach(Array(zip(locations.indices, locations)), id: \.0) {
+                index,
+                location in
                 FavoriteLocationRow(
-                    viewModel: .init(
+                    viewModel: LocationRowViewModel(
                         location: location,
                         service: service,
-                        temperatureFormatterFactory: TemperatureFormatterFactory(notationStorage: NotationSettingsStorage())
+                        temperatureFormatterFactory: TemperatureFormatterFactory(
+                            notationStorage: NotationSettingsStorage()
+                        )
                     )
                 )
                 .listRowSeparator(.hidden)

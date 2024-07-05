@@ -9,5 +9,9 @@
 import ThemeFeatureDomain
 
 final class FakeAnalyticsService: AnalyticsService {
-    func send(event: AnalyticsEvent) { }
+    var didSend = false
+
+    func send(event: AnalyticsEvent) { 
+        didSend = true
+    }
 }

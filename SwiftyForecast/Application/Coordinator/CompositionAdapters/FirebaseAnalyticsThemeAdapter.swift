@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ThemeFeatureDomain
+import ThemeFeatureUI
 
 struct FirebaseAnalyticsThemeAdapter: ThemeAnalyticsSendable {
     private struct Event: AnalyticsEvent {

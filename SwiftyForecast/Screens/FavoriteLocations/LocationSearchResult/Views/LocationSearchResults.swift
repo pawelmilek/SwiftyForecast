@@ -62,18 +62,6 @@ struct LocationSearchResults: View {
             )
             .interactiveDismissDisabled()
         }
-        .onAppear {
-            logScreenViewed()
-        }
-    }
-
-    private func logScreenViewed() {
-        analyticsService.send(
-            event: LocationSearchResultsAnalyticsEvent.screenViewed(
-                name: "Location Search Result",
-                className: "\(type(of: self))"
-            )
-        )
     }
 
     private var shouldShowContentUnavailableView: Bool {

@@ -21,6 +21,11 @@ struct FirebaseAnalyticsAboutAdapter: AnalyticsAboutSendable {
     }
 
     func send(name: String, metadata: [String: Any]) {
-        service.send(event: Event(name: name, metadata: metadata))
+        service.send(
+            event: Event(
+                name: name,
+                metadata: metadata
+            )
+        )
     }
 }

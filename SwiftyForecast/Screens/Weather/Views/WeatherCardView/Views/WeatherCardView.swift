@@ -26,7 +26,8 @@ struct WeatherCardView: View {
             .foregroundStyle(Style.WeatherCard.textColor)
             .padding(15)
             .background(
-                AnimationView(condition: viewModel.condition)
+                // TODO: Enable Animation faeture after Dependency Injection and Composition Root is finished.
+                AnimationView(condition: .none /*viewModel.condition*/)
             )
             .clipShape(
                 RoundedRectangle(

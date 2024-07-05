@@ -11,18 +11,10 @@ import ThemeFeatureUI
 
 struct ContentView: View {
     @EnvironmentObject private var viewModel: ThemeViewModel
-    let textColor: Color
-    let darkScheme: Color
-    let lightScheme: Color
 
     var body: some View {
         ThemeView(
-            viewModel: ThemeViewModel(
-                notification: NotificationCenterThemeChangeAdapter(
-                    notificationCenter: .default
-                ),
-                analytics: PreviewAnalyticsTheme()
-            ),
+            viewModel: viewModel,
             textColor: .accentColor,
             darkScheme: .red,
             lightScheme: .yellow
@@ -31,17 +23,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(
-        textColor: .accentColor,
-        darkScheme: .purple,
-        lightScheme: .primary
-    )
-    .environmentObject(
-        ThemeViewModel(
-            notification: NotificationCenterThemeChangeAdapter(
-                notificationCenter: .default
-            ),
-            analytics: PreviewAnalyticsTheme()
-        )
-    )
+    ContentView()
+        .environmentObject(Preview.viewModel)
 }

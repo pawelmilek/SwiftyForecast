@@ -10,7 +10,6 @@ import UIKit
 import TipKit
 import Combine
 import ThemeFeatureDomain
-import ThemeFeatureUI
 
 final class MainViewController: UIViewController {
     @AppStorage("appearanceTheme") var theme: Theme = .systemDefault
@@ -137,7 +136,10 @@ private extension MainViewController {
         NotificationCenter.default
             .publisher(for: .didChangeTheme)
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
+            .sink { [weak self] notification in
+                let newTheme = notification.userInfo?["theme"] ?? "Dark"
+
+                debugPrint(notification)
                 self?.setupTheme()
             }
             .store(in: &cancellables)
