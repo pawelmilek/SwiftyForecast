@@ -132,6 +132,7 @@
 		E270891C24CE5AEC003F7587 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270891B24CE5AEC003F7587 /* Coordinator.swift */; };
 		E270BA212C383632000558B2 /* CompositionRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270BA202C383632000558B2 /* CompositionRoot.swift */; };
 		E270BA232C385176000558B2 /* ThemeTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = E270BA222C385176000558B2 /* ThemeTip.swift */; };
+		E2755D5A2C399604008ADE1A /* FakeFirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2755D592C399604008ADE1A /* FakeFirebaseAnalyticsService.swift */; };
 		E2768B552B30ED14004C4994 /* HourlyEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2768B542B30ED14004C4994 /* HourlyEntry.swift */; };
 		E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F871DA0487600B3EABF /* Main.storyboard */; };
 		E27E2F8A1DA048A400B3EABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */; };
@@ -162,7 +163,7 @@
 		E28F2AD32C388C530000908A /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E28F2AD22C388C530000908A /* AboutFeature */; };
 		E28F2AD52C388D0E0000908A /* PreviewToolbarInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F2AD42C388D0E0000908A /* PreviewToolbarInteractive.swift */; };
 		E28F2AD72C388D320000908A /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F2AD62C388D320000908A /* Preview.swift */; };
-		E28F2ADD2C38901B0000908A /* ApplicationInfoAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */; };
+		E28F2ADD2C38901B0000908A /* BundledApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */; };
 		E28F2ADE2C3890250000908A /* Bundle+ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */; };
 		E28F2ADF2C38902B0000908A /* UIDevice+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E281790F2B385C6600D06917 /* UIDevice+identifier.swift */; };
 		E28F2AE32C38911E0000908A /* FileBuildConfigurationAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E296A7E62AD6F49D001BFADB /* FileBuildConfigurationAdapter.swift */; };
@@ -287,7 +288,7 @@
 		E2E4BA512C17577A00734382 /* DailyForecastDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */; };
 		E2E4BA542C175DF000734382 /* HourlyForecastFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */; };
 		E2E4BA5C2C1783DD00734382 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E4BA5B2C1783DC00734382 /* MainPageViewController.swift */; };
-		E2E5EB5E2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */; };
+		E2E5EB5E2C36ECF700DA62B6 /* BundledApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
 		E2F17C2D20F4097C00068BD2 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */; };
@@ -431,6 +432,7 @@
 		E270891B24CE5AEC003F7587 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		E270BA202C383632000558B2 /* CompositionRoot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositionRoot.swift; sourceTree = "<group>"; };
 		E270BA222C385176000558B2 /* ThemeTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeTip.swift; sourceTree = "<group>"; };
+		E2755D592C399604008ADE1A /* FakeFirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeFirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		E2768B542B30ED14004C4994 /* HourlyEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyEntry.swift; sourceTree = "<group>"; };
 		E27E2F871DA0487600B3EABF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E27E2F891DA048A400B3EABF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -528,7 +530,7 @@
 		E2E4BA502C17577A00734382 /* DailyForecastDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastDataSource.swift; sourceTree = "<group>"; };
 		E2E4BA532C175DF000734382 /* HourlyForecastFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastFlowLayout.swift; sourceTree = "<group>"; };
 		E2E4BA5B2C1783DC00734382 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
-		E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationInfoAdapter.swift; sourceTree = "<group>"; };
+		E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledApplicationInfo.swift; sourceTree = "<group>"; };
 		E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
 		E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+PreferredFont.swift"; sourceTree = "<group>"; };
 		E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -609,11 +611,11 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		E20E28472C345E24007834F5 /* CompositionAdapters */ = {
+		E20E28472C345E24007834F5 /* Composition */ = {
 			isa = PBXGroup;
 			children = (
 				E270BA202C383632000558B2 /* CompositionRoot.swift */,
-				E2E5EB5D2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift */,
+				E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */,
 				E296A7E62AD6F49D001BFADB /* FileBuildConfigurationAdapter.swift */,
 				E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */,
 				E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */,
@@ -621,7 +623,7 @@
 				E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */,
 				E2D3B75F2C362F25007F8561 /* ThemeTipToolbarAdapter.swift */,
 			);
-			path = CompositionAdapters;
+			path = Composition;
 			sourceTree = "<group>";
 		};
 		E2117B442B29B9E200F91ADB /* Provider */ = {
@@ -936,7 +938,7 @@
 		E270891824CE5904003F7587 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				E20E28472C345E24007834F5 /* CompositionAdapters */,
+				E20E28472C345E24007834F5 /* Composition */,
 				E270891924CE5ADA003F7587 /* RootCoordinator.swift */,
 				E270891B24CE5AEC003F7587 /* Coordinator.swift */,
 			);
@@ -1006,6 +1008,7 @@
 				E28F2ACD2C388C1F0000908A /* Preview Assets.xcassets */,
 				E28F2AD42C388D0E0000908A /* PreviewToolbarInteractive.swift */,
 				E28F2AD62C388D320000908A /* Preview.swift */,
+				E2755D592C399604008ADE1A /* FakeFirebaseAnalyticsService.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -1707,11 +1710,12 @@
 				E28F2AE82C3893910000908A /* ThemeTipToolbarAdapter.swift in Sources */,
 				E28F2AE52C3893220000908A /* FirebaseAnalyticsAboutAdapter.swift in Sources */,
 				E28F2ADF2C38902B0000908A /* UIDevice+identifier.swift in Sources */,
-				E28F2ADD2C38901B0000908A /* ApplicationInfoAdapter.swift in Sources */,
+				E28F2ADD2C38901B0000908A /* BundledApplicationInfo.swift in Sources */,
 				E28F2AC72C388C1E0000908A /* AboutDevAppApp.swift in Sources */,
 				E28F2AE92C38939E0000908A /* ThemeTip.swift in Sources */,
 				E28F2AD72C388D320000908A /* Preview.swift in Sources */,
 				E28F2ADE2C3890250000908A /* Bundle+ApplicationInfo.swift in Sources */,
+				E2755D5A2C399604008ADE1A /* FakeFirebaseAnalyticsService.swift in Sources */,
 				E28F2AE32C38911E0000908A /* FileBuildConfigurationAdapter.swift in Sources */,
 				E28F2AE72C3893390000908A /* AnalyticsEvent.swift in Sources */,
 				E28F2AD52C388D0E0000908A /* PreviewToolbarInteractive.swift in Sources */,
@@ -1788,7 +1792,7 @@
 				E25EF00B20F97CE200E4C115 /* Style.swift in Sources */,
 				E2255A4A2C1020B400C6F3AD /* LocationListEvent.swift in Sources */,
 				E2644D0A2C2A060700B505A1 /* ReviewedVersionStorage.swift in Sources */,
-				E2E5EB5E2C36ECF700DA62B6 /* ApplicationInfoAdapter.swift in Sources */,
+				E2E5EB5E2C36ECF700DA62B6 /* BundledApplicationInfo.swift in Sources */,
 				E28550022290F26E00CD7554 /* MetricSystem.swift in Sources */,
 				E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */,
 				E22450722B9F3F9800F14BAA /* WeatherModel.swift in Sources */,

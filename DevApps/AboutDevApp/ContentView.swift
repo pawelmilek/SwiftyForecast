@@ -15,11 +15,11 @@ struct ContentView: View {
     var body: some View {
         AboutView(
             viewModel: AboutViewModel(
-                appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
+                appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
                 buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
-                networkResourceFactory: NetworkResourceFactory(),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FakeFirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
+                devicesRepository: ReleasedDevicesRepository(),
                 licenseRepository: HtmlPackageLicenseRepository()
             ),
             tintColor: .customPrimary,
@@ -30,10 +30,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-class FakeFirebaseAnalyticsService: AnalyticsService {
-    func send(event: AnalyticsEvent) {
-
-    }
 }

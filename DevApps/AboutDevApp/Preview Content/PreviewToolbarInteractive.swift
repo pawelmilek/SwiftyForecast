@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import AboutFeatureUI
 
 struct PreviewToolbarInteractive: ToolbarInteractive {
     func doneItemTapped() { }

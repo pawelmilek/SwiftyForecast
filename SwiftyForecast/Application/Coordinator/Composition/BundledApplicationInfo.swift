@@ -1,17 +1,16 @@
 //
-//  ApplicationInfoAdapter.swift
+//  BundledApplicationInfo.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 7/4/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import AboutFeatureDomain
+import AboutFeatureUI
 
 @MainActor
-struct ApplicationInfoAdapter: ApplicationInfo {
+struct BundledApplicationInfo: ApplicationInfo {
     let name: String
     let version: String
     let deviceId: String

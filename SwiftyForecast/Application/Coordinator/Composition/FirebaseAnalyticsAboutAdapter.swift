@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import AboutFeatureUI
 
 struct FirebaseAnalyticsAboutAdapter: AnalyticsAboutSendable {
     private struct Event: AnalyticsEvent {

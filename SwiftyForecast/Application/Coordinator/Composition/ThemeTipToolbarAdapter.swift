@@ -6,12 +6,9 @@
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
-import Foundation
-import ThemeFeatureUI
-import AboutFeatureDomain
+import AboutFeatureUI
 
 struct ThemeTipToolbarAdapter: ToolbarInteractive {
-
     func doneItemTapped() {
         Task(priority: .userInitiated) {
             await ThemeTip.didTipBecomePresentableEvent.donate()

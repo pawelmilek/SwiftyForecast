@@ -126,15 +126,11 @@ private extension RootCoordinator {
     var aboutViewController: AboutViewController {
         AboutViewController(
             viewModel: AboutViewModel(
-                appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
+                appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
                 buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
-                networkResourceFactory: NetworkResourceFactory(),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
-                devicesRepository: ReleasedDevicesRepository(
-                    resourceData: ResourceDataFile(),
-                    decoder: JSONDecoder()
-                ),
+                devicesRepository: ReleasedDevicesRepository(),
                 licenseRepository: HtmlPackageLicenseRepository()
             ),
             tintColor: .customPrimary,
