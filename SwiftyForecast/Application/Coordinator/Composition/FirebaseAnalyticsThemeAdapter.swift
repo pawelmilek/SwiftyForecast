@@ -9,7 +9,7 @@
 import Foundation
 import ThemeFeatureUI
 
-struct FirebaseAnalyticsThemeAdapter: ThemeAnalyticsSendable {
+struct FirebaseAnalyticsThemeAdapter: AnalyticsThemeSendable {
     private struct Event: AnalyticsEvent {
         var name: String
         var metadata: [String: Any]

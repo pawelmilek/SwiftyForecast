@@ -130,8 +130,21 @@ private extension RootCoordinator {
                 buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
-                devicesRepository: ReleasedDevicesRepository(),
-                licenseRepository: HtmlPackageLicenseRepository()
+                networkResourceService: AppNetworkResourceService(
+                    repository: AppNetworkResourceRepository(
+                        dataSource: LocalNetworkResourceDataSource()
+                    )
+                ),
+                deviceService: UserDeviceService(
+                    repository: ReleasedDevicesRepository(
+                        dataSource: LocalReleasedDevicesDataSource()
+                    )
+                ),
+                licenseService: PackagesLicenseService(
+                    repository: PackageLicenseRepository(
+                        dataSource: LocalPackagesLicenseDataSource()
+                    )
+                )
             ),
             tintColor: .customPrimary,
             accentColor: .accent

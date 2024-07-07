@@ -19,8 +19,21 @@ struct ContentView: View {
                 buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
                 analytics: FirebaseAnalyticsAboutAdapter(service: FakeFirebaseAnalyticsService()),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
-                devicesRepository: ReleasedDevicesRepository(),
-                licenseRepository: HtmlPackageLicenseRepository()
+                networkResourceService: AppNetworkResourceService(
+                    repository: AppNetworkResourceRepository(
+                        dataSource: LocalNetworkResourceDataSource()
+                    )
+                ),
+                deviceService: UserDeviceService(
+                    repository: ReleasedDevicesRepository(
+                        dataSource: LocalReleasedDevicesDataSource()
+                    )
+                ),
+                licenseService: PackagesLicenseService(
+                    repository: PackageLicenseRepository(
+                        dataSource: LocalPackagesLicenseDataSource()
+                    )
+                )
             ),
             tintColor: .customPrimary,
             accentColor: .accent
