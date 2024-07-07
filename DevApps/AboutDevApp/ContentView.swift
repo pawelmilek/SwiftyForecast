@@ -16,8 +16,9 @@ struct ContentView: View {
         AboutView(
             viewModel: AboutViewModel(
                 appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
-                buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
-                analytics: FirebaseAnalyticsAboutAdapter(service: FakeFirebaseAnalyticsService()),
+                analytics: FirebaseAnalyticsAboutAdapter(
+                    service: FakeFirebaseAnalyticsService()
+                ),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
                 networkResourceService: AppNetworkResourceService(
                     repository: AppNetworkResourceRepository(

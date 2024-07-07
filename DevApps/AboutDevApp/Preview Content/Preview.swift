@@ -13,7 +13,7 @@ import AboutFeatureUI
 //    static var viewModel: AboutViewModel {
 //        AboutViewModel(
 //            appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
-//            buildConfiguration: FileBuildConfigurationAdapter(bundle: .main),
+//            buildConfiguration: FileBuildConfiguration(bundle: .main),
 //            networkResourceFactory: NetworkResourceFactory(),
 //            analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
 //            toolbarInteractive: PreviewToolbarInteractive(),

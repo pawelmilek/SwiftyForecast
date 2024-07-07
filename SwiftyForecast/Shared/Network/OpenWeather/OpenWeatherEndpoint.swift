@@ -77,6 +77,8 @@ enum OpenWeatherEndpoint: Endpoint {
         return parameters
     }
 
-    // TODO: - Remove FileBuildConfigurationAdapter dependency from Endpoint. Afterwards, remove Package from Widget extension.
-    static private let weatherServiceAPIKey = FileBuildConfigurationAdapter(bundle: .main).weatherServiceAPIKey()
+    // TODO: - Remove FileBuildConfiguration dependency from Endpoint. Afterwards, remove Package from Widget extension.
+    static private let weatherServiceAPIKey = FileBuildConfiguration(
+        bundle: .main
+    ).weatherServiceAPIKey()
 }

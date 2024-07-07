@@ -31,8 +31,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ConfigurationSettings</key>
 	<dict>
-		<key>AppId</key>
-		<string>$(APP_ID)</string>
 		<key>SupportEmail</key>
 		<string>$(SUPPORT_EMAIL)</string>
 		<key>WeatherServiceAPIKey</key>

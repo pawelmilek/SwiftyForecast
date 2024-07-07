@@ -1,5 +1,5 @@
 //
-//  FileBuildConfigurationAdapter.swift
+//  FileBuildConfiguration.swift
 //  SwiftyForecast
 //
 //  Created by Pawel Milek on 10/11/23.
@@ -7,9 +7,12 @@
 //
 
 import Foundation
-import AboutFeatureUI
 
-struct FileBuildConfigurationAdapter: BuildConfiguration {
+protocol BuildConfiguration {
+    func weatherServiceAPIKey() -> String
+}
+
+struct FileBuildConfiguration: BuildConfiguration {
     typealias Configurations = [String: String]
 
     enum Error: Swift.Error {
@@ -19,8 +22,6 @@ struct FileBuildConfigurationAdapter: BuildConfiguration {
 
     private enum ConfigurationKey {
         static let weatherServiceAPIKey = "WeatherServiceAPIKey"
-        static let supportEmailKey = "SupportEmail"
-        static let appId = "AppId"
     }
 
     private let plistKey = "ConfigurationSettings"
@@ -33,22 +34,6 @@ struct FileBuildConfigurationAdapter: BuildConfiguration {
     func weatherServiceAPIKey() -> String {
         do {
             return try value(with: ConfigurationKey.weatherServiceAPIKey)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-
-    func supportEmailAddress() -> String {
-        do {
-            return try value(with: ConfigurationKey.supportEmailKey)
-        } catch {
-            fatalError(error.localizedDescription)
-        }
-    }
-
-    func appStoreId() -> Int {
-        do {
-            return try Int(value(with: ConfigurationKey.appId)) ?? 0
         } catch {
             fatalError(error.localizedDescription)
         }
