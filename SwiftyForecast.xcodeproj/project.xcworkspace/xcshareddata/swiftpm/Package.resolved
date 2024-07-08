@@ -1,6 +1,15 @@
 {
-  "originHash" : "f16c75d2e2c582a45740bc7cbfc008a8298086d551972aad126986ad8ccebcaf",
+  "originHash" : "14f55e2af36ff9e9e4a9247c0dd475bdc9ad9642ba77c3c5a1dda8a8799467d1",
   "pins" : [
+    {
+      "identity" : "aboutfeature",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pawelmilek/AboutFeature.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "020782abc10850d89475915c2b4d1bc4eec5f9df"
+      }
+    },
     {
       "identity" : "abseil-cpp-binary",
       "kind" : "remoteSourceControl",
@@ -143,6 +152,15 @@
       "state" : {
         "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
         "version" : "1.26.0"
+      }
+    },
+    {
+      "identity" : "themefeature",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pawelmilek/ThemeFeature.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "548265e905605f79908d601eff2528b7da12485c"
       }
     },
     {
