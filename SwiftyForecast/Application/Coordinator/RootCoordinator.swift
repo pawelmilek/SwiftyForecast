@@ -134,19 +134,35 @@ private extension RootCoordinator {
                     service: FirebaseAnalyticsService()
                 ),
                 toolbarInteractive: ThemeTipToolbarAdapter(),
-                networkResourceService: AppNetworkResourceService(
-                    repository: AppNetworkResourceRepository(
-                        dataSource: LocalNetworkResourceDataSource()
+                appService: NetworkAppService(
+                    repository: NetworkAppRepository(
+                        dataSource: LocalAppDataSource(
+                            localFileResource: LocalFileResource(
+                                name: "app_resources",
+                                fileExtension: "json",
+                                bundle: .main
+                            ),
+                            decoder: JSONDecoder()
+                        )
                     )
                 ),
                 deviceService: UserDeviceService(
                     repository: ReleasedDevicesRepository(
-                        dataSource: LocalReleasedDevicesDataSource()
+                        dataSource: LocalReleasedDevicesDataSource(
+                            decoder: JSONDecoder()
+                        )
                     )
                 ),
                 licenseService: PackagesLicenseService(
-                    repository: PackageLicenseRepository(
-                        dataSource: LocalPackagesLicenseDataSource()
+                    repository: PackagesLicenseRepository(
+                        dataSource: LocalPackagesLicenseDataSource(
+                            licenseFile: LocalFileResource(
+                                name: "packages_license",
+                                fileExtension: "html",
+                                bundle: .main
+                            ),
+                            bundle: .main
+                        )
                     )
                 )
             ),

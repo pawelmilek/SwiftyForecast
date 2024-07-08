@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -279,6 +279,12 @@
 		E2D430FB2BB4F2B6003F26EE /* LocationRowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */; };
 		E2D786D22C24A558001E4DE8 /* WeatherEntryServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D786D12C24A558001E4DE8 /* WeatherEntryServiceFactory.swift */; };
 		E2D786D82C24AF79001E4DE8 /* EntryServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D786D72C24AF79001E4DE8 /* EntryServiceFactory.swift */; };
+		E2D7E9552C3C4C1200FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E9542C3C4C1200FCEA19 /* AboutFeature */; };
+		E2D7E9572C3C543F00FCEA19 /* packages_license.html in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9562C3C543F00FCEA19 /* packages_license.html */; };
+		E2D7E9582C3C550B00FCEA19 /* packages_license.html in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9562C3C543F00FCEA19 /* packages_license.html */; };
+		E2D7E9602C3C66B300FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E95F2C3C66B300FCEA19 /* AboutFeature */; };
+		E2D7E9622C3C672B00FCEA19 /* app_resources.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9612C3C672B00FCEA19 /* app_resources.json */; };
+		E2D7E9632C3C672B00FCEA19 /* app_resources.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9612C3C672B00FCEA19 /* app_resources.json */; };
 		E2D960812120F34800AE0B6E /* GeocodedLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocodedLocation.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */; };
@@ -291,10 +297,9 @@
 		E2E5EB5E2C36ECF700DA62B6 /* BundledApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
-		E2ED093F2C3B76B3007C2372 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED093E2C3B76B3007C2372 /* AboutFeature */; };
-		E2ED09412C3B76C0007C2372 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09402C3B76C0007C2372 /* AboutFeature */; };
 		E2ED09442C3B7884007C2372 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09432C3B7884007C2372 /* ThemeFeature */; };
 		E2ED09462C3B788D007C2372 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09452C3B788D007C2372 /* ThemeFeature */; };
+		E2ED09492C3C4BF7007C2372 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09482C3C4BF7007C2372 /* AboutFeature */; };
 		E2F17C2D20F4097C00068BD2 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */; };
 		E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */; };
 		E2F671142B234EA200B791A0 /* TemperatureFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */; };
@@ -525,6 +530,8 @@
 		E2D430F92BB4F2B6003F26EE /* LocationRowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRowViewModel.swift; sourceTree = "<group>"; };
 		E2D786D12C24A558001E4DE8 /* WeatherEntryServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEntryServiceFactory.swift; sourceTree = "<group>"; };
 		E2D786D72C24AF79001E4DE8 /* EntryServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryServiceFactory.swift; sourceTree = "<group>"; };
+		E2D7E9562C3C543F00FCEA19 /* packages_license.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = packages_license.html; sourceTree = "<group>"; };
+		E2D7E9612C3C672B00FCEA19 /* app_resources.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app_resources.json; sourceTree = "<group>"; };
 		E2D960802120F34800AE0B6E /* GeocodedLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocodedLocation.swift; sourceTree = "<group>"; };
 		E2DC1457248D2F8700D1A329 /* InvalidReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvalidReference.swift; sourceTree = "<group>"; };
 		E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+ApplicationInfo.swift"; sourceTree = "<group>"; };
@@ -567,7 +574,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E28F2AD32C388C530000908A /* AboutFeature in Frameworks */,
-				E2ED09412C3B76C0007C2372 /* AboutFeature in Frameworks */,
+				E2D7E9552C3C4C1200FCEA19 /* AboutFeature in Frameworks */,
+				E2D7E9602C3C66B300FCEA19 /* AboutFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,10 +585,10 @@
 			files = (
 				E290F2542ADDAF55001B3276 /* Kingfisher in Frameworks */,
 				E20C6B172BE859DA00DDB57A /* Vortex in Frameworks */,
-				E2ED093F2C3B76B3007C2372 /* AboutFeature in Frameworks */,
 				E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */,
 				E28F2ABF2C388BDB0000908A /* AboutFeature in Frameworks */,
 				E2ED09442C3B7884007C2372 /* ThemeFeature in Frameworks */,
+				E2ED09492C3C4BF7007C2372 /* AboutFeature in Frameworks */,
 				E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */,
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
 				E2D3B7512C35D8F1007F8561 /* ThemeFeature in Frameworks */,
@@ -786,6 +794,8 @@
 		E23997D820E840C1007D8CE4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E2D7E9612C3C672B00FCEA19 /* app_resources.json */,
+				E2D7E9562C3C543F00FCEA19 /* packages_license.html */,
 				E283572F2B25BFA200E3807A /* SwiftyForecastWidgetExtension.entitlements */,
 				E283572E2B25BEDE00E3807A /* SwiftyForecast.entitlements */,
 				E27E2FDA1DA057C100B3EABF /* Info.plist */,
@@ -1442,7 +1452,8 @@
 			name = AboutDevApp;
 			packageProductDependencies = (
 				E28F2AD22C388C530000908A /* AboutFeature */,
-				E2ED09402C3B76C0007C2372 /* AboutFeature */,
+				E2D7E9542C3C4C1200FCEA19 /* AboutFeature */,
+				E2D7E95F2C3C66B300FCEA19 /* AboutFeature */,
 			);
 			productName = AboutDevApp;
 			productReference = E28F2AC42C388C1E0000908A /* AboutDevApp.app */;
@@ -1475,8 +1486,8 @@
 				E234A6812C35C53900288175 /* ThemeFeature */,
 				E2D3B7502C35D8F1007F8561 /* ThemeFeature */,
 				E28F2ABE2C388BDB0000908A /* AboutFeature */,
-				E2ED093E2C3B76B3007C2372 /* AboutFeature */,
 				E2ED09432C3B7884007C2372 /* ThemeFeature */,
+				E2ED09482C3C4BF7007C2372 /* AboutFeature */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
@@ -1578,8 +1589,8 @@
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 				E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				E2ED093D2C3B76B3007C2372 /* XCRemoteSwiftPackageReference "AboutFeature" */,
 				E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */,
+				E2D7E95E2C3C66B300FCEA19 /* XCLocalSwiftPackageReference "../Packages/AboutFeature" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -1608,6 +1619,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D7E9582C3C550B00FCEA19 /* packages_license.html in Resources */,
+				E2D7E9632C3C672B00FCEA19 /* app_resources.json in Resources */,
 				E28F2ACE2C388C1F0000908A /* Preview Assets.xcassets in Resources */,
 				E28F2ACB2C388C1F0000908A /* Assets.xcassets in Resources */,
 			);
@@ -1622,11 +1635,13 @@
 				E2CAC9E72C04321A00E573D2 /* GoogleService-Info.plist in Resources */,
 				E20C6B062BE64EFA00DDB57A /* PrivacyInfo.xcprivacy in Resources */,
 				E27E2F881DA0487600B3EABF /* Main.storyboard in Resources */,
+				E2D7E9622C3C672B00FCEA19 /* app_resources.json in Resources */,
 				E20C6B192BE85BD800DDB57A /* CHANGELOG.md in Resources */,
 				E23CD76120ED950500F0F72A /* HourlyViewCell.xib in Resources */,
 				E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */,
 				E21ABD512AE9735F00F93F01 /* current_weather_response.json in Resources */,
 				E228F8482B4462F200B60E33 /* Assets.xcassets in Resources */,
+				E2D7E9572C3C543F00FCEA19 /* packages_license.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2582,6 +2597,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		E2D7E95E2C3C66B300FCEA19 /* XCLocalSwiftPackageReference "../Packages/AboutFeature" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/AboutFeature;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2613,14 +2635,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 10.26.0;
-			};
-		};
-		E2ED093D2C3B76B3007C2372 /* XCRemoteSwiftPackageReference "AboutFeature" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pawelmilek/AboutFeature.git";
-			requirement = {
-				branch = main;
-				kind = branch;
 			};
 		};
 		E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */ = {
@@ -2708,14 +2722,12 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = ThemeFeature;
 		};
-		E2ED093E2C3B76B3007C2372 /* AboutFeature */ = {
+		E2D7E9542C3C4C1200FCEA19 /* AboutFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2ED093D2C3B76B3007C2372 /* XCRemoteSwiftPackageReference "AboutFeature" */;
 			productName = AboutFeature;
 		};
-		E2ED09402C3B76C0007C2372 /* AboutFeature */ = {
+		E2D7E95F2C3C66B300FCEA19 /* AboutFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2ED093D2C3B76B3007C2372 /* XCRemoteSwiftPackageReference "AboutFeature" */;
 			productName = AboutFeature;
 		};
 		E2ED09432C3B7884007C2372 /* ThemeFeature */ = {
@@ -2727,6 +2739,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */;
 			productName = ThemeFeature;
+		};
+		E2ED09482C3C4BF7007C2372 /* AboutFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AboutFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

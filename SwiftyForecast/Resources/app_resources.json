@@ -1,0 +1,29 @@
+{
+    "appIdentifier": "1161186194",
+    "resources": [
+        {
+            "name": "privacyPolicy",
+            "content": "https://sites.google.com/view/pmilek/privacy-policy"
+        },
+        {
+            "name": "appStoreShare",
+            "content": "https://apps.apple.com/app/id1161186194"
+        },
+        {
+            "name": "appStoreReview",
+            "content": "https://apps.apple.com/app/id1161186194?action=write-review"
+        },
+        {
+            "name": "appStorePreview",
+            "content": "https://apps.apple.com/us/developer/pawel-milek/id1139599148"
+        },
+        {
+            "name": "dataProvider",
+            "content": "https://openweathermap.org"
+        },
+        {
+            "name": "supportEmail",
+            "content": "pawel.milek0626@gmail.com"
+        }
+    ]
+}
