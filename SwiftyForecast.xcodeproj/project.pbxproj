@@ -285,6 +285,13 @@
 		E2D7E9602C3C66B300FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E95F2C3C66B300FCEA19 /* AboutFeature */; };
 		E2D7E9622C3C672B00FCEA19 /* app_resources.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9612C3C672B00FCEA19 /* app_resources.json */; };
 		E2D7E9632C3C672B00FCEA19 /* app_resources.json in Resources */ = {isa = PBXBuildFile; fileRef = E2D7E9612C3C672B00FCEA19 /* app_resources.json */; };
+		E2D7E96B2C3C6CCE00FCEA19 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E96A2C3C6CCE00FCEA19 /* ThemeFeature */; };
+		E2D7E96D2C3C6CDE00FCEA19 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E96C2C3C6CDE00FCEA19 /* ThemeFeature */; };
+		E2D7E9732C3CAA2B00FCEA19 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E9722C3CAA2B00FCEA19 /* ThemeFeature */; };
+		E2D7E9762C3CAF1B00FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E9752C3CAF1B00FCEA19 /* AboutFeature */; };
+		E2D7E9782C3CB74300FCEA19 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E9772C3CB74300FCEA19 /* ThemeFeature */; };
+		E2D7E97B2C3CB98E00FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E97A2C3CB98E00FCEA19 /* AboutFeature */; };
+		E2D7E97D2C3CB99A00FCEA19 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D7E97C2C3CB99A00FCEA19 /* AboutFeature */; };
 		E2D960812120F34800AE0B6E /* GeocodedLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocodedLocation.swift */; };
 		E2DC1458248D2F8700D1A329 /* InvalidReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC1457248D2F8700D1A329 /* InvalidReference.swift */; };
 		E2DC146F248F21A500D1A329 /* Bundle+ApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DC146E248F21A500D1A329 /* Bundle+ApplicationInfo.swift */; };
@@ -297,8 +304,6 @@
 		E2E5EB5E2C36ECF700DA62B6 /* BundledApplicationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E5EB5D2C36ECF700DA62B6 /* BundledApplicationInfo.swift */; };
 		E2E6C6FB2C0E313000500EE8 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E6C6FA2C0E313000500EE8 /* FirebaseAnalyticsService.swift */; };
 		E2E712732AD93710002BFFA7 /* UIFont+PreferredFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E712722AD93710002BFFA7 /* UIFont+PreferredFont.swift */; };
-		E2ED09442C3B7884007C2372 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09432C3B7884007C2372 /* ThemeFeature */; };
-		E2ED09462C3B788D007C2372 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09452C3B788D007C2372 /* ThemeFeature */; };
 		E2ED09492C3C4BF7007C2372 /* AboutFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2ED09482C3C4BF7007C2372 /* AboutFeature */; };
 		E2F17C2D20F4097C00068BD2 /* DailyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F17C2B20F4097C00068BD2 /* DailyViewCell.swift */; };
 		E2F17C2E20F4097C00068BD2 /* DailyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2F17C2C20F4097C00068BD2 /* DailyViewCell.xib */; };
@@ -565,7 +570,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D3B7532C35D900007F8561 /* ThemeFeature in Frameworks */,
-				E2ED09462C3B788D007C2372 /* ThemeFeature in Frameworks */,
+				E2D7E96D2C3C6CDE00FCEA19 /* ThemeFeature in Frameworks */,
+				E2D7E9732C3CAA2B00FCEA19 /* ThemeFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,9 +579,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D7E97D2C3CB99A00FCEA19 /* AboutFeature in Frameworks */,
 				E28F2AD32C388C530000908A /* AboutFeature in Frameworks */,
 				E2D7E9552C3C4C1200FCEA19 /* AboutFeature in Frameworks */,
 				E2D7E9602C3C66B300FCEA19 /* AboutFeature in Frameworks */,
+				E2D7E9762C3CAF1B00FCEA19 /* AboutFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,12 +595,14 @@
 				E20C6B172BE859DA00DDB57A /* Vortex in Frameworks */,
 				E2CAC9E32C04310600E573D2 /* FirebaseAnalytics in Frameworks */,
 				E28F2ABF2C388BDB0000908A /* AboutFeature in Frameworks */,
-				E2ED09442C3B7884007C2372 /* ThemeFeature in Frameworks */,
+				E2D7E9782C3CB74300FCEA19 /* ThemeFeature in Frameworks */,
+				E2D7E96B2C3C6CCE00FCEA19 /* ThemeFeature in Frameworks */,
 				E2ED09492C3C4BF7007C2372 /* AboutFeature in Frameworks */,
 				E2CAC9E52C04310600E573D2 /* FirebaseCrashlytics in Frameworks */,
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
 				E2D3B7512C35D8F1007F8561 /* ThemeFeature in Frameworks */,
 				E234A6822C35C53900288175 /* ThemeFeature in Frameworks */,
+				E2D7E97B2C3CB98E00FCEA19 /* AboutFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,7 +1441,8 @@
 			name = ThemeDevApp;
 			packageProductDependencies = (
 				E2D3B7522C35D900007F8561 /* ThemeFeature */,
-				E2ED09452C3B788D007C2372 /* ThemeFeature */,
+				E2D7E96C2C3C6CDE00FCEA19 /* ThemeFeature */,
+				E2D7E9722C3CAA2B00FCEA19 /* ThemeFeature */,
 			);
 			productName = ThemeDevApp;
 			productReference = E234A6882C35CB5E00288175 /* ThemeDevApp.app */;
@@ -1454,6 +1465,8 @@
 				E28F2AD22C388C530000908A /* AboutFeature */,
 				E2D7E9542C3C4C1200FCEA19 /* AboutFeature */,
 				E2D7E95F2C3C66B300FCEA19 /* AboutFeature */,
+				E2D7E9752C3CAF1B00FCEA19 /* AboutFeature */,
+				E2D7E97C2C3CB99A00FCEA19 /* AboutFeature */,
 			);
 			productName = AboutDevApp;
 			productReference = E28F2AC42C388C1E0000908A /* AboutDevApp.app */;
@@ -1486,8 +1499,10 @@
 				E234A6812C35C53900288175 /* ThemeFeature */,
 				E2D3B7502C35D8F1007F8561 /* ThemeFeature */,
 				E28F2ABE2C388BDB0000908A /* AboutFeature */,
-				E2ED09432C3B7884007C2372 /* ThemeFeature */,
 				E2ED09482C3C4BF7007C2372 /* AboutFeature */,
+				E2D7E96A2C3C6CCE00FCEA19 /* ThemeFeature */,
+				E2D7E9772C3CB74300FCEA19 /* ThemeFeature */,
+				E2D7E97A2C3CB98E00FCEA19 /* AboutFeature */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
@@ -1589,8 +1604,8 @@
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 				E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */,
-				E2D7E95E2C3C66B300FCEA19 /* XCLocalSwiftPackageReference "../Packages/AboutFeature" */,
+				E2D7E9712C3CAA2B00FCEA19 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */,
+				E2D7E9792C3CB98E00FCEA19 /* XCRemoteSwiftPackageReference "AboutFeature" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -2598,9 +2613,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		E2D7E95E2C3C66B300FCEA19 /* XCLocalSwiftPackageReference "../Packages/AboutFeature" */ = {
+		E2D7E9712C3CAA2B00FCEA19 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/AboutFeature;
+			relativePath = ../Packages/ThemeFeature;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -2637,9 +2652,9 @@
 				minimumVersion = 10.26.0;
 			};
 		};
-		E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */ = {
+		E2D7E9792C3CB98E00FCEA19 /* XCRemoteSwiftPackageReference "AboutFeature" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pawelmilek/ThemeFeature.git";
+			repositoryURL = "https://github.com/pawelmilek/AboutFeature.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -2730,15 +2745,35 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AboutFeature;
 		};
-		E2ED09432C3B7884007C2372 /* ThemeFeature */ = {
+		E2D7E96A2C3C6CCE00FCEA19 /* ThemeFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */;
 			productName = ThemeFeature;
 		};
-		E2ED09452C3B788D007C2372 /* ThemeFeature */ = {
+		E2D7E96C2C3C6CDE00FCEA19 /* ThemeFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2ED09422C3B7884007C2372 /* XCRemoteSwiftPackageReference "ThemeFeature" */;
 			productName = ThemeFeature;
+		};
+		E2D7E9722C3CAA2B00FCEA19 /* ThemeFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThemeFeature;
+		};
+		E2D7E9752C3CAF1B00FCEA19 /* AboutFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AboutFeature;
+		};
+		E2D7E9772C3CB74300FCEA19 /* ThemeFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThemeFeature;
+		};
+		E2D7E97A2C3CB98E00FCEA19 /* AboutFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2D7E9792C3CB98E00FCEA19 /* XCRemoteSwiftPackageReference "AboutFeature" */;
+			productName = AboutFeature;
+		};
+		E2D7E97C2C3CB99A00FCEA19 /* AboutFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E2D7E9792C3CB98E00FCEA19 /* XCRemoteSwiftPackageReference "AboutFeature" */;
+			productName = AboutFeature;
 		};
 		E2ED09482C3C4BF7007C2372 /* AboutFeature */ = {
 			isa = XCSwiftPackageProductDependency;

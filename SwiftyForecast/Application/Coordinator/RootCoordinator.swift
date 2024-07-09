@@ -11,6 +11,7 @@ import SwiftUI
 import CoreLocation
 import ThemeFeatureUI
 import ThemeFeatureData
+import ThemeFeatureDomain
 import AboutFeatureUI
 import AboutFeatureData
 import AboutFeatureDomain
@@ -109,7 +110,15 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
-                repository: UserDefaultsThemeRepository(storage: .standard),
+                service: ThemeStorageService(
+                    repository: ThemeRepository(
+                        dataSource: LocalThemeDataSource(
+                            storage: .standard
+                        )
+                    ),
+                    encoder: JSONEncoder(),
+                    decoder: JSONDecoder()
+                ),
                 notification: NotificationCenterThemeAdapter(
                     notificationCenter: .default
                 ),

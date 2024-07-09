@@ -8,12 +8,21 @@
 
 import Foundation
 import ThemeFeatureUI
+import ThemeFeatureDomain
 import ThemeFeatureData
 
 enum Preview {
     static var viewModel: ThemeViewModel {
         ThemeViewModel(
-            repository: UserDefaultsThemeRepository(storage: .init(suiteName: "preivew")!),
+            service: ThemeStorageService(
+                repository: ThemeRepository(
+                    dataSource: LocalThemeDataSource(
+                        storage: .init(suiteName: "preivew")!
+                    )
+                ),
+                encoder: JSONEncoder(),
+                decoder: JSONDecoder()
+            ),
             notification: NotificationCenterThemeAdapter(
                 notificationCenter: .default
             ),

@@ -8,12 +8,21 @@
 
 import SwiftUI
 import ThemeFeatureUI
+import ThemeFeatureDomain
 import ThemeFeatureData
 
 @main
 struct ThemeDevAppApp: App {
     @StateObject private var viewModel = ThemeViewModel(
-        repository: UserDefaultsThemeRepository(storage: .standard),
+        service: ThemeStorageService(
+            repository: ThemeRepository(
+                dataSource: LocalThemeDataSource(
+                    storage: .standard
+                )
+            ),
+            encoder: JSONEncoder(),
+            decoder: JSONDecoder()
+        ),
         notification: NotificationCenterThemeAdapter(
             notificationCenter: .default
         ),
