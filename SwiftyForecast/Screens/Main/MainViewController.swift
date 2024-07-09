@@ -12,7 +12,7 @@ import Combine
 import ThemeFeatureDomain
 
 final class MainViewController: UIViewController {
-    @AppStorage("appearanceTheme") var theme: Theme = .systemDefault
+    @AppStorage("appearanceTheme") var theme: Theme = .system
 
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()
@@ -169,7 +169,7 @@ private extension MainViewController {
         case .light:
             window?.overrideUserInterfaceStyle = .light
 
-        case .systemDefault:
+        case .system:
             window?.overrideUserInterfaceStyle = UITraitCollection.current.userInterfaceStyle
         }
     }

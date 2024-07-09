@@ -16,8 +16,7 @@ struct ContentView: View {
         ThemeView(
             viewModel: viewModel,
             textColor: .accentColor,
-            darkScheme: .red,
-            lightScheme: .yellow
+            scheme: (dark: .red, light: .yellow)
         )
     }
 }
