@@ -12,7 +12,7 @@ import Combine
 import ThemeFeatureDomain
 
 final class MainViewController: UIViewController {
-    @AppStorage("appearanceTheme") var theme: Theme = .system
+    @AppStorage("appearanceTheme") var theme: ThemeState = .system
 
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()

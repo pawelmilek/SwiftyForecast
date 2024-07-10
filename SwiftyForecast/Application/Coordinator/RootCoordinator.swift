@@ -127,8 +127,7 @@ private extension RootCoordinator {
                 )
             ),
             textColor: .accent,
-            darkScheme: .purple,
-            lightScheme: .customPrimary
+            scheme: (dark: .purple, light: .customPrimary)
         )
     }
 
