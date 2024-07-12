@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import CoreLocation
 
 @MainActor
 enum CompositionRoot {
-
     static func weatherViewController(
         compoundKey: String,
         latitude: Double,
@@ -68,5 +66,4 @@ enum CompositionRoot {
 
         return viewController
     }
-
 }
