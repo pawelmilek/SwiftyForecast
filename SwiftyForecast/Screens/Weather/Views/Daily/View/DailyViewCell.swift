@@ -27,15 +27,33 @@ final class DailyViewCell: UITableViewCell {
 
 // MARK: - Private - Setups
 private extension DailyViewCell {
+    struct Style {
+        static let backgroundColor = UIColor.clear
+
+        static let dateColor = UIColor.accent
+        static let dateAlignment = NSTextAlignment.left
+        static let numberOfLines = 2
+
+        static let iconColor = UIColor.accent
+        static let iconAlignment = NSTextAlignment.center
+
+        static let temperatureFont = UIFont.preferredFont(for: .title3, weight: .bold, design: .monospaced)
+        static let temperatureColor = UIColor.accent
+        static let temperatureAlignment = NSTextAlignment.center
+
+        static let iconShadowRadius = CGFloat(0.5)
+        static let iconShadowOpacity = Float(1.0)
+        static let iconShadowOffset = CGSize(width: 1, height: 1)
+    }
 
     func setup() {
-        backgroundColor = Style.DailyCell.backgroundColor
-        dateLabel.textColor = Style.DailyCell.dateColor
-        dateLabel.textAlignment = Style.DailyCell.dateAlignment
-        dateLabel.numberOfLines = Style.DailyCell.numberOfLines
-        temperatureLabel.font = Style.DailyCell.temperatureFont
-        temperatureLabel.textColor = Style.DailyCell.temperatureColor
-        temperatureLabel.textAlignment = Style.DailyCell.temperatureAlignment
+        backgroundColor = Style.backgroundColor
+        dateLabel.textColor = Style.dateColor
+        dateLabel.textAlignment = Style.dateAlignment
+        dateLabel.numberOfLines = Style.numberOfLines
+        temperatureLabel.font = Style.temperatureFont
+        temperatureLabel.textColor = Style.temperatureColor
+        temperatureLabel.textAlignment = Style.temperatureAlignment
         setupConditionIconShadow()
         registerTraitUserInterfaceStyleObserver()
     }
@@ -50,9 +68,9 @@ private extension DailyViewCell {
 
     @objc
     func setupConditionIconShadow() {
-        iconImageView.layer.shadowRadius = Style.DailyCell.iconShadowRadius
-        iconImageView.layer.shadowOpacity = Style.DailyCell.iconShadowOpacity
-        iconImageView.layer.shadowOffset = Style.DailyCell.iconShadowOffset
+        iconImageView.layer.shadowRadius = Style.iconShadowRadius
+        iconImageView.layer.shadowOpacity = Style.iconShadowOpacity
+        iconImageView.layer.shadowOffset = Style.iconShadowOffset
         iconImageView.layer.shadowColor = UIColor.shadow.cgColor
         iconImageView.layer.masksToBounds = false
     }

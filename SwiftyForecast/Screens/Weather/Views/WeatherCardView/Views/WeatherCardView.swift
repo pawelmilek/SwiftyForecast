@@ -9,6 +9,24 @@
 import SwiftUI
 
 struct WeatherCardView: View {
+    private struct Style {
+        static let cornerRadius: CGFloat = 25
+        static let shadowColor = Color(.shadow)
+        static let shadowRadius = CGFloat(0)
+        static let shadow = (x: CGFloat(2.5), y: CGFloat(2.5))
+        static let textColor = Color.white
+
+        static let locationNameFont = Font.system(.title2, design: .monospaced, weight: .heavy)
+        static let dayDescriptionFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
+        static let temperatureFont = Font.system(size: 80, weight: .black, design: .monospaced)
+        static let temperatureMaxMinFont = Font.system(.footnote, design: .monospaced, weight: .black)
+        static let conditionsFont = Font.system(.caption2, design: .monospaced, weight: .light)
+
+        static let iconShadowRadius = CGFloat(0.5)
+        static let iconShadowOffset = CGSize(width: 1, height: 1)
+        static let iconShadowColor = Color.white
+    }
+
     @ObservedObject var viewModel: WeatherCardViewViewModel
 
     var body: some View {
@@ -23,7 +41,7 @@ struct WeatherCardView: View {
                 }
                 conditionsView
             }
-            .foregroundStyle(Style.WeatherCard.textColor)
+            .foregroundStyle(Style.textColor)
             .padding(15)
             .background(
                 // TODO: Enable Animation faeture after Dependency Injection and Composition Root is finished.
@@ -31,16 +49,16 @@ struct WeatherCardView: View {
             )
             .clipShape(
                 RoundedRectangle(
-                    cornerRadius: Style.WeatherCard.cornerRadius,
+                    cornerRadius: Style.cornerRadius,
                     style: .continuous
                 )
                 .inset(by: 2.5)
             )
             .shadow(
-                color: Style.WeatherCard.shadowColor,
-                radius: Style.WeatherCard.shadowRadius,
-                x: Style.WeatherCard.shadow.x,
-                y: Style.WeatherCard.shadow.y
+                color: Style.shadowColor,
+                radius: Style.shadowRadius,
+                x: Style.shadow.x,
+                y: Style.shadow.y
             )
         }
         .frame(maxHeight: 250)
@@ -54,7 +72,7 @@ private extension WeatherCardView {
 
     var locationNameView: some View {
         Text(viewModel.name)
-            .font(Style.WeatherCard.locationNameFont)
+            .font(Style.locationNameFont)
             .id(viewModel.name)
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
     }
@@ -77,10 +95,10 @@ private extension WeatherCardView {
             }
         }
         .shadow(
-            color: Style.WeatherCard.iconShadowColor,
-            radius: Style.WeatherCard.iconShadowRadius,
-            x: Style.WeatherCard.iconShadowOffset.width,
-            y: Style.WeatherCard.iconShadowOffset.height
+            color: Style.iconShadowColor,
+            radius: Style.iconShadowRadius,
+            x: Style.iconShadowOffset.width,
+            y: Style.iconShadowOffset.height
         )
     }
 
@@ -90,19 +108,19 @@ private extension WeatherCardView {
             Text(viewModel.description)
                 .textScaled()
         }
-        .font(Style.WeatherCard.dayDescriptionFont)
+        .font(Style.dayDescriptionFont)
     }
 
     var temperatureView: some View {
         VStack(spacing: 0) {
             Text(viewModel.temperature)
-                .font(Style.WeatherCard.temperatureFont)
+                .font(Style.temperatureFont)
                 .textScaled()
             VStack {
                 Text("")
                 Text(viewModel.temperatureMaxMin)
             }
-            .font(Style.WeatherCard.temperatureMaxMinFont)
+            .font(Style.temperatureMaxMinFont)
         }
         .id(viewModel.temperature)
         .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
@@ -139,7 +157,7 @@ private extension WeatherCardView {
             .transition(.blurReplace.animation(.easeOut(duration: 0.5)))
             .frame(maxWidth: .infinity)
         }
-        .font(Style.WeatherCard.conditionsFont)
+        .font(Style.conditionsFont)
     }
 }
 

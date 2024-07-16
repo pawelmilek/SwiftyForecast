@@ -10,6 +10,14 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchRow: View {
+    private struct Style {
+        static let fontDesign = Font.Design.monospaced
+        static let titleFont = Font.callout
+        static let subtitleFont = Font.subheadline
+        static let titleFontWeight = Font.Weight.regular
+        static let subtitleFontWeight = Font.Weight.bold
+    }
+
     let result: MKLocalSearchCompletion
     var onAction: (MKLocalSearchCompletion) -> Void
 
@@ -19,13 +27,13 @@ struct LocationSearchRow: View {
         }, label: {
             VStack(alignment: .leading) {
                 Text(result.title)
-                    .font(Style.LocationSearchResultRow.subtitleFont)
-                    .fontWeight(Style.LocationSearchResultRow.titleFontWeight)
+                    .font(Style.subtitleFont)
+                    .fontWeight(Style.titleFontWeight)
                 Text(result.subtitle)
-                    .font(Style.LocationSearchResultRow.subtitleFont)
-                    .fontWeight(Style.LocationSearchResultRow.subtitleFontWeight)
+                    .font(Style.subtitleFont)
+                    .fontWeight(Style.subtitleFontWeight)
             }
-            .fontDesign(Style.LocationSearchResultRow.fontDesign)
+            .fontDesign(Style.fontDesign)
             .frame(maxWidth: .infinity, alignment: .leading)
         })
     }

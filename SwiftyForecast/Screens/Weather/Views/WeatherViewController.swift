@@ -10,6 +10,12 @@ import UIKit
 import Combine
 
 final class WeatherViewController: UIViewController {
+    private struct Style {
+        static let tableViewBackgroundColor = UIColor.clear
+        static let tableViewSeparatorStyle = UITableViewCell.SeparatorStyle.none
+        static let backgroundColor = UIColor.systemBackground
+    }
+
     private enum Constant {
         static let weekdayCellHeight = CGFloat(53)
         static let hourlyCellsInRow = CGFloat(4)
@@ -81,10 +87,10 @@ private extension WeatherViewController {
     }
 
     func setupAppearance() {
-        view.backgroundColor = Style.Weather.backgroundColor
-        hourlyCollectionView.backgroundColor = Style.Weather.backgroundColor
-        dailyTableView.backgroundColor = Style.Weather.tableViewBackgroundColor
-        dailyTableView.separatorStyle = Style.Weather.tableViewSeparatorStyle
+        view.backgroundColor = Style.backgroundColor
+        hourlyCollectionView.backgroundColor = Style.backgroundColor
+        dailyTableView.backgroundColor = Style.tableViewBackgroundColor
+        dailyTableView.separatorStyle = Style.tableViewSeparatorStyle
     }
 
     func setupHourlyCollectionView() {

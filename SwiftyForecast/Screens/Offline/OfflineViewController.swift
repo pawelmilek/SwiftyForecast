@@ -9,16 +9,24 @@
 import UIKit
 
 final class OfflineViewController: UIViewController {
+    private struct Style {
+        static let backgroundColor = UIColor.systemBackground
+        static let symbolFont = UIFont.systemFont(ofSize: 100, weight: .light)
+        static let symbolColor = UIColor.accent
+        static let descriptionFont = UIFont.preferredFont(for: .title2, weight: .bold, design: .monospaced)
+        static let descriptionColor = UIColor.accent
+        static let descriptionAlignment = NSTextAlignment.center
+    }
     static let identifier = 0xDEADBEEF
 
     private var centerImageView: UIImageView = {
         let imageView = UIImageView()
         let config = UIImage.SymbolConfiguration(
-            font: Style.Offline.symbolFont,
+            font: Style.symbolFont,
             scale: .large
         )
         imageView.image = UIImage(systemName: "wifi.slash", withConfiguration: config)
-        imageView.tintColor = Style.Offline.symbolColor
+        imageView.tintColor = Style.symbolColor
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -26,9 +34,9 @@ final class OfflineViewController: UIViewController {
     private var descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("You are offline", comment: "")
-        label.font = Style.Offline.descriptionFont
-        label.textColor = Style.Offline.descriptionColor
-        label.textAlignment = Style.Offline.descriptionAlignment
+        label.font = Style.descriptionFont
+        label.textColor = Style.descriptionColor
+        label.textAlignment = Style.descriptionAlignment
         label.numberOfLines = 1
         return label
     }()
@@ -68,7 +76,7 @@ private extension OfflineViewController {
 
     func setup() {
         self.view.tag = OfflineViewController.identifier
-        view.backgroundColor = Style.Offline.backgroundColor
+        view.backgroundColor = Style.backgroundColor
     }
 
     func setupLayout() {

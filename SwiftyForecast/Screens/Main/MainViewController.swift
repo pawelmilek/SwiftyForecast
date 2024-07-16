@@ -12,6 +12,11 @@ import Combine
 import ThemeFeatureDomain
 
 final class MainViewController: UIViewController {
+    private struct Style {
+        static let pageIndicatorTintColor = UIColor.accent
+        static let backgroundColor = UIColor.systemBackground
+    }
+
     @AppStorage("appearanceTheme") var theme: ThemeState = .system
 
     private lazy var aboutBarButton: UIBarButtonItem = {
@@ -202,9 +207,9 @@ private extension MainViewController {
 
     func setupPageControlAppearance() {
         let proxyPageControl = UIPageControl.appearance()
-        proxyPageControl.pageIndicatorTintColor = Style.Main.pageIndicatorTintColor
+        proxyPageControl.pageIndicatorTintColor = Style.pageIndicatorTintColor
         proxyPageControl.currentPageIndicatorTintColor = .customPrimary
-        view.backgroundColor = Style.Main.backgroundColor
+        view.backgroundColor = Style.backgroundColor
     }
 
     func setupTipObservationTasks() {

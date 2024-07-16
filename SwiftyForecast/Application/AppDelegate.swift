@@ -59,12 +59,12 @@ private extension AppDelegate {
         }
 
         let setTitleTextColor = {
-            let textAttributes = [NSAttributedString.Key.foregroundColor: Style.NavigationBar.titleColor]
+            let textAttributes = [NSAttributedString.Key.foregroundColor: UIColor.accent]
             UINavigationBar.appearance().titleTextAttributes = textAttributes
         }
 
         let setBarButtonItemColor = {
-            UINavigationBar.appearance().tintColor = Style.NavigationBar.barButtonItemColor
+            UINavigationBar.appearance().tintColor = UIColor.accent
         }
 
         setTransparentBackground()

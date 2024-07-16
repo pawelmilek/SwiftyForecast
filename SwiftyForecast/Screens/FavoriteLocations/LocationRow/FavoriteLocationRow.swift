@@ -32,21 +32,39 @@ struct FavoriteLocationRow: View {
 }
 
 private extension FavoriteLocationRow {
+    struct Style {
+        static let backgroundColor = UIColor.clear
+        static let timeFont = Font.system(.subheadline, design: .monospaced, weight: .bold)
+
+        static let nameFont = Font.system(.footnote, design: .monospaced, weight: .semibold)
+        static let nameColor = Color(.accent)
+
+        static let tempFont = Font.system(.title, design: .monospaced, weight: .heavy)
+        static let tempColor = Color(.customPrimary)
+
+        static let cornerRadius = CGFloat(15)
+        static let borderColor = Color(.shadow)
+        static let shadowColor = Color(.shadow)
+        static let shadowRadius = CGFloat(0)
+        static let shadowOpacity = Float(1.0)
+        static let shadowOffset = (x: 2.5, y: 2.5)
+    }
+
     var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 0) {
                 Text(viewModel.time)
-                    .font(Style.LocationRow.timeFont)
+                    .font(Style.timeFont)
                     .foregroundStyle(.customPrimary)
                 Text(viewModel.name)
-                    .font(Style.LocationRow.nameFont)
-                    .foregroundStyle(Style.LocationRow.nameColor)
+                    .font(Style.nameFont)
+                    .foregroundStyle(Style.nameColor)
                     .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             Text(viewModel.temperature)
-                .font(Style.LocationRow.tempFont)
-                .foregroundStyle(Style.LocationRow.tempColor)
+                .font(Style.tempFont)
+                .foregroundStyle(Style.tempColor)
                 .overlay {
                     ProgressView()
                         .tint(.customPrimary)
@@ -63,19 +81,19 @@ private extension FavoriteLocationRow {
                     .tint(.customPrimary)
             }
         }
-        .cornerRadius(Style.LocationRow.cornerRadius)
+        .cornerRadius(Style.cornerRadius)
         .clipShape(
             RoundedRectangle(
-                cornerRadius: Style.LocationRow.cornerRadius,
+                cornerRadius: Style.cornerRadius,
                 style: .continuous
             )
             .inset(by: 2.5)
         )
         .shadow(
-            color: Style.LocationRow.shadowColor,
-            radius: Style.LocationRow.shadowRadius,
-            x: Style.LocationRow.shadowOffset.x,
-            y: Style.LocationRow.shadowOffset.y
+            color: Style.shadowColor,
+            radius: Style.shadowRadius,
+            x: Style.shadowOffset.x,
+            y: Style.shadowOffset.y
         )
     }
 }

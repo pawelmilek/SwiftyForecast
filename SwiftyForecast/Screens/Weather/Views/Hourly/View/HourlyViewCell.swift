@@ -2,6 +2,26 @@ import UIKit
 import Combine
 
 final class HourlyViewCell: UICollectionViewCell {
+    private struct Style {
+        static let timeFont = UIFont.preferredFont(for: .caption1, weight: .semibold, design: .monospaced)
+        static let timeColor = UIColor.accent
+        static let timeAlignment = NSTextAlignment.center
+        static let temperatureFont = UIFont.preferredFont(for: .body, weight: .bold, design: .monospaced)
+        static let temperatureColor = UIColor.accent
+        static let temperatureAlignment = NSTextAlignment.right
+        static let iconContentMode = UIView.ContentMode.scaleAspectFit
+
+        static let cornerRadius = CGFloat(13)
+        static let shadowRadius = CGFloat(0)
+        static let shadowOpacity = Float(1.0)
+        static let shadowOffset = CGSize(width: 2.5, height: 2.5)
+
+        static let iconShadowRadius = CGFloat(0.5)
+        static let iconShadowOpacity = Float(1.0)
+        static let iconShadowOffset = CGSize(width: 1, height: 1)
+        static let iconShadowColor = UIColor.white.cgColor
+    }
+
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var temperatureLabel: UILabel!
@@ -27,20 +47,20 @@ final class HourlyViewCell: UICollectionViewCell {
 private extension HourlyViewCell {
 
     func setup() {
-        timeLabel.font = Style.HourlyCell.timeFont
-        timeLabel.textColor = Style.HourlyCell.timeColor
-        timeLabel.textAlignment = Style.HourlyCell.timeAlignment
+        timeLabel.font = Style.timeFont
+        timeLabel.textColor = Style.timeColor
+        timeLabel.textAlignment = Style.timeAlignment
 
-        iconImageView.contentMode = Style.HourlyCell.iconContentMode
-        iconImageView.layer.shadowRadius = Style.HourlyCell.iconShadowRadius
-        iconImageView.layer.shadowOpacity = Style.HourlyCell.iconShadowOpacity
-        iconImageView.layer.shadowOffset = Style.HourlyCell.iconShadowOffset
-        iconImageView.layer.shadowColor = Style.HourlyCell.iconShadowColor
+        iconImageView.contentMode = Style.iconContentMode
+        iconImageView.layer.shadowRadius = Style.iconShadowRadius
+        iconImageView.layer.shadowOpacity = Style.iconShadowOpacity
+        iconImageView.layer.shadowOffset = Style.iconShadowOffset
+        iconImageView.layer.shadowColor = Style.iconShadowColor
         iconImageView.layer.masksToBounds = false
 
-        temperatureLabel.font = Style.HourlyCell.temperatureFont
-        temperatureLabel.textColor = Style.HourlyCell.temperatureColor
-        temperatureLabel.textAlignment = Style.HourlyCell.temperatureAlignment
+        temperatureLabel.font = Style.temperatureFont
+        temperatureLabel.textColor = Style.temperatureColor
+        temperatureLabel.textAlignment = Style.temperatureAlignment
 
         contentView.backgroundColor = .customPrimary
         setRoundedCornersAndBorder()
@@ -57,14 +77,14 @@ private extension HourlyViewCell {
 
     func setupShadow() {
         contentView.layer.shadowColor = UIColor.shadow.cgColor
-        contentView.layer.shadowOffset = Style.HourlyCell.shadowOffset
-        contentView.layer.shadowOpacity = Style.HourlyCell.shadowOpacity
-        contentView.layer.shadowRadius = Style.HourlyCell.shadowRadius
+        contentView.layer.shadowOffset = Style.shadowOffset
+        contentView.layer.shadowOpacity = Style.shadowOpacity
+        contentView.layer.shadowRadius = Style.shadowRadius
     }
 
     @objc
     func setRoundedCornersAndBorder() {
-        contentView.layer.cornerRadius = Style.HourlyCell.cornerRadius
+        contentView.layer.cornerRadius = Style.cornerRadius
         layer.masksToBounds = false
         setupShadow()
     }

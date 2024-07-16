@@ -10,6 +10,11 @@ import SwiftUI
 import Charts
 
 struct HourlyForecastChart: View {
+    private struct Style {
+        static let iconShadowRadius = CGFloat(0.5)
+        static let iconShadowOffset = CGSize(width: 1, height: 1)
+    }
+
     @ObservedObject var viewModel: HourlyForecastChartViewModel
 
     let curGradient = LinearGradient(
@@ -57,9 +62,9 @@ struct HourlyForecastChart: View {
                                         .frame(maxWidth: 35, maxHeight: 35)
                                         .shadow(
                                             color: Color(.shadow),
-                                            radius: Style.WeatherCard.iconShadowRadius,
-                                            x: Style.WeatherCard.iconShadowOffset.width,
-                                            y: Style.WeatherCard.iconShadowOffset.height
+                                            radius: Style.iconShadowRadius,
+                                            x: Style.iconShadowOffset.width,
+                                            y: Style.iconShadowOffset.height
                                         )
                                 }, placeholder: {
                                     ProgressView()

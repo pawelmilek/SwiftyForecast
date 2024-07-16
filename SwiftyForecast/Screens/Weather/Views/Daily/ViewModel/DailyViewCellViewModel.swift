@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 @MainActor
 final class DailyViewCellViewModel: ObservableObject {
@@ -43,8 +44,13 @@ final class DailyViewCellViewModel: ObservableObject {
         let monthRange = fullDate.range(of: month)
 
         let attributedString = NSMutableAttributedString(string: fullDate as String)
-        attributedString.addAttributes([.font: Style.DailyCell.weekdayFont], range: weekdayRange)
-        attributedString.addAttributes([.font: Style.DailyCell.monthFont], range: monthRange)
+        
+        // TODO: Remove SwiftUI dependency!
+        let weekdayFont = UIFont.preferredFont(for: .subheadline, weight: .bold, design: .monospaced)
+        let monthFont = UIFont.preferredFont(for: .caption1, weight: .light, design: .monospaced)
+
+        attributedString.addAttributes([.font: weekdayFont], range: weekdayRange)
+        attributedString.addAttributes([.font: monthFont], range: monthRange)
         return attributedString
     }
 }
