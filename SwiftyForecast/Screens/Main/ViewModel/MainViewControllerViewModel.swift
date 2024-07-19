@@ -10,6 +10,7 @@ import WidgetKit
 import RealmSwift
 import CoreLocation
 import Combine
+import ThemeFeatureDomain
 
 @MainActor
 final class MainViewControllerViewModel: ObservableObject {
@@ -20,6 +21,7 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var selectedIndex: Int?
     @Published private(set) var hasNetworkConnection = true
     @Published private(set) var locations: [LocationModel] = []
+    @Published private(set) var themeState = ThemeState.system
 
     private let geocodeLocation: LocationPlaceable
     private var notationSettings: NotationSettings
@@ -99,6 +101,20 @@ final class MainViewControllerViewModel: ObservableObject {
 
         locationManager.$error
             .assign(to: \.locationError, on: self)
+            .store(in: &cancellables)
+
+        NotificationCenter.default
+            .publisher(for: .didChangeTheme)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] notification in
+                guard let self else { return }
+                guard let postedThemeState = notification.userInfo?["themeState"] as? String,
+                      let newThemeState = ThemeState(rawValue: postedThemeState) else {
+                    return
+                }
+
+                themeState = newThemeState
+            }
             .store(in: &cancellables)
     }
 

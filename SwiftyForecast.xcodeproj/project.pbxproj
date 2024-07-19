@@ -20,7 +20,7 @@
 		E20C93FE2C31E11100675CF2 /* LocationPlaceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20C93FB2C31DB4500675CF2 /* LocationPlaceable.swift */; };
 		E20C93FF2C31E11300675CF2 /* GeocodedLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D960802120F34800AE0B6E /* GeocodedLocation.swift */; };
 		E20DA45B214348AD0047491B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20DA45A214348AD0047491B /* NetworkMonitor.swift */; };
-		E20E28462C345D31007834F5 /* NotificationCenterThemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */; };
+		E20E28462C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */; };
 		E20E28512C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */; };
 		E2126F4B2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
 		E2126F4C2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */; };
@@ -240,7 +240,7 @@
 		E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */; };
 		E2D3B7512C35D8F1007F8561 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D3B7502C35D8F1007F8561 /* ThemeFeature */; };
 		E2D3B7532C35D900007F8561 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D3B7522C35D900007F8561 /* ThemeFeature */; };
-		E2D3B7542C35D967007F8561 /* NotificationCenterThemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */; };
+		E2D3B7542C35D967007F8561 /* NotificationCenterThemeStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */; };
 		E2D3B7552C35D96C007F8561 /* FirebaseAnalyticsThemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */; };
 		E2D3B7562C35D98C007F8561 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A4E2C10210E00C6F3AD /* AnalyticsService.swift */; };
 		E2D3B7572C35D98C007F8561 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A382C0FBE7900C6F3AD /* AnalyticsEvent.swift */; };
@@ -370,7 +370,7 @@
 		E20C6B182BE85BD800DDB57A /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		E20C93FB2C31DB4500675CF2 /* LocationPlaceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPlaceable.swift; sourceTree = "<group>"; };
 		E20DA45A214348AD0047491B /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
-		E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterThemeAdapter.swift; sourceTree = "<group>"; };
+		E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterThemeStateAdapter.swift; sourceTree = "<group>"; };
 		E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsThemeAdapter.swift; sourceTree = "<group>"; };
 		E2126F4A2C27A8F4001111E0 /* TemperatureConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConvertible.swift; sourceTree = "<group>"; };
 		E2126F4D2C27A902001111E0 /* ConvertedFahrenheit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertedFahrenheit.swift; sourceTree = "<group>"; };
@@ -642,7 +642,7 @@
 				E2D3B7642C363172007F8561 /* FirebaseAnalyticsAboutAdapter.swift */,
 				E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */,
 				E2FEB7BC2B172782009D54B2 /* MetricSystemNotificationAdapter.swift */,
-				E20E28452C345D31007834F5 /* NotificationCenterThemeAdapter.swift */,
+				E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */,
 				E2D3B75F2C362F25007F8561 /* ThemeTipToolbarAdapter.swift */,
 			);
 			path = Composition;
@@ -1735,7 +1735,7 @@
 				E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */,
 				E2D3B7562C35D98C007F8561 /* AnalyticsService.swift in Sources */,
 				E2D3B7572C35D98C007F8561 /* AnalyticsEvent.swift in Sources */,
-				E2D3B7542C35D967007F8561 /* NotificationCenterThemeAdapter.swift in Sources */,
+				E2D3B7542C35D967007F8561 /* NotificationCenterThemeStateAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1809,7 +1809,7 @@
 				E2126F4B2C27A8F4001111E0 /* TemperatureConvertible.swift in Sources */,
 				E270BA232C385176000558B2 /* ThemeTip.swift in Sources */,
 				E224507A2B9F3F9800F14BAA /* WeatherCardViewController.swift in Sources */,
-				E20E28462C345D31007834F5 /* NotificationCenterThemeAdapter.swift in Sources */,
+				E20E28462C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift in Sources */,
 				E2DC1475248F221E00D1A329 /* UIViewController+Containment.swift in Sources */,
 				E22A221B2AE004230069A83A /* LocationManager.swift in Sources */,
 				E2644D052C29ECCE00B505A1 /* WeatherServiceProtocol.swift in Sources */,

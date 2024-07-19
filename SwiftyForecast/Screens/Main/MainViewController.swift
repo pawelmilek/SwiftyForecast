@@ -17,8 +17,6 @@ final class MainViewController: UIViewController {
         static let backgroundColor = UIColor.systemBackground
     }
 
-    @AppStorage("appearanceTheme") var theme: ThemeState = .system
-
     private lazy var aboutBarButton: UIBarButtonItem = {
         aboutBarButtonItem()
     }()
@@ -133,19 +131,16 @@ private extension MainViewController {
             .publisher(for: UIApplication.willEnterForegroundNotification)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.viewModel.requestLocation()
-                self?.setupTheme()
+                guard let self else { return }
+                viewModel.requestLocation()
+                setupThemeState(viewModel.themeState)
             }
             .store(in: &cancellables)
 
-        NotificationCenter.default
-            .publisher(for: .didChangeTheme)
+        viewModel.$themeState
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] notification in
-                let newTheme = notification.userInfo?["theme"] ?? "Dark"
-
-                debugPrint(notification)
-                self?.setupTheme()
+            .sink { [weak self] themeState in
+                self?.setupThemeState(themeState)
             }
             .store(in: &cancellables)
 
@@ -161,13 +156,13 @@ private extension MainViewController {
             .store(in: &cancellables)
     }
 
-    func setupTheme() {
+    func setupThemeState(_ themeState: ThemeState) {
         let window = Array(UIApplication.shared.connectedScenes)
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
             .first(where: { $0.isKeyWindow })
 
-        switch theme {
+        switch themeState {
         case .dark:
             window?.overrideUserInterfaceStyle = .dark
 

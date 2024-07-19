@@ -119,7 +119,7 @@ private extension RootCoordinator {
                     encoder: JSONEncoder(),
                     decoder: JSONDecoder()
                 ),
-                notification: NotificationCenterThemeAdapter(
+                notification: NotificationCenterThemeStateAdapter(
                     notificationCenter: .default
                 ),
                 analytics: FirebaseAnalyticsThemeAdapter(

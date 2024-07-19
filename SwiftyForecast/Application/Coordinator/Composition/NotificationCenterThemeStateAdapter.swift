@@ -1,5 +1,5 @@
 //
-//  NotificationCenterThemeAdapter.swift
+//  NotificationCenterThemeStateAdapter.swift
 //  Swifty Forecast
 //
 //  Created by Pawel Milek on 7/2/24.
@@ -9,7 +9,7 @@
 import Foundation
 import ThemeFeatureUI
 
-struct NotificationCenterThemeAdapter: ThemeChangeNotifiable {
+struct NotificationCenterThemeStateAdapter: ThemeStateChangeNotifiable {
     private let notificationCenter: NotificationCenter
 
     init(notificationCenter: NotificationCenter) {
@@ -20,7 +20,7 @@ struct NotificationCenterThemeAdapter: ThemeChangeNotifiable {
         notificationCenter.post(
             name: .didChangeTheme,
             object: nil,
-            userInfo: ["theme": newTheme]
+            userInfo: ["themeState": newTheme]
         )
     }
 }
