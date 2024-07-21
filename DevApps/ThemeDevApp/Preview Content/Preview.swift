@@ -11,19 +11,20 @@ import ThemeFeatureUI
 import ThemeFeatureDomain
 import ThemeFeatureData
 
+@MainActor
 enum Preview {
     static var viewModel: ThemeViewModel {
         ThemeViewModel(
-            service: ThemeStorageService(
+            service: ThemeService(
                 repository: ThemeRepository(
                     dataSource: LocalThemeDataSource(
                         storage: .init(suiteName: "preivew")!
-                    )
-                ),
-                encoder: JSONEncoder(),
-                decoder: JSONDecoder()
+                    ),
+                    decoder: JSONDecoder(),
+                    encoder: JSONEncoder()
+                )
             ),
-            notification: NotificationCenterThemeAdapter(
+            notification: NotificationCenterThemeStateAdapter(
                 notificationCenter: .default
             ),
             analytics: FirebaseAnalyticsThemeAdapter(

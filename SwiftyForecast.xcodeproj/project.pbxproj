@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -56,6 +56,9 @@
 		E21ABD512AE9735F00F93F01 /* current_weather_response.json in Resources */ = {isa = PBXBuildFile; fileRef = E21ABD4E2AE9735F00F93F01 /* current_weather_response.json */; };
 		E21ABD522AE9735F00F93F01 /* current_weather_response.json in Resources */ = {isa = PBXBuildFile; fileRef = E21ABD4E2AE9735F00F93F01 /* current_weather_response.json */; };
 		E21ABD562AE9740F00F93F01 /* MockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24EB89225410010001F5D72 /* MockGenerator.swift */; };
+		E21D02B82C4D84D600BF87F7 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E21D02B72C4D84D600BF87F7 /* ThemeFeature */; };
+		E21D02BA2C4D84DF00BF87F7 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E21D02B92C4D84DF00BF87F7 /* ThemeFeature */; };
+		E21D02BC2C4D87B200BF87F7 /* NotificationCenterThemeStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */; };
 		E21E4A3A25143D0700066401 /* WeatherViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CF4DE52288E46100062E36 /* WeatherViewControllerViewModel.swift */; };
 		E2227E842ADD5439000C3886 /* TemperatureFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E832ADD5439000C3886 /* TemperatureFormatterFactory.swift */; };
 		E2227E8E2ADD5DD9000C3886 /* SpeedFormatterFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2227E8D2ADD5DD9000C3886 /* SpeedFormatterFactory.swift */; };
@@ -240,7 +243,6 @@
 		E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */; };
 		E2D3B7512C35D8F1007F8561 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D3B7502C35D8F1007F8561 /* ThemeFeature */; };
 		E2D3B7532C35D900007F8561 /* ThemeFeature in Frameworks */ = {isa = PBXBuildFile; productRef = E2D3B7522C35D900007F8561 /* ThemeFeature */; };
-		E2D3B7542C35D967007F8561 /* NotificationCenterThemeStateAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28452C345D31007834F5 /* NotificationCenterThemeStateAdapter.swift */; };
 		E2D3B7552C35D96C007F8561 /* FirebaseAnalyticsThemeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20E28502C34B405007834F5 /* FirebaseAnalyticsThemeAdapter.swift */; };
 		E2D3B7562C35D98C007F8561 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A4E2C10210E00C6F3AD /* AnalyticsService.swift */; };
 		E2D3B7572C35D98C007F8561 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2255A382C0FBE7900C6F3AD /* AnalyticsEvent.swift */; };
@@ -569,6 +571,7 @@
 				E2D3B7532C35D900007F8561 /* ThemeFeature in Frameworks */,
 				E2D7E96D2C3C6CDE00FCEA19 /* ThemeFeature in Frameworks */,
 				E2D7E9732C3CAA2B00FCEA19 /* ThemeFeature in Frameworks */,
+				E21D02BA2C4D84DF00BF87F7 /* ThemeFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +602,7 @@
 				E25B3EFC2BFA2E6D00FFC11A /* RealmSwift in Frameworks */,
 				E2D3B7512C35D8F1007F8561 /* ThemeFeature in Frameworks */,
 				E234A6822C35C53900288175 /* ThemeFeature in Frameworks */,
+				E21D02B82C4D84D600BF87F7 /* ThemeFeature in Frameworks */,
 				E2D7E97B2C3CB98E00FCEA19 /* AboutFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1310,10 +1314,10 @@
 		E2D3B74A2C35CBC7007F8561 /* ThemeDevApp */ = {
 			isa = PBXGroup;
 			children = (
-				E2D3B7462C35CBC7007F8561 /* Preview Content */,
-				E2D3B7472C35CBC7007F8561 /* Assets.xcassets */,
-				E2D3B7482C35CBC7007F8561 /* ContentView.swift */,
 				E2D3B7492C35CBC7007F8561 /* ThemeDevAppApp.swift */,
+				E2D3B7482C35CBC7007F8561 /* ContentView.swift */,
+				E2D3B7472C35CBC7007F8561 /* Assets.xcassets */,
+				E2D3B7462C35CBC7007F8561 /* Preview Content */,
 			);
 			path = ThemeDevApp;
 			sourceTree = "<group>";
@@ -1439,6 +1443,7 @@
 				E2D3B7522C35D900007F8561 /* ThemeFeature */,
 				E2D7E96C2C3C6CDE00FCEA19 /* ThemeFeature */,
 				E2D7E9722C3CAA2B00FCEA19 /* ThemeFeature */,
+				E21D02B92C4D84DF00BF87F7 /* ThemeFeature */,
 			);
 			productName = ThemeDevApp;
 			productReference = E234A6882C35CB5E00288175 /* ThemeDevApp.app */;
@@ -1499,6 +1504,7 @@
 				E2D7E96A2C3C6CCE00FCEA19 /* ThemeFeature */,
 				E2D7E9772C3CB74300FCEA19 /* ThemeFeature */,
 				E2D7E97A2C3CB98E00FCEA19 /* AboutFeature */,
+				E21D02B72C4D84D600BF87F7 /* ThemeFeature */,
 			);
 			productName = "Swifty Forecast";
 			productReference = E29911F61D456EAC0083B484 /* Swifty Forecast.app */;
@@ -1600,8 +1606,8 @@
 				E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */,
 				E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E2CAC9E12C04310600E573D2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				E2D7E9712C3CAA2B00FCEA19 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */,
 				E2D7E9792C3CB98E00FCEA19 /* XCRemoteSwiftPackageReference "AboutFeature" */,
+				E21D02B62C4D84D600BF87F7 /* XCRemoteSwiftPackageReference "ThemeFeature" */,
 			);
 			productRefGroup = E29911F71D456EAC0083B484 /* Products */;
 			projectDirPath = "";
@@ -1729,13 +1735,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2D3B74D2C35CBC7007F8561 /* ContentView.swift in Sources */,
+				E21D02BC2C4D87B200BF87F7 /* NotificationCenterThemeStateAdapter.swift in Sources */,
 				E2D3B7552C35D96C007F8561 /* FirebaseAnalyticsThemeAdapter.swift in Sources */,
 				E254C2342C3861C70007951C /* Preview.swift in Sources */,
 				E2D3B75A2C362577007F8561 /* FakeAnalyticsService.swift in Sources */,
 				E2D3B74E2C35CBC7007F8561 /* ThemeDevAppApp.swift in Sources */,
 				E2D3B7562C35D98C007F8561 /* AnalyticsService.swift in Sources */,
 				E2D3B7572C35D98C007F8561 /* AnalyticsEvent.swift in Sources */,
-				E2D3B7542C35D967007F8561 /* NotificationCenterThemeStateAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2606,13 +2612,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		E2D7E9712C3CAA2B00FCEA19 /* XCLocalSwiftPackageReference "../Packages/ThemeFeature" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Packages/ThemeFeature;
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCRemoteSwiftPackageReference section */
 		E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -2620,6 +2619,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.1;
+			};
+		};
+		E21D02B62C4D84D600BF87F7 /* XCRemoteSwiftPackageReference "ThemeFeature" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pawelmilek/ThemeFeature.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 		E25B3EFA2BFA2E6D00FFC11A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
@@ -2650,8 +2657,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pawelmilek/AboutFeature.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2661,6 +2668,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E20C6B152BE859DA00DDB57A /* XCRemoteSwiftPackageReference "Vortex" */;
 			productName = Vortex;
+		};
+		E21D02B72C4D84D600BF87F7 /* ThemeFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E21D02B62C4D84D600BF87F7 /* XCRemoteSwiftPackageReference "ThemeFeature" */;
+			productName = ThemeFeature;
+		};
+		E21D02B92C4D84DF00BF87F7 /* ThemeFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E21D02B62C4D84D600BF87F7 /* XCRemoteSwiftPackageReference "ThemeFeature" */;
+			productName = ThemeFeature;
 		};
 		E2255A3D2C0FC55C00C6F3AD /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

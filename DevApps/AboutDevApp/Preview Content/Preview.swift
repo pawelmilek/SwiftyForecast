@@ -8,16 +8,47 @@
 
 import Foundation
 import AboutFeatureUI
+import AboutFeatureDomain
+import AboutFeatureData
 
-//enum Preview {
-//    static var viewModel: AboutViewModel {
-//        AboutViewModel(
-//            appInfo: ApplicationInfoAdapter(bundle: .main, currentDevice: .current),
-//            buildConfiguration: FileBuildConfiguration(bundle: .main),
-//            networkResourceFactory: NetworkResourceFactory(),
-//            analytics: FirebaseAnalyticsAboutAdapter(service: FirebaseAnalyticsService()),
-//            toolbarInteractive: PreviewToolbarInteractive(),
-//            licenseRepository: HtmlPackageLicenseRepository()
-//        )
-//    }
-//}
+@MainActor
+enum Preview {
+    static var viewModel: AboutViewModel {
+        AboutViewModel(
+            appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
+            analytics: FirebaseAnalyticsAboutAdapter(
+                service: FakeFirebaseAnalyticsService()
+            ),
+            toolbarInteractive: ThemeTipToolbarAdapter(),
+            appService: NetworkAppService(
+                repository: NetworkAppRepository(
+                    dataSource: LocalAppDataSource(
+                        localFileResource: LocalFileResource(
+                            name: "app_resources",
+                            fileExtension: "json",
+                            bundle: .main
+                        )
+                    ),
+                    decoder: JSONDecoder()
+                )
+            ),
+            deviceService: UserDeviceService(
+                repository: ReleasedDevicesRepository(
+                    dataSource: LocalDevicesDataSource(),
+                    decoder: JSONDecoder()
+                )
+            ),
+            licenseService: PackagesLicenseService(
+                repository: PackagesLicenseRepository(
+                    dataSource: LocalLicenseDataSource(
+                        licenseFile: LocalFileResource(
+                            name: "packages_license",
+                            fileExtension: "html",
+                            bundle: .main
+                        )
+                    )
+                )
+            )
+        )
+    }
+}

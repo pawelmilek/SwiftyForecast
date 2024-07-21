@@ -8,6 +8,7 @@
 
 import Foundation
 import ThemeFeatureUI
+import ThemeFeatureDomain
 
 struct NotificationCenterThemeStateAdapter: ThemeStateChangeNotifiable {
     private let notificationCenter: NotificationCenter
@@ -16,11 +17,11 @@ struct NotificationCenterThemeStateAdapter: ThemeStateChangeNotifiable {
         self.notificationCenter = notificationCenter
     }
 
-    func notify(newTheme: String) {
+    func notify(themeState: ThemeState) {
         notificationCenter.post(
             name: .didChangeTheme,
             object: nil,
-            userInfo: ["themeState": newTheme]
+            userInfo: ["themeState": themeState.description.lowercased()]
         )
     }
 }

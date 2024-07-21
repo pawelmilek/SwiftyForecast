@@ -8,50 +8,13 @@
 
 import SwiftUI
 import AboutFeatureUI
-import AboutFeatureDomain
-import AboutFeatureData
 
 struct ContentView: View {
+    @EnvironmentObject private var viewMdoel: AboutViewModel
+
     var body: some View {
         AboutView(
-            viewModel: AboutViewModel(
-                appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
-                analytics: FirebaseAnalyticsAboutAdapter(
-                    service: FakeFirebaseAnalyticsService()
-                ),
-                toolbarInteractive: ThemeTipToolbarAdapter(),
-                appService: NetworkAppService(
-                    repository: NetworkAppRepository(
-                        dataSource: LocalAppDataSource(
-                            localFileResource: LocalFileResource(
-                                name: "app_resources",
-                                fileExtension: "json",
-                                bundle: .main
-                            ),
-                            decoder: JSONDecoder()
-                        )
-                    )
-                ),
-                deviceService: UserDeviceService(
-                    repository: ReleasedDevicesRepository(
-                        dataSource: LocalReleasedDevicesDataSource(
-                            decoder: JSONDecoder()
-                        )
-                    )
-                ),
-                licenseService: PackagesLicenseService(
-                    repository: PackagesLicenseRepository(
-                        dataSource: LocalPackagesLicenseDataSource(
-                            licenseFile: LocalFileResource(
-                                name: "packages_license",
-                                fileExtension: "html",
-                                bundle: .main
-                            ),
-                            bundle: .main
-                        )
-                    )
-                )
-            ),
+            viewModel: viewMdoel,
             tintColor: .customPrimary,
             accentColor: .accent
         )
@@ -60,4 +23,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(Preview.viewModel)
 }

@@ -110,14 +110,14 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
-                service: ThemeStorageService(
+                service: ThemeService(
                     repository: ThemeRepository(
                         dataSource: LocalThemeDataSource(
                             storage: .standard
-                        )
-                    ),
-                    encoder: JSONEncoder(),
-                    decoder: JSONDecoder()
+                        ),
+                        decoder: JSONDecoder(),
+                        encoder: JSONEncoder()
+                    )
                 ),
                 notification: NotificationCenterThemeStateAdapter(
                     notificationCenter: .default
@@ -149,27 +149,25 @@ private extension RootCoordinator {
                                 name: "app_resources",
                                 fileExtension: "json",
                                 bundle: .main
-                            ),
-                            decoder: JSONDecoder()
-                        )
+                            )
+                        ),
+                        decoder: JSONDecoder()
                     )
                 ),
                 deviceService: UserDeviceService(
                     repository: ReleasedDevicesRepository(
-                        dataSource: LocalReleasedDevicesDataSource(
-                            decoder: JSONDecoder()
-                        )
+                        dataSource: LocalDevicesDataSource(),
+                        decoder: JSONDecoder()
                     )
                 ),
                 licenseService: PackagesLicenseService(
                     repository: PackagesLicenseRepository(
-                        dataSource: LocalPackagesLicenseDataSource(
+                        dataSource: LocalLicenseDataSource(
                             licenseFile: LocalFileResource(
                                 name: "packages_license",
                                 fileExtension: "html",
                                 bundle: .main
-                            ),
-                            bundle: .main
+                            )
                         )
                     )
                 )

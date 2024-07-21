@@ -14,16 +14,16 @@ import ThemeFeatureData
 @main
 struct ThemeDevAppApp: App {
     @StateObject private var viewModel = ThemeViewModel(
-        service: ThemeStorageService(
+        service: ThemeService(
             repository: ThemeRepository(
                 dataSource: LocalThemeDataSource(
                     storage: .standard
-                )
-            ),
-            encoder: JSONEncoder(),
-            decoder: JSONDecoder()
+                ),
+                decoder: JSONDecoder(),
+                encoder: JSONEncoder()
+            )
         ),
-        notification: NotificationCenterThemeAdapter(
+        notification: NotificationCenterThemeStateAdapter(
             notificationCenter: .default
         ),
         analytics: FirebaseAnalyticsThemeAdapter(
