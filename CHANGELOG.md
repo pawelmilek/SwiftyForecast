@@ -221,9 +221,9 @@ Thank you for using the Swifty Forecast!
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.7.2...v3.7.3)
 
 ## 3.8.0
-- New weather condition animations<br>
-- Improve About view design<br> 
+- Redesign navigation toolbar items<br>
+- Redesign the About view layout<br> 
 - Under the hood performance improvements<br>
 
-[2024-05-31] |
+[2024-07-21] |
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.7.3...v3.8.0)
