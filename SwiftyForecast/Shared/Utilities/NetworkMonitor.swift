@@ -14,6 +14,7 @@ final class NetworkMonitor: ObservableObject {
     init(monitor: NWPathMonitor) {
         self.monitor = monitor
         monitor.pathUpdateHandler = { [weak self] path in
+            debugPrint(path)
             self?.hasNetworkConnection = path.status == .satisfied
         }
     }
