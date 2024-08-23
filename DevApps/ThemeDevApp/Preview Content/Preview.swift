@@ -17,11 +17,11 @@ enum Preview {
         ThemeViewModel(
             service: ThemeService(
                 repository: ThemeRepository(
-                    dataSource: LocalThemeDataSource(
-                        storage: .init(suiteName: "preivew")!
-                    ),
-                    decoder: JSONDecoder(),
-                    encoder: JSONEncoder()
+                    dataSource: UserDefaultsThemeDataSource(
+                        storage: .standard,
+                        decoder: JSONDecoder(),
+                        encoder: JSONEncoder()
+                    )
                 )
             ),
             notification: NotificationCenterThemeStateAdapter(

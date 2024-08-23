@@ -225,5 +225,5 @@ Thank you for using the Swifty Forecast!
 - Redesign the About view layout<br> 
 - Under the hood performance improvements<br>
 
-[2024-07-21] |
+[2024-08-23] |
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.7.3...v3.8.0)

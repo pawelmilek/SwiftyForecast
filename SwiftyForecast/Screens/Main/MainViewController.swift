@@ -97,7 +97,8 @@ private extension MainViewController {
             .assign(to: \.selectedSegmentIndex, on: notationSegmentedControl)
             .store(in: &cancellables)
 
-        // TODO: Move up the WeatherViewController init to Composition Root
+        // Refactore Dependency Injection Ambient Context anti-pattern
+        // TODO: Move the WeatherViewController initialization to the Composition Root (RootCoordinator)
         viewModel.$locations
             .compactMap { $0 }
             .filter { !$0.isEmpty }
@@ -138,6 +139,7 @@ private extension MainViewController {
             .store(in: &cancellables)
 
         viewModel.$themeState
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] themeState in
                 self?.setupThemeState(themeState)
