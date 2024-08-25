@@ -31,6 +31,7 @@ final class MainViewControllerViewModel: ObservableObject {
     private let locationManager: LocationManager
     private let analyticsService: AnalyticsService
     private let networkMonitor: NetworkMonitor
+    private let themeRepository: Repository
     private var cancellables = Set<AnyCancellable>()
 
     init(
@@ -41,7 +42,8 @@ final class MainViewControllerViewModel: ObservableObject {
         databaseManager: DatabaseManager,
         locationManager: LocationManager,
         analyticsService: AnalyticsService,
-        networkMonitor: NetworkMonitor
+        networkMonitor: NetworkMonitor,
+        themeRepository: Repository
     ) {
         self.geocodeLocation = geocodeLocation
         self.notationSettings = notationSettings
@@ -53,13 +55,14 @@ final class MainViewControllerViewModel: ObservableObject {
         self.networkMonitor = networkMonitor
         self.notationControlIndex = notationSettings.temperatureNotation.rawValue
         self.notationControlItems = TemperatureNotation.allCases.map { $0.symbol }
+        self.themeRepository = themeRepository
         subscirbePublishers()
     }
 
     func onViewDidLoad() {
         loadLocations()
+        loadThemeState()
         networkMonitor.start()
-
         debugPrint(databaseManager.description)
     }
 
@@ -133,6 +136,16 @@ final class MainViewControllerViewModel: ObservableObject {
                 .store(in: &cancellables)
         } catch {
             fatalError(error.localizedDescription)
+        }
+    }
+
+    private func loadThemeState() {
+        Task {
+            do {
+                themeState = try await themeRepository.saved()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
 

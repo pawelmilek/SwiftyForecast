@@ -17,6 +17,16 @@ import AboutFeatureData
 import AboutFeatureDomain
 
 final class RootCoordinator: Coordinator {
+    private lazy var themeRepository: ThemeRepository = {
+        ThemeRepository(
+            dataSource: UserDefaultsThemeDataSource(
+                storage: .standard,
+                decoder: JSONDecoder(),
+                encoder: JSONEncoder()
+            )
+        )
+    }()
+
     var navigationController: UINavigationController
 
     init(navigationController: UINavigationController) {
@@ -81,7 +91,7 @@ private extension RootCoordinator {
         let storyboard = UIStoryboard(storyboard: .main)
         let viewController = storyboard.instantiateViewController(
             identifier: MainViewController.storyboardIdentifier
-        ) { coder in
+        ) { [self] coder in
             MainViewController(
                 viewModel: MainViewControllerViewModel(
                     geocodeLocation: GeocodedLocation(
@@ -97,7 +107,8 @@ private extension RootCoordinator {
                     databaseManager: RealmManager(),
                     locationManager: LocationManager(),
                     analyticsService: FirebaseAnalyticsService(),
-                    networkMonitor: NetworkMonitor()
+                    networkMonitor: NetworkMonitor(),
+                    themeRepository: themeRepository
                 ),
                 coordinator: self,
                 coder: coder
@@ -110,13 +121,7 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
-                repository: ThemeRepository(
-                    dataSource: UserDefaultsThemeDataSource(
-                        storage: .standard,
-                        decoder: JSONDecoder(),
-                        encoder: JSONEncoder()
-                    )
-                ),
+                repository: themeRepository,
                 notification: NotificationCenterThemeStateAdapter(
                     notificationCenter: .default
                 ),
