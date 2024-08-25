@@ -133,13 +133,15 @@ private extension MainViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
+                guard let themeState = viewModel.themeState else { return }
+
                 viewModel.requestLocation()
-                setupThemeState(viewModel.themeState)
+                setupThemeState(themeState)
             }
             .store(in: &cancellables)
 
         viewModel.$themeState
-            .dropFirst()
+            .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] themeState in
                 self?.setupThemeState(themeState)

@@ -21,7 +21,7 @@ final class MainViewControllerViewModel: ObservableObject {
     @Published private(set) var selectedIndex: Int?
     @Published private(set) var hasNetworkConnection = true
     @Published private(set) var locations: [LocationModel] = []
-    @Published private(set) var themeState = ThemeState.system
+    @Published private(set) var themeState: ThemeState?
 
     private let geocodeLocation: LocationPlaceable
     private var notationSettings: NotationSettings
