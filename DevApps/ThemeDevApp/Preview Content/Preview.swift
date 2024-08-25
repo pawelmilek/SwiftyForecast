@@ -15,13 +15,11 @@ import ThemeFeatureData
 enum Preview {
     static var viewModel: ThemeViewModel {
         ThemeViewModel(
-            service: ThemeService(
-                repository: ThemeRepository(
-                    dataSource: UserDefaultsThemeDataSource(
-                        storage: .standard,
-                        decoder: JSONDecoder(),
-                        encoder: JSONEncoder()
-                    )
+            repository: ThemeRepository(
+                dataSource: UserDefaultsThemeDataSource(
+                    storage: .standard,
+                    decoder: JSONDecoder(),
+                    encoder: JSONEncoder()
                 )
             ),
             notification: NotificationCenterThemeStateAdapter(

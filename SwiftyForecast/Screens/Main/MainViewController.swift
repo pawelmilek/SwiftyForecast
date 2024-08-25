@@ -139,7 +139,7 @@ private extension MainViewController {
             .store(in: &cancellables)
 
         viewModel.$themeState
-            .dropFirst()
+//            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] themeState in
                 self?.setupThemeState(themeState)

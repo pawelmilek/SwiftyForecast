@@ -159,8 +159,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pawelmilek/ThemeFeature.git",
       "state" : {
-        "revision" : "5da9484a1a367248e896410915cdcae93387c502",
-        "version" : "1.0.2"
+        "revision" : "7b9559540bc7d1523e554ba94000d7da398a5849",
+        "version" : "1.0.3"
       }
     },
     {

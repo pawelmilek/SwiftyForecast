@@ -59,6 +59,7 @@ final class MainViewControllerViewModel: ObservableObject {
     func onViewDidLoad() {
         loadLocations()
         networkMonitor.start()
+
         debugPrint(databaseManager.description)
     }
 

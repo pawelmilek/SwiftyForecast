@@ -14,13 +14,11 @@ import ThemeFeatureData
 @main
 struct ThemeDevAppApp: App {
     @StateObject private var viewModel = ThemeViewModel(
-        service: ThemeService(
-            repository: ThemeRepository(
-                dataSource: UserDefaultsThemeDataSource(
-                    storage: .standard,
-                    decoder: JSONDecoder(),
-                    encoder: JSONEncoder()
-                )
+        repository: ThemeRepository(
+            dataSource: UserDefaultsThemeDataSource(
+                storage: .standard,
+                decoder: JSONDecoder(),
+                encoder: JSONEncoder()
             )
         ),
         notification: NotificationCenterThemeStateAdapter(

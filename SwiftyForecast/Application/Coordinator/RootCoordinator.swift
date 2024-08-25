@@ -110,13 +110,11 @@ private extension RootCoordinator {
     var themeViewController: ThemeViewController {
         ThemeViewController(
             viewModel: ThemeViewModel(
-                service: ThemeService(
-                    repository: ThemeRepository(
-                        dataSource: UserDefaultsThemeDataSource(
-                            storage: .standard,
-                            decoder: JSONDecoder(),
-                            encoder: JSONEncoder()
-                        )
+                repository: ThemeRepository(
+                    dataSource: UserDefaultsThemeDataSource(
+                        storage: .standard,
+                        decoder: JSONDecoder(),
+                        encoder: JSONEncoder()
                     )
                 ),
                 notification: NotificationCenterThemeStateAdapter(
