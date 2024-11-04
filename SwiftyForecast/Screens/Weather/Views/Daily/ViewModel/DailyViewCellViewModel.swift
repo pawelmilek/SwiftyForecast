@@ -27,24 +27,17 @@ final class DailyViewCellViewModel: ObservableObject {
     }
 
     private func renderMonthWeekday(date: Date) -> NSAttributedString {
-        let completeDate = date.formatted(date: .complete, time: .omitted)
-        let splited = completeDate
-            .split(separator: ",")
-            .dropLast()
+        let weekday = date.formatted(.dateTime.weekday(.wide)).localizedLowercase
+        let twoDigitNumericDay = date.formatted(.dateTime.day(.twoDigits))
+        let month = date.formatted(.dateTime.month(.wide))
+        let monthWithDigits = "\(month) \(twoDigitNumericDay)".localizedLowercase
 
-        let month = splited.last?
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .uppercased() ?? ""
-        let weekday = splited.first?
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .uppercased() ?? ""
-
-        let fullDate = ("\(weekday)\r\n\(month)") as NSString
+        let fullDate = ("\(weekday)\r\n\(monthWithDigits)") as NSString
         let weekdayRange = fullDate.range(of: weekday)
-        let monthRange = fullDate.range(of: month)
+        let monthRange = fullDate.range(of: monthWithDigits)
 
         let attributedString = NSMutableAttributedString(string: fullDate as String)
-        
+
         // TODO: Remove SwiftUI dependency!
         let weekdayFont = UIFont.preferredFont(for: .subheadline, weight: .bold, design: .monospaced)
         let monthFont = UIFont.preferredFont(for: .caption1, weight: .light, design: .monospaced)

@@ -811,7 +811,6 @@
 				E27E2FDA1DA057C100B3EABF /* Info.plist */,
 				E2CAC9E62C04321A00E573D2 /* GoogleService-Info.plist */,
 				E2EC1CF81D918F4900FD1F95 /* Assets.xcassets */,
-				E296A7E52AD6EE8C001BFADB /* Config.xcconfig */,
 				E20C6B052BE64EFA00DDB57A /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
@@ -1083,6 +1082,7 @@
 				E2FDBD692B2079DF0012D7C4 /* SwiftyForecastWidget */,
 				E234A6832C35CB1E00288175 /* DevApps */,
 				E29911F71D456EAC0083B484 /* Products */,
+				E296A7E52AD6EE8C001BFADB /* Config.xcconfig */,
 				E20C6B182BE85BD800DDB57A /* CHANGELOG.md */,
 			);
 			sourceTree = "<group>";

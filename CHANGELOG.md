@@ -227,3 +227,9 @@ Thank you for using the Swifty Forecast!
 
 [2024-08-25] |
 [Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.7.3...v3.8.0)
+
+## 3.8.1
+- Under the hood performance improvements<br>
+
+[2024-08-25] |
+[Full Changelog](https://github.com/pawelmilek/SwiftyForecast/compare/v3.8.0...v3.8.1)
